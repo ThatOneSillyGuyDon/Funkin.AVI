@@ -5,6 +5,6 @@ function onCreatePost()
 	addEffect1('dad', 0.001);
 end
 
-function onUpdate()
-	addEffect3('boyfriend', true);
-end
+--function onUpdate()
+--	addEffect3('boyfriend', true);
+--end

@@ -64,6 +64,9 @@ class StrumNote extends FlxSprite
 			case 'spooky':
 				skin = 'Skins/SpookyNOTE_assets';
 				doAntialiasing = true;
+			case 'mickey' | 'mickeysadistic' | 'mickeysuicidal' | 'bf-satan' | 'bf-hallucination' | 'bf-greyscale':
+				skin = 'Skins/GreyNOTE_assets';
+				doAntialiasing = true;
 			case 'bf-pixel-opponent' /*| 'bf-pixel'*/:
 				/*if(PlayState.isPixelStage) {
 					skin = 'pixelUI/pixelBF-notes';

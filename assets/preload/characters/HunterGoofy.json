@@ -2,77 +2,77 @@
 	"animations": [
 		{
 			"offsets": [
-				590,
-				640
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "idle",
-			"indices": [],
-			"name": "Mickeyphase2 Idle"
-		},
-		{
-			"offsets": [
-				570,
-				654
+				5,
+				0
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singLEFT",
 			"indices": [],
-			"name": "Mickeyphase2 Left"
+			"name": "HunterGoofy Left Arrow"
 		},
 		{
 			"offsets": [
-				570,
-				630
-			],
-			"loop": false,
-			"fps": 24,
-			"anim": "singUP",
-			"indices": [],
-			"name": "Mickeyphase2 Up"
-		},
-		{
-			"offsets": [
-				590,
-				642
+				0,
+				-5
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singDOWN",
 			"indices": [],
-			"name": "Mickeyphase2 Down"
+			"name": "HunterGoofy Down Arrow"
 		},
 		{
 			"offsets": [
-				540,
-				640
+				2,
+				5
+			],
+			"loop": false,
+			"fps": 24,
+			"anim": "singUP",
+			"indices": [],
+			"name": "HunterGoofy Up Arrow"
+		},
+		{
+			"offsets": [
+				-5,
+				0
 			],
 			"loop": false,
 			"fps": 24,
 			"anim": "singRIGHT",
 			"indices": [],
-			"name": "Mickeyphase2 Right"
+			"name": "HunterGoofy Right Arrow"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 24,
+			"anim": "idle",
+			"loop": false,
+			"name": "HunterGoofy Idle Bop"
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/Mickeyphase2",
+	"image": "characters/HunterGoofy",
 	"position": [
-		0,
-		200
+		-200,
+		-90
 	],
-	"healthicon": "lunamick",
+	"healthicon": "face",
 	"flip_x": false,
 	"healthbar_colors": [
-		216,
-		216,
-		216
+		0,
+		0,
+		0
 	],
 	"camera_position": [
-		-290,
-		-320
+		-20,
+		90
 	],
 	"sing_duration": 6.1,
-	"scale": 0.7
+	"scale": 0.8
 }

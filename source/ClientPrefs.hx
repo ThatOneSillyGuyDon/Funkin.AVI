@@ -29,12 +29,14 @@ class ClientPrefs {
 	public static var imagesPersist:Bool = false;
 	public static var ghostTapping:Bool = true;
 	public static var timeBarType:String = 'Time Left';
+	public static var uiSkin:String = 'Demolition';
 	public static var scoreZoom:Bool = true;
 	public static var noReset:Bool = false;
 	public static var healthBarAlpha:Float = 1;
 	public static var controllerMode:Bool = false;
 	public static var screenRes:String = '1280x720';
 	public static var fullscreen:Bool = false;
+	public static var showWatermarks:Bool = true;
 	public static var hitsoundVolume:Float = 0;
 	public static var pauseMusic:String = 'Tea Time';
 	public static var gameplaySettings:Map<String, Dynamic> = [
@@ -128,6 +130,7 @@ class ClientPrefs {
 		FlxG.save.data.imagesPersist = imagesPersist;
 		FlxG.save.data.ghostTapping = ghostTapping;
 		FlxG.save.data.timeBarType = timeBarType;
+		FlxG.save.data.uiSkin = uiSkin;
 		FlxG.save.data.scoreZoom = scoreZoom;
 		FlxG.save.data.noReset = noReset;
 		FlxG.save.data.healthBarAlpha = healthBarAlpha;
@@ -145,6 +148,7 @@ class ClientPrefs {
 		FlxG.save.data.controllerMode = controllerMode;
 		FlxG.save.data.screenRes = screenRes;
 		FlxG.save.data.fullscreen = fullscreen;
+		FlxG.save.data.showWatermarks = showWatermarks;
 		FlxG.save.data.hitsoundVolume = hitsoundVolume;
 		FlxG.save.data.pauseMusic = pauseMusic;
 	
@@ -231,6 +235,9 @@ class ClientPrefs {
 		if(FlxG.save.data.timeBarType != null) {
 			timeBarType = FlxG.save.data.timeBarType;
 		}
+		if (FlxG.save.data.uiSkin != null) {
+			uiSkin = FlxG.save.data.uiSkin;
+		}
 		if(FlxG.save.data.scoreZoom != null) {
 			scoreZoom = FlxG.save.data.scoreZoom;
 		}
@@ -270,6 +277,10 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.fullscreen != null) {
 			fullscreen = FlxG.save.data.fullscreen;
+		}
+		if (FlxG.save.data.showWatermarks != null)
+		{
+			showWatermarks = FlxG.save.data.showWatermarks;
 		}
 		if(FlxG.save.data.hitsoundVolume != null) {
 			hitsoundVolume = FlxG.save.data.hitsoundVolume;

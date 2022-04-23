@@ -47,6 +47,7 @@ import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.filters.ShaderFilter;
 import editors.ChartingState;
+import editors.OpenSong;
 import editors.CharacterEditorState;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
@@ -153,6 +154,7 @@ class PlayState extends MusicBeatState
 
 	public var laneunderlay:FlxSprite;
 	public var laneunderlayOpponent:FlxSprite;
+	public var blackFadeThing:FlxSprite;
 
 	//Handles the new epic mega sexy cam code that i've done
 	private var camFollow:FlxPoint;
@@ -927,6 +929,12 @@ class PlayState extends MusicBeatState
 		laneunderlay.alpha = ClientPrefs.laneTransparency;
 		laneunderlay.color = FlxColor.BLACK;
 		laneunderlay.scrollFactor.set();
+	
+        blackFadeThing = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+		blackFadeThing.alpha = 0;
+		blackFadeThing.screenCenter(X);
+		blackFadeThing.screenCenter(Y);
+        add(blackFadeThing);
 
 		if (ClientPrefs.laneunderlay)
 		{
@@ -941,7 +949,11 @@ class PlayState extends MusicBeatState
 
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+		 if (!isPixelStage) {
 		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		} else {
+                timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
 		timeTxt.scrollFactor.set();
 		timeTxt.alpha = 0;
 		timeTxt.borderSize = 2;
@@ -1097,14 +1109,22 @@ class PlayState extends MusicBeatState
 		reloadHealthBarColors();
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
+	        if (!isPixelStage) {
 		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		} else {
+                scoreTxt.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
 		scoreTxt.scrollFactor.set();
 		scoreTxt.borderSize = 1.25;
 		scoreTxt.visible = !ClientPrefs.hideHud;
 		add(scoreTxt);
 
 		peWatermark = new FlxText(5, FlxG.height - 29, 0, "", 16);
+	        if (!isPixelStage) {
 		peWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		} else {
+                peWatermark.setFormat(Paths.font("Retro Gaming.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
 		peWatermark.scrollFactor.set();
 		peWatermark.text = "Demolition Engine v" + MainMenuState.DemoEngineVersion + " | " + curSong + " " + storyDifficultyText;
 		peWatermark.visible = ClientPrefs.showWatermarks;
@@ -1124,8 +1144,11 @@ class PlayState extends MusicBeatState
 			case 4:
 				botplayTxt.text = "CHEATING...";
 		}
-
+		if (!isPixelStage) {
 		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		} else {
+		botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		}
 		botplayTxt.scrollFactor.set();
 		botplayTxt.borderSize = 1.25;
 		botplayTxt.visible = cpuControlled;
@@ -1134,8 +1157,13 @@ class PlayState extends MusicBeatState
 			botplayTxt.y = timeBarBG.y - 78;
 		}
 
+	        if(!ClientPrefs.hideJudgement) {
 			judgementCounter = new FlxText(20, 0, 0, "", 20);
+			if (!isPixelStage) {
 			judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			} else {
+			judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			}
 			judgementCounter.borderSize = 2;
 			judgementCounter.borderQuality = 2;
 			judgementCounter.scrollFactor.set();
@@ -1146,6 +1174,7 @@ class PlayState extends MusicBeatState
 			else
 				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
 			add(judgementCounter);
+		}
 		add(scoreTxt);
 
 		strumLineNotes.cameras = [camHUD];
@@ -1162,8 +1191,9 @@ class PlayState extends MusicBeatState
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
+		blackFadeThing.cameras = [camHUD];
 		doof.cameras = [camHUD];
-
+		
 		// if (SONG.song == 'South')
 		// FlxG.camera.alpha = 0.7;
 		// UI_camera.zoom = 1;
@@ -2559,11 +2589,21 @@ class PlayState extends MusicBeatState
 
 		super.update(elapsed);
 
+		if(ClientPrefs.simplifiedScore) {
+		
 		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName;
+			scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses;
 		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%' + ')' + ' | ' + ratingFC;//peeps wanted no integer rating
+                        scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses + ' (' + ratingFC + ')';
 		}
+	        } else {
+
+		if(ratingName == '?') {
+			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' ~ Score: ' + songScore + ' ~ Misses: ' + songMisses + ' ~ Rating: ' + ratingName;
+		} else {
+			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' ~ Score: ' + songScore + ' ~ Misses: ' + songMisses + ' ~ Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
+		}
+	        }
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -2599,6 +2639,22 @@ class PlayState extends MusicBeatState
 			}
 		}
 
+		/*
+		delete
+		'		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
+		{
+			openChartEditor();
+		} ' to properly use this
+		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene && SONG.song.toLowerCase() == 'song name') 
+			{ 
+				trace ("function loaded"); lol(); 
+	        } 
+			else if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene) 
+	        { 
+				openChartEditor(); 
+	        }
+			last of the hard code shit
+	    */
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 		{
 			openChartEditor();
@@ -2902,6 +2958,16 @@ class PlayState extends MusicBeatState
 		#end
 	}
 
+	/*
+	function lol() 
+		{ persistentUpdate = false;
+			 paused = true;
+			  cancelMusicFadeTween();
+			   MusicBeatState.switchState(new OpenSong()); 
+		}
+		just for hard code support??
+		*/
+
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
 		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead)
@@ -2965,6 +3031,8 @@ class PlayState extends MusicBeatState
 		return pressed;
 	}
 
+	var lyrics:FlxText;
+	
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
 		switch(eventName) {
 			case 'Hey!':
@@ -3291,7 +3359,388 @@ class PlayState extends MusicBeatState
 						}
 				}
 				reloadHealthBarColors();
-			
+			case 'Screen Fade':
+				var charType:Int = Std.parseInt(value1);
+				if(Math.isNaN(charType)) charType = 0;
+	
+				switch(charType) {
+					case 0:
+						blackFadeThing.alpha = 0;
+					case 1:
+						blackFadeThing.alpha += 0.05;
+					case 2:
+						blackFadeThing.alpha -= 0.05;
+					case 3:
+						blackFadeThing.alpha += 1;
+					//Sorry that you have to fucking spam these events to do the thing
+				}
+			case 'Lyrics':
+				if(lyrics!=null){
+					remove(lyrics);
+					lyrics.destroy();
+				}
+				if(value2.trim()=='')value2='#FFFFFF';
+				if(value1.trim()!=''){
+			 		lyrics = new FlxText(0, 570, 0, value1, 32);
+					lyrics.cameras = [camOther];
+					lyrics.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.fromString(value2), CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					lyrics.screenCenter(X);
+					lyrics.updateHitbox();
+					add(lyrics);
+				}
+			case 'Flash Screen':
+				var colorFlash:Int = Std.parseInt(value1);
+				if(Math.isNaN(colorFlash)) colorFlash = 0;
+		
+				switch(colorFlash) {
+					case 0:
+						FlxG.camera.flash(FlxColor.WHITE, 3);
+					case 1:
+						FlxG.camera.flash(FlxColor.RED, 3);
+					case 2:
+						FlxG.camera.flash(FlxColor.BLUE, 3);
+					case 3:
+						FlxG.camera.flash(FlxColor.BLACK, 3);
+					case 4:
+						FlxG.camera.flash(FlxColor.CYAN, 3);
+					case 5:
+						FlxG.camera.flash(FlxColor.MAGENTA, 3);
+					case 6:
+						FlxG.camera.flash(FlxColor.PINK, 3);
+					case 7:
+						FlxG.camera.flash(FlxColor.ORANGE, 3);
+					case 8:
+						FlxG.camera.flash(FlxColor.PURPLE, 3);
+					case 9:
+						FlxG.camera.flash(FlxColor.LIME, 3);
+				}
+
+				switch(value2) {
+					case 'false' | 'False':
+						camHUD.visible = true;
+					case 'true' | 'True':
+						camHUD.visible = false;
+				}
+			case 'Fade Character':
+				var charType:Int = Std.parseInt(value1);
+				if(Math.isNaN(charType)) charType = 0;
+						
+				switch(charType) {
+					case 0:
+						dad.alpha -= 0.05;
+						iconP2.alpha -= 0.05;
+						opponentStrums.members[0].alpha -= 0.05;
+						opponentStrums.members[1].alpha -= 0.05;
+						opponentStrums.members[2].alpha -= 0.05;
+						opponentStrums.members[3].alpha -= 0.05;
+					case 1:
+						boyfriend.alpha -= 0.05;
+						iconP1.alpha -= 0.05;
+						playerStrums.members[0].alpha -= 0.05;
+						playerStrums.members[1].alpha -= 0.05;
+						playerStrums.members[2].alpha -= 0.05;
+						playerStrums.members[3].alpha -= 0.05;
+					case 2:
+						dad.alpha += 0.05;
+						iconP2.alpha += 0.05;
+						opponentStrums.members[0].alpha += 0.05;
+						opponentStrums.members[1].alpha += 0.05;
+						opponentStrums.members[2].alpha += 0.05;
+						opponentStrums.members[3].alpha += 0.05;
+					case 3:
+						boyfriend.alpha += 0.05;
+						iconP1.alpha += 0.05;
+						playerStrums.members[0].alpha += 0.05;
+						playerStrums.members[1].alpha += 0.05;
+						playerStrums.members[2].alpha += 0.05;
+						playerStrums.members[3].alpha += 0.05;
+					//Sorry that you have to fucking spam these events to do the thing
+				}
+				//thx KutikiPlayz for letting me use this
+			case 'Scroll Type':
+				var playerLeft:Bool = false;
+				var playerDown:Bool = false;
+				var playerUp:Bool = false;
+				var playerRight:Bool = false;
+				var playerDefault:Bool = false;
+				var playerFlip:Bool = false;
+				var undyne:Bool = false;
+
+				switch(value1) {
+					case 'left' | 'Left':
+						undyne = false;
+						playerDefault = false;
+						playerLeft = true;
+						playerDown = false;
+						playerUp = false;
+						playerRight = false;
+						playerFlip = false;
+					case 'down' | 'Down':
+						undyne = false;
+						playerDefault = false;
+						playerLeft = false;
+						playerDown = true;
+						playerUp = false;
+						playerRight = false;
+						playerFlip = false;
+					case 'up' | 'Up':
+						undyne = false;
+						playerDefault = false;
+						playerLeft = false;
+						playerDown = false;
+						playerUp = true;
+						playerRight = false;
+						playerFlip = false;
+					case 'right' | 'Right':
+						undyne = false;
+						playerDefault = false;
+						playerLeft = false;
+						playerDown = false;
+						playerUp = false;
+						playerRight = true;
+						playerFlip = false;
+					case 'default' | 'Default':
+						undyne = false;
+						playerDefault = true;
+						playerLeft = false;
+						playerDown = false;
+						playerUp = false;
+						playerRight = false;
+						playerFlip = false;
+					case 'flip' | 'Flip':
+						undyne = false;
+						playerDefault = false;
+						playerLeft = false;
+						playerDown = false;
+						playerUp = false;
+						playerRight = false;
+						playerFlip = true;
+					case 'undyne' | 'Undyne':
+						undyne = true;
+						playerDefault = false;
+						playerLeft = false;
+						playerDown = false;
+						playerUp = false;
+						playerRight = false;
+						playerFlip = false;
+				}
+
+				for (i in 0...playerStrums.length) {
+					for(j in 0...opponentStrums.length) {
+						if(playerLeft) {
+							FlxTween.tween(playerStrums.members[i], {direction: 180, x: FlxG.width - 150, angle: 90}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[0], {y: 144}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[1], {y: 256}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[2], {y: 368}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[3], {y: 480}, 0.2, {ease: FlxEase.linear});
+							playerStrums.members[i].downScroll = false;
+
+							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
+						} else if(playerDown) {
+							FlxTween.tween(playerStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[0], {x: 732}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[1], {x: 844}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
+							playerStrums.members[i].downScroll = true;
+
+							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
+						} else if(playerUp) {
+							FlxTween.tween(playerStrums.members[i], {direction: 90, y: 50, angle: 0}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[0], {x: 732}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[1], {x: 844}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
+							playerStrums.members[i].downScroll = false;
+
+							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
+						} else if(playerRight) {
+							FlxTween.tween(playerStrums.members[i], {direction: 0, x: 50, angle: 270}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[0], {y: 480}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[1], {y: 368}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[2], {y: 256}, 0.2, {ease: FlxEase.linear});
+							FlxTween.tween(playerStrums.members[3], {y: 144}, 0.2, {ease: FlxEase.linear});
+							playerStrums.members[i].downScroll = false;
+
+							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
+						} else if(playerDefault) {
+							if(ClientPrefs.downScroll) {
+								FlxTween.tween(playerStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[0], {x: 732}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[1], {x: 844}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
+								playerStrums.members[i].downScroll = true;
+							} else {
+								FlxTween.tween(playerStrums.members[i], {direction: 90, y: 50, angle: 0}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[0], {x: 732}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[1], {x: 844}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
+								playerStrums.members[i].downScroll = false;
+								}
+
+							FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
+							} else if(playerFlip) {
+								if(ClientPrefs.downScroll) {
+								FlxTween.tween(playerStrums.members[i], {direction: 90, y: 50, angle: 0}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[0], {x: 732}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[1], {x: 844}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
+								playerStrums.members[i].downScroll = false;
+							} else {
+								FlxTween.tween(playerStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[0], {x: 732}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[1], {x: 844}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[2], {x: 956}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(playerStrums.members[3], {x: 1068}, 0.2, {ease: FlxEase.linear});
+								playerStrums.members[i].downScroll = true;
+								}
+
+								FlxTween.tween(opponentStrums.members[j], {alpha: 1}, 0.2, {ease: FlxEase.linear});
+							} else if(undyne) {
+							FlxTween.tween(playerStrums.members[0], {direction: 180, x: 585 - 75, y: 305, angle: 0}, 0.2, {ease: FlxEase.linear});
+							playerStrums.members[0].downScroll = false;
+							FlxTween.tween(playerStrums.members[1], {direction: 90, x: 586, y: 305 + 75, angle: 0}, 0.2, {ease: FlxEase.linear});
+							playerStrums.members[1].downScroll = false;
+							FlxTween.tween(playerStrums.members[2], {direction: 90, x: 586, y: 305 - 75, angle: 0}, 0.2, {ease: FlxEase.linear});
+							playerStrums.members[2].downScroll = true;
+							FlxTween.tween(playerStrums.members[3], {direction: 0, x: 585 + 75, y: 305, angle: 0}, 0.2, {ease: FlxEase.linear});
+							playerStrums.members[3].downScroll = false;
+
+							FlxTween.tween(opponentStrums.members[j], {alpha: 0}, 0.2, {ease: FlxEase.linear});
+							}
+						}
+					}
+
+				var opponentLeft:Bool = false;
+				var opponentDown:Bool = false;
+				var opponentUp:Bool = false;
+				var opponentRight:Bool = false;
+				var opponentDefault:Bool = false;
+				var opponentFlip:Bool = false;
+
+					switch(value2) {
+						case 'left' | 'Left':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = true;
+							opponentDown = false;
+							opponentUp = false;
+							opponentRight = false;
+							opponentFlip = false;
+						case 'down' | 'Down':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = false;
+							opponentDown = true;
+							opponentUp = false;
+							opponentRight = false;
+							opponentFlip = false;
+						case 'up' | 'Up':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = false;
+							opponentDown = false;
+							opponentUp = true;
+							opponentRight = false;
+							opponentFlip = false;
+						case 'right' | 'Right':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = false;
+							opponentDown = false;
+							opponentUp = false;
+							opponentRight = true;
+							opponentFlip = false;
+						case 'default' | 'Default':
+							undyne = false;
+							opponentDefault = true;
+							opponentLeft = false;
+							opponentDown = false;
+							opponentUp = false;
+							opponentRight = false;
+							opponentFlip = false;
+						case 'flip' | 'Flip':
+							undyne = false;
+							opponentDefault = false;
+							opponentLeft = false;
+							opponentDown = false;
+							opponentUp = false;
+							opponentRight = false;
+							opponentFlip = true;
+							}
+
+						for (i in 0...opponentStrums.length) {
+							if(opponentLeft) {
+								FlxTween.tween(opponentStrums.members[i], {direction: 180, x: FlxG.width - 150, angle: 90, alpha: 1}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[0], {y: 144}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[1], {y: 256}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[2], {y: 368}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[3], {y: 480}, 0.2, {ease: FlxEase.linear});
+								opponentStrums.members[i].downScroll = false;
+								//allowOpponentNoteSplash = true;
+							} else if(opponentDown) {
+								FlxTween.tween(opponentStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+								opponentStrums.members[i].downScroll = true;
+								//allowOpponentNoteSplash = true;
+							} else if(opponentUp) {
+								FlxTween.tween(opponentStrums.members[i], {direction: 90, y: 50, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+								opponentStrums.members[i].downScroll = false;
+								//allowOpponentNoteSplash = true;
+							} else if(opponentRight) {
+								FlxTween.tween(opponentStrums.members[i], {direction: 0, x: 50, angle: 270, alpha: 1}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[0], {y: 480}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[1], {y: 368}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[2], {y: 256}, 0.2, {ease: FlxEase.linear});
+								FlxTween.tween(opponentStrums.members[3], {y: 144}, 0.2, {ease: FlxEase.linear});
+								opponentStrums.members[i].downScroll = false;
+								//allowOpponentNoteSplash = true;
+							} else if(opponentDefault) {
+								if(ClientPrefs.downScroll) {
+									FlxTween.tween(opponentStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+									opponentStrums.members[i].downScroll = true;
+								} else {
+									FlxTween.tween(opponentStrums.members[i], {direction: 90, y: 50, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+									opponentStrums.members[i].downScroll = false;
+									}
+								//allowOpponentNoteSplash = true;
+							} else if(opponentFlip) {
+								if(ClientPrefs.downScroll) {
+									FlxTween.tween(opponentStrums.members[i], {direction: 90, y: 50, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+									opponentStrums.members[i].downScroll = false;
+								} else {
+									FlxTween.tween(opponentStrums.members[i], {direction: 90, y: FlxG.height - 150, angle: 0, alpha: 1}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[0], {x: 92}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[1], {x: 204}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[2], {x: 316}, 0.2, {ease: FlxEase.linear});
+									FlxTween.tween(opponentStrums.members[3], {x: 428}, 0.2, {ease: FlxEase.linear});
+									opponentStrums.members[i].downScroll = true;
+									}
+							//allowOpponentNoteSplash = true;
+						}
+				}
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
 
@@ -3756,6 +4205,8 @@ class PlayState extends MusicBeatState
 				uiSkin = 'beat-alt';
 			case 'Demolition':
 				uiSkin = 'demolition';
+			case 'Matt :)':
+				uiSkin = 'matt';
 		}
 
 		rating.loadGraphic(Paths.image(getUiSkin(uiSkin, daRating, altPart)));
@@ -3771,6 +4222,8 @@ class PlayState extends MusicBeatState
 		rating.y -= ClientPrefs.comboOffset[1];
 
 		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(getUiSkin(uiSkin, 'combo', altPart)));
+                if(combo > 5)
+ 			insert(members.indexOf(strumLineNotes), comboSpr);
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();
 		comboSpr.x = coolText.x;
@@ -4859,10 +5312,12 @@ class PlayState extends MusicBeatState
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
-		if (ClientPrefs.marvelouses)
+		if (!ClientPrefs.hideJudgement) {
+			if (ClientPrefs.marvelouses)
 			judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
-		else
+		        else
 			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
+		}
 	}
 
 	#if ACHIEVEMENTS_ALLOWED

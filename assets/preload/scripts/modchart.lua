@@ -54,7 +54,7 @@ function bumpArrows(time, amount, smallamount)
 end
 
 function onBeatHit()
-  if curBeat % 10 == 5 then
+    if curBeat % 10 == 5 then
         bumpArrows(1, 400, 0)
     end
 end

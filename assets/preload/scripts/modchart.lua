@@ -33,24 +33,6 @@ function onStepHit()
     end
 end
  
-function randomNote()
-    for i = 4,7 do 
-        setPropertyFromGroup('strumLineNotes', i, 'x', 
-        defaultNotePos[i + 1][1] + math.floor(math.random(-150,150)))
- 
-        if downscroll == true then 
-            ylowest = 50;
-            yhighest = -150;
-        else 
-            ylowest = -150
-            yhighest = 150;
-        end
- 
-        setPropertyFromGroup('strumLineNotes', i, 'y', 
-        defaultNotePos[i + 1][2] + math.floor(math.random(ylowest,yhighest)))
-    end
-end
- 
 function bumpArrows(time, amount, smallamount)
     for i = 0,7 do
         shit = 0;
@@ -72,11 +54,7 @@ function bumpArrows(time, amount, smallamount)
 end
 
 function onBeatHit()
-    if curBeat % 60 == 30 then
-        randomNote()
-    end
-
-    if curBeat % 10 == 5 then
-        bumpArrows(1, 40, 0)
+  if curBeat % 10 == 5 then
+        bumpArrows(1, 400, 0)
     end
 end

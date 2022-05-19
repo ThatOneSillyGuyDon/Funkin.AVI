@@ -4,6 +4,7 @@ package;
 import Discord.DiscordClient;
 #end
 import editors.ChartingState;
+import PlayState;
 import flash.text.TextField;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -16,6 +17,7 @@ import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
+import lime.app.Application;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
 import WeekData;
@@ -65,6 +67,8 @@ class FreeplayState extends MusicBeatState
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In Freeplay", null);
 		#end
+			
+		Application.current.window.title = "Friday Night Funkin': Demolition Engine";
 
 		for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
@@ -350,6 +354,17 @@ class FreeplayState extends MusicBeatState
 				vocals.looped = true;
 				vocals.volume = 0.7;
 				instPlaying = curSelected;
+				switch(PlayState.SONG.song)
+				{
+					case 'Atrocity':
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Saster";
+					case 'Tutorial' | 'Bopeebo' | 'Fresh' | 'Dad Battle' | 'Spookeez' | 'South' | 'Pico' | 'Philly Nice' | 'Blammed' | 'Satin Panties' | 'High' | 'Milf' | 'Cocoa' | 'Eggnog' | 'Senpai' | 'Roses' | 'Thorns' | 'Ugh' | 'Guns' | 'Stress':
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Kawai Sprite";
+					case 'Monster' | 'Winter Horrorland':
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Kawai Sprite & Bassetfilms";
+					default:
+					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song;
+				}
 				#end
 			}
 		}

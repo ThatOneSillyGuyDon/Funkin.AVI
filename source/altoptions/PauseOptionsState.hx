@@ -1,4 +1,4 @@
-package options;
+package altoptions;
 
 #if desktop
 import Discord.DiscordClient;
@@ -15,7 +15,6 @@ import lime.utils.Assets;
 import flixel.FlxSubState;
 import flash.text.TextField;
 import flixel.FlxG;
-import lime.app.Application;
 import flixel.FlxSprite;
 import flixel.util.FlxSave;
 import haxe.Json;
@@ -28,7 +27,7 @@ import Controls;
 
 using StringTools;
 
-class OptionsState extends MusicBeatState
+class PauseOptionsState extends MusicBeatState
 {
 	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay' /*'Note Skins'*/];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
@@ -38,19 +37,19 @@ class OptionsState extends MusicBeatState
 	function openSelectedSubstate(label:String) {
 		switch(label) {
 			case 'Note Colors':
-				openSubState(new options.NotesSubState());
+				openSubState(new altoptions.NotesSubState());
 			case 'Controls':
-				openSubState(new options.ControlsSubState());
+				openSubState(new altoptions.ControlsSubState());
 			case 'Graphics':
-				openSubState(new options.GraphicsSettingsSubState());
+				openSubState(new altoptions.GraphicsSettingsSubState());
 			case 'Visuals and UI':
-				openSubState(new options.VisualsUISubState());
+				openSubState(new altoptions.VisualsUISubState());
 			case 'Gameplay':
-				openSubState(new options.GameplaySettingsSubState());
+				openSubState(new altoptions.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
-				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
+				LoadingState.loadAndSwitchState(new altoptions.NoteOffsetState());
 			/*case 'Note Skins':
-				LoadingState.loadAndSwitchState(new options.NoteSkinState());*/
+				LoadingState.loadAndSwitchState(new altoptions.NoteSkinState());*/
 		}
 	}
 
@@ -62,8 +61,6 @@ class OptionsState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("Options Menu", null);
 		#end
-			
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Settings";
 
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
@@ -81,6 +78,11 @@ class OptionsState extends MusicBeatState
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
 			grpOptions.add(optionText);
 		}
+		
+		if(ClientPrefs.pauseMusic == 'None')
+			FlxG.sound.music.volume = 0;
+		else
+			FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)));
 
 		selectorLeft = new Alphabet(0, 0, '>', true, false);
 		add(selectorLeft);
@@ -110,7 +112,7 @@ class OptionsState extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			MusicBeatState.switchState(new PlayState());
 		}
 
 		if (controls.ACCEPT) {

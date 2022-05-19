@@ -9,14 +9,20 @@ import Controls;
 class ClientPrefs {
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
+	public static var antiMash:Bool = true;
+	public static var center:Bool = true;
+	public static var keAccuracy:Bool = false;
+	public static var ratingSystem:String = "Bedrock";
 	public static var laneunderlay:Bool = false;
 	public static var laneTransparency:Float = 0.5;
 	public static var debugMode:Bool = false;
+	public static var iconBounce:String = 'Default';
 	public static var camMove:Bool = true;
 	public static var marvelouses:Bool = true;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
 	public static var hideJudgement:Bool = false;
+	public static var longBar:Bool = true;
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
@@ -25,6 +31,7 @@ class ClientPrefs {
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
 	public static var hideHud:Bool = false;
+	public static var funiShaders:Bool = true;
 	public static var noteOffset:Int = 0;
 	public static var simplifiedScore:Bool = false;
 	public static var arrowHSV:Array<Array<Int>> = [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]];
@@ -39,6 +46,7 @@ class ClientPrefs {
 	public static var screenRes:String = '1280x720';
 	public static var fullscreen:Bool = false;
 	public static var showWatermarks:Bool = true;
+	public static var winningIcon:Bool = true;
 	public static var hitsoundVolume:Float = 0;
 	public static var pauseMusic:String = 'Tea Time';
 	public static var gameplaySettings:Map<String, Dynamic> = [
@@ -119,17 +127,24 @@ class ClientPrefs {
 		FlxG.save.data.camMove = camMove;
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
+		FlxG.save.data.winningIcon = winningIcon;
+		FlxG.save.data.iconBounce = iconBounce;
 		FlxG.save.data.simplifiedScore = simplifiedScore;
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
+		FlxG.save.data.longBar = longBar;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
+		FlxG.save.data.antiMash = antiMash;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
+		FlxG.save.data.keAccuracy = keAccuracy;
+		FlxG.save.data.funiShaders = funiShaders;
 		FlxG.save.data.camZooms = camZooms;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
 		FlxG.save.data.hideJudgement = hideJudgement;
+		FlxG.save.data.ratingSystem = ratingSystem;
 		FlxG.save.data.arrowHSV = arrowHSV;
 		FlxG.save.data.imagesPersist = imagesPersist;
 		FlxG.save.data.ghostTapping = ghostTapping;
@@ -141,6 +156,7 @@ class ClientPrefs {
 		FlxG.save.data.comboOffset = comboOffset;
 		FlxG.save.data.achievementsMap = Achievements.achievementsMap;
 		FlxG.save.data.henchmenDeath = Achievements.henchmenDeath;
+		FlxG.save.data.center = center;
 
 		FlxG.save.data.ratingOffset = ratingOffset;
 		FlxG.save.data.marvelousWindow = marvelousWindow;
@@ -169,11 +185,26 @@ class ClientPrefs {
 		if(FlxG.save.data.debugMode != null) {
 			debugMode = FlxG.save.data.debugMode;
 		}
+		if (FlxG.save.data.center != null) {
+			center = FlxG.save.data.center;
+		}
+		if (FlxG.save.data.funiShaders != null) {
+			funiShaders = FlxG.save.data.funiShaders;
+		}
+		if(FlxG.save.data.winningIcon != null) {
+			winningIcon = FlxG.save.data.winningIcon;
+		}
 		if(FlxG.save.data.downScroll != null) {
 			downScroll = FlxG.save.data.downScroll;
 		}
 		if(FlxG.save.data.marvelouses != null) {
 			marvelouses = FlxG.save.data.marvelouses;
+		}
+		if(FlxG.save.data.antiMash != null) {
+			antiMash = FlxG.save.data.antiMash;
+		}
+		if(FlxG.save.data.iconBounce != null) {
+			iconBounce = FlxG.save.data.iconBounce;
 		}
 		if(FlxG.save.data.middleScroll != null) {
 			middleScroll = FlxG.save.data.middleScroll;
@@ -184,8 +215,15 @@ class ClientPrefs {
 		if(FlxG.save.data.laneunderlay != null) {
 			laneunderlay = FlxG.save.data.laneunderlay;
 		}
+		if (FlxG.save.data.keAccuracy != null)
+		{
+			keAccuracy = FlxG.save.data.keAccuracy;
+		}
 		if(FlxG.save.data.laneTransparency != null) {
 			laneTransparency = FlxG.save.data.laneTransparency;
+		}
+		if(FlxG.save.data.longBar != null) {
+			longBar = FlxG.save.data.longBar;
 		}
 		if(FlxG.save.data.simplifiedScore != null) {
 			simplifiedScore = FlxG.save.data.simplifiedScore;
@@ -207,6 +245,10 @@ class ClientPrefs {
 		}
 		if(FlxG.save.data.hideJudgement != null) {
 			hideJudgement = FlxG.save.data.hideJudgement;
+		}
+		if (FlxG.save.data.ratingSystem != null)
+		{
+			ratingSystem = FlxG.save.data.ratingSystem;
 		}
 		if(FlxG.save.data.lowQuality != null) {
 			lowQuality = FlxG.save.data.lowQuality;

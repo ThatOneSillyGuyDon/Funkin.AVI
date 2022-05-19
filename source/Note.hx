@@ -162,6 +162,14 @@ class Note extends FlxSprite
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
+				case 'Error Note':
+					ignoreNote = mustPress;
+					hitCausesMiss = true;
+					reloadNote('ERROR');
+					noteSplashTexture = 'HURTnoteSplashes';
+					if(PlayState.isPixelStage) {
+						noteSplashTexture = 'pixelUI/HURTnoteSplashes';
+					}
 				case 'Hurt Note':
 					ignoreNote = mustPress;
 					reloadNote('HURT');
@@ -228,9 +236,6 @@ class Note extends FlxSprite
 				antialias = true;
 			case 'spooky':
 				skin = 'Skins/SpookyNOTE_assets';
-				antialias = true;
-			case 'mickey' | 'mickeysadistic' | 'mickeysuicidal' | 'bf-satan' | 'bf-hallucination' | 'bf-greyscale':
-				skin = 'Skins/GreyNOTE_assets';
 				antialias = true;
 			case 'bf-pixel-opponent' /*| 'bf-pixel'*/:
 				/*if(PlayState.isPixelStage) {

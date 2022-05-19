@@ -1,4 +1,4 @@
-package options;
+package altoptions;
 
 #if desktop
 import Discord.DiscordClient;
@@ -179,13 +179,7 @@ class VisualsUISubState extends BaseOptionsMenu
 
 		changedMusic = true;
 	}
-
-	override function destroy()
-	{
-		if(changedMusic) FlxG.sound.playMusic(Paths.music('freakyMenu'));
-		super.destroy();
-	}
-
+	
 	#if !mobile
 	function onChangeFPSCounter()
 	{

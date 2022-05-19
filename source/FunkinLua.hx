@@ -1845,7 +1845,7 @@ class FunkinLua {
 			PlayState.instance.addShaderToCamera(camera, new BloomEffect(blurSize/512.0, intensity));
 			
 		});
-		Lua_helper.add_callback(lua, "addEffect15", function(camera:String) { //for dem funkies
+		Lua_helper.add_callback(lua, "addEffect14", function(camera:String) { //for dem funkies
 			
 			PlayState.instance.addShaderToCamera(camera, new BetterVHSEffect());
 			

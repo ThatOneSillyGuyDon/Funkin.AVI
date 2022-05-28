@@ -227,6 +227,7 @@ class ScanlineEffect extends Effect
 	
 }
 
+
 class Scanline extends FlxShader
 {
 	@:glFragmentSource('

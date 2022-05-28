@@ -99,7 +99,7 @@ class ChromaticAberrationEffect extends Effect
 // Original haxefl code: https://github.com/jobf/haxeflixel-vcr-effect-shader/blob/master/source/VhsShader.hx
 // Modified by zackdroid so it can be much easier to handle.
 
-class VhsHandler
+class VhsHandler extends Effect
 {
     public var shader:VhsShader;
     public var noise(default, set):Float = 0.0;

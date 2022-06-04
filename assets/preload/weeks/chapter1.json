@@ -1,0 +1,50 @@
+{
+	"storyName": "Mickey Mouse",
+	"difficulties": "Hard",
+	"hideFreeplay": true,
+	"weekBackground": "street",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"weekBefore": "tutorial",
+	"startUnlocked": true,
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"songs": [
+		[
+			"Isolated",
+			"mickey",
+			[
+				60,
+				60,
+				60
+			]
+		],
+		[
+			"Lunacy",
+			"lunamick",
+			[
+				60,
+				60,
+				60
+			]
+		],
+		[
+			"Delusional",
+			"insanemick",
+			[
+				60,
+				60,
+				60
+			]
+		]
+	],
+	"hideStoryMode": false,
+	"weekName": "Episode 1",
+	"hiddenUntilUnlocked": false
+}

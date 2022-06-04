@@ -266,6 +266,8 @@ class PlayState extends MusicBeatState
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 
+	var light:BGSprite;
+
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
 	public var songMisses:Int = 0;
@@ -424,6 +426,14 @@ class PlayState extends MusicBeatState
 					curStage = 'schoolEvil';
 				case 'ugh' | 'guns' | 'stress':
 					curStage = 'tank';
+				case 'isolated' | 'isolated-old' | 'lunacy' | 'delusional':
+					curStage = 'EndlessLoop';
+				case 'twisted-grins':
+					curStage = 'Office';
+				case 'hunted':
+					curStage = 'Forest';
+				case 'gl1tchl3ss':
+					curStage = 'PixelWorld';
 				default:
 					curStage = 'stage';
 			}
@@ -745,6 +755,44 @@ class PlayState extends MusicBeatState
 					add(bg);
 				}
 
+			case 'EndlessLoop':
+				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-mickey';
+				//GameOverSubstate.loopSoundName = 'gameOver-mickey';
+				//GameOverSubstate.endSoundName = 'gameOverEnd-mickey';
+				//GameOverSubstate.characterName = 'bf-demon-dead';
+
+				var street:BGSprite = new BGSprite('funkinAVI/episode1/street/Mickeybg', -382, -409);
+				add(street);
+
+			case 'Office':
+				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-smile';
+				//GameOverSubstate.loopSoundName = 'gameOver-smile';
+				//GameOverSubstate.endSoundName = 'gameOverEnd-smile';
+				//GameOverSubstate.characterName = 'bf-smile-dead';
+
+				var office:BGSprite = new BGSprite('funkinAVI/mrSmile/office', 0, 0);
+				add(office);
+
+				light = new BGSprite('funkinAVI/mrSmile/office', 0, 0);
+
+			case 'PixelWorld':
+				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-square';
+				//GameOverSubstate.loopSoundName = 'gameOver-square';
+				//GameOverSubstate.endSoundName = 'gameOverEnd-square';
+				//GameOverSubstate.characterName = 'bf-square-dead';
+
+				var square:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/PixelMouse', -984, -975);
+				add(square);
+
+			case 'Forest':
+				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-goof';
+				//GameOverSubstate.loopSoundName = 'gameOver-goof';
+				//GameOverSubstate.endSoundName = 'gameOverEnd-goof';
+				//GameOverSubstate.characterName = 'bf-goof-dead';
+
+				var forest:BGSprite = new BGSprite('funkinAVI/goofy/forest', 0, 0);
+				add(forest);
+
 			default: //custom stages
 				isPixelStage = stageData.isPixelStage;
 				for (layer in stageData.layerArray){
@@ -838,6 +886,8 @@ class PlayState extends MusicBeatState
 				add(halloweenWhite);
 			case 'tank':
 				add(foregroundSprites);
+			case 'Office':
+				add(light);
 		}
 
 		#if LUA_ALLOWED
@@ -1034,7 +1084,7 @@ class PlayState extends MusicBeatState
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
 		 if (!isPixelStage) {
-		timeTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		timeTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		} else {
                 timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
@@ -1162,14 +1212,18 @@ class PlayState extends MusicBeatState
 
 		switch(PlayState.SONG.song)
 				{
-					case 'Atrocity':
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Saster";
-					case 'Tutorial' | 'Bopeebo' | 'Fresh' | 'Dad Battle' | 'Spookeez' | 'South' | 'Pico' | 'Philly Nice' | 'Blammed' | 'Satin Panties' | 'High' | 'Milf' | 'Cocoa' | 'Eggnog' | 'Senpai' | 'Roses' | 'Thorns' | 'Ugh' | 'Guns' | 'Stress':
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Kawai Sprite";
-					case 'Monster' | 'Winter Horrorland':
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "] - Composed by: Kawai Sprite & Bassetfilms";
+					case 'Isolated' | 'Laugh Track':
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
+					case 'Lunacy':
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
+					case 'Delusional':
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
+					case 'Isolated Old' | "Don't Cross!":
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki";
+					case 'Twisted Grins':
+					Application.current.window.title = "Funkin.avi - Secret: Twisted Grins - Composed by: Sayan Sama (Paused)";
 					default:
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " [" + CoolUtil.difficultyString() + "]";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
 				}
 
 		if(ClientPrefs.longBar)
@@ -1211,7 +1265,7 @@ class PlayState extends MusicBeatState
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
 	        if (!isPixelStage) {
-		scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		scoreTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		} else {
                 scoreTxt.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
@@ -1222,12 +1276,12 @@ class PlayState extends MusicBeatState
 
 		peWatermark = new FlxText(5, FlxG.height - 29, 0, "", 16);
 	        if (!isPixelStage) {
-		peWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		peWatermark.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 24, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		} else {
                 peWatermark.setFormat(Paths.font("Retro Gaming.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
 		peWatermark.scrollFactor.set();
-		peWatermark.text = "Demolition Engine v" + MainMenuState.DemoEngineVersion + " | " + curSong + " " + storyDifficultyText;
+		peWatermark.text = "Funkin.avi" + " | " + curSong + " (" + storyDifficultyText + ")";
 		peWatermark.visible = ClientPrefs.showWatermarks;
 		peWatermark.cameras = [camCustom];
 		add(peWatermark);
@@ -1244,9 +1298,19 @@ class PlayState extends MusicBeatState
 				botplayTxt.text = "I CAN SEE YOU CHEATING";
 			case 4:
 				botplayTxt.text = "CHEATING...";
+			case 5:
+				botplayTxt.text = " ";
+			case 6:
+				botplayTxt.text = " ";
+			case 7:
+				botplayTxt.text = " ";
+			case 8:
+				botplayTxt.text = " ";
+			case 9:
+				botplayTxt.text = " ";
 		}
 		if (!isPixelStage) {
-		botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		} else {
 		botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
@@ -1261,7 +1325,7 @@ class PlayState extends MusicBeatState
 	        if(!ClientPrefs.hideJudgement) {
 			judgementCounter = new FlxText(20, 0, 0, "", 20);
 			if (!isPixelStage) {
-			judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			judgementCounter.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			} else {
 			judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			}
@@ -1278,6 +1342,19 @@ class PlayState extends MusicBeatState
 		}
 		add(scoreTxt);
 
+		var filmScratch:BGSprite = new BGSprite('funkinAVI-filters/scratchShit', 0, 0, 1, 1, ['scratch thing 1'], true);
+		var filmScratchGame:BGSprite = new BGSprite('funkinAVI-filters/scratchShit', 0, 0, 1, 1, ['scratch thing 1'], true);
+		filmScratchGame.alpha = 0.5;
+
+		switch(curStage)
+		{
+			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat':
+				add(filmScratch);
+				add(filmScratchGame);
+			default:
+				//nothing, that's it.
+		}
+
 		strumLineNotes.cameras = [camHUD];
 		grpNoteSplashes.cameras = [camHUD];
 		notes.cameras = [camHUD];
@@ -1292,6 +1369,14 @@ class PlayState extends MusicBeatState
 		timeBar.cameras = [camHUD];
 		timeBarBG.cameras = [camHUD];
 		timeTxt.cameras = [camHUD];
+		switch(curStage)
+		{
+			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat':
+				filmScratch.cameras = [camHUD];
+				filmScratchGame.cameras = [camGame];
+			default:
+				//nothing, that's it.
+		}
 		blackFadeThing.cameras = [camCustom];
 		doof.cameras = [camHUD];
 		
@@ -2147,9 +2232,12 @@ class PlayState extends MusicBeatState
 	var finishTimer:FlxTimer = null;
 
 	// For being able to mess with the sprites on Lua
+	public var countdownBeginning:FlxSprite;
 	public var countdownReady:FlxSprite;
 	public var countdownSet:FlxSprite;
 	public var countdownGo:FlxSprite;
+	public var introAlts:Array<String>;
+	public var antialias:Bool;
 	public static var startOnTime:Float = 0;
 
 	public function startCountdown():Void
@@ -2213,11 +2301,20 @@ class PlayState extends MusicBeatState
 				}
 
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
+				introAssets.set('vintage', ['funkinAVI/intro/3', 'funkinAVI/intro/2', 'funkinAVI/intro/1', 'funkinAVI/intro/Go']);
 				introAssets.set('default', ['ready', 'set', 'go']);
 				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
 
-				var introAlts:Array<String> = introAssets.get('default');
-				var antialias:Bool = ClientPrefs.globalAntialiasing;
+				switch (curStage)
+				{
+					case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat':
+						introAlts = introAssets.get('vintage');
+						antialias = ClientPrefs.globalAntialiasing;
+					default:
+						introAlts = introAssets.get('default');
+						antialias = ClientPrefs.globalAntialiasing;
+				}
+
 				if(isPixelStage) {
 					introAlts = introAssets.get('pixel');
 					antialias = false;
@@ -2232,71 +2329,163 @@ class PlayState extends MusicBeatState
 					santa.dance(true);
 				}
 
-				switch (swagCounter)
+				switch (curStage)
 				{
-					case 0:
-						FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
-					case 1:
-						countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
-						countdownReady.scrollFactor.set();
-						countdownReady.updateHitbox();
+					case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat':
+						switch (swagCounter)
+						{
+							case 0:
+								countdownBeginning = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
+								countdownBeginning.scrollFactor.set();
+								countdownBeginning.updateHitbox();
 
-						if (PlayState.isPixelStage)
-							countdownReady.setGraphicSize(Std.int(countdownReady.width * daPixelZoom));
+								countdownBeginning.screenCenter();
+								countdownBeginning.antialiasing = antialias;
+								add(countdownBeginning);
+								FlxTween.tween(countdownBeginning, {/*y: countdownBeginning.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+									ease: FlxEase.cubeInOut,
+									onComplete: function(twn:FlxTween)
+									{
+										remove(countdownBeginning);
+										countdownBeginning.destroy();
+									}
+								});
+								FlxG.sound.play(Paths.sound('funkinAVI/intro/intro3' + introSoundsSuffix), 1);
+							case 1:
+								camGame.zoom = 1.05;
+								camHUD.zoom = 1.05;
+								FlxTween.tween(camGame, {zoom: 1}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+								FlxTween.tween(camHUD, {zoom: 1}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+								
+								countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
+								countdownReady.scrollFactor.set();
+								countdownReady.updateHitbox();
 
-						countdownReady.screenCenter();
-						countdownReady.antialiasing = antialias;
-						add(countdownReady);
-						FlxTween.tween(countdownReady, {/*y: countdownReady.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
-							ease: FlxEase.cubeInOut,
-							onComplete: function(twn:FlxTween)
-							{
-								remove(countdownReady);
-								countdownReady.destroy();
-							}
-						});
-						FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);
-					case 2:
-						countdownSet = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
-						countdownSet.scrollFactor.set();
+								countdownReady.screenCenter();
+								countdownReady.antialiasing = antialias;
+								add(countdownReady);
+								FlxTween.tween(countdownReady, {/*y: countdownReady.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+									ease: FlxEase.cubeInOut,
+									onComplete: function(twn:FlxTween)
+									{
+										remove(countdownReady);
+										countdownReady.destroy();
+									}
+								});
+								FlxG.sound.play(Paths.sound('funkinAVI/intro/intro2' + introSoundsSuffix), 1);
+							case 2:
+								camGame.zoom = 1.1;
+								camHUD.zoom = 1.1;
+								FlxTween.tween(camGame, {zoom: 1}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+								FlxTween.tween(camHUD, {zoom: 1}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
 
-						if (PlayState.isPixelStage)
-							countdownSet.setGraphicSize(Std.int(countdownSet.width * daPixelZoom));
+								countdownSet = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
+								countdownSet.scrollFactor.set();
 
-						countdownSet.screenCenter();
-						countdownSet.antialiasing = antialias;
-						add(countdownSet);
-						FlxTween.tween(countdownSet, {/*y: countdownSet.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
-							ease: FlxEase.cubeInOut,
-							onComplete: function(twn:FlxTween)
-							{
-								remove(countdownSet);
-								countdownSet.destroy();
-							}
-						});
-						FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
-					case 3:
-						countdownGo = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
-						countdownGo.scrollFactor.set();
+								countdownSet.screenCenter();
+								countdownSet.antialiasing = antialias;
+								add(countdownSet);
+								FlxTween.tween(countdownSet, {/*y: countdownSet.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+									ease: FlxEase.cubeInOut,
+									onComplete: function(twn:FlxTween)
+									{
+										remove(countdownSet);
+										countdownSet.destroy();
+									}
+								});
+								FlxG.sound.play(Paths.sound('funkinAVI/intro/intro1' + introSoundsSuffix), 0.4);
+							case 3:
+								camGame.zoom = 1.15;
+								camHUD.zoom = 1.15;
+								FlxTween.tween(camGame, {zoom: 1}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+								FlxTween.tween(camHUD, {zoom: 1}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
 
-						if (PlayState.isPixelStage)
-							countdownGo.setGraphicSize(Std.int(countdownGo.width * daPixelZoom));
+								countdownGo = new FlxSprite().loadGraphic(Paths.image(introAlts[3]));
+								countdownGo.scrollFactor.set();
 
-						countdownGo.updateHitbox();
+								countdownGo.updateHitbox();
 
-						countdownGo.screenCenter();
-						countdownGo.antialiasing = antialias;
-						add(countdownGo);
-						FlxTween.tween(countdownGo, {/*y: countdownGo.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
-							ease: FlxEase.cubeInOut,
-							onComplete: function(twn:FlxTween)
-							{
-								remove(countdownGo);
-								countdownGo.destroy();
-							}
-						});
-						FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
-					case 4:
+								countdownGo.screenCenter();
+								countdownGo.antialiasing = antialias;
+								add(countdownGo);
+								FlxTween.tween(countdownGo, {/*y: countdownGo.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+									ease: FlxEase.cubeInOut,
+									onComplete: function(twn:FlxTween)
+									{
+										remove(countdownGo);
+										countdownGo.destroy();
+									}
+								});
+								FlxG.sound.play(Paths.sound('funkinAVI/intro/introGo' + introSoundsSuffix), 1);
+							case 4:
+						}
+					default:
+						switch (swagCounter)
+						{
+							case 0:
+								FlxG.sound.play(Paths.sound('intro3' + introSoundsSuffix), 0.6);
+							case 1:
+								countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
+								countdownReady.scrollFactor.set();
+								countdownReady.updateHitbox();
+
+								if (PlayState.isPixelStage)
+									countdownReady.setGraphicSize(Std.int(countdownReady.width * daPixelZoom));
+
+								countdownReady.screenCenter();
+								countdownReady.antialiasing = antialias;
+								add(countdownReady);
+								FlxTween.tween(countdownReady, {/*y: countdownReady.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+									ease: FlxEase.cubeInOut,
+									onComplete: function(twn:FlxTween)
+									{
+										remove(countdownReady);
+										countdownReady.destroy();
+									}
+								});
+								FlxG.sound.play(Paths.sound('intro2' + introSoundsSuffix), 0.6);
+							case 2:
+								countdownSet = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
+								countdownSet.scrollFactor.set();
+
+								if (PlayState.isPixelStage)
+									countdownSet.setGraphicSize(Std.int(countdownSet.width * daPixelZoom));
+
+								countdownSet.screenCenter();
+								countdownSet.antialiasing = antialias;
+								add(countdownSet);
+								FlxTween.tween(countdownSet, {/*y: countdownSet.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+									ease: FlxEase.cubeInOut,
+									onComplete: function(twn:FlxTween)
+									{
+										remove(countdownSet);
+										countdownSet.destroy();
+									}
+								});
+								FlxG.sound.play(Paths.sound('intro1' + introSoundsSuffix), 0.6);
+							case 3:
+								countdownGo = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
+								countdownGo.scrollFactor.set();
+
+								if (PlayState.isPixelStage)
+									countdownGo.setGraphicSize(Std.int(countdownGo.width * daPixelZoom));
+
+								countdownGo.updateHitbox();
+
+								countdownGo.screenCenter();
+								countdownGo.antialiasing = antialias;
+								add(countdownGo);
+								FlxTween.tween(countdownGo, {/*y: countdownGo.y + 100,*/ alpha: 0}, Conductor.crochet / 1000, {
+									ease: FlxEase.cubeInOut,
+									onComplete: function(twn:FlxTween)
+									{
+										remove(countdownGo);
+										countdownGo.destroy();
+									}
+								});
+								FlxG.sound.play(Paths.sound('introGo' + introSoundsSuffix), 0.6);
+							case 4:
+						}
 				}
 
 				notes.forEachAlive(function(note:Note) {
@@ -3521,7 +3710,7 @@ class PlayState extends MusicBeatState
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				
-				Application.current.window.title = "Friday Night Funkin': Demolition Engine - " + WeekData.getCurrentWeek().weekName + " - Game Over";
+				Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + " - Game Over";
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here

@@ -99,24 +99,21 @@ class ChromaticAberrationEffect extends Effect
 // Original haxefl code: https://github.com/jobf/haxeflixel-vcr-effect-shader/blob/master/source/VhsShader.hx
 // Modified by zackdroid so it can be much easier to handle.
 
-class VhsHandler extends Effect
+class VhsEffect extends Effect
 {
     public var shader:VhsShader;
-    public var noise(default, set):Float = 0.0;
-    public var intensity(default,set):Float = 0.2;
+    public var noise(default, set):Float = 0.00;
+    public var intensityVHS(default,set):Float = 0.10;
 
-	public function new()
-	{
-		//super();
-        shader = new VhsShader();
-    	shader.iTime.value = [0.0];
-	    shader.noisePercent.value = [0.0];
-        shader.intensity.value = [0.2];
+  public function new(noise:Float = 0.00, intensityVHS:Float = 0.10){
+      shader = new VhsShader();
+        shader.noisePercent.value = [noise];
+        shader.intensityVHS.value = [intensityVHS];
+        shader.iTime.value = [0];
+        PlayState.instance.shaderUpdates.push(update);
 	}
-
-	public function update(elapsed:Float)
-	{
-    	shader.iTime.value[0] += elapsed;
+	public function update(elapsed:Float){
+		shader.iTime.value[0] += elapsed;
 	}
 
 	function set_noise(value:Float):Float {
@@ -124,9 +121,9 @@ class VhsHandler extends Effect
         noise = value;
         return value;
 	}
-	function set_intensity(value:Float):Float {
-    	shader.intensity.value = [value];
-        intensity = value;
+	function set_intensityVHS(value:Float):Float {
+    	shader.intensityVHS.value = [value];
+        intensityVHS = value;
         return value;
 	}
 }
@@ -138,7 +135,7 @@ class VhsShader extends FlxShader {
     uniform float iTime;
     uniform sampler2D noiseTexture;
     uniform float noisePercent;
-    uniform float intensity;
+    uniform float intensityVHS;
     
     float rand(vec2 co)
     {
@@ -181,7 +178,7 @@ class VhsShader extends FlxShader {
         look.x = look.x + sin(look.y*10. + iTime)/50.*onOff(4.,4.,.3)*(1.+cos(iTime*80.))*window;
         float vShift = 0.4*onOff(2.,3.,.9) * (sin(iTime)*sin(iTime*20.) + (0.5 + 0.1*sin(iTime*200.)*cos(iTime)));
         look.y = mod(look.y + vShift, 1.);
-        vec4 video = vec4(flixel_texture2D(bitmap,mix(uv,look,intensity)));
+        vec4 video = vec4(flixel_texture2D(bitmap,mix(uv,look,intensityVHS)));
         return video;
     }
 

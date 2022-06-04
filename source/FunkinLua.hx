@@ -1848,9 +1848,9 @@ class FunkinLua {
 			PlayState.instance.addShaderToCamera(camera, new BloomEffect(blurSize/512.0, intensity));
 			
 		});
-		Lua_helper.add_callback(lua, "addEffect14", function(camera:String, noise:Float = 0.0, intensity:Float = 0.2) { //for dem funkies
+		Lua_helper.add_callback(lua, "addEffect14", function(camera:String, noise:Float = 0.00, intensityVHS:Float=0.10) {
 			
-			PlayState.instance.addShaderToCamera(camera, new VhsHandler(noise, intensity));	
+			PlayState.instance.addShaderToCamera(camera, new VhsEffect(noise, intensityVHS));
 		});
 		Lua_helper.add_callback(lua, "die", function(camera:String) {
 			PlayState.instance.clearShaderFromCamera(camera);

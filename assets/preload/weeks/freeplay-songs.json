@@ -1,0 +1,68 @@
+{
+	"storyName": "Freeplay",
+	"difficulties": "Hard",
+	"hideFreeplay": false,
+	"weekBackground": "street",
+	"weekBefore": "chapter1",
+	"freeplayColor": [
+		146,
+		113,
+		253
+	],
+	"startUnlocked": false,
+	"hideStoryMode": true,
+	"songs": [
+		[
+			"Isolated",
+			"mickey",
+			[
+				60,
+				60,
+				60
+			]
+		],
+		[
+			"Lunacy",
+			"lunamick",
+			[
+				60,
+				60,
+				60
+			]
+		],
+		[
+			"Delusional",
+			"insanemick",
+			[
+				60,
+				60,
+				60
+			]
+		],
+		[
+			"Isolated Old",
+			"mickey",
+			[
+				60,
+				60,
+				60
+			]
+		],
+		[
+			"Laugh Track",
+			"ricky",
+			[
+				80,
+				80,
+				60
+			]
+		]
+	],
+	"weekCharacters": [
+		"",
+		"",
+		""
+	],
+	"hiddenUntilUnlocked": true,
+	"weekName": "Freeplay"
+}

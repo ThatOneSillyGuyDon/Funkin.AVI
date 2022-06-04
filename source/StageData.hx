@@ -56,6 +56,14 @@ class StageData {
 					stage = 'schoolEvil';
 				case 'ugh' | 'guns' | 'stress':
 					stage = 'tank';
+				case 'isolated' | 'isolated-old' | 'lunacy' | 'delusional':
+					stage = 'EndlessLoop';
+				case 'twisted-grins':
+					stage = 'Office';
+				case 'hunted':
+					stage = 'Forest';
+				case 'gl1tchl3ss':
+					stage = 'PixelWorld';
 				default:
 					stage = 'stage';
 			}

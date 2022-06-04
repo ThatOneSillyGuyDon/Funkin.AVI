@@ -85,7 +85,7 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
-		menuart = new FlxSprite(-80).loadGraphic(Paths.image('menuBG'));
+		menuart = new FlxSprite(-80).loadGraphic(Paths.image('NEWmenu/newspaper'));
 		menuart.scrollFactor.set(0, yScroll);
 		menuart.setGraphicSize(Std.int(menuart.width * 1.175));
 		menuart.updateHitbox();
@@ -176,7 +176,7 @@ class MainMenuState extends MusicBeatState
 			else
 				menuItem.y = 108 + (0 * 90);
 
-			// Mods
+			// Credits
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(100, 400);
 			menuItem.scale.x = scale;
@@ -206,7 +206,7 @@ class MainMenuState extends MusicBeatState
 			else
 				menuItem.y = 108 + (0 * 90);
 
-			// Credits
+			// Settings
 			var offset:Float = 108 - (Math.max(optionShit.length, 4) - 4) * 80;
 			var menuItem:FlxSprite = new FlxSprite(100, 550);
 			menuItem.scale.x = scale;
@@ -381,6 +381,10 @@ class MainMenuState extends MusicBeatState
 				{
 					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
 				}
+				else if (optionShit[curSelected] == 'Story_mode')
+				{
+					FlxG.sound.play(Paths.sound('funkinAVI/nope'));
+				}
 				else
 				{
 					selectedSomethin = true;
@@ -415,8 +419,6 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new FreeplayState());
 									//#if MODS_ALLOWED

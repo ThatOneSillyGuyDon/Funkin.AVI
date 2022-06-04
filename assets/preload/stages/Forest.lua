@@ -1,11 +1,11 @@
 function onCreate()
-makeLuaSprite('office', 'funkinAVI/goofy/forest', 0, 0);
-setScrollFactor('office', 1, 1);
-setProperty('office.flipY', false);
-setProperty('office.flipX', false);
-addLuaSprite('office', false);
-addEffect1('office', 0.005);
-addEffect5('office', 1, false, true, true);
+makeLuaSprite('forest', 'funkinAVI/goofy/forest', 0, 0);
+setScrollFactor('forest', 1, 1);
+setProperty('forest.flipY', false);
+setProperty('forest.flipX', false);
+addLuaSprite('forest', 'false');
+addEffect1('forest', 0.005);
+addEffect5('forest', 1, false, true, true);
 addEffect5('game');
 addEffect1('hud', 0.004);
 addEffect5('hud');

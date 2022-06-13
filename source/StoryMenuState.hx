@@ -104,11 +104,7 @@ class StoryMenuState extends MusicBeatState
 		DiscordClient.changePresence("In Story Mode", null);
 		#end
 			
-<<<<<<< HEAD
 		Application.current.window.title = "Choose...";
-=======
-		Application.current.window.title = "Funkin.avi - Choosing Episode";
->>>>>>> d89046ed730272b0631d43b62b83fde938c469c5
 
 		var num:Int = 0;
 		for (i in 0...WeekData.weeksList.length)

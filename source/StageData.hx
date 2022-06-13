@@ -62,7 +62,7 @@ class StageData {
 					stage = 'Office';
 				case 'hunted':
 					stage = 'Forest';
-				case 'gl1tchl3ss':
+				case 'malfunction':
 					stage = 'PixelWorld';
 				default:
 					stage = 'stage';

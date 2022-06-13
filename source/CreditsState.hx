@@ -83,6 +83,46 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			['Funkin.avi Dev Team'],
+			['Funkin.avi Twitter',	'missing-icon',	'Follow Us Here for \nMore Updates!',	'https://twitter.com/AviFunkin',	'FFFFFF'],
+			['Directors'],
+			['Yama haki',	'yama',	'Main Director',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
+			['DEMOLITIONDON96',	'demolitiondon96',	'Co-Director', 'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['Nutsack',	'nutsack',	'2nd Co-Director',	'https://twitter.com/Nutblocked',	'FFFFFF'],
+			['Artists'],
+			['Mr. IDK',	'idk',	'Sprite Artist', 'https://twitter.com/Mr_IDKK?t=iYM1mlQcv4_UVmxtW2kvig&s=09',	'FFFFFF'],
+			['AustinTheRedDragon',	'austin',	'Creator of Mr. Smiles & Concept Artist',	'https://twitter.com/Austinthereddr3?t=ZQVsYKPA_aseqQ5EBImdWQ&s=09', 'FFFFFF'],
+			['GavinTheCartoonist',	'missing-icon',	'Artist for Cognitive Crisis Collab',	'https://twitter.com/AnimationFelix',	'FFFFFF'],
+			['DEMOLITIONDON96',	'demolitiondon96',	'Concept Artist',	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['awe',	'missing-icon',	'Concept Artist',	'https://twitter.com/awesitoelpapu',	'FFFFFF'],
+			['Genorelm_lmao',	'genore',	'Artist',	'https://twitter.com/Genorelm_',	'FFFFFF'],
+			['Nutsack',	'nutsack',	'Episode 1 Assets',	'https://twitter.com/Nutblocked',	'FFFFFF'],
+			['Cheez',	'cheez',	'Animator for some characters',	'https://gamebanana.com/members/1784678',	'FFFFFF'],
+			['BonoanAnything',	'bonoan',	'Cutscenes Animator\n(Did the trailer too)',	'https://www.youtube.com/channel/UCvSHOa48e2HJrRjwEjpx1Hw',	'FFFFFF'],
+			['COOLTE3YET',	'cool',	'Thumbnail Artist for GJ & GB Pages\n(Give them credit)',	'https://gamebanana.com/members/2005084',	'FFFFFF'],
+			['Composers'],
+			['FR3SHMoure',	'fresh',	'Composer of Delusional',	'https://twitter.com/FR3SHAnimates?t=woj1MCTZ95ucJ33ngNSspA&s=09', 'FFFFFF'],
+			['Yama haki',	'yama', 'Did most of Tracks with help of Others',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
+			['obscurity.',	'missing-icon',	'Epic Composer',	'https://twitter.com/MrObscuritylol', 'FFFFFF'],
+			['Sayan Sama', 'missing-icon',	'Composer of Mr. Smiles Tracks',	'https://gamebanana.com/members/1825237',	'FFFFFF'],
+			['AzkoBlitz',	'azko',	'Composer',	'https://twitter.com/Azko57478381',	'FFFFFF'],
+			['JBlitz',	'blitz',	'Menu Music Composer',	'https://twitter.com/JBlitz_',	'FFFFFF'],
+			['END_SELLA',	'missing-icon',	'Composer',	'https://www.youtube.com/c/seibichu%E3%83%84/videos',	'FFFFFF'],
+			['AttackPan',	'missing-icon',	'Instrumentals for some Tracks',	'nolink',	'FFFFFF'],
+			['Charters'],
+			['DEMOLITIONDON96',	'demolitiondon96',	'Did some charts',	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['Yama haki',	'yama',	'Charted old Isolated',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
+			['Dest',	'dest',	'Charter',	'https://gamebanana.com/members/2095443',	'FFFFFF'],
+			['Noppz',	'missing-icon',	'Charter for Suicidal Difficulty \n(Not Available in this Demo)',	'https://www.youtube.com/channel/UCuz26FymzG_4tluOooxT-xQ',	'FFFFFF'],
+			['PhantomNexus',	'nexus',	'Minor Charting',	'https://twitter.com/archerthewolf2',	'FFFFFF'],
+			['Zer0XD',	'zero',	'funny charter.',	'https://www.youtube.com/channel/UCq9VLHYIwoCU7hnr0TK9yuA',	'FFFFFF'],
+			['fakeburritos123',	'burrito',	"Charted Don't Cross! \n(Don made sure it was the best chart ever)",	'nolink',	'FFFFFF'],
+			['Voice Actors'],
+			['Flaconadir',	'flacon',	'Voice Actor',	'https://twitter.com/flaconadir',	'FFFFFF'],
+			['JUSTIN X',	'justin',	'Voice Actor',	'https://twitter.com/CbmShow',	'FFFFFF'],
+			['Coders'],
+			['DEMOLITIONDON96',	'demolitiondon96',	"The only coder in the team\n(I am crying in pain as i'm typing this)",	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			[''],
 			['Demolition Engine Team'],
 			['DEMOLITIONDON96',		'demolitiondon96',	'Creator of the Engine',			'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
 			['Tony Time!',				'matt',				'Epic Coder \n(Did Lots of Cool Shit)',											'https://github.com/TonyTimee',			'444444'],
@@ -188,6 +228,25 @@ class CreditsState extends MusicBeatState
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
 		changeSelection();
+
+		var scratchStuff:FlxSprite = new FlxSprite();
+		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
+		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
+		scratchStuff.animation.play('idle');
+		scratchStuff.screenCenter();
+		scratchStuff.scale.x = 1.1;
+		scratchStuff.scale.y = 1.1;
+		add(scratchStuff);
+
+		var grain:FlxSprite = new FlxSprite();
+		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
+		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
+		grain.animation.play('idle');
+		grain.screenCenter();
+		grain.scale.x = 1.1;
+		grain.scale.y = 1.1;
+		add(grain);
+		
 		super.create();
 	}
 
@@ -298,7 +357,7 @@ class CreditsState extends MusicBeatState
 	var moveTween:FlxTween = null;
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'), 0.4);
 		do {
 			curSelected += change;
 			if (curSelected < 0)

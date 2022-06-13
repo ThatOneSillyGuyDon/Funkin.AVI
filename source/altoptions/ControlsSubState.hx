@@ -139,7 +139,7 @@ class ControlsSubState extends MusicBeatSubstate {
 					ClientPrefs.keyBinds = ClientPrefs.defaultKeys.copy();
 					reloadKeys();
 					changeSelection();
-					FlxG.sound.play(Paths.sound('confirmMenu'));
+					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 				} else if(!unselectableCheck(curSelected)) {
 					bindingTime = 0;
 					rebindingKey = true;
@@ -148,7 +148,7 @@ class ControlsSubState extends MusicBeatSubstate {
 					} else {
 						grpInputs[getInputTextNum()].alpha = 0;
 					}
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 				}
 			}
 		} else {
@@ -164,7 +164,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				ClientPrefs.keyBinds.set(optionShit[curSelected][1], keysArray);
 
 				reloadKeys();
-				FlxG.sound.play(Paths.sound('confirmMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 				rebindingKey = false;
 			}
 
@@ -175,7 +175,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				} else {
 					grpInputs[curSelected].alpha = 1;
 				}
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 				rebindingKey = false;
 				bindingTime = 0;
 			}
@@ -241,7 +241,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				}
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 	}
 
 	function changeAlt() {
@@ -264,7 +264,7 @@ class ControlsSubState extends MusicBeatSubstate {
 				break;
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 	}
 
 	private function unselectableCheck(num:Int, ?checkDefaultKey:Bool = false):Bool {

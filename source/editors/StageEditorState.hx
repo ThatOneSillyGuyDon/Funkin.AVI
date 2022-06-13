@@ -808,7 +808,7 @@ class StageEditorState extends MusicBeatState
 		if (FlxG.keys.justPressed.ESCAPE)
 		{
 			MusicBeatState.switchState(new editors.MasterEditorMenu());
-			FlxG.sound.playMusic(Paths.music('freakyMenu'));
+			FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
 
 			FlxG.mouse.visible = false;
 			return;

@@ -15,6 +15,7 @@ import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxEase;
+import flixel.FlxCamera;
 import flixel.tweens.FlxTween;
 import lime.utils.Assets;
 import lime.app.Application;
@@ -29,6 +30,8 @@ using StringTools;
 
 class FreeplayState extends MusicBeatState
 {
+	private var camFilter:FlxCamera;
+
 	var songs:Array<SongMetadata> = [];
 
 	var selector:FlxText;
@@ -56,6 +59,11 @@ class FreeplayState extends MusicBeatState
 
 	override function create()
 	{
+		camFilter = new FlxCamera();
+		camFilter.bgColor.alpha = 0;
+
+		FlxG.cameras.add(camFilter);
+		
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
@@ -68,7 +76,7 @@ class FreeplayState extends MusicBeatState
 		DiscordClient.changePresence("In Freeplay", null);
 		#end
 			
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine";
+		Application.current.window.title = "Funkin.avi - Freeplay";
 
 		for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
@@ -209,6 +217,27 @@ class FreeplayState extends MusicBeatState
 		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
 		add(text);
+
+		var scratchStuff:FlxSprite = new FlxSprite();
+		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
+		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
+		scratchStuff.animation.play('idle');
+		scratchStuff.screenCenter();
+		scratchStuff.scale.x = 1.1;
+		scratchStuff.scale.y = 1.1;
+		add(scratchStuff);
+
+		var grain:FlxSprite = new FlxSprite();
+		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
+		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
+		grain.animation.play('idle');
+		grain.screenCenter();
+		grain.scale.x = 1.1;
+		grain.scale.y = 1.1;
+		add(grain);
+
+		scratchStuff.cameras = [camFilter];
+		grain.cameras = [camFilter];
 
 		super.create();
 	}
@@ -356,14 +385,20 @@ class FreeplayState extends MusicBeatState
 				instPlaying = curSelected;
 				switch(PlayState.SONG.song)
 				{
-					case 'Atrocity':
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Saster";
-					case 'Tutorial' | 'Bopeebo' | 'Fresh' | 'Dad Battle' | 'Spookeez' | 'South' | 'Pico' | 'Philly Nice' | 'Blammed' | 'Satin Panties' | 'High' | 'Milf' | 'Cocoa' | 'Eggnog' | 'Senpai' | 'Roses' | 'Thorns' | 'Ugh' | 'Guns' | 'Stress':
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Kawai Sprite";
-					case 'Monster' | 'Winter Horrorland':
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song + " - Composed by: Kawai Sprite & Bassetfilms";
+					case 'Isolated' | 'Laugh Track':
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
+					case 'Lunacy':
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: obscurity.";
+					case 'Delusional':
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
+					case 'Isolated Old' | "Don't Cross!":
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: Yama haki";
+					case 'Malfunction':
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: obscurity.";
+					case 'Twisted Grins':
+					Application.current.window.title = "Funkin.avi - Listening to: Twisted Grins - Composed by: Sayan Sama";
 					default:
-					Application.current.window.title = "Friday Night Funkin': Demolition Engine - Listening to: " + PlayState.SONG.song;
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song;
 				}
 				#end
 			}
@@ -409,7 +444,7 @@ class FreeplayState extends MusicBeatState
 		{
 			persistentUpdate = false;
 			openSubState(new ResetScoreSubState(songs[curSelected].songName, curDifficulty, songs[curSelected].songCharacter));
-			FlxG.sound.play(Paths.sound('scrollMenu'));
+			FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 		}
 		super.update(elapsed);
 	}
@@ -453,7 +488,7 @@ class FreeplayState extends MusicBeatState
 
 	function changeSelection(change:Int = 0, playSound:Bool = true)
 	{
-		if(playSound) FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		if(playSound) FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'), 0.4);
 
 		curSelected += change;
 

@@ -6,6 +6,7 @@ import Discord.DiscordClient;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
+import flixel.FlxCamera;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
@@ -25,6 +26,8 @@ using StringTools;
 
 class StoryMenuState extends MusicBeatState
 {
+	private var camFilter:FlxCamera;
+
 	public static var weekCompleted:Map<String, Bool> = new Map<String, Bool>();
 
 	var scoreText:FlxText;
@@ -54,6 +57,11 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
+		camFilter = new FlxCamera();
+		camFilter.bgColor.alpha = 0;
+
+		FlxG.cameras.add(camFilter);
+
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
@@ -96,7 +104,11 @@ class StoryMenuState extends MusicBeatState
 		DiscordClient.changePresence("In Story Mode", null);
 		#end
 			
+<<<<<<< HEAD
 		Application.current.window.title = "Choose...";
+=======
+		Application.current.window.title = "Funkin.avi - Choosing Episode";
+>>>>>>> d89046ed730272b0631d43b62b83fde938c469c5
 
 		var num:Int = 0;
 		for (i in 0...WeekData.weeksList.length)
@@ -195,6 +207,27 @@ class StoryMenuState extends MusicBeatState
 
 		FlxTween.tween(transitionThing, {x: 1600}, 2.1, {ease: FlxEase.quadInOut});
 
+		var scratchStuff:FlxSprite = new FlxSprite();
+		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
+		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
+		scratchStuff.animation.play('idle');
+		scratchStuff.screenCenter();
+		scratchStuff.scale.x = 1.1;
+		scratchStuff.scale.y = 1.1;
+		add(scratchStuff);
+
+		var grain:FlxSprite = new FlxSprite();
+		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
+		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
+		grain.animation.play('idle');
+		grain.screenCenter();
+		grain.scale.x = 1.1;
+		grain.scale.y = 1.1;
+		add(grain);
+
+		scratchStuff.cameras = [camFilter];
+		grain.cameras = [camFilter];
+
 		super.create();
 	}
 
@@ -221,13 +254,13 @@ class StoryMenuState extends MusicBeatState
 			if (upP)
 			{
 				changeWeek(-1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 
 			if (downP)
 			{
 				changeWeek(1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 
 			if (controls.UI_RIGHT)
@@ -256,7 +289,7 @@ class StoryMenuState extends MusicBeatState
 			{
 				persistentUpdate = false;
 				openSubState(new ResetScoreSubState('', curDifficulty, '', curWeek));
-				//FlxG.sound.play(Paths.sound('scrollMenu'));
+				//FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 			else if (controls.ACCEPT)
 			{
@@ -290,7 +323,7 @@ class StoryMenuState extends MusicBeatState
 		{
 			if (stopspamming == false)
 			{
-				FlxG.sound.play(Paths.sound('confirmMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/confirm_episode'));
 
 				grpWeekText.members[curWeek].startFlashing();
 

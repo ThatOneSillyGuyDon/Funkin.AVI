@@ -96,7 +96,7 @@ class StoryMenuState extends MusicBeatState
 		DiscordClient.changePresence("In Story Mode", null);
 		#end
 			
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine";
+		Application.current.window.title = "Choose...";
 
 		var num:Int = 0;
 		for (i in 0...WeekData.weeksList.length)

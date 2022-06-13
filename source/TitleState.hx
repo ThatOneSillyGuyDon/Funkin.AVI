@@ -479,7 +479,7 @@ class TitleState extends MusicBeatState
 
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
-					if (mustUpdate) {
+					if (mustUpdate && ClientPrefs.outdated) {
 						Application.current.window.title = "Funkin.avi - OUTDATED VERSION";
 						MusicBeatState.switchState(new OutdatedState());
 					} else {

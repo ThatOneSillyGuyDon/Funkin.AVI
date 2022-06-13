@@ -31,7 +31,6 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var DemoVersion:String = '1.0';
 	public static var DemoEngineVersion:String = '0.2.3';
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -71,7 +70,6 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-	var song:Array<FlxKey>;
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
 	//public var camZooming:Bool = false;
@@ -80,14 +78,13 @@ class MainMenuState extends MusicBeatState
 	{
 		WeekData.loadTheFirstEnabledMod();
 
-		Application.current.window.title = "Funkin.avi - In the menu's";
+		Application.current.window.title = "Funkin.avi";
 		
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null);
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
-		song = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1¿2'));
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
@@ -324,10 +321,6 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 		
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Funkin.avi v" + DemoVersion, 12);
-		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(versionShit);
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Demolition Engine v" + DemoEngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -538,13 +531,6 @@ class MainMenuState extends MusicBeatState
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
-
-			else if (FlxG.keys.anyJustPressed(song)) 
-				{
-					selectedSomethin = true;
-					PlayState.SONG = Song.loadFromJson('test', 'test'); //for munkey.mp4 i guess idk
-                    LoadingState.loadAndSwitchState(new PlayState());
-				}
 			#end
 		}
 

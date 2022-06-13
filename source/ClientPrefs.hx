@@ -7,6 +7,7 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs {
+	public static var outdated:Bool = false;
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
 	public static var antiMash:Bool = true;
@@ -118,6 +119,7 @@ class ClientPrefs {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.outdated = outdated;
 		FlxG.save.data.downScroll = downScroll;
 		FlxG.save.data.laneunderlay = laneunderlay;
 		FlxG.save.data.laneTransparency = laneTransparency;
@@ -182,6 +184,9 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.outdated != null) {
+			outdated = FlxG.save.data.outdated;
+		}
 		if(FlxG.save.data.debugMode != null) {
 			debugMode = FlxG.save.data.debugMode;
 		}

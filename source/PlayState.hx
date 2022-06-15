@@ -4342,6 +4342,7 @@ class PlayState extends MusicBeatState
 					case 'true' | 'True':
 						camHUD.visible = false;
 				}
+			}
 			case 'Fade Character':
 				var charType:Int = Std.parseInt(value1);
 				if(Math.isNaN(charType)) charType = 0;

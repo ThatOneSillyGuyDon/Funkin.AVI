@@ -35,6 +35,7 @@ class Achievements {
 		FlxG.log.add('Completed achievement "' + name +'"');
 		achievementsMap.set(name, true);
 		FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+		trace('Achievement Unlocked: "' + name +'"!');
 	}
 
 	public static function isAchievementUnlocked(name:String) {

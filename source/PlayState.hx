@@ -3982,6 +3982,7 @@ class PlayState extends MusicBeatState
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
 		switch(eventName) {
 			case 'Hey!':
+				if(ClientPrefs.events) {
 				var value:Int = 2;
 				switch(value1.toLowerCase().trim()) {
 					case 'bf' | 'boyfriend' | '0':
@@ -4014,13 +4015,17 @@ class PlayState extends MusicBeatState
 					boyfriend.specialAnim = true;
 					boyfriend.heyTimer = time;
 				}
+			}
 
 			case 'Set GF Speed':
+				if(ClientPrefs.events) {
 				var value:Int = Std.parseInt(value1);
 				if(Math.isNaN(value) || value < 1) value = 1;
 				gfSpeed = value;
+			}
 
 			case 'Philly Glow':
+				if(ClientPrefs.events) {
 				var lightId:Int = Std.parseInt(value1);
 				if(Math.isNaN(lightId)) lightId = 0;
 
@@ -4102,12 +4107,13 @@ class PlayState extends MusicBeatState
 						}
 						phillyGlowGradient.bop();
 				}
+			}
 
 			case 'Kill Henchmen':
 				killHenchmen();
 
 			case 'Add Camera Zoom':
-				if(ClientPrefs.camZooms && FlxG.camera.zoom < 1.35) {
+				if(ClientPrefs.camZooms && ClientPrefs.events && FlxG.camera.zoom < 1.35) {
 					var camZoom:Float = Std.parseFloat(value1);
 					var hudZoom:Float = Std.parseFloat(value2);
 					if(Math.isNaN(camZoom)) camZoom = 0.015;
@@ -4184,6 +4190,7 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Screen Shake':
+				if(ClientPrefs.events) {
 				var valuesArray:Array<String> = [value1, value2];
 				var targetsArray:Array<FlxCamera> = [camGame, camHUD];
 				for (i in 0...targetsArray.length) {
@@ -4199,6 +4206,7 @@ class PlayState extends MusicBeatState
 						targetsArray[i].shake(intensity, duration);
 					}
 				}
+			}
 
 
 			case 'Change Character':
@@ -4270,6 +4278,7 @@ class PlayState extends MusicBeatState
 				}
 				reloadHealthBarColors();
 			case 'Screen Fade':
+				if(ClientPrefs.events) { //lag prevention or idk
 				var charType:Int = Std.parseInt(value1);
 				if(Math.isNaN(charType)) charType = 0;
 	
@@ -4284,6 +4293,7 @@ class PlayState extends MusicBeatState
 						blackFadeThing.alpha += 1;
 					//Sorry that you have to fucking spam these events to do the thing
 				}
+			}
 			case 'Lyrics':
 				if(lyrics!=null){
 					remove(lyrics);
@@ -4299,6 +4309,7 @@ class PlayState extends MusicBeatState
 					add(lyrics);
 				}
 			case 'Flash Screen':
+				if(ClientPrefs.flashing) { //This Demolition, is how to make flashing lights disambled
 				var colorFlash:Int = Std.parseInt(value1);
 				if(Math.isNaN(colorFlash)) colorFlash = 0;
 		
@@ -4652,7 +4663,7 @@ class PlayState extends MusicBeatState
 									}
 							//allowOpponentNoteSplash = true;
 						}
-				}
+				} //T O O  M U C H  C O D E
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
 
@@ -4685,7 +4696,7 @@ class PlayState extends MusicBeatState
 					}*/
 			
 			case 'Change Scroll Speed':
-				if (songSpeedType == "constant")
+				if (songSpeedType == "constant" && ClientPrefs.events)
 					return;
 				var val1:Float = Std.parseFloat(value1);
 				var val2:Float = Std.parseFloat(value2);

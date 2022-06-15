@@ -41,6 +41,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
+		var option:Option = new Option('Events/Modcharts',
+		'If unchecked, song will NOT have events, recomended for begginers',
+		'events',
+		'bool',
+		false);
+	addOption(option);
+
 		var option:Option = new Option('Controller Mode',
 			'Check this if you want to play with\na controller instead of using your Keyboard.',
 			'controllerMode',

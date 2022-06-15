@@ -7,6 +7,7 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs {
+	public static var randomModchart:Bool = false;
 	public static var events:Bool = false;
 	public static var outdated:Bool = false;
 	public static var downScroll:Bool = false;
@@ -120,6 +121,7 @@ class ClientPrefs {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.randomModchart = randomModchart;
 		FlxG.save.data.events = events;
 		FlxG.save.data.outdated = outdated;
 		FlxG.save.data.downScroll = downScroll;
@@ -186,6 +188,9 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.randomModchart != null) {
+			randomModchart = FlxG.save.data.randomModchart;
+		}
 		if(FlxG.save.data.events != null) {
 			events = FlxG.save.data.events;
 		}

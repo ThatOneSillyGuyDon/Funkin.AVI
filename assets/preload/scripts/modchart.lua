@@ -3,6 +3,8 @@ local spin = true;
 local arrowMoveX = 0;
 local arrowMoveY = 32;
  
+function onUpdate()
+    if getPropertyFromClass('ClientPrefs', 'randomModchart') then --i dont want this tony
 function onSongStart()
     for i = 0,7 do 
         x = getPropertyFromGroup('strumLineNotes', i, 'x')
@@ -57,4 +59,6 @@ function onBeatHit()
     if curBeat % 10 == 5 then
         bumpArrows(1, 400, 0)
     end
+end
+end
 end

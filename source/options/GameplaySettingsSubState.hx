@@ -222,6 +222,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
+		var option:Option = new Option('Super mega random modchart',
+			'If checked, there will be a full random wtf modchart',
+			'outdated',
+			'bool',
+			false);
+		addOption(option);
+
 		super();
 	}
 }

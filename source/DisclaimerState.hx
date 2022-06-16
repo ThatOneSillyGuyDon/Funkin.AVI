@@ -17,7 +17,7 @@ class DisclaimerState extends MusicBeatState
 	public static var leftState:Bool = false;
 
 	var blackFade:FlxSprite;
-	var bg:FlxSprite;
+	var dumbBG:FlxSprite;
 	var disclaimText:FlxText;
 	var disclaimText2:FlxText;
 	var disclaimText3:FlxText;
@@ -25,12 +25,12 @@ class DisclaimerState extends MusicBeatState
 	{
 		super.create();
 
-		bg = new FlxSprite();
-		bg.loadGraphic(Paths.image('WARNING/Avi_Disclaimer'), false);
-		bg.screenCenter();
-		bg.scale.x = 0.68;
-		bg.scale.y = 0.67;
-		add(bg);
+		dumbBG = new FlxSprite();
+		dumbBG.loadGraphic(Paths.image('WARNING/Avi_Disclaimer'), false);
+		dumbBG.screenCenter();
+		dumbBG.scale.x = 0.68;
+		dumbBG.scale.y = 0.67;
+		add(dumbBG);
 
 		var redFormat = new FlxTextFormatMarkerPair(new FlxTextFormat(FlxColor.RED, true, true), '^');
 
@@ -42,8 +42,8 @@ class DisclaimerState extends MusicBeatState
 
 		disclaimText2 = new FlxText(15, 150, FlxG.width,
 			"Mickey Mouse is a character owned by Disney!\n
-			Flashing Lights are also turned on and CANNOT be disabled.\n
-			Press ENTER to continue further to the game.\n
+			Flashing Lights are in this mod so Be careful.\n
+			Press ENTER to continue further to the game and disamble it.\n
 			Press ESCAPE to exit now.",
 			20);
 		disclaimText2.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, LEFT);
@@ -89,7 +89,7 @@ class DisclaimerState extends MusicBeatState
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
 				if(!back) {
-					ClientPrefs.flashing = true;
+					ClientPrefs.flashing = false;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					FlxTween.tween(blackFade, {alpha: 1}, 1, {

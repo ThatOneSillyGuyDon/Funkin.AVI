@@ -4167,7 +4167,7 @@ class PlayState extends MusicBeatState
 						}
 						phillyGlowGradient.bop();
 				}
-
+			}
 			case 'Kill Henchmen':
 				killHenchmen();
 

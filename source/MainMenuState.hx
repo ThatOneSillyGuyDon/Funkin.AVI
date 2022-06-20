@@ -31,7 +31,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var MouseVersion:String = '0.5.1 (DEMO)';
+	public static var MouseVersion:String = '1.5 (DEMO)';
 	public static var DemoEngineVersion:String = '0.2.3';
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -513,7 +513,7 @@ class MainMenuState extends MusicBeatState
 									case 'story_mode':
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
-										MusicBeatState.switchState(new FreeplayState());
+										MusicBeatState.switchState(new EpicSelectorWOOO());
 									//#if MODS_ALLOWED
 									//case 'mods':
 										//MusicBeatState.switchState(new ModsMenuState());

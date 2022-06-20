@@ -73,7 +73,7 @@ class FreeplayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In Freeplay", null);
+		DiscordClient.changePresence("In Freeplay", null, null, 'icon');
 		#end
 			
 		Application.current.window.title = "Funkin.avi - Freeplay";

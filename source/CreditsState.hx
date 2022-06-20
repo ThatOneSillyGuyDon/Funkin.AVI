@@ -43,7 +43,7 @@ class CreditsState extends MusicBeatState
 	{
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Viewing Credits", null);
+		DiscordClient.changePresence("Viewing Credits", null, null, 'icon');
 		#end
 
 		persistentUpdate = true;
@@ -130,7 +130,7 @@ class CreditsState extends MusicBeatState
 			['Tony Time!',				'matt',				'Epic Coder \n(Did Lots of Cool Shit)',											'https://github.com/TonyTimee',			'444444'],
 			['Cherif107',	'missing-icon',	'Cool Coder\nNice Guy',		'https://github.com/Cherif107',		'FFFFFF'],
 			['PrismLight', 'prism', 'Minor Code',	'https://github.com/PrismLight', 	'3B3B3B',],
-			['Theoyeah',	'theoyeah cring    -cycba',		'Help with some code',	'https://github.com/Theoyeah',		'FFFFFF'],
+			['Theoyeah',	'theoyeah credit',		'Help with some code',	'https://github.com/Theoyeah',		'FFFFFF'],
 			[''],
 			['Extra Code'],
 			['mayo78',   'missing-icon',     'Epic CPU Skin Code',        'https://github.com/mayo78',                'FFFFFF'],

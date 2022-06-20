@@ -1,35 +1,15 @@
 {
-	"layerArray": [
-
-	],
-	"camera_boyfriend": [
-		0,
-		0
-	],
-	"girlfriend": [
-		400,
-		130
-	],
-	"isPixelStage": false,
-	"boyfriend": [
-		1270,
-		100
-	],
-	"name": "EndlessLoop",
-	"defaultZoom": 0.85,
-	"camera_girlfriend": [
-		0,
-		0
-	],
-	"opponent": [
-		220,
-		100
-	],
 	"directory": "",
-	"camera_speed": 0.8,
+	"defaultZoom": 0.9,
+	"isPixelStage": false,
+
+	"boyfriend": [950, 100],
+	"girlfriend": [400, 130],
+	"opponent": [150, 100],
 	"hide_girlfriend": true,
-	"camera_opponent": [
-		0,
-		0
-	]
+
+	"camera_boyfriend": [0, 0],
+	"camera_opponent": [0, 0],
+	"camera_girlfriend": [0, 0],
+	"camera_speed": 1
 }

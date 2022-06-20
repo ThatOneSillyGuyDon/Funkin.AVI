@@ -1,45 +1,15 @@
 {
-	"camera_opponent": [
-		0,
-		0
-	],
-	"girlfriend": [
-		400,
-		130
-	],
-	"camera_girlfriend": [
-		0,
-		0
-	],
-	"layerArray": [
-		{
-			"yAxis": 0,
-			"flipX": false,
-			"flipY": false,
-			"directory": "funkinAVI/goofy/forest",
-			"scrollX": null,
-			"scrollY": null,
-			"xAxis": 0,
-			"name": "forest",
-			"scale": 1
-		}
-	],
-	"boyfriend": [
-		1500,
-		500
-	],
-	"isPixelStage": false,
-	"opponent": [
-		600,
-		500
-	],
-	"hide_girlfriend": true,
 	"directory": "",
-	"camera_speed": null,
-	"defaultZoom": null,
-	"camera_boyfriend": [
-		0,
-		0
-	],
-	"name": "Forest"
+	"defaultZoom": 1,
+	"isPixelStage": false,
+
+	"boyfriend": [1500, 400],
+	"girlfriend": [400, 130],
+	"opponent": [600, 500],
+	"hide_girlfriend": true,
+
+	"camera_boyfriend": [0, 0],
+	"camera_opponent": [0, 0],
+	"camera_girlfriend": [0, 0],
+	"camera_speed": 1
 }

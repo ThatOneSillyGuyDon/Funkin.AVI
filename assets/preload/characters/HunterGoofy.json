@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
+			"loop": false,
 			"offsets": [
 				5,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "HunterGoofy Left Arrow"
+			"fps": 24,
+			"name": "HunterGoofy Left Arrow",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				-5
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "HunterGoofy Down Arrow"
+			"fps": 24,
+			"name": "HunterGoofy Down Arrow",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				2,
 				5
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "HunterGoofy Up Arrow"
+			"fps": 24,
+			"name": "HunterGoofy Up Arrow",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				-5,
 				0
 			],
-			"loop": false,
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "HunterGoofy Right Arrow"
+			"fps": 24,
+			"name": "HunterGoofy Right Arrow",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"indices": [],
-			"fps": 24,
 			"anim": "idle",
-			"loop": false,
-			"name": "HunterGoofy Idle Bop"
+			"fps": 24,
+			"name": "HunterGoofy Idle Bop",
+			"indices": []
 		}
 	],
 	"no_antialiasing": false,
@@ -62,12 +62,12 @@
 		-200,
 		-90
 	],
-	"healthicon": "face",
+	"healthicon": "goofy",
 	"flip_x": false,
 	"healthbar_colors": [
-		0,
-		0,
-		0
+		211,
+		211,
+		211
 	],
 	"camera_position": [
 		-20,

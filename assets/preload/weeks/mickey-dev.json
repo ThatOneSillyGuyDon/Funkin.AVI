@@ -35,21 +35,30 @@
 			]
 		],
 		[
-			"Twisted Grins",
-			"face",
+			"Hunted",
+			"goofy",
 			[
-				80,
-				80,
+				0,
+				40,
 				60
 			]
 		],
 		[
-			"Laugh Track",
-			"face",
+			"Isolated Old",
+			"mickey",
 			[
-				100,
+				60,
 				60,
 				60
+			]
+		],
+		[
+			"Malfunction",
+			"square-pixel",
+			[
+				140,
+				120,
+				180
 			]
 		]
 	],

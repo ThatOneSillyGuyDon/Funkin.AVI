@@ -268,6 +268,7 @@ class PlayState extends MusicBeatState
 
 	var light:BGSprite;
 	var isolatedIntro:FlxSprite;
+	var treesFront:BGSprite;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -299,6 +300,7 @@ class PlayState extends MusicBeatState
 
 	#if desktop
 	// Discord RPC variables
+	var curPortrait:String = "";
 	var storyDifficultyText:String = "";
 	var detailsText:String = "";
 	var detailsPausedText:String = "";
@@ -771,6 +773,30 @@ class PlayState extends MusicBeatState
 				isolatedIntro.cameras = [camCustom];
 				isolatedIntro.alpha = 0;
 
+			case 'Studio':
+				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-mickey';
+				//GameOverSubstate.loopSoundName = 'gameOver-mickey';
+				//GameOverSubstate.endSoundName = 'gameOverEnd-mickey';
+				//GameOverSubstate.characterName = 'bf-demon-dead';
+
+				var studioBG:BGSprite = new BGSprite('funkinAVI/episode1/streetNEW/bg', -400, -300);
+				studioBG.scale.set(1.2, 1.2);
+				add(studioBG);
+
+				var streetNEW:BGSprite = new BGSprite('funkinAVI/episode1/streetNEW/street', -400, -300);
+				streetNEW.scale.set(1.2, 1.2);
+				add(streetNEW);
+
+				var vignetteCam:BGSprite = new BGSprite('funkinAVI/episode1/streetNEW/vignetteOverlay', -400, -300);
+				add(vignetteCam);
+				vignetteCam.cameras = [camHUD];
+
+				isolatedIntro = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+				add(isolatedIntro);
+				isolatedIntro.scrollFactor.set();
+				isolatedIntro.cameras = [camCustom];
+				isolatedIntro.alpha = 0;
+
 			case 'Office':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-smile';
 				//GameOverSubstate.loopSoundName = 'gameOver-smile';
@@ -799,6 +825,28 @@ class PlayState extends MusicBeatState
 
 				var forest:BGSprite = new BGSprite('funkinAVI/goofy/forest', 0, 0);
 				add(forest);
+
+			case 'ForestNEW':
+				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-goof';
+				//GameOverSubstate.loopSoundName = 'gameOver-goof';
+				//GameOverSubstate.endSoundName = 'gameOverEnd-goof';
+				//GameOverSubstate.characterName = 'bf-goof-dead';
+
+				var goofyBG:BGSprite = new BGSprite('funkinAVI/goofyNEW/bg', -600, -650, 0.7, 0.7);
+				goofyBG.scale.set(1.2, 1.2);
+				add(goofyBG);
+
+				var treesBack:BGSprite = new BGSprite('funkinAVI/goofyNEW/treesBack', -600, -800, 0.8, 0.8);
+				treesBack.scale.set(1.2, 1.2);
+				add(treesBack);
+
+				var goofyStreet:BGSprite = new BGSprite('funkinAVI/goofyNEW/ground', -700, -1330);
+				goofyStreet.scale.set(1.5, 1.9);
+				add(goofyStreet);
+
+				treesFront = new BGSprite('funkinAVI/goofyNEW/treesFront', -550, -850, 1.2, 1.2);
+				treesFront.scale.set(1.5, 1.5);
+
 
 			default: //custom stages
 				isPixelStage = stageData.isPixelStage;
@@ -895,6 +943,8 @@ class PlayState extends MusicBeatState
 				add(foregroundSprites);
 			case 'Office':
 				add(light);
+			case 'ForestNEW':
+				add(treesFront);
 		}
 
 		#if LUA_ALLOWED
@@ -1517,7 +1567,7 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence.
-		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength, curPortrait);
 		#end
 
 		if(!ClientPrefs.controllerMode)
@@ -2321,7 +2371,7 @@ class PlayState extends MusicBeatState
 
 				switch (curStage)
 				{
-					case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat':
+					case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat' | 'ForestNEW' | 'Studio':
 						introAlts = introAssets.get('vintage');
 						antialias = ClientPrefs.globalAntialiasing;
 					default:
@@ -2827,6 +2877,18 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
+		switch(curSong){
+			case "Isolated": curPortrait = "placeholder";
+			case "Lunacy": curPortrait = "placeholder";
+			case "Delusional": curPortrait = "placeholder";
+			case "Malfunction": curPortrait = "placeholder";
+			case "Don't Cross!": curPortrait = "placeholder";
+			case "Twisted Grins": curPortrait = "placeholder";
+			case "Facade": curPortrait = "placeholder";
+			case "Laugh Track": curPortrait = "placeholder";
+			case "Scrapped": curPortrait = "placeholder";
+		}
+
 		switch(curStage)
 		{
 			case 'tank':
@@ -2839,7 +2901,7 @@ class PlayState extends MusicBeatState
 		
 		#if desktop
 		// Updating Discord Rich Presence (with Time Left)
-		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength);
+		DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength, curPortrait);
 		#end
 		setOnLuas('songLength', songLength);
 		callOnLuas('onSongStart', []);
@@ -3223,7 +3285,7 @@ class PlayState extends MusicBeatState
 			#if desktop
 			if (startTimer != null && startTimer.finished)
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset, curPortrait);
 			}
 			else
 			{
@@ -3242,7 +3304,7 @@ class PlayState extends MusicBeatState
 		{
 			if (Conductor.songPosition > 0.0)
 			{
-				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset);
+				DiscordClient.changePresence(detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), true, songLength - Conductor.songPosition - ClientPrefs.noteOffset, curPortrait);
 			}
 			else
 			{
@@ -3259,7 +3321,7 @@ class PlayState extends MusicBeatState
 		#if desktop
 		if (health > 0 && !paused)
 		{
-			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+			DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), curPortrait);
 		}
 		#end
 
@@ -3515,7 +3577,7 @@ class PlayState extends MusicBeatState
 				//}
 		
 				#if desktop
-				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), curPortrait);
 				#end
 			}
 		}
@@ -3942,7 +4004,7 @@ class PlayState extends MusicBeatState
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
-				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter());
+				DiscordClient.changePresence("Game Over - " + detailsText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), curPortrait);
 				#end
 				isDead = true;
 				return true;
@@ -3982,7 +4044,6 @@ class PlayState extends MusicBeatState
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
 		switch(eventName) {
 			case 'Hey!':
-				if(ClientPrefs.events) {
 				var value:Int = 2;
 				switch(value1.toLowerCase().trim()) {
 					case 'bf' | 'boyfriend' | '0':
@@ -4015,7 +4076,6 @@ class PlayState extends MusicBeatState
 					boyfriend.specialAnim = true;
 					boyfriend.heyTimer = time;
 				}
-			}
 
 			case 'Set GF Speed':
 				if(ClientPrefs.events) {
@@ -4107,7 +4167,6 @@ class PlayState extends MusicBeatState
 						}
 						phillyGlowGradient.bop();
 				}
-			}
 
 			case 'Kill Henchmen':
 				killHenchmen();

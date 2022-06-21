@@ -356,7 +356,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.chartingMode = false;
 				case "Options":
 					Application.current.window.title = "Funkin.avi - Settings";
-					LoadingState.loadAndSwitchState(new altoptions.PauseOptionsState());
+					LoadingState.loadAndSwitchState(new OptionsAlt());
 			}
 		}
 	}

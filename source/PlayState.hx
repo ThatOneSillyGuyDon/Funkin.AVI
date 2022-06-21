@@ -1278,7 +1278,7 @@ class PlayState extends MusicBeatState
 					case 'Isolated Old' | "Don't Cross!":
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki";
 					case 'Malfunction':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
+					Application.current.window.title = "F0Nk1n.'dot'Av1-Illegal Instrucction 0x191R816)";
 					case 'Twisted Grins':
 					Application.current.window.title = "Funkin.avi - Secret: Twisted Grins - Composed by: Sayan Sama";
 					default:

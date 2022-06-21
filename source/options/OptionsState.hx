@@ -60,7 +60,7 @@ class OptionsState extends MusicBeatState
 
 	override function create() {
 		#if desktop
-		DiscordClient.changePresence("Options Menu", null);
+		DiscordClient.changePresence("Options Menu", null, null, 'icon');
 		#end
 			
 		Application.current.window.title = "Funkin.avi - Settings";

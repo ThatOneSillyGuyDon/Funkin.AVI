@@ -17,7 +17,7 @@ class DiscordClient
 	{
 		trace("Discord Client starting...");
 		DiscordRpc.start({
-			clientID: "960006549433098321",
+			clientID: "963434291860234321",
 			onReady: onReady,
 			onError: onError,
 			onDisconnected: onDisconnected
@@ -42,10 +42,10 @@ class DiscordClient
 	static function onReady()
 	{
 		DiscordRpc.presence({
-			details: "Opening Game...",
+			details: "Beginning the Show...",
 			state: null,
 			largeImageKey: 'icon',
-			largeImageText: "Demo Engine"
+			largeImageText: "Funkin.avi"
 		});
 	}
 
@@ -69,7 +69,7 @@ class DiscordClient
 		isInitialized = true;
 	}
 
-	public static function changePresence(details:String, state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float)
+	public static function changePresence(details:String, state:Null<String>, ?smallImageKey : String, ?hasStartTimestamp : Bool, ?endTimestamp: Float, ?image : String)
 	{
 		var startTimestamp:Float = if(hasStartTimestamp) Date.now().getTime() else 0;
 
@@ -81,8 +81,8 @@ class DiscordClient
 		DiscordRpc.presence({
 			details: details,
 			state: state,
-			largeImageKey: 'icon',
-			largeImageText: "Engine Version: " + MainMenuState.DemoEngineVersion,
+			largeImageKey: image,
+			largeImageText: "Funkin.avi: v" + MainMenuState.MouseVersion,
 			smallImageKey : smallImageKey,
 			// Obtained times are in milliseconds so they are divided so Discord can use it
 			startTimestamp : Std.int(startTimestamp / 1000),

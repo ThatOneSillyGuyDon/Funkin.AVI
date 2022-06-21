@@ -136,9 +136,9 @@ class Cache extends MusicBeatState
 
 
 
-		for (i in music)
+		for (i in music) 
 		{
-			trace(i);
+			trace(i + ' loaded');
 			//FlxG.sound.cache(Paths.inst(i));
 			//FlxG.sound.cache(Paths.voices(i));
 		}

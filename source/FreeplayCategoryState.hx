@@ -29,9 +29,8 @@ using StringTools;
 
 class FreeplayCategoryState extends MusicBeatState
 {
-        var vanillaGame:FlxSprite;
-        var exclusiveShit:FlxSprite;
-        var modsMusic:FlxSprite;
+        var episodies:FlxSprite;
+        var extras:FlxSprite;
         var selectorBox:FlxSprite;
   
         var bg:FlxSprite;
@@ -44,10 +43,10 @@ class FreeplayCategoryState extends MusicBeatState
 		
 		            persistentUpdate = true;
 
-		            #if desktop
-		            // Updating Discord Rich Presence
-		            DiscordClient.changePresence("In Freeplay Category", null);
-		            #end
+		    #if desktop
+	            // Updating Discord Rich Presence
+	            DiscordClient.changePresence("In Freeplay Category", null);
+	            #end
                   
                 bg = new FlxSprite().loadGraphic(Paths.image('menuFreeplayCate'));
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
@@ -55,23 +54,19 @@ class FreeplayCategoryState extends MusicBeatState
 		add(bg);
 		bg.screenCenter();
           
-                exclusiveShit = new FlxSprite().loadGraphic(Paths.image('bonusBanner'));
-                exclusiveShit.antialiasing = ClientPrefs.globalAntialiasing;
-                add(exclusiveShit);
-          
-                modsMusic = new FlxSprite().loadGraphic(Paths.image('modsMenuBanner'));
-                modsMusic.antialiasing = ClientPrefs.globalAntialiasing;
-                add(modsMusic);
+                extras = new FlxSprite().loadGraphic(Paths.image('this_shit/awsome'));
+                extras.antialiasing = ClientPrefs.globalAntialiasing;
+                add(extras);
           	
-		vanillaGame = new FlxSprite().loadGraphic(Paths.image('mainGameBanner'));
-                vanillaGame.antialiasing = ClientPrefs.globalAntialiasing;
-                add(vanillaGame);
+		episodies = new FlxSprite().loadGraphic(Paths.image('this_shit/for-test'));
+                episodies.antialiasing = ClientPrefs.globalAntialiasing;
+                add(episodies);
 		
                 selectorBox = new FlxSprite().loadGraphic(Paths.image('daSelecta'));
                 selectorBox.antialiasing = ClientPrefs.globalAntialiasing;
-                add(selectorBox);
           
                 super.create();
         }
 }
 //We workin' on this, clearly not finished lmao
+//well idk ngl

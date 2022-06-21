@@ -83,6 +83,8 @@ class CreditsState extends MusicBeatState
 		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
+			//use this as a template:
+			//['',	'',	'',	'',	''],
 			['Funkin.avi Dev Team'],
 			['Funkin.avi Twitter',	'missing-icon',	'Follow Us Here for \nMore Updates!',	'https://twitter.com/AviFunkin',	'FFFFFF'],
 			['Directors'],
@@ -121,8 +123,9 @@ class CreditsState extends MusicBeatState
 			['Flaconadir',	'flacon',	'Voice Actor',	'https://twitter.com/flaconadir',	'FFFFFF'],
 			['JUSTIN X',	'justin',	'Voice Actor',	'https://twitter.com/CbmShow',	'FFFFFF'],
 			['Coders'],
-			['DEMOLITIONDON96',	'demolitiondon96',	"The only coder in the team\n(I am crying in pain as i'm typing this)",	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
-			['Jsa010',       	'jsa010',	        "Extra coder :)",                                                     	'https://twitter.com/Jsa010_coolguy',   	'FF4922'],
+			['DEMOLITIONDON96',	'demolitiondon96',	"There's more artist than coders bro\n(jsa is felling pain writing this)",	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['Jsa010',       	'jsa010',	        "Second coder of the mod, also really cool stuff :D",                                                     	'https://twitter.com/Jsa010_coolguy',   	'FF4922'],
+		    ['TonyTime',	    'missing-icon',	    'He left but he\'s back',                                                   'https://github.com/TonyTimee',	                                            'FCA349'],
 			[''],
 			[''],
 			['Demolition Engine Team'],
@@ -136,7 +139,7 @@ class CreditsState extends MusicBeatState
 			['mayo78',   'missing-icon',     'Epic CPU Skin Code',        'https://github.com/mayo78',                'FFFFFF'],
 			['Wither362',  'wither362',	'.mp3 & .wav file support\n(and for allowing me to add in some cool shit they made)',   'https://www.youtube.com/channel/UCsVr-qBLxT0uSWH037BmlHw',   '009BF4'],
 			['lemz1',     'lemz1',            'Modchart Code for Game Window',        'https://github.com/lemz1',         '383838'],
-			//['Phoneguytech75', 'missing-icon', 'Note Skins :D',			'https://github.com/Phoneguytech75',	'FFFFFF'],
+			['Phoneguytech75', 'missing-icon', 'Note Skins :D',			'https://github.com/Phoneguytech75',	'FFFFFF'],
 			['HiroMizuki',	'hiro',		'Pixel Splashes & \nScreen Resolution Code',	'https://github.com/HiroMizuki',	'3DED02'],
 			['8bitjake',	'missing-icon',	'Hold Pieces Fix for Sidescroll Modcharts',	'https://github.com/ShadowMario/FNF-PsychEngine/pull/8676',		'FFFFFF'],
 			['magnumsrtisswag',		'mag',	'Stage Editor',		'https://github.com/magnumsrtisswag',			'0B03FC'],

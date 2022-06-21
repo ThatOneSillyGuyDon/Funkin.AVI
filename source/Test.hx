@@ -12,6 +12,7 @@ import flixel.math.FlxMath;
 import flixel.tweens.FlxTween;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
+import lime.app.Application;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 
@@ -45,6 +46,8 @@ class Test extends MusicBeatState{
 
 	override function create()
 	{
+		Application.current.window.title = "Funkin.avi - Freeplay, Extras";
+
 		addSong('hunted', 1, 'goofy', FlxColor.BLUE);
         addSong('malfunction', 1, 'square-pixel', FlxColor.BLUE);
 		Paths.clearStoredMemory();

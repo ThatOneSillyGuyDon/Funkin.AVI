@@ -6,7 +6,7 @@ import Discord.DiscordClient;
 import Conductor.BPMChangeEvent;
 import Section.SwagSection;
 import Song.SwagSong;
-import PlayState;
+import PlayState; //omg playstate import real
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxObject;
@@ -216,21 +216,22 @@ class ChartingState extends MusicBeatState
 			_song = PlayState.SONG;
 		else
 		{
+			//this is when you go to the chart editor in the master editor menu
 			_song = {
 				song: 'Test',
 				notes: [],
 				events: [],
-				bpm: 150.0,
-				needsVoices: true,
-				arrowSkin: '',
+				bpm: 150.0, //BPM
+				needsVoices: true, //Voices shit
+				arrowSkin: '', //Arrow skin
 				splashSkin: 'noteSplashes',//idk it would crash if i didn't
-				player1: 'bf',
-				player2: 'dad',
-				player3: null,
-				gfVersion: 'gf',
-				speed: 1,
-				stage: 'stage',
-				validScore: false
+				player1: 'bf', //bf
+				player2: 'dad', //bitch bad ass
+				player3: null, //removed
+				gfVersion: 'gf', //*insert bobs joke
+				speed: 2, //speed
+				stage: 'stage', //stage
+				validScore: false //basically don't save the score
 			};
 			addSection();
 			PlayState.SONG = _song;
@@ -243,7 +244,7 @@ class ChartingState extends MusicBeatState
 		DiscordClient.changePresence("Chart Editor", StringTools.replace(_song.song, '-', ' '));
 		#end
 			
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Chart Editor - Editing: " + StringTools.replace(_song.song, '-', ' ');
+		Application.current.window.title = "Funkin.Avi Chart Editor - Editing: " + StringTools.replace(_song.song, '-', ' ');
 
 		vortex = FlxG.save.data.chart_vortex;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
@@ -358,7 +359,8 @@ class ChartingState extends MusicBeatState
 		\nEsc - Test your chart inside Chart Editor
 		\nEnter - Play your chart
 		\nQ/E - Decrease/Increase Note Sustain Length
-		\nSpace - Stop/Resume song";
+		\nSpace - Stop/Resume song;
+		\nBackspace - Go To Menu Editor";
 
 		var tipTextArray:Array<String> = text.split('\n');
 		for (i in 0...tipTextArray.length) {
@@ -626,14 +628,14 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(reloadNotesButton);
 		tab_group_song.add(noteSkinInputText);
 		tab_group_song.add(noteSplashesInputText);
-		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
-		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Song Speed:'));
+		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'BPM:'));
+		tab_group_song.add(new FlxText(stepperSpeed.x, stepperSpeed.y - 15, 0, 'Speed:'));
 		tab_group_song.add(new FlxText(player2DropDown.x, player2DropDown.y - 15, 0, 'Opponent:'));
 		tab_group_song.add(new FlxText(player3DropDown.x, player3DropDown.y - 15, 0, 'Girlfriend:'));
 		tab_group_song.add(new FlxText(player1DropDown.x, player1DropDown.y - 15, 0, 'Boyfriend:'));
 		tab_group_song.add(new FlxText(stageDropDown.x, stageDropDown.y - 15, 0, 'Stage:'));
-		tab_group_song.add(new FlxText(noteSkinInputText.x, noteSkinInputText.y - 15, 0, 'Note Texture:'));
-		tab_group_song.add(new FlxText(noteSplashesInputText.x, noteSplashesInputText.y - 15, 0, 'Note Splashes Texture:'));
+		tab_group_song.add(new FlxText(noteSkinInputText.x, noteSkinInputText.y - 15, 0, '(Note) Texture:'));
+		tab_group_song.add(new FlxText(noteSplashesInputText.x, noteSplashesInputText.y - 15, 0, 'Splash Texture:'));
 		tab_group_song.add(player2DropDown);
 		tab_group_song.add(player3DropDown);
 		tab_group_song.add(player1DropDown);
@@ -664,7 +666,7 @@ class ChartingState extends MusicBeatState
 		stepperLength.name = 'section_length';
 		blockPressWhileTypingOnStepper.push(stepperLength);
 
-		check_mustHitSection = new FlxUICheckBox(10, 30, null, null, "Must hit section", 100);
+		check_mustHitSection = new FlxUICheckBox(10, 30, null, null, "Bf section", 100);
 		check_mustHitSection.name = 'check_mustHit';
 		check_mustHitSection.checked = _song.notes[curSection].mustHitSection;
 

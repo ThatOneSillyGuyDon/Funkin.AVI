@@ -1,4 +1,4 @@
-package;
+package options;
 
 #if desktop
 import Discord.DiscordClient;
@@ -28,7 +28,7 @@ import Controls;
 
 using StringTools;
 
-class OptionsAlt extends MusicBeatState
+class OptionsState extends MusicBeatState
 {
 	//var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay' /*'Note Skins'*/];
 	var options:Array<String> = ['Adjust Delay and Combo', 'Controls', 'Gameplay', 'Graphics', 'Note Colors', /*'Note Skins'*/ 'Visuals and UI'];
@@ -130,7 +130,7 @@ class OptionsAlt extends MusicBeatState
 
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new PlayState());
+			MusicBeatState.switchState(new MainMenuState());
 		}
 
 		if (controls.ACCEPT) {

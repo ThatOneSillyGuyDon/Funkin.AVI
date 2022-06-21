@@ -1,3 +1,5 @@
+function onUpdate()
+if getPropertyFromClass('ClientPrefs', 'events') then
 function opponentNoteHit(id,data,type,sus)
     triggerEvent('Screen Shake','0.1, 0.002','0.1, 0.002')
     addEffect4('game', 5, 0);
@@ -18,4 +20,6 @@ function onTimerCompleted(tag)
 	    addEffect1('hud', 0.004);
 	    addEffect1('game');
 	end
+end
+end
 end

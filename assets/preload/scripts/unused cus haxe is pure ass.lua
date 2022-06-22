@@ -8,4 +8,4 @@ function onStartCountdown()
 	return Function_Continue
 end
 
---cry KBHgames, CRY
+--i hate haxe now

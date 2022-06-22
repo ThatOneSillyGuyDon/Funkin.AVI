@@ -840,7 +840,7 @@ class PlayState extends MusicBeatState
 				//GameOverSubstate.endSoundName = 'gameOverEnd-goof';
 				//GameOverSubstate.characterName = 'bf-goof-dead';
 
-				var goofyBG:BGSprite = new BGSprite('funkinAVI/goofyNEW/bg', -600, -650, 0.7, 0.7);
+				var goofyBG:BGSprite = new BGSprite('funkinAVI/goofyNEW/bg', -120, -590, 0.7, 0.7);
 				goofyBG.scale.set(1.2, 1.2);
 				add(goofyBG);
 

@@ -438,7 +438,7 @@ class PlayState extends MusicBeatState
 				case 'gl1tchl3ss':
 					curStage = 'PixelWorld';
 				case 'mercy':
-					curStage = 'walter'
+					curStage = 'walter';
 				default:
 					curStage = 'stage';
 			}

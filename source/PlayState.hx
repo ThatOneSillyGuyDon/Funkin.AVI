@@ -437,6 +437,8 @@ class PlayState extends MusicBeatState
 					curStage = 'Forest';
 				case 'gl1tchl3ss':
 					curStage = 'PixelWorld';
+				case 'mercy':
+					curStage = 'walter'
 				default:
 					curStage = 'stage';
 			}
@@ -518,6 +520,10 @@ class PlayState extends MusicBeatState
 					stageCurtains.updateHitbox();
 					add(stageCurtains);
 				}
+
+				case 'walter': //Week 1
+				var bg:BGSprite = new BGSprite('walt-bg', -600, -200, 0.9, 0.9);
+				add(bg);
 
 			case 'spooky': //Week 2
 				if(!ClientPrefs.lowQuality) {

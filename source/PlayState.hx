@@ -1358,11 +1358,11 @@ class PlayState extends MusicBeatState
 			case 4:
 				botplayTxt.text = "CHEATING...";
 			case 5:
-				botplayTxt.text = " ";
+				botplayTxt.text = "Damm bro we should make this easier";
 			case 6:
-				botplayTxt.text = " ";
+				botplayTxt.text = "Showcase";
 			case 7:
-				botplayTxt.text = " ";
+				botplayTxt.text = "Go to hell";
 			case 8:
 				botplayTxt.text = " ";
 			case 9:
@@ -3300,7 +3300,7 @@ class PlayState extends MusicBeatState
 	override public function onFocus():Void
 	{
 		#if desktop
-		if (health > 0 && !paused)
+		if (health > 0 && !paused) //k
 		{
 			if (Conductor.songPosition > 0.0)
 			{

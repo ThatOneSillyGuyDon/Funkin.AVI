@@ -61,6 +61,7 @@ class Achievements {
 			}
 			if(FlxG.save.data.achievementsUnlocked != null) {
 				FlxG.log.add("Trying to load stuff");
+				trace('Trying to load stuff');
 				var savedStuff:Array<String> = FlxG.save.data.achievementsUnlocked;
 				for (i in 0...savedStuff.length) {
 					achievementsMap.set(savedStuff[i], true);

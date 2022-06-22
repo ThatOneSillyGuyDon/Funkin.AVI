@@ -46,10 +46,10 @@ class Test extends MusicBeatState{
 
 	override function create()
 	{
-		Application.current.window.title = "Funkin.avi - Freeplay, Extras";
+		Application.current.window.title = "Funkin.avi - Freeplay Extras";
 
-		addSong('hunted', 1, 'goofy', FlxColor.BLUE);
-        addSong('malfunction', 1, 'square-pixel', FlxColor.BLUE);
+		addSong('hunted', 1, 'goofy', FlxColor.GRAY);
+        addSong('malfunction', 1, 'square-pixel', FlxColor.PURPLE);
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
@@ -59,7 +59,7 @@ class Test extends MusicBeatState{
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("In the freeplay", null);
 		#end
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
@@ -142,7 +142,7 @@ class Test extends MusicBeatState{
 		var swag:Alphabet = new Alphabet(1, 0, "swag");
 
 		// JUST DOIN THIS SHIT FOR TESTING!!!
-		/* 
+		/*
 			var md:String = Markdown.markdownToHtml(Assets.getText('CHANGELOG.md'));
 			var texFel:TextField = new TextField();
 			texFel.width = FlxG.width;
@@ -481,7 +481,7 @@ class Test extends MusicBeatState{
 		}
 
 		var newPos:Int = CoolUtil.difficulties.indexOf(lastDifficultyName);
-		//trace('Pos of ' + lastDifficultyName + ' is ' + newPos);
+		trace('Pos of ' + lastDifficultyName + ' is ' + newPos);
 		if(newPos > -1)
 		{
 			curDifficulty = newPos;

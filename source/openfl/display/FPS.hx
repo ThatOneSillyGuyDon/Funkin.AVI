@@ -49,9 +49,6 @@ class FPS extends TextField
 		defaultTextFormat = new TextFormat("_sans", 12, color);
 		autoSize = LEFT;
 		multiline = true;
-		if(ClientPrefs.FPStext) {
-		text = "FramesPerSecond: ";
-		} else {
 		text = "FPS: ";
 
 		cacheCount = 0;
@@ -90,10 +87,7 @@ class FPS extends TextField
 			
 			#if openfl
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			if(ClientPrefs.FPStext) {
 			text += "\nMemory: " + memoryMegas + " MB";
-			}else{
-			text += "\nMB: " + memoryMegas;
 			#end
 
 			textColor = 0xFFFFFFFF;

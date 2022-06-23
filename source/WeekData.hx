@@ -50,7 +50,7 @@ class WeekData {
 
 	public var fileName:String;
 
-	public static function createWeekFile():WeekFile {
+	public static function createWeekFile():WeekFile { //Uhhhhhh, template for custom weeks
 		var weekFile:WeekFile = {
 			songs: [["Bopeebo", "dad", [146, 113, 253]], ["Fresh", "dad", [146, 113, 253]], ["Dad Battle", "dad", [146, 113, 253]]],
 			weekCharacters: ['dad', 'bf', 'gf'],
@@ -133,7 +133,7 @@ class WeekData {
 		var originalLength:Int = directories.length;
 		#end
 
-		var sexList:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('weeks/weekList.txt'));
+		var sexList/*sex :sob:*/:Array<String> = CoolUtil.coolTextFile(Paths.getPreloadPath('weeks/weekList.txt'));
 		for (i in 0...sexList.length) {
 			for (j in 0...directories.length) {
 				var fileToCheck:String = directories[j] + 'weeks/' + sexList[i] + '.json';

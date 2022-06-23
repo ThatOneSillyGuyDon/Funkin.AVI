@@ -46,9 +46,12 @@ class FPS extends TextField
 		currentFPS = 0;
 		selectable = false;
 		mouseEnabled = false;
-		defaultTextFormat = new TextFormat("_sans", 14, color);
+		defaultTextFormat = new TextFormat("_sans", 12, color);
 		autoSize = LEFT;
 		multiline = true;
+		if(ClientPrefs.FPStext) {
+		text = "FramesPerSecond: ";
+		} else {
 		text = "FPS: ";
 
 		cacheCount = 0;
@@ -82,12 +85,19 @@ class FPS extends TextField
 
 		if (currentCount != cacheCount /*&& visible*/)
 		{
+			if(ClientPrefs.FPStext) {
+			text = "FramesPerSecond: " + currentFPS;
+			var memoryMegas:Float = 0;
+			}else{
 			text = "FPS: " + currentFPS;
 			var memoryMegas:Float = 0;
 			
 			#if openfl
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
+			if(ClientPrefs.FPStext) {
 			text += "\nMemory: " + memoryMegas + " MB";
+			}else{
+			text += "\nMB: " + memoryMegas;
 			#end
 
 			textColor = 0xFFFFFFFF;

@@ -6,7 +6,8 @@ import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
 
-class ClientPrefs {
+class ClientPrefs /*Client Preferetions*/ {
+	public static var FPStext:Bool = false;
 	public static var randomModchart:Bool = false;
 	public static var events:Bool = false;
 	public static var outdated:Bool = false;
@@ -121,6 +122,7 @@ class ClientPrefs {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.FPStext = FPStext;
 		FlxG.save.data.randomModchart = randomModchart;
 		FlxG.save.data.events = events;
 		FlxG.save.data.outdated = outdated;
@@ -188,6 +190,9 @@ class ClientPrefs {
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.FPStext != null) {
+			FPStext = FlxG.save.data.FPStext;
+		}
 		if(FlxG.save.data.randomModchart != null) {
 			randomModchart = FlxG.save.data.randomModchart;
 		}

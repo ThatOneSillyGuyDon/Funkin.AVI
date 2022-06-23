@@ -85,10 +85,6 @@ class FPS extends TextField
 
 		if (currentCount != cacheCount /*&& visible*/)
 		{
-			if(ClientPrefs.FPStext) {
-			text = "FramesPerSecond: " + currentFPS;
-			var memoryMegas:Float = 0;
-			}else{
 			text = "FPS: " + currentFPS;
 			var memoryMegas:Float = 0;
 			

@@ -50,6 +50,7 @@ class Test extends MusicBeatState{
 
 		addSong('hunted', 1, 'goofy', FlxColor.GRAY);
         addSong('malfunction', 1, 'square-pixel', FlxColor.PURPLE);
+		addSong('Mercy', 1, 'face', FlxColor.GRAY);
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		

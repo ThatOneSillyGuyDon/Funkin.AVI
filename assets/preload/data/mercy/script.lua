@@ -1,3 +1,3 @@
 function onCreate()
-    setPropertyFromClass('ClientPrefs', 'downScroll', true)
+    setPropertyFromClass('ClientPrefs', 'middleScroll', true)
 end

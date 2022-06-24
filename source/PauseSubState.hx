@@ -110,7 +110,7 @@ class PauseSubState extends MusicBeatSubstate
 		{
 			case 'Isolated' | 'Laugh Track':
 			composer = 'By Yama haki & obscurity.';
-			case 'Lunacy' | 'Malfunction':
+			case 'Lunacy' | 'Malfunction' | 'Mercy':
 			composer = 'By obscurity.';
 			case 'Delusional':
 			composer = 'By FR3SHMoure';
@@ -142,6 +142,8 @@ class PauseSubState extends MusicBeatSubstate
 			charter = 'Chart by PhantomNexus';
 			case "Don't Cross!":
 			charter = 'Chart by fakeburritos123 & DEMOLITIONDON96';
+			case 'Mercy':
+			charter = 'Chart by Jsa010 and ';
 		}
 		charterCredit.text += charter;
 		charterCredit.scrollFactor.set();

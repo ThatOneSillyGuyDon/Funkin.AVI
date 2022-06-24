@@ -40,6 +40,7 @@ function onUpdate(elapsed)
 
    function onCreate()
         makeLuaText('warning', 'Press Space For Gain health', 1100, 100)
+        addLuaText('warning', 'Press Space!')
         setTextSize('warning', 32)
         setTextColor('warning', '0xFFFFFF')
         setTextFont('warning', 'vcr.ttf')

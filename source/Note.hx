@@ -237,6 +237,9 @@ class Note extends FlxSprite
 			case 'spooky':
 				skin = 'Skins/SpookyNOTE_assets';
 				antialias = true;
+			case 'mickey' | 'mickeysadistic' | 'mickeyinsane' | 'mickeygiveup' | 'mickeynew' | 'bf-fake' | 'bffake' | 'bf-demon' | 'bf-grey' | 'bfsatan' | 'bfworried' | 'Hunterhoofy' | 'smiles':
+				skin = 'Skins/GreyNOTE_assets';
+				antialias = true;
 			case 'bf-pixel-opponent' /*| 'bf-pixel'*/:
 				/*if(PlayState.isPixelStage) {
 					skin = 'pixelUI/pixelBF-notes';

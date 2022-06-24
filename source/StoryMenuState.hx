@@ -351,7 +351,16 @@ class StoryMenuState extends MusicBeatState
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				LoadingState.loadAndSwitchState(new PlayState(), true);
-				FreeplayState.destroyFreeplayVocals();
+				switch(PlayState.SONG.song)
+				{
+					case 'Isolated' | 'Lunacy' | 'Delusional':
+					EpisodesState.destroyFreeplayVocals();
+					case 'Hunted' | 'Twisted Grins' | 'Malfunction' | "Don't Cross!" | 'Birthday' | 'Isolated Old':
+					ExtrasState.destroyFreeplayVocals();
+					default:
+					EpisodesState.destroyFreeplayVocals();
+					ExtrasState.destroyFreeplayVocals();
+				}
 			});
 		} else {
 			FlxG.sound.play(Paths.sound('cancelMenu'));

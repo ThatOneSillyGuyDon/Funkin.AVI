@@ -494,10 +494,6 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
-			case 'walt':
-				var bg:BGSprite = new BGSprite('light', -600, -200, 0.9, 0.9);
-				add(bg);
-
 			case 'stage': //Week 1
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
@@ -522,10 +518,6 @@ class PlayState extends MusicBeatState
 					stageCurtains.updateHitbox();
 					add(stageCurtains);
 				}
-
-				case 'walter': //Week 1
-				var bg:BGSprite = new BGSprite('walt-bg', -600, -200, 0.9, 0.9);
-				add(bg);
 
 			case 'spooky': //Week 2
 				if(!ClientPrefs.lowQuality) {
@@ -795,9 +787,10 @@ class PlayState extends MusicBeatState
 				streetNEW.scale.set(1.2, 1.2);
 				add(streetNEW);
 
-				var vignetteCam:BGSprite = new BGSprite('funkinAVI/episode1/streetNEW/vignetteOverlay', -400, -300);
+				var vignetteCam:BGSprite = new BGSprite('funkinAVI/episode1/streetNEW/vignetteOverlay', -400, -300, 0, 0);
 				add(vignetteCam);
-				vignetteCam.cameras = [camHUD];
+				vignetteCam.screenCenter();
+				vignetteCam.scale.set(0.9, 0.9);
 
 				isolatedIntro = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 				add(isolatedIntro);
@@ -840,7 +833,7 @@ class PlayState extends MusicBeatState
 				//GameOverSubstate.endSoundName = 'gameOverEnd-goof';
 				//GameOverSubstate.characterName = 'bf-goof-dead';
 
-				var goofyBG:BGSprite = new BGSprite('funkinAVI/goofyNEW/bg', -120, -590, 0.7, 0.7);
+				var goofyBG:BGSprite = new BGSprite('funkinAVI/goofyNEW/bg', -600, -650, 0.7, 0.7);
 				goofyBG.scale.set(1.2, 1.2);
 				add(goofyBG);
 
@@ -855,6 +848,14 @@ class PlayState extends MusicBeatState
 				treesFront = new BGSprite('funkinAVI/goofyNEW/treesFront', -550, -850, 1.2, 1.2);
 				treesFront.scale.set(1.5, 1.5);
 
+			case 'WaltStage':
+				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-walt';
+				//GameOverSubstate.loopSoundName = 'gameOver-walt';
+				//GameOverSubstate.endSoundName = 'gameOverEnd-walt';
+				//GameOverSubstate.characterName = 'bf-walt-dead';
+
+				var waltStage:BGSprite = new BGSprite('funkinAVI/walt/walt-bg', -339, -106);
+				add(waltStage);
 
 			default: //custom stages
 				isPixelStage = stageData.isPixelStage;
@@ -1149,7 +1150,13 @@ class PlayState extends MusicBeatState
 		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
 		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
 		 if (!isPixelStage) {
-		timeTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			switch(curStage)
+			{
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+					timeTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				default:
+					timeTxt.setFormat(Paths.font("vcr.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			}
 		} else {
                 timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
@@ -1286,9 +1293,11 @@ class PlayState extends MusicBeatState
 					case 'Isolated Old' | "Don't Cross!":
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki";
 					case 'Malfunction':
-					Application.current.window.title = "F0Nk1n.'dot'Av1-Illegal Instrucction 0x191R816)";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
 					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - Secret: Twisted Grins - Composed by: Sayan Sama";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Sayan Sama";
+					case 'Hunted':
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz";
 					default:
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
 				}
@@ -1332,7 +1341,13 @@ class PlayState extends MusicBeatState
 
 		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
 	        if (!isPixelStage) {
-		scoreTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			switch(curStage)
+			{
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+					scoreTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				default: 
+					scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			}
 		} else {
                 scoreTxt.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
@@ -1343,7 +1358,13 @@ class PlayState extends MusicBeatState
 
 		peWatermark = new FlxText(5, FlxG.height - 29, 0, "", 16);
 	        if (!isPixelStage) {
-		peWatermark.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 24, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			switch(curStage)
+			{
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+					peWatermark.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				default: 
+					peWatermark.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			}
 		} else {
                 peWatermark.setFormat(Paths.font("Retro Gaming.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
@@ -1377,7 +1398,13 @@ class PlayState extends MusicBeatState
 				botplayTxt.text = " ";
 		}
 		if (!isPixelStage) {
-		botplayTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			switch(curStage)
+			{
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+					botplayTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				default: 
+					botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			}
 		} else {
 		botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
@@ -1392,7 +1419,13 @@ class PlayState extends MusicBeatState
 	        if(!ClientPrefs.hideJudgement) {
 			judgementCounter = new FlxText(20, 0, 0, "", 20);
 			if (!isPixelStage) {
-			judgementCounter.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			switch(curStage)
+			{
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+					judgementCounter.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 24, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				default: 
+					judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			}
 			} else {
 			judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			}
@@ -1415,7 +1448,7 @@ class PlayState extends MusicBeatState
 
 		switch(curStage)
 		{
-			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat':
+			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat' | 'Studio' | 'ForestNEW':
 				add(filmScratch);
 				add(filmScratchGame);
 			default:
@@ -1438,7 +1471,7 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		switch(curStage)
 		{
-			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat':
+			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat' | 'Studio' | 'ForestNEW':
 				filmScratch.cameras = [camHUD];
 				filmScratchGame.cameras = [camGame];
 			default:
@@ -3308,7 +3341,7 @@ class PlayState extends MusicBeatState
 	override public function onFocus():Void
 	{
 		#if desktop
-		if (health > 0 && !paused) //k
+		if (health > 0 && !paused)
 		{
 			if (Conductor.songPosition > 0.0)
 			{
@@ -5038,7 +5071,7 @@ class PlayState extends MusicBeatState
 					CustomFadeTransition.nextCamera = null;
 				}
 				//MusicBeatState.switchState(new MainMenuState());
-				MusicBeatState.switchState(new FreeplayState());
+				MusicBeatState.switchState(new EpicSelectorWOOO());
 				FlxG.mouse.visible = true;
 				FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
 				changedDifficulty = false;
@@ -5083,21 +5116,42 @@ class PlayState extends MusicBeatState
 
 	public static function getUiSkin(?uiSkin:String = 'classic', ?file:String = '', ?alt:String = '', ?numSkin:Bool = false, ?num:Int = 0)
 	{
-		var path:String = 'judgements/'
-			+ (numSkin ? 'numbers/' : '')
-			+ uiSkin
-			+ '/'
-			+ (numSkin ? 'num' : file)
-			+ (numSkin ? Std.string(num) : '')
-			+ alt;
-		if (!Paths.fileExists('images/' + path + '.png', IMAGE))
-			path = 'judgements/'
-				+ (numSkin ? 'numbers/' : '')
-				+ 'classic/'
-				+ (numSkin ? 'num' : file)
-				+ (numSkin ? Std.string(num) : '')
-				+ alt;
-		return path;
+		switch(curStage)
+		{
+			case 'Studio' | 'Forest' | 'EndlessLoop' | 'ForestNEW' | 'Office':
+				var path:String = 'judgements/funkinAVI/'
+					+ (numSkin ? 'numbers/' : '')
+					+ uiSkin
+					+ '/'
+					+ (numSkin ? 'num' : file)
+					+ (numSkin ? Std.string(num) : '')
+					+ alt;
+				if (!Paths.fileExists('images/' + path + '.png', IMAGE))
+					path = 'judgements/funkinAVI/'
+						+ (numSkin ? 'numbers/' : '')
+						+ 'funkinAVI/'
+						+ (numSkin ? 'num' : file)
+						+ (numSkin ? Std.string(num) : '')
+						+ alt;
+				return path;
+			default:
+				var path:String = 'judgements/'
+					+ (numSkin ? 'numbers/' : '')
+					+ uiSkin
+					+ '/'
+					+ (numSkin ? 'num' : file)
+					+ (numSkin ? Std.string(num) : '')
+					+ alt;
+				if (!Paths.fileExists('images/' + path + '.png', IMAGE))
+					path = 'judgements/'
+						+ (numSkin ? 'numbers/' : '')
+						+ 'classic/'
+						+ (numSkin ? 'num' : file)
+						+ (numSkin ? Std.string(num) : '')
+						+ alt;
+				return path;
+		}
+		
 	}
 
 	private function popUpScore(note:Note = null):Void
@@ -5244,6 +5298,8 @@ class PlayState extends MusicBeatState
 				uiSkin = 'demolition';
 			case 'Matt :)':
 				uiSkin = 'matt';
+			case 'Funkin.avi':
+				uiSkin = 'funkinAVI';
 		}
 
 		rating.loadGraphic(Paths.image(getUiSkin(uiSkin, daRating, altPart)));
@@ -5258,7 +5314,7 @@ class PlayState extends MusicBeatState
 		rating.x += ClientPrefs.comboOffset[0];
 		rating.y -= ClientPrefs.comboOffset[1];
 
-		var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(getUiSkin(uiSkin, 'combo', altPart)));
+			var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(getUiSkin(uiSkin, 'combo', altPart)));
                 if(combo > 5)
  			insert(members.indexOf(strumLineNotes), comboSpr);
 		comboSpr.cameras = [camHUD];

@@ -76,7 +76,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		'uiSkin', 
 		'string', 
 		'Demolition',
-			['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock', 'Matt :)']);
+			['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock', 'Matt :)', 'Funkin.avi']);
 		addOption(option);
 		
 		var option:Option = new Option('Simplify Score Text',

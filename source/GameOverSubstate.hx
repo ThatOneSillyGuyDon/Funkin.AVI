@@ -96,7 +96,15 @@ class GameOverSubstate extends MusicBeatSubstate
 			if (PlayState.isStoryMode)
 				MusicBeatState.switchState(new StoryMenuState());
 			else
-				MusicBeatState.switchState(new FreeplayState());
+				switch(PlayState.SONG.song)
+					{
+						case 'Isolated' | 'Lunacy':
+							MusicBeatState.switchState(new EpisodesState());
+						case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old':
+							MusicBeatState.switchState(new ExtrasState());
+						default:
+							MusicBeatState.switchState(new EpisodesState());
+					}
 
 			FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
 			PlayState.instance.callOnLuas('onGameOverConfirm', [false]);

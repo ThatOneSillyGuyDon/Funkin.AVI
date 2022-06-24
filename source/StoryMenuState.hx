@@ -70,7 +70,7 @@ class StoryMenuState extends MusicBeatState
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
-		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36); //why this number??????
+		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat("VCR OSD Mono", 32);
 
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
@@ -351,7 +351,16 @@ class StoryMenuState extends MusicBeatState
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				LoadingState.loadAndSwitchState(new PlayState(), true);
-				FreeplayState.destroyFreeplayVocals();
+				switch(PlayState.SONG.song)
+				{
+					case 'Isolated' | 'Lunacy' | 'Delusional':
+					EpisodesState.destroyFreeplayVocals();
+					case 'Hunted' | 'Twisted Grins' | 'Malfunction' | "Don't Cross!" | 'Birthday' | 'Isolated Old':
+					ExtrasState.destroyFreeplayVocals();
+					default:
+					EpisodesState.destroyFreeplayVocals();
+					ExtrasState.destroyFreeplayVocals();
+				}
 			});
 		} else {
 			FlxG.sound.play(Paths.sound('cancelMenu'));

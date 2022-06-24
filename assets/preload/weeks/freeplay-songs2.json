@@ -1,32 +1,32 @@
 {
-	"storyName": "You're Fucked",
-	"difficulties": "You're Fucked",
-	"hideFreeplay": false,
-	"weekBackground": "street",
-	"weekBefore": "chapter1",
+	"songs": [
+		[
+			"",
+			"",
+			[
+				146,
+				113,
+				253
+			]
+		]
+	],
+	"hiddenUntilUnlocked": false,
+	"hideFreeplay": true,
+	"weekBackground": "stage",
+	"difficulties": "You're FUcked",
+	"weekCharacters": [
+		"dad",
+		"bf",
+		"gf"
+	],
+	"storyName": "Your New Week",
+	"weekName": "Custom Week",
 	"freeplayColor": [
 		146,
 		113,
 		253
 	],
-	"startUnlocked": false,
 	"hideStoryMode": true,
-	"songs": [
-		[
-			"Don't Cross!",
-			"mickey",
-			[
-				146,
-				0,
-				0
-			]
-		]
-	],
-	"weekCharacters": [
-		"",
-		"",
-		""
-	],
-	"hiddenUntilUnlocked": true,
-	"weekName": "Freeplay"
+	"weekBefore": "tutorial",
+	"startUnlocked": true
 }

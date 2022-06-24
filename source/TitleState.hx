@@ -185,7 +185,7 @@ class TitleState extends MusicBeatState
 		if(!initialized && FlxG.save.data != null && FlxG.save.data.fullscreen)
 		{
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
-			trace('LOADED FULLSCREEN SETTING!!');
+			//trace('LOADED FULLSCREEN SETTING!!');
 		}
 
 		if (FlxG.save.data.weekCompleted != null)
@@ -566,7 +566,7 @@ class TitleState extends MusicBeatState
 		case 5:
 		Application.current.window.title = "Funkin.avi - Mr. Smile & White Noise are dating, this is canon.";
 		case 6:
-		Application.current.window.title = "ERROR110ERROR110ERRO Closing ggamEE in = 10";
+		Application.current.window.title = "ERROR110ERROR110ERROR110ERROR110ERROR110ERROR110";
 		case 7:
 		Application.current.window.title = "Funkin.avi - omfg, stop asking, just wait for full release >:(";
 		case 8:

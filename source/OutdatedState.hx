@@ -18,8 +18,6 @@ class OutdatedState extends MusicBeatState
 	var warnText:FlxText;
 	override function create()
 	{
-		Application.current.window.title = "Funkin.avi - Damm bro why do you dont turn off that outdated option???";
-
 		super.create();
 
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);

@@ -84,6 +84,11 @@ class OptionsAlt extends MusicBeatState
 			grpOptions.add(optionText);
 		}
 
+		if(ClientPrefs.pauseMusic == 'None')
+			FlxG.sound.music.volume = 0;
+		else
+			FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)));
+
 		selectorLeft = new Alphabet(0, 0, '>', true, false);
 		add(selectorLeft);
 		selectorRight = new Alphabet(0, 0, '<', true, false);

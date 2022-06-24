@@ -1,19 +1,40 @@
 package;
 
+#if desktop
+import Discord.DiscordClient;
+#end
 import flixel.group.FlxGroup.FlxTypedGroup;
+import lime.app.Application;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import flixel.FlxCamera;
 
 class EpicSelectorWOOO extends MusicBeatState{
-    var freeplayCats:Array<String> = ['Episodies', 'Extras'];
+	private var camFilter:FlxCamera;
+    var freeplayCats:Array<String> = ['Episodes', 'Extras'];
+	var fpCateBanners:FlxSprite;
 	var grpCats:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 	var BG:FlxSprite;
     override function create(){
+
+		camFilter = new FlxCamera();
+		camFilter.bgColor.alpha = 0;
+
+		FlxG.cameras.add(camFilter);
+
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		BG.updateHitbox();
 		BG.screenCenter();
 		add(BG);
+
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("In Freeplay", "Category Menu", null, 'icon');
+		#end
+
+		Application.current.window.title = "Funkin.avi - Freeplay: Category Menu";
+
         grpCats = new FlxTypedGroup<Alphabet>();
 		add(grpCats);
         for (i in 0...freeplayCats.length)
@@ -23,6 +44,28 @@ class EpicSelectorWOOO extends MusicBeatState{
             catsText.isMenuItem = true;
 			grpCats.add(catsText);
 		}
+
+		var scratchStuff:FlxSprite = new FlxSprite();
+		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
+		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
+		scratchStuff.animation.play('idle');
+		scratchStuff.screenCenter();
+		scratchStuff.scale.x = 1.1;
+		scratchStuff.scale.y = 1.1;
+		add(scratchStuff);
+
+		var grain:FlxSprite = new FlxSprite();
+		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
+		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
+		grain.animation.play('idle');
+		grain.screenCenter();
+		grain.scale.x = 1.1;
+		grain.scale.y = 1.1;
+		add(grain);
+
+		scratchStuff.cameras = [camFilter];
+		grain.cameras = [camFilter];
+
         changeSelection();
         super.create();
     }
@@ -40,9 +83,9 @@ class EpicSelectorWOOO extends MusicBeatState{
         if (controls.ACCEPT){
             switch(curSelected){
                 case 0:
-                MusicBeatState.switchState(new FreeplayState());
+                MusicBeatState.switchState(new EpisodesState());
                 case 1:
-                MusicBeatState.switchState(new Test());
+                MusicBeatState.switchState(new ExtrasState());
             }
         }
         super.update(elapsed);
@@ -66,6 +109,6 @@ class EpicSelectorWOOO extends MusicBeatState{
 				item.alpha = 1;
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 	}
 }

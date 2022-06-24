@@ -1286,7 +1286,7 @@ class PlayState extends MusicBeatState
 				{
 					case 'Isolated' | 'Laugh Track':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
-					case 'Lunacy':
+					case 'Lunacy' | 'Mercy':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
 					case 'Delusional':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
@@ -2547,7 +2547,7 @@ class PlayState extends MusicBeatState
 								case 4:
 							}
 						}
-					case 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Hunted' | 'Facade' | 'Isolated Old':
+					case 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Hunted' | 'Facade' | 'Isolated Old' | 'Mercy':
 						switch (swagCounter)
 						{
 							case 0:

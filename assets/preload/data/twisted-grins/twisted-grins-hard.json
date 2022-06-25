@@ -1,7 +1,7 @@
 {
 	"song": {
 		"sectionLengths": [],
-		"player1": "bfworried",
+		"player1": "bf-fake",
 		"events": [
 			[
 				0,
@@ -24,6 +24,36 @@
 				]
 			],
 			[
+				3093.75,
+				[
+					[
+						"Lyrics",
+						"mr.smiles  will change notes speed to make you smile.",
+						""
+					]
+				]
+			],
+			[
+				6656.25,
+				[
+					[
+						"Lyrics",
+						"try to survive and prevent your dead",
+						""
+					]
+				]
+			],
+			[
+				9000,
+				[
+					[
+						"Lyrics",
+						"",
+						""
+					]
+				]
+			],
+			[
 				27000,
 				[
 					[
@@ -34,12 +64,12 @@
 				]
 			],
 			[
-				48000,
+				48093.75,
 				[
 					[
-						"Change Scroll Speed",
-						"2",
-						"0"
+						"Lyrics",
+						"SPEED > 1.3",
+						""
 					]
 				]
 			],
@@ -50,6 +80,21 @@
 						"Change Scroll Speed",
 						"1",
 						"0"
+					],
+					[
+						"Lyrics",
+						"SPEED > 0.01",
+						""
+					]
+				]
+			],
+			[
+				48281.25,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.7",
+						""
 					]
 				]
 			],
@@ -60,6 +105,21 @@
 						"Change Scroll Speed",
 						"0.3",
 						"0"
+					],
+					[
+						"Lyrics",
+						"SPEED > 3",
+						""
+					]
+				]
+			],
+			[
+				48468.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.2",
+						""
 					]
 				]
 			],
@@ -99,6 +159,16 @@
 				]
 			],
 			[
+				48843.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.2",
+						""
+					]
+				]
+			],
+			[
 				48937.5,
 				[
 					[
@@ -129,6 +199,26 @@
 				]
 			],
 			[
+				49218.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > 0.001",
+						""
+					]
+				]
+			],
+			[
+				49406.25,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1",
+						""
+					]
+				]
+			],
+			[
 				49500,
 				[
 					[
@@ -140,6 +230,16 @@
 						"Set Cam Zoom",
 						"0.7",
 						"1"
+					]
+				]
+			],
+			[
+				53531.25,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.1",
+						""
 					]
 				]
 			],
@@ -174,6 +274,16 @@
 				]
 			],
 			[
+				56437.5,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.2",
+						""
+					]
+				]
+			],
+			[
 				56625,
 				[
 					[
@@ -184,12 +294,42 @@
 				]
 			],
 			[
+				56718.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.3",
+						""
+					]
+				]
+			],
+			[
+				56906.25,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.4",
+						""
+					]
+				]
+			],
+			[
 				57000,
 				[
 					[
 						"Set Cam Zoom",
 						"1",
 						"5"
+					]
+				]
+			],
+			[
+				57093.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.5",
+						""
 					]
 				]
 			],
@@ -209,6 +349,16 @@
 				]
 			],
 			[
+				58593.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.6",
+						""
+					]
+				]
+			],
+			[
 				58781.25,
 				[
 					[
@@ -224,6 +374,16 @@
 				]
 			],
 			[
+				58875,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.7",
+						""
+					]
+				]
+			],
+			[
 				59062.5,
 				[
 					[
@@ -235,6 +395,16 @@
 						"Set Cam Zoom",
 						"1.3",
 						"0.2"
+					]
+				]
+			],
+			[
+				59156.25,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.8",
+						""
 					]
 				]
 			],
@@ -269,6 +439,16 @@
 				]
 			],
 			[
+				59718.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > 1.999",
+						""
+					]
+				]
+			],
+			[
 				60000,
 				[
 					[
@@ -280,6 +460,556 @@
 						"Screen Shake",
 						"24, 0.009",
 						"24, 0.006"
+					]
+				]
+			],
+			[
+				60093.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > 3",
+						""
+					]
+				]
+			],
+			[
+				61031.25,
+				[
+					[
+						"Lyrics",
+						"SPEED > 9",
+						""
+					]
+				]
+			],
+			[
+				61968.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > curRandom",
+						""
+					]
+				]
+			],
+			[
+				62531.25,
+				[
+					[
+						"Lyrics",
+						"SPEED > 10",
+						""
+					]
+				]
+			],
+			[
+				62906.25,
+				[
+					[
+						"Lyrics",
+						"SPEED > 4",
+						""
+					]
+				]
+			],
+			[
+				63093.75,
+				[
+					[
+						"Lyrics",
+						"SPEED > 3",
+						""
+					]
+				]
+			],
+			[
+				63375,
+				[
+					[
+						"Lyrics",
+						"SPEED > 3.3",
+						""
+					]
+				]
+			],
+			[
+				63562.5,
+				[
+					[
+						"Lyrics",
+						"SPEED > 69",
+						""
+					]
+				]
+			],
+			[
+				63750,
+				[
+					[
+						"Lyrics",
+						"SPEED > 96",
+						""
+					]
+				]
+			],
+			[
+				63843.75,
+				[
+					[
+						"Change Scroll Speed",
+						"0.1",
+						""
+					]
+				]
+			],
+			[
+				63937.5,
+				[
+					[
+						"Lyrics",
+						"SPEED > 0.1",
+						""
+					]
+				]
+			],
+			[
+				64031.25,
+				[
+					[
+						"Change Scroll Speed",
+						"5",
+						""
+					]
+				]
+			],
+			[
+				64125,
+				[
+					[
+						"Change Scroll Speed",
+						"1.5",
+						""
+					]
+				]
+			],
+			[
+				64218.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1.9",
+						""
+					]
+				]
+			],
+			[
+				64312.5,
+				[
+					[
+						"Change Scroll Speed",
+						"1.8",
+						""
+					]
+				]
+			],
+			[
+				64406.25,
+				[
+					[
+						"Change Scroll Speed",
+						"1.5",
+						""
+					]
+				]
+			],
+			[
+				64500,
+				[
+					[
+						"Lyrics",
+						"ERROR > NULL",
+						""
+					]
+				]
+			],
+			[
+				64593.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				64687.5,
+				[
+					[
+						"Change Scroll Speed",
+						"0.7",
+						""
+					]
+				]
+			],
+			[
+				64781.25,
+				[
+					[
+						"Change Scroll Speed",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				66468.75,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						""
+					]
+				]
+			],
+			[
+				66562.5,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				66656.25,
+				[
+					[
+						"Change Scroll Speed",
+						"1.5",
+						""
+					]
+				]
+			],
+			[
+				69468.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1.2",
+						""
+					]
+				]
+			],
+			[
+				69562.5,
+				[
+					[
+						"Change Scroll Speed",
+						"1.3",
+						""
+					]
+				]
+			],
+			[
+				69656.25,
+				[
+					[
+						"Change Scroll Speed",
+						"1.4",
+						""
+					]
+				]
+			],
+			[
+				70968.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1.9",
+						""
+					]
+				]
+			],
+			[
+				71531.25,
+				[
+					[
+						"Change Scroll Speed",
+						"1.7",
+						""
+					]
+				]
+			],
+			[
+				72375,
+				[
+					[
+						"Change Scroll Speed",
+						"6",
+						""
+					]
+				]
+			],
+			[
+				72468.75,
+				[
+					[
+						"Change Scroll Speed",
+						"4",
+						""
+					]
+				]
+			],
+			[
+				72562.5,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						""
+					]
+				]
+			],
+			[
+				72656.25,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				72937.5,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				73312.5,
+				[
+					[
+						"Change Scroll Speed",
+						"0.1",
+						""
+					]
+				]
+			],
+			[
+				73500,
+				[
+					[
+						"Change Scroll Speed",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				73875,
+				[
+					[
+						"Change Scroll Speed",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				74250,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				74625,
+				[
+					[
+						"Change Scroll Speed",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				74812.5,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"3"
+					]
+				]
+			],
+			[
+				75562.5,
+				[
+					[
+						"Change Scroll Speed",
+						"0.1",
+						""
+					]
+				]
+			],
+			[
+				75656.25,
+				[
+					[
+						"Change Scroll Speed",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				75750,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						""
+					]
+				]
+			],
+			[
+				76312.5,
+				[
+					[
+						"Change Scroll Speed",
+						"0.1",
+						""
+					]
+				]
+			],
+			[
+				76406.25,
+				[
+					[
+						"Change Scroll Speed",
+						"1.1",
+						""
+					]
+				]
+			],
+			[
+				76687.5,
+				[
+					[
+						"Change Scroll Speed",
+						"0.3",
+						""
+					]
+				]
+			],
+			[
+				76875,
+				[
+					[
+						"Change Scroll Speed",
+						"1.5",
+						"3"
+					]
+				]
+			],
+			[
+				78281.25,
+				[
+					[
+						"Change Scroll Speed",
+						"0.5",
+						"3"
+					]
+				]
+			],
+			[
+				78468.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1.5",
+						"3"
+					]
+				]
+			],
+			[
+				78656.25,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"3"
+					]
+				]
+			],
+			[
+				78937.5,
+				[
+					[
+						"Change Scroll Speed",
+						"2.5",
+						""
+					]
+				]
+			],
+			[
+				79218.75,
+				[
+					[
+						"Change Scroll Speed",
+						"3",
+						""
+					]
+				]
+			],
+			[
+				79500,
+				[
+					[
+						"Change Scroll Speed",
+						"4",
+						""
+					]
+				]
+			],
+			[
+				79687.5,
+				[
+					[
+						"Lyrics",
+						"PlayState.reenable(curSpeed)",
+						""
+					]
+				]
+			],
+			[
+				81937.5,
+				[
+					[
+						"Lyrics",
+						"Re-enabling curSpeed...",
+						""
+					]
+				]
+			],
+			[
+				83906.25,
+				[
+					[
+						"Lyrics",
+						"curSpeed ready!",
+						""
 					]
 				]
 			],
@@ -305,6 +1035,611 @@
 						"Set Cam Zoom",
 						"0.5",
 						"1"
+					],
+					[
+						"Change Scroll Speed",
+						"2",
+						"3"
+					]
+				]
+			],
+			[
+				85593.75,
+				[
+					[
+						"Lyrics",
+						"ERROR > NULL value not supported!",
+						""
+					]
+				]
+			],
+			[
+				88500,
+				[
+					[
+						"Change Scroll Speed",
+						"0.4",
+						""
+					]
+				]
+			],
+			[
+				88687.5,
+				[
+					[
+						"Change Scroll Speed",
+						"0.5",
+						""
+					]
+				]
+			],
+			[
+				88875,
+				[
+					[
+						"Change Scroll Speed",
+						"0.1",
+						""
+					]
+				]
+			],
+			[
+				89062.5,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				89250,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						""
+					]
+				]
+			],
+			[
+				89437.5,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				89625,
+				[
+					[
+						"Change Scroll Speed",
+						"3",
+						""
+					]
+				]
+			],
+			[
+				89812.5,
+				[
+					[
+						"Change Scroll Speed",
+						"4",
+						""
+					]
+				]
+			],
+			[
+				90000,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"4"
+					]
+				]
+			],
+			[
+				90187.5,
+				[
+					[
+						"Lyrics",
+						"h",
+						""
+					]
+				]
+			],
+			[
+				90281.25,
+				[
+					[
+						"Lyrics",
+						"ha",
+						""
+					]
+				]
+			],
+			[
+				90375,
+				[
+					[
+						"Lyrics",
+						"hax",
+						""
+					]
+				]
+			],
+			[
+				90468.75,
+				[
+					[
+						"Lyrics",
+						"haxe",
+						""
+					]
+				]
+			],
+			[
+				90562.5,
+				[
+					[
+						"Lyrics",
+						"haxel",
+						""
+					]
+				]
+			],
+			[
+				90656.25,
+				[
+					[
+						"Lyrics",
+						"haxeli",
+						""
+					]
+				]
+			],
+			[
+				90750,
+				[
+					[
+						"Lyrics",
+						"haxelib",
+						""
+					]
+				]
+			],
+			[
+				90843.75,
+				[
+					[
+						"Lyrics",
+						"haxelib ",
+						""
+					]
+				]
+			],
+			[
+				90937.5,
+				[
+					[
+						"Lyrics",
+						"haxelib r",
+						""
+					]
+				]
+			],
+			[
+				91031.25,
+				[
+					[
+						"Lyrics",
+						"haxelib re",
+						""
+					]
+				]
+			],
+			[
+				91125,
+				[
+					[
+						"Lyrics",
+						"haxelib res",
+						""
+					]
+				]
+			],
+			[
+				91218.75,
+				[
+					[
+						"Lyrics",
+						"haxelib rest",
+						""
+					]
+				]
+			],
+			[
+				91312.5,
+				[
+					[
+						"Lyrics",
+						"haxelib resto",
+						""
+					]
+				]
+			],
+			[
+				91406.25,
+				[
+					[
+						"Lyrics",
+						"haxelib restor",
+						""
+					]
+				]
+			],
+			[
+				91500,
+				[
+					[
+						"Lyrics",
+						"haxelib restore",
+						""
+					]
+				]
+			],
+			[
+				91593.75,
+				[
+					[
+						"Lyrics",
+						"haxelib restore ",
+						""
+					]
+				]
+			],
+			[
+				91687.5,
+				[
+					[
+						"Lyrics",
+						"haxelib restore N",
+						""
+					]
+				]
+			],
+			[
+				91781.25,
+				[
+					[
+						"Lyrics",
+						"haxelib restore NU",
+						""
+					]
+				]
+			],
+			[
+				91875,
+				[
+					[
+						"Lyrics",
+						"haxelib restore NUL",
+						""
+					]
+				]
+			],
+			[
+				91968.75,
+				[
+					[
+						"Lyrics",
+						"haxelib restore NULL",
+						""
+					]
+				]
+			],
+			[
+				92156.25,
+				[
+					[
+						"Change Scroll Speed",
+						"0.7",
+						""
+					]
+				]
+			],
+			[
+				92343.75,
+				[
+					[
+						"Change Scroll Speed",
+						"0.6",
+						""
+					]
+				]
+			],
+			[
+				92531.25,
+				[
+					[
+						"Change Scroll Speed",
+						"0.9",
+						""
+					]
+				]
+			],
+			[
+				92718.75,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						""
+					]
+				]
+			],
+			[
+				93093.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				93375,
+				[
+					[
+						"Change Scroll Speed",
+						"4",
+						"5"
+					]
+				]
+			],
+			[
+				93750,
+				[
+					[
+						"Lyrics",
+						"restoring NULL...",
+						""
+					]
+				]
+			],
+			[
+				96843.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"2"
+					]
+				]
+			],
+			[
+				97875,
+				[
+					[
+						"Change Scroll Speed",
+						"3",
+						"2"
+					]
+				]
+			],
+			[
+				98250,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"2"
+					]
+				]
+			],
+			[
+				98531.25,
+				[
+					[
+						"Change Scroll Speed",
+						"5",
+						"2"
+					]
+				]
+			],
+			[
+				98718.75,
+				[
+					[
+						"Change Scroll Speed",
+						"0.1",
+						"2"
+					]
+				]
+			],
+			[
+				98906.25,
+				[
+					[
+						"Change Scroll Speed",
+						"0.2",
+						"2"
+					]
+				]
+			],
+			[
+				99093.75,
+				[
+					[
+						"Change Scroll Speed",
+						"0.5",
+						"2"
+					]
+				]
+			],
+			[
+				99281.25,
+				[
+					[
+						"Change Scroll Speed",
+						"0.9",
+						"2"
+					]
+				]
+			],
+			[
+				99562.5,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"2"
+					]
+				]
+			],
+			[
+				99937.5,
+				[
+					[
+						"Change Scroll Speed",
+						"1.3",
+						"2"
+					]
+				]
+			],
+			[
+				100218.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1.6",
+						"2"
+					]
+				]
+			],
+			[
+				100687.5,
+				[
+					[
+						"Change Scroll Speed",
+						"1.9",
+						"2"
+					]
+				]
+			],
+			[
+				101250,
+				[
+					[
+						"Change Scroll Speed",
+						"2.2",
+						"1"
+					]
+				]
+			],
+			[
+				101718.75,
+				[
+					[
+						"Change Scroll Speed",
+						"2.3",
+						"1"
+					]
+				]
+			],
+			[
+				102281.25,
+				[
+					[
+						"Change Scroll Speed",
+						"2.9",
+						"1"
+					]
+				]
+			],
+			[
+				102750,
+				[
+					[
+						"Change Scroll Speed",
+						"3.1",
+						"1"
+					]
+				]
+			],
+			[
+				103687.5,
+				[
+					[
+						"Change Scroll Speed",
+						"3.5",
+						"1"
+					]
+				]
+			],
+			[
+				104250,
+				[
+					[
+						"Change Scroll Speed",
+						"3.7",
+						"1"
+					]
+				]
+			],
+			[
+				105000,
+				[
+					[
+						"Change Scroll Speed",
+						"1.7",
+						"1"
+					]
+				]
+			],
+			[
+				105468.75,
+				[
+					[
+						"Change Scroll Speed",
+						"0.9",
+						"1"
+					]
+				]
+			],
+			[
+				105656.25,
+				[
+					[
+						"Change Scroll Speed",
+						"1.4",
+						"1"
+					]
+				]
+			],
+			[
+				106500,
+				[
+					[
+						"Change Scroll Speed",
+						"1.8",
+						"1"
+					]
+				]
+			],
+			[
+				106781.25,
+				[
+					[
+						"Lyrics",
+						"NULL restored!",
+						""
 					]
 				]
 			],
@@ -320,6 +1655,16 @@
 						"Set Cam Zoom",
 						"3",
 						"80"
+					]
+				]
+			],
+			[
+				109593.75,
+				[
+					[
+						"Lyrics",
+						"",
+						""
 					]
 				]
 			],
@@ -344,12 +1689,32 @@
 				]
 			],
 			[
+				139593.75,
+				[
+					[
+						"Lyrics",
+						"ERRRRROORRERR",
+						""
+					]
+				]
+			],
+			[
 				139687.5,
 				[
 					[
 						"Change Scroll Speed",
 						"1.5",
 						"0"
+					]
+				]
+			],
+			[
+				139781.25,
+				[
+					[
+						"Lyrics",
+						"EOEOEOIWWIWIWIO101010",
+						""
 					]
 				]
 			],
@@ -364,12 +1729,22 @@
 				]
 			],
 			[
+				139968.75,
+				[
+					[
+						"Lyrics",
+						"",
+						""
+					]
+				]
+			],
+			[
 				140062.5,
 				[
 					[
-						"Change Scroll Speed",
-						"0.3",
-						"0"
+						"Lyrics",
+						"101010110100101001",
+						""
 					]
 				]
 			],
@@ -395,6 +1770,16 @@
 						"Set Cam Zoom",
 						"1",
 						"0.2"
+					]
+				]
+			],
+			[
+				140343.75,
+				[
+					[
+						"Lyrics",
+						"illegal instruccion 0x1909099109",
+						""
 					]
 				]
 			],
@@ -439,6 +1824,26 @@
 				]
 			],
 			[
+				141093.75,
+				[
+					[
+						"Lyrics",
+						"restored!",
+						""
+					]
+				]
+			],
+			[
+				143343.75,
+				[
+					[
+						"Lyrics",
+						"",
+						""
+					]
+				]
+			],
+			[
 				150000,
 				[
 					[
@@ -450,6 +1855,16 @@
 						"Set Cam Zoom",
 						"0.8",
 						"0.2"
+					]
+				]
+			],
+			[
+				150093.75,
+				[
+					[
+						"Lyrics",
+						"E",
+						""
 					]
 				]
 			],
@@ -469,6 +1884,16 @@
 				]
 			],
 			[
+				150375,
+				[
+					[
+						"Lyrics",
+						"ERR",
+						""
+					]
+				]
+			],
+			[
 				150562.5,
 				[
 					[
@@ -480,6 +1905,16 @@
 						"Set Cam Zoom",
 						"1",
 						"0.2"
+					]
+				]
+			],
+			[
+				150656.25,
+				[
+					[
+						"Lyrics",
+						"ERRO",
+						""
 					]
 				]
 			],
@@ -499,17 +1934,37 @@
 				]
 			],
 			[
+				150937.5,
+				[
+					[
+						"Lyrics",
+						"ERROO",
+						""
+					]
+				]
+			],
+			[
 				151125,
 				[
 					[
 						"Change Scroll Speed",
-						"1.75",
+						"3",
 						"0"
 					],
 					[
 						"Set Cam Zoom",
-						"1.2",
+						"1.4",
 						"0.2"
+					]
+				]
+			],
+			[
+				151218.75,
+				[
+					[
+						"Lyrics",
+						"ERROOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO00001001",
+						""
 					]
 				]
 			],
@@ -534,12 +1989,92 @@
 				]
 			],
 			[
+				151781.25,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"0"
+					]
+				]
+			],
+			[
+				151968.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"0"
+					]
+				]
+			],
+			[
+				152156.25,
+				[
+					[
+						"Change Scroll Speed",
+						"3",
+						"0"
+					]
+				]
+			],
+			[
+				152343.75,
+				[
+					[
+						"Change Scroll Speed",
+						"4",
+						"0"
+					]
+				]
+			],
+			[
+				152531.25,
+				[
+					[
+						"Change Scroll Speed",
+						"3",
+						"0"
+					]
+				]
+			],
+			[
+				152718.75,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"0"
+					]
+				]
+			],
+			[
+				152906.25,
+				[
+					[
+						"Change Scroll Speed",
+						"3",
+						"0"
+					]
+				]
+			],
+			[
 				175500,
 				[
 					[
 						"Set Cam Zoom",
 						"1.2",
 						"1"
+					]
+				]
+			],
+			[
+				175687.5,
+				[
+					[
+						"Lyrics",
+						"Deleting Funkin.avi.exe...",
+						""
 					]
 				]
 			],
@@ -555,6 +2090,181 @@
 						"Screen Shake",
 						"24, 0.009",
 						"24, 0.006"
+					],
+					[
+						"Change Scroll Speed",
+						"5",
+						"2"
+					]
+				]
+			],
+			[
+				178031.25,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"2"
+					]
+				]
+			],
+			[
+				178593.75,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"2"
+					]
+				]
+			],
+			[
+				179156.25,
+				[
+					[
+						"Change Scroll Speed",
+						"0.4",
+						"0.7"
+					]
+				]
+			],
+			[
+				179343.75,
+				[
+					[
+						"Change Scroll Speed",
+						"0.8",
+						"0.7"
+					]
+				]
+			],
+			[
+				179625,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"0.7"
+					]
+				]
+			],
+			[
+				180375,
+				[
+					[
+						"Change Scroll Speed",
+						"3",
+						"0.7"
+					]
+				]
+			],
+			[
+				181500,
+				[
+					[
+						"Change Scroll Speed",
+						"4",
+						"0.7"
+					]
+				]
+			],
+			[
+				183000,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"0.7"
+					]
+				]
+			],
+			[
+				184500,
+				[
+					[
+						"Change Scroll Speed",
+						"5",
+						"0.7"
+					]
+				]
+			],
+			[
+				186000,
+				[
+					[
+						"Change Scroll Speed",
+						"4",
+						"0.7"
+					]
+				]
+			],
+			[
+				187500,
+				[
+					[
+						"Change Scroll Speed",
+						"3",
+						"0.7"
+					]
+				]
+			],
+			[
+				189000,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"0.7"
+					]
+				]
+			],
+			[
+				190500,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"0.7"
+					]
+				]
+			],
+			[
+				192000,
+				[
+					[
+						"Change Scroll Speed",
+						"0.5",
+						"0.7"
+					]
+				]
+			],
+			[
+				193500,
+				[
+					[
+						"Change Scroll Speed",
+						"2",
+						"0.7"
+					]
+				]
+			],
+			[
+				195000,
+				[
+					[
+						"Change Scroll Speed",
+						"4",
+						"0.7"
+					]
+				]
+			],
+			[
+				196500,
+				[
+					[
+						"Change Scroll Speed",
+						"1",
+						"4"
 					]
 				]
 			],
@@ -565,6 +2275,176 @@
 						"Set Cam Zoom",
 						"2.2",
 						"30"
+					]
+				]
+			],
+			[
+				201093.75,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201096.09375,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201098.4375,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201105.46875,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201107.8125,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201114.84375,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201117.1875,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201126.5625,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201135.9375,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201140.625,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201142.96875,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201152.34375,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201157.03125,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201164.0625,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201168.75,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201171.09375,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
+					]
+				]
+			],
+			[
+				201173.4375,
+				[
+					[
+						"Screen Fade",
+						"1",
+						""
 					]
 				]
 			]
@@ -579,7 +2459,13 @@
 				"mustHitSection": false
 			},
 			{
-				"sectionNotes": [],
+				"sectionNotes": [
+					[
+						2421.09375,
+						5,
+						0
+					]
+				],
 				"lengthInSteps": 16,
 				"typeOfSection": 0,
 				"mustHitSection": false
@@ -3290,6 +5176,11 @@
 					[
 						79406.25,
 						3,
+						0
+					],
+					[
+						78937.5,
+						0,
 						0
 					]
 				],
@@ -6310,6 +8201,11 @@
 					[
 						146812.5,
 						0,
+						0
+					],
+					[
+						146625,
+						2,
 						0
 					]
 				],
@@ -10525,6 +12421,126 @@
 				"mustHitSection": true
 			},
 			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 160
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 160
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
 				"sectionNotes": [],
 				"typeOfSection": 0,
 				"lengthInSteps": 16,
@@ -10543,34 +12559,14 @@
 				"bpm": 160,
 				"changeBPM": false,
 				"mustHitSection": true
-			},
-			{
-				"gfSection": false,
-				"lengthInSteps": 16,
-				"altAnim": false,
-				"typeOfSection": 0,
-				"sectionNotes": [],
-				"bpm": 160,
-				"changeBPM": false,
-				"mustHitSection": true
-			},
-			{
-				"gfSection": false,
-				"lengthInSteps": 16,
-				"altAnim": false,
-				"typeOfSection": 0,
-				"sectionNotes": [],
-				"bpm": 160,
-				"changeBPM": false,
-				"mustHitSection": true
 			}
 		],
 		"player3": null,
 		"song": "Twisted Grins",
+		"stage": "Office",
 		"validScore": true,
 		"sections": 0,
 		"needsVoices": true,
-		"stage": "Office",
 		"speed": 1.6,
 		"bpm": 160
 	}

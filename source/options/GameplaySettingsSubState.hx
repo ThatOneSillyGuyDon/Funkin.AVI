@@ -78,7 +78,15 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'Bedrock',
 			['Bedrock', 'Psych', 'Forever', 'Andromeda', "Etterna", 'Mania', "None"]);
 		addOption(option);
-		
+		/*
+		var option:Option = new Option('Live Difficulty:',
+			"What Is The Difficulty Lives Should There Be In Malfunction?", 
+			'lives', 
+			'string', 
+			'normal',
+			['easy', 'normal', 'hard']);
+		addOption(option);
+		*/
 			var option:Option = new Option('Kade Engine Input System',
 			'If checked, KE input system will be on, this will not effect the rating system',
 			'keAccuracy',

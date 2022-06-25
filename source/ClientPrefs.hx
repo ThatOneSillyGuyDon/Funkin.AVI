@@ -194,7 +194,7 @@ class ClientPrefs /*Client Preferetions*/ {
 	}
 
 	public static function loadPrefs() {
-		if(FlxG.save.data.cutscens != null) {
+		if(FlxG.save.data.cutscenes != null) {
 			cutscens = FlxG.save.data.cutscens;
 		}
 		if(FlxG.save.data.FPStext != null) {

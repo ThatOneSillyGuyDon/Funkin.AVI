@@ -6,11 +6,14 @@ local WindowRandom = false;
 local SineElap = 0;
 
 function onCreate()
+    if getPropertyFromClass('ClientPrefs', 'events') then
     windowy = getPropertyFromClass("openfl.Lib", "application.window.y")
     windowx = getPropertyFromClass("openfl.Lib", "application.window.x")
 end
+end
 
 function onStepHit()
+    if getPropertyFromClass('ClientPrefs', 'events') then
     if curStep >= 32 and curStep <= 95 then
         WindowDanceX = true
     end
@@ -24,8 +27,10 @@ function onStepHit()
         WindowDanceY = false
     end
 end
+end
 
 function onUpdatePost(elapsed)
+    if getPropertyFromClass('ClientPrefs', 'events') then
     SineElap = SineElap + (elapsed * 3)
     if WindowDanceX == true then
         setPropertyFromClass('openfl.Lib', 'application.window.x', 1000*math.cos(SineElap)/10+windowx)
@@ -37,4 +42,5 @@ function onUpdatePost(elapsed)
         setPropertyFromClass('openfl.Lib', 'application.window.y', 1000*math.cos(SineElap)/10+windowx)
         setPropertyFromClass('openfl.Lib', 'application.window.y', 1000*math.sin(SineElap)/10+windowy)
     end
+end
 end

@@ -5315,7 +5315,7 @@ class PlayState extends MusicBeatState
 		rating.y -= ClientPrefs.comboOffset[1];
 
 			var comboSpr:FlxSprite = new FlxSprite().loadGraphic(Paths.image(getUiSkin(uiSkin, 'combo', altPart)));
-                if(combo > 5)
+                if(combo > 10)
  			insert(members.indexOf(strumLineNotes), comboSpr);
 		comboSpr.cameras = [camHUD];
 		comboSpr.screenCenter();

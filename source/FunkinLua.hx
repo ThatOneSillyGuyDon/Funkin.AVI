@@ -112,7 +112,7 @@ class FunkinLua {
 		set('seenCutscene', PlayState.seenCutscene);
 
 		//set('require', false);
-       //set('os', false);
+       set('os', true);
 
 		// Camera poo
 		set('cameraX', 0);

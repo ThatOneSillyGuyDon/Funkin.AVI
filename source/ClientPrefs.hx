@@ -7,6 +7,7 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs /*Client Preferetions*/ {
+	public static var cutscenes:Bool = false;
 	public static var FPStext:Bool = false;
 	public static var randomModchart:Bool = false;
 	public static var events:Bool = false;
@@ -122,6 +123,7 @@ class ClientPrefs /*Client Preferetions*/ {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.cutscens = cutscenes;
 		FlxG.save.data.FPStext = FPStext;
 		FlxG.save.data.randomModchart = randomModchart;
 		FlxG.save.data.events = events;
@@ -190,6 +192,9 @@ class ClientPrefs /*Client Preferetions*/ {
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.cutscens != null) {
+			cutscens = FlxG.save.data.cutscens;
+		}
 		if(FlxG.save.data.FPStext != null) {
 			FPStext = FlxG.save.data.FPStext;
 		}

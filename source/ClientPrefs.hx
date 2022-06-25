@@ -8,6 +8,7 @@ import Controls;
 
 class ClientPrefs /*Client Preferetions*/ {
 	public static var FPStext:Bool = false;
+	//public static var lives:String = 'normal';
 	public static var randomModchart:Bool = false;
 	public static var events:Bool = false;
 	public static var outdated:Bool = false;
@@ -144,6 +145,7 @@ class ClientPrefs /*Client Preferetions*/ {
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
 		FlxG.save.data.antiMash = antiMash;
+		//FlxG.save.data.lives = lives;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
 		FlxG.save.data.keAccuracy = keAccuracy;
@@ -202,6 +204,11 @@ class ClientPrefs /*Client Preferetions*/ {
 		if(FlxG.save.data.outdated != null) {
 			outdated = FlxG.save.data.outdated;
 		}
+		/*
+		if(FlxG.save.data.lives != null) {
+			lives = FlxG.save.data.lives;
+		}
+		*/
 		if(FlxG.save.data.debugMode != null) {
 			debugMode = FlxG.save.data.debugMode;
 		}

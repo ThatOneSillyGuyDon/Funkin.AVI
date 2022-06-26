@@ -23,9 +23,6 @@ class DiscordClient
 			onDisconnected: onDisconnected
 		});
 		trace("Discord Client started.");
-		/*if(null) {
-			trace('Discord got NULLED');
-		}*/
 
 		while (true)
 		{

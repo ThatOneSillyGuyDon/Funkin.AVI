@@ -33,33 +33,6 @@
 				60,
 				60
 			]
-		],
-		[
-			"Hunted",
-			"goofy",
-			[
-				0,
-				40,
-				60
-			]
-		],
-		[
-			"Isolated Old",
-			"mickey",
-			[
-				60,
-				60,
-				60
-			]
-		],
-		[
-			"Malfunction",
-			"square-pixel",
-			[
-				140,
-				120,
-				180
-			]
 		]
 	],
 	"hideStoryMode": true,

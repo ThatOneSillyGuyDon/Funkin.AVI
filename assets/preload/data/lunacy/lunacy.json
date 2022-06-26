@@ -5162,7 +5162,7 @@
 		],
 		"gfVersion": "gf",
 		"player3": null,
-		"splashSkin": "noteSplashes",
+		"splashSkin": null,
 		"song": "Lunacy",
 		"stage": "EndlessLoop",
 		"validScore": true,

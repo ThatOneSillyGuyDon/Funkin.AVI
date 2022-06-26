@@ -15,8 +15,19 @@ class NoteSplash extends FlxSprite
 
 		switch(PlayState.curStage)
 		{
+			case 'WaltStage':
+				var skin:String = 'NoteSplashSkins/waltSplashes';
+				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
+
+				loadAnims(skin);
+				
+				colorSwap = new ColorSwap();
+				shader = colorSwap.shader;
+
+				setupNoteSplash(x, y, note);
+				antialiasing = ClientPrefs.globalAntialiasing;
 			case 'Studio' | 'Forest' | 'EndlessLoop' | 'ForestNEW' | 'Office':
-				var skin:String = 'noteSplashesGREY';
+				var skin:String = 'NoteSplashSkins/noteSplashesGREY';
 				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 
 				loadAnims(skin);
@@ -27,7 +38,7 @@ class NoteSplash extends FlxSprite
 				setupNoteSplash(x, y, note);
 				antialiasing = ClientPrefs.globalAntialiasing;
 			default:
-				var skin:String = 'noteSplashes';
+				var skin:String = 'NoteSplashSkins/noteSplashes';
 				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 
 				loadAnims(skin);
@@ -46,9 +57,20 @@ class NoteSplash extends FlxSprite
 
 		switch(PlayState.curStage)
 		{
+			case 'WaltStage':
+				if(texture == null) {
+				texture = 'NoteSplashSkins/waltSplashes';
+				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = PlayState.SONG.splashSkin;
+
+				if(PlayState.isPixelStage) {
+					texture = 'pixelUI/noteSplashes';
+					if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = 'pixelUI/' + PlayState.SONG.splashSkin;
+					if(animation.curAnim != null)animation.curAnim.frameRate = 12;
+				}
+			}
 			case 'Studio' | 'Forest' | 'EndlessLoop' | 'ForestNEW' | 'Office':
 				if(texture == null) {
-				texture = 'noteSplashesGREY';
+				texture = 'NoteSplashSkins/noteSplashesGREY';
 				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = PlayState.SONG.splashSkin;
 
 				if(PlayState.isPixelStage) {
@@ -59,7 +81,7 @@ class NoteSplash extends FlxSprite
 			}
 			default:
 				if(texture == null) {
-				texture = 'noteSplashes';
+				texture = 'NoteSplashSkins/noteSplashes';
 				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = PlayState.SONG.splashSkin;
 
 				if(PlayState.isPixelStage) {

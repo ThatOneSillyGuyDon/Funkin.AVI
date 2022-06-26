@@ -24,8 +24,10 @@ import sys.io.File;
 import options.GraphicsSettingsSubState;
 //import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
 import flixel.input.gamepad.FlxGamepad;
+import flixel.math.FlxMath;
 import flixel.math.FlxPoint;
 import flixel.math.FlxRect;
 import flixel.system.FlxSound;
@@ -95,6 +97,9 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
+		#if LUA_ALLOWED
+		Paths.pushGlobalMods();
+		#end
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		WeekData.loadTheFirstEnabledMod();
 		
@@ -182,10 +187,15 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
-		if(!initialized && FlxG.save.data != null && FlxG.save.data.fullscreen)
+		if(!initialized)
 		{
-			FlxG.fullscreen = FlxG.save.data.fullscreen;
-			//trace('LOADED FULLSCREEN SETTING!!');
+			if(FlxG.save.data != null && FlxG.save.data.fullscreen)
+			{
+				FlxG.fullscreen = FlxG.save.data.fullscreen;
+				//trace('LOADED FULLSCREEN SETTING!!');
+			}
+			persistentUpdate = true;
+			persistentDraw = true;
 		}
 
 		if (FlxG.save.data.weekCompleted != null)
@@ -214,10 +224,15 @@ class TitleState extends MusicBeatState
 			}
 			#end
 
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-			{
+			if (initialized)
 				startIntro();
-			});
+			else
+			{
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					startIntro();
+				});
+			}
 		}
 		#end
 	}

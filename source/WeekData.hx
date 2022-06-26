@@ -8,7 +8,6 @@ import lime.utils.Assets;
 import openfl.utils.Assets as OpenFlAssets;
 import haxe.Json;
 import haxe.format.JsonParser;
-import sys.io.File;
 
 using StringTools;
 
@@ -52,7 +51,7 @@ class WeekData {
 
 	public static function createWeekFile():WeekFile {
 		var weekFile:WeekFile = {
-			songs: [["Bopeebo", "", [146, 113, 253]], ["Fresh", "", [146, 113, 253]], ["Dad Battle", "", [146, 113, 253]]],
+			songs: [["Bopeebo", "dad", [146, 113, 253]], ["Fresh", "dad", [146, 113, 253]], ["Dad Battle", "dad", [146, 113, 253]]],
 			weekCharacters: ['dad', 'bf', 'gf'],
 			weekBackground: 'stage',
 			weekBefore: 'tutorial',
@@ -63,7 +62,7 @@ class WeekData {
 			hiddenUntilUnlocked: false,
 			hideStoryMode: false,
 			hideFreeplay: false,
-			difficulties: 'Hard, Suicidal'
+			difficulties: ''
 		};
 		return weekFile;
 	}

@@ -221,12 +221,15 @@ class PauseSubState extends MusicBeatSubstate
 
 		changeSelection();
 
+		regenMenu();
 		cameras = [FlxG.cameras.list[FlxG.cameras.list.length - 1]];
 	}
 
 	var holdTime:Float = 0;
+	var cantUnpause:Float = 0.1;
 	override function update(elapsed:Float)
 	{
+		cantUnpause -= elapsed;
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 
@@ -277,7 +280,7 @@ class PauseSubState extends MusicBeatSubstate
 				}
 		}
 
-		if (accepted)
+		if (accepted && (cantUnpause <= 0 || !ClientPrefs.controllerMode))
 		{
 			if (menuItems == difficultyChoices)
 			{
@@ -330,6 +333,7 @@ class PauseSubState extends MusicBeatSubstate
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
+					deleteSkipTimeText();
 					regenMenu();
 				case 'Toggle Practice Mode':
 					PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
@@ -367,6 +371,8 @@ class PauseSubState extends MusicBeatSubstate
 				case "Exit to menu":
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
+
+					WeekData.loadTheFirstEnabledMod();
 					if(PlayState.isStoryMode) {
 						Application.current.window.title = "Funkin.avi";
 						MusicBeatState.switchState(new StoryMenuState());
@@ -391,6 +397,18 @@ class PauseSubState extends MusicBeatSubstate
 					LoadingState.loadAndSwitchState(new OptionsAlt());
 			}
 		}
+	}
+
+	function deleteSkipTimeText()
+	{
+		if(skipTimeText != null)
+		{
+			skipTimeText.kill();
+			remove(skipTimeText);
+			skipTimeText.destroy();
+		}
+		skipTimeText = null;
+		skipTimeTracker = null;
 	}
 
 	public static function restartSong(noTrans:Bool = false)

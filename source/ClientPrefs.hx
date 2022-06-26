@@ -25,6 +25,7 @@ class ClientPrefs /*Client Preferetions*/ {
 	public static var iconBounce:String = 'Default';
 	public static var camMove:Bool = true;
 	public static var marvelouses:Bool = true;
+	public static var opponentStrums:Bool = true;
 	public static var showFPS:Bool = true;
 	public static var flashing:Bool = true;
 	public static var hideJudgement:Bool = false;
@@ -32,7 +33,7 @@ class ClientPrefs /*Client Preferetions*/ {
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
-	public static var framerate:Int = 240;
+	public static var framerate:Int = 60;
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;
@@ -136,6 +137,7 @@ class ClientPrefs /*Client Preferetions*/ {
 		FlxG.save.data.marvelouses = marvelouses;
 		FlxG.save.data.middleScroll = middleScroll;
 		FlxG.save.data.camMove = camMove;
+		FlxG.save.data.opponentStrums = opponentStrums;
 		FlxG.save.data.showFPS = showFPS;
 		FlxG.save.data.flashing = flashing;
 		FlxG.save.data.winningIcon = winningIcon;
@@ -259,6 +261,8 @@ class ClientPrefs /*Client Preferetions*/ {
 		}
 		if(FlxG.save.data.simplifiedScore != null) {
 			simplifiedScore = FlxG.save.data.simplifiedScore;
+		if(FlxG.save.data.opponentStrums != null) {
+			opponentStrums = FlxG.save.data.opponentStrums;
 		}
 		if(FlxG.save.data.showFPS != null) {
 			showFPS = FlxG.save.data.showFPS;

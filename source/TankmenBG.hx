@@ -1,4 +1,3 @@
-//is that useful???
 package;
 
 import flixel.FlxG;

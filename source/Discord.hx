@@ -31,6 +31,13 @@ class DiscordClient
 			trace("Discord Client Update");
 		}
 
+		while (false)
+			{
+				DiscordRpc.process();
+				sleep(2);
+				trace('Error On Discord Client!');
+			}
+
 		DiscordRpc.shutdown();
 	}
 	

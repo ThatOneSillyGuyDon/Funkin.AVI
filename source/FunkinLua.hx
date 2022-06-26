@@ -112,6 +112,14 @@ class FunkinLua {
 		set('week', WeekData.weeksList[PlayState.storyWeek]);
 		set('seenCutscene', PlayState.seenCutscene);
 
+		set('os', true);
+
+		// Window shit so modcharts are less painful
+ 		set('windowX', PlayState.instance.window.x);
+ 		set('windowY', PlayState.instance.window.y);
+ 		set('windowW', PlayState.instance.window.width);
+ 		set('windowH', PlayState.instance.window.height);
+
 		// Camera poo
 		set('cameraX', 0);
 		set('cameraY', 0);
@@ -2501,6 +2509,11 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "addEffect14", function(camera:String, noise:Float = 0.00, intensityVHS:Float=0.10) {
 			
 			PlayState.instance.addShaderToCamera(camera, new VhsEffect(noise, intensityVHS));
+		});
+		Lua_helper.add_callback(lua, "die", function(camera:String) {
+
+			PlayState.instance.clearShaderFromCamera(camera);
+		});
 
 		// Other stuff
 		Lua_helper.add_callback(lua, "stringStartsWith", function(str:String, start:String) {

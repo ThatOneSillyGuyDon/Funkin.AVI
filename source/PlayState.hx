@@ -1309,7 +1309,7 @@ class PlayState extends MusicBeatState
 				{
 					case 'Isolated' | 'Laugh Track':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
-					case 'Lunacy' | 'Mercy':
+					case 'Lunacy' | 'Malfunction' | 'Mercy':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
 					case 'Delusional':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure";

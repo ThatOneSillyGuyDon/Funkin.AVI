@@ -67,6 +67,9 @@ class StrumNote extends FlxSprite
 			case 'mickey' | 'mickeysadistic' | 'mickeyinsane' | 'mickeygiveup' | 'mickeyNEW' | 'bf-fake' | 'bffake' | 'bf-demon' | 'bf-grey' | 'bfsatan' | 'bfworried' | 'HunterGoofy' | 'smiles':
 				skin = 'Skins/GreyNOTE_assets';
 				doAntialiasing = true;
+			case 'Walt' | 'bf-firstperson':
+				skin = 'Skins/WaltNOTES';
+				doAntialiasing = true;
 			case 'bf-pixel-opponent' /*| 'bf-pixel'*/:
 				/*if(PlayState.isPixelStage) {
 					skin = 'pixelUI/pixelBF-notes';

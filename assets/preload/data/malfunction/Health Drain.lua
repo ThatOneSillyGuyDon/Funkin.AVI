@@ -1,11 +1,11 @@
 function onUpdate()
     if getPropertyFromClass('ClientPrefs', 'events') then
     function opponentNoteHit(id,data,type,sus)
-        getPropertyFromClass("openfl.Lib", "application.window.x")
-        getPropertyFromClass("openfl.Lib", "application.window.y")
+        --getPropertyFromClass("openfl.Lib", "application.window.x")
+        --getPropertyFromClass("openfl.Lib", "application.window.y")
         triggerEvent('Screen Shake','0.1, 0.002','0.1, 0.002')
-        addEffect4('game', 0.1, 0);
-        addEffect4('hud', 0.1, 0);
+        addEffect4('game', 5, 0);
+        addEffect4('hud', 2, 0);
         addEffect1('hud', 0.01);
         addEffect1('game', 0.01);
         runTimer('chromaticTimer', 0.04, 1);
@@ -13,8 +13,8 @@ function onUpdate()
         if getProperty('health') > 0.08 then
             setProperty('health', health- 0.009); --doing fair
         end
-        setPropertyFromClass('openfl.Lib', 'application.window.y', getRandomFloat(0, 313))
-        setPropertyFromClass('openfl.Lib', 'application.window.x', getRandomFloat(0, 313))
+        --setPropertyFromClass('openfl.Lib', 'application.window.y', getRandomFloat(80, 283))
+        --setPropertyFromClass('openfl.Lib', 'application.window.x', getRandomFloat(80, 283))
     end
     
     function onTimerCompleted(tag)

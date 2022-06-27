@@ -9,10 +9,6 @@ function onUpdate()
         addEffect1('hud', 0.01);
         addEffect1('game', 0.01);
         runTimer('chromaticTimer', 0.04, 1);
-        health = getProperty('health')
-        if getProperty('health') > 0.08 then
-            setProperty('health', health- 0.009); --doing fair
-        end
         --setPropertyFromClass('openfl.Lib', 'application.window.y', getRandomFloat(80, 283))
         --setPropertyFromClass('openfl.Lib', 'application.window.x', getRandomFloat(80, 283))
     end

@@ -12,7 +12,7 @@ import flash.media.Sound;
 using StringTools;
 
 /**
- * Loosley based on FlxTypeText lololol
+ * Loosley based on FlxTypeText lolol
  */
 class Alphabet extends FlxSpriteGroup
 {

@@ -1195,7 +1195,13 @@ class PlayState extends MusicBeatState
 		timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
 		timeBarBG.scrollFactor.set();
 		timeBarBG.alpha = 0;
-		timeBarBG.visible = showTime;
+		if(curStage == 'WaltStage')
+		{
+			timeBarBG.visible = false;
+		}else{
+			timeBarBG.visible = showTime;
+		}
+		
 		timeBarBG.color = FlxColor.BLACK;
 		timeBarBG.xAdd = -4;
 		timeBarBG.yAdd = -4;
@@ -2452,10 +2458,6 @@ class PlayState extends MusicBeatState
 				for (i in 0...opponentStrums.length) {
 					setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 					setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
-					opponentStrums.members[0].alpha = 0.0;
-					opponentStrums.members[1].alpha = 0.0;
-					opponentStrums.members[2].alpha = 0.0;
-					opponentStrums.members[3].alpha = 0.0;
 					opponentStrums.members[i].visible = false;
 				}
 			}else{
@@ -2930,7 +2932,8 @@ class PlayState extends MusicBeatState
 						}
 					}else{
 						note.copyAlpha = false;
-						note.alpha = 0;
+						note.alpha = 1;
+
 						if(ClientPrefs.middleScroll && !note.mustPress) {
 							note.alpha *= 0.5;
 						}
@@ -3849,8 +3852,8 @@ class PlayState extends MusicBeatState
 			{
 				health = 0;
 			}
-			health -= 0.002;
-			healthDrain -= 0.0002;
+			health -= 0.0015;
+			healthDrain -= 0.00015;
 		}
 	}else{
 		if (healthDrain > 0 && health > 0.1)
@@ -5363,8 +5366,42 @@ class PlayState extends MusicBeatState
 
 			if (ClientPrefs.keAccuracy)
 		{
-		switch (daRating)
-		{
+			if(curStage == 'WaltStage')
+			{
+				switch (daRating)
+				{
+			
+				case 'shit':
+					score = -300;
+					combo = 0;
+					songMisses++;
+					totalMisses++;
+					health -= 0;
+					shits++;
+				case 'bad':
+					daRating = 'bad';
+					score = 0;
+					health -= 0;
+					bads++;
+				case 'good':
+					daRating = 'good';
+					score = 200;
+					if (health < 2)
+						health += 0;
+					goods++;
+				case 'sick':
+					if (health < 2)
+						health += 0;
+					sicks++;
+				case "marvelous": // marvelous
+					totalNotesHit += 1;
+						if (health < 2)
+							health += 0;
+					marvelouses++;
+				}
+			}else{
+				switch (daRating)
+				{
 				case 'shit':
 					score = -300;
 					combo = 0;
@@ -5385,36 +5422,69 @@ class PlayState extends MusicBeatState
 					if (health < 2)
 						health += 0.04;
 					sicks++;
-			case "marvelous": // marvelous
-				totalNotesHit += 1;
-					if (health < 2)
-						health += 0.08;
-				marvelouses++;
-		}
+				case "marvelous": // marvelous
+					totalNotesHit += 1;
+						if (health < 2)
+							health += 0.08;
+					marvelouses++;
+				}		
+			}
 		}
 		else
 		{
-		switch (daRating)
-		{
-			case "shit": // shit
-				totalNotesHit += 0;
-				shits++;
-			case "bad": // bad
-				totalNotesHit += 0.5;
-				bads++;
-			case "good": // good
-				totalNotesHit += 0.75;
-				goods++;
-			case "sick": // sick
-				if (!ClientPrefs.marvelouses)
-					totalNotesHit += 1;
-				else
-					totalNotesHit += 0.95;
-				sicks++;
-			case "marvelous": // marvelous
-				totalNotesHit += 1;
-				marvelouses++;
-		}
+			if(curStage == 'WaltStage')
+			{
+				switch(daRating)
+				{
+					case "shit": // shit
+					totalNotesHit += 0;
+					health -= 0.04;
+					shits++;
+					case "bad": // bad
+						totalNotesHit += 0.5;
+						health -= 0.01;
+						bads++;
+					case "good": // good
+						totalNotesHit += 0.75;
+						health += 0.005;
+						goods++;
+					case "sick": // sick
+						if (!ClientPrefs.marvelouses)
+							totalNotesHit += 1;
+						else
+							totalNotesHit += 0.95;
+						health += 0.01;
+						sicks++;
+					case "marvelous": // marvelous
+						totalNotesHit += 1;
+						health += 0.015;
+						marvelouses++;
+				}
+					
+			}else{
+				switch(daRating)
+				{
+					case "shit": // shit
+					totalNotesHit += 0;
+					shits++;
+					case "bad": // bad
+						totalNotesHit += 0.5;
+						bads++;
+					case "good": // good
+						totalNotesHit += 0.75;
+						goods++;
+					case "sick": // sick
+						if (!ClientPrefs.marvelouses)
+							totalNotesHit += 1;
+						else
+							totalNotesHit += 0.95;
+						sicks++;
+					case "marvelous": // marvelous
+						totalNotesHit += 1;
+						marvelouses++;
+				}
+				
+			}
 		}
 
 		if (ClientPrefs.marvelouses == true)
@@ -5805,12 +5875,18 @@ class PlayState extends MusicBeatState
 
 		if(daNote.noteType == 'Double Damage')
 			{
-				health -= 0.10;
+				health -= daNote.missHealth * healthLoss * 2;
 			}
 	
 		combo = 0;
 
-		health -= daNote.missHealth * healthLoss;
+		if(curStage == 'WaltStage')
+		{
+			health -= 0.20;
+		}else{
+			health -= daNote.missHealth * healthLoss;
+		}
+		
 		if(instakillOnMiss)
 		{
 			vocals.volume = 0;
@@ -5919,6 +5995,14 @@ class PlayState extends MusicBeatState
 									note.alpha = 0;
 									note.visible = false;
 								}
+								if(curStage == 'PixelWorld')
+								{
+									if (health < 0.1)
+									{
+										health = 0.1;
+									}
+									health -= 0.01;
+								}
 									if(ClientPrefs.camMove)
 										{
 											camFollow.x -= 20;
@@ -5929,6 +6013,14 @@ class PlayState extends MusicBeatState
 								{
 									note.alpha = 0;
 									note.visible = false;
+								}
+								if(curStage == 'PixelWorld')
+								{
+									if (health < 0.1)
+									{
+										health = 0.1;
+									}
+									health -= 0.01;
 								}
 									if(ClientPrefs.camMove)
 										{
@@ -5941,6 +6033,14 @@ class PlayState extends MusicBeatState
 									note.alpha = 0;
 									note.visible = false;
 								}
+								if(curStage == 'PixelWorld')
+								{
+									if (health < 0.1)
+									{
+										health = 0.1;
+									}
+									health -= 0.01;
+								}
 									if(ClientPrefs.camMove)
 										{
 											camFollow.y -= 20;
@@ -5951,6 +6051,14 @@ class PlayState extends MusicBeatState
 								{
 									note.alpha = 0;
 									note.visible = false;
+								}
+								if(curStage == 'PixelWorld')
+								{
+									if (health < 0.1)
+									{
+										health = 0.1;
+									}
+									health -= 0.01;
 								}
 									if(ClientPrefs.camMove)
 										{
@@ -6088,7 +6196,13 @@ class PlayState extends MusicBeatState
 				popUpScore(note);
 				if(combo > 9999) combo = 9999;
 			}
-			health += note.hitHealth * healthGain;
+			if(curStage == 'WaltStage')
+			{
+				health += 0.0;
+			}else{
+				health += note.hitHealth * healthGain;
+			}
+			
 
 			if(!note.noAnimation) {
 				var daAlt = '';
@@ -6542,6 +6656,7 @@ class PlayState extends MusicBeatState
 
 		switch (curStage)
 		{
+			
 			case 'WaltStage':
 				healthDrain = 0.4;
 			case 'tank':

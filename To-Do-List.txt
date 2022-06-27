@@ -1,20 +1,13 @@
-Shit People Probably Want Most:
-- Music Player Menu (for peeps that just wanna listen to music)
-- Modchart Editor
-- Note Skin Maker
-- Softcoded Menus????
-- extra keys???????
-- Discord RPC
-- Make Hell Charts
-- Update Menu Assets
-- Freeze Note???
-- Experiment with Pixel Notes
-- Softcode Note Skins (both notes and strums)
-- Player Note Skins
-- UI Skin Options?
-- Stage Editor (overrated request, but, eh, we're doing it ig)
-- Character Select Screen? (wait, doesn't this exist for something already? idk)
-- Add More Exclusive Content, maybe?
-- Fix the border in week 2 ????
-- Finish Hell charts for built-in chart
-- Extra stuff
+To do List for the next update:
+
+- Artwork for each song on the Discord RPC
+- Mickey's sprites for 2nd song
+- Don't Cross assets (even though we're probably not adding him to the demo)
+- Icons for basically all the characters in the demo
+- Muckney.mp4 assets and song
+- New Cutscenes(?)
+- New Goofy Sprites
+- couch. (yes)
+- Piracy screen for html5 builds
+- remove the fucking lua scripts that aren't needed unless they're shaders
+- The REAL BF Sprite (and pixel version for Malfunction)

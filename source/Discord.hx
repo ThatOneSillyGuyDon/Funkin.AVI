@@ -23,9 +23,6 @@ class DiscordClient
 			onDisconnected: onDisconnected
 		});
 		trace("Discord Client started.");
-		/*if(null) {
-			trace('Discord got NULLED');
-		}*/
 
 		while (true)
 		{
@@ -33,6 +30,13 @@ class DiscordClient
 			sleep(2);
 			trace("Discord Client Update");
 		}
+
+		while (false)
+			{
+				DiscordRpc.process();
+				sleep(2);
+				trace('Error On Discord Client!');
+			}
 
 		DiscordRpc.shutdown();
 	}

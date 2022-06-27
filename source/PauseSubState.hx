@@ -15,13 +15,20 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
+import PlayState;
 
 class PauseSubState extends MusicBeatSubstate
 {
 	var grpMenuShit:FlxTypedGroup<Alphabet>;
 
 	var menuItems:Array<String> = [];
-	var menuItemsOG:Array<String> = ['Resume', 'Restart Song', 'Options', 'Change Difficulty', 'Exit to menu'];
+	var menuItemsOG:Array<String> = [
+		'Resume', 
+		'Restart Song', 
+		'Options', 
+		'Change Difficulty', 
+		'Exit to menu'
+	];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
 	var composer:String = '';
@@ -84,7 +91,7 @@ class PauseSubState extends MusicBeatSubstate
 				{
 					case 'Isolated' | 'Laugh Track':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity. (PAUSED)";
-					case 'Lunacy' | 'Malfunction':
+					case 'Lunacy' | 'Malfunction' | 'Mercy':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity. (PAUSED)";
 					case 'Delusional':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure (PAUSED)";
@@ -130,7 +137,7 @@ class PauseSubState extends MusicBeatSubstate
 		var charterCredit:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
 		switch(PlayState.SONG.song)
 		{
-			case 'Isolated' | 'Laugh Track' | 'Isolated Old' | 'Twisted Grins' | 'Malfunction':
+			case 'Isolated' | 'Laugh Track' | 'Isolated Old' | 'Twisted Grins' | 'Malfunction' | 'Mercy':
 			charter = 'Chart by DEMOLITIONDON96';
 			case 'Lunacy':
 			charter = 'Chart by obscurity';
@@ -142,8 +149,6 @@ class PauseSubState extends MusicBeatSubstate
 			charter = 'Chart by PhantomNexus';
 			case "Don't Cross!":
 			charter = 'Chart by fakeburritos123 & DEMOLITIONDON96';
-			case 'Mercy':
-			charter = 'Chart by Jsa010 and ';
 		}
 		charterCredit.text += charter;
 		charterCredit.scrollFactor.set();
@@ -306,7 +311,7 @@ class PauseSubState extends MusicBeatSubstate
 				{
 					case 'Isolated' | 'Laugh Track':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
-					case 'Lunacy' | 'Malfunction':
+					case 'Lunacy' | 'Malfunction' | 'Mercy':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
 					case 'Delusional':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
@@ -319,6 +324,7 @@ class PauseSubState extends MusicBeatSubstate
 					default:
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
 				}
+					//PlayState.startCountdown();
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
@@ -368,7 +374,7 @@ class PauseSubState extends MusicBeatSubstate
 						{
 							case 'Isolated' | 'Lunacy':
 								MusicBeatState.switchState(new EpisodesState());
-							case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old':
+							case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy':
 								MusicBeatState.switchState(new ExtrasState());
 							default:
 								MusicBeatState.switchState(new EpisodesState());

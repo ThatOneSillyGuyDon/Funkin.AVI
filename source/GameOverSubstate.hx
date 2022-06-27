@@ -100,7 +100,7 @@ class GameOverSubstate extends MusicBeatSubstate
 					{
 						case 'Isolated' | 'Lunacy':
 							MusicBeatState.switchState(new EpisodesState());
-						case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old':
+						case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy':
 							MusicBeatState.switchState(new ExtrasState());
 						default:
 							MusicBeatState.switchState(new EpisodesState());

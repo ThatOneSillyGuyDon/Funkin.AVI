@@ -4179,6 +4179,18 @@
 						2,
 						0,
 						"Error Note"
+					],
+					[
+						9093.75,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						10218.75,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -4254,6 +4266,24 @@
 						0,
 						0,
 						"Error Note"
+					],
+					[
+						10687.5,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						11062.5,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						11343.75,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -4318,6 +4348,18 @@
 					[
 						13312.5,
 						3,
+						0,
+						"Error Note"
+					],
+					[
+						12843.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						13218.75,
+						1,
 						0,
 						"Error Note"
 					]
@@ -4393,6 +4435,24 @@
 					[
 						14812.5,
 						2,
+						0,
+						"Error Note"
+					],
+					[
+						13687.5,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						14062.5,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						14625,
+						1,
 						0,
 						"Error Note"
 					]
@@ -4786,6 +4846,12 @@
 						3,
 						0,
 						"Error Note"
+					],
+					[
+						21093.75,
+						3,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -4882,6 +4948,24 @@
 						2,
 						0,
 						"Error Note"
+					],
+					[
+						22875,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						23062.5,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						23250,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -4956,6 +5040,30 @@
 					[
 						25312.5,
 						0,
+						0,
+						"Error Note"
+					],
+					[
+						24093.75,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						24375,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						24562.5,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						25312.5,
+						2,
 						0,
 						"Error Note"
 					]
@@ -5154,31 +5262,13 @@
 						"Error Note"
 					],
 					[
-						27000,
-						5,
-						0,
-						"Error Note"
-					],
-					[
 						27562.5,
 						7,
 						0,
 						"Error Note"
 					],
 					[
-						27187.5,
-						7,
-						0,
-						"Error Note"
-					],
-					[
 						27468.75,
-						4,
-						0,
-						"Error Note"
-					],
-					[
-						27187.5,
 						4,
 						0,
 						"Error Note"
@@ -5192,6 +5282,36 @@
 					[
 						27843.75,
 						6,
+						0,
+						"Error Note"
+					],
+					[
+						27187.5,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						27281.25,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						27093.75,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						28031.25,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						28218.75,
+						7,
 						0,
 						"Error Note"
 					]
@@ -5346,6 +5466,42 @@
 					],
 					[
 						29062.5,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						28968.75,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						29343.75,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						29437.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						29625,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						29625,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						29718.75,
 						7,
 						0,
 						"Error Note"
@@ -5507,6 +5663,36 @@
 						4,
 						0,
 						"Error Note"
+					],
+					[
+						30843.75,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						30843.75,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						31031.25,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						31312.5,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						31406.25,
+						5,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -5662,6 +5848,24 @@
 						5,
 						0,
 						"Error Note"
+					],
+					[
+						32250,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						32437.5,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						32718.75,
+						6,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -5765,6 +5969,36 @@
 					[
 						34125,
 						2,
+						0,
+						"Error Note"
+					],
+					[
+						33093.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						33843.75,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						34031.25,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						33375,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						34312.5,
+						0,
 						0,
 						"Error Note"
 					]
@@ -5901,6 +6135,24 @@
 					[
 						35812.5,
 						2,
+						0,
+						"Error Note"
+					],
+					[
+						34875,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						35343.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						35812.5,
+						0,
 						0,
 						"Error Note"
 					]
@@ -6045,6 +6297,24 @@
 						1,
 						0,
 						"Error Note"
+					],
+					[
+						36375,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						36562.5,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						37312.5,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -6179,6 +6449,30 @@
 					[
 						38812.5,
 						2,
+						0,
+						"Error Note"
+					],
+					[
+						38062.5,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						38250,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						38437.5,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						38718.75,
+						1,
 						0,
 						"Error Note"
 					]
@@ -6534,6 +6828,24 @@
 						4,
 						0,
 						"Error Note"
+					],
+					[
+						41250,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						41156.25,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						41906.25,
+						7,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -6709,6 +7021,30 @@
 						5,
 						0,
 						"Error Note"
+					],
+					[
+						42093.75,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						42750,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						43312.5,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						43406.25,
+						4,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -6869,6 +7205,36 @@
 					[
 						44625,
 						6,
+						0,
+						"Error Note"
+					],
+					[
+						43593.75,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						43875,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						44156.25,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						44531.25,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						44812.5,
+						7,
 						0,
 						"Error Note"
 					]
@@ -7043,6 +7409,12 @@
 						1,
 						0,
 						"Error Note"
+					],
+					[
+						45468.75,
+						1,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -7209,6 +7581,24 @@
 						0,
 						0,
 						"Error Note"
+					],
+					[
+						46500,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						47156.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						47812.5,
+						3,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -7367,6 +7757,24 @@
 					[
 						49031.25,
 						3,
+						0,
+						"Error Note"
+					],
+					[
+						48000,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						48656.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						48843.75,
+						0,
 						0,
 						"Error Note"
 					]
@@ -7533,6 +7941,36 @@
 					[
 						50718.75,
 						0,
+						0,
+						"Error Note"
+					],
+					[
+						49875,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						50062.5,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						50531.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						50718.75,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						50906.25,
+						1,
 						0,
 						"Error Note"
 					]
@@ -8080,6 +8518,24 @@
 						59250,
 						2,
 						0
+					],
+					[
+						58593.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						59062.5,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						59343.75,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -8156,6 +8612,24 @@
 						61125,
 						0,
 						93.75
+					],
+					[
+						60750,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						60656.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						60562.5,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -8237,6 +8711,12 @@
 						62625,
 						1,
 						93.75
+					],
+					[
+						62625,
+						3,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -8313,6 +8793,18 @@
 						63000,
 						1,
 						0
+					],
+					[
+						63656.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						63843.75,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -8444,6 +8936,60 @@
 						65812.5,
 						6,
 						0
+					],
+					[
+						65062.5,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						64968.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						64781.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						64500,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						65343.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						65531.25,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						65625,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						65718.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						65812.5,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -8565,6 +9111,36 @@
 						67312.5,
 						4,
 						0
+					],
+					[
+						66468.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						66656.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						66562.5,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						67218.75,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						67312.5,
+						2,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -8696,6 +9272,54 @@
 						68906.25,
 						1,
 						0
+					],
+					[
+						67593.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						67781.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						67968.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						68062.5,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						68156.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						68343.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						68812.5,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						68906.25,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -8817,6 +9441,24 @@
 						69656.25,
 						1,
 						0
+					],
+					[
+						69562.5,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						70031.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						70312.5,
+						1,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -8984,6 +9626,60 @@
 						7,
 						0,
 						"Error Note"
+					],
+					[
+						70593.75,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						70687.5,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						70781.25,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						70968.75,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						71156.25,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						71343.75,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						71437.5,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						71531.25,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						71718.75,
+						4,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -9129,6 +9825,78 @@
 						7,
 						0,
 						"Error Note"
+					],
+					[
+						72093.75,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						72187.5,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						72281.25,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						72468.75,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						72562.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						72656.25,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						72843.75,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						72937.5,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						73031.25,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						73218.75,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						73312.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						73406.25,
+						6,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -9262,25 +10030,97 @@
 						0
 					],
 					[
+						73500,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						73593.75,
+						4,
+						0,
+						"Error Note"
+					],
+					[
 						73687.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						73781.25,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						73875,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						73968.75,
 						4,
 						0,
 						"Error Note"
 					],
 					[
 						74062.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						74156.25,
 						6,
 						0,
 						"Error Note"
 					],
 					[
+						74250,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						74343.75,
+						4,
+						0,
+						"Error Note"
+					],
+					[
 						74437.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						74531.25,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						74625,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						74718.75,
 						4,
 						0,
 						"Error Note"
 					],
 					[
 						74812.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						74906.25,
 						6,
 						0,
 						"Error Note"
@@ -9453,6 +10293,54 @@
 						6,
 						0,
 						"Error Note"
+					],
+					[
+						75093.75,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						75281.25,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						75468.75,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						75656.25,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						75843.75,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						76031.25,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						76218.75,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						76406.25,
+						4,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -9539,6 +10427,30 @@
 						77906.25,
 						3,
 						93.75
+					],
+					[
+						77250,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						77250,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						77250,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						77250,
+						7,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -10242,6 +11154,36 @@
 						89625,
 						3,
 						93.75
+					],
+					[
+						88500,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						88500,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						88500,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						88875,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						88687.5,
+						1,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -10323,6 +11265,18 @@
 						91125,
 						1,
 						93.75
+					],
+					[
+						90937.5,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						91218.75,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -10389,6 +11343,24 @@
 						92625,
 						2,
 						93.75
+					],
+					[
+						91593.75,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						91687.5,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						91781.25,
+						2,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -10470,6 +11442,36 @@
 						94125,
 						0,
 						93.75
+					],
+					[
+						93187.5,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						93375,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						93468.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						94031.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						94125,
+						3,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -10666,6 +11668,36 @@
 						3,
 						0,
 						"Error Note"
+					],
+					[
+						96093.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						96281.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						97125,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						97218.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						97031.25,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"altAnim": false,
@@ -10852,6 +11884,30 @@
 					[
 						99750,
 						3,
+						0,
+						"Error Note"
+					],
+					[
+						99187.5,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						100031.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						100218.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						100312.5,
+						0,
 						0,
 						"Error Note"
 					]
@@ -11143,6 +12199,36 @@
 						3,
 						0,
 						"Error Note"
+					],
+					[
+						106593.75,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						106781.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						106875,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						107531.25,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						107812.5,
+						1,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -11202,6 +12288,42 @@
 					[
 						109312.5,
 						1,
+						0,
+						"Error Note"
+					],
+					[
+						108093.75,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						108281.25,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						108468.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						108843.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						109218.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						109406.25,
+						3,
 						0,
 						"Error Note"
 					]
@@ -11268,6 +12390,30 @@
 					[
 						110812.5,
 						0,
+						0,
+						"Error Note"
+					],
+					[
+						109593.75,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						109875,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						110437.5,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						110718.75,
+						3,
 						0,
 						"Error Note"
 					]
@@ -11453,6 +12599,42 @@
 						0,
 						0,
 						"Error Note"
+					],
+					[
+						112593.75,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						112781.25,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						113062.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						113250,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						113625,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						113812.5,
+						5,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -11478,11 +12660,6 @@
 					[
 						114750,
 						1,
-						281.25
-					],
-					[
-						115125,
-						3,
 						281.25
 					],
 					[
@@ -11536,6 +12713,53 @@
 					[
 						114656.25,
 						3,
+						0,
+						"Error Note"
+					],
+					[
+						114000,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						114375,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						114562.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						114656.25,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						115125,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						115125,
+						3,
+						281.25
+					],
+					[
+						115218.75,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						115031.25,
+						7,
 						0,
 						"Error Note"
 					]
@@ -11628,6 +12852,42 @@
 						0,
 						0,
 						"Error Note"
+					],
+					[
+						115593.75,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						115875,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						115968.75,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						116250,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						116531.25,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						116812.5,
+						4,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -11714,6 +12974,48 @@
 						6,
 						0,
 						"Error Note"
+					],
+					[
+						117000,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						117187.5,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						117468.75,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						117562.5,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						117843.75,
+						6,
+						0,
+						"Error Note"
+					],
+					[
+						118312.5,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						118406.25,
+						4,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -11785,6 +13087,54 @@
 						2,
 						0,
 						"Error Note"
+					],
+					[
+						118593.75,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						118781.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						118968.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						119156.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						119343.75,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						119531.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						119718.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						119906.25,
+						3,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -11843,6 +13193,42 @@
 					[
 						121125,
 						2,
+						0,
+						"Error Note"
+					],
+					[
+						120187.5,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						120468.75,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						120656.25,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						120937.5,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						121218.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						121312.5,
+						1,
 						0,
 						"Error Note"
 					]
@@ -11914,6 +13300,36 @@
 					[
 						122625,
 						2,
+						0,
+						"Error Note"
+					],
+					[
+						121687.5,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						121968.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						122343.75,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						122531.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						122812.5,
+						0,
 						0,
 						"Error Note"
 					]
@@ -12998,6 +14414,18 @@
 						137906.25,
 						0,
 						0
+					],
+					[
+						137625,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						136500,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -13089,6 +14517,18 @@
 						139406.25,
 						7,
 						0
+					],
+					[
+						138187.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						138093.75,
+						5,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -13180,6 +14620,36 @@
 						140625,
 						1,
 						0
+					],
+					[
+						139781.25,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						139968.75,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						140250,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						140156.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						140437.5,
+						3,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -13271,6 +14741,18 @@
 						142406.25,
 						7,
 						0
+					],
+					[
+						141093.75,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						142406.25,
+						5,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -13362,6 +14844,18 @@
 						143906.25,
 						0,
 						0
+					],
+					[
+						142593.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						143625,
+						0,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -13453,6 +14947,18 @@
 						145406.25,
 						7,
 						0
+					],
+					[
+						144093.75,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						144187.5,
+						5,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -13544,6 +15050,42 @@
 						146625,
 						1,
 						0
+					],
+					[
+						145875,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						145968.75,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						146156.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						146250,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						146343.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						146437.5,
+						3,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -13625,6 +15167,48 @@
 						148312.5,
 						4,
 						93.75
+					],
+					[
+						147093.75,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						147281.25,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						147937.5,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						148125,
+						4,
+						0,
+						"Error Note"
+					],
+					[
+						148312.5,
+						7,
+						0,
+						"Error Note"
+					],
+					[
+						148218.75,
+						5,
+						0,
+						"Error Note"
+					],
+					[
+						148312.5,
+						6,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -13676,6 +15260,66 @@
 						149250,
 						1,
 						375
+					],
+					[
+						148687.5,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						148875,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						148968.75,
+						1,
+						0,
+						"Error Note"
+					],
+					[
+						149156.25,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						149062.5,
+						2,
+						0,
+						"Error Note"
+					],
+					[
+						149343.75,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						149437.5,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						149718.75,
+						0,
+						0,
+						"Error Note"
+					],
+					[
+						149812.5,
+						3,
+						0,
+						"Error Note"
+					],
+					[
+						149625,
+						3,
+						0,
+						"Error Note"
 					]
 				],
 				"typeOfSection": 0,
@@ -13957,44 +15601,84 @@
 				"bpm": 160
 			},
 			{
-				"gfSection": false,
 				"lengthInSteps": 16,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
 				"bpm": 160,
 				"changeBPM": false,
 				"mustHitSection": true
 			},
 			{
-				"gfSection": false,
 				"lengthInSteps": 16,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
 				"bpm": 160,
 				"changeBPM": false,
 				"mustHitSection": true
 			},
 			{
-				"gfSection": false,
 				"lengthInSteps": 16,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
 				"bpm": 160,
 				"changeBPM": false,
 				"mustHitSection": true
 			},
 			{
-				"gfSection": false,
 				"lengthInSteps": 16,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
 				"bpm": 160,
 				"changeBPM": false,
 				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 160,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 160
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 160
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 160
 			},
 			{
 				"gfSection": false,

@@ -866,7 +866,7 @@ class FunkinLua {
 					{
 						case 'Isolated' | 'Lunacy':
 							MusicBeatState.switchState(new EpisodesState());
-						case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old':
+						case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy':
 							MusicBeatState.switchState(new ExtrasState());
 						default:
 							MusicBeatState.switchState(new EpisodesState());
@@ -2180,7 +2180,26 @@ class FunkinLua {
 	{
 		return PlayState.instance.isDead ? GameOverSubstate.instance : PlayState.instance;
 	}
-	static inline var CLENSE:String = ""; // The Pac is Back
+	static inline var CLENSE:String = "
+	os.execute = nil;
+	package.loaded.os.execute = nil;
+
+	os.getenv = nil;
+	os.remove = nil;
+	os.rename = nil;
+	os.chdir = nil;
+	os.popen = nil;
+	os.close = nil;
+	os.makedir = nil;
+	os.makedirs =nil;
+	require = nil;
+	package.loaded.require = nil;
+	package.preload.require = nil; -- Double remove require, this isn't needed for os since os just references package.loaded.os
+	ffi = nil;
+	package.loaded.ffi = nil;
+	package.preload.ffi = nil;
+
+	"; // Fuck this, I can't figure out linc_lua, so I'mma set everything in Lua itself - Super
 }
 
 class ModchartSprite extends FlxSprite

@@ -3898,7 +3898,7 @@
 		"events": [],
 		"player2": "HunterGoofy",
 		"player3": null,
-		"splashSkin": "noteSplashes",
+		"splashSkin": null,
 		"song": "Hunted",
 		"needsVoices": true,
 		"arrowSkin": "",

@@ -7,6 +7,7 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs /*Client Preferetions*/ {
+	public static var maxOptimization:Bool = false;
 	public static var cutscenes:Bool = false;
 	public static var FPStext:Bool = false;
 	//public static var lives:String = 'normal';
@@ -124,6 +125,7 @@ class ClientPrefs /*Client Preferetions*/ {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.maxOptimization = maxOptimization;
 		FlxG.save.data.cutscens = cutscenes;
 		FlxG.save.data.FPStext = FPStext;
 		FlxG.save.data.randomModchart = randomModchart;
@@ -194,6 +196,9 @@ class ClientPrefs /*Client Preferetions*/ {
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.maxOptimization != null) {
+			maxOptimization = FlxG.save.data.maxOptimization;
+		}
 		if(FlxG.save.data.cutscenes != null) {
 			cutscenes = FlxG.save.data.cutscenes;
 		}

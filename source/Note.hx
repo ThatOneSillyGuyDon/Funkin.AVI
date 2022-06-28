@@ -211,6 +211,8 @@ class Note extends FlxSprite
 		this.prevNote = prevNote;
 		isSustainNote = sustainNote;
 		this.inEditor = inEditor;
+		
+		//noAnimation = ClientPrefs.maxOptimization;
 
 		antialias = ClientPrefs.globalAntialiasing;
 

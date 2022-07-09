@@ -70,7 +70,11 @@ class NoticeState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new MainMenuState());
+							if(ClientPrefs.simpleMenu) {
+							MusicBeatState.switchState(new LowEndMenuState());
+							} else {
+								MusicBeatState.switchState(new MainMenuState());
+							}
 						}
 					});
 				} else {

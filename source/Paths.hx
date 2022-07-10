@@ -87,7 +87,7 @@ class Paths
 	public static function clearStoredMemory(?cleanUnused:Bool = false) {
 		// clear anything not in the tracked assets list
 		@:privateAccess
-		for (key in FlxG.bitmap._cache.keys()) 
+		for (key in FlxG.bitmap._cache.keys())
 		{
 			var obj = FlxG.bitmap._cache.get(key);
 			if (obj != null && !currentTrackedAssets.exists(key)) {
@@ -223,29 +223,43 @@ class Paths
 
 	inline static public function voices(song:String):Any
 	{
-		if (CoolUtil.difficulties[PlayState.storyDifficulty] == "Suicidal"){
-			var songKey:String = '${formatToSongPath(song)}/Voices_Suicidal';
-			var voices = returnSound('songs', songKey);
-			return voices;
-		}
-		else{
-			var songKey:String = '${formatToSongPath(song)}/Voices';
-			var voices = returnSound('songs', songKey);
-			return voices;
+		switch (CoolUtil.difficulties[PlayState.storyDifficulty])
+		{
+			case "X2":
+				var songKey:String = '${formatToSongPath(song)}/Voicesx2';
+				var voices = returnSound('songs', songKey);
+				return voices;
+
+			case "Suicidal":
+				var songKey:String = '${formatToSongPath(song)}/SUICIDEVoices';
+				var voices = returnSound('songs', songKey);
+				return voices;
+			
+			default:
+				var songKey:String = '${formatToSongPath(song)}/Voices';
+				var voices = returnSound('songs', songKey);
+				return voices;
 		}
 	}
 
 	inline static public function inst(song:String):Any
 	{
-		if (CoolUtil.difficulties[PlayState.storyDifficulty] == "Suicidal"){
-			var songKey:String = '${formatToSongPath(song)}/Inst_Suicidal';
-			var voices = returnSound('songs', songKey);
-			return voices;
-		}
-		else{
-			var songKey:String = '${formatToSongPath(song)}/Inst';
-			var voices = returnSound('songs', songKey);
-			return voices;
+		switch (CoolUtil.difficulties[PlayState.storyDifficulty])
+		{
+			case "X2":
+				var songKey:String = '${formatToSongPath(song)}/Instx2';
+				var voices = returnSound('songs', songKey);
+				return voices;
+
+			case "Suicidal":
+				var songKey:String = '${formatToSongPath(song)}/SUICIDEInst';
+				var voices = returnSound('songs', songKey);
+				return voices;
+			
+			default:
+				var songKey:String = '${formatToSongPath(song)}/Inst';
+				var voices = returnSound('songs', songKey);
+				return voices;
 		}
 	}
 

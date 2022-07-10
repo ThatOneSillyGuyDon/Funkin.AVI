@@ -98,6 +98,7 @@ class ChartingState extends MusicBeatState
 		['Screen Fade', "Funi Screen Fade\n0 = Invisible\n1 = add 0.05 to Visibility\n2 = remove 0.05 to Visibility\n3 = Visible\n(i'm sorry you have to spam 1 & 2)"],
 		['Lyrics',"Value 1: Lyrics\nValue 2: Color (white is default)"],
 		['Hide HUD', "Value 1: 1 = Hide HUD, 2 = Show HUD\n Value 2: No Use"],
+		['Spotlights', "ONLY VALUE 1 WORKS!\nType 1 for ON/OFF switch\n2 for Dad\n3 for BF"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Scroll Type', "Changes Scroll Type, Mid-Song\n \nValue 1 = BF Notes\nValue 2 = Dad Notes\n \nDefault = Normal Scroll Type\nFlip = Flips Current Scroll Type\nDown = Locks Downscroll\nUp = Locks Upscroll\nLeft = Sidescroll from Left\nRight = Sidescroll from Right\nUndyne = Centerscroll"],
 		['Flash Screen', "Flashes da hud, yup, thats it\nValue 1 = Color you should Flash\nValue 2 = Option to Hide HUD\n \n Colors: 0 = White\n1 = Red\n2 = Blue\n3 = Black\n4 = Cyan\n5 = Magenta\n6 = Pink\n7 = Orange\n8 = Purple\n9 = Lime\n \nTrue: HUD is hidden\n False: HUD is visible"],
@@ -1975,120 +1976,175 @@ class ChartingState extends MusicBeatState
 			audioBuffers[0].dispose();
 		}
 		audioBuffers[0] = null;
-		if (CoolUtil.difficulties[PlayState.storyDifficulty] == "Suicidal"){
-			#if MODS_ALLOWED
-			if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.ogg'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.ogg'));
-				//trace('Custom vocals found');
-			
-			} 
-			#if MP3_ALLOWED 
-			else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.mp3'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.mp3'));
-			}
-			#end
-			#if WAV_ALLOWED
-			else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.wav'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.wav'));
-			}
-			#end
-				else { #end
-				var leVocals:String = Paths.getPath(currentSongName + '/SUICIDEInst.' + Paths.SOUND_EXT, SOUND, 'songs');
-				if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
-					audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
-					//trace('Voices found, LETS FUCKING GOOOO');
-				}
-			#if MODS_ALLOWED
-			}
-			#end
-		}
-		else
+		switch (CoolUtil.difficulties[PlayState.storyDifficulty])
 		{
-			#if MODS_ALLOWED
-			if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'));
-				//trace('Custom vocals found');
-			
-			} 
-			#if MP3_ALLOWED 
-			else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'));
-			}
-			#end
-			#if WAV_ALLOWED
-			else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'));
-			}
-			#end
-				else { #end
-				var leVocals:String = Paths.getPath(currentSongName + '/Inst.' + Paths.SOUND_EXT, SOUND, 'songs');
-				if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
-					audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
-					//trace('Voices found, LETS FUCKING GOOOO');
+			case "X2":
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Instx2.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Instx2.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Instx2.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Instx2.mp3'));
 				}
-			#if MODS_ALLOWED
-			}
-			#end
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Instx2.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Instx2.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Instx2.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
+
+			case "Suicidal":
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/SUICIDEInst.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
+
+			default:
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Inst.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
 		}
 
 		if(audioBuffers[1] != null) {
 			audioBuffers[1].dispose();
 		}
 		audioBuffers[1] = null;
-		if (CoolUtil.difficulties[PlayState.storyDifficulty] == "Suicidal"){
-			#if MODS_ALLOWED
-			if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.ogg'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.ogg'));
-				//trace('Custom vocals found');
-			
-			} 
-			#if MP3_ALLOWED 
-			else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.mp3'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.mp3'));
-			}
-			#end
-			#if WAV_ALLOWED
-			else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.wav'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.wav'));
-			}
-			#end
-				else { #end
-				var leVocals:String = Paths.getPath(currentSongName + '/SUICIDEVoices.' + Paths.SOUND_EXT, SOUND, 'songs');
-				if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
-					audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
-					//trace('Voices found, LETS FUCKING GOOOO');
-				}
-			#if MODS_ALLOWED
-			}
-			#end
-		}
-		else
+		switch (CoolUtil.difficulties[PlayState.storyDifficulty])
 		{
-			#if MODS_ALLOWED
-			if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'));
-				//trace('Custom vocals found');
-			
-			} 
-			#if MP3_ALLOWED 
-			else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'));
-			}
-			#end
-			#if WAV_ALLOWED
-			else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'))) {
-				audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'));
-			}
-			#end
-				else { #end
-				var leVocals:String = Paths.getPath(currentSongName + '/Voices.' + Paths.SOUND_EXT, SOUND, 'songs');
-				if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
-					audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
-					//trace('Voices found, LETS FUCKING GOOOO');
+			case "X2":
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.mp3'));
 				}
-			#if MODS_ALLOWED
-			}
-			#end
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Voicesx2.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
+			case "Suicidal":
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/SUICIDEVoices.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
+				
+			default:
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Voices.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
 		}
 	}
 	function reloadGridLayer() {

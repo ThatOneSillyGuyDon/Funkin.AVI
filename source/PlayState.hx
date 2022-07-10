@@ -271,6 +271,10 @@ class PlayState extends MusicBeatState
 	var isolatedIntro:FlxSprite;
 	var treesFront:BGSprite;
 
+	//Spotlight Functions
+	var spotlight:BGSprite;
+	var darknessBlack:BGSprite;
+
 	//Malfunction Life System
 	var crashLives:FlxText;
 	var crashLivesIcon:FlxSprite;
@@ -783,6 +787,21 @@ class PlayState extends MusicBeatState
 				isolatedIntro.cameras = [camCustom];
 				isolatedIntro.alpha = 0;
 
+				if(ClientPrefs.funiShaders)
+				{
+					//Epic Shaders Let's GOOOOOOOOO
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+					addShaderToCamera('hud', new GreyscaleEffect());
+					addShaderToCamera('game', new GreyscaleEffect());
+					addShaderToCamera('game', new VhsEffect(0.3, 0));
+					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+				}
+				
+
+
 			case 'Studio':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-mickey';
 				//GameOverSubstate.loopSoundName = 'gameOver-mickey';
@@ -808,6 +827,19 @@ class PlayState extends MusicBeatState
 				isolatedIntro.cameras = [camCustom];
 				isolatedIntro.alpha = 0;
 
+				if(ClientPrefs.funiShaders)
+				{
+					//Epic Shaders Let's GOOOOOOOOO
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+					addShaderToCamera('hud', new GreyscaleEffect());
+					addShaderToCamera('game', new GreyscaleEffect());
+					addShaderToCamera('game', new VhsEffect(0.3, 0));
+					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+				}
+
 			case 'Office':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-smile';
 				//GameOverSubstate.loopSoundName = 'gameOver-smile';
@@ -818,6 +850,8 @@ class PlayState extends MusicBeatState
 				add(office);
 
 				light = new BGSprite('funkinAVI/mrSmile/officeLight', 0, 0);
+				light.blend = ADD;
+				light.alpha = 0.55;
 
 			case 'PixelWorld':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-square';
@@ -866,6 +900,16 @@ class PlayState extends MusicBeatState
 
 				var waltStage:BGSprite = new BGSprite('funkinAVI/walt/walt-bg', -339, -106);
 				add(waltStage);
+
+			case 'Line':
+				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-crossin';
+				//GameOverSubstate.loopSoundName = 'gameOver-crossin';
+				//GameOverSubstate.endSoundName = 'gameOverEnd-crossin';
+				//GameOverSubstate.characterName = 'bf-crossin-dead';
+
+				var funiLine:BGSprite = new BGSprite('funkinAVI/DontCross/theLine', 0, 0);
+				funiLine.scale.set(1.3, 1.3);
+				add(funiLine);
 
 			default: //custom stages
 				isPixelStage = stageData.isPixelStage;
@@ -951,8 +995,15 @@ class PlayState extends MusicBeatState
 		if (curStage == 'limo')
 			add(limo);
 
-		add(dadGroup);
-		add(boyfriendGroup);
+		if(curStage == 'Line')
+		{
+			add(boyfriendGroup);
+			add(dadGroup);
+		}else{
+			add(dadGroup);
+			add(boyfriendGroup);
+		}
+		
 		
 		switch(curStage)
 		{
@@ -3279,6 +3330,19 @@ class PlayState extends MusicBeatState
 				var newCharacter:String = event.value2;
 				addCharacterToList(newCharacter, charType);
 
+			case 'Spotlights':
+				darknessBlack = new BGSprite(null, -800, -400, 0, 0);
+				darknessBlack.makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+				darknessBlack.alpha = 0.25;
+				darknessBlack.visible = false;
+				add(darknessBlack);
+
+				spotlight = new BGSprite('funkinAVI/uiAndEvents/spotlight', 400, -400);
+				spotlight.alpha = 0.375;
+				spotlight.blend = ADD;
+				spotlight.visible = false;
+				add(spotlight);
+
 			case 'Philly Glow':
 				blammedLightsBlack = new FlxSprite(FlxG.width * -0.5, FlxG.height * -0.5).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 				blammedLightsBlack.visible = false;
@@ -4270,6 +4334,46 @@ class PlayState extends MusicBeatState
 	
 	public function triggerEventNote(eventName:String, value1:String, value2:String) {
 		switch(eventName) {
+
+			case 'Spotlights':
+				var val:Null<Int> = Std.parseInt(value1);
+				if(val == null) val = 0;
+
+				switch(Std.parseInt(value1))
+				{
+					case 1, 2, 3: //enable and target dad
+						if(val == 1) //enable
+						{
+							darknessBlack.visible = true;
+							spotlight.visible = true;
+							defaultCamZoom += 0.12;
+						}
+
+						var who:Character = dad;
+						if(val > 2) who = boyfriend;
+						//2 only targets dad
+						spotlight.alpha = 0;
+						darknessBlack.alpha = 0;
+						new FlxTimer().start(0, function(tmr:FlxTimer) {
+							FlxTween.tween(spotlight, {alpha: 0.375}, 1);
+							FlxTween.tween(darknessBlack, {alpha: 0.25}, 0.75);
+						});
+						spotlight.setPosition(who.getGraphicMidpoint().x - spotlight.width / 2, who.y + who.height - spotlight.height + 50);
+
+					default:
+						darknessBlack.visible = false;
+						spotlight.visible = false;
+						defaultCamZoom -= 0.12;
+						FlxTween.tween(spotlight, {alpha: 0}, 1, {onComplete: function(twn:FlxTween)
+						{
+							spotlight.visible = false;
+						}});
+						FlxTween.tween(darknessBlack, {alpha: 0}, 0.75, {onComplete: function(twn:FlxTween)
+						{
+							darknessBlack.visible = false;
+						}});
+				}
+
 			case 'Hey!':
 				var value:Int = 2;
 				switch(value1.toLowerCase().trim()) {
@@ -4588,14 +4692,14 @@ class PlayState extends MusicBeatState
 				if(value2.trim()=='')value2='#FFFFFF';
 				if(value1.trim()!=''){
 			 		lyrics = new FlxText(0, 570, 0, value1, 32);
-					lyrics.cameras = [camOther];
+					lyrics.cameras = [camCustom];
 					lyrics.setFormat(Paths.font("vcr.ttf"), 24, FlxColor.fromString(value2), CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 					lyrics.screenCenter(X);
 					lyrics.updateHitbox();
 					add(lyrics);
 				}
 			case 'Flash Screen':
-				if(ClientPrefs.flashing) { //This Demolition, is how to make flashing lights disambled
+				if(ClientPrefs.flashing) { //This Demolition, is how to make flashing lights disabled
 				var colorFlash:Int = Std.parseInt(value1);
 				if(Math.isNaN(colorFlash)) colorFlash = 0;
 		
@@ -5990,6 +6094,13 @@ class PlayState extends MusicBeatState
 						{
 							case 0:
 								animToPlay = 'singLEFT';
+								if(curStage == 'Line')
+								{
+									boyfriend.x += 1;
+									boyfriend.y -= 1;
+									boyfriend.scale.x -= 0.001;
+									boyfriend.scale.y -= 0.001;
+								}
 								if(curStage == 'WaltStage')
 								{
 									note.alpha = 0;
@@ -6009,6 +6120,13 @@ class PlayState extends MusicBeatState
 										}
 							case 1:
 								animToPlay = 'singDOWN';
+								if(curStage == 'Line')
+								{
+									boyfriend.x += 1;
+									boyfriend.y -= 1;
+									boyfriend.scale.x -= 0.001;
+									boyfriend.scale.y -= 0.001;
+								}
 								if(curStage == 'WaltStage')
 								{
 									note.alpha = 0;
@@ -6028,6 +6146,13 @@ class PlayState extends MusicBeatState
 										}
 							case 2:
 								animToPlay = 'singUP';
+								if(curStage == 'Line')
+								{
+									boyfriend.x += 1;
+									boyfriend.y -= 1;
+									boyfriend.scale.x -= 0.001;
+									boyfriend.scale.y -= 0.001;
+								}
 								if(curStage == 'WaltStage')
 								{
 									note.alpha = 0;
@@ -6047,6 +6172,13 @@ class PlayState extends MusicBeatState
 										}
 							case 3:
 								animToPlay = 'singRIGHT';
+								if(curStage == 'Line')
+								{
+									boyfriend.x += 1;
+									boyfriend.y -= 1;
+									boyfriend.scale.x -= 0.001;
+									boyfriend.scale.y -= 0.001;
+								}
 								if(curStage == 'WaltStage')
 								{
 									note.alpha = 0;
@@ -6213,24 +6345,52 @@ class PlayState extends MusicBeatState
 				{
 					case 0:
 						animToPlay = 'singLEFT';
+						if(curStage == 'Line')
+						{
+							boyfriend.x -= 1.2;
+							boyfriend.y += 1.2;
+							boyfriend.scale.x += 0.0012;
+							boyfriend.scale.y += 0.0012;
+						}
 						if(ClientPrefs.camMove)
 					{
 						camFollow.x -= 20;
 					}
 					case 1:
 						animToPlay = 'singDOWN';
+						if(curStage == 'Line')
+						{
+							boyfriend.x -= 1.2;
+							boyfriend.y += 1.2;
+							boyfriend.scale.x += 0.0012;
+							boyfriend.scale.y += 0.0012;
+						}
 						if(ClientPrefs.camMove)
 							{
 								camFollow.y += 20;
 							}
 					case 2:
 						animToPlay = 'singUP';
+						if(curStage == 'Line')
+						{
+							boyfriend.x -= 1.2;
+							boyfriend.y += 1.2;
+							boyfriend.scale.x += 0.0012;
+							boyfriend.scale.y += 0.0012;
+						}
 						if(ClientPrefs.camMove)
 							{
 								camFollow.y -= 20;
 							}
 					case 3:
 						animToPlay = 'singRIGHT';
+						if(curStage == 'Line')
+						{
+							boyfriend.x -= 1.2;
+							boyfriend.y += 1.2;
+							boyfriend.scale.x += 0.0012;
+							boyfriend.scale.y += 0.0012;
+						}
 						if(ClientPrefs.camMove)
 							{
 								camFollow.x += 20;

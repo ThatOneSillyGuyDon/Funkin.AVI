@@ -88,10 +88,10 @@ class FPS extends TextField
 			
 			#if openfl
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			//text += "\nMemory: " + memoryMegas + " MB"; //old ass code
+			//text += "\nMemory: " + memoryMegas + " MB";
 			if (memoryMegas > memoryMegasPeak) memoryMegasPeak = memoryMegas;
 
-			text += "\nRAM: " + memoryMegas + "mb / " + memoryMegasPeak + "mb"; //awsome new code
+			text += "\nRAM: " + memoryMegas + "MB / " + memoryMegasPeak + "MB";
 			#end
 
 			textColor = 0xFFFFFFFF;

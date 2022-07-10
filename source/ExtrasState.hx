@@ -19,7 +19,7 @@ import flixel.system.FlxSound;
 
 using StringTools;
 
-class ExtrasState extends MusicBeatState {
+class ExtrasState extends MusicBeatState{
 	private var camFilter:FlxCamera;
 	var songs:Array<SongMetadataCool> = [];
 
@@ -57,11 +57,11 @@ class ExtrasState extends MusicBeatState {
 		addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), ['Hard']);
         addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), ['Hard']);
 		addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(0, 40, 60), ['Hard']);
-		addSong('Birthday', 3, 'face', FlxColor.BLUE, ['Hard']);
+		//addSong('Birthday', 3, 'face', FlxColor.BLUE, ['Hard']);
+		addSong('Bless', 3, 'white-alt', FlxColor.WHITE, ['Hard']);
 		addSong('Isolated Old', 3, 'mickey', FlxColor.fromRGB(60, 60, 60), ['Hard']);
 		addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED, ['Hard']);
 		addSong('Mercy', 3, 'face', FlxColor.fromRGB(153, 148, 112), ['Hard']);
-		addSong('Relapsed Mouse', 3, 'face', FlxColor.fromRGB(103, 91, 91), ['Hard']);
 
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
@@ -554,7 +554,7 @@ class ExtrasState extends MusicBeatState {
 	}
 }
 
-class SongMetadataCool 
+class SongMetadataCool
 {
 	public var songName:String = "";
 	public var week:Int = 0;

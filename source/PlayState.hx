@@ -102,6 +102,7 @@ class PlayState extends MusicBeatState
 	public var camGameShaders:Array<ShaderEffect> = [];
 	public var camHUDShaders:Array<ShaderEffect> = [];
 	public var camOtherShaders:Array<ShaderEffect> = [];
+	public var camFilterShaders:Array<ShaderEffect> = [];
 	
 	//modchart
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -221,6 +222,7 @@ class PlayState extends MusicBeatState
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
+	public var camFilter:FlxCamera;
 	public var camCustom:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
@@ -1966,6 +1968,14 @@ class PlayState extends MusicBeatState
 					newCamEffects.push(new ShaderFilter(i.shader));
 				}
 				camGame.setFilters(newCamEffects);
+			case 'camfilter' | 'filter':
+				camFilterShaders.push(effect);
+				var newCamEffects:Array<BitmapFilter> = []; // IT SHUTS HAXE UP IDK WHY BUT WHATEVER IDK WHY I CANT JUST ARRAY<SHADERFILTER>
+				for (i in camFilterShaders)
+				{
+					newCamEffects.push(new ShaderFilter(i.shader));
+				}
+				camFilter.setFilters(newCamEffects);
 			default:
 				if (modchartSprites.exists(cam))
 				{

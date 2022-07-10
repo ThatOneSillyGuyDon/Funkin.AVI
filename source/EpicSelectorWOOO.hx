@@ -87,6 +87,15 @@ class EpicSelectorWOOO extends MusicBeatState{
 		scratchStuff.cameras = [camFilter];
 		grain.cameras = [camFilter];
 
+		/*if(ClientPrefs.funiShaders)
+		{
+			//Epic Shaders Let's GOOOOOOOOO
+			PlayState.instance.addShaderToCamera('filter', new ChromaticAberrationEffect(0.005));
+			PlayState.instance.addShaderToCamera('filter', new VCRDistortionEffect(0, true, false, true));
+			PlayState.instance.addShaderToCamera('filter', new VhsEffect(0.3, 0));
+			PlayState.instance.addShaderToCamera('filter', new TiltshiftEffect(0.5, 0));
+		}*/
+
         changeSelection();
         super.create();
     }

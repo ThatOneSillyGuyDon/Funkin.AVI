@@ -38,7 +38,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 
 		var option:Option = new Option('Simple Menu',
 			'If checked, the menu replaces with a single menu, recomended for low-end users!',
-			'imagesPersist',
+			'simpleMenu',
 			'bool',
 			false);
 

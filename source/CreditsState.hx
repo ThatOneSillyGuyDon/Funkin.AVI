@@ -326,7 +326,7 @@ class CreditsState extends MusicBeatState
 				if(ClientPrefs.simpleMenu) {
 					MusicBeatState.switchState(new LowEndMenuState());
 				}else{
-					usicBeatState.switchState(new MainMenuState());
+					MusicBeatState.switchState(new MainMenuState());
 				}
 				quitting = true;
 			}

@@ -19,6 +19,7 @@ class CoolUtil
 	public static var defaultDifficulties:Array<String> = [
 		'Hard', //0
 		'Suicidal', //1
+		'X2', //2
 		//lol, no more normal and easy mode B)
 		//'Crazy' (this was meant for remixed versions, but ig this is unused)
 		//'Mania' (this will be added when multikeys are added)

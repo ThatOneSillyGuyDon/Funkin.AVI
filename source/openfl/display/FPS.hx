@@ -88,10 +88,10 @@ class FPS extends TextField
 			
 			#if openfl
 			memoryMegas = Math.abs(FlxMath.roundDecimal(System.totalMemory / 1000000, 1));
-			//text += "\nMemory: " + memoryMegas + " MB"; //old ass code
-			if (memoryMegas > memoryMegasPeak) memoryMegasPeak = memoryMegas;
+			text += "\nMemory: " + memoryMegas + " MB"; //old ass code (jsa) No, this is better for less lag spikes (don)
+			/*if (memoryMegas > memoryMegasPeak) memoryMegasPeak = memoryMegas;
 
-			text += "\nRAM: " + memoryMegas + "mb / " + memoryMegasPeak + "mb"; //awsome new code
+			text += "\nRAM: " + memoryMegas + "mb / " + memoryMegasPeak + "mb"; //awsome new code (jsa)*/ //no, bad code, BAD CODE (don)
 			#end
 
 			textColor = 0xFFFFFFFF;

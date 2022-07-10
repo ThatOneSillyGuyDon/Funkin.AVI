@@ -34,8 +34,8 @@ class EpicSelectorWOOO extends MusicBeatState
 	private var camAchievement:FlxCamera;
 	
 	var theThing:Array<String> = [
-		'main',
-		'extras',
+		'story_mode',
+		'freeplay',
 	//	#if MODS_ALLOWED 'mods', #end
 	//	#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		"don't_cross_secret",
@@ -222,9 +222,9 @@ class EpicSelectorWOOO extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'main':
+									case 'story_mode':
 										MusicBeatState.switchState(new EpisodesState());
-									case 'extras':
+									case 'freeplay':
 										MusicBeatState.switchState(new ExtrasState());
 								}
 							});

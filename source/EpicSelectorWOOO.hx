@@ -40,9 +40,9 @@ class EpicSelectorWOOO extends MusicBeatState{
         if (controls.ACCEPT){
             switch(curSelected){
                 case 0:
-                MusicBeatState.switchState(new FreeplayState());
+                MusicBeatState.switchState(new EpisodesState());
                 case 1:
-                MusicBeatState.switchState(new Test());
+                MusicBeatState.switchState(new ExtrasState());
             }
         }
         super.update(elapsed);

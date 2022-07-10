@@ -41,7 +41,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option('Events/Modcharts',
+		var option:Option = new Option('Events or Modcharts',
 		'If unchecked, song will NOT have events, recommended for beginners',
 		'events',
 		'bool',

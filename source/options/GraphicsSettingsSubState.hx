@@ -37,10 +37,11 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		rpcTitle = 'Graphics Settings Menu'; //for Discord Rich Presence
 
 		var option:Option = new Option('Simple Menu',
-			'If checked, the menu replaces with a single menu, recomended for low-end users!',
-			'simpleMenu',
-			'bool',
-			false);
+		'If checked, the menu replaces with a single menu, recomended for low-end users!',
+		'simpleMenu',
+		'bool',
+		false);
+		addOption(option);
 
 		//I'd suggest using "Low Quality" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Low Quality', //Name

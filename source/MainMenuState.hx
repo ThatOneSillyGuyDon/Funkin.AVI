@@ -39,7 +39,7 @@ class MainMenuState extends MusicBeatState
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
-	private var camFilter:FlxCamera;
+	public var camFilter:FlxCamera;
 	
 	var optionShit:Array<String> = [
 		'story_mode',
@@ -513,7 +513,7 @@ class MainMenuState extends MusicBeatState
 									case 'story_mode':
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
-										MusicBeatState.switchState(new EpisodesState());
+										MusicBeatState.switchState(new EpicSelectorWOOO());
 									//#if MODS_ALLOWED
 									//case 'mods':
 										//MusicBeatState.switchState(new ModsMenuState());

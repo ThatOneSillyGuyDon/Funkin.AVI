@@ -1,19 +1,61 @@
 package;
 
-import flixel.group.FlxGroup.FlxTypedGroup;
-import flixel.FlxSprite;
+#if desktop
+import Discord.DiscordClient;
+#end
 import flixel.FlxG;
+import flixel.FlxObject;
+import flixel.FlxSprite;
+import flixel.FlxCamera;
+import flixel.addons.transition.FlxTransitionableState;
+import flixel.effects.FlxFlicker;
+import flixel.graphics.frames.FlxAtlasFrames;
+import flixel.group.FlxGroup.FlxTypedGroup;
+import flixel.text.FlxText;
+import flixel.math.FlxMath;
+import flixel.tweens.FlxEase;
+import flixel.tweens.FlxTween;
+import flixel.util.FlxColor;
+import lime.app.Application;
+import Achievements;
+import editors.MasterEditorMenu;
+import flixel.input.keyboard.FlxKey;
+import PlayState;
+import Shaders;
+import openfl.display.BlendMode;
+import openfl.display.StageQuality;
+import openfl.filters.BitmapFilter;
+import openfl.utils.Assets as OpenFlAssets;
+import openfl.filters.ShaderFilter;
+
+using StringTools;
 
 class EpicSelectorWOOO extends MusicBeatState{
-    var freeplayCats:Array<String> = ['Episodies', 'Extras'];
+	public var camFilter:FlxCamera;
+    var freeplayCats:Array<String> = ['Episodes', 'Extras'];
+	var fpCateBanners:FlxSprite;
 	var grpCats:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 	var BG:FlxSprite;
     override function create(){
+
+		camFilter = new FlxCamera();
+		camFilter.bgColor.alpha = 0;
+
+		FlxG.cameras.add(camFilter);
+
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		BG.updateHitbox();
 		BG.screenCenter();
 		add(BG);
+
+		#if desktop
+		// Updating Discord Rich Presence
+		DiscordClient.changePresence("In Freeplay", "Category Menu", null, 'icon');
+		#end
+
+		Application.current.window.title = "Funkin.avi - Freeplay: Category Menu";
+
         grpCats = new FlxTypedGroup<Alphabet>();
 		add(grpCats);
         for (i in 0...freeplayCats.length)
@@ -23,12 +65,34 @@ class EpicSelectorWOOO extends MusicBeatState{
             catsText.isMenuItemCenter = true;
 			grpCats.add(catsText);
 		}
+
+		var scratchStuff:FlxSprite = new FlxSprite();
+		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
+		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
+		scratchStuff.animation.play('idle');
+		scratchStuff.screenCenter();
+		scratchStuff.scale.x = 1.1;
+		scratchStuff.scale.y = 1.1;
+		add(scratchStuff);
+
+		var grain:FlxSprite = new FlxSprite();
+		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
+		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
+		grain.animation.play('idle');
+		grain.screenCenter();
+		grain.scale.x = 1.1;
+		grain.scale.y = 1.1;
+		add(grain);
+
+		scratchStuff.cameras = [camFilter];
+		grain.cameras = [camFilter];
+
         changeSelection();
         super.create();
     }
 
     override public function update(elapsed:Float){
-
+        
 		if (controls.UI_UP_P) 
 			changeSelection(-1);
 		if (controls.UI_DOWN_P) 
@@ -70,6 +134,6 @@ class EpicSelectorWOOO extends MusicBeatState{
 				item.alpha = 1;
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 	}
-} 
+}

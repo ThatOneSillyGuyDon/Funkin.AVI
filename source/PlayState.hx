@@ -794,12 +794,12 @@ class PlayState extends MusicBeatState
 					//Epic Shaders Let's GOOOOOOOOO
 					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
 					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
-					addShaderToCamera('hud', new GreyscaleEffect());
-					addShaderToCamera('game', new GreyscaleEffect());
+					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 					addShaderToCamera('game', new VhsEffect(0.3, 0));
 					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
-					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+					addShaderToCamera('hud', new GreyscaleEffect());
+					addShaderToCamera('game', new GreyscaleEffect());
 				}
 				
 
@@ -834,12 +834,12 @@ class PlayState extends MusicBeatState
 					//Epic Shaders Let's GOOOOOOOOO
 					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
 					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
-					addShaderToCamera('hud', new GreyscaleEffect());
-					addShaderToCamera('game', new GreyscaleEffect());
+					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 					addShaderToCamera('game', new VhsEffect(0.3, 0));
 					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
-					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+					addShaderToCamera('hud', new GreyscaleEffect());
+					addShaderToCamera('game', new GreyscaleEffect());
 				}
 
 			case 'Office':
@@ -854,6 +854,18 @@ class PlayState extends MusicBeatState
 				light = new BGSprite('funkinAVI/mrSmile/officeLight', 0, 0);
 				light.blend = ADD;
 				light.alpha = 0.55;
+
+				if(ClientPrefs.funiShaders)
+				{
+					//Epic Shaders Let's GOOOOOOOOO
+					addShaderToCamera('hud', new VCRDistortionEffect(0.05, true, true, true));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.004));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.006));
+					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					addShaderToCamera('hud', new GreyscaleEffect());
+					addShaderToCamera('game', new GreyscaleEffect());
+				}
 
 			case 'PixelWorld':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-square';
@@ -872,6 +884,18 @@ class PlayState extends MusicBeatState
 
 				var forest:BGSprite = new BGSprite('funkinAVI/goofy/forest', 0, 0);
 				add(forest);
+
+				if(ClientPrefs.funiShaders)
+				{
+					//Epic Shaders Let's GOOOOOOOOO
+					addShaderToCamera('hud', new VCRDistortionEffect(0.05, true, true, true));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.004));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.006));
+					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					addShaderToCamera('hud', new GreyscaleEffect());
+					addShaderToCamera('game', new GreyscaleEffect());
+				}
 
 			case 'ForestNEW':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-goof';
@@ -894,6 +918,18 @@ class PlayState extends MusicBeatState
 				treesFront = new BGSprite('funkinAVI/goofyNEW/treesFront', -550, -850, 1.2, 1.2);
 				treesFront.scale.set(1.5, 1.5);
 
+				if(ClientPrefs.funiShaders)
+				{
+					//Epic Shaders Let's GOOOOOOOOO
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+					addShaderToCamera('game', new VhsEffect(0.3, 0));
+					addShaderToCamera('hud', new TiltshiftEffect(0.3, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.4, 0));
+					addShaderToCamera('hud', new GreyscaleEffect());
+					addShaderToCamera('game', new GreyscaleEffect());
+				}
+
 			case 'WaltStage':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-walt';
 				//GameOverSubstate.loopSoundName = 'gameOver-walt';
@@ -902,6 +938,16 @@ class PlayState extends MusicBeatState
 
 				var waltStage:BGSprite = new BGSprite('funkinAVI/walt/walt-bg', -339, -106);
 				add(waltStage);
+
+				if(ClientPrefs.funiShaders)
+				{
+					addShaderToCamera('game', new VhsEffect(0.5, 0));
+					addShaderToCamera('game', new VCRDistortionEffect(0, true, true, true));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+					addShaderToCamera('hud', new VCRDistortionEffect(0, true, true, true));
+					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+				}
 
 			case 'Line':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-crossin';
@@ -3919,7 +3965,7 @@ class PlayState extends MusicBeatState
 				health = 0;
 			}
 			health -= 0.0015;
-			healthDrain -= 0.00015;
+			healthDrain -= 0.01;
 		}
 	}else{
 		if (healthDrain > 0 && health > 0.1)
@@ -4582,7 +4628,6 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Screen Shake':
-				if(ClientPrefs.events) {
 				var valuesArray:Array<String> = [value1, value2];
 				var targetsArray:Array<FlxCamera> = [camGame, camHUD];
 				for (i in 0...targetsArray.length) {
@@ -4598,7 +4643,6 @@ class PlayState extends MusicBeatState
 						targetsArray[i].shake(intensity, duration);
 					}
 				}
-			}
 
 
 			case 'Change Character':
@@ -4670,7 +4714,6 @@ class PlayState extends MusicBeatState
 				}
 				reloadHealthBarColors();
 			case 'Screen Fade':
-				if(ClientPrefs.events) { //lag prevention or idk
 				var charType:Int = Std.parseInt(value1);
 				if(Math.isNaN(charType)) charType = 0;
 	
@@ -4685,7 +4728,6 @@ class PlayState extends MusicBeatState
 						blackFadeThing.alpha += 1;
 					//Sorry that you have to fucking spam these events to do the thing
 				}
-			}
 			case 'Lyrics':
 				if(lyrics!=null){
 					remove(lyrics);
@@ -6115,6 +6157,21 @@ class PlayState extends MusicBeatState
 										health = 0.1;
 									}
 									health -= 0.01;
+									triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
+									if(ClientPrefs.funiShaders)
+									{
+										addShaderToCamera('hud', new TiltshiftEffect(2, 0));
+										addShaderToCamera('game', new TiltshiftEffect(5, 0));
+										addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+										addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+										new FlxTimer().start(0.04, function(tmr:FlxTimer)
+										{
+											clearShaderFromCamera('game');
+											clearShaderFromCamera('hud');
+											addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+											addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+										});
+									}
 								}
 									if(ClientPrefs.camMove)
 										{
@@ -6141,6 +6198,21 @@ class PlayState extends MusicBeatState
 										health = 0.1;
 									}
 									health -= 0.01;
+									triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
+									if(ClientPrefs.funiShaders)
+									{
+										addShaderToCamera('hud', new TiltshiftEffect(2, 0));
+										addShaderToCamera('game', new TiltshiftEffect(5, 0));
+										addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+										addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+										new FlxTimer().start(0.04, function(tmr:FlxTimer)
+										{
+											clearShaderFromCamera('game');
+											clearShaderFromCamera('hud');
+											addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+											addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+										});
+									}
 								}
 									if(ClientPrefs.camMove)
 										{
@@ -6167,6 +6239,21 @@ class PlayState extends MusicBeatState
 										health = 0.1;
 									}
 									health -= 0.01;
+									triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
+									if(ClientPrefs.funiShaders)
+									{
+										addShaderToCamera('hud', new TiltshiftEffect(2, 0));
+										addShaderToCamera('game', new TiltshiftEffect(5, 0));
+										addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+										addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+										new FlxTimer().start(0.04, function(tmr:FlxTimer)
+										{
+											clearShaderFromCamera('game');
+											clearShaderFromCamera('hud');
+											addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+											addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+										});
+									}
 								}
 									if(ClientPrefs.camMove)
 										{
@@ -6193,6 +6280,21 @@ class PlayState extends MusicBeatState
 										health = 0.1;
 									}
 									health -= 0.01;
+									triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
+									if(ClientPrefs.funiShaders)
+									{
+										addShaderToCamera('hud', new TiltshiftEffect(2, 0));
+										addShaderToCamera('game', new TiltshiftEffect(5, 0));
+										addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+										addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+										new FlxTimer().start(0.04, function(tmr:FlxTimer)
+										{
+											clearShaderFromCamera('game');
+											clearShaderFromCamera('hud');
+											addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+											addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+										});
+									}
 								}
 									if(ClientPrefs.camMove)
 										{

@@ -18,7 +18,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
-import lime.net.curl.CURLCode;
+import lime.net.curl.CURLCode; //k
 import flixel.graphics.FlxGraphic;
 import WeekData;
 
@@ -72,6 +72,7 @@ class StoryMenuState extends MusicBeatState
 
 		scoreText = new FlxText(10, 10, 0, "SCORE: 49324858", 36);
 		scoreText.setFormat("VCR OSD Mono", 32);
+		scoreText.screenCenter(X);
 
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
 		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
@@ -151,7 +152,7 @@ class StoryMenuState extends MusicBeatState
 		difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
 
-		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 10, grpWeekText.members[0].y + 10);
+		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 9, grpWeekText.members[0].y + 9);
 		leftArrow.frames = ui_tex;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
@@ -359,7 +360,7 @@ class StoryMenuState extends MusicBeatState
 				{
 					case 'Isolated' | 'Lunacy' | 'Delusional':
 					EpisodesState.destroyFreeplayVocals();
-					case 'Hunted' | 'Twisted Grins' | 'Malfunction' | "Don't Cross!" | 'Birthday' | 'Isolated Old':
+					case 'Hunted' | 'Twisted Grins' | 'Malfunction' | "Don't Cross!" | 'Birthday' | 'Isolated Old' | 'Mercy':
 					ExtrasState.destroyFreeplayVocals();
 					default:
 					EpisodesState.destroyFreeplayVocals();

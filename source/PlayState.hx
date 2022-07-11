@@ -79,12 +79,12 @@ class PlayState extends MusicBeatState
 	public static var STRUM_X_MIDDLESCROLL = -278;
 
 	public static var ratingStuff:Array<Dynamic> = [
-		['Shit...', 0.2], //From 0% to 19%
+		['Asshole', 0.2], //From 0% to 19%
 		['Terrible', 0.4], //From 20% to 39%
 		['Bad', 0.5], //From 40% to 49%
 		['Meh', 0.6], //From 50% to 59%
 		['Okay', 0.69], //From 60% to 68%
-		['Nice', 0.7], //69%
+		['<-- Funny Number Lol', 0.7], //69%
 		['Good.', 0.8], //From 70% to 79%
 		['Great!', 0.9], //from 80% to 89%
 		['Sick!!', 1], //From 90% to 99%
@@ -98,7 +98,7 @@ class PlayState extends MusicBeatState
  	public var windowW:Int = 1280;
  	public var windowH:Int = 720;
 	
-	//SHADERS
+	//Shaders shit
 	public var camGameShaders:Array<ShaderEffect> = [];
 	public var camHUDShaders:Array<ShaderEffect> = [];
 	public var camOtherShaders:Array<ShaderEffect> = [];
@@ -224,7 +224,9 @@ class PlayState extends MusicBeatState
 	public var camCustom:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
-	var dialogue:Array<String> = ['blah blah blah', 'coolswag'];
+	var dialogue:Array<String> = [
+	'hi do you know who joe is?', 
+	'coolswag'];
 	var dialogueJson:DialogueFile = null;
 
 	var halloweenBG:BGSprite;
@@ -423,7 +425,7 @@ class PlayState extends MusicBeatState
 		var songName:String = Paths.formatToSongPath(SONG.song);
 
 		curStage = SONG.stage;
-		//trace('stage is: ' + curStage);
+		trace('stage is: ' + curStage);
 		if(SONG.stage == null || SONG.stage.length < 1) {
 			switch (songName)
 			{

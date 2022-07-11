@@ -70,8 +70,6 @@ class LowEndMenuState extends MusicBeatState
 				MusicBeatState.switchState(new StoryMenuState());
 			case 'Freeplay':
 				MusicBeatState.switchState(new EpicSelectorWOOO());
-			case 'Mods':
-				MusicBeatState.switchState(new ModsMenuState());
 			case 'Credits':
 				MusicBeatState.switchState(new CreditsState());
 			case 'Options':
@@ -97,13 +95,21 @@ class LowEndMenuState extends MusicBeatState
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v0.5.2h", 12);
+		var versionShit:FlxText = new FlxText(69, FlxG.height - 44, 0, "Funkin.avi v" + MainMenuState.MouseVersion, 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
+		var versionShit:FlxText = new FlxText(48, FlxG.height - 44, 0, "Demolition Engine v" + MainMenuState.DemoEngineVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v0.2.8", 12);
+		var versionShit:FlxText = new FlxText(24, FlxG.height - 44, 0, "Psych Engine v" + MainMenuState.psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(versionShit);
+		var versionShit:FlxText = new FlxText(14, FlxG.height - 24, 0, "Friday Night Funkin' v0.2.8", 12);
+		versionShit.scrollFactor.set();
+		versionShit.setFormat("VCR OSD Mono", 20, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
 		for (i in 0...options.length)

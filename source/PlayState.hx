@@ -1509,11 +1509,13 @@ class PlayState extends MusicBeatState
 		} else {
                 peWatermark.setFormat(Paths.font("Retro Gaming.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		}
+		#if desktop
 		peWatermark.scrollFactor.set();
 		peWatermark.text = "Funkin.avi" + " | " + curSong + " (" + storyDifficultyText + ")";
 		peWatermark.visible = ClientPrefs.showWatermarks;
 		peWatermark.cameras = [camCustom];
 		add(peWatermark);
+		#end
 
 		botplayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (ClientPrefs.downScroll ? 100 : -100), "", 32);
 
@@ -3143,6 +3145,7 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
+		#if desktop //for prevent curPortrait error
 		switch(curSong){
 			case "Isolated": curPortrait = "placeholder";
 			case "Lunacy": curPortrait = "placeholder";
@@ -3154,6 +3157,7 @@ class PlayState extends MusicBeatState
 			case "Laugh Track": curPortrait = "placeholder";
 			case "Scrapped": curPortrait = "placeholder";
 		}
+		#end
 
 		switch(curStage)
 		{

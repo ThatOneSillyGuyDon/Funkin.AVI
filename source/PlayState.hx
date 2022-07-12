@@ -2621,7 +2621,7 @@ class PlayState extends MusicBeatState
 				var introAssets:Map<String, Array<String>> = new Map<String, Array<String>>();
 				introAssets.set('vintage', ['funkinAVI/intro/3', 'funkinAVI/intro/2', 'funkinAVI/intro/1', 'funkinAVI/intro/Go']);
 				introAssets.set('corrupted', ['funkinAVI/intro/3-PixelWorld-pixel', 'funkinAVI/intro/2-PixelWorld-pixel', 'funkinAVI/intro/1-PixelWorld-pixel', 'funkinAVI/intro/Go-PixelWorld-pixel']);
-				introAssets.set('vintage-corrupt', ['funkinAVI/intro/3-currupt', 'funkinAVI/intro/2-currupt', 'funkinAVI/intro/1-currupt', 'funkinAVI/intro/Go-currupt',])
+				introAssets.set('vintage-corrupt', ['funkinAVI/intro/3-currupt', 'funkinAVI/intro/2-currupt', 'funkinAVI/intro/1-currupt', 'funkinAVI/intro/Go-currupt',]);
 				introAssets.set('default', ['ready', 'set', 'go']);
 				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
 

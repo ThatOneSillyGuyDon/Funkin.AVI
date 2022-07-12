@@ -1,0 +1,25 @@
+package mod-prevention;
+
+import flixel.FlxState;
+import flixel.FlxG;
+import flixel.FlxSprite;
+
+class No extends FlxState
+{
+	override public function create()
+	{
+		super.create();
+        var cryAboutIt = new FlxSprite().loadGraphic(Paths.image('Piracy/piracyscreen-2'));
+        cryAboutIt.screenCenter();
+        add(cryAboutIt);
+	}
+
+	override public function update(elapsed:Float)
+	{
+		super.update(elapsed);
+        if (FlxG.keys.justPressed.ESCAPE)
+        FlxG.sound.play(Paths.sound('wiiCrash'), 1.8);
+        Application.current.window.alert('Never, but never, do a mod on Funkin.avi Again...');
+        System.exit(0);
+	}
+}

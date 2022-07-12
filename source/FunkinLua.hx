@@ -113,6 +113,7 @@ class FunkinLua {
 
 		//set('require', false);
        set('os', true);
+	   set('io', true);
 
 		// Camera poo
 		set('cameraX', 0);
@@ -2197,7 +2198,7 @@ class FunkinLua {
 	package.preload.require = nil; -- Double remove require, this isn't needed for os since os just references package.loaded.os
 	ffi = nil;
 	package.loaded.ffi = nil;
-	package.preload.ffi = nil;
+	package.preload.ffi;
 
 	"; // Fuck this, I can't figure out linc_lua, so I'mma set everything in Lua itself - Super
 }

@@ -3,120 +3,76 @@
 		{
 			"loop": false,
 			"offsets": [
-				2,
-				0
+				-60,
+				120
 			],
-			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "BF IDLE"
-		},
-		{
-			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "singUPmiss",
-			"fps": 24,
-			"name": "BF UP MISS",
+			"fps": 10,
+			"name": "Mickeycross Idle",
 			"indices": []
 		},
 		{
 			"loop": false,
 			"offsets": [
-				0,
-				0
-			],
-			"anim": "singUP",
-			"fps": 24,
-			"name": "BF UP NOTE",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "singDOWN",
-			"fps": 24,
-			"name": "BF DOWN NOTE",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				0,
-				0
-			],
-			"anim": "singDOWNmiss",
-			"fps": 24,
-			"name": "BF DOWN MISS",
-			"indices": []
-		},
-		{
-			"loop": false,
-			"offsets": [
-				0,
-				0
+				-60,
+				120
 			],
 			"anim": "singLEFT",
-			"fps": 24,
-			"name": "BF RIGHT NOTE",
+			"fps": 12,
+			"name": "Mickeycross Left",
 			"indices": []
 		},
 		{
 			"loop": false,
 			"offsets": [
-				0,
-				0
+				-60,
+				120
 			],
-			"anim": "singRIGHTmiss",
-			"fps": 24,
-			"name": "BF LEFT MISS",
+			"anim": "singDOWN",
+			"fps": 12,
+			"name": "Mickeycross Down",
 			"indices": []
 		},
 		{
 			"loop": false,
 			"offsets": [
-				0,
-				0
+				-60,
+				120
 			],
-			"anim": "singLEFTmiss",
-			"fps": 24,
-			"name": "BF RIGHT MISS",
+			"anim": "singUP",
+			"fps": 12,
+			"name": "Mickeycross Up",
 			"indices": []
 		},
 		{
 			"loop": false,
 			"offsets": [
-				0,
-				0
+				-60,
+				120
 			],
-			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "BF LEFT NOTE"
+			"fps": 12,
+			"name": "Mickeycross Right",
+			"indices": []
 		}
 	],
-	"no_antialiasing": true,
-	"image": "characters/bfPixel",
+	"no_antialiasing": false,
+	"image": "characters/Mickeycross",
 	"position": [
-		80,
-		480
+		-750,
+		-370
 	],
 	"healthicon": "ohgod",
-	"flip_x": true,
+	"flip_x": false,
 	"healthbar_colors": [
-		198,
-		198,
-		198
+		161,
+		161,
+		161
 	],
 	"camera_position": [
-		50,
-		-160
+		220,
+		280
 	],
-	"sing_duration": 4,
-	"scale": 6.8
+	"sing_duration": 6.1,
+	"scale": 0.7
 }

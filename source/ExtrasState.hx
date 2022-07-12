@@ -58,10 +58,10 @@ class ExtrasState extends MusicBeatState{
         addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), ['Hard']);
 		addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(0, 40, 60), ['Hard']);
 		//addSong('Birthday', 3, 'face', FlxColor.BLUE, ['Hard']);
-		addSong('Bless', 3, 'white-alt', FlxColor.WHITE, ['Hard']);
+		addSong('Bless', 3, 'whitenew', FlxColor.WHITE, ['Hard']);
 		addSong('Isolated Old', 3, 'mickey', FlxColor.fromRGB(60, 60, 60), ['Hard']);
 		addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED, ['Hard']);
-		addSong('Mercy', 3, 'face', FlxColor.fromRGB(153, 148, 112), ['Hard']);
+		addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), ['Hard']);
 
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();

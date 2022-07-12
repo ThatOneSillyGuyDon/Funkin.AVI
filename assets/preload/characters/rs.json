@@ -3,76 +3,76 @@
 		{
 			"offsets": [
 				0,
-				260
+				0
 			],
-			"loop": false,
+			"indices": [],
 			"fps": 24,
 			"anim": "idle",
-			"indices": [],
-			"name": "Walt_Idle"
+			"loop": false,
+			"name": "idle"
 		},
 		{
 			"offsets": [
 				60,
-				270
+				100
 			],
-			"loop": false,
+			"indices": [],
 			"fps": 24,
 			"anim": "singLEFT",
-			"indices": [],
-			"name": "Walt Left"
+			"loop": false,
+			"name": "left"
 		},
 		{
 			"offsets": [
-				20,
-				246
+				80,
+				20
 			],
-			"loop": false,
+			"indices": [],
 			"fps": 24,
 			"anim": "singDOWN",
-			"indices": [],
-			"name": "Walt_Down"
+			"loop": false,
+			"name": "down"
 		},
 		{
 			"offsets": [
-				-26,
-				345
+				150,
+				200
 			],
-			"loop": false,
+			"indices": [],
 			"fps": 24,
 			"anim": "singUP",
-			"indices": [],
-			"name": "Walt_Up"
+			"loop": false,
+			"name": "up"
 		},
 		{
 			"offsets": [
-				-34,
-				300
+				110,
+				100
 			],
-			"loop": false,
+			"indices": [],
 			"fps": 24,
 			"anim": "singRIGHT",
-			"indices": [],
-			"name": "Walt_Right"
+			"loop": false,
+			"name": "right"
 		}
 	],
 	"no_antialiasing": false,
-	"image": "characters/Waltfnf",
+	"image": "characters/rs",
 	"position": [
-		0,
-		0
+		-200,
+		-220
 	],
-	"healthicon": "walt",
+	"healthicon": "rs",
 	"flip_x": false,
 	"healthbar_colors": [
-		161,
-		161,
-		161
+		246,
+		0,
+		255
 	],
 	"camera_position": [
-		120,
-		220
+		-200,
+		10
 	],
 	"sing_duration": 6.1,
-	"scale": 0.4
+	"scale": 1
 }

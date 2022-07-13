@@ -3,6 +3,8 @@ package modPrevention;
 import flixel.FlxState;
 import flixel.FlxG;
 import flixel.FlxSprite;
+import lime.app.Application;
+import flash.system.System;
 
 class No extends FlxState
 {

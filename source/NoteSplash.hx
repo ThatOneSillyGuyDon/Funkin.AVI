@@ -37,6 +37,13 @@ class NoteSplash extends FlxSprite
 
 				setupNoteSplash(x, y, note);
 				antialiasing = ClientPrefs.globalAntialiasing;
+			case 'PixelWorld':
+				var skin:String = 'NoteSplashSkin/noteSplashesPixel';
+				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
+
+				loadAnims(skin);
+				
+				colorSwap = new ColorSwap();
 			default:
 				var skin:String = 'NoteSplashSkins/noteSplashes';
 				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
@@ -71,6 +78,17 @@ class NoteSplash extends FlxSprite
 			case 'Studio' | 'Forest' | 'EndlessLoop' | 'ForestNEW' | 'Office':
 				if(texture == null) {
 				texture = 'NoteSplashSkins/noteSplashesGREY';
+				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = PlayState.SONG.splashSkin;
+
+				if(PlayState.isPixelStage) {
+					texture = 'pixelUI/noteSplashes';
+					if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = 'pixelUI/' + PlayState.SONG.splashSkin;
+					if(animation.curAnim != null)animation.curAnim.frameRate = 12;
+				}
+			}
+			case 'PixelWorld':
+				if(texture == null) {
+				texture = 'NoteSplashSkins/noteSplashesPixel';
 				if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) texture = PlayState.SONG.splashSkin;
 
 				if(PlayState.isPixelStage) {

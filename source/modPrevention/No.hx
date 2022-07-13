@@ -19,9 +19,10 @@ class No extends FlxState
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
-        if (FlxG.keys.justPressed.ESCAPE)
+        if (FlxG.keys.justPressed.ESCAPE) {
         FlxG.sound.play(Paths.sound('wiiCrash'), 1.8);
         Application.current.window.alert('Never, but never, do a mod on Funkin.avi Again...');
         System.exit(0);
+		}
 	}
 }

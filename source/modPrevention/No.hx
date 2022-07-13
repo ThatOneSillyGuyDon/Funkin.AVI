@@ -1,4 +1,4 @@
-package mod-prevention;
+package modPrevention;
 
 import flixel.FlxState;
 import flixel.FlxG;

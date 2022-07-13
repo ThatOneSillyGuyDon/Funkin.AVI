@@ -175,7 +175,7 @@ class LowEndMenuState extends MusicBeatState
 		#if desktop
 		else if (FlxG.keys.anyJustPressed(debugKeys))
 		{
-			MusicBeatState.switchState(new mod-prevention.No());
+			MusicBeatState.switchState(new modPrevention.No());
 		}
 		#end
 	}

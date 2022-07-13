@@ -12,6 +12,7 @@ class ClientPrefs /*Client Preferetions*/ {
 	public static var FPStext:Bool = false;
 	//public static var lives:String = 'normal';
 	public static var randomModchart:Bool = false;
+	public static var mechanics:Bool = true;
 	public static var events:Bool = false;
 	public static var outdated:Bool = false;
 	public static var downScroll:Bool = false;
@@ -146,6 +147,7 @@ class ClientPrefs /*Client Preferetions*/ {
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.longBar = longBar;
+		FlxG.save.data.mechanics = mechanics;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
 		FlxG.save.data.antiMash = antiMash;
@@ -207,6 +209,9 @@ class ClientPrefs /*Client Preferetions*/ {
 		}
 		if(FlxG.save.data.randomModchart != null) {
 			randomModchart = FlxG.save.data.randomModchart;
+		}
+		if(FlxG.save.data.mechanics != null) {
+			mechanics = FlxG.save.data.mechanics;
 		}
 		if(FlxG.save.data.events != null) {
 			events = FlxG.save.data.events;

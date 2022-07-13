@@ -41,13 +41,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option('Events or Modcharts',
-		'If unchecked, song will NOT have events, recommended for beginners',
-		'events',
-		'bool',
-		false);
-	addOption(option);
-
 		var option:Option = new Option('Controller Mode',
 			'Check this if you want to play with\na controller instead of using your Keyboard.',
 			'controllerMode',
@@ -69,7 +62,15 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'bool',
 			false);
 		addOption(option);
-		
+
+		var option:Option = new Option(
+			'Toggle Mechanics',
+			'If unchecked, Mechanics will be removed\n(If selecting this mid-game, you may need to restart from the menu.)',
+			'mechanics',
+			'bool',
+			true);
+		addOption(option);
+
 		//bedrock can kiss my ass XD
 		var option:Option = new Option('Rating System:',
 		    "What should your Rating System be?", 

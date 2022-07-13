@@ -173,7 +173,12 @@ class Paths
 
 	inline static public function json(key:String, ?library:String)
 	{
-		return getPath('data/$key.json', TEXT, library);
+		if(ClientPrefs.mechanics)
+		{
+			return getPath('data/$key.json', TEXT, library);
+		}else{
+			return getPath('data/$key-nomechanics.json', TEXT, library);
+		}
 	}
 
 	inline static public function shaderFragment(key:String, ?library:String)

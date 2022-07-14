@@ -7,6 +7,7 @@ import flixel.graphics.FlxGraphic;
 import Controls;
 
 class ClientPrefs /*Client Preferetions*/ {
+	public static var noVsMouseSob:Bool = false;
 	public static var simpleMenu:Bool = false;
 	public static var cutscenes:Bool = false;
 	public static var FPStext:Bool = false;
@@ -126,6 +127,7 @@ class ClientPrefs /*Client Preferetions*/ {
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.noVsMouseSob = noVsMouseSob;
 		FlxG.save.data.simpleMenu = simpleMenu;
 		FlxG.save.data.cutscens = cutscenes;
 		FlxG.save.data.FPStext = FPStext;
@@ -198,6 +200,9 @@ class ClientPrefs /*Client Preferetions*/ {
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.noVsMouseSob != null) {
+			noVsMouseSob = FlxG.save.data.noVsMouseSob;
+		}
 		if(FlxG.save.data.simpleMenu != null) {
 			simpleMenu = FlxG.save.data.simpleMenu;
 		}

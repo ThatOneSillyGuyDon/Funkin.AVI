@@ -56,7 +56,9 @@ class ExtrasState extends MusicBeatState{
 		//Funky Song List yey
 		addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), ['Hard']);
         addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), ['Hard']);
+		addSong('Cycled Sins', 3, 'relapse', FlxColor.fromRGB(115, 86, 86), ['Hard']);
 		addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(0, 40, 60), ['Hard']);
+		addSong('War Dilemma', 3, 'warmick', FlxColor.fromRGB(105, 17, 10), ['Hard']);
 		//addSong('Birthday', 3, 'face', FlxColor.BLUE, ['Hard']);
 		addSong('Bless', 3, 'whitenew', FlxColor.WHITE, ['Hard']);
 		addSong('Isolated Old', 3, 'mickey', FlxColor.fromRGB(60, 60, 60), ['Hard']);

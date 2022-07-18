@@ -1,48 +1,59 @@
 {
 	"animations": [
 		{
-			"offsets": [
-				0,
-				0
-			],
-			"indices": [],
-			"fps": 12,
-			"anim": "idle",
 			"loop": true,
-			"name": "Relapsed2 Idle"
-		},
-		{
 			"offsets": [
 				0,
 				0
 			],
-			"indices": [],
+			"anim": "idle",
 			"fps": 12,
+			"name": "Relapsed2 Idle",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
 			"anim": "singDOWN",
-			"loop": false,
-			"name": "Relapsed2 Down"
+			"fps": 12,
+			"name": "Relapsed2 Down",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"indices": [],
-			"fps": 13,
 			"anim": "singUP",
-			"loop": false,
-			"name": "Relapsed2 Up"
+			"fps": 13,
+			"name": "Relapsed2 Up",
+			"indices": []
 		},
 		{
+			"loop": false,
 			"offsets": [
 				0,
 				0
 			],
-			"indices": [],
-			"fps": 13,
 			"anim": "singLEFT",
+			"fps": 13,
+			"name": "Relapsed2 Left",
+			"indices": []
+		},
+		{
 			"loop": false,
-			"name": "Relapsed2 Left"
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "singRIGHT",
+			"fps": 13,
+			"name": "Relapsed2 Right",
+			"indices": []
 		},
 		{
 			"offsets": [
@@ -51,9 +62,20 @@
 			],
 			"indices": [],
 			"fps": 13,
-			"anim": "singRIGHT",
+			"anim": "attack",
 			"loop": false,
-			"name": "Relapsed2 Right"
+			"name": "Relapsed2 Attack"
+		},
+		{
+			"offsets": [
+				0,
+				0
+			],
+			"indices": [],
+			"fps": 13,
+			"anim": "reload",
+			"loop": false,
+			"name": "Relapsed2 Reload"
 		}
 	],
 	"no_antialiasing": true,

@@ -33,13 +33,6 @@ class VisualsUISubState extends BaseOptionsMenu
 	{
 		title = 'Visuals and UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
-		
-		var option:Option = new Option('Disable Mouse Controls',
-		"If checked, there won't be mouse controls\nin the Story Mode menu.",
-		'noVsMouseSob',
-		'bool',
-		false);
-	   addOption(option);
 
 		var option:Option = new Option('Cutscenes',
 			"If checked, cutscenes will show (this will affect Freeplay too).",

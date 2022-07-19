@@ -89,7 +89,7 @@ class DiscordClient
 			details: details,
 			state: state,
 			largeImageKey: image,
-			largeImageText: "Funkin.avi: v" + MainMenuState.MouseVersion,
+			largeImageText: "Funkin.avi: v1.5",
 			smallImageKey : smallImageKey,
 			// Obtained times are in milliseconds so they are divided so Discord can use it
 			startTimestamp : Std.int(startTimestamp / 1000),

@@ -132,7 +132,6 @@ class OptionsState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
 		    }
-		}
 
 		if (controls.ACCEPT) {
 			openSelectedSubstate(options[curSelected]);

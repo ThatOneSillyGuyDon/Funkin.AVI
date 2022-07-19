@@ -45,7 +45,7 @@ class MainMenuState extends MusicBeatState
 		'story_mode',
 		'freeplay',
 		//#if MODS_ALLOWED 'mods', #end
-		//#if ACHIEVEMENTS_ALLOWED 'awards', #end
+		#if ACHIEVEMENTS_ALLOWED 'awards', #end
 		'credits',
 		//#if !switch 'donate', #end
 		'options'
@@ -202,7 +202,7 @@ class MainMenuState extends MusicBeatState
 			else
 				menuItem.y = 108 + (0 * 90);
 
-			// Credits
+			// Achievement's
 			var menuItem:FlxSprite = new FlxSprite(700, 400);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
@@ -231,8 +231,37 @@ class MainMenuState extends MusicBeatState
 			else
 				menuItem.y = 108 + (0 * 90);
 
-			// Settings
+			// Credits
 			var menuItem:FlxSprite = new FlxSprite(700, 700);
+			menuItem.scale.x = scale;
+			menuItem.scale.y = scale;
+			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[2]);
+			menuItem.animation.addByPrefix('idle', optionShit[2] + " basic", 24);
+			menuItem.animation.addByPrefix('selected', optionShit[2] + " white", 24);
+			menuItem.animation.play('idle');
+			menuItem.ID = 2;
+			//menuItem.screenCenter(X);
+			menuItems.add(menuItem);
+			var scr:Float = (optionShit.length - 2) * 0.135;
+			if(optionShit.length < 6) scr = 2;
+			menuItem.scrollFactor.set(0, scr);
+			menuItem.antialiasing = ClientPrefs.globalAntialiasing;
+			//menuItem.setGraphicSize(Std.int(menuItem.width * 0.58));
+			menuItem.updateHitbox();
+			if (firstStart)
+				FlxTween.tween(menuItem, {y: 100 + (0 * 90)}, 1 + (0 * 0.25), {
+					ease: FlxEase.elasticInOut,
+					onComplete: function(flxTween:FlxTween)
+					{
+						finishedFunnyMove = true;
+						changeItem();
+					}
+				});
+			else
+				menuItem.y = 108 + (0 * 90);
+
+			// Settings
+			var menuItem:FlxSprite = new FlxSprite(700, 900);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[3]);

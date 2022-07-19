@@ -7397,6 +7397,7 @@ class PlayState extends MusicBeatState
 		lastBeatHit = curBeat;
 
 		//Modcharts/Events go here
+		//Kade Engine moment btw
 
 		//NOTE: Before setting the modcharts/events here, make sure you test them in the Chart Editor first, just to be safe!
 		switch(SONG.song)
@@ -7530,7 +7531,12 @@ class PlayState extends MusicBeatState
 			case "Don't Cross!":
 				//Insert Events here
 			case 'Cycled Sins':
-				//Insert Events here
+				//shit that makes the song cool
+				timeBar.visible = false;
+				timeTxt.visible = false;
+				timeBarBG.visible = false;
+				scoreTxt.visible = false;
+				hideJudgement.visible = false;
 			case 'Malfunction':
 				//Insert Events here
 			case 'Hunted':

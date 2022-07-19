@@ -49,7 +49,6 @@ import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.filters.ShaderFilter;
 import editors.ChartingState;
-import editors.OpenSong;
 import editors.CharacterEditorState;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.keyboard.FlxKey;
@@ -490,7 +489,6 @@ class PlayState extends MusicBeatState
 		var stageData:StageFile = StageData.getStageFile(curStage);
 		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
 			stageData = {
-				name: "",
 				directory: "",
 				defaultZoom: 0.9,
 				isPixelStage: false,
@@ -498,7 +496,6 @@ class PlayState extends MusicBeatState
 				boyfriend: [770, 100],
 				girlfriend: [400, 130],
 				opponent: [100, 100],
-				layerArray: [],
 				hide_girlfriend: false,
 
 				camera_boyfriend: [0, 0],
@@ -986,16 +983,6 @@ class PlayState extends MusicBeatState
 				var funiLine:BGSprite = new BGSprite('funkinAVI/DontCross/theLine', 0, 0);
 				funiLine.scale.set(1.3, 1.3);
 				add(funiLine);
-
-			default: //custom stages
-				isPixelStage = stageData.isPixelStage;
-				for (layer in stageData.layerArray){
-				var loadedLayer:BGSprite = new BGSprite(layer.directory, layer.xAxis, layer.yAxis, layer.scrollX, layer.scrollY);
-				loadedLayer.setGraphicSize(Std.int(loadedLayer.width * layer.scale));
-				loadedLayer.flipX = layer.flipX;
-				loadedLayer.flipY = layer.flipY;
-				add(loadedLayer);
-			}
 			case 'tank': //Week 7 - Ugh, Guns, Stress
 				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
 				add(sky);
@@ -4461,6 +4448,7 @@ class PlayState extends MusicBeatState
 
 	function openChartEditor()
 	{
+		#if debug
 		persistentUpdate = false;
 		paused = true;
 		cancelMusicFadeTween();
@@ -4470,18 +4458,14 @@ class PlayState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("Chart Editor", null, null, true);
 		#end
+		#else
+		var poop = Highscore.formatSong('cheating', 1); //yes i stole this from lua
+		PlayState.SONG = Song.loadFromJson(poop, 'cheating');
+		PlayState.storyDifficulty = 1;
+		PlayState.instance.persistentUpdate = false;
+		LoadingState.loadAndSwitchState(new PlayState());
+		#end
 	}
-
-	/*
-	function lol() 
-		{ persistentUpdate = false;
-			 paused = true;
-			  cancelMusicFadeTween();
-			   MusicBeatState.switchState(new OpenSong()); 
-		}
-		just for hard code support??
-		*/
-
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
 		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead)
@@ -5374,7 +5358,7 @@ class PlayState extends MusicBeatState
 		{
 			var yOffsetB:Int = 0;
 			var xOffsetB:Int = 0;
-			if (ClientPrefs.camMove){
+			if (ClientPrefs.camMove  && !note.isSustainNote){
 				if (gf.animation.curAnim.name.startsWith('singUP')){
 					yOffsetB = -25;
 					xOffsetB = 0;
@@ -5419,7 +5403,7 @@ class PlayState extends MusicBeatState
 	var cameraTwn:FlxTween;
 	public function moveCamera(isDad:Bool, isNote:Bool = false, yOffsetB:Float = 0, xOffsetB:Float = 0, yOffsetD:Float = 0, xOffsetD:Float = 0)
 	{
-		if (isNote && ClientPrefs.camMove){
+		if (isNote && ClientPrefs.camMove  && !note.isSustainNote){
 			if (boyfriend.animation.curAnim.name.startsWith('singUP')){
 				yOffsetB = -25;
 				xOffsetB = 0;
@@ -6567,7 +6551,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove)
+									if(ClientPrefs.camMove && !note.isSustainNote)
 									{
 										camFollow.x -= 15;
 									}	
@@ -6613,7 +6597,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove)
+									if(ClientPrefs.camMove && !note.isSustainNote)
 									{
 										camFollow.y += 15;
 									}	
@@ -6659,7 +6643,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove)
+									if(ClientPrefs.camMove && !note.isSustainNote)
 									{
 										camFollow.y -= 15;
 									}	
@@ -6705,7 +6689,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove)
+									if(ClientPrefs.camMove && !note.isSustainNote)
 									{
 										camFollow.x += 15;
 									}	
@@ -6872,7 +6856,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						if(ClientPrefs.camMove && !note.isSustainNote)
 						{
 							camFollow.x -= 15;
 						}	
@@ -6885,7 +6869,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						if(ClientPrefs.camMove && !note.isSustainNote)
 						{
 							camFollow.y += 15;
 						}
@@ -6898,7 +6882,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						if(ClientPrefs.camMove && !note.isSustainNote)
 						{
 							camFollow.y -= 15;
 						}
@@ -6911,7 +6895,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						if(ClientPrefs.camMove && !note.isSustainNote)
 						{
 							camFollow.x += 15;
 						}

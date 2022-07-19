@@ -21,7 +21,7 @@ class No extends FlxState
 		super.update(elapsed);
         if (FlxG.keys.justPressed.ESCAPE) {
         FlxG.sound.play(Paths.sound('wiiCrash'), 1.8);
-        Application.current.window.alert('Never, but never, do a mod on Funkin.avi Again...');
+        Application.current.window.alert('Never, but never try, to do a mod on Funkin.avi Again...');
         System.exit(0);
 		}
 	}

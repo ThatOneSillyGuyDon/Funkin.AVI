@@ -6,11 +6,11 @@ import Discord.DiscordClient;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
-import flixel.FlxCamera;
+import flixel.FlxCamera as Camera;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import lime.app.Application;
+import lime.app.Application as App;
 import flixel.group.FlxGroup;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
@@ -26,7 +26,7 @@ using StringTools;
 
 class StoryMenuState extends MusicBeatState
 {
-	private var camFilter:FlxCamera;
+	private var camFilter:Camera;
 
 	public static var weekCompleted:Map<String, Bool> = new Map<String, Bool>();
 
@@ -57,7 +57,7 @@ class StoryMenuState extends MusicBeatState
 
 	override function create()
 	{
-		camFilter = new FlxCamera();
+		camFilter = new Camera();
 		camFilter.bgColor.alpha = 0;
 
 		FlxG.cameras.add(camFilter);
@@ -69,10 +69,6 @@ class StoryMenuState extends MusicBeatState
 		WeekData.reloadWeekFiles(true);
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
-
-		scoreText = new FlxText(10000000000000000, 10, 0, "SCORE: 49324858", 36);
-		scoreText.setFormat("VCR OSD Mono", 32);
-	//	scoreText.screenCenter(X);
 
 		txtWeekTitle = new FlxText(FlxG.width * 0.7, 10, 0, "", 32);
 		txtWeekTitle.setFormat("VCR OSD Mono", 32, FlxColor.WHITE, RIGHT);
@@ -105,7 +101,7 @@ class StoryMenuState extends MusicBeatState
 		DiscordClient.changePresence("Choosing Episode", null, null, 'icon');
 		#end
 			
-		Application.current.window.title = "Funkin.avi - Choosing Episode";
+		App.current.window.title = "Funkin.avi - Choosing Episode";
 
 		var num:Int = 0;
 		for (i in 0...WeekData.weeksList.length)

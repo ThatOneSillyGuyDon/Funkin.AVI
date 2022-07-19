@@ -96,6 +96,7 @@ class AchievementsMenuState extends MusicBeatState
 		if(controls.RESET) {
 			openSubState(new Prompt('This action will clear the progress of the selected achievement.\n\nProceed?', 0, function() {
 				FlxG.sound.play(Paths.sound('confirmMenu'));
+				FlxG.mouse.visible = true;
 				achievementArray[curSelected].iForgor();
 				grpOptions.members[curSelected].changeText('Locked');
 			}, function() {

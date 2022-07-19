@@ -7536,7 +7536,6 @@ class PlayState extends MusicBeatState
 				timeTxt.visible = false;
 				timeBarBG.visible = false;
 				scoreTxt.visible = false;
-				hideJudgement.visible = false;
 			case 'Malfunction':
 				//Insert Events here
 			case 'Hunted':

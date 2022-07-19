@@ -4466,7 +4466,6 @@ class PlayState extends MusicBeatState
 		LoadingState.loadAndSwitchState(new PlayState());
 		#end
 	}
-
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
 		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead)
@@ -5359,7 +5358,7 @@ class PlayState extends MusicBeatState
 		{
 			var yOffsetB:Int = 0;
 			var xOffsetB:Int = 0;
-			if (ClientPrefs.camMove){
+			if (ClientPrefs.camMove  && !note.isSustainNote){
 				if (gf.animation.curAnim.name.startsWith('singUP')){
 					yOffsetB = -25;
 					xOffsetB = 0;
@@ -5404,7 +5403,7 @@ class PlayState extends MusicBeatState
 	var cameraTwn:FlxTween;
 	public function moveCamera(isDad:Bool, isNote:Bool = false, yOffsetB:Float = 0, xOffsetB:Float = 0, yOffsetD:Float = 0, xOffsetD:Float = 0)
 	{
-		if (isNote && ClientPrefs.camMove){
+		if (isNote && ClientPrefs.camMove  && !note.isSustainNote){
 			if (boyfriend.animation.curAnim.name.startsWith('singUP')){
 				yOffsetB = -25;
 				xOffsetB = 0;
@@ -6552,7 +6551,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove)
+									if(ClientPrefs.camMove && !note.isSustainNote)
 									{
 										camFollow.x -= 15;
 									}	
@@ -6598,7 +6597,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove)
+									if(ClientPrefs.camMove && !note.isSustainNote)
 									{
 										camFollow.y += 15;
 									}	
@@ -6644,7 +6643,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove)
+									if(ClientPrefs.camMove && !note.isSustainNote)
 									{
 										camFollow.y -= 15;
 									}	
@@ -6690,7 +6689,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove)
+									if(ClientPrefs.camMove && !note.isSustainNote)
 									{
 										camFollow.x += 15;
 									}	
@@ -6857,7 +6856,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						if(ClientPrefs.camMove && !note.isSustainNote)
 						{
 							camFollow.x -= 15;
 						}	
@@ -6870,7 +6869,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						if(ClientPrefs.camMove && !note.isSustainNote)
 						{
 							camFollow.y += 15;
 						}
@@ -6883,7 +6882,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						if(ClientPrefs.camMove && !note.isSustainNote)
 						{
 							camFollow.y -= 15;
 						}
@@ -6896,7 +6895,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						if(ClientPrefs.camMove && !note.isSustainNote)
 						{
 							camFollow.x += 15;
 						}

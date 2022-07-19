@@ -489,7 +489,6 @@ class PlayState extends MusicBeatState
 		var stageData:StageFile = StageData.getStageFile(curStage);
 		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
 			stageData = {
-				name: "",
 				directory: "",
 				defaultZoom: 0.9,
 				isPixelStage: false,
@@ -497,7 +496,6 @@ class PlayState extends MusicBeatState
 				boyfriend: [770, 100],
 				girlfriend: [400, 130],
 				opponent: [100, 100],
-				layerArray: [],
 				hide_girlfriend: false,
 
 				camera_boyfriend: [0, 0],
@@ -985,16 +983,6 @@ class PlayState extends MusicBeatState
 				var funiLine:BGSprite = new BGSprite('funkinAVI/DontCross/theLine', 0, 0);
 				funiLine.scale.set(1.3, 1.3);
 				add(funiLine);
-
-			default: //custom stages
-				isPixelStage = stageData.isPixelStage;
-				for (layer in stageData.layerArray){
-				var loadedLayer:BGSprite = new BGSprite(layer.directory, layer.xAxis, layer.yAxis, layer.scrollX, layer.scrollY);
-				loadedLayer.setGraphicSize(Std.int(loadedLayer.width * layer.scale));
-				loadedLayer.flipX = layer.flipX;
-				loadedLayer.flipY = layer.flipY;
-				add(loadedLayer);
-			}
 			case 'tank': //Week 7 - Ugh, Guns, Stress
 				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
 				add(sky);
@@ -4460,6 +4448,7 @@ class PlayState extends MusicBeatState
 
 	function openChartEditor()
 	{
+		#if debug
 		persistentUpdate = false;
 		paused = true;
 		cancelMusicFadeTween();
@@ -4468,6 +4457,13 @@ class PlayState extends MusicBeatState
 
 		#if desktop
 		DiscordClient.changePresence("Chart Editor", null, null, true);
+		#end
+		#else
+		var poop = Highscore.formatSong('cheating', '1'); //yes i stole this from lua
+		PlayState.SONG = Song.loadFromJson(poop, 'cheating');
+		PlayState.storyDifficulty = 1;
+		PlayState.instance.persistentUpdate = false;
+		LoadingState.loadAndSwitchState(new PlayState());
 		#end
 	}
 

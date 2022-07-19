@@ -65,14 +65,15 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.maxValue = 240;
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
-		#end
+		
 			
-		var option:Option = new Option('Toggle Shaders',
+		var option:Option = new Option('Toggle Shaders', //this one too btw
 			'If checked, you will see some cool visuals.\n(TURN THIS OFF IF YOUR DEVICE CRASHES WITH SHADERS ON)',
 			'funiShaders',
 			'bool',
 			true);
 		addOption(option);
+        #end
 
 		#if desktop //no need for this at other platforms cuz only desktop has fullscreen as false by default (MAYBE I'LL TRY TO MAKE IT FOR FULLSCREEN MODE TOO)
 		var option:Option = new Option('Screen Resolution',

@@ -4448,7 +4448,6 @@ class PlayState extends MusicBeatState
 
 	function openChartEditor()
 	{
-		#if debug
 		persistentUpdate = false;
 		paused = true;
 		cancelMusicFadeTween();
@@ -4458,14 +4457,14 @@ class PlayState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("Chart Editor", null, null, true);
 		#end
-		#else
-		var poop = Highscore.formatSong('cheating', 1); //yes i stole this from lua
+		/*var poop = Highscore.formatSong('cheating', 1); //yes i stole this from lua
 		PlayState.SONG = Song.loadFromJson(poop, 'cheating');
 		PlayState.storyDifficulty = 1;
 		PlayState.instance.persistentUpdate = false;
-		LoadingState.loadAndSwitchState(new PlayState());
-		#end
+		LoadingState.loadAndSwitchState(new PlayState());*/
+		//for now cus we need the chart editor, and no i don't want to spend 1 extra GB on my PC
 	}
+
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
 		if (((skipHealthCheck && instakillOnMiss) || health <= 0) && !practiceMode && !isDead)
@@ -7520,6 +7519,15 @@ class PlayState extends MusicBeatState
 				timeTxt.visible = false;
 				timeBarBG.visible = false;
 				scoreTxt.visible = false;
+
+			/*	if(curStep == 0) {
+                relapsed1.visible = true;
+                bg2.visible = false;
+			}
+              if(curStep == ) {
+              bg.visible = false;
+              bg2.visible = true;
+           }*/
 			case 'Malfunction':
 				//Insert Events here
 			case 'Hunted':

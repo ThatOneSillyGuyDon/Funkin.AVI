@@ -4459,7 +4459,7 @@ class PlayState extends MusicBeatState
 		DiscordClient.changePresence("Chart Editor", null, null, true);
 		#end
 		#else
-		var poop = Highscore.formatSong('cheating', '1'); //yes i stole this from lua
+		var poop = Highscore.formatSong('cheating', 1); //yes i stole this from lua
 		PlayState.SONG = Song.loadFromJson(poop, 'cheating');
 		PlayState.storyDifficulty = 1;
 		PlayState.instance.persistentUpdate = false;

@@ -14,7 +14,6 @@ import Song;
 using StringTools;
 
 typedef StageFile = {
-	var name:String;
 	var directory:String;
 	var defaultZoom:Float;
 	var isPixelStage:Bool;
@@ -22,7 +21,6 @@ typedef StageFile = {
 	var boyfriend:Array<Dynamic>;
 	var girlfriend:Array<Dynamic>;
 	var opponent:Array<Dynamic>;
-	var layerArray:Array<LayerFile>;
 	var hide_girlfriend:Bool;
 
 	var camera_boyfriend:Array<Float>;

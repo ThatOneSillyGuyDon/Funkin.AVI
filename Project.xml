@@ -2,6 +2,7 @@
 <project>
 	<!-- _________________________ Application Settings _________________________ -->
 
+	<!--app title="Funkin.avi" file="Funkin.avi" packageName="com.funkinavi.demolitionengine" package="com.funkinavi.demolitionengine" main="Main" version="0.2.8" company="Yama Haki" / -->
 	<app title="Funkin.avi" file="Funkin.avi" packageName="com.shadowmario.psychengine" package="com.shadowmario.psychengine" main="Main" version="0.2.8" company="Yama Haki" />
 
 	<!--Switch Export with Unique ApplicationID and Icon-->

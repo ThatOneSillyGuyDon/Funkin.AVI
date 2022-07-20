@@ -1023,16 +1023,6 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('hud', new GreyscaleEffect());
 				}
 				
-
-			default: //custom stages
-				isPixelStage = stageData.isPixelStage;
-				for (layer in stageData.layerArray){
-				var loadedLayer:BGSprite = new BGSprite(layer.directory, layer.xAxis, layer.yAxis, layer.scrollX, layer.scrollY);
-				loadedLayer.setGraphicSize(Std.int(loadedLayer.width * layer.scale));
-				loadedLayer.flipX = layer.flipX;
-				loadedLayer.flipY = layer.flipY;
-				add(loadedLayer);
-			}
 			case 'tank': //Week 7 - Ugh, Guns, Stress
 				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
 				add(sky);

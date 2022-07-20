@@ -4491,7 +4491,7 @@ class PlayState extends MusicBeatState
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				
-				Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + " - Game Over";
+				Application.current.window.title = "Funkin.avi - " + PauseSubState.songName + " - Game Over";
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here

@@ -73,10 +73,10 @@ class EpisodesState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In Freeplay", null, null, 'icon');
+		DiscordClient.changePresence("In Freeplay", "Main Story Songs", null, 'icon');
 		#end
 			
-		Application.current.window.title = "Funkin.avi - Freeplay";
+		Application.current.window.title = "Funkin.avi - Freeplay: Main Story Songs";
 
 		for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
@@ -158,7 +158,7 @@ class EpisodesState extends MusicBeatState
 		WeekData.setDirectoryFromWeek();
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
-		scoreText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, RIGHT);
+		scoreText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, RIGHT);
 
 		scoreBG = new FlxSprite(scoreText.x - 6, 0).makeGraphic(1, 66, 0xFF000000);
 		scoreBG.alpha = 0.6;
@@ -214,7 +214,7 @@ class EpisodesState extends MusicBeatState
 		var size:Int = 18;
 		#end
 		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-		text.setFormat(Paths.font("vcr.ttf"), size, FlxColor.WHITE, RIGHT);
+		text.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), size, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
 		add(text);
 
@@ -353,7 +353,7 @@ class EpisodesState extends MusicBeatState
 				colorTween.cancel();
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
+			MusicBeatState.switchState(new EpicSelectorWOOO());
 		}
 
 		if(ctrl)
@@ -367,6 +367,7 @@ class EpisodesState extends MusicBeatState
 			{
 				#if PRELOAD_ALL
 				destroyFreeplayVocals();
+				ExtrasState.destroyFreeplayVocals();
 				FlxG.sound.music.volume = 0;
 				Paths.currentModDirectory = songs[curSelected].folder;
 				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);

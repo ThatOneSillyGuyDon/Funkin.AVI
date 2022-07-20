@@ -15,7 +15,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
-import PlayState as FunnyState;
+import PlayState;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -48,12 +48,12 @@ class PauseSubState extends MusicBeatSubstate
 		super();
 		if(CoolUtil.difficulties.length < 2) menuItemsOG.remove('Change Difficulty'); //No need to change difficulty if there is only one!
 
-		if(FunnyState.chartingMode)
+		if(PlayState.chartingMode)
 		{
 			menuItemsOG.insert(2, 'Leave Charting Mode');
 			
 			var num:Int = 0;
-			if(!FunnyState.instance.startingSong)
+			if(!PlayState.instance.startingSong)
 			{
 				num = 1;
 				menuItemsOG.insert(3, 'Skip Time');
@@ -87,33 +87,33 @@ class PauseSubState extends MusicBeatSubstate
 		bg.scrollFactor.set();
 		add(bg);
 
-		switch(FunnyState.SONG.song)
+		switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: Yama haki & obscurity. (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity. (PAUSED)";
 					case 'Lunacy' | 'Malfunction' | 'Mercy':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: obscurity. (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity. (PAUSED)";
 					case 'Delusional':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: FR3SHMoure (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure (PAUSED)";
 					case 'Isolated Old' | "Don't Cross!":
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: Yama haki (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki (PAUSED)";
 					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: Sayan Sama (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Sayan Sama (PAUSED)";
 					case 'Hunted':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: JBlitz (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz (PAUSED)";
 					default:
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " (PAUSED)";
 				}
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
-		levelInfo.text += FunnyState.SONG.song;
+		levelInfo.text += PlayState.SONG.song;
 		levelInfo.scrollFactor.set();
 		levelInfo.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32);
 		levelInfo.updateHitbox();
 		add(levelInfo);
 
 		var composerCredit:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
-		switch(FunnyState.SONG.song)
+		switch(PlayState.SONG.song)
 		{
 			case 'Isolated' | 'Laugh Track':
 			composer = 'By Yama haki & obscurity.';
@@ -135,7 +135,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(composerCredit);
 
 		var charterCredit:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		switch(FunnyState.SONG.song)
+		switch(PlayState.SONG.song)
 		{
 			case 'Isolated' | 'Laugh Track' | 'Isolated Old' | 'Twisted Grins' | 'Malfunction' | 'Mercy':
 			charter = 'Chart by DEMOLITIONDON96';
@@ -164,7 +164,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelDifficulty);
 
 		var blueballedTxt:FlxText = new FlxText(20, 15 + 128, 0, "", 32);
-		blueballedTxt.text = "Blueballed: " + FunnyState.deathCounter;
+		blueballedTxt.text = "Blueballed: " + PlayState.deathCounter;
 		blueballedTxt.scrollFactor.set();
 		blueballedTxt.setFormat(Paths.font('NewWaltDisneyFontRegular-BPen.ttf'), 32);
 		blueballedTxt.updateHitbox();
@@ -175,7 +175,7 @@ class PauseSubState extends MusicBeatSubstate
 		practiceText.setFormat(Paths.font('NewWaltDisneyFontRegular-BPen.ttf'), 32);
 		practiceText.x = FlxG.width - (practiceText.width + 20);
 		practiceText.updateHitbox();
-		practiceText.visible = FunnyState.instance.practiceMode;
+		practiceText.visible = PlayState.instance.practiceMode;
 		add(practiceText);
 
 		var chartingText:FlxText = new FlxText(20, 15 + 162, 0, "CHARTING MODE", 32);
@@ -184,7 +184,7 @@ class PauseSubState extends MusicBeatSubstate
 		chartingText.x = FlxG.width - (chartingText.width + 20);
 		chartingText.y = FlxG.height - (chartingText.height + 20);
 		chartingText.updateHitbox();
-		chartingText.visible = FunnyState.chartingMode;
+		chartingText.visible = PlayState.chartingMode;
 		add(chartingText);
 
 		blueballedTxt.alpha = 0;
@@ -280,14 +280,14 @@ class PauseSubState extends MusicBeatSubstate
 			if (menuItems == difficultyChoices)
 			{
 				if(menuItems.length - 1 != curSelected && difficultyChoices.contains(daSelected)) {
-					var name:String = FunnyState.SONG.song;
+					var name:String = PlayState.SONG.song;
 					var poop = Highscore.formatSong(name, curSelected);
-					FunnyState.SONG = Song.loadFromJson(poop, name);
-					FunnyState.storyDifficulty = curSelected;
+					PlayState.SONG = Song.loadFromJson(poop, name);
+					PlayState.storyDifficulty = curSelected;
 					MusicBeatState.resetState();
 					FlxG.sound.music.volume = 0;
-					FunnyState.changedDifficulty = true;
-					FunnyState.chartingMode = false;
+					PlayState.changedDifficulty = true;
+					PlayState.chartingMode = false;
 					skipTimeTracker = null;
 
 					if(skipTimeText != null)
@@ -307,72 +307,72 @@ class PauseSubState extends MusicBeatSubstate
 			switch (daSelected)
 			{
 				case "Resume":
-					switch(FunnyState.SONG.song)
+					switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: Yama haki & obscurity.";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
 					case 'Lunacy' | 'Malfunction' | 'Mercy':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: obscurity.";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
 					case 'Delusional':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: FR3SHMoure";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
 					case 'Isolated Old' | "Don't Cross!":
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: Yama haki";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki";
 					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: Sayan Sama";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Sayan Sama";
 					case 'Hunted':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song + " - Composed by: JBlitz";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz";
 					default:
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + FunnyState.SONG.song;
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
 				}
-					//FunnyState.startCountdown();
+					//PlayState.startCountdown();
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
 					regenMenu();
 				case 'Toggle Practice Mode':
-					FunnyState.instance.practiceMode = !FunnyState.instance.practiceMode;
-					FunnyState.changedDifficulty = true;
-					practiceText.visible = FunnyState.instance.practiceMode;
+					PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
+					PlayState.changedDifficulty = true;
+					practiceText.visible = PlayState.instance.practiceMode;
 				case "Restart Song":
 					restartSong();
 				case 'Restart Replay':
 					FlxG.resetState();
 				case "Leave Charting Mode":
 					restartSong();
-					FunnyState.chartingMode = false;
+					PlayState.chartingMode = false;
 				case 'Skip Time':
 					if(curTime < Conductor.songPosition)
 					{
-						FunnyState.startOnTime = curTime;
+						PlayState.startOnTime = curTime;
 						restartSong(true);
 					}
 					else
 					{
 						if (curTime != Conductor.songPosition)
 						{
-							FunnyState.instance.clearNotesBefore(curTime);
-							FunnyState.instance.setSongTime(curTime);
+							PlayState.instance.clearNotesBefore(curTime);
+							PlayState.instance.setSongTime(curTime);
 						}
 						close();
 					}
 				case "End Song":
 					close();
-					FunnyState.instance.finishSong(true);
+					PlayState.instance.finishSong(true);
 				case 'Toggle Botplay':
-					FunnyState.instance.cpuControlled = !FunnyState.instance.cpuControlled;
-					FunnyState.changedDifficulty = true;
-					FunnyState.instance.botplayTxt.visible = FunnyState.instance.cpuControlled;
-					FunnyState.instance.botplayTxt.alpha = 1;
-					FunnyState.instance.botplaySine = 0;
+					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
+					PlayState.changedDifficulty = true;
+					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
+					PlayState.instance.botplayTxt.alpha = 1;
+					PlayState.instance.botplaySine = 0;
 				case "Exit to menu":
-					FunnyState.deathCounter = 0;
-					FunnyState.seenCutscene = false;
-					if(FunnyState.isStoryMode) {
+					PlayState.deathCounter = 0;
+					PlayState.seenCutscene = false;
+					if(PlayState.isStoryMode) {
 						Application.current.window.title = "Funkin.avi";
 						MusicBeatState.switchState(new StoryMenuState());
 					} else {
 						Application.current.window.title = "Funkin.avi";
-						switch(FunnyState.SONG.song)
+						switch(PlayState.SONG.song)
 						{
 							case 'Isolated' | 'Lunacy':
 								MusicBeatState.switchState(new EpisodesState());
@@ -382,10 +382,10 @@ class PauseSubState extends MusicBeatSubstate
 								MusicBeatState.switchState(new EpisodesState());
 						}
 					}
-					FunnyState.cancelMusicFadeTween();
+					PlayState.cancelMusicFadeTween();
 					FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
-					FunnyState.changedDifficulty = false;
-					FunnyState.chartingMode = false;
+					PlayState.changedDifficulty = false;
+					PlayState.chartingMode = false;
 				case "Options":
 					Application.current.window.title = "Funkin.avi - Settings";
 					LoadingState.loadAndSwitchState(new OptionsAlt());
@@ -395,9 +395,9 @@ class PauseSubState extends MusicBeatSubstate
 
 	public static function restartSong(noTrans:Bool = false)
 	{
-		FunnyState.instance.paused = true; // For lua
+		PlayState.instance.paused = true; // For lua
 		FlxG.sound.music.volume = 0;
-		FunnyState.instance.vocals.volume = 0;
+		PlayState.instance.vocals.volume = 0;
 
 		if(noTrans)
 		{

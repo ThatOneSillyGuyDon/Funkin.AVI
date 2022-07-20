@@ -5,10 +5,10 @@
 				0,
 				0
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 12,
 			"anim": "idle",
-			"loop": false,
+			"indices": [],
 			"name": "Relapsed1 Idle"
 		},
 		{
@@ -16,10 +16,10 @@
 				0,
 				0
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 16,
 			"anim": "singLEFT",
-			"loop": false,
+			"indices": [],
 			"name": "Relapsed1 Left"
 		},
 		{
@@ -27,10 +27,10 @@
 				0,
 				0
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 16,
 			"anim": "singDOWN",
-			"loop": false,
+			"indices": [],
 			"name": "Relapsed1 Down"
 		},
 		{
@@ -38,10 +38,10 @@
 				0,
 				0
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 16,
 			"anim": "singUP",
-			"loop": false,
+			"indices": [],
 			"name": "Relapsed1 Up"
 		},
 		{
@@ -49,10 +49,10 @@
 				0,
 				0
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 16,
 			"anim": "singRIGHT",
-			"loop": false,
+			"indices": [],
 			"name": "Relapsed1 Right"
 		},
 		{
@@ -60,10 +60,10 @@
 				0,
 				0
 			],
-			"indices": [],
+			"loop": false,
 			"fps": 14,
 			"anim": "Transition",
-			"loop": false,
+			"indices": [],
 			"name": "Relapsed1 Transformation"
 		}
 	],
@@ -81,8 +81,8 @@
 		161
 	],
 	"camera_position": [
-		0,
-		0
+		320,
+		-300
 	],
 	"sing_duration": 6.1,
 	"scale": 1.4

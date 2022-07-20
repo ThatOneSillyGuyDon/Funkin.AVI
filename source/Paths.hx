@@ -177,7 +177,7 @@ class Paths
 		{
 			return getPath('data/$key.json', TEXT, library);
 		}else{
-			return getPath('data/$key-nomechanics.json', TEXT, library);
+			return getPath('data/NoMechanics/$key.json', TEXT, library);
 		}
 	}
 
@@ -460,8 +460,6 @@ class Paths
 		return modFolders('images/' + key + '.txt');
 	}
 
-	/* Goes unused for now
-
 	inline static public function modsShaderFragment(key:String, ?library:String)
 	{
 		return modFolders('shaders/'+key+'.frag');
@@ -472,7 +470,7 @@ class Paths
 	}
 	inline static public function modsAchievements(key:String) {
 		return modFolders('achievements/' + key + '.json');
-	}*/
+	}
 
 	static public function modFolders(key:String) {
 		if(currentModDirectory != null && currentModDirectory.length > 0) {

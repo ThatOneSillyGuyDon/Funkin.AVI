@@ -4,6 +4,8 @@ import flixel.addons.ui.U;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.graphics.frames.FlxAtlasFrames;
+import PlayState;
+import MusicBeatState;
 
 using StringTools;
 
@@ -102,40 +104,74 @@ class StrumNote extends FlxSprite
 
 		if(PlayState.isPixelStage)
 		{
-			loadGraphic(Paths.image('pixelUI/' + texture));
-			width = width / 4;
-			height = height / 5;
-			loadGraphic(Paths.image('pixelUI/' + texture), true, Math.floor(width), Math.floor(height));
-
-			antialiasing = false;
-			setGraphicSize(Std.int(width * PlayState.daPixelZoom));
-
-			animation.add('green', [6]);
-			animation.add('red', [7]);
-			animation.add('blue', [5]);
-			animation.add('purple', [4]);
-			switch (Math.abs(noteData))
+			if(PlayState.curStage != 'RelapseStage')
 			{
-				case 0:
-					animation.add('static', [0]);
-					animation.add('pressed', [4, 8], 12, false);
-					animation.add('confirm', [12, 16], 24, false);
-				case 1:
-					animation.add('static', [1]);
-					animation.add('pressed', [5, 9], 12, false);
-					animation.add('confirm', [13, 17], 24, false);
-				case 2:
-					animation.add('static', [2]);
-					animation.add('pressed', [6, 10], 12, false);
-					animation.add('confirm', [14, 18], 12, false);
-				case 3:
-					animation.add('static', [3]);
-					animation.add('pressed', [7, 11], 12, false);
-					animation.add('confirm', [15, 19], 24, false);
-			}
-		}
-		else
-		{
+				loadGraphic(Paths.image('pixelUI/' + texture));
+				width = width / 4;
+				height = height / 5;
+				loadGraphic(Paths.image('pixelUI/' + texture), true, Math.floor(width), Math.floor(height));
+
+				antialiasing = false;
+				setGraphicSize(Std.int(width * PlayState.daPixelZoom));
+
+				animation.add('green', [6]);
+				animation.add('red', [7]);
+				animation.add('blue', [5]);
+				animation.add('purple', [4]);
+				switch (Math.abs(noteData))
+				{
+					case 0:
+						animation.add('static', [0]);
+						animation.add('pressed', [4, 8], 12, false);
+						animation.add('confirm', [12, 16], 24, false);
+					case 1:
+						animation.add('static', [1]);
+						animation.add('pressed', [5, 9], 12, false);
+						animation.add('confirm', [13, 17], 24, false);
+					case 2:
+						animation.add('static', [2]);
+						animation.add('pressed', [6, 10], 12, false);
+						animation.add('confirm', [14, 18], 12, false);
+					case 3:
+						animation.add('static', [3]);
+						animation.add('pressed', [7, 11], 12, false);
+						animation.add('confirm', [15, 19], 24, false);
+				}
+			}else{
+						loadGraphic(Paths.image('pixelUI/relapsePhase1NOTES'));
+						width = width / 4;
+						height = height / 5;
+						loadGraphic(Paths.image('pixelUI/relapsePhase1NOTES'), true, Math.floor(width), Math.floor(height));
+
+						antialiasing = false;
+						setGraphicSize(Std.int(width * PlayState.daPixelZoom));
+
+						animation.add('green', [6]);
+						animation.add('red', [7]);
+						animation.add('blue', [5]);
+						animation.add('purple', [4]);
+						switch (Math.abs(noteData))
+						{
+							case 0:
+								animation.add('static', [0]);
+								animation.add('pressed', [4, 8], 12, false);
+								animation.add('confirm', [12, 16], 24, false);
+							case 1:
+								animation.add('static', [1]);
+								animation.add('pressed', [5, 9], 12, false);
+								animation.add('confirm', [13, 17], 24, false);
+							case 2:
+								animation.add('static', [2]);
+								animation.add('pressed', [6, 10], 12, false);
+								animation.add('confirm', [14, 18], 12, false);
+							case 3:
+								animation.add('static', [3]);
+								animation.add('pressed', [7, 11], 12, false);
+								animation.add('confirm', [15, 19], 24, false);
+						}
+					}
+					
+			}else{
 			frames = Paths.getSparrowAtlas(texture);
 			animation.addByPrefix('green', 'arrowUP');
 			animation.addByPrefix('blue', 'arrowDOWN');
@@ -189,7 +225,8 @@ class StrumNote extends FlxSprite
 				resetAnim = 0;
 			}
 		}
-		if((animation.curAnim != null && animation.curAnim.name == 'confirm') && !PlayState.isPixelStage) {
+		//if(animation.curAnim != null){ //my bad i was upset
+		if(animation.curAnim.name == 'confirm' && !PlayState.isPixelStage) {
 			centerOrigin();
 		//}
 		}

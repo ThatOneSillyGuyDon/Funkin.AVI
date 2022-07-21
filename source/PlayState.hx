@@ -7730,7 +7730,7 @@ class PlayState extends MusicBeatState
 				#if !html5 //can crash html5 so put a !
 				Lib.application.window.width = 1000;
 				Lib.application.window.height = 650;
-				trace('Window size changed!')
+				trace('Window size changed!');
 				#end
 
 			case 'Malfunction':

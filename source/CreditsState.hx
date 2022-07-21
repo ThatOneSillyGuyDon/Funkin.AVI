@@ -54,95 +54,69 @@ class CreditsState extends MusicBeatState
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
-		#if MODS_ALLOWED
-		var path:String = 'modsList.txt';
-		if(FileSystem.exists(path))
-		{
-			var leMods:Array<String> = CoolUtil.coolTextFile(path);
-			for (i in 0...leMods.length)
-			{
-				if(leMods.length > 1 && leMods[0].length > 0) {
-					var modSplit:Array<String> = leMods[i].split('|');
-					if(!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase()) && !modsAdded.contains(modSplit[0]))
-					{
-						if(modSplit[1] == '1')
-							pushModCreditsToList(modSplit[0]);
-						else
-							modsAdded.push(modSplit[0]);
-					}
-				}
-			}
-		}
-
-		var arrayOfFolders:Array<String> = Paths.getModDirectories();
-		arrayOfFolders.push('');
-		for (folder in arrayOfFolders)
-		{
-			pushModCreditsToList(folder);
-		}
-		#end
-
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			//use this as a template:
-			//['',	'',	'',	'',	''],
+			//['',	'FunkinAvi/',	'',	'',	''],
+			//Man Im Honest, this is hell
 			['Funkin.avi Dev Team'],
-			['Funkin.avi Twitter',	'missing-icon',	'Follow Us Here for \nMore Updates!',	'https://twitter.com/AviFunkin',	'FFFFFF'],
+			['Twitter',	'missing-icon',	'Follow Us Here for \nMore Updates!',	'https://twitter.com/AviFunkin',	'FFFFFF'],
+			['Discord',	'discord',	'Also Join Our Discord!',	'https://discord.gg/hgK9gUgKKs',	'FFFFFF'],
 			['Directors'],
-			['Yama haki',	'yama',	'Main Director',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
-			['DEMOLITIONDON96',	'demolitiondon96',	'Co-Director', 'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
-			['Nutsack',	'nutsack',	'2nd Co-Director',	'https://twitter.com/Nutblocked',	'FFFFFF'],
+			['Yama haki',	'FunkinAvi/yama',	'Main Director',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
+			['DEMOLITIONDON96',	'Engine/demolitiondon96',	'Co-Director', 'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['Nutsack',	'FunkinAvi/nutsack',	'2nd Co-Director',	'https://twitter.com/Nutblocked',	'FFFFFF'],
 			['Artists'],
-			['Mr. IDK',	'idk',	'Sprite Artist', 'https://twitter.com/Mr_IDKK?t=iYM1mlQcv4_UVmxtW2kvig&s=09',	'FFFFFF'],
-			['AustinTheRedDragon',	'austin',	'Creator of Mr. Smiles & Concept Artist',	'https://twitter.com/Austinthereddr3?t=ZQVsYKPA_aseqQ5EBImdWQ&s=09', 'FFFFFF'],
+			['Mr. IDK',	'FunkinAvi/idk',	'Sprite Artist', 'https://twitter.com/Mr_IDKK?t=iYM1mlQcv4_UVmxtW2kvig&s=09',	'FFFFFF'],
+			['AustinTheRedDragon',	'FunkinAvi/austin',	'Creator of Mr. Smiles & Concept Artist',	'https://twitter.com/Austinthereddr3?t=ZQVsYKPA_aseqQ5EBImdWQ&s=09', 'FFFFFF'],
 			['GavinTheCartoonist',	'missing-icon',	'Artist for Cognitive Crisis Collab',	'https://twitter.com/AnimationFelix',	'FFFFFF'],
-			['DEMOLITIONDON96',	'demolitiondon96',	'Concept Artist',	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['DEMOLITIONDON96',	'Engine/demolitiondon96',	'Concept Artist',	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
 			['awe',	'missing-icon',	'Concept Artist',	'https://twitter.com/awesitoelpapu',	'FFFFFF'],
-			['Genorelm_lmao',	'genore',	'Artist',	'https://twitter.com/Genorelm_',	'FFFFFF'],
-			['Nutsack',	'nutsack',	'Episode 1 Assets',	'https://twitter.com/Nutblocked',	'FFFFFF'],
-			['Cheez',	'cheez',	'Animator for some characters',	'https://gamebanana.com/members/1784678',	'FFFFFF'],
-			['BonoanAnything',	'bonoan',	'Cutscenes Animator\n(Did the trailer too)',	'https://www.youtube.com/channel/UCvSHOa48e2HJrRjwEjpx1Hw',	'FFFFFF'],
-			['COOLTE3YET',	'cool',	'Thumbnail Artist for GJ & GB Pages\n(Give them credit)',	'https://gamebanana.com/members/2005084',	'FFFFFF'],
+			['Genorelm_lmao',	'FunkinAvi/genore',	'Artist',	'https://twitter.com/Genorelm_',	'FFFFFF'],
+			['Nutsack',	'FunkinAvi/nutsack',	'Episode 1 Assets',	'https://twitter.com/Nutblocked',	'FFFFFF'],
+			['Cheez',	'FunkinAvi/cheez',	'Animator for some characters',	'https://gamebanana.com/members/1784678',	'FFFFFF'],
+			['BonoanAnything',	'FunkinAvi/bonoan',	'Cutscenes Animator\n(Did the trailer too)',	'https://www.youtube.com/channel/UCvSHOa48e2HJrRjwEjpx1Hw',	'FFFFFF'],
+			['COOLTE3YET',	'FunkinAvi/cool',	'Thumbnail Artist for GJ & GB Pages\n(Give them credit)',	'https://gamebanana.com/members/2005084',	'FFFFFF'],
 			['Composers'],
-			['FR3SHMoure',	'fresh',	'Composer of Delusional',	'https://twitter.com/FR3SHAnimates?t=woj1MCTZ95ucJ33ngNSspA&s=09', 'FFFFFF'],
-			['Yama haki',	'yama', 'Did most of Tracks with help of Others',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
+			['FR3SHMoure',	'FunkinAvi/fresh',	'Composer of Delusional',	'https://twitter.com/FR3SHAnimates?t=woj1MCTZ95ucJ33ngNSspA&s=09', 'FFFFFF'],
+			['Yama haki',	'FunkinAvi/yama', 'Did most of Tracks with help of Others',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
 			['obscurity.',	'missing-icon',	'Epic Composer',	'https://twitter.com/MrObscuritylol', 'FFFFFF'],
 			['Sayan Sama', 'missing-icon',	'Composer of Mr. Smiles Tracks',	'https://gamebanana.com/members/1825237',	'FFFFFF'],
-			['AzkoBlitz',	'azko',	'Composer',	'https://twitter.com/Azko57478381',	'FFFFFF'],
-			['JBlitz',	'blitz',	'Menu Music Composer',	'https://twitter.com/JBlitz_',	'FFFFFF'],
-			['END_SELLA',	'missing-icon',	'Composer',	'https://www.youtube.com/c/seibichu%E3%83%84/videos',	'FFFFFF'],
+			['AzkoBlitz',	'FunkinAvi/azko',	'Composer',	'https://twitter.com/Azko57478381',	'FFFFFF'],
+			['JBlitz',	'FunkinAvi/blitz',	'Menu Music Composer',	'https://twitter.com/JBlitz_',	'FFFFFF'],
+			['END_SELLA',	'FunkinAvi/Sella',	'Composer',	'https://www.youtube.com/c/seibichu%E3%83%84/videos',	'FFFFFF'],
 			['AttackPan',	'missing-icon',	'Instrumentals for some Tracks',	'nolink',	'FFFFFF'],
 			['Charters'],
-			['DEMOLITIONDON96',	'demolitiondon96',	'Did some charts',	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
-			['Yama haki',	'yama',	'Charted old Isolated',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
-			['Dest',	'dest',	'Charter',	'https://gamebanana.com/members/2095443',	'FFFFFF'],
+			['DEMOLITIONDON96',	'Engine/demolitiondon96',	'Did some charts',	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['Yama haki',	'FunkinAvi/yama',	'Charted old Isolated',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
+			['Dest',	'FunkinAvi/dest',	'Charter',	'https://gamebanana.com/members/2095443',	'FFFFFF'],
 			['Noppz',	'missing-icon',	'Charter for Suicidal Difficulty \n(Not Available in this Demo)',	'https://www.youtube.com/channel/UCuz26FymzG_4tluOooxT-xQ',	'FFFFFF'],
-			['PhantomNexus',	'nexus',	'Minor Charting',	'https://twitter.com/archerthewolf2',	'FFFFFF'],
-			['Zer0XD',	'zero',	'funny charter.',	'https://www.youtube.com/channel/UCq9VLHYIwoCU7hnr0TK9yuA',	'FFFFFF'],
-			['fakeburritos123',	'burrito',	"Charted Don't Cross! \n(Don made sure it was the best chart ever)",	'nolink',	'FFFFFF'],
+			['PhantomNexus',	'FunkinAvi/nexus',	'Minor Charting',	'https://twitter.com/archerthewolf2',	'FFFFFF'],
+			['Zer0XD',	'FunkinAvi/zero',	'funny charter.',	'https://www.youtube.com/channel/UCq9VLHYIwoCU7hnr0TK9yuA',	'FFFFFF'],
+			['fakeburritos123',	'FunkinAvi/burrito',	"Charted Don't Cross! \n(Don made sure it was the best chart ever)",	'nolink',	'FFFFFF'],
 			['Voice Actors'],
-			['Flaconadir',	'flacon',	'Voice Actor',	'https://twitter.com/flaconadir',	'FFFFFF'],
-			['JUSTIN X',	'justin',	'Voice Actor',	'https://twitter.com/CbmShow',	'FFFFFF'],
+			['Flaconadir',	'FunkinAvi/flacon',	'Voice Actor',	'https://twitter.com/flaconadir',	'FFFFFF'],
+			['JUSTIN X',	'FunkinAvi/justin',	'Voice Actor',	'https://twitter.com/CbmShow',	'FFFFFF'],
 			['Coders'],
-			['DEMOLITIONDON96',	'demolitiondon96',	"There's more artist than coders bro\n(jsa is felling pain writing this)",	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
-			['Jsa010',       	'jsa010',	        "Second coder of the mod, also really cool stuff :D",                                                     	'https://twitter.com/Jsa010_coolguy',   	'FF4922'],
-		    ['TonyTime',	    'missing-icon',	    'He left but he\'s back',                                                   'https://github.com/TonyTimee',	                                            'FCA349'],
+			['DEMOLITIONDON96',	'Engine/demolitiondon96',	"Main Coder of Funkin.avi",	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['Jsa010',       	'FunkinAvi/jsa010',	        "Second coder of the mod, also really cool stuff :D",                                                     	'https://twitter.com/Jsa010_coolguy',   	'FF4922'],
+		    ['TonyTime',	    'Engine/matt',	            'He left but he\'s back',                                                   'https://github.com/TonyTimee',	                                            'FCA349'],
 			[''],
 			[''],
 			['Demolition Engine Team'],
-			['DEMOLITIONDON96',		'demolitiondon96',	'Creator of the Engine',			'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
-			['Tony Time!',				'matt',				'Epic Coder \n(Did Lots of Cool Shit)',											'https://github.com/TonyTimee',			'444444'],
+			['DEMOLITIONDON96',		'Engine/demolitiondon96',	'Creator of the Engine',			'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
+			['Tony Time!',				'Engine/matt',				'Epic Coder \n(Did Lots of Cool Shit)',											'https://github.com/TonyTimee',			'444444'],
 			['Cherif107',	'missing-icon',	'Cool Coder\nNice Guy',		'https://github.com/Cherif107',		'FFFFFF'],
-			['PrismLight', 'prism', 'Minor Code',	'https://github.com/PrismLight', 	'3B3B3B',],
-			['Theoyeah',	'theoyeah credit',		'Help with some code',	'https://github.com/Theoyeah',		'FFFFFF'],
+			['PrismLight', 'Engine/prism', 'Minor Code',	'https://github.com/PrismLight', 	'3B3B3B',],
+			['Theoyeah',	'Engine/theoyeah credit',		'Help with some code',	'https://github.com/Theoyeah',		'FFFFFF'],
 			[''],
 			['Extra Code'],
 			['mayo78',   'missing-icon',     'Epic CPU Skin Code',        'https://github.com/mayo78',                'FFFFFF'],
-			['Wither362',  'wither362',	'.mp3 & .wav file support\n(and for allowing me to add in some cool shit they made)',   'https://www.youtube.com/channel/UCsVr-qBLxT0uSWH037BmlHw',   '009BF4'],
-			['lemz1',     'lemz1',            'Modchart Code for Game Window',        'https://github.com/lemz1',         '383838'],
+			['Wither362',  'Engine/wither362',	'.mp3 & .wav file support\n(and for allowing me to add in some cool shit they made)',   'https://www.youtube.com/channel/UCsVr-qBLxT0uSWH037BmlHw',   '009BF4'],
+			['lemz1',     'Engine/lemz1',            'Modchart Code for Game Window',        'https://github.com/lemz1',         '383838'],
 			['Phoneguytech75', 'missing-icon', 'Note Skins :D',			'https://github.com/Phoneguytech75',	'FFFFFF'],
-			['HiroMizuki',	'hiro',		'Pixel Splashes & \nScreen Resolution Code',	'https://github.com/HiroMizuki',	'3DED02'],
+			['HiroMizuki',	'Engine/hiro',		'Pixel Splashes & \nScreen Resolution Code',	'https://github.com/HiroMizuki',	'3DED02'],
 			['8bitjake',	'missing-icon',	'Hold Pieces Fix for Sidescroll Modcharts',	'https://github.com/ShadowMario/FNF-PsychEngine/pull/8676',		'FFFFFF'],
-			['magnumsrtisswag',		'mag',	'Stage Editor',		'https://github.com/magnumsrtisswag',			'0B03FC'],
+			['magnumsrtisswag',		'Engine/mag',	'Stage Editor',		'https://github.com/magnumsrtisswag',			'0B03FC'],
 			['AlexDrar',		'missing-icon',	'Hard Code Song Shit',		'https://github.com/mayo78/PSYCHDISCUSSIONS/discussions/85',			'FFFFFF'],
 			['Snow White Muffins',		'missing-icon',	'Moving Main Menu Code',		'https://www.youtube.com/watch?v=QZQJ701tAqQ',			'FFFFFF'],
 			['TimothyFnf',		'missing-icon',	'Some Credit For Code',		'https://gamebanana.com/mods/370936',			'FFFFFF'],
@@ -354,7 +328,7 @@ class CreditsState extends MusicBeatState
 	{
 		super.beatHit();
 			if(ClientPrefs.camZooms) {
-        FlxG.camera.zoom += 0.015;
+        FlxG.camera.zoom += 0.020;
 		if(!camZooming) { //Copied from PlayState.hx
 			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5);
 		}
@@ -410,31 +384,6 @@ class CreditsState extends MusicBeatState
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
 	}
-
-	#if MODS_ALLOWED
-	private var modsAdded:Array<String> = [];
-	function pushModCreditsToList(folder:String)
-	{
-		if(modsAdded.contains(folder)) return;
-
-		var creditsFile:String = null;
-		if(folder != null && folder.trim().length > 0) creditsFile = Paths.mods(folder + '/data/credits.txt');
-		else creditsFile = Paths.mods('data/credits.txt');
-
-		if (FileSystem.exists(creditsFile))
-		{
-			var firstarray:Array<String> = File.getContent(creditsFile).split('\n');
-			for(i in firstarray)
-			{
-				var arr:Array<String> = i.replace('\\n', '\n').split("::");
-				if(arr.length >= 5) arr.push(folder);
-				creditsStuff.push(arr);
-			}
-			creditsStuff.push(['']);
-		}
-		modsAdded.push(folder);
-	}
-	#end
 
 	function getCurrentBGColor() {
 		var bgColor:String = creditsStuff[curSelected][4];

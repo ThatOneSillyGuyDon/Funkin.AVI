@@ -47,7 +47,6 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
-import openfl.Lib; //windows size shit
 import openfl.filters.ShaderFilter;
 import editors.ChartingState;
 import editors.CharacterEditorState;
@@ -1488,19 +1487,19 @@ class PlayState extends MusicBeatState
 		switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
 					case 'Lunacy' | 'Malfunction' | 'Mercy':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: obscurity.";
 					case 'Delusional':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
 					case 'Isolated Old' | "Don't Cross!":
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Yama haki";
 					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Sayan Sama";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Sayan Sama";
 					case 'Hunted':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: JBlitz";
 					default:
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song;
 				}
 
 		if(ClientPrefs.longBar)
@@ -7728,7 +7727,12 @@ class PlayState extends MusicBeatState
 						relapseChaos.alpha = 1;
 					}
 				}
+				#if !html5 //can crash html5 so put a !
 				Lib.application.window.width = 1000;
+				Lib.application.window.height = 650;
+				trace('Window size changed!')
+				#end
+
 			case 'Malfunction':
 				//Insert Events here
 			case 'Hunted':

@@ -47,6 +47,7 @@ import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
+import openfl.Lib; //windows size shit
 import openfl.filters.ShaderFilter;
 import editors.ChartingState;
 import editors.CharacterEditorState;
@@ -7727,6 +7728,7 @@ class PlayState extends MusicBeatState
 						relapseChaos.alpha = 1;
 					}
 				}
+				Lib.application.window.width = 1000;
 			case 'Malfunction':
 				//Insert Events here
 			case 'Hunted':

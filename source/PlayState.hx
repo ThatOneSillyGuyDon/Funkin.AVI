@@ -287,6 +287,17 @@ class PlayState extends MusicBeatState
 	var waltText:FlxText;
 	var gettinSleepy:FlxSprite;
 
+	//Relapse shit
+	var relapseChaos:BGSprite;
+	var relapseCalm:BGSprite;
+	var dodged:Bool;
+	var shootin:Bool;
+	var canDodge:Bool = true;
+	var pressedSpace:Bool = false;
+	var pressCounter = 0;
+	//var warningText:FlxSprite;
+	var detectAttack:Bool = false;
+
 	//stole this from Vs Ourple Guy mod lmfao
 	var zoomBeat:Float = 4;
 	var zoomBounce:Float = 0;
@@ -983,6 +994,35 @@ class PlayState extends MusicBeatState
 				var funiLine:BGSprite = new BGSprite('funkinAVI/DontCross/theLine', 0, 0);
 				funiLine.scale.set(1.3, 1.3);
 				add(funiLine);
+
+			case 'RelapseStage':
+				GameOverSubstate.deathSoundName = 'fnf_loss_sfx-pixel';
+				GameOverSubstate.loopSoundName = 'gameOver-pixel';
+				GameOverSubstate.endSoundName = 'gameOverEnd-pixel';
+				GameOverSubstate.characterName = 'bf-relapsed';
+
+				relapseCalm = new BGSprite('funkinAVI/relapse/relapse1', 0, 0, 1, 1, ['Bg bg'], true);
+				relapseCalm.scale.set(5.9, 5.9);
+				relapseCalm.antialiasing = false;
+				add(relapseCalm);
+
+				relapseChaos = new BGSprite('funkinAVI/relapse/relapse2', 0, 0);
+				relapseChaos.scale.set(5.9, 5.9);
+				relapseChaos.antialiasing = false;
+				relapseChaos.alpha = 0;
+				add(relapseChaos);
+
+				if(ClientPrefs.funiShaders)
+				{
+					addShaderToCamera('game', new VhsEffect(0.4, 0.3));
+					addShaderToCamera('game', new VCRDistortionEffect(0, true, true, true));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+					addShaderToCamera('hud', new VCRDistortionEffect(0, true, true, true));
+					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					addShaderToCamera('hud', new GreyscaleEffect());
+				}
+				
 			case 'tank': //Week 7 - Ugh, Guns, Stress
 				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
 				add(sky);
@@ -1651,27 +1691,44 @@ class PlayState extends MusicBeatState
 		{
 			if(curStage == 'PixelWorld')
 			{
-				crashLives = new FlxText(200, 300, 0, "", 20);
-				if (!isPixelStage) {
-					switch(curStage)
-					{
-						case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
-							crashLives.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-						default: 
-							crashLives.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-					}
-					} else {
-					crashLives.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-					}
-				crashLives.borderSize = 2;
-				crashLives.borderQuality = 2;
-				crashLives.scrollFactor.set();
-				crashLives.cameras = [camHUD];
-				crashLives.text = 'Lives: ${crashLivesCounter}';
-				add(crashLives);
+				if(ClientPrefs.downScroll)
+				{
+					crashLives = new FlxText(600, 170, 0, "", 20);
+					crashLivesIcon = new FlxSprite(550, 170);
+				}else{
+					crashLives = new FlxText(600, 500, 0, "", 20);
+					crashLivesIcon = new FlxSprite(550, 500);
+				}	
+					if (!isPixelStage) {
+						switch(curStage)
+						{
+							case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+								crashLives.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+							default: 
+								crashLives.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						}
+						} else {
+						crashLives.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						}
+					crashLives.borderSize = 2;
+					crashLives.borderQuality = 2;
+					crashLives.scrollFactor.set();
+					crashLives.cameras = [camHUD];
+					crashLives.text = 'Lives: ${crashLivesCounter}';
+					add(crashLives);
 
-				//crashLivesIcon = new FlxSprite
-			}
+					crashLivesIcon.frames = Paths.getSparrowAtlas('funkinAVI/uiAndEvents/lives-icon');
+					crashLivesIcon.animation.addByPrefix('idle', 'lives-icon idle', 15);
+					crashLivesIcon.animation.addByPrefix('OMFG IT GLITCHES', 'lives-icon glitchin', 15);
+					crashLivesIcon.animation.play('idle');
+					crashLivesIcon.scale.set(2.2, 2.2);
+					crashLivesIcon.cameras = [camHUD];
+					add(crashLivesIcon);
+
+					FlxTween.tween(crashLives, {alpha: 0.2}, 1, {ease: FlxEase.quadInOut, startDelay: 5});
+					FlxTween.tween(crashLivesIcon, {alpha: 0.2}, 1, {ease: FlxEase.quadInOut, startDelay: 5});
+				}
+				
 
 			if(curStage == 'WaltStage')
 			{
@@ -1698,7 +1755,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 		
-		songBanner = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
+		songBanner = new FlxSprite(0, 0).makeGraphic(999, 136, FlxColor.WHITE);
 		songBanner.scrollFactor.set();
 		songBanner.visible = !ClientPrefs.hideHud;
 		songBanner.blend = ADD;
@@ -3261,18 +3318,17 @@ class PlayState extends MusicBeatState
 
 		#if desktop //for prevent curPortrait error
 		switch(curSong){
-			case "Isolated": curPortrait = "placeholder";
-			case "Lunacy": curPortrait = "placeholder";
-			case "Delusional": curPortrait = "placeholder";
+			case "Isolated" | "Lunacy" | "Delusional": curPortrait = "placeholder";
 			case "Malfunction": curPortrait = "placeholder";
 			case "Don't Cross!": curPortrait = "placeholder";
-			case "Twisted Grins": curPortrait = "placeholder";
-			case "Facade": curPortrait = "placeholder";
+			case "Twisted Grins" | "Facade": curPortrait = "episode2";
 			case "Laugh Track": curPortrait = "placeholder";
 			case "Scrapped": curPortrait = "scrapped";
 			case "Mercy": curPortrait = "placeholder";
-			case "Bless": curPortrait = "placeholder";
+			case "Bless": curPortrait = "bless";
 			case "Isolated Old": curPortrait = "placeholder";
+			case "Cycled Sins": curPortrait = "cycledsins";
+			case "War Dilemma": curPortrait = "placeholder";
 		}
 		#end
 
@@ -3778,6 +3834,14 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.justPressed.NINE)
 		{
 			iconP1.swapOldIcon();
+		}
+
+		if(FlxG.keys.justPressed.SPACE && shootin && canDodge) {
+			dodged = true;
+			canDodge = false;
+			new FlxTimer().start(1, function(tmr:FlxTimer) {
+				canDodge = true;
+			});
 		}
 
 		callOnLuas('onUpdate', [elapsed]);
@@ -4491,7 +4555,7 @@ class PlayState extends MusicBeatState
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				
-				Application.current.window.title = "Funkin.avi - Game Over";
+				Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Game Over";
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
@@ -5257,6 +5321,9 @@ class PlayState extends MusicBeatState
 			
 			case 'BG Freaks Expression':
 				if(bgGirls != null) bgGirls.swapDanceType();
+
+			case 'Relapse Shoot':
+				relapseShoot();
 
 			case 'Hide HUD':
 				var HUDid:Int = Std.parseInt(value1);
@@ -6768,7 +6835,7 @@ class PlayState extends MusicBeatState
 							case 'PixelWorld':
 								crashLivesCounter -= 1;
 
-								if(crashLivesCounter == 0)
+								if(crashLivesCounter == -1)
 								{
 									endSong();
 									FlxG.sound.play(Paths.sound('wiiCrash'), 1);
@@ -6778,6 +6845,26 @@ class PlayState extends MusicBeatState
 									healthDrain = 0.01;
 									health -= 0;
 								}
+								crashLives.text = 'Lives: ${crashLivesCounter}';
+								crashLivesIcon.animation.play('OMFG IT GLITCHES');
+								new FlxTimer().start(0.25, function(tmr:FlxTimer)
+								{
+									crashLivesIcon.animation.play('idle');
+								});
+								FlxTween.tween(crashLives, {x: 620}, 0.01);
+								FlxTween.tween(crashLivesIcon, {x: 570}, 0.01);
+								FlxTween.tween(crashLives, {x: 585}, 0.01, {startDelay: 0.1});
+								FlxTween.tween(crashLivesIcon, {x: 535}, 0.01, {startDelay: 0.1});
+								FlxTween.tween(crashLives, {x: 610}, 0.01, {startDelay: 0.2});
+								FlxTween.tween(crashLivesIcon, {x: 560}, 0.01, {startDelay: 0.2});
+								FlxTween.tween(crashLives, {x: 595}, 0.01, {startDelay: 0.3});
+								FlxTween.tween(crashLivesIcon, {x: 545}, 0.01, {startDelay: 0.3});
+								FlxTween.tween(crashLives, {x: 600}, 0.01, {startDelay: 0.4});
+								FlxTween.tween(crashLivesIcon, {x: 550}, 0.01, {startDelay: 0.4});
+								FlxTween.tween(crashLives, {alpha: 1}, 0.15);
+								FlxTween.tween(crashLivesIcon, {alpha: 1}, 0.15);
+								FlxTween.tween(crashLives, {alpha: 0.2}, 1, {ease: FlxEase.quadInOut, startDelay: 3});
+								FlxTween.tween(crashLivesIcon, {alpha: 0.2}, 1, {ease: FlxEase.quadInOut, startDelay: 3});
 							default:
 								endSong();
 								FlxG.sound.play(Paths.sound('wiiCrash'), 1);
@@ -6835,6 +6922,17 @@ class PlayState extends MusicBeatState
 				}
 			}else{
 				health += note.hitHealth * healthGain;
+			}
+
+			function detectSpace()
+			{
+				if (FlxG.keys.justPressed.SPACE)
+				{
+					pressCounter += 1;
+					trace('tap');
+					pressedSpace = true;
+					detectAttack = false;
+				}
 			}
 			
 			
@@ -6987,6 +7085,44 @@ class PlayState extends MusicBeatState
 		var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
 		splash.setupNoteSplash(x, y, data, skin, hue, sat, brt);
 		grpNoteSplashes.add(splash);
+	}
+
+	function relapseShoot()
+	{
+		dodged = false;
+		shootin = true;	
+		ohShitHeGonnaShoot();
+			new FlxTimer().start(0.75, function(tmr:FlxTimer){
+				FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Shoot'), 0.6);
+				dad.playAnim("attack", true);
+				dad.specialAnim = true;
+				new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+				if(!dodged) {
+					FlxG.camera.shake(0.05, 0.05);
+					health = 0;
+					trace("L bozo");
+					dodged = false;
+				} else {
+					boyfriend.playAnim('dodge');
+					dodged = false;
+					shootin = false;
+					health += 0.2;
+				}
+				});
+			});
+	}
+
+	function ohShitHeGonnaShoot()
+	{
+		FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Reload'), 0.6);
+		//warningText.alpha = 1;
+		dad.playAnim("reload", true);
+		dad.specialAnim = true;
+		/*new FlxTimer().start(0.4, function(tmr:FlxTimer)
+		{
+			warningText.alpha = 0;
+		});*/
+		pressCounter = 0;
 	}
 
 	var fastCarCanDrive:Bool = true;
@@ -7380,7 +7516,6 @@ class PlayState extends MusicBeatState
 		lastBeatHit = curBeat;
 
 		//Modcharts/Events go here
-		//Kade Engine moment btw
 
 		//NOTE: Before setting the modcharts/events here, make sure you test them in the Chart Editor first, just to be safe!
 		switch(SONG.song)
@@ -7465,37 +7600,107 @@ class PlayState extends MusicBeatState
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
 				}
-				if(curStep == 472)
+				if(curStep == 488)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
 				}
-				if(curStep == 480)
+				if(curStep == 496)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
 				}
-				if(curStep == 472)
+				if(curStep == 504)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
 				}
-				if(curStep == 480)
+				if(curStep == 512)
 				{
+					triggerEventNote('Flash Screen', '0', 'False');
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
 				}
-				if(curStep == 472)
+				if(curStep == 520)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
 				}
-				if(curStep == 480)
+				if(curStep == 528)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
 				}
-				if(curStep == 472)
+				if(curStep == 536)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
 				}
-				if(curStep == 480)
+				if(curStep == 544)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+				}
+				if(curStep == 552)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+				}
+				if(curStep == 560)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+				}
+				if(curStep == 568)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+				}
+				if(curStep == 576)
+				{
+					triggerEventNote('Flash Screen', '3', 'False');
+					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+				}
+				if(curStep == 584)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+				}
+				if(curStep == 592)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+				}
+				if(curStep == 600)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+				}
+				if(curStep == 608)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+				}
+				if(curStep == 616)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+				}
+				if(curStep == 624)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+				}
+				if(curStep == 632)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+				}
+				if(curStep == 640)
+				{
+					triggerEventNote('Alter Camera Zoom', '1.35', '3.8');
+				}
+				if(curStep == 688)
+				{
+					triggerEventNote('Alter Camera Zoom', '0.8', '1');
+				}
+				if(curStep == 704)
+				{
+					triggerEventNote('Alter Camera Zoom', '1.35', '3.8');
+				}
+				if(curStep == 752)
+				{
+					triggerEventNote('Alter Camera Zoom', '0.8', '1');
+				}
+				if(curStep == 768)
+				{
+					triggerEventNote('Flash Screen', '0', '');
+				}
+				if(curStep == 832)
+				{
+					triggerEventNote('Flash Screen', '3', '');
 				}
 			case 'Lunacy':
 				//Insert Events here
@@ -7514,20 +7719,14 @@ class PlayState extends MusicBeatState
 			case "Don't Cross!":
 				//Insert Events here
 			case 'Cycled Sins':
-				//shit that makes the song cool
-				timeBar.visible = false;
-				timeTxt.visible = false;
-				timeBarBG.visible = false;
-				scoreTxt.visible = false;
-
-			/*	if(curStep == 0) {
-                relapsed1.visible = true;
-                bg2.visible = false;
-			}
-              if(curStep == ) {
-              bg.visible = false;
-              bg2.visible = true;
-           }*/
+				if(curStep == 572)
+				{
+					if(curStage == 'RelapseStage')
+					{
+						relapseCalm.alpha = 0;
+						relapseChaos.alpha = 1;
+					}
+				}
 			case 'Malfunction':
 				//Insert Events here
 			case 'Hunted':
@@ -7654,10 +7853,6 @@ class PlayState extends MusicBeatState
 			judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
 		        else
 			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
-		}
-		if(curStage == 'PixelWorld')
-		{
-		crashLives.text = 'Lives: ${crashLivesCounter}';
 		}
 	}
 

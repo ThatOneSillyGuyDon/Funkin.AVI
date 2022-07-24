@@ -7719,18 +7719,25 @@ class PlayState extends MusicBeatState
 			case "Don't Cross!":
 				//Insert Events here
 			case 'Cycled Sins':
+				if(curStep == 505)
+				{
+					health -0.1;
+					camHUD.visible = false;
+
+				}
 				if(curStep == 572)
 				{
 					if(curStage == 'RelapseStage')
 					{
+						camHUD.visible = true;
 						relapseCalm.alpha = 0;
 						relapseChaos.alpha = 1;
 					}
 				}
+				
 				#if !html5 //can crash html5 so put a !
-				Lib.application.window.width = 1000;
-				Lib.application.window.height = 650;
-				trace('Window size changed!');
+				Lib.application.window.width = 1383;
+				Lib.application.window.height = 647;
 				#end
 
 			case 'Malfunction':

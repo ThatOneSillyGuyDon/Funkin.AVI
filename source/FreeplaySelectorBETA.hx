@@ -38,7 +38,7 @@ class EpicSelectorWOOO extends MusicBeatState
 		'extras',
 	//	#if MODS_ALLOWED 'mods', #end
 	//	#if ACHIEVEMENTS_ALLOWED 'awards', #end
-		"don't_cross_secret",
+	//	"don't_cross_secret",
 	//	#if !switch 'donate', #end
 	];
 
@@ -81,11 +81,6 @@ class EpicSelectorWOOO extends MusicBeatState
 		bg.screenCenter();
 		bg.antialiasing = ClientPrefs.globalAntialiasing;
 		add(bg);
-
-		camFollow = new FlxObject(0, 0, 1, 1);
-		camFollowPos = new FlxObject(0, 0, 1, 1);
-		add(camFollow);
-		add(camFollowPos);
 		
 		// magenta.scrollFactor.set();
 
@@ -118,7 +113,7 @@ class EpicSelectorWOOO extends MusicBeatState
 			menuItem.updateHitbox();
 		}
 
-		FlxG.camera.follow(camFollowPos, null, 1);
+	//	FlxG.camera.follow(camFollowPos, null, 1);
 
 		/*var versionShit:FlxText = new FlxText(12, FlxG.height - 73, 0, "Pibby Corrupted v" + bitch, 20);
 		versionShit.scrollFactor.set();
@@ -186,17 +181,11 @@ class EpicSelectorWOOO extends MusicBeatState
 				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('cancelMenu'));
-					MusicBeatState.switchState(new TitleState());
+					MusicBeatState.switchState(new MainMenuState());
 				}
 
 			if (controls.ACCEPT)
 			{
-				if (theThing[curSelected] == 'donate')
-				{
-					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
-				}
-				else
-				{
 					selectedSomethin = true;
 					FlxG.sound.play(Paths.sound('confirmMenu'));
 
@@ -275,4 +264,3 @@ class EpicSelectorWOOO extends MusicBeatState
 			}
 		});
 	}
-}

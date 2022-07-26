@@ -33,17 +33,15 @@ class CreditsState extends MusicBeatState
 	var descText:FlxText;
 	var intendedColor:Int;
 	var colorTween:FlxTween;
-	var noLink:Bool;
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
-	public var camZooming:Bool = false;
 
 	override function create()
 	{
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("Viewing Credits", null, null, 'icon');
+		DiscordClient.changePresence("In the Menus", null);
 		#end
 
 		persistentUpdate = true;
@@ -53,6 +51,34 @@ class CreditsState extends MusicBeatState
 		
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
+
+		#if MODS_ALLOWED
+		var path:String = 'modsList.txt';
+		if(FileSystem.exists(path))
+		{
+			var leMods:Array<String> = CoolUtil.coolTextFile(path);
+			for (i in 0...leMods.length)
+			{
+				if(leMods.length > 1 && leMods[0].length > 0) {
+					var modSplit:Array<String> = leMods[i].split('|');
+					if(!Paths.ignoreModFolders.contains(modSplit[0].toLowerCase()) && !modsAdded.contains(modSplit[0]))
+					{
+						if(modSplit[1] == '1')
+							pushModCreditsToList(modSplit[0]);
+						else
+							modsAdded.push(modSplit[0]);
+					}
+				}
+			}
+		}
+
+		var arrayOfFolders:Array<String> = Paths.getModDirectories();
+		arrayOfFolders.push('');
+		for (folder in arrayOfFolders)
+		{
+			pushModCreditsToList(folder);
+		}
+		#end
 
 		var pisspoop:Array<Array<String>> = [ //Name - Icon name - Description - Link - BG Color
 			//use this as a template:
@@ -147,10 +173,7 @@ class CreditsState extends MusicBeatState
 			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",							'https://twitter.com/ninja_muffin99',	'CF2D2D'],
 			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",								'https://twitter.com/PhantomArcade3K',	'FADC45'],
 			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",								'https://twitter.com/evilsk8r',			'5ABD4B'],
-			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								'https://twitter.com/kawaisprite',		'378FC7']		
-			//[''],
-			//["Slutty Crew"],
-			//['Ben UWU',		'ben',	"Got Drip And Is So Slutty",						"https://www.youtube.com/watch?v=v5F5WyhzW9M",		'FFFFFF']
+			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								'https://twitter.com/kawaisprite',		'378FC7']
 		];
 		
 		for(i in pisspoop){
@@ -209,25 +232,6 @@ class CreditsState extends MusicBeatState
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
 		changeSelection();
-
-		var scratchStuff:FlxSprite = new FlxSprite();
-		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
-		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
-		scratchStuff.animation.play('idle');
-		scratchStuff.screenCenter();
-		scratchStuff.scale.x = 1.1;
-		scratchStuff.scale.y = 1.1;
-		add(scratchStuff);
-
-		var grain:FlxSprite = new FlxSprite();
-		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
-		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
-		grain.animation.play('idle');
-		grain.screenCenter();
-		grain.scale.x = 1.1;
-		grain.scale.y = 1.1;
-		add(grain);
-		
 		super.create();
 	}
 
@@ -274,33 +278,19 @@ class CreditsState extends MusicBeatState
 				}
 			}
 
-				if(creditsStuff[curSelected][3] == 'nolink') {
-
-  					noLink = true;
-  				}else{
-  					noLink = false;
-  				}
-  				if(noLink) {
-  				if(controls.ACCEPT) {
-  					FlxG.sound.play(Paths.sound('cancelMenu'));
-  				} 
-  				}else {
-  					if(controls.ACCEPT) {
-  					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
-  				}
-
+			if(controls.ACCEPT && (creditsStuff[curSelected][3] == null || creditsStuff[curSelected][3].length > 4)) {
+				CoolUtil.browserLoad(creditsStuff[curSelected][3]);
 			}
-
 			if (controls.BACK)
 			{
 				if(colorTween != null) {
 					colorTween.cancel();
 				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-					MusicBeatState.switchState(new MainMenuState());
-				}
+				MusicBeatState.switchState(new MainMenuState());
 				quitting = true;
 			}
+		}
 		
 		for (item in grpOptions.members)
 		{
@@ -323,22 +313,11 @@ class CreditsState extends MusicBeatState
 		}
 		super.update(elapsed);
 	}
-	
-		override function beatHit()
-	{
-		super.beatHit();
-			if(ClientPrefs.camZooms) {
-        FlxG.camera.zoom += 0.020;
-		if(!camZooming) { //Copied from PlayState.hx
-			FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5);
-		}
-	}
-	}
-	
+
 	var moveTween:FlxTween = null;
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'), 0.4);
+		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		do {
 			curSelected += change;
 			if (curSelected < 0)
@@ -384,6 +363,31 @@ class CreditsState extends MusicBeatState
 		descBox.setGraphicSize(Std.int(descText.width + 20), Std.int(descText.height + 25));
 		descBox.updateHitbox();
 	}
+
+	#if MODS_ALLOWED
+	private var modsAdded:Array<String> = [];
+	function pushModCreditsToList(folder:String)
+	{
+		if(modsAdded.contains(folder)) return;
+
+		var creditsFile:String = null;
+		if(folder != null && folder.trim().length > 0) creditsFile = Paths.mods(folder + '/data/credits.txt');
+		else creditsFile = Paths.mods('data/credits.txt');
+
+		if (FileSystem.exists(creditsFile))
+		{
+			var firstarray:Array<String> = File.getContent(creditsFile).split('\n');
+			for(i in firstarray)
+			{
+				var arr:Array<String> = i.replace('\\n', '\n').split("::");
+				if(arr.length >= 5) arr.push(folder);
+				creditsStuff.push(arr);
+			}
+			creditsStuff.push(['']);
+		}
+		modsAdded.push(folder);
+	}
+	#end
 
 	function getCurrentBGColor() {
 		var bgColor:String = creditsStuff[curSelected][4];

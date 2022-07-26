@@ -833,7 +833,8 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 					addShaderToCamera('game', new VhsEffect(0.3, 0));
 					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
-					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					//addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					//at least made it visible man
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
 				}
@@ -7713,7 +7714,10 @@ class PlayState extends MusicBeatState
 			case 'Bless':
 				//Insert Events here
 			case 'War Dilemma':
-				//Insert Events here
+				#if !html5 //a reference of the video size
+				Lib.application.window.width = 1400;
+				Lib.application.window.height = 700;
+				#end
 			case 'Isolated Old':
 				//Insert Events here
 			case "Don't Cross!":
@@ -7734,11 +7738,6 @@ class PlayState extends MusicBeatState
 						relapseChaos.alpha = 1;
 					}
 				}
-				
-				#if !html5 //can crash html5 so put a !
-				Lib.application.window.width = 1383;
-				Lib.application.window.height = 647;
-				#end
 
 			case 'Malfunction':
 				//Insert Events here

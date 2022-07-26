@@ -15,7 +15,10 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
+import openfl.filters.ShaderFilter as Filters;
 import PlayState;
+import Shaders; //Help
+
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -90,19 +93,19 @@ class PauseSubState extends MusicBeatSubstate
 		switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity. (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity. (PAUSED)";
 					case 'Lunacy' | 'Malfunction' | 'Mercy':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity. (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: obscurity. (PAUSED)";
 					case 'Delusional':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: FR3SHMoure (PAUSED)";
 					case 'Isolated Old' | "Don't Cross!":
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Yama haki (PAUSED)";
 					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Sayan Sama (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Sayan Sama (PAUSED)";
 					case 'Hunted':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: JBlitz (PAUSED)";
 					default:
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " (PAUSED)";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " (PAUSED)";
 				}
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
@@ -125,7 +128,7 @@ class PauseSubState extends MusicBeatSubstate
 			composer = 'By Yama haki';
 			case 'Twisted Grins':
 			composer = 'By Sama Yama';
-			case 'Hunted':
+			case 'Hunted' | 'Cycled Sins':
 			composer = 'By JBlitz';
 		}
 		composerCredit.text += composer;
@@ -303,6 +306,7 @@ class PauseSubState extends MusicBeatSubstate
 				menuItems = menuItemsOG;
 				regenMenu();
 			}
+	
 
 			switch (daSelected)
 			{
@@ -310,19 +314,19 @@ class PauseSubState extends MusicBeatSubstate
 					switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
 					case 'Lunacy' | 'Malfunction' | 'Mercy':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: obscurity.";
 					case 'Delusional':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
 					case 'Isolated Old' | "Don't Cross!":
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Yama haki";
 					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Sayan Sama";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Sayan Sama";
 					case 'Hunted':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz";
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: JBlitz";
 					default:
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song;
 				}
 					//PlayState.startCountdown();
 					close();
@@ -391,7 +395,7 @@ class PauseSubState extends MusicBeatSubstate
 					LoadingState.loadAndSwitchState(new OptionsAlt());
 			}
 		}
-	}
+	}	
 
 	public static function restartSong(noTrans:Bool = false)
 	{

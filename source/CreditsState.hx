@@ -36,12 +36,13 @@ class CreditsState extends MusicBeatState
 	var descBox:AttachedSprite;
 
 	var offsetThing:Float = -75;
+	public var camZooming:Bool = false;
 
 	override function create()
 	{
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In the Menus", null);
+		DiscordClient.changePresence("Viewing Credits", null, null, 'icon');
 		#end
 
 		persistentUpdate = true;
@@ -232,6 +233,25 @@ class CreditsState extends MusicBeatState
 		bg.color = getCurrentBGColor();
 		intendedColor = bg.color;
 		changeSelection();
+
+		var scratchStuff:FlxSprite = new FlxSprite();
+		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
+		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
+		scratchStuff.animation.play('idle');
+		scratchStuff.screenCenter();
+		scratchStuff.scale.x = 1.1;
+		scratchStuff.scale.y = 1.1;
+		add(scratchStuff);
+
+		var grain:FlxSprite = new FlxSprite();
+		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
+		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
+		grain.animation.play('idle');
+		grain.screenCenter();
+		grain.scale.x = 1.1;
+		grain.scale.y = 1.1;
+		add(grain);
+
 		super.create();
 	}
 
@@ -311,13 +331,24 @@ class CreditsState extends MusicBeatState
 				}
 			}
 		}
-		super.update(elapsed);
-	}
+		super.update(elapsed);	
+		}
+
+		override function beatHit()
+			{
+				super.beatHit();
+					if(ClientPrefs.camZooms) {
+				FlxG.camera.zoom += 0.020;
+				if(!camZooming) { //Copied from PlayState.hx
+					FlxTween.tween(FlxG.camera, {zoom: 1}, 0.5);
+				}
+			}
+		}
 
 	var moveTween:FlxTween = null;
 	function changeSelection(change:Int = 0)
 	{
-		FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
+		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'), 0.4);
 		do {
 			curSelected += change;
 			if (curSelected < 0)

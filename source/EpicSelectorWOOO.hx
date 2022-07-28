@@ -99,11 +99,7 @@ class EpicSelectorWOOO extends MusicBeatState{
 			changeSelection(1);
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			if(ClientPrefs.simpleMenu) {
-			MusicBeatState.switchState(new LowEndMenuState());
-			}else{
-				MusicBeatState.switchState(new MainMenuState());
-			}
+			MusicBeatState.switchState(new MainMenuState());
 		}
         if (controls.ACCEPT){
             switch(curSelected){

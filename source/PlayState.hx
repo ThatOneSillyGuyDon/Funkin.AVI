@@ -521,7 +521,6 @@ class PlayState extends MusicBeatState
 		var stageData:StageFile = StageData.getStageFile(curStage);
 		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
 			stageData = {
-				name: "",
 				directory: "",
 				defaultZoom: 0.9,
 				isPixelStage: false,
@@ -529,7 +528,6 @@ class PlayState extends MusicBeatState
 				boyfriend: [770, 100],
 				girlfriend: [400, 130],
 				opponent: [100, 100],
-				layerArray: [],
 				hide_girlfriend: false,
 
 				camera_boyfriend: [0, 0],
@@ -7805,14 +7803,10 @@ class PlayState extends MusicBeatState
 			case 'Bless':
 				//Insert Events here
 			case 'War Dilemma':
-<<<<<<< HEAD
 				#if !html5 //a reference of the video size
 				Lib.application.window.width = 1382;
 				Lib.application.window.height = 500;
 				#end
-=======
-				//Insert Events here
->>>>>>> b59263e8617a56e9e87f6530df181f7c9abf3406
 			case 'Isolated Old':
 				//Insert Events here
 			case "Don't Cross!":

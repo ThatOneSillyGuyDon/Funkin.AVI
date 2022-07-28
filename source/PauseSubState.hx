@@ -15,11 +15,8 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
-<<<<<<< HEAD
 import flash.system.System;
 import openfl.filters.ShaderFilter as Filters;
-=======
->>>>>>> b59263e8617a56e9e87f6530df181f7c9abf3406
 import PlayState;
 
 class PauseSubState extends MusicBeatSubstate
@@ -376,15 +373,10 @@ class PauseSubState extends MusicBeatSubstate
 						Application.current.window.title = "Funkin.avi";
 						switch(PlayState.SONG.song)
 						{
-							case 'Isolated' | 'Lunacy' | 'Delusional':
+							case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins':
 								MusicBeatState.switchState(new EpisodesState());
-<<<<<<< HEAD
-							case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy' | 'Cycled Sins' | 'War Dilema':
-								MusicBeatState.switchState(new ExtrasState());
-=======
-							case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy':
+							case 'Hunted' | 'Malfunction' | 'Birthday' | "Don't Cross!" | 'Isolated Old' | 'Mercy' | 'Cycled Sins' | 'War Dilema':
 								MusicBeatState.switchState(new CustomFPMenuTestState());
->>>>>>> b59263e8617a56e9e87f6530df181f7c9abf3406
 							default:
 								MusicBeatState.switchState(new EpisodesState());
 						}

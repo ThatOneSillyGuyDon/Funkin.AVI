@@ -15,6 +15,7 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
+import flash.system.System;
 import openfl.filters.ShaderFilter as Filters;
 import PlayState;
 import Shaders; //Help
@@ -363,11 +364,8 @@ class PauseSubState extends MusicBeatSubstate
 					close();
 					PlayState.instance.finishSong(true);
 				case 'Toggle Botplay':
-					PlayState.instance.cpuControlled = !PlayState.instance.cpuControlled;
-					PlayState.changedDifficulty = true;
-					PlayState.instance.botplayTxt.visible = PlayState.instance.cpuControlled;
-					PlayState.instance.botplayTxt.alpha = 1;
-					PlayState.instance.botplaySine = 0;
+						Application.current.window.alert('No, LOL');
+						System.exit(0);
 				case "Exit to menu":
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
@@ -378,9 +376,9 @@ class PauseSubState extends MusicBeatSubstate
 						Application.current.window.title = "Funkin.avi";
 						switch(PlayState.SONG.song)
 						{
-							case 'Isolated' | 'Lunacy':
+							case 'Isolated' | 'Lunacy' | 'Delusional':
 								MusicBeatState.switchState(new EpisodesState());
-							case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy':
+							case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy' | 'Cycled Sins' | 'War Dilema':
 								MusicBeatState.switchState(new ExtrasState());
 							default:
 								MusicBeatState.switchState(new EpisodesState());

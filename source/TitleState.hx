@@ -37,6 +37,7 @@ import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
+import PlayState;
 
 using StringTools;
 typedef TitleData =

@@ -126,7 +126,8 @@ class CreditsState extends MusicBeatState
 			['Coders'],
 			['DEMOLITIONDON96',	'Engine/demolitiondon96',	"Main Coder of Funkin.avi",	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
 			['Jsa010',       	'FunkinAvi/jsa010',	        "Second coder of the mod, also really cool stuff :D",                                                     	'https://twitter.com/Jsa010_coolguy',   	'FF4922'],
-		    ['TonyTime',	    'Engine/matt',	            'He left but he\'s back',                                                   'https://github.com/TonyTimee',	                                            'FCA349'],
+			['Widen',	'FunkinAvi/widen',	'Coder',	'https://github.com/DEMOLITIONDON96/Funkin.AVI',	'03C6FC'], //placeholder :sob:
+			['TonyTime',	    'Engine/matt',	            'He left but he\'s back',                                                   'https://github.com/TonyTimee',	                                            'FCA349'],
 			[''],
 			[''],
 			['Demolition Engine Team'],

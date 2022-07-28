@@ -99,15 +99,28 @@ class EpicSelectorWOOO extends MusicBeatState{
 			changeSelection(1);
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
+			if(ClientPrefs.simpleMenu) {
+			MusicBeatState.switchState(new LowEndMenuState());
+			}else{
 				MusicBeatState.switchState(new MainMenuState());
 			}
-	
+		}
         if (controls.ACCEPT){
             switch(curSelected){
                 case 0:
-                MusicBeatState.switchState(new EpisodesState());
+				if(FPClientPrefs.episode1FPLock == 'unlocked')
+				{
+					MusicBeatState.switchState(new EpisodesState());
+				}else{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}
                 case 1:
-                MusicBeatState.switchState(new ExtrasState());
+				if(FPClientPrefs.episode1FPLock == 'unlocked')
+				{
+					MusicBeatState.switchState(new CustomFPMenuTestState());
+				}else{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}
             }
         }
         super.update(elapsed);

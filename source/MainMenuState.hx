@@ -79,6 +79,8 @@ class MainMenuState extends MusicBeatState
 	{
 		WeekData.loadTheFirstEnabledMod();
 
+		FPClientPrefs.loadShit();
+
 		Application.current.window.title = "Funkin.avi";
 		
 		#if desktop
@@ -259,7 +261,6 @@ class MainMenuState extends MusicBeatState
 				});
 			else
 				menuItem.y = 108 + (0 * 90);
-
 		
 			// Donate
 			/*var menuItem:FlxSprite = new FlxSprite(100, 700);
@@ -470,8 +471,8 @@ class MainMenuState extends MusicBeatState
 									//case 'mods':
 										//MusicBeatState.switchState(new ModsMenuState());
 									//#end
-									case 'awards':
-										MusicBeatState.switchState(new AchievementsMenuState());
+									//case 'awards':
+										//MusicBeatState.switchState(new AchievementsMenuState());
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':

@@ -32,7 +32,7 @@ class EpisodesState extends MusicBeatState
 {
 	private var camFilter:FlxCamera;
 
-	var songs:Array<SongMetadata> = [];
+	private var songs:Array<SongMetadata> = [];
 
 	var selector:FlxText;
 	private static var curSelected:Int = 0;
@@ -78,7 +78,7 @@ class EpisodesState extends MusicBeatState
 			
 		Application.current.window.title = "Funkin.avi - Freeplay: Main Story Songs";
 
-		for (i in 0...WeekData.weeksList.length) {
+		/*for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
 
 			var leWeek:WeekData = WeekData.weeksLoaded.get(WeekData.weeksList[i]);
@@ -101,7 +101,23 @@ class EpisodesState extends MusicBeatState
 				}
 				addSong(song[0], i, song[1], FlxColor.fromRGB(colors[0], colors[1], colors[2]));
 			}
-		}
+		}*/
+
+		FPClientPrefs.loadShit();
+
+        if(FPClientPrefs.episode1FPLock == 'unlocked')
+        {
+            addSong('Isolated', 1, 'mickey', FlxColor.fromRGB(60, 60, 60));
+            addSong('Lunacy', 1, 'lunamick', FlxColor.fromRGB(60, 60, 60));
+            addSong('Delusional', 1, 'insanemick', FlxColor.fromRGB(60, 60, 60));
+        }
+
+        if(FPClientPrefs.episode2FPLock == 'unlocked')
+        {
+            addSong('Twisted Grins', 2, 'smile', FlxColor.fromRGB(115, 86, 86));
+            addSong('Facade', 2, 'smile', FlxColor.fromRGB(105, 17, 10));
+        }
+
 		WeekData.loadTheFirstEnabledMod();
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
@@ -386,18 +402,12 @@ class EpisodesState extends MusicBeatState
 				instPlaying = curSelected;
 				switch(PlayState.SONG.song)
 				{
-					case 'Isolated' | 'Laugh Track':
+					case 'Isolated':
 					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
 					case 'Lunacy':
 					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: obscurity.";
 					case 'Delusional':
 					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
-					case 'Isolated Old' | "Don't Cross!":
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: Yama haki";
-					case 'Malfunction':
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: obscurity.";
-					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - Listening to: Twisted Grins - Composed by: Sayan Sama";
 					default:
 					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song;
 				}
@@ -440,6 +450,7 @@ class EpisodesState extends MusicBeatState
 			FlxG.sound.music.volume = 0;
 					
 			destroyFreeplayVocals();
+			ExtrasState.destroyFreeplayVocals();
 		}
 		else if(controls.RESET)
 		{

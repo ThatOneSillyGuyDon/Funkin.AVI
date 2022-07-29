@@ -519,26 +519,6 @@ class PlayState extends MusicBeatState
 		SONG.stage = curStage;
 
 		var stageData:StageFile = StageData.getStageFile(curStage);
-<<<<<<< HEAD
-=======
-		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
-			stageData = {
-				directory: "",
-				defaultZoom: 0.9,
-				isPixelStage: false,
-
-				boyfriend: [770, 100],
-				girlfriend: [400, 130],
-				opponent: [100, 100],
-				hide_girlfriend: false,
-
-				camera_boyfriend: [0, 0],
-				camera_opponent: [0, 0],
-				camera_girlfriend: [0, 0],
-				camera_speed: 1
-			};
-		}
->>>>>>> fc2c855217225af31d4827edb233cf012ebad232
 
 		defaultCamZoom = stageData.defaultZoom;
 		isPixelStage = stageData.isPixelStage;

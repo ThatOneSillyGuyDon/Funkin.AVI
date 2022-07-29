@@ -52,13 +52,12 @@ class AchievementsMenuState extends MusicBeatState
 
 		for (i in 0...options.length) {
 			var achieveName:String = Achievements.achievementsStuff[achievementIndex[i]][2];
-			var optionText:Alphabet = new Alphabet(0, (100 * i) + 210, Achievements.isAchievementUnlocked(achieveName) ? Achievements.achievementsStuff[achievementIndex[i]][0] : 'Locked', false, false);
+			var optionText:Alphabet = new Alphabet(0, (100 * i) + 210, Achievements.isAchievementUnlocked(achieveName) ? Achievements.achievementsStuff[achievementIndex[i]][0] : '?', false, false);
 			optionText.isMenuItem = true;
 			optionText.x += 280;
 			optionText.xAdd = 200;
 			optionText.targetY = i;
 			grpOptions.add(optionText);
-			optionText.screenCenter(X);
 
 			var icon:AttachedAchievement = new AttachedAchievement(optionText.x - 105, optionText.y, achieveName);
 			icon.sprTracker = optionText;
@@ -69,15 +68,8 @@ class AchievementsMenuState extends MusicBeatState
 		descText = new FlxText(150, 600, 980, "", 32);
 		descText.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		descText.scrollFactor.set();
-		descText.borderSize = 2.2; //OMG GEOMETRY DASH 2.2
+		descText.borderSize = 2.4;
 		add(descText);
-
-		var resetText:FlxText = new FlxText(0, 680, FlxG.width, "Press R to reset achievement", 12);
-		resetText.borderSize = 5;
-		resetText.setFormat(Paths.font("vcr.ttf"), 28, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		resetText.scrollFactor.set();
-		add(resetText);
-
 		changeSelection();
 
 		super.create();
@@ -91,17 +83,6 @@ class AchievementsMenuState extends MusicBeatState
 		}
 		if (controls.UI_DOWN_P) {
 			changeSelection(1);
-		}
-
-		if(controls.RESET) {
-			openSubState(new Prompt('This action will clear the progress of the selected achievement.\n\nProceed?', 0, function() {
-				FlxG.sound.play(Paths.sound('confirmMenu'));
-				FlxG.mouse.visible = true;
-				achievementArray[curSelected].iForgor();
-				grpOptions.members[curSelected].changeText('Locked');
-			}, function() {
-				FlxG.sound.play(Paths.sound('cancelMenu'));
-			}, false));
 		}
 
 		if (controls.BACK) {

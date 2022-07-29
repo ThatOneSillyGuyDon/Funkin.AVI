@@ -1,7 +1,6 @@
 //Modificed KE code  
 //                             -some guy in the world
 //also for lag prevention
-//this is now unused cus memory shit
 
 #if sys
 package;
@@ -47,7 +46,7 @@ class Cache extends MusicBeatState
 	{
 		Application.current.window.title = "Funkin.avi - Loading...";
 
-		FlxG.mouse.visible = true;
+		FlxG.mouse.visible = false;
 
 		FlxG.worldBounds.set(0,0);
 
@@ -58,7 +57,7 @@ class Cache extends MusicBeatState
 		menuBG.screenCenter();
 		add(menuBG);
 
-		shitz = new FlxText(12, 12, 0, 'Loading ', 12);
+		shitz = new FlxText(12, 12, 0, "Loading Assets...", 12);
 		shitz.scrollFactor.set();
 		shitz.setFormat("NewWaltDisneyFontRegular-BPen.ttf", 32, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(shitz);
@@ -132,19 +131,20 @@ class Cache extends MusicBeatState
 			graph.persist = true;
 			graph.destroyOnNoUse = false;
 			bitmapData.set(replaced,graph);
-			trace(i + ', yeah its working');
+			trace(i);
 		}
 
 
 
 		for (i in music) 
 		{
-			trace(i + ' <- this file too');
+			trace(i + ' loaded');
+			//FlxG.sound.cache(Paths.inst(i));
+			//FlxG.sound.cache(Paths.voices(i));
 		}
 
 
 		#end
-		if(FlxG.save.data.flashing = null)
 		FlxG.switchState(new TitleState());
 	}
 

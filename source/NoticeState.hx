@@ -58,10 +58,8 @@ class NoticeState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if(!leftState) {
 			var back:Bool = controls.BACK;
 			if (controls.ACCEPT || back) {
-				leftState = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
 				if(!back) {
@@ -83,7 +81,6 @@ class NoticeState extends MusicBeatState
 					});
 				}
 			}
-		}
 		super.update(elapsed);
 	}
 }

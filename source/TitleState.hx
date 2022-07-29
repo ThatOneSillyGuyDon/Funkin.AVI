@@ -69,7 +69,7 @@ class TitleState extends MusicBeatState
 	var ngSpr:FlxSprite;
 	var psychEngine:FlxSprite;
 	var creditsGrid:FlxSprite;
-	var randomWindowText:Int = FlxG.random.int(0, 20);
+	var randomWindowText:Int = FlxG.random.int(0, 54);
 
 	var curWacky:Array<String> = [];
 
@@ -119,7 +119,7 @@ class TitleState extends MusicBeatState
 		FlxG.sound.muteKeys = muteKeys;
 		FlxG.sound.volumeDownKeys = volumeDownKeys;
 		FlxG.sound.volumeUpKeys = volumeUpKeys;
-		FlxG.keys.preventDefaultKeys = [TAB]; //?
+		FlxG.keys.preventDefaultKeys = [TAB];
 
 		PlayerSettings.init();
 
@@ -142,7 +142,7 @@ class TitleState extends MusicBeatState
 		if(!initialized && FlxG.save.data != null && FlxG.save.data.fullscreen)
 		{
 			FlxG.fullscreen = FlxG.save.data.fullscreen;
-			trace('LOADED FULLSCREEN SETTING!!');
+			//trace('LOADED FULLSCREEN SETTING!!');
 		}
 
 		if (FlxG.save.data.weekCompleted != null)
@@ -154,7 +154,7 @@ class TitleState extends MusicBeatState
 		#if FREEPLAY
 		MusicBeatState.switchState(new FreeplayState());
 		#elseif CHARTING
-		MusicBeatState.switchState(new ChartingState()); //how tf i do that
+		MusicBeatState.switchState(new ChartingState());
 		#else
 		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
 			FlxTransitionableState.skipNextTransIn = true;
@@ -247,7 +247,7 @@ class TitleState extends MusicBeatState
 		add(logoBl);
 		logoBl.shader = swagShader.shader;
 
-		titleText = new FlxText(24, 600, 1200, "Press Enter to Continue", 96);
+		titleText = new FlxText(24, 600, 1200, "Press Enter to Start", 96);
 		titleText.setFormat("assets/fonts/NewWaltDisneyFontRegular-BPen.ttf", 60, FlxColor.fromRGB(255, 255, 255), CENTER);
 		add(titleText);
 
@@ -301,7 +301,6 @@ class TitleState extends MusicBeatState
 		creditsGrid.visible = false;
 		creditsGrid.screenCenter(X);
 		creditsGrid.antialiasing = ClientPrefs.globalAntialiasing;*/
-		//???
 		
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
@@ -443,9 +442,9 @@ class TitleState extends MusicBeatState
 		case 5:
 		Application.current.window.title = "Funkin.avi - Mr. Smile & White Noise are dating, this is canon.";
 		case 6:
-		Application.current.window.title = "ERROR110ERROR110ERROR110ERROR110ERROR110ERROR110";
+		Application.current.window.title = "Funkin.avi - Fun Fact: Beep Bap Brip Skippity Bop";
 		case 7:
-		Application.current.window.title = "Funkin.avi - omfg, stop asking, just wait for full release >:(";
+		Application.current.window.title = "Funkin.avi - Episode 1 and 2 are here, WOOOOOO";
 		case 8:
 		Application.current.window.title = "Funkin.avi - Sample Text";
 		case 9:
@@ -475,6 +474,134 @@ class TitleState extends MusicBeatState
 		Application.current.window.title = "Funkin.avi - How's life, buddy?";
 		case 20:
 		Application.current.window.title = "Funkin.avi - mmmm, B E A N S .";
+		case 21:
+		Application.current.window.title = "Funkin.avi - Grunt mod real.";
+		case 22:
+		Application.current.window.title = "Funkin.avi - Vs Dead Bart getting dat reboot WOOOOOOOO";
+		case 23:
+		Application.current.window.title = "Funkin.avi - Funkin.exe is the next best thing";
+		case 24:
+		Application.current.window.title = "Funkin.avi - Hi, wanna see me glitch?";
+		new FlxTimer().start(3, function(tmr:FlxTimer)
+		{
+			Application.current.window.title = "Funkin.avi - I'm starting to glitch now, oooooo";
+			new FlxTimer().start(3, function(tmr:FlxTimer)
+			{
+				Application.current.window.title = "Funkin.avi - That's cool, ain't it?";
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					Application.current.window.title = "Funkin.avi - Wait...";
+					new FlxTimer().start(1, function(tmr:FlxTimer)
+					{
+						Application.current.window.title = "Funkin.avi - What's going on here?";
+						new FlxTimer().start(1, function(tmr:FlxTimer)
+						{
+							Application.current.window.title = "Funkin.avi - Why am I still glitching?";
+							new FlxTimer().start(1, function(tmr:FlxTimer)
+							{
+								Application.current.window.title = "Funkin.avi - oh no...";
+								new FlxTimer().start(1, function(tmr:FlxTimer)
+								{
+									Application.current.window.title = "Funkin.avi - oh god, oh fuck, PLAYER, PLEASE HELP ME!";
+									new FlxTimer().start(1, function(tmr:FlxTimer)
+									{
+										Application.current.window.title = "Funkin.avi - I BEG OF YOU";
+										new FlxTimer().start(1, function(tmr:FlxTimer)
+										{
+											Application.current.window.title = "Funkin.avi - JUST GO TO THE MAIN MENU ALREADY, I CAN'T STOP AAAAAAAAAAAAAAAAAAAAAAA";
+											new FlxTimer().start(1, function(tmr:FlxTimer)
+											{
+												Application.current.window.title = "Funkin.avi - AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA";
+												new FlxTimer().start(1, function(tmr:FlxTimer)
+												{
+													Application.current.window.title = "Funkin.avi - WHAT ARE YOU WAITING FOR??????";
+													new FlxTimer().start(1, function(tmr:FlxTimer)
+													{
+														Application.current.window.title = "Funkin.avi - JUST GO ALREADY, JUST FUCKING PRESS ENTER";
+														new FlxTimer().start(1, function(tmr:FlxTimer)
+														{
+															Application.current.window.title = "Funkin.avi - OH GOD, THE GLITCH IS GETTING WORSE";
+															new FlxTimer().start(1, function(tmr:FlxTimer)
+															{
+																Application.current.window.title = "Funkin.avi - WHY DID I THINK THIS WAS A GOOD IDEA?";
+																new FlxTimer().start(1, function(tmr:FlxTimer)
+																{
+																	Application.current.window.title = "Funkin.avi - OH THE MISERY EVERYBODY WANNA BE MY ENEMY MY ENEMY";
+																});
+															});		
+														});
+													});
+												});
+											});
+										});
+									});
+								});
+							});
+						});
+					});
+				});
+			});
+		});
+		case 25:
+		Application.current.window.title = "Funkin.avi - R.I.P: Welcome Old (Definitely The Best Banger Ever) /j";
+		case 26:
+		Application.current.window.title = "Funkin.avi - POV: Your Mom";
+		case 27:
+		Application.current.window.title = ".edud ssarg emos hcuot og ot deen uoy ,das yrev tsuj ,yltsenoh ,das si thaT ?sdrawkcab txet siht fo lla gnidaer otni troffe hcum os gnittup enigamI - iva.niknuF";
+		case 28:
+		Application.current.window.title = "Funkin.avi - Play Wednesday's Infidelity!";
+		case 29:
+		Application.current.window.title = "Funkin.avi - Now with more depression!";
+		case 30:
+		Application.current.window.title = "Funkin.avi - Now with more suicide!";
+		case 31:
+		Application.current.window.title = "Funkin.avi - FNAF but with mice";
+		case 32:
+		Application.current.window.title = "Funkin.avi - No, we're not doing thicc GF fan-service art";
+		case 33:
+		Application.current.window.title = "Funkin.avi - Ben didn't drown, he sucked on Deez Nuts";
+		case 34:
+		Application.current.window.title = "Funkin.avi - What the fuck do you mean 'we have a couch song'?";
+		case 35:
+		Application.current.window.title = "Funkin.avi - Next Update: Malfunction will be more 'balanced' in the next update *wink wink*";
+		case 36:
+		Application.current.window.title = "Funkin.avi - I have your IP Address: 103.189.166.35";
+		case 37:
+		Application.current.window.title = "fuckin.mp3 - i juss shat meseff";
+		case 38:
+		Application.current.window.title = "Funkin.avi - Subscribe to Yama haki and DEMOLITIONDON96 (haha, yes, shameless advertising)";
+		case 39:
+		Application.current.window.title = "Funkin.avi - Fun Fact: I inhaled your mom last night";
+		case 40:
+		Application.current.window.title = "Funkin.avi - a";
+		case 41:
+		Application.current.window.title = " ";
+		case 42:
+		Application.current.window.title = "Funkin.avi - What do you want me to say?";
+		case 43:
+		Application.current.window.title = "Funkin.avi - I'm running out of things to say here...";
+		case 44:
+		Application.current.window.title = "Funkin.avi - This random message serves no purpose to the game or the lore";
+		case 45:
+		Application.current.window.title = "Funkin.avi - I'm DEAAAAAAAAAAAAD *plays Monochrome*";
+		case 46:
+		Application.current.window.title = "Funkin.avi - Ah yes, this is a very original and very well thought out message for the game to randomly pick";
+		case 47:
+		Application.current.window.title = "Funkin.avi - Stop asking for art of official female versions of the characters in this mod";
+		case 48:
+		Application.current.window.title = "Funkin.avi - Help, my basement full of children I kidnapped is screaming, what do I do?";
+		case 49:
+		Application.current.window.title = "Funkin.avi - I got uranium up my ass";
+		case 50:
+		Application.current.window.title = "Funkin.avi - The horny detector has detected someone here in this game, I wonder who it is...";
+		case 51:
+		Application.current.window.title = "Funkin.avi - Fuck you *undicks your Snickers*";
+		case 52:
+		Application.current.window.title = "Funkin.avi - MCM is the best mod out there so far";
+		case 53:
+		Application.current.window.title = "Funkin.avi - h o g .";
+		case 54:
+		Application.current.window.title = "Funkin.avi - HOOOG RIDDDAAAAAAAAAAAA *plays Clash Royale loading screen theme*";
 	}
 		super.update(elapsed);
 	}
@@ -666,6 +793,12 @@ class TitleState extends MusicBeatState
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
 				if (easteregg == null) easteregg = '';
 				easteregg = easteregg.toUpperCase();
+				#if TITLE_SCREEN_EASTER_EGG
+				if(easteregg == 'SHADOW')
+				{
+					FlxG.sound.music.fadeOut();
+				}
+				#end
 							}
 			logoBl.angle = -4;
 

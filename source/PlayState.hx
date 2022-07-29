@@ -852,7 +852,7 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
 					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
 					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
-					//addShaderToCamera('game', new VhsEffect(0.3, 0));
+					addShaderToCamera('game', new VhsEffect(0.3, 0));
 					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());

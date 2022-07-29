@@ -273,6 +273,8 @@ class PlayState extends MusicBeatState
 	var light:BGSprite;
 	var isolatedIntro:FlxSprite;
 	var treesFront:BGSprite;
+	var depression:BGSprite;
+	var vignetteCam:BGSprite;
 
 	//Spotlight Functions
 	var spotlight:BGSprite;
@@ -369,22 +371,41 @@ class PlayState extends MusicBeatState
 		instance = this;
 
 		switch(PlayState.SONG.song) {
-			case 'Isolated' | 'Laugh Track':
+			case 'Isolated':
 				songComposer = 'Yama haki & obscurity.';
-			case 'Lunacy' | 'Malfunction' | 'Mercy' | 'Facade':
+			case 'Lunacy':
 				songComposer = 'obscurity.';
+			case 'Malfunction':
+				songComposer = 'obscurity.';
+				if (FlxG.save.data.malfunctionLock != 'beaten') FPClientPrefs.malfunctionLock = 'unlocked';
+			case 'Mercy':
+				songComposer = 'obscurity.';
+				if (FlxG.save.data.mercyLock != 'beaten') FPClientPrefs.mercyLock = 'unlocked';
+			//case 'Facade':
+				//songComposer = 'obscurity.';
+				//this song is scrapped :(
 			case 'Delusional':
 				songComposer = 'FR3SHMoure';
-			case 'Isolated Old' | "Don't Cross!":
+			case 'Isolated Old':
 				songComposer = 'Yama haki';
+				if (FlxG.save.data.oldisolateLock != 'beaten') FPClientPrefs.oldisolateLock = 'unlocked';
+			case "Don't Cross!":
+				songComposer = 'Yama haki';
+				if (FlxG.save.data.crossinLock != 'beaten') FPClientPrefs.crossinLock = 'unlocked';
 			case 'Twisted Grins':
 				songComposer = 'Sayan Sama';
 			case 'War Dilemma':
 				songComposer = 'obscurity. & Sayan Sama';
-			case 'Hunted' | 'Cycled Sins':
+				if (FlxG.save.data.warLock != 'beaten') FPClientPrefs.warLock = 'unlocked';
+			case 'Hunted':
 				songComposer = 'JBlitz';
+				if (FlxG.save.data.huntedLock != 'beaten') FPClientPrefs.huntedLock = 'unlocked';
+			case 'Cycled Sins':
+				songComposer = 'JBlitz';
+				if (FlxG.save.data.sinsLock != 'beaten') FPClientPrefs.sinsLock = 'unlocked';
 			case 'Bless':
 				songComposer = 'END_SELLA';
+				if (FlxG.save.data.blessLock != 'beaten') FPClientPrefs.blessLock = 'unlocked';
 		}
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
@@ -498,23 +519,6 @@ class PlayState extends MusicBeatState
 		SONG.stage = curStage;
 
 		var stageData:StageFile = StageData.getStageFile(curStage);
-		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
-			stageData = {
-				directory: "",
-				defaultZoom: 0.9,
-				isPixelStage: false,
-
-				boyfriend: [770, 100],
-				girlfriend: [400, 130],
-				opponent: [100, 100],
-				hide_girlfriend: false,
-
-				camera_boyfriend: [0, 0],
-				camera_opponent: [0, 0],
-				camera_girlfriend: [0, 0],
-				camera_speed: 1
-			};
-		}
 
 		defaultCamZoom = stageData.defaultZoom;
 		isPixelStage = stageData.isPixelStage;
@@ -831,10 +835,9 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
 					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
 					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
-					addShaderToCamera('game', new VhsEffect(0.3, 0));
+					//addShaderToCamera('game', new VhsEffect(0.3, 0));
 					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
-					//addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
-					//at least made it visible man
+					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
 				}
@@ -842,10 +845,18 @@ class PlayState extends MusicBeatState
 
 
 			case 'Studio':
-				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-mickey';
-				//GameOverSubstate.loopSoundName = 'gameOver-mickey';
-				//GameOverSubstate.endSoundName = 'gameOverEnd-mickey';
-				//GameOverSubstate.characterName = 'bf-demon-dead';
+				/*if(SONG.song == 'Delusional')
+				{
+					GameOverSubstate.deathSoundName = 'fnf_loss_sfx-satan';
+					GameOverSubstate.loopSoundName = 'gameOver-satan';
+					GameOverSubstate.endSoundName = 'gameOverEnd-satan';
+					GameOverSubstate.characterName = 'bf-demon';
+				}else{
+					GameOverSubstate.deathSoundName = 'fnf_loss_sfx-mickey';
+					GameOverSubstate.loopSoundName = 'gameOver-mickey';
+					GameOverSubstate.endSoundName = 'gameOverEnd-mickey';
+					GameOverSubstate.characterName = 'bf-fake-dead';
+				}*/
 
 				var studioBG:BGSprite = new BGSprite('funkinAVI/episode1/streetNEW/bg', -400, -300);
 				studioBG.scale.set(1.2, 1.2);
@@ -855,10 +866,12 @@ class PlayState extends MusicBeatState
 				streetNEW.scale.set(1.2, 1.2);
 				add(streetNEW);
 
-				var vignetteCam:BGSprite = new BGSprite('funkinAVI/episode1/streetNEW/vignetteOverlay', -400, -300, 0, 0);
-				add(vignetteCam);
-				vignetteCam.screenCenter();
-				vignetteCam.scale.set(0.9, 0.9);
+				vignetteCam = new BGSprite('funkinAVI/episode1/streetNEW/vignetteOverlay', -400, -300, 0, 0);
+				vignetteCam.cameras = [camHUD];
+
+				depression = new BGSprite('funkinAVI/episode1/streetNEW/rain', -400, -300, 1.2, 1.2, ['Symbol 8 instance 1'], true);
+				depression.scale.set(1.6, 1.6);
+				depression.alpha = 0;
 
 				isolatedIntro = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
 				add(isolatedIntro);
@@ -895,11 +908,11 @@ class PlayState extends MusicBeatState
 				if(ClientPrefs.funiShaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
-					addShaderToCamera('hud', new VCRDistortionEffect(0.05, true, true, true));
-					addShaderToCamera('game', new ChromaticAberrationEffect(0.004));
-					addShaderToCamera('hud', new ChromaticAberrationEffect(0.006));
-					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
-					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					addShaderToCamera('hud', new VCRDistortionEffect(0.04, true, true, true));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.003));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
+					addShaderToCamera('hud', new TiltshiftEffect(0.4, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.3, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
 				}
@@ -1111,6 +1124,9 @@ class PlayState extends MusicBeatState
 		
 		switch(curStage)
 		{
+			case 'Studio':
+				add(depression);
+				add(vignetteCam);
 			case 'spooky':
 				add(halloweenWhite);
 			case 'tank':
@@ -1488,19 +1504,19 @@ class PlayState extends MusicBeatState
 		switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
-					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
 					case 'Lunacy' | 'Malfunction' | 'Mercy':
-					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: obscurity.";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
 					case 'Delusional':
-					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
 					case 'Isolated Old' | "Don't Cross!":
-					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Yama haki";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki";
 					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: Sayan Sama";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Sayan Sama";
 					case 'Hunted':
-					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: JBlitz";
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz";
 					default:
-					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song;
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
 				}
 
 		if(ClientPrefs.longBar)
@@ -1845,7 +1861,22 @@ class PlayState extends MusicBeatState
 		#end
 		
 		var daSong:String = Paths.formatToSongPath(curSong);
-		if (ClientPrefs.cutscenes && !seenCutscene) //CUTSCENES ON FREEPLAY
+		/*if (isStoryMode && !seenCutscene)
+		{
+			switch (daSong)
+			{
+				case "isolated":
+					startVideo('Episode1_Intro');
+					isolatedIntro.alpha = 1;
+					inCutscene = true;
+					if(FlxG.keys.justPressed.SPACE)
+					{
+						inCutscene = false;
+						seenCutscene = true;
+						startCountdown();
+					}
+			}
+		} else*/ if (ClientPrefs.cutscenes && !seenCutscene) //CUTSCENES ON FREEPLAY
 		{
 			switch (daSong)
 			{
@@ -3320,7 +3351,7 @@ class PlayState extends MusicBeatState
 		#if desktop //for prevent curPortrait error
 		switch(curSong){
 			case "Isolated" | "Lunacy" | "Delusional": curPortrait = "placeholder";
-			case "Malfunction": curPortrait = "placeholder";
+			case "Malfunction": curPortrait = "malfunction";
 			case "Don't Cross!": curPortrait = "placeholder";
 			case "Twisted Grins" | "Facade": curPortrait = "episode2";
 			case "Laugh Track": curPortrait = "placeholder";
@@ -3330,6 +3361,7 @@ class PlayState extends MusicBeatState
 			case "Isolated Old": curPortrait = "placeholder";
 			case "Cycled Sins": curPortrait = "cycledsins";
 			case "War Dilemma": curPortrait = "placeholder";
+			case "Hunted": curPortrait = "hunted";
 		}
 		#end
 
@@ -4522,13 +4554,17 @@ class PlayState extends MusicBeatState
 		#if desktop
 		DiscordClient.changePresence("Chart Editor", null, null, true);
 		#end
-		/*var poop = Highscore.formatSong('cheating', 1); //yes i stole this from lua
-		PlayState.SONG = Song.loadFromJson(poop, 'cheating');
-		PlayState.storyDifficulty = 1;
-		PlayState.instance.persistentUpdate = false;
-		LoadingState.loadAndSwitchState(new PlayState());*/
-		//for now cus we need the chart editor, and no i don't want to spend 1 extra GB on my PC
 	}
+
+	/*
+	function lol() 
+		{ persistentUpdate = false;
+			 paused = true;
+			  cancelMusicFadeTween();
+			   MusicBeatState.switchState(new OpenSong()); 
+		}
+		just for hard code support??
+		*/
 
 	public var isDead:Bool = false; //Don't mess with this on Lua!!!
 	function doDeathCheck(?skipHealthCheck:Bool = false) {
@@ -4556,7 +4592,7 @@ class PlayState extends MusicBeatState
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				
-				Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Game Over";
+				Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + " - Game Over";
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here
@@ -5425,7 +5461,7 @@ class PlayState extends MusicBeatState
 		{
 			var yOffsetB:Int = 0;
 			var xOffsetB:Int = 0;
-			if (ClientPrefs.camMove  && !note.isSustainNote){
+			if (ClientPrefs.camMove){
 				if (gf.animation.curAnim.name.startsWith('singUP')){
 					yOffsetB = -25;
 					xOffsetB = 0;
@@ -5470,7 +5506,7 @@ class PlayState extends MusicBeatState
 	var cameraTwn:FlxTween;
 	public function moveCamera(isDad:Bool, isNote:Bool = false, yOffsetB:Float = 0, xOffsetB:Float = 0, yOffsetD:Float = 0, xOffsetD:Float = 0)
 	{
-		if (isNote && ClientPrefs.camMove  && !note.isSustainNote){
+		if (isNote && ClientPrefs.camMove){
 			if (boyfriend.animation.curAnim.name.startsWith('singUP')){
 				yOffsetB = -25;
 				xOffsetB = 0;
@@ -5728,6 +5764,14 @@ class PlayState extends MusicBeatState
 						}
 
 						FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
+						switch(SONG.song)
+						{
+							case 'Delusional':
+								FPClientPrefs.episode1FPLock = 'unlocked';
+							case 'Twisted Grins':
+								FPClientPrefs.episode2FPLock = 'unlocked';
+						}	
+						FPClientPrefs.saveShit();
 						FlxG.save.flush();
 					}
 					changedDifficulty = false;
@@ -5782,9 +5826,30 @@ class PlayState extends MusicBeatState
 					CustomFadeTransition.nextCamera = null;
 				}
 				//MusicBeatState.switchState(new MainMenuState());
-				MusicBeatState.switchState(new EpicSelectorWOOO());
+				MusicBeatState.switchState(new CustomFPMenuTestState());
 				FlxG.mouse.visible = true;
 				FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
+				switch(SONG.song) {
+					case 'Hunted':
+						FPClientPrefs.huntedLock = 'beaten';
+					case 'Isolated Old':
+						FPClientPrefs.oldisolateLock = 'beaten';
+					case 'Malfunction':
+						FPClientPrefs.malfunctionLock = 'beaten';
+					case 'Revenge':
+						FPClientPrefs.revengeLock = 'beaten';
+					case 'Bless':
+						FPClientPrefs.blessLock = 'beaten';
+					case 'Cycled Sins':
+						FPClientPrefs.sinsLock = 'beaten';
+					case 'War Dilemma':
+						FPClientPrefs.warLock = 'beaten';
+					case "Don't Cross!":
+						FPClientPrefs.crossinLock = 'beaten';
+					case 'Mercy':
+						FPClientPrefs.mercyLock = 'beaten';
+				}
+				FPClientPrefs.saveShit();
 				changedDifficulty = false;
 			}
 			transitioning = true;
@@ -6618,7 +6683,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove && !note.isSustainNote)
+									if(ClientPrefs.camMove)
 									{
 										camFollow.x -= 15;
 									}	
@@ -6664,7 +6729,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove && !note.isSustainNote)
+									if(ClientPrefs.camMove)
 									{
 										camFollow.y += 15;
 									}	
@@ -6710,7 +6775,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove && !note.isSustainNote)
+									if(ClientPrefs.camMove)
 									{
 										camFollow.y -= 15;
 									}	
@@ -6756,7 +6821,7 @@ class PlayState extends MusicBeatState
 												});
 											}
 									}
-									if(ClientPrefs.camMove && !note.isSustainNote)
+									if(ClientPrefs.camMove)
 									{
 										camFollow.x += 15;
 									}	
@@ -6954,7 +7019,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove && !note.isSustainNote)
+						if(ClientPrefs.camMove)
 						{
 							camFollow.x -= 15;
 						}	
@@ -6967,7 +7032,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove && !note.isSustainNote)
+						if(ClientPrefs.camMove)
 						{
 							camFollow.y += 15;
 						}
@@ -6980,7 +7045,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove && !note.isSustainNote)
+						if(ClientPrefs.camMove)
 						{
 							camFollow.y -= 15;
 						}
@@ -6993,7 +7058,7 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove && !note.isSustainNote)
+						if(ClientPrefs.camMove)
 						{
 							camFollow.x += 15;
 						}
@@ -7101,7 +7166,7 @@ class PlayState extends MusicBeatState
 				if(!dodged) {
 					FlxG.camera.shake(0.05, 0.05);
 					health = 0;
-					trace("L bozo");
+					trace("lmfao you fucking died to a mouse");
 					dodged = false;
 				} else {
 					boyfriend.playAnim('dodge');
@@ -7125,6 +7190,7 @@ class PlayState extends MusicBeatState
 		});*/
 		pressCounter = 0;
 	}
+
 
 	var fastCarCanDrive:Bool = true;
 
@@ -7706,7 +7772,13 @@ class PlayState extends MusicBeatState
 			case 'Lunacy':
 				//Insert Events here
 			case 'Delusional':
-				//Insert Events here
+				if(curStep == 456)
+				{
+					if(curStage == 'Studio')
+					{
+						depression.alpha = 1;
+					}
+				}
 			case 'Mercy':
 				//Insert Events here
 			case 'Twisted Grins':
@@ -7715,30 +7787,22 @@ class PlayState extends MusicBeatState
 				//Insert Events here
 			case 'War Dilemma':
 				#if !html5 //a reference of the video size
-				Lib.application.window.width = 1400;
-				Lib.application.window.height = 700;
+				Lib.application.window.width = 1382;
+				Lib.application.window.height = 500;
 				#end
 			case 'Isolated Old':
 				//Insert Events here
 			case "Don't Cross!":
 				//Insert Events here
 			case 'Cycled Sins':
-				if(curStep == 505)
-				{
-					health -0.1;
-					camHUD.visible = false;
-
-				}
 				if(curStep == 572)
 				{
 					if(curStage == 'RelapseStage')
 					{
-						camHUD.visible = true;
 						relapseCalm.alpha = 0;
 						relapseChaos.alpha = 1;
 					}
 				}
-
 			case 'Malfunction':
 				//Insert Events here
 			case 'Hunted':

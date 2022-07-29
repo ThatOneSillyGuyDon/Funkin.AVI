@@ -519,23 +519,6 @@ class PlayState extends MusicBeatState
 		SONG.stage = curStage;
 
 		var stageData:StageFile = StageData.getStageFile(curStage);
-		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
-			stageData = {
-				directory: "",
-				defaultZoom: 0.9,
-				isPixelStage: false,
-
-				boyfriend: [770, 100],
-				girlfriend: [400, 130],
-				opponent: [100, 100],
-				hide_girlfriend: false,
-
-				camera_boyfriend: [0, 0],
-				camera_opponent: [0, 0],
-				camera_girlfriend: [0, 0],
-				camera_speed: 1
-			};
-		}
 
 		defaultCamZoom = stageData.defaultZoom;
 		isPixelStage = stageData.isPixelStage;
@@ -925,11 +908,11 @@ class PlayState extends MusicBeatState
 				if(ClientPrefs.funiShaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
-					addShaderToCamera('hud', new VCRDistortionEffect(0.05, true, true, true));
-					addShaderToCamera('game', new ChromaticAberrationEffect(0.004));
-					addShaderToCamera('hud', new ChromaticAberrationEffect(0.006));
-					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
-					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					addShaderToCamera('hud', new VCRDistortionEffect(0.04, true, true, true));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.003));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
+					addShaderToCamera('hud', new TiltshiftEffect(0.4, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.3, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
 				}

@@ -373,9 +373,9 @@ class PauseSubState extends MusicBeatSubstate
 						Application.current.window.title = "Funkin.avi";
 						switch(PlayState.SONG.song)
 						{
-							case 'Isolated' | 'Lunacy' | 'Delusional':
+							case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins':
 								MusicBeatState.switchState(new EpisodesState());
-							case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy':
+							case 'Hunted' | 'Malfunction' | 'Birthday' | "Don't Cross!" | 'Isolated Old' | 'Mercy' | 'Cycled Sins' | 'War Dilema':
 								MusicBeatState.switchState(new CustomFPMenuTestState());
 							default:
 								MusicBeatState.switchState(new EpisodesState());

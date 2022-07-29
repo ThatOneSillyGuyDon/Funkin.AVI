@@ -519,25 +519,6 @@ class PlayState extends MusicBeatState
 		SONG.stage = curStage;
 
 		var stageData:StageFile = StageData.getStageFile(curStage);
-		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
-			stageData = {
-				name: "",
-				directory: "",
-				defaultZoom: 0.9,
-				isPixelStage: false,
-
-				boyfriend: [770, 100],
-				girlfriend: [400, 130],
-				opponent: [100, 100],
-				layerArray: [],
-				hide_girlfriend: false,
-
-				camera_boyfriend: [0, 0],
-				camera_opponent: [0, 0],
-				camera_girlfriend: [0, 0],
-				camera_speed: 1
-			};
-		}
 
 		defaultCamZoom = stageData.defaultZoom;
 		isPixelStage = stageData.isPixelStage;
@@ -927,11 +908,11 @@ class PlayState extends MusicBeatState
 				if(ClientPrefs.funiShaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
-					addShaderToCamera('hud', new VCRDistortionEffect(0.05, true, true, true));
-					addShaderToCamera('game', new ChromaticAberrationEffect(0.004));
-					addShaderToCamera('hud', new ChromaticAberrationEffect(0.006));
-					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
-					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					addShaderToCamera('hud', new VCRDistortionEffect(0.04, true, true, true));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.003));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
+					addShaderToCamera('hud', new TiltshiftEffect(0.4, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.3, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
 				}
@@ -7805,14 +7786,7 @@ class PlayState extends MusicBeatState
 			case 'Bless':
 				//Insert Events here
 			case 'War Dilemma':
-<<<<<<< HEAD
-				#if !html5 //a reference of the video size
-				Lib.application.window.width = 1382;
-				Lib.application.window.height = 500;
-				#end
-=======
 				//Insert Events here
->>>>>>> b59263e8617a56e9e87f6530df181f7c9abf3406
 			case 'Isolated Old':
 				//Insert Events here
 			case "Don't Cross!":

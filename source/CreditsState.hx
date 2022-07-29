@@ -123,16 +123,10 @@ class CreditsState extends MusicBeatState
 			['Flaconadir',	'flacon',	'Voice Actor',	'https://twitter.com/flaconadir',	'FFFFFF'],
 			['JUSTIN X',	'justin',	'Voice Actor',	'https://twitter.com/CbmShow',	'FFFFFF'],
 			['Coders'],
-<<<<<<< HEAD
 			['DEMOLITIONDON96',	'Engine/demolitiondon96',	"Main Coder of Funkin.avi",	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
 			['Jsa010',       	'FunkinAvi/jsa010',	        "Second coder of the mod, also really cool stuff :D",                                                     	'https://twitter.com/Jsa010_coolguy',   	'FF4922'],
 			['Widen',	'FunkinAvi/widen',	'Coder',	'https://github.com/DEMOLITIONDON96/Funkin.AVI',	'03C6FC'], //placeholder :sob:
 			['TonyTime',	    'Engine/matt',	            'He left but he\'s back',                                                   'https://github.com/TonyTimee',	                                            'FCA349'],
-=======
-			['DEMOLITIONDON96',	'demolitiondon96',	"There's more artist than coders bro\n(jsa is felling pain writing this)",	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
-			['Jsa010',       	'jsa010',	        "Second coder of the mod, also really cool stuff :D",                                                     	'https://twitter.com/Jsa010_coolguy',   	'FF4922'],
-		    ['TonyTime',	    'missing-icon',	    'He left but he\'s back',                                                   'https://github.com/TonyTimee',	                                            'FCA349'],
->>>>>>> b59263e8617a56e9e87f6530df181f7c9abf3406
 			[''],
 			[''],
 			['Demolition Engine Team'],
@@ -330,14 +324,10 @@ class CreditsState extends MusicBeatState
 					colorTween.cancel();
 				}
 				FlxG.sound.play(Paths.sound('cancelMenu'));
-				if(ClientPrefs.simpleMenu) {
-					MusicBeatState.switchState(new LowEndMenuState());
-				}else{
 					MusicBeatState.switchState(new MainMenuState());
 				}
 				quitting = true;
 			}
-		}
 		
 		for (item in grpOptions.members)
 		{

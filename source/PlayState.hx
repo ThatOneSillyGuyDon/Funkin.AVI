@@ -7,7 +7,6 @@ import Discord.DiscordClient;
 import Section.SwagSection;
 import Song.SwagSong;
 import WiggleEffect.WiggleEffectType;
-import kha.System as KhaSystem; //https://github.com/Kode/Kha
 import flixel.FlxBasic;
 import flixel.FlxCamera;
 import flixel.FlxG;
@@ -7169,7 +7168,6 @@ class PlayState extends MusicBeatState
 					health = 0;
 					trace("lmfao you fucking died to a mouse");
 					dodged = false;
-					KhaSystem.stop(0);
 				} else {
 					boyfriend.playAnim('dodge');
 					dodged = false;

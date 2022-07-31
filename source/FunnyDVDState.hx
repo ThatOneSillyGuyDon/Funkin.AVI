@@ -36,7 +36,7 @@ override function create() {
 
 override function update(elapsed:Float) {
     if (FlxG.keys.justPressed.ESCAPE) {
-        FlxG.switchState(new MainMenuState());  
+        FlxG.switchState(new MainMenuState()); //yep 
     }
     if (dvdLogo.x > FlxG.width - dvdLogo.width || dvdLogo.x < 0) {
         dvdLogo.velocity.x = -dvdLogo.velocity.x;

@@ -64,13 +64,23 @@ class StupidShittyNewFreeplayCategoryExample extends MusicBeatState
             text.screenCenter(X);
 		add(text);
 
-            var descBox = new AttachedSprite();
-		descBox.makeGraphic(1, 1, FlxColor.BLACK);
-		descBox.xAdd = -10;
-		descBox.yAdd = -10;
-		descBox.alphaMult = 0.6;
-		descBox.alpha = 0.6;
-		add(descBox);
+            var scratchStuff:FlxSprite = new FlxSprite();
+		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
+		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
+		scratchStuff.animation.play('idle');
+		scratchStuff.screenCenter();
+		scratchStuff.scale.x = 1.1;
+		scratchStuff.scale.y = 1.1;
+		add(scratchStuff);
+
+		var grain:FlxSprite = new FlxSprite();
+		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
+		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
+		grain.animation.play('idle');
+		grain.screenCenter();
+		grain.scale.x = 1.1;
+		grain.scale.y = 1.1;
+		add(grain);
 
             super.create();
       }

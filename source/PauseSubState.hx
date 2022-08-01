@@ -41,7 +41,7 @@ class PauseSubState extends MusicBeatSubstate
 	var skipTimeText:FlxText;
 	var skipTimeTracker:Alphabet;
 	var curTime:Float = Math.max(0, Conductor.songPosition);
-	var botplayText:FlxText;
+	//var botplayText:FlxText;
 
 	public static var songName:String = '';
 
@@ -225,8 +225,10 @@ class PauseSubState extends MusicBeatSubstate
 	}
 
 	var holdTime:Float = 0;
+	var cantUnpause:Float = 0.1;
 	override function update(elapsed:Float)
 	{
+		cantUnpause -= elapsed;
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 
@@ -252,13 +254,13 @@ class PauseSubState extends MusicBeatSubstate
 			case 'Skip Time':
 				if (controls.UI_LEFT_P)
 				{
-					FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'), 0.4);
+					FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 					curTime -= 1000;
 					holdTime = 0;
 				}
 				if (controls.UI_RIGHT_P)
 				{
-					FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'), 0.4);
+					FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 					curTime += 1000;
 					holdTime = 0;
 				}
@@ -277,34 +279,26 @@ class PauseSubState extends MusicBeatSubstate
 				}
 		}
 
-		if (accepted)
-		{
-			if (menuItems == difficultyChoices)
+		if (accepted && (cantUnpause <= 0 || !ClientPrefs.controllerMode))
 			{
-				if(menuItems.length - 1 != curSelected && difficultyChoices.contains(daSelected)) {
-					var name:String = PlayState.SONG.song;
-					var poop = Highscore.formatSong(name, curSelected);
-					PlayState.SONG = Song.loadFromJson(poop, name);
-					PlayState.storyDifficulty = curSelected;
-					MusicBeatState.resetState();
-					FlxG.sound.music.volume = 0;
-					PlayState.changedDifficulty = true;
-					PlayState.chartingMode = false;
-					skipTimeTracker = null;
-
-					if(skipTimeText != null)
-					{
-						skipTimeText.kill();
-						remove(skipTimeText);
-						skipTimeText.destroy();
+				if (menuItems == difficultyChoices)
+				{
+					if(menuItems.length - 1 != curSelected && difficultyChoices.contains(daSelected)) {
+						var name:String = PlayState.SONG.song;
+						var poop = Highscore.formatSong(name, curSelected);
+						PlayState.SONG = Song.loadFromJson(poop, name);
+						PlayState.storyDifficulty = curSelected;
+						MusicBeatState.resetState();
+						FlxG.sound.music.volume = 0;
+						PlayState.changedDifficulty = true;
+						PlayState.chartingMode = false;
+						return;
 					}
-					skipTimeText = null;
-					return;
+	
+					menuItems = menuItemsOG;
+					regenMenu();
 				}
-
-				menuItems = menuItemsOG;
-				regenMenu();
-			}
+	
 
 			switch (daSelected)
 			{

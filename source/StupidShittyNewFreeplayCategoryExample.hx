@@ -16,6 +16,8 @@ using StringTools;
 class StupidShittyNewFreeplayCategoryExample extends MusicBeatState
 {
       var BG:FlxSprite;
+      var BG2:FlxSprite;
+      var BG3:FlxSprite;
       var tag1:FlxSprite;
       var tag2:FlxSprite;
 
@@ -38,11 +40,6 @@ class StupidShittyNewFreeplayCategoryExample extends MusicBeatState
 		#end
 
             Application.current.window.title = "Funkin.avi - Freeplay: Category Menu";
-
-            BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
-		BG.updateHitbox();
-		BG.screenCenter();
-		add(BG);
 
             tag1 = new FlxSprite().loadGraphic(Paths.image('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'));
             tag1.updateHitbox();
@@ -83,7 +80,31 @@ class StupidShittyNewFreeplayCategoryExample extends MusicBeatState
 		add(grain);
 
             super.create();
+
+            switch (FlxG.random.int(1, 3))
+            {
+            case 1:
+            BG = new FlxSprite().loadGraphic(Paths.image('funkinAVI-freeplayBGs/Mickeybg'));
+		BG.updateHitbox();
+		BG.screenCenter();
+            BG.alpha = 0.2;
+		add(BG);
+
+            case 2:
+            BG2 = new FlxSprite().loadGraphic(Paths.image('funkinAVI-freeplayBGs/office'));
+		BG2.updateHitbox();
+		BG2.screenCenter();
+            BG2.alpha = 0.2;
+		add(BG2);
+
+            case 3:
+            BG3 = new FlxSprite().loadGraphic(Paths.image('funkinAVI-freeplayBGs/forest'));
+            BG3.updateHitbox();
+            BG3.screenCenter();
+            BG3.alpha = 0.2;
+            add(BG3);
       }
+}
 
       var selectedSomethin:Bool = false;
 

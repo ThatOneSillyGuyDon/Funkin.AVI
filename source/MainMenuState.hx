@@ -466,7 +466,7 @@ class MainMenuState extends MusicBeatState
 									case 'story_mode':
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
-										MusicBeatState.switchState(new EpicSelectorWOOO());
+										MusicBeatState.switchState(new StupidShittyNewFreeplayCategoryExample());
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':

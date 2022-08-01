@@ -548,6 +548,7 @@ class TitleState extends MusicBeatState
 		Application.current.window.title = "Funkin.avi - POV: Your Mom";
 		case 27:
 		Application.current.window.title = ".edud ssarg emos hcuot og ot deen uoy ,das yrev tsuj ,yltsenoh ,das si thaT ?sdrawkcab txet siht fo lla gnidaer otni troffe hcum os gnittup enigamI - iva.niknuF";
+		//Ok so this is the fucking text: "Funkin.avi - imagine putting so much effort into reading all of shit text backwards? That is sad, honestly, just very sad, you need to go touch some grass dude."
 		case 28:
 		Application.current.window.title = "Funkin.avi - Play Wednesday's Infidelity!";
 		case 29:

@@ -4,6 +4,8 @@ package;
 import Discord.DiscordClient;
 #end
 import flixel.FlxG;
+import flixel.text.FlxText;
+import flixel.util.FlxColor;
 import flixel.FlxSprite;
 import flixel.FlxCamera;
 import flixel.addons.transition.FlxTransitionableState;
@@ -11,7 +13,7 @@ import lime.app.Application;
 
 using StringTools;
 
-class Stupid Shitty New Freeplay Category Example extends MusicBeatState
+class StupidShittyNewFreeplayCategoryExample extends MusicBeatState
 {
       var BG:FlxSprite;
       var tag1:FlxSprite;
@@ -46,15 +48,29 @@ class Stupid Shitty New Freeplay Category Example extends MusicBeatState
             tag1.updateHitbox();
             tag1.antialiasing = ClientPrefs.globalAntialiasing;
             tag1.screenCenter(Y);
-            tag1.x -= 100; //IDK
+            tag1.x -= -140; //IDK
             add(tag1);
 
             tag2 = new FlxSprite().loadGraphic(Paths.image('Mickey_Mouse_South_Park'));
             tag2.updateHitbox();
             tag2.antialiasing = ClientPrefs.globalAntialiasing;
             tag2.screenCenter(Y);
-            tag2.x += 100; //IDK
-            add(tag1);
+            tag2.x += 740; //IDK
+            add(tag2); //Tony, you made me be 1 hour fixing this for nothing
+
+            var text:FlxText = new FlxText(60, FlxG.height - 104, 0, "Choose...", 12);
+		text.scrollFactor.set();
+		text.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 60, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+            text.screenCenter(X);
+		add(text);
+
+            var descBox = new AttachedSprite();
+		descBox.makeGraphic(1, 1, FlxColor.BLACK);
+		descBox.xAdd = -10;
+		descBox.yAdd = -10;
+		descBox.alphaMult = 0.6;
+		descBox.alpha = 0.6;
+		add(descBox);
 
             super.create();
       }
@@ -63,19 +79,13 @@ class Stupid Shitty New Freeplay Category Example extends MusicBeatState
 
       override function update(elapsed:Float)
             {
-                  if (FlxG.sound.music.volume < 0.8)
-                  {
-                        FlxG.sound.music.volume += 0.5 * FlxG.elapsed;
-                        if(FreeplayState.vocals != null) FreeplayState.vocals.volume += 0.5 * elapsed;
-                  }
-
                   if (!selectedSomethin)
                         {
                               if (controls.BACK)
                               {
                                     selectedSomethin = true;
                                     FlxG.sound.play(Paths.sound('cancelMenu'));
-                                    MusicBeatState.switchState(new THE_SUPER_COOL_EPIC_MENU_State());
+                                    MusicBeatState.switchState(new MainMenuState());
                               }
 
                               if(FlxG.mouse.overlaps(tag1) && FlxG.mouse.justPressed){
@@ -84,7 +94,7 @@ class Stupid Shitty New Freeplay Category Example extends MusicBeatState
                                     FlxG.sound.play(Paths.sound('confirmMenu'));
                               }
 
-                              if(FlxG.mouse.overlaps(tag1) && FlxG.mouse.justPressed){
+                              if(FlxG.mouse.overlaps(tag2) && FlxG.mouse.justPressed){
                                     MusicBeatState.switchState(new ExtrasState());
                                     selectedSomethin = true;
                                     FlxG.sound.play(Paths.sound('confirmMenu'));

@@ -8,6 +8,8 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
+import openfl.system.System as OpenSystem;
+import flash.system.System;
 import flixel.math.FlxMath;
 import flixel.tweens.FlxTween;
 import flixel.text.FlxText;
@@ -223,6 +225,14 @@ class ExtrasState extends MusicBeatState{
 		songs.push(new SongMetadataCool(songName, weekNum, songCharacter, color, difficulties));
 	}
 
+	
+	override function beatHit()
+		{
+			super.beatHit();
+			if (curBeat % 1 == 0 && ClientPrefs.camZooms)
+				FlxG.camera.zoom = 1.015;
+		}
+
 	function weekIsLocked(name:String):Bool {
 		var leWeek:WeekData = WeekData.weeksLoaded.get(name);
 		return (!leWeek.startUnlocked && leWeek.weekBefore.length > 0 && (!StoryMenuState.weekCompleted.exists(leWeek.weekBefore) || !StoryMenuState.weekCompleted.get(leWeek.weekBefore)));
@@ -247,6 +257,7 @@ class ExtrasState extends MusicBeatState{
 	var instPlaying:Int = -1;
 	private static var vocals:FlxSound = null;
 	var holdTime:Float = 0;
+	
 	override function update(elapsed:Float)
 	{
 		if (FlxG.sound.music.volume < 0.7)
@@ -386,7 +397,8 @@ class ExtrasState extends MusicBeatState{
 			}
 			
 			if (FlxG.keys.pressed.SHIFT){
-				LoadingState.loadAndSwitchState(new editors.ChartingState());
+				Application.current.window.alert('No Cheating ofc (this should be a cheating cover btw)');
+				System.exit(0);
 			}else{
 				LoadingState.loadAndSwitchState(new PlayState());
 				FlxG.mouse.visible = false;
@@ -543,6 +555,7 @@ class ExtrasState extends MusicBeatState{
 		diffText.x -= diffText.width / 2;
 	}
 }
+
 
 class SongMetadataCool
 {

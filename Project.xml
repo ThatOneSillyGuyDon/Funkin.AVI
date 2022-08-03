@@ -101,6 +101,7 @@
 	-->
 	<assets path="assets/fonts" embed='true'/>
 	<!-- _______________________________ Libraries ______________________________ -->
+	
 
 	<haxelib name="flixel" />
 	<haxedev set='webgl' />
@@ -126,6 +127,10 @@
 	<!--<haxelib name="nape-haxe4" />-->
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
+    <haxedef name="FREEPLAY" />
+	<haxedef name="FREEPLAYEXTRA" />
+	<haxedef name="CHARTING" />
+	<haxedef name="STORY" />
 
 	<!--Enable the Flixel core recording system-->
 	<!--<haxedef name="FLX_RECORD" />-->

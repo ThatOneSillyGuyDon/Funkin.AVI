@@ -152,9 +152,13 @@ class TitleState extends MusicBeatState
 
 		FlxG.mouse.visible = false;
 		#if FREEPLAY
-		MusicBeatState.switchState(new FreeplayState());
+		MusicBeatState.switchState(new EpisodesState());
+		#elseif FREEPLAYEXTRA
+		MusicBeatState.switchState(new ExtrasState());
 		#elseif CHARTING
 		MusicBeatState.switchState(new ChartingState());
+		#elseif STORY
+        MusicBeatState.switchState(new StoryMenuState());
 		#else
 		if(FlxG.save.data.flashing == null && !FlashingState.leftState) {
 			FlxTransitionableState.skipNextTransIn = true;

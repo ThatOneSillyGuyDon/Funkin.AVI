@@ -109,7 +109,7 @@ class CreditsState extends MusicBeatState
 			['Sayan Sama', 'missing-icon',	'Composer of Mr. Smiles Tracks',	'https://gamebanana.com/members/1825237',	'FFFFFF'],
 			['AzkoBlitz',	'azko',	'Composer',	'https://twitter.com/Azko57478381',	'FFFFFF'],
 			['JBlitz',	'blitz',	'Menu Music Composer',	'https://twitter.com/JBlitz_',	'FFFFFF'],
-			['END_SELLA',	'missing-icon',	'Composer',	'https://www.youtube.com/c/seibichu%E3%83%84/videos',	'FFFFFF'],
+			['END_SELLA',	'Sella',	'Composer',	'https://www.youtube.com/c/seibichu%E3%83%84/videos',	'FFFFFF'],
 			['AttackPan',	'missing-icon',	'Instrumentals for some Tracks',	'nolink',	'FFFFFF'],
 			['Charters'],
 			['DEMOLITIONDON96',	'demolitiondon96',	'Did some charts',	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],

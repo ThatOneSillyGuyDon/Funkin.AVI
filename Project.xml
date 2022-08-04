@@ -100,6 +100,7 @@
 		NOT USING A DIRECT THING TO THE ASSET!!!
 	-->
 	<assets path="assets/fonts" embed='true'/>
+	<assets path="example_mods/scripts" embed='true'/>
 	<!-- _______________________________ Libraries ______________________________ -->
 	
 
@@ -127,10 +128,6 @@
 	<!--<haxelib name="nape-haxe4" />-->
 
 	<!-- ______________________________ Haxedefines _____________________________ -->
-    <haxedef name="FREEPLAY" />
-	<haxedef name="FREEPLAYEXTRA" />
-	<haxedef name="CHARTING" />
-	<haxedef name="STORY" />
 
 	<!--Enable the Flixel core recording system-->
 	<!--<haxedef name="FLX_RECORD" />-->

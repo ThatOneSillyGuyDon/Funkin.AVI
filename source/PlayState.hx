@@ -7809,6 +7809,13 @@ class PlayState extends MusicBeatState
 				//Insert Events here
 			case 'Facade':
 				//Insert Events here
+			case 'Bless':
+				#if desktop
+				if(curStep == 276) {
+				Lib.application.window.width = 780;
+				Lib.application.window.height = 500;
+				#end
+			}
 		}
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????

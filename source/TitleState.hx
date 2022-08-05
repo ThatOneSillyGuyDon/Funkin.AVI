@@ -425,7 +425,7 @@ if (!transitioning && skippedIntro)
 				FlxTween.tween(titleText, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gfDance, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gradientBar, {y: 2000}, 3, {ease: FlxEase.quadIn});
-				
+		}
 		else if(easterEggEnabled)
 		{
 			var finalKey:FlxKey = FlxG.keys.firstJustPressed();

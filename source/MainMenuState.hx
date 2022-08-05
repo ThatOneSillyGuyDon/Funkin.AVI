@@ -481,7 +481,7 @@ class MainMenuState extends MusicBeatState
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
 				selectedSomethin = true;
-				MusicBeatState.switchState(new modPrevention.No());
+				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 			#end
 		}

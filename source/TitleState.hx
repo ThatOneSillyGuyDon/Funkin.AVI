@@ -54,6 +54,9 @@ typedef TitleData =
 }
 class TitleState extends MusicBeatState
 {
+	static inline final DON_T_CROSS = "don't-cross!"; //Not me, it was VS code
+
+	//Well, basically i wanted to do like that scrapped malfunction acces idea, but i ended got scrapped it cus it crashes
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
 	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
@@ -63,7 +66,7 @@ class TitleState extends MusicBeatState
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
-	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFAA00AA);
+	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFB003B0);
 	var credTextShit:Alphabet;
 	var textGroup:FlxGroup;
 	var ngSpr:FlxSprite;
@@ -72,6 +75,12 @@ class TitleState extends MusicBeatState
 	var randomWindowText:Int = FlxG.random.int(0, 54);
 
 	var curWacky:Array<String> = [];
+
+	//Fun Fact: this is 0.4.2 code that i copy and pasted
+	//BTW, basically i wanted to do like that scrapped malfunction acces idea, but i ended got scrapped it cus it crashes
+	var easterEggEnabled:Bool = true;
+	var easterEggKeyCombination:Array<FlxKey> = [FlxKey.R, FlxKey.A, FlxKey.T, FlxKey.I, FlxKey.O];
+	var lastKeysPressed:Array<FlxKey> = [];
 
 	var Timer:Float = 0;
 
@@ -376,6 +385,7 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
+
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
 		if (gamepad != null)
@@ -389,37 +399,71 @@ class TitleState extends MusicBeatState
 			#end
 		}
 
-		// EASTER EGG
+// EASTER EGG
 
-		if (initialized && !transitioning && skippedIntro)
+if (!transitioning && skippedIntro)
+	{
+		if(pressedEnter)
 		{
-			if(pressedEnter)
+			if(titleText != null) titleText.animation.play('press');
+
+			FlxG.camera.flash(FlxColor.WHITE, 1);
+			FlxG.sound.play(Paths.sound('confirmMenu'), 0.7);
+
+			transitioning = true;
+			// FlxG.sound.music.stop();
+
+			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
-				if(titleText != null) titleText.animation.play('press');
-
-				FlxG.camera.flash(FlxColor.WHITE, 1);
-				FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
-
-				transitioning = true;
-				// FlxG.sound.music.stop();
-
-				new FlxTimer().start(1, function(tmr:FlxTimer)
+				MusicBeatState.switchState(new MainMenuState());
+				closedState = true;
+			});
+			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
+		}
+		else if(easterEggEnabled)
+		{
+			var finalKey:FlxKey = FlxG.keys.firstJustPressed();
+			if(finalKey != FlxKey.NONE) {
+				lastKeysPressed.push(finalKey); //Convert int to FlxKey
+				if(lastKeysPressed.length > easterEggKeyCombination.length)
 				{
-					if (mustUpdate && ClientPrefs.outdated) {
-						Application.current.window.title = "Funkin.avi - OUTDATED VERSION";
-						MusicBeatState.switchState(new OutdatedState());
-					} else {
-						Application.current.window.title = "Funkin.avi";
-						MusicBeatState.switchState(new NoticeState());
+					lastKeysPressed.shift();
+				}
+				
+				if(lastKeysPressed.length == easterEggKeyCombination.length)
+				{
+					var isDifferent:Bool = false;
+					for (i in 0...lastKeysPressed.length) {
+						if(lastKeysPressed[i] != easterEggKeyCombination[i]) {
+							isDifferent = true;
+							break;
+						}
 					}
-					closedState = true;
-				});
-				FlxTween.tween(logoBl, {y: 2000}, 3, {ease: FlxEase.quadIn});
-				FlxTween.tween(titleText, {y: 2000}, 3, {ease: FlxEase.quadIn});
-				//FlxTween.tween(gfDance, {y: 2000}, 3, {ease: FlxEase.quadIn});
-				//FlxTween.tween(gradientBar, {y: 2000}, 3, {ease: FlxEase.quadIn});
+
+					if(!isDifferent) {
+						trace('Easter egg triggered!');
+						FlxG.save.data.psykaEasterEgg = !FlxG.save.data.psykaEasterEgg;
+						FlxG.sound.play(Paths.sound('secretSound'));
+
+						var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+						black.alpha = 0;
+						add(black);
+
+						FlxTween.tween(black, {alpha: 1}, 1, {onComplete:
+							function(twn:FlxTween) {
+								FlxTransitionableState.skipNextTransIn = true;
+								FlxTransitionableState.skipNextTransOut = true;
+								FlxG.switchState(new FunnyDVDState()); //Yeah useless, but is a fun easter egg
+							}
+						});
+						lastKeysPressed = [];
+						closedState = true;
+						transitioning = true;
+					}
+				}
 			}
 		}
+	}
 
 		if (initialized && pressedEnter && !skippedIntro)
 		{

@@ -1,5 +1,5 @@
 .coolBox {
-    background: #1a1a1aCC;
+    background: #4f4f4fcc;
     margin: 40px 4vw;
     padding: 25px;
     font-size: 120%;
@@ -24,6 +24,7 @@ h1 {
 
 body {
     background-image: url('img/skin-funkin-cardbordtoast.jpg');
+    background-position: center center; 
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;

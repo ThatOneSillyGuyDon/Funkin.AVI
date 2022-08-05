@@ -406,20 +406,26 @@ if (!transitioning && skippedIntro)
 		if(pressedEnter)
 		{
 			if(titleText != null) titleText.animation.play('press');
-
-			FlxG.camera.flash(FlxColor.WHITE, 1);
-			FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
-
-			transitioning = true;
-			// FlxG.sound.music.stop();
-
-			new FlxTimer().start(1, function(tmr:FlxTimer)
-			{
-				MusicBeatState.switchState(new MainMenuState());
-				closedState = true;
-			});
-			// FlxG.sound.play(Paths.music('titleShoot'), 0.7);
-		}
+				FlxG.camera.flash(FlxColor.WHITE, 1);
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
+				transitioning = true;
+				// FlxG.sound.music.stop();
+				new FlxTimer().start(1, function(tmr:FlxTimer)
+				{
+					if (mustUpdate && ClientPrefs.outdated) {
+						Application.current.window.title = "Funkin.avi - OUTDATED VERSION";
+						MusicBeatState.switchState(new OutdatedState());
+					} else {
+						Application.current.window.title = "Funkin.avi";
+						MusicBeatState.switchState(new NoticeState());
+					}
+					closedState = true;
+				});
+				FlxTween.tween(logoBl, {y: 2000}, 3, {ease: FlxEase.quadIn});
+				FlxTween.tween(titleText, {y: 2000}, 3, {ease: FlxEase.quadIn});
+				//FlxTween.tween(gfDance, {y: 2000}, 3, {ease: FlxEase.quadIn});
+				//FlxTween.tween(gradientBar, {y: 2000}, 3, {ease: FlxEase.quadIn});
+				
 		else if(easterEggEnabled)
 		{
 			var finalKey:FlxKey = FlxG.keys.firstJustPressed();

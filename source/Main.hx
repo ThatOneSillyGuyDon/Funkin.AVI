@@ -1,5 +1,6 @@
 package;
 
+import GameJolt;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -20,6 +21,7 @@ class Main extends Sprite
 	var framerate:Int = 240; // Wowwowoowowowowowowowowowowowowowowowow wtf dude, start with at least 120 FPS
 	var skipSplash:Bool = true; // Hope we add this to the mod xd
 	var startFullscreen:Bool = false; // N o
+	public static var gjToastManager:GJToastManager;
 	public static var fpsVar:FPS;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
@@ -61,6 +63,9 @@ class Main extends Sprite
 		var res = ClientPrefs.screenRes.split('x');
 		gameWidth = Std.parseInt(res[0]);
 		gameHeight = Std.parseInt(res[1]);
+
+		gjToastManager = new GJToastManager();
+        addChild(gjToastManager);
 
 		if (zoom == -1)
 		{

@@ -71,6 +71,7 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
+	var achievement:Array<FlxKey>;
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
 	//public var camZooming:Bool = false;
@@ -88,6 +89,7 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null, null, 'icon');
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
+		achievement = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2')); //Debug 2 is 8
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
@@ -341,6 +343,11 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 
+		var achievementText:FlxText = new FlxText(937, FlxG.height - 34, 0, "Press 8 to go to the achievement menu", 25);
+		achievementText.scrollFactor.set();
+		achievementText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(achievementText);
+
 		// NG.core.calls.event.logEvent('swag').send();
 
 		changeItem();
@@ -483,7 +490,13 @@ class MainMenuState extends MusicBeatState
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
-			#end
+           #end
+			else if (FlxG.keys.anyJustPressed(achievement))
+				{
+					selectedSomethin = true;
+					MusicBeatState.switchState(new AchievementsMenuState());
+				}
+			
 		}
 
 		super.update(elapsed);

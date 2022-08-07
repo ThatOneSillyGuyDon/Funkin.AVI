@@ -10,6 +10,7 @@ import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
 import flixel.tweens.FlxTween;
+import flash.system.System;
 import flixel.text.FlxText;
 import flixel.FlxCamera;
 import lime.app.Application;
@@ -60,7 +61,7 @@ class ExtrasState extends MusicBeatState{
             addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), FlxG.save.data.huntedLock);
             addSong('Isolated Old', 3, 'mickey', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.oldisolateLock);
             addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), FlxG.save.data.malfunctionLock);
-            addSong('Revenge', 3, 'face', FlxColor.WHITE, FlxG.save.data.revengeLock);
+           // addSong('Revenge', 3, 'face', FlxColor.WHITE, FlxG.save.data.revengeLock);
         }
 
         if(FPClientPrefs.episode2FPLock == 'unlocked')
@@ -184,7 +185,7 @@ class ExtrasState extends MusicBeatState{
 		add(textBG);
 
 		#if PRELOAD_ALL
-		var leText:String = "Press SPACE to listen to the Song / Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
+		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
 		var size:Int = 16;
 		#else
 		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";

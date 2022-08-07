@@ -70,7 +70,12 @@ class NoticeState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-								MusicBeatState.switchState(new GameJoltLogin());
+								if(GameJoltAPI.userLogin)
+								{
+									MusicBeatState.switchState(new MainMenuState());
+								}else{
+									MusicBeatState.switchState(new GameJoltLogin());
+								}
 							}
 					});
 				} else {
@@ -78,7 +83,12 @@ class NoticeState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new GameJoltLogin());
+							if(GameJoltAPI.userLogin)
+								{
+									MusicBeatState.switchState(new MainMenuState());
+								}else{
+									MusicBeatState.switchState(new GameJoltLogin());
+								}
 						}
 					});
 				}

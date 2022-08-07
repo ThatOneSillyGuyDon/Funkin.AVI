@@ -54,9 +54,6 @@ typedef TitleData =
 }
 class TitleState extends MusicBeatState
 {
-	static inline final DON_T_CROSS = "don't-cross!"; //Not me, it was VS code
-
-	//Well, basically i wanted to do like that scrapped malfunction acces idea, but i ended got scrapped it cus it crashes
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
 	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
 	public static var volumeUpKeys:Array<FlxKey> = [FlxKey.NUMPADPLUS, FlxKey.PLUS];
@@ -75,12 +72,6 @@ class TitleState extends MusicBeatState
 	var randomWindowText:Int = FlxG.random.int(0, 54);
 
 	var curWacky:Array<String> = [];
-
-	//Fun Fact: this is 0.4.2 code that i copy and pasted
-	//BTW, basically i wanted to do like that scrapped malfunction acces idea, but i ended got scrapped it cus it crashes
-	var easterEggEnabled:Bool = true;
-	var easterEggKeyCombination:Array<FlxKey> = [FlxKey.R, FlxKey.A, FlxKey.T, FlxKey.I, FlxKey.O];
-	var lastKeysPressed:Array<FlxKey> = [];
 
 	var Timer:Float = 0;
 
@@ -128,7 +119,7 @@ class TitleState extends MusicBeatState
 		FlxG.sound.muteKeys = muteKeys;
 		FlxG.sound.volumeDownKeys = volumeDownKeys;
 		FlxG.sound.volumeUpKeys = volumeUpKeys;
-		FlxG.keys.preventDefaultKeys = [TAB];
+		FlxG.keys.preventDefaultKeys = [TAB]; //?
 
 		PlayerSettings.init();
 
@@ -314,6 +305,7 @@ class TitleState extends MusicBeatState
 		creditsGrid.visible = false;
 		creditsGrid.screenCenter(X);
 		creditsGrid.antialiasing = ClientPrefs.globalAntialiasing;*/
+		//???
 		
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
@@ -385,7 +377,6 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
-
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
 		if (gamepad != null)
@@ -399,17 +390,20 @@ class TitleState extends MusicBeatState
 			#end
 		}
 
-// EASTER EGG
+		// EASTER EGG
 
-if (!transitioning && skippedIntro)
-	{
-		if(pressedEnter)
+		if (initialized && !transitioning && skippedIntro)
 		{
-			if(titleText != null) titleText.animation.play('press');
+			if(pressedEnter)
+			{
+				if(titleText != null) titleText.animation.play('press');
+
 				FlxG.camera.flash(FlxColor.WHITE, 1);
 				FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
+
 				transitioning = true;
 				// FlxG.sound.music.stop();
+
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					if (mustUpdate && ClientPrefs.outdated) {
@@ -425,51 +419,8 @@ if (!transitioning && skippedIntro)
 				FlxTween.tween(titleText, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gfDance, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gradientBar, {y: 2000}, 3, {ease: FlxEase.quadIn});
-		}
-		else if(easterEggEnabled)
-		{
-			var finalKey:FlxKey = FlxG.keys.firstJustPressed();
-			if(finalKey != FlxKey.NONE) {
-				lastKeysPressed.push(finalKey); //Convert int to FlxKey
-				if(lastKeysPressed.length > easterEggKeyCombination.length)
-				{
-					lastKeysPressed.shift();
-				}
-				
-				if(lastKeysPressed.length == easterEggKeyCombination.length)
-				{
-					var isDifferent:Bool = false;
-					for (i in 0...lastKeysPressed.length) {
-						if(lastKeysPressed[i] != easterEggKeyCombination[i]) {
-							isDifferent = true;
-							break;
-						}
-					}
-
-					if(!isDifferent) {
-						trace('Easter egg triggered!');
-						FlxG.save.data.psykaEasterEgg = !FlxG.save.data.psykaEasterEgg;
-						FlxG.sound.play(Paths.sound('secretSound'));
-
-						var black:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
-						black.alpha = 0;
-						add(black);
-
-						FlxTween.tween(black, {alpha: 1}, 1, {onComplete:
-							function(twn:FlxTween) {
-								FlxTransitionableState.skipNextTransIn = true;
-								FlxTransitionableState.skipNextTransOut = true;
-								FlxG.switchState(new FunnyDVDState()); //Yeah useless, but is a fun easter egg
-							}
-						});
-						lastKeysPressed = [];
-						closedState = true;
-						transitioning = true;
-					}
-				}
 			}
 		}
-	}
 
 		if (initialized && pressedEnter && !skippedIntro)
 		{
@@ -848,12 +799,6 @@ if (!transitioning && skippedIntro)
 				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
 				if (easteregg == null) easteregg = '';
 				easteregg = easteregg.toUpperCase();
-				#if TITLE_SCREEN_EASTER_EGG
-				if(easteregg == 'SHADOW')
-				{
-					FlxG.sound.music.fadeOut();
-				}
-				#end
 							}
 			logoBl.angle = -4;
 

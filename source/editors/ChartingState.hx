@@ -70,6 +70,10 @@ class ChartingState extends MusicBeatState
 		'Hurt Note',
 		'Flip Note',
 		'Error Note',
+		'Rookie Sing',
+		'Randy Sing',
+		'WI Sing',
+		'Cog Sing',
 		'GF Sing',
 		'No Animation'
 	];

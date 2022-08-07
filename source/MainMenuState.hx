@@ -18,6 +18,7 @@ import flixel.effects.FlxFlicker;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.text.FlxText;
+import flash.system.System;
 import flixel.math.FlxMath;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -71,7 +72,6 @@ class MainMenuState extends MusicBeatState
 	var camFollow:FlxObject;
 	var camFollowPos:FlxObject;
 	var debugKeys:Array<FlxKey>;
-	var achievement:Array<FlxKey>;
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
 	//public var camZooming:Bool = false;
@@ -89,7 +89,6 @@ class MainMenuState extends MusicBeatState
 		DiscordClient.changePresence("In the Menus", null, null, 'icon');
 		#end
 		debugKeys = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
-		achievement = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2')); //Debug 2 is 8
 
 		camGame = new FlxCamera();
 		camAchievement = new FlxCamera();
@@ -235,8 +234,8 @@ class MainMenuState extends MusicBeatState
 			else
 				menuItem.y = 108 + (0 * 90);
 
-			// Options
-			var menuItem:FlxSprite = new FlxSprite(700, 600);
+			// Settings
+			var menuItem:FlxSprite = new FlxSprite(700, 700);
 			menuItem.scale.x = scale;
 			menuItem.scale.y = scale;
 			menuItem.frames = Paths.getSparrowAtlas('mainmenu/menu_' + optionShit[3]);
@@ -473,7 +472,13 @@ class MainMenuState extends MusicBeatState
 									case 'story_mode':
 										MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
-										MusicBeatState.switchState(new StupidShittyNewFreeplayCategoryExample());
+										MusicBeatState.switchState(new EpicSelectorWOOO());
+									//#if MODS_ALLOWED
+									//case 'mods':
+										//MusicBeatState.switchState(new ModsMenuState());
+									//#end
+									//case 'awards':
+										//MusicBeatState.switchState(new AchievementsMenuState());
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
@@ -489,14 +494,10 @@ class MainMenuState extends MusicBeatState
 			{
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
+			else if (FlxG.keys.justPressed.EIGHT || FlxG.keys.justPressed.NUMPADEIGHT)
+			{
+				MusicBeatState.switchState(new AchievementsMenuState());
 			}
-           #end
-			else if (FlxG.keys.anyJustPressed(achievement))
-				{
-					selectedSomethin = true;
-					MusicBeatState.switchState(new AchievementsMenuState());
-				}
-			
 		}
 
 		super.update(elapsed);

@@ -1,0 +1,78 @@
+{
+	"animations": [
+		{
+			"loop": false,
+			"offsets": [
+				0,
+				0
+			],
+			"anim": "idle",
+			"fps": 24,
+			"name": "MinnieMouseIDLE",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-57,
+				-53
+			],
+			"anim": "singLEFT",
+			"fps": 24,
+			"name": "MinnieMouseLEFT",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-53,
+				-52
+			],
+			"anim": "singDOWN",
+			"fps": 24,
+			"name": "MinnieMouseDOWN",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				-131,
+				21
+			],
+			"anim": "singUP",
+			"fps": 24,
+			"name": "MinnieMouseUP",
+			"indices": []
+		},
+		{
+			"loop": false,
+			"offsets": [
+				34,
+				-13
+			],
+			"anim": "singRIGHT",
+			"fps": 24,
+			"name": "MinnieMouseRIGHT",
+			"indices": []
+		}
+	],
+	"no_antialiasing": false,
+	"image": "characters/MinnieCouch",
+	"position": [
+		-190,
+		230
+	],
+	"healthicon": "face",
+	"flip_x": true,
+	"healthbar_colors": [
+		161,
+		161,
+		161
+	],
+	"camera_position": [
+		-100,
+		-230
+	],
+	"sing_duration": 6.1,
+	"scale": 1.3
+}

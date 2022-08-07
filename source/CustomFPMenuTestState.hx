@@ -167,7 +167,7 @@ class CustomFPMenuTestState extends MusicBeatState
 			songText.targetY = i;
 			//grpSongs.add(songText);
 
-			var ostArtThing:OSTArt = new OSTArt(160, (200 * i) + 100);
+			var ostArtThing:OSTArt = new OSTArt(160, (150 * i) + 100);
 			if (songs[i].lockstatus == 'unlocked' || songs[i].lockstatus == 'beaten') 
             {
                 ostArtThing.loadGraphic(Paths.image('ostArt/' + songs[i].songName.toLowerCase(), 'preload'));   

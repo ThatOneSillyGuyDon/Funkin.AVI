@@ -8,8 +8,6 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.display.FlxGridOverlay;
 import flixel.group.FlxGroup.FlxTypedGroup;
-import openfl.system.System as OpenSystem;
-import flash.system.System;
 import flixel.math.FlxMath;
 import flixel.tweens.FlxTween;
 import flixel.text.FlxText;
@@ -55,17 +53,24 @@ class ExtrasState extends MusicBeatState{
 
 		FlxG.cameras.add(camFilter);
 
-		//Funky Song List yey
-		addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), ['Hard']);
-        addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), ['Hard']);
-		addSong('Cycled Sins', 3, 'relapse', FlxColor.fromRGB(115, 86, 86), ['Hard']);
-		addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(0, 40, 60), ['Hard']);
-		addSong('War Dilemma', 3, 'warmick', FlxColor.fromRGB(105, 17, 10), ['Hard']);
-		//addSong('Birthday', 3, 'face', FlxColor.BLUE, ['Hard']);
-		addSong('Bless', 3, 'whitenew', FlxColor.WHITE, ['Hard']);
-		addSong('Isolated Old', 3, 'mickey', FlxColor.fromRGB(60, 60, 60), ['Hard']);
-		addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED, ['Hard']);
-		addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), ['Hard']);
+		FPClientPrefs.loadShit();
+
+        if(FPClientPrefs.episode1FPLock == 'unlocked')
+        {
+            addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), FlxG.save.data.huntedLock);
+            addSong('Isolated Old', 3, 'mickey', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.oldisolateLock);
+            addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), FlxG.save.data.malfunctionLock);
+            addSong('Revenge', 3, 'face', FlxColor.WHITE, FlxG.save.data.revengeLock);
+        }
+
+        if(FPClientPrefs.episode2FPLock == 'unlocked')
+        {
+            addSong('Cycled Sins', 3, 'relapse', FlxColor.fromRGB(115, 86, 86), FlxG.save.data.sinsLock);
+            addSong('War Dilemma', 3, 'warmick', FlxColor.fromRGB(105, 17, 10), FlxG.save.data.warLock);
+            addSong('Bless', 3, 'whitenew', FlxColor.WHITE, FlxG.save.data.blessLock);
+            addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED, FlxG.save.data.crossinLock);
+            addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock);
+        }
 
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
@@ -555,7 +560,6 @@ class ExtrasState extends MusicBeatState{
 		diffText.x -= diffText.width / 2;
 	}
 }
-
 
 class SongMetadataCool
 {

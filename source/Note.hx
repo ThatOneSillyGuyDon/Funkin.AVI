@@ -190,6 +190,14 @@ class Note extends FlxSprite
 					noAnimation = true;
 				case 'GF Sing':
 					gfNote = true;
+				case 'Rookie Sing':
+					//nothing
+				case 'WI Sing':
+					//nothing
+				case 'Cog Sing':
+					//nothing
+				case 'Randy Sing':
+					//nothing
 				default:
 					hasNoteType = false;
 			}

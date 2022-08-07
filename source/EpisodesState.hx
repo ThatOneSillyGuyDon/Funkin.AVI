@@ -107,15 +107,15 @@ class EpisodesState extends MusicBeatState
 
         if(FPClientPrefs.episode1FPLock == 'unlocked')
         {
-            addSong('Isolated', 1, 'mickey', FlxColor.fromRGB(60, 60, 60));
-            addSong('Lunacy', 1, 'lunamick', FlxColor.fromRGB(60, 60, 60));
-            addSong('Delusional', 1, 'insanemick', FlxColor.fromRGB(60, 60, 60));
+            addSong('Isolated', 3, 'mickey', FlxColor.fromRGB(60, 60, 60));
+            addSong('Lunacy', 3, 'lunamick', FlxColor.fromRGB(60, 60, 60));
+            addSong('Delusional', 3, 'insanemick', FlxColor.fromRGB(60, 60, 60));
         }
 
         if(FPClientPrefs.episode2FPLock == 'unlocked')
         {
-            addSong('Twisted Grins', 2, 'smile', FlxColor.fromRGB(115, 86, 86));
-            addSong('Facade', 2, 'smile', FlxColor.fromRGB(105, 17, 10));
+            addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
+            addSong('Facade', 3, 'smile', FlxColor.fromRGB(105, 17, 10));
         }
 
 		WeekData.loadTheFirstEnabledMod();

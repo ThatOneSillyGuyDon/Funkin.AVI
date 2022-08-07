@@ -225,10 +225,8 @@ class PauseSubState extends MusicBeatSubstate
 	}
 
 	var holdTime:Float = 0;
-	var cantUnpause:Float = 0.1;
 	override function update(elapsed:Float)
 	{
-		cantUnpause -= elapsed;
 		if (pauseMusic.volume < 0.5)
 			pauseMusic.volume += 0.01 * elapsed;
 
@@ -279,26 +277,34 @@ class PauseSubState extends MusicBeatSubstate
 				}
 		}
 
-		if (accepted && (cantUnpause <= 0 || !ClientPrefs.controllerMode))
+		if (accepted)
+		{
+			if (menuItems == difficultyChoices)
 			{
-				if (menuItems == difficultyChoices)
-				{
-					if(menuItems.length - 1 != curSelected && difficultyChoices.contains(daSelected)) {
-						var name:String = PlayState.SONG.song;
-						var poop = Highscore.formatSong(name, curSelected);
-						PlayState.SONG = Song.loadFromJson(poop, name);
-						PlayState.storyDifficulty = curSelected;
-						MusicBeatState.resetState();
-						FlxG.sound.music.volume = 0;
-						PlayState.changedDifficulty = true;
-						PlayState.chartingMode = false;
-						return;
+				if(menuItems.length - 1 != curSelected && difficultyChoices.contains(daSelected)) {
+					var name:String = PlayState.SONG.song;
+					var poop = Highscore.formatSong(name, curSelected);
+					PlayState.SONG = Song.loadFromJson(poop, name);
+					PlayState.storyDifficulty = curSelected;
+					MusicBeatState.resetState();
+					FlxG.sound.music.volume = 0;
+					PlayState.changedDifficulty = true;
+					PlayState.chartingMode = false;
+					skipTimeTracker = null;
+
+					if(skipTimeText != null)
+					{
+						skipTimeText.kill();
+						remove(skipTimeText);
+						skipTimeText.destroy();
 					}
-	
-					menuItems = menuItemsOG;
-					regenMenu();
+					skipTimeText = null;
+					return;
 				}
-	
+
+				menuItems = menuItemsOG;
+				regenMenu();
+			}
 
 			switch (daSelected)
 			{
@@ -320,7 +326,7 @@ class PauseSubState extends MusicBeatSubstate
 					default:
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
 				}
-					PlayState.instance.startCountdown();
+					//PlayState.startCountdown();
 					close();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
@@ -370,7 +376,7 @@ class PauseSubState extends MusicBeatSubstate
 							case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins':
 								MusicBeatState.switchState(new EpisodesState());
 							case 'Hunted' | 'Malfunction' | 'Birthday' | "Don't Cross!" | 'Isolated Old' | 'Mercy' | 'Cycled Sins' | 'War Dilema':
-								MusicBeatState.switchState(new CustomFPMenuTestState());
+								MusicBeatState.switchState(new ExtrasState());
 							default:
 								MusicBeatState.switchState(new EpisodesState());
 						}

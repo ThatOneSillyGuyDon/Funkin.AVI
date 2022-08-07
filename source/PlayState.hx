@@ -45,6 +45,7 @@ import lime.utils.Assets;
 import openfl.Lib;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
+import openfl.display.StageScaleMode;
 import openfl.filters.BitmapFilter;
 import openfl.utils.Assets as OpenFlAssets;
 import openfl.filters.ShaderFilter;
@@ -275,6 +276,13 @@ class PlayState extends MusicBeatState
 	var treesFront:BGSprite;
 	var depression:BGSprite;
 	var vignetteCam:BGSprite;
+	var snsMickDed:BGSprite;
+
+	//Couch Characters
+	var rookieMick:FlxSprite;
+	var randyMick:FlxSprite;
+	var WIMick:FlxSprite;
+	var cogMick:FlxSprite;
 
 	//Spotlight Functions
 	var spotlight:BGSprite;
@@ -519,6 +527,23 @@ class PlayState extends MusicBeatState
 		SONG.stage = curStage;
 
 		var stageData:StageFile = StageData.getStageFile(curStage);
+		if(stageData == null) { //Stage couldn't be found, create a dummy stage for preventing a crash
+			stageData = {
+				directory: "",
+				defaultZoom: 0.9,
+				isPixelStage: false,
+
+				boyfriend: [770, 100],
+				girlfriend: [400, 130],
+				opponent: [100, 100],
+				hide_girlfriend: false,
+
+				camera_boyfriend: [0, 0],
+				camera_opponent: [0, 0],
+				camera_girlfriend: [0, 0],
+				camera_speed: 1
+			};
+		}
 
 		defaultCamZoom = stageData.defaultZoom;
 		isPixelStage = stageData.isPixelStage;
@@ -835,7 +860,7 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
 					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
 					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
-					addShaderToCamera('game', new VhsEffect(0.3, 0));
+					//addShaderToCamera('game', new VhsEffect(0.3, 0));
 					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
@@ -908,11 +933,11 @@ class PlayState extends MusicBeatState
 				if(ClientPrefs.funiShaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
-					addShaderToCamera('hud', new VCRDistortionEffect(0.04, true, true, true));
-					addShaderToCamera('game', new ChromaticAberrationEffect(0.003));
-					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
-					addShaderToCamera('hud', new TiltshiftEffect(0.4, 0));
-					addShaderToCamera('game', new TiltshiftEffect(0.3, 0));
+					addShaderToCamera('hud', new VCRDistortionEffect(0.05, true, true, true));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.004));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.006));
+					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
 				}
@@ -1036,6 +1061,76 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 				}
+
+			case 'Couch':
+				//GameOverSubstate.deathSoundName = 'funkinAVI/gameOver/CouchSexGameOverTheme';
+				GameOverSubstate.loopSoundName = 'funkinAVI/gameOver/CouchSexGameOverTheme';
+				//GameOverSubstate.endSoundName = 'gameOverEnd-crossin';
+				//GameOverSubstate.characterName = 'bf-crossin-dead';
+
+				//Placeholder BG
+				var whiteBGShit:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 8), Std.int(FlxG.height * 8), FlxColor.WHITE);
+				add(whiteBGShit);
+
+				cogMick = new FlxSprite(500, -150);
+				cogMick.frames = Paths.getSparrowAtlas('funkinAVI/Couch/CogMouseCouch');
+				cogMick.animation.addByPrefix('idle', 'CogMickIDLE', 24, true);
+				cogMick.animation.addByPrefix('CogLeft', 'CogMickLEFT', 24, false);
+				cogMick.animation.addByPrefix('CogDown', 'CogMickDOWN', 24, false);
+				cogMick.animation.addByPrefix('CogUp', 'CogMickUP', 24, false);
+				cogMick.animation.addByPrefix('CogRight', 'CogMickRIGHT', 24, false);
+				cogMick.animation.play('idle');
+				cogMick.scrollFactor.set(0.9, 0.9);				
+
+				WIMick = new FlxSprite(1100, -150);
+				WIMick.frames = Paths.getSparrowAtlas('funkinAVI/Couch/WenMickCouch');
+				WIMick.animation.addByPrefix('idle', 'WenMouseIDLE', 24, true);
+				WIMick.animation.addByPrefix('WILeft', 'WenMouseLEFT', 24, false);
+				WIMick.animation.addByPrefix('WIDown', 'WenMouseDOWN', 24, false);
+				WIMick.animation.addByPrefix('WIUp', 'WenMouseUP', 24, false);
+				WIMick.animation.addByPrefix('WIRight', 'WenMouseRIGHT', 24, false);
+				WIMick.animation.play('idle');
+				WIMick.scrollFactor.set(0.9, 0.9);				
+
+				randyMick = new FlxSprite(-400, -150);
+				randyMick.frames = Paths.getSparrowAtlas('funkinAVI/Couch/RandyCouch');
+				randyMick.animation.addByPrefix('idle', 'SMILEmouseIDLE', 24, true);
+				randyMick.animation.addByPrefix('randyLeft', 'SMILEmouseLEFT', 24, false);
+				randyMick.animation.addByPrefix('randyDown', 'SMILEmouseDOWN', 24, false);
+				randyMick.animation.addByPrefix('randyUp', 'SMILEmouseUP', 24, false);
+				randyMick.animation.addByPrefix('randyRight', 'SMILEmouseRIGHT', 24, false);
+				randyMick.animation.play('idle');
+				randyMick.scrollFactor.set(0.9, 0.9);				
+
+				rookieMick = new FlxSprite(1500, -180);
+				rookieMick.frames = Paths.getSparrowAtlas('funkinAVI/Couch/RookieCouch');
+				rookieMick.animation.addByPrefix('idle', 'VSMouseIDLE', 24, true);
+				rookieMick.animation.addByPrefix('rookieLeft', 'VSMouseLEFT', 24, false);
+				rookieMick.animation.addByPrefix('rookieDown', 'VSMouseDOWN', 24, false);
+				rookieMick.animation.addByPrefix('rookieUp', 'VSMouseUP', 24, false);
+				rookieMick.animation.addByPrefix('rookieRight', 'VSMouseRIGHT', 24, false);
+				rookieMick.animation.play('idle');
+				rookieMick.scrollFactor.set(0.9, 0.9);	
+
+				//Scale Shit
+				cogMick.scale.set(1.3, 1.3);
+				WIMick.scale.set(1.3, 1.3);
+				randyMick.scale.set(1.3, 1.3);
+				rookieMick.scale.set(1.3, 1.3);	
+
+				//layering the fucking mouses
+				add(WIMick);
+				add(cogMick);
+				add(randyMick);
+				add(rookieMick);
+
+				var couch:BGSprite = new BGSprite('funkinAVI/Couch/Couch', -660, -100);
+				add(couch);
+
+				snsMickDed = new BGSprite('funkinAVI/Couch/SNSMickeyDieded', 1270, 680, 1.1, 1.1);
+
+
+
 				
 			case 'tank': //Week 7 - Ugh, Guns, Stress
 				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
@@ -1135,6 +1230,8 @@ class PlayState extends MusicBeatState
 				add(light);
 			case 'ForestNEW':
 				add(treesFront);
+			case 'Couch':
+				add(snsMickDed);
 		}
 
 		#if LUA_ALLOWED
@@ -3314,8 +3411,8 @@ class PlayState extends MusicBeatState
 		//Window Code by lemz1
 		windowX = window.x;
  		windowY = window.y;
- 		windowW = window.width;
- 		windowH = window.height;
+		windowW = window.width;
+		windowH = window.height;
 		startingSong = false;
 
 		previousFrameTime = FlxG.game.ticks;
@@ -4115,25 +4212,9 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-		/*
-		delete
-		'		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
-		{
-			openChartEditor();
-		} ' to properly use this
-		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene && SONG.song.toLowerCase() == 'song name') 
-			{ 
-				trace ("function loaded"); lol(); 
-	        } 
-			else if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene) 
-	        { 
-				openChartEditor(); 
-	        }
-			last of the hard code shit
-	    */
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 		{
-			openChartEditor();
+			openChartEditor(); 
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
@@ -4253,10 +4334,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
-			persistentUpdate = false;
-			paused = true;
-			cancelMusicFadeTween();
-			MusicBeatState.switchState(new CharacterEditorState(SONG.player2));
+			MusicBeatState.switchState(new CharacterEditorState());
 		}
 
 		if (startingSong)
@@ -5703,9 +5781,7 @@ class PlayState extends MusicBeatState
 		if(achievementObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement(['week1_nomiss', 'week2_nomiss', 'week3_nomiss', 'week4_nomiss',
-				'week5_nomiss', 'week6_nomiss', 'week7_nomiss', 'ur_bad',
-				'ur_good', 'hype', 'two_keys', 'toastie', 'debugger']);
+			var achieve:String = checkForAchievement(['episode1', 'episode2', 'episode1_nomiss', 'episode2_nomiss', 'malfunction_nomiss', 'relapse_nomiss', 'malfunction_tryhard']);
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -6643,7 +6719,22 @@ class PlayState extends MusicBeatState
 						switch (Math.abs(note.noteData))
 						{
 							case 0:
-								animToPlay = 'singLEFT';
+								if(curStage == 'Couch')
+								{
+									switch(note.noteType)
+									{
+										case 'Rookie Sing':
+											rookieMick.animation.play('rookieLeft');
+										case 'WI Sing':
+											WIMick.animation.play('WILeft');
+										case 'Randy Sing':
+											randyMick.animation.play('randyLeft');
+										case 'Cog Sing':
+											cogMick.animation.play('CogLeft');
+									}	
+								}else{
+									animToPlay = 'singLEFT';
+								}
 								if(curStage == 'Line')
 								{
 									boyfriend.x += 1;
@@ -6689,7 +6780,22 @@ class PlayState extends MusicBeatState
 									}	
 								}
 							case 1:
-								animToPlay = 'singDOWN';
+								if(curStage == 'Couch')
+								{
+									switch(note.noteType)
+									{
+										case 'Rookie Sing':
+											rookieMick.animation.play('rookieDown');
+										case 'WI Sing':
+											WIMick.animation.play('WIDown');
+										case 'Randy Sing':
+											randyMick.animation.play('randyDown');
+										case 'Cog Sing':
+											cogMick.animation.play('CogDown');
+									}	
+								}else{
+									animToPlay = 'singDOWN';
+								}							
 								if(curStage == 'Line')
 								{
 									boyfriend.x += 1;
@@ -6735,7 +6841,22 @@ class PlayState extends MusicBeatState
 									}	
 								}
 							case 2:
-								animToPlay = 'singUP';
+								if(curStage == 'Couch')
+								{
+									switch(note.noteType)
+									{
+										case 'Rookie Sing':
+											rookieMick.animation.play('rookieUp');
+										case 'WI Sing':
+											WIMick.animation.play('WIUp');
+										case 'Randy Sing':
+											randyMick.animation.play('randyUp');
+										case 'Cog Sing':
+											cogMick.animation.play('CogUp');
+									}	
+								}else{
+									animToPlay = 'singUP';
+								}															
 								if(curStage == 'Line')
 								{
 									boyfriend.x += 1;
@@ -6781,7 +6902,22 @@ class PlayState extends MusicBeatState
 									}	
 								}
 							case 3:
-								animToPlay = 'singRIGHT';
+								if(curStage == 'Couch')
+								{
+									switch(note.noteType)
+									{
+										case 'Rookie Sing':
+											rookieMick.animation.play('rookieRight');
+										case 'WI Sing':
+											WIMick.animation.play('WIRight');
+										case 'Randy Sing':
+											randyMick.animation.play('randyRight');
+										case 'Cog Sing':
+											cogMick.animation.play('CogRight');
+									}	
+								}else{
+									animToPlay = 'singRIGHT';
+								}							
 								if(curStage == 'Line')
 								{
 									boyfriend.x += 1;
@@ -6845,6 +6981,33 @@ class PlayState extends MusicBeatState
 		if(note.isSustainNote && !note.animation.curAnim.name.endsWith('end')) {
 			time += 0.15;
 		}
+
+		if(curStage == 'Couch' && !note.isSustainNote || note.animation.curAnim.name.endsWith('end'))
+		{
+			switch(note.noteType)
+			{
+				case 'Rookie Sing':
+					new FlxTimer().start(1.5, function(tmr:FlxTimer)
+					{
+						rookieMick.animation.play('idle');
+					});
+				case 'WI Sing':
+					new FlxTimer().start(1.5, function(tmr:FlxTimer)
+					{
+						WIMick.animation.play('idle');
+					});
+				case 'Randy Sing':
+					new FlxTimer().start(1.5, function(tmr:FlxTimer)
+					{
+						randyMick.animation.play('idle');
+					});
+				case 'Cog Sing':
+					new FlxTimer().start(1.5, function(tmr:FlxTimer)
+					{
+						cogMick.animation.play('idle');
+					});
+			}
+		}
 		StrumPlayAnim(true, Std.int(Math.abs(note.noteData)) % 4, time);
 		note.hitByOpponent = true;
 		note.alpha = 0;
@@ -6871,7 +7034,6 @@ class PlayState extends MusicBeatState
 			if(cpuControlled && (note.ignoreNote || note.hitCausesMiss)) return;
 
 			if(note.hitCausesMiss) {
-				noteMiss(note);
 				if(!note.noteSplashDisabled && !note.isSustainNote) {
 					spawnNoteSplashOnNote(note);
 				}
@@ -6886,6 +7048,7 @@ class PlayState extends MusicBeatState
 						add(shadow);
 						//FlxTween.tween(shadow, {alpha: shadow.alpha = 0}, 30, {ease: FlxEase.quadInOut, type: PERSIST});
 						healthDrain = 0.005;
+						noteMiss(note);
 
 					case 'Instakill Note':
 						if(boyfriend.animation.getByName('hurt') != null) {
@@ -6895,7 +7058,6 @@ class PlayState extends MusicBeatState
 						health -= 500;
 						
 					case 'Error Note':
-
 						switch(curStage)
 						{
 							case 'PixelWorld':
@@ -6952,6 +7114,7 @@ class PlayState extends MusicBeatState
 						health -= 0;
 
 					case 'Poison Note':
+						noteMiss(note);
 						healthDrain = 0.20;
 						health -= 0;
 
@@ -6960,6 +7123,7 @@ class PlayState extends MusicBeatState
 							boyfriend.playAnim('hurt', true);
 							boyfriend.specialAnim = true;
 						}
+						noteMiss(note);
 				}
 				
 				note.wasGoodHit = true;
@@ -7786,10 +7950,7 @@ class PlayState extends MusicBeatState
 			case 'Bless':
 				//Insert Events here
 			case 'War Dilemma':
-				#if !html5 //a reference of the video size
-				Lib.application.window.width = 1382;
-				Lib.application.window.height = 500;
-				#end
+				//Insert Events here
 			case 'Isolated Old':
 				//Insert Events here
 			case "Don't Cross!":
@@ -7944,26 +8105,47 @@ class PlayState extends MusicBeatState
 				var unlock:Bool = false;
 				switch(achievementName)
 				{
-					case 'week1_nomiss' | 'week2_nomiss' | 'week3_nomiss' | 'week4_nomiss' | 'week5_nomiss' | 'week6_nomiss' | 'week7_nomiss':
+					case 'malfunction_tryhard':
+						if(!isStoryMode && campaignMisses + songMisses < 1 && crashLivesCounter > 29 && CoolUtil.difficultyString() == 'HARD' && !changedDifficulty && !usedPractice)
+						{
+							if(SONG.song == 'Malfunction') unlock = true;
+						}
+					case 'episode1_nomiss' | 'episode2_nomiss' | 'malfunction_nomiss' | 'relapse_nomiss':
 						if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
 						{
 							var weekName:String = WeekData.getWeekFileName();
 							switch(weekName) //I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
 							{
-								case 'week1':
-									if(achievementName == 'week1_nomiss') unlock = true;
-								case 'week2':
-									if(achievementName == 'week2_nomiss') unlock = true;
-								case 'week3':
-									if(achievementName == 'week3_nomiss') unlock = true;
-								case 'week4':
-									if(achievementName == 'week4_nomiss') unlock = true;
-								case 'week5':
-									if(achievementName == 'week5_nomiss') unlock = true;
-								case 'week6':
-									if(achievementName == 'week6_nomiss') unlock = true;
-								case 'week7':
-									if(achievementName == 'week7_nomiss') unlock = true;
+								case 'chapter1':
+									if(achievementName == 'episode1_nomiss') unlock = true;
+								case 'chapter2':
+									if(achievementName == 'episode2_nomiss') unlock = true;
+							}
+						}
+						if(!isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && !changedDifficulty && !usedPractice)
+						{
+							if(SONG.song == 'Malfunction')
+							{
+								if(achievementName == 'malfunction_nomiss') unlock = true;
+							}
+						}
+						if(!isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && !changedDifficulty && !usedPractice)
+						{
+							if(SONG.song == 'Cycled Sins')
+							{
+								if(achievementName == 'relapse_nomiss') unlock = true;
+							}
+						}
+					case 'episode1' | 'episode2':
+						if(isStoryMode && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
+						{
+							var weekName:String = WeekData.getWeekFileName();
+							switch(weekName)
+							{
+								case 'chapter1':
+									if(achievementName == 'episode1') unlock = true;
+								case 'chapter2':
+									if(achievementName == 'episode2') unlock = true;
 							}
 						}
 					case 'ur_bad':
@@ -7972,37 +8154,6 @@ class PlayState extends MusicBeatState
 						}
 					case 'ur_good':
 						if(ratingPercent >= 1 && !usedPractice) {
-							unlock = true;
-						}
-					case 'roadkill_enthusiast':
-						if(Achievements.henchmenDeath >= 100) {
-							unlock = true;
-						}
-					case 'oversinging':
-						if(boyfriend.holdTimer >= 10 && !usedPractice) {
-							unlock = true;
-						}
-					case 'hype':
-						if(!boyfriendIdled && !usedPractice) {
-							unlock = true;
-						}
-					case 'two_keys':
-						if(!usedPractice) {
-							var howManyPresses:Int = 0;
-							for (j in 0...keysPressed.length) {
-								if(keysPressed[j]) howManyPresses++;
-							}
-
-							if(howManyPresses <= 2) {
-								unlock = true;
-							}
-						}
-					case 'toastie':
-						if(/*ClientPrefs.framerate <= 60 &&*/ ClientPrefs.lowQuality && !ClientPrefs.globalAntialiasing && !ClientPrefs.imagesPersist) {
-							unlock = true;
-						}
-					case 'debugger':
-						if(Paths.formatToSongPath(SONG.song) == 'test' && !usedPractice) {
 							unlock = true;
 						}
 				}

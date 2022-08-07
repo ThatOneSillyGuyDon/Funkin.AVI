@@ -17,7 +17,7 @@ class Achievements {
 		["My Smile is Bigger!",			"FC Episode 2.",									'episode2_nomiss',	false],
 		["What Malfunction?",			"FC Malfunction.",									'malfunction_nomiss',	false],
 		["Bullet Dodger!",				"FC Cycled Sins.",									'relapse_nomiss',	false],
-		["True Malfunctioner",			"FC & Have ALL 30 Lives in Malfunction!",			'malfunction_tryhard',	false],
+		["Glitch in the System!",			"FC & Have ALL 30 Lives in Malfunction!",			'malfunction_tryhard',	false],
 		//THEY WORK, LET'S GOOOOOO
 		["Freaky on a Friday Night",	"Play on a Friday... Night.",						'friday_night_play',	 true],
 		["What a Funkin' Disaster!",	"Complete a Song with a rating lower than 20%.",	'ur_bad',				false],

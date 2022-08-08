@@ -5904,7 +5904,7 @@ class PlayState extends MusicBeatState
 					CustomFadeTransition.nextCamera = null;
 				}
 				//MusicBeatState.switchState(new MainMenuState());
-				MusicBeatState.switchState(new CustomFPMenuTestState());
+				MusicBeatState.switchState(new ExtrasState());
 				FlxG.mouse.visible = true;
 				FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
 				switch(SONG.song) {
@@ -8110,7 +8110,11 @@ class PlayState extends MusicBeatState
 					case 'malfunction_tryhard':
 						if(!isStoryMode && campaignMisses + songMisses < 1 && crashLivesCounter > 29 && CoolUtil.difficultyString() == 'HARD' && !changedDifficulty && !usedPractice)
 						{
-							if(SONG.song == 'Malfunction') unlock = true;
+							if(SONG.song == 'Malfunction')
+							{
+								unlock = true;
+								GameJolt.GameJoltAPI.getTrophy(169789);
+							}
 						}
 					case 'episode1_nomiss' | 'episode2_nomiss' | 'malfunction_nomiss' | 'relapse_nomiss':
 						if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
@@ -8119,23 +8123,35 @@ class PlayState extends MusicBeatState
 							switch(weekName) //I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
 							{
 								case 'chapter1':
-									if(achievementName == 'episode1_nomiss') unlock = true;
+									if(achievementName == 'episode1_nomiss')
+									{
+										unlock = true;
+										GameJolt.GameJoltAPI.getTrophy(169793);			
+									}
 								case 'chapter2':
-									if(achievementName == 'episode2_nomiss') unlock = true;
+									if(achievementName == 'episode2_nomiss')
+									{
+										unlock = true;
+									}
 							}
 						}
 						if(!isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && !changedDifficulty && !usedPractice)
 						{
 							if(SONG.song == 'Malfunction')
 							{
-								if(achievementName == 'malfunction_nomiss') unlock = true;
+								if(achievementName == 'malfunction_nomiss')
+								{
+									unlock = true;
+									GameJolt.GameJoltAPI.getTrophy(169791);
+								}
 							}
-						}
-						if(!isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && !changedDifficulty && !usedPractice)
-						{
 							if(SONG.song == 'Cycled Sins')
 							{
-								if(achievementName == 'relapse_nomiss') unlock = true;
+								if(achievementName == 'relapse_nomiss')
+								{ 
+									unlock = true;
+									GameJolt.GameJoltAPI.getTrophy(169790);
+								}
 							}
 						}
 					case 'episode1' | 'episode2':
@@ -8145,7 +8161,11 @@ class PlayState extends MusicBeatState
 							switch(weekName)
 							{
 								case 'chapter1':
-									if(achievementName == 'episode1') unlock = true;
+									if(achievementName == 'episode1')
+									{
+										unlock = true;
+										GameJolt.GameJoltAPI.getTrophy(169792);
+									}
 								case 'chapter2':
 									if(achievementName == 'episode2') unlock = true;
 							}

@@ -14,6 +14,9 @@ import flixel.util.FlxColor;
 import lime.utils.Assets;
 import flixel.FlxSubState;
 import Achievements;
+//GameJolt Shit
+import GameJolt;
+import GameJolt.GameJoltAPI;
 
 using StringTools;
 

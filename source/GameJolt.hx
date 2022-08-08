@@ -100,7 +100,7 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
      * Inline variable to see if the user has logged in.
      * True for logged in, false for not logged in.
      */
-    static var userLogin:Bool = false;
+    public static var userLogin:Bool = false;
 
     /**
      * Inline variable to see if the user wants to submit scores.
@@ -411,7 +411,7 @@ class GameJoltLogin extends MusicBeatSubstate
 
         if(!login)
             {
-                FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuTheme'),0);
+                FlxG.sound.playMusic(Paths.music('freakyMenu'),0);
                 FlxG.sound.music.fadeIn(2, 0, 0.85);
             }
 

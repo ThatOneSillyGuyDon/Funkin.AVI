@@ -23,6 +23,8 @@ class NoticeState extends MusicBeatState
 	{
 		super.create();
 
+		GameJoltAPI.connect();
+        GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
 	
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
@@ -70,12 +72,7 @@ class NoticeState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-								if(GameJoltAPI.userLogin)
-								{
 									MusicBeatState.switchState(new MainMenuState());
-								}else{
-									MusicBeatState.switchState(new GameJoltLogin());
-								}
 							}
 					});
 				} else {
@@ -83,12 +80,7 @@ class NoticeState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-							if(GameJoltAPI.userLogin)
-								{
-									MusicBeatState.switchState(new MainMenuState());
-								}else{
-									MusicBeatState.switchState(new GameJoltLogin());
-								}
+                            MusicBeatState.switchState(new MainMenuState());
 						}
 					});
 				}

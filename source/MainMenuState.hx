@@ -27,6 +27,8 @@ import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
+import GameJolt;
+import GameJolt.GameJoltAPI;
 
 using StringTools;
 
@@ -79,6 +81,9 @@ class MainMenuState extends MusicBeatState
 	override function create()
 	{
 		WeekData.loadTheFirstEnabledMod();
+
+		GameJoltAPI.connect();
+        GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
 
 		FPClientPrefs.loadShit();
 
@@ -347,6 +352,11 @@ class MainMenuState extends MusicBeatState
 		achievementText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(achievementText);
 
+		var GameJoltText:FlxText = new FlxText(937, FlxG.height - 54, 0, "Press 6 to Login to GameJolt", 25);
+		GameJoltText.scrollFactor.set();
+		GameJoltText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(GameJoltText);
+
 		// NG.core.calls.event.logEvent('swag').send();
 
 		changeItem();
@@ -495,6 +505,10 @@ class MainMenuState extends MusicBeatState
 				selectedSomethin = true;
 				MusicBeatState.switchState(new MasterEditorMenu());
 			}
+			else if (FlxG.keys.justPressed.SIX || FlxG.keys.justPressed.NUMPADSIX)
+				{
+					FlxG.switchState(new GameJoltLogin());
+				}
 			#end
 			else if (FlxG.keys.justPressed.EIGHT || FlxG.keys.justPressed.NUMPADEIGHT)
 			{

@@ -214,7 +214,7 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
                 var bool:Bool = false;
                 if (data.exists("message"))
                     bool = true;
-                Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Unlocked a new trophy"+(bool ? "... again?" : "!"), "Thank you for testing this out!\nCheck out Vs. King, it's cool", true);
+                Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Unlocked a new trophy"+(bool ? "... again?" : "!"), "Thank you for testing this out!", true);
             });
         }
     }
@@ -367,9 +367,9 @@ class GameJoltInfo extends FlxSubState
         "Holofunk is awesome",
         "What you know about rollin down in the deep",
         "This isn't an NFT. Crazy right?",
-        "no not the null reference :(",
+        "Fuck Error's right?",
         "Thank you BrightFyre for your help :)",
-        "Thank you Firubii for the notification code :)"
+        "This is a text"
     ];
 }
 
@@ -411,7 +411,7 @@ class GameJoltLogin extends MusicBeatSubstate
 
         if(!login)
             {
-                FlxG.sound.playMusic(Paths.music('freakyMenu'),0);
+                FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuTheme'),0);
                 FlxG.sound.music.fadeIn(2, 0, 0.85);
             }
 
@@ -438,7 +438,7 @@ class GameJoltLogin extends MusicBeatSubstate
         charBop.flipX = false;
 		add(charBop);
 
-        gamejoltText1 = new FlxText(0, 25, 0, "GameJolt + FNF Integration", 16);
+        gamejoltText1 = new FlxText(0, 25, 0, "Funkin.avi GameJolt Login", 16);
         gamejoltText1.screenCenter(X);
         gamejoltText1.x += baseX;
         gamejoltText1.color = FlxColor.fromRGB(84,155,149);
@@ -501,7 +501,7 @@ class GameJoltLogin extends MusicBeatSubstate
             GameJoltAPI.authDaUser(usernameBox.text,tokenBox.text,true);
         });
 
-        helpBox = new FlxButton(0, 550, "GameJolt Token", function()
+        helpBox = new FlxButton(0, 550, "Where is my token?", function()
         {
             if (!GameJoltAPI.getStatus())openLink('https://www.youtube.com/watch?v=T5-x7kAGGnE');
             else
@@ -584,7 +584,6 @@ class GameJoltLogin extends MusicBeatSubstate
 
     override function update(elapsed:Float)
     {
-        gamejoltText2.text = Date.now().toString();
 
         if (FlxG.save.data.lbToggle == null)
         {

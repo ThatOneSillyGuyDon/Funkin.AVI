@@ -1,5 +1,7 @@
 package;
 
+import GameJolt;
+import GameJolt.GameJoltAPI;
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
@@ -5781,7 +5783,7 @@ class PlayState extends MusicBeatState
 		if(achievementObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement(['episode1', 'episode2', 'episode1_nomiss', 'episode2_nomiss', 'malfunction_nomiss', 'relapse_nomiss', 'malfunction_tryhard']);
+			var achieve:String = checkForAchievement(['episode1', 'episode2', 'episode1_nomiss', 'episode2_nomiss', 'malfunction_nomiss', 'relapse_nomiss', 'malfunction_tryhard', 'test']);
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -8155,6 +8157,11 @@ class PlayState extends MusicBeatState
 					case 'ur_good':
 						if(ratingPercent >= 1 && !usedPractice) {
 							unlock = true;
+						}
+					case 'test':
+						if(!isStoryMode && CoolUtil.difficultyString() == 'HARD' && SONG.song == 'Isolated') {
+							unlock = true;
+							GameJoltAPI.getTrophy(169794);
 						}
 				}
 

@@ -14,6 +14,7 @@ import flixel.text.FlxText;
 import flixel.FlxCamera;
 import lime.app.Application;
 import flixel.util.FlxColor;
+import flash.system.System;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
 

@@ -8168,6 +8168,7 @@ class PlayState extends MusicBeatState
 									}
 								case 'chapter2':
 									if(achievementName == 'episode2') unlock = true;
+									GameJolt.GameJoltAPI.getTrophy(169866);
 							}
 						}
 					case 'ur_bad':

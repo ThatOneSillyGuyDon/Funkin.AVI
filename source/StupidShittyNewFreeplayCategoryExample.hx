@@ -10,6 +10,7 @@ import flixel.FlxSprite;
 import flixel.FlxCamera;
 import flixel.addons.transition.FlxTransitionableState;
 import lime.app.Application;
+import flixel.tweens.FlxTween;
 
 using StringTools;
 

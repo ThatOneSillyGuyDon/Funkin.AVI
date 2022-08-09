@@ -8113,8 +8113,7 @@ class PlayState extends MusicBeatState
 							if(SONG.song == 'Malfunction')
 							{
 								unlock = true;
-								if(!GameJoltAPI.checkTrophy(169789))
-									GameJoltAPI.getTrophy(169789, '#FEF200', 'Glitch in the System!', 'FC & have ALL 30 LIVES in Malfunction!');		
+								GameJolt.GameJoltAPI.getTrophy(169789);
 							}
 						}
 					case 'episode1_nomiss' | 'episode2_nomiss' | 'malfunction_nomiss' | 'relapse_nomiss':
@@ -8127,8 +8126,7 @@ class PlayState extends MusicBeatState
 									if(achievementName == 'episode1_nomiss')
 									{
 										unlock = true;
-										if(!GameJoltAPI.checkTrophy(169793))
-											GameJoltAPI.getTrophy(169793, '#FEF200', 'True Satanist', 'FC Episode 1.');		
+										GameJolt.GameJoltAPI.getTrophy(169793);			
 									}
 								case 'chapter2':
 									if(achievementName == 'episode2_nomiss')
@@ -8144,8 +8142,7 @@ class PlayState extends MusicBeatState
 								if(achievementName == 'malfunction_nomiss')
 								{
 									unlock = true;
-									if(!GameJoltAPI.checkTrophy(169791))
-										GameJoltAPI.getTrophy(169791, '#FEF200', 'What Malfunction?', 'FC Malfunction.');		
+									GameJolt.GameJoltAPI.getTrophy(169791);
 								}
 							}
 							if(SONG.song == 'Cycled Sins')
@@ -8153,8 +8150,7 @@ class PlayState extends MusicBeatState
 								if(achievementName == 'relapse_nomiss')
 								{ 
 									unlock = true;
-									if(!GameJoltAPI.checkTrophy(169790))
-										GameJoltAPI.getTrophy(169790, '#FEF200', 'Bullet Dodger!', 'FC Cycled Sins.');
+									GameJolt.GameJoltAPI.getTrophy(169790);
 								}
 							}
 						}
@@ -8168,8 +8164,7 @@ class PlayState extends MusicBeatState
 									if(achievementName == 'episode1')
 									{
 										unlock = true;
-										if(!GameJoltAPI.checkTrophy(169792))
-											GameJoltAPI.getTrophy(169792, '#FEF200', 'Nothing is Real...', 'Complete Episode 1.');
+										GameJolt.GameJoltAPI.getTrophy(169792);
 									}
 								case 'chapter2':
 									if(achievementName == 'episode2') unlock = true;
@@ -8182,6 +8177,11 @@ class PlayState extends MusicBeatState
 					case 'ur_good':
 						if(ratingPercent >= 1 && !usedPractice) {
 							unlock = true;
+						}
+					case 'test':
+						if(!isStoryMode && CoolUtil.difficultyString() == 'HARD' && SONG.song == 'Isolated') {
+							unlock = true;
+							GameJoltAPI.getTrophy(169794);
 						}
 				}
 

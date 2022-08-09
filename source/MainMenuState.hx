@@ -27,8 +27,11 @@ import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
+
+//GameJolt
 import GameJolt;
 import GameJolt.GameJoltAPI;
+import tentools.api.FlxGameJolt as GJApi;
 
 using StringTools;
 
@@ -372,6 +375,16 @@ class MainMenuState extends MusicBeatState
 				ClientPrefs.saveSettings();
 			}
 		}
+
+		Achievements.loadAchievements();
+		if(GameJoltAPI.userLogin) {
+			var achieveID:Int = Achievements.getAchievementIndex('gamejolt');
+			if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's a friday night. WEEEEEEEEEEEEEEEEEE
+				Achievements.achievementsMap.set(Achievements.achievementsStuff[achieveID][2], true);
+				giveGameJoltAchievement();
+				ClientPrefs.saveSettings();
+			}
+		}
 		#end
 
 		var scratchStuff:FlxSprite = new FlxSprite();
@@ -404,6 +417,12 @@ class MainMenuState extends MusicBeatState
 		add(new AchievementObject('friday_night_play', camAchievement));
 		FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
 		trace('Giving achievement "friday_night_play"');
+	}
+
+	function giveGameJoltAchievement() {
+		add(new AchievementObject('gamejolt', camAchievement));
+		FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
+		trace('Thanks For Login ' + GJApi.username);
 	}
 	#end
 

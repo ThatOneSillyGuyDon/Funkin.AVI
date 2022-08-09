@@ -39,7 +39,7 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
      * Inline variable to see if the user has logged in.
      * True for logged in, false for not logged in.
      */
-    static var userLogin:Bool = false;
+    public static var userLogin:Bool = false;
 
     /**
      * Inline variable to see if the user wants to submit scores.
@@ -144,7 +144,7 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
      * Give a trophy!
      * @param trophyID Trophy ID. Check your game's API settings for trophy IDs.
      */
-    public static function getTrophy(trophyID:Int, color:String, title:String, desc:String) /* Awards a trophy to the user! */
+    public static function getTrophy(trophyID:Int) /* Awards a trophy to the user! */
     {
         if(userLogin)
         {
@@ -153,7 +153,7 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
                 var bool:Bool = false;
                 if (data.exists("message"))
                     bool = true;
-                Main.gjToastManager.createToast('GJ/$title', title.toUpperCase(), desc.toUpperCase(), true, color);
+               // Main.gjToastManager.createToast('GJ/$title', title.toUpperCase(), desc.toUpperCase(), true, color);
             });
         }
     }

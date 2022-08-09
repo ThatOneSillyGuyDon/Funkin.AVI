@@ -421,7 +421,8 @@ class MainMenuState extends MusicBeatState
 
 	function giveGameJoltAchievement() {
 		add(new AchievementObject('gamejolt', camAchievement));
-		FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
+		GameJoltAPI.giveTrophy(169870);
+;		FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
 		trace('Thanks For Login ' + GJApi.username);
 	}
 	#end

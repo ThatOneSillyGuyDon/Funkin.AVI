@@ -11,18 +11,18 @@ using StringTools;
 
 class Achievements {
 	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Achievement save tag, Hidden achievement
-["Imma Gaming'"       ,		    "Login To GameJolt!",				                'gamejolt',		    false],
-["Nothing is Real...",		    "Complete Episode 1.",				                'episode1',		    false],
-["'Smiling For The Show.'",		"Complete Episode 2.",				                'episode2',			false],
-["True Satanist",				"FC Episode 1.",									'episode1_nomiss',	false],
-["My Smile is Bigger!",			"FC Episode 2.",									'episode2_nomiss',	false],
-["What Malfunction?",			"FC Malfunction.",									'malfunction_nomiss',	false],
-["Bullet Dodger!",				"FC Cycled Sins.",									'relapse_nomiss',	false],
-["Glitch in the System!",			"FC & Have ALL 30 Lives in Malfunction!",			'malfunction_tryhard',	false],
-//THEY WORK, LET'S GOOOOOO
-["Freaky on a Friday Night",	"Play on a Friday... Night.",						'friday_night_play',	 true],
-["What a Funkin' Disaster!",	"Complete a Song with a rating lower than 20%.",	'ur_bad',				false],
-["Perfectionist",				"Complete a Song with a rating of 100%.",			'ur_good',				false]
+	    ["We Be Gamin'",		            "Login To GameJolt!",				                'gamejolt',		    false],
+		["Nothing is Real...",		    "Complete Episode 1.",				                'episode1',		    false],
+		["'Smiling For The Show.'",		"Complete Episode 2.",				                'episode2',			false],
+		["True Satanist",				"FC Episode 1.",									'episode1_nomiss',	false],
+		["My Smile is Bigger!",			"FC Episode 2.",									'episode2_nomiss',	false],
+		["What Malfunction?",			"FC Malfunction.",									'malfunction_nomiss',	false],
+		["Bullet Dodger!",				"FC Cycled Sins.",									'relapse_nomiss',	false],
+		["Glitch in the System!",			"FC & Have ALL 30 Lives in Malfunction!",			'malfunction_tryhard',	false],
+		//THEY WORK, LET'S GOOOOOO
+		["Freaky on a Friday Night",	"Play on a Friday... Night.",						'friday_night_play',	 true],
+		["What a Funkin' Disaster!",	"Complete a Song with a rating lower than 20%.",	'ur_bad',				false],
+		["Perfectionist",				"Complete a Song with a rating of 100%.",			'ur_good',				false],
 	];
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
 

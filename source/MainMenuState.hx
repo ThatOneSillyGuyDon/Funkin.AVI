@@ -382,6 +382,10 @@ class MainMenuState extends MusicBeatState
 			if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's a friday night. WEEEEEEEEEEEEEEEEEE
 				Achievements.achievementsMap.set(Achievements.achievementsStuff[achieveID][2], true);
 				giveGameJoltAchievement();
+				if (!GameJoltAPI.checkTrophy(169870))
+				{
+					GameJoltAPI.getTrophy(169870);
+				}
 				ClientPrefs.saveSettings();
 			}
 		}
@@ -421,8 +425,7 @@ class MainMenuState extends MusicBeatState
 
 	function giveGameJoltAchievement() {
 		add(new AchievementObject('gamejolt', camAchievement));
-	FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
-	GameJolt.GameJoltAPI.getTrophy(169870);
+		FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'), 0.7);
 		trace('Thanks For Login ' + GJApi.username);
 	}
 	#end

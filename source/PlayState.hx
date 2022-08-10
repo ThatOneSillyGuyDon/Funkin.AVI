@@ -2,6 +2,8 @@ package;
 
 import GameJolt;
 import GameJolt.GameJoltAPI;
+import WindowsAPI.ConsoleColor;
+import WindowsAPI;
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;

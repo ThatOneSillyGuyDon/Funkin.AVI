@@ -17,12 +17,13 @@ class Achievements {
 		["True Satanist",				"FC Episode 1.",									'episode1_nomiss',	false],
 		["My Smile is Bigger!",			"FC Episode 2.",									'episode2_nomiss',	false],
 		["What Malfunction?",			"FC Malfunction.",									'malfunction_nomiss',	false],
+		["Un-Defeated Glitch",			"Die 10 Times In Malfunction.",						'malfunction_dead',	false],
 		["Bullet Dodger!",				"FC Cycled Sins.",									'relapse_nomiss',	false],
 		["Glitch in the System!",			"FC & Have ALL 30 Lives in Malfunction!",			'malfunction_tryhard',	false],
 		//THEY WORK, LET'S GOOOOOO
 		["Freaky on a Friday Night",	"Play on a Friday... Night.",						'friday_night_play',	 true],
 		["What a Funkin' Disaster!",	"Complete a Song with a rating lower than 20%.",	'ur_bad',				false],
-		["Perfectionist",				"Complete a Song with a rating of 100%.",			'ur_good',				false],
+		["30's Perfectionist",			"Complete any song with 100% of accuracy.",			'ur_good',				false],
 	];
 	public static var achievementsMap:Map<String, Bool> = new Map<String, Bool>();
 

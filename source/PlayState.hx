@@ -5783,7 +5783,7 @@ class PlayState extends MusicBeatState
 		if(achievementObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement(['episode1', 'episode2', 'episode1_nomiss', 'episode2_nomiss', 'malfunction_nomiss', 'relapse_nomiss', 'malfunction_tryhard', 'test']);
+			var achieve:String = checkForAchievement(['episode1', 'episode2', 'episode1_nomiss', 'episode2_nomiss', 'malfunction_nomiss', 'relapse_nomiss', 'malfunction_tryhard', 'test', 'malfunction_dead']);
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -8176,12 +8176,19 @@ class PlayState extends MusicBeatState
 									GameJolt.GameJoltAPI.getTrophy(169866);
 							}
 						}
+
+						case 'malfunction_dead':
+							if(Paths.formatToSongPath(SONG.song) == 'Malfunction' && !usedPractice && !cpuControlled && deathCounter == 10) {
+								unlock = true;
+						}
 					case 'ur_bad':
 						if(ratingPercent < 0.2 && !practiceMode) {
 							unlock = true;
 						}
 					case 'ur_good':
 						if(ratingPercent >= 1 && !usedPractice) {
+							if(!GameJoltAPI.checkTrophy(169967))
+								GameJoltAPI.getTrophy(169967);
 							unlock = true;
 						}
 				}

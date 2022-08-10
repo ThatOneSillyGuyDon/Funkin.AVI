@@ -1,6 +1,7 @@
 package;
 
 import GameJolt;
+import GameJolt.GameJoltAPI;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -57,15 +58,15 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
+		gjToastManager = new GJToastManager();
+		addChild(gjToastManager); //adding the toddler
+		
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
 		var res = ClientPrefs.screenRes.split('x');
 		gameWidth = Std.parseInt(res[0]);
 		gameHeight = Std.parseInt(res[1]);
-
-		gjToastManager = new GJToastManager();
-        addChild(gjToastManager);
 
 		if (zoom == -1)
 		{

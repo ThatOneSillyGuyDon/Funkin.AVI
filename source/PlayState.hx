@@ -7943,18 +7943,19 @@ class PlayState extends MusicBeatState
 			case 'Twisted Grins':
 				//Insert Events here
 			case 'Bless':
-				//Insert Events here
+			timeBar.createFilledBar(0xFFFF0000, 0xFFD9FF00);
 			case 'War Dilemma':
 				//Insert Events here
 			case 'Isolated Old':
 				//Insert Events here
 			case "Don't Cross!":
-				//Insert Events here
+				timeBar.createFilledBar(0xFF000000, 0xFFE1E1E1);
 			case 'Cycled Sins':
 				if(curStep == 572)
 				{
 					if(curStage == 'RelapseStage')
 					{
+						timeBar.createFilledBar(0xFF222222, 0xFF9E2222);
 						relapseCalm.alpha = 0;
 						relapseChaos.alpha = 1;
 					}

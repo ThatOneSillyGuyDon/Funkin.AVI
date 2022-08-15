@@ -1479,10 +1479,10 @@ class PlayState extends MusicBeatState
 			{
 				timeBarBG.visible = false;
 			}else{
-				timeBarBG.visible = showTime;
+				timeBarBG.alpha = 0;
 			}
 		}else{
-			timeBarBG.visible = showTime;
+			timeBarBG.alpha = 0;
 		}
 		
 		
@@ -1494,7 +1494,7 @@ class PlayState extends MusicBeatState
 		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
 			'songPercent', 0, 1);
 		timeBar.scrollFactor.set();
-		timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF);
+		timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
 		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
 		timeBar.alpha = 0;
 		if(ClientPrefs.mechanics)
@@ -1503,10 +1503,10 @@ class PlayState extends MusicBeatState
 			{
 				timeBar.visible = false;
 			}else{
-				timeBar.visible = showTime;
+				timeBar.alpha = 0;
 			}	
 		}else{
-			timeBar.visible = showTime;
+			timeBar.alpha = 0;
 		}
 		add(timeBar);
 		add(timeTxt);
@@ -4166,9 +4166,9 @@ class PlayState extends MusicBeatState
 	        } else {
 
 		if(ratingName == '?') {
-			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' ~ Score: ' + songScore + ' ~ Misses: ' + songMisses + ' ~ Rating: ' + ratingName;
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + ratingFC;
 		} else {
-			scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' ~ Score: ' + songScore + ' ~ Misses: ' + songMisses + ' ~ Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
 		}
 	        }
 
@@ -5443,19 +5443,12 @@ class PlayState extends MusicBeatState
 				relapseShoot();
 
 			case 'Hide HUD':
-				var HUDid:Int = Std.parseInt(value1);
-				//var HUDtrans:Int = Std.parseInt(value2);
-				if(Math.isNaN(HUDid)) HUDid = 0;
-				//if(Math.isNaN(HUDid)) HUDid = 0;
-
-				//var newHUDValue:Float = camHUD + HUDtrans;
-
-				switch(HUDid) {
-				case 1:
-					FlxTween.tween(camHUD, {alpha: camHUD.alpha = 0}, 1.5, {ease: FlxEase.quartInOut});
-				case 2:
-					FlxTween.tween(camHUD, {alpha: camHUD.alpha = 1}, 1.5, {ease: FlxEase.quartInOut});
+				if(value1 == 'false') {
+				FlxTween.tween(camHUD, {alpha: 0}, 1);
+				} else if(value1 == 'true') {
+					FlxTween.tween(camHUD, {alpha: 1}, 1);
 				}
+				//trying to know the timer thing because value 2 is 'String'
 
 				/*if(val2 <= 0)
 				{

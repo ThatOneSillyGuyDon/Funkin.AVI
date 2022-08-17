@@ -417,6 +417,7 @@ class PlayState extends MusicBeatState
 				songComposer = 'END_SELLA';
 				if (FlxG.save.data.blessLock != 'beaten') FPClientPrefs.blessLock = 'unlocked';
 		}
+		//Translating it later lol
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
@@ -4166,19 +4167,34 @@ class PlayState extends MusicBeatState
 	        } else {
 
 		if(ratingName == '?') {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + ratingFC;
+			if(ClientPrefs.language == "Spanish") {
+			scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ' + ratingFC;
 		} else {
-			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
+			scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + ratingFC;
+		}
+		} else {
+			if(ClientPrefs.language == "Spanish") {
+				scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';
+			} else {
+				scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
+		}
 		}
 	        }
+
+			//Literally, Disorganized code
 
 					// Info Bar
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
 		var ratingNameTwo:String = ratingName;
 		var divider:String = ' ' + '-' + ' ';
 			
-		if (ClientPrefs.ratingSystem == "None")
-			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
+		if (ClientPrefs.ratingSystem == "None") {
+			if(ClientPrefs.language == "Spanish") {
+			scoreTxt.text = 'Puntuacion: ${songScore}' + divider + 'Perdidas: ${totalMisses}';
+			} else {
+				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
+			}
+		}
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -4672,7 +4688,7 @@ class PlayState extends MusicBeatState
 
 				// MusicBeatState.switchState(new GameOverState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				
-				Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + " - Game Over";
+				Application.current.window.title = "Funkin.avi - Game Over";
 
 				#if desktop
 				// Game Over doesn't get his own variable because it's only used here

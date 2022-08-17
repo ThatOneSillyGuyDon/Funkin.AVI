@@ -222,17 +222,22 @@ class EpisodesState extends MusicBeatState
 		textBG.alpha = 0.6;
 		add(textBG);
 
-		#if PRELOAD_ALL
-		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
+        if(ClientPrefs.language == "Spanish") {
+		var leText:String = "Presiona CTRL Para Modifical El GamePlay / Presiona R Para Reiniciar El Progreso De La Cancion.";
 		var size:Int = 18;
-		#else
-		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
-		var size:Int = 18;
-		#end
 		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
 		text.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), size, FlxColor.WHITE, RIGHT);
 		text.scrollFactor.set();
 		add(text);
+		} else {
+		var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
+		var size:Int = 18;
+		var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
+		text.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), size, FlxColor.WHITE, RIGHT);
+		text.scrollFactor.set();
+		add(text);
+		}
+		
 
 		var scratchStuff:FlxSprite = new FlxSprite();
 		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');

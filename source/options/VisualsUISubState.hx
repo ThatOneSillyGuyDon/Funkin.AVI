@@ -1,5 +1,6 @@
 package options;
 
+import GameplayChangersSubstate.GameplayOption;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -33,6 +34,14 @@ class VisualsUISubState extends BaseOptionsMenu
 	{
 		title = 'Visuals and UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
+
+		var option:Option = new Option('Language',
+		"What Language The Game Should Run?",
+		'language',
+		'string',
+		'English',
+		['English', 'Spanish']);
+		addOption(option);
 
 		var option:Option = new Option('Cutscenes',
 			"If checked, cutscenes will show (this will affect Freeplay too).",

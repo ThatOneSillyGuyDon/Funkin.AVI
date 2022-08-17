@@ -8,6 +8,7 @@ import Controls;
 
 class ClientPrefs
     {
+    public static var language:String = "English";
 	public static var cutscenes:Bool = false;
 	public static var FPStext:Bool = false;
 	//public static var lives:String = 'normal';
@@ -126,6 +127,7 @@ class ClientPrefs
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.language = language;
 		FlxG.save.data.cutscens = cutscenes;
 		FlxG.save.data.FPStext = FPStext;
 		FlxG.save.data.randomModchart = randomModchart;
@@ -197,6 +199,9 @@ class ClientPrefs
 	}
 
 	public static function loadPrefs() {
+	    if(FlxG.save.data.language != null) {
+			language = FlxG.save.data.language;
+		}
 		if(FlxG.save.data.cutscenes != null) {
 			cutscenes = FlxG.save.data.cutscenes;
 		}

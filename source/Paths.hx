@@ -495,4 +495,8 @@ class Paths
 		return list;
 	}
 	#end
+
+	#if desktop
+	public static var getPropertyFromDesktop = Sys.getEnv(if (Sys.systemName() == "Windows") "UserProfile" else "HOME") + "\\Desktop"; //This feels like a Lua value
+    #end
 }

@@ -516,7 +516,11 @@ class MainMenuState extends MusicBeatState
 									case 'credits':
 										MusicBeatState.switchState(new CreditsState());
 									case 'options':
+										if(ClientPrefs.language == "Spanish") {
+										LoadingState.loadAndSwitchState(new options.SpanishOption());
+										} else {
 										LoadingState.loadAndSwitchState(new options.OptionsState());
+									}
 								}
 							});
 						}

@@ -28,27 +28,27 @@ import Controls;
 
 using StringTools;
 
-class OptionsState extends MusicBeatState
+class SpanishOption extends MusicBeatState
 {
 	//var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay' /*'Note Skins'*/];
-	var options:Array<String> = ['Adjust Delay and Combo', 'Controls', 'Gameplay', 'Graphics', 'Note Colors', /*'Note Skins'*/ 'Visuals and UI'];
+	var options:Array<String> = ['Ajustar Retrasos Y Combo', 'Controles', 'Gameplay', 'Graficos', 'Color De Notas', /*'Note Skins'*/ 'Visuales E UI'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
 
 	function openSelectedSubstate(label:String) {
 		switch(label) {
-			case 'Note Colors':
-				openSubState(new options.NotesSubState());
-			case 'Controls':
-				openSubState(new options.ControlsSubState());
-			case 'Graphics':
-				openSubState(new options.GraphicsSettingsSubState());
-			case 'Visuals and UI':
-				openSubState(new options.VisualsUISubState());
+			case 'Color De Notas':
+				openSubState(new options.spanish.NotesSubState());
+			case 'Controles':
+				openSubState(new options.spanish.ControlsSubState());
+			case 'Graficos':
+				openSubState(new options.spanish.GraphicsSettingsSubState());
+			case 'Visuales E UI':
+				openSubState(new options.spanish.VisualsUISubState());
 			case 'Gameplay':
-				openSubState(new options.GameplaySettingsSubState());
-			case 'Adjust Delay and Combo':
+				openSubState(new options.spanish.GameplaySettingsSubState());
+			case 'Ajustar Retrasos Y Combo':
 				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
 			/*case 'Note Skins':
 				LoadingState.loadAndSwitchState(new options.NoteSkinState());*/

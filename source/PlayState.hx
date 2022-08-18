@@ -6,6 +6,10 @@ import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
 #end
+#if sys
+import sys.io.File;
+import sys.FileSystem;
+#end
 import Section.SwagSection;
 import Song.SwagSong;
 import WiggleEffect.WiggleEffectType;
@@ -4221,7 +4225,12 @@ class PlayState extends MusicBeatState
 					FlxG.sound.music.pause();
 					vocals.pause();
 				}
+
+				if(ClientPrefs.language == "Spanish") {
+				openSubState(new PauseSpanishState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				} else {
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+				}
 				//}
 		
 				#if desktop
@@ -5817,6 +5826,24 @@ class PlayState extends MusicBeatState
 				#end
 			}
 
+			#if sys
+			if(SONG.song.toLowerCase()=='malfunction'){
+				var path = '${Paths.getPropertyFromDesktop}\\malfunctionThing.txt';
+				var content:String = "Congratulations, You Beated The Unknown Black Square.
+But We Don't Know If He Will Return...
+Stay Safe";
+				try{
+					File.saveContent(path, content);
+				}catch(e:Dynamic){
+					path = 'malfunctionThing.txt';
+					File.saveContent(path, content);
+					trace(e);
+				}
+				CoolUtil.openDumbFile(path);
+				FlxG.save.flush();
+			}
+			#end
+
 			if (chartingMode)
 			{
 				openChartEditor();
@@ -6165,7 +6192,7 @@ class PlayState extends MusicBeatState
 								totalNotesHit += 1;
 							else
 								totalNotesHit += 0.95;
-							health += 0.01;
+							health += 0.02;
 							sicks++;
 						case "marvelous": // marvelous
 							totalNotesHit += 1;
@@ -7959,7 +7986,7 @@ class PlayState extends MusicBeatState
 			case 'Twisted Grins':
 				//Insert Events here
 			case 'Bless':
-			timeBar.createFilledBar(0xFFFF0000, 0xFFD9FF00);
+			timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
 			case 'War Dilemma':
 				//Insert Events here
 			case 'Isolated Old':
@@ -8086,13 +8113,23 @@ class PlayState extends MusicBeatState
 			}
 
 			// Rating FC
+			if(ClientPrefs.language == "Spanish") {
 			ratingFC = "";
 			if (marvelouses > 0) ratingFC = "MFC";
 			if (sicks > 0) ratingFC = "SFC";
 			if (goods > 0) ratingFC = "GFC";
 			if (bads > 0 || shits > 0) ratingFC = "FC";
 			if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
-			else if (songMisses >= 10) ratingFC = "Clear";
+			else if (songMisses >= 10) ratingFC = "Limpio";
+			} else {
+				ratingFC = "";
+				if (marvelouses > 0) ratingFC = "MFC";
+				if (sicks > 0) ratingFC = "SFC";
+				if (goods > 0) ratingFC = "GFC";
+				if (bads > 0 || shits > 0) ratingFC = "FC";
+				if (songMisses > 0 && songMisses < 10) ratingFC = "SDCB";
+				else if (songMisses >= 10) ratingFC = "Clear";
+			}
 		}
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);

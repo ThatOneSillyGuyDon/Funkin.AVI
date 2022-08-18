@@ -1,4 +1,4 @@
-package options;
+package options.spanish;
 
 #if desktop
 import Discord.DiscordClient;

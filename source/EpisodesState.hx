@@ -322,8 +322,14 @@ class EpisodesState extends MusicBeatState
 			ratingSplit[1] += '0';
 		}
 
+		if(ClientPrefs.language == "Spanish") {
+		scoreText.text = 'Record Personal: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
+		positionHighscore();
+		} else{
 		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 		positionHighscore();
+		}
+
 
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;

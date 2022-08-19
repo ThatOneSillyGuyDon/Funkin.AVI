@@ -1,6 +1,7 @@
 package;
 
 import GameJolt;
+import GameJolt.GameJoltAPI;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -32,7 +33,7 @@ class Main extends Sprite
 	var framerate:Int = 60; // Wowwowoowowowowowowowowowowowowowowowow wtf dude, start with at least 120 FPS
 	var skipSplash:Bool = true; // Hope we add this to the mod xd
 	var startFullscreen:Bool = false; // N o
-	public static var gjToastManager:GJToastManager;
+	public static var gjToastManager:GJToastManager; //Toast For Advice
 	public static var fpsVar:FPS;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
@@ -68,6 +69,9 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
+		gjToastManager = new GJToastManager();
+		addChild(gjToastManager); //adding the toddler
+		
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
@@ -103,50 +107,6 @@ class Main extends Sprite
 
 		FlxG.autoPause = false;
 		FlxG.mouse.visible = false;
-
-		
-		#if Goofy_Ahh_Crash_Thing
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
-		#end
 	}
-
-	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
-	// very cool person for real they don't get enough credit for their work
-	#if Goofy_Ahh_Crash_Thing
-	function onCrash(e:UncaughtErrorEvent):Void
-	{
-		var errMsg:String = "";
-		var path:String;
-		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
-		var dateNow:String = Date.now().toString();
-
-		path = "./crashData/" + "ErrorLog_" + dateNow + ".txt";
-
-		for (stackItem in callStack)
-		{
-			switch (stackItem)
-			{
-				case FilePos(s, file, line, column):
-					errMsg += file + " (line " + line + ")\n";
-				default:
-					Sys.println(stackItem);
-			}
-		}
-
-		errMsg += "\nAn Error Happend In Funkin.Avi: " + e.error + "\nIf This is a Psych Engine Bug Go To Report It here: https://github.com/ShadowMario/FNF-PsychEngine\n\n> Crash Handler written by: sqirra-rng";
-
-		if (!FileSystem.exists("./crashData/"))
-			FileSystem.createDirectory("./crashData/");
-
-		File.saveContent(path, errMsg + "\n");
-
-		Sys.println(errMsg);
-		Sys.println("Crash Error Saved In " + Path.normalize(path));
-
-		Application.current.window.alert(errMsg, "Error!");
-		DiscordClient.shutdown();
-		Sys.exit(1);
-	}
-	#end
-	}
+}
 	

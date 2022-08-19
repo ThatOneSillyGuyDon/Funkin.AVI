@@ -85,9 +85,6 @@ class MainMenuState extends MusicBeatState
 	{
 		WeekData.loadTheFirstEnabledMod();
 
-		GameJoltAPI.connect();
-        GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
-
 		FPClientPrefs.loadShit();
 
 		Application.current.window.title = "Funkin.avi";

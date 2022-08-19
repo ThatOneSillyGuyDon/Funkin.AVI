@@ -8004,7 +8004,16 @@ Stay Safe";
 					}
 				}
 			case 'Malfunction':
-				//Insert Events here
+				if(curStep == 1)
+				{
+					triggerEventNote('Alter Camera Zoom', '1.8', '2.0');
+					trace('is working');
+				}
+
+				if(curStep == 20)
+				{
+					triggerEventNote('Alter Camera Zoom', '0.9', '0.5');
+				}
 			case 'Hunted':
 				//Insert Events here
 			case 'Facade':

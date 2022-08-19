@@ -1,7 +1,6 @@
 package;
 
 import GameJolt;
-import GameJolt.GameJoltAPI;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -69,9 +68,6 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-		gjToastManager = new GJToastManager();
-		addChild(gjToastManager); //adding the toddler
-		
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 

@@ -10,7 +10,6 @@ import flixel.FlxSprite;
 import flixel.FlxCamera;
 import flixel.addons.transition.FlxTransitionableState;
 import lime.app.Application;
-import flixel.tweens.FlxTween;
 
 using StringTools;
 
@@ -21,7 +20,6 @@ class StupidShittyNewFreeplayCategoryExample extends MusicBeatState
       var BG3:FlxSprite;
       var tag1:FlxSprite;
       var tag2:FlxSprite;
-      var text:FlxText;
 
       private var camGame:FlxCamera;
 
@@ -68,23 +66,20 @@ class StupidShittyNewFreeplayCategoryExample extends MusicBeatState
             tag1.updateHitbox();
             tag1.antialiasing = ClientPrefs.globalAntialiasing;
             tag1.screenCenter(Y);
-            //tag1.x -= -140; //IDK
-	    tag1.x -= 1277; //trust me
+            tag1.x -= -140; //IDK
             add(tag1);
 
             tag2 = new FlxSprite().loadGraphic(Paths.image('Mickey_Mouse_South_Park'));
             tag2.updateHitbox();
             tag2.antialiasing = ClientPrefs.globalAntialiasing;
             tag2.screenCenter(Y);
-            //tag2.x += 740; //IDK
-	      tag2.x += 1282; //trust me
+            tag2.x += 740; //IDK
             add(tag2); //Tony, you made me be 1 hour fixing this for nothing
 
-            text = new FlxText(60, FlxG.height - 104, 0, "Choose...", 12);
+            var text:FlxText = new FlxText(60, FlxG.height - 104, 0, "Choose...", 12);
 		text.scrollFactor.set();
 		text.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 60, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
             text.screenCenter(X);
-		text.alpha = 0;
 		add(text);
 
             var scratchStuff:FlxSprite = new FlxSprite();
@@ -112,9 +107,6 @@ class StupidShittyNewFreeplayCategoryExample extends MusicBeatState
 
       override function update(elapsed:Float)
             {
-		  FlxTween.tween(tag1, {x: 140}, 1);
-		  FlxTween.tween(tag2, {x: 740}, 1);
-		  FlxTween.tween(text, {alpha: 1}, 1);
                   if (!selectedSomethin)
                         {
                               if (controls.BACK)

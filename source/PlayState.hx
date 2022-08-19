@@ -289,10 +289,13 @@ class PlayState extends MusicBeatState
 	var randyMick:FlxSprite;
 	var WIMick:FlxSprite;
 	var cogMick:FlxSprite;
+	var aviMick:FlxSprite;
 
-	//Spotlight Functions
+	//Cool Visual Shit
 	var spotlight:BGSprite;
 	var darknessBlack:BGSprite;
+	var whiteFlashBG:FlxSprite;
+	var whiteFlashBGFade:FlxTween;
 
 	//Malfunction Life System
 	var crashLives:FlxText;
@@ -421,7 +424,6 @@ class PlayState extends MusicBeatState
 				songComposer = 'END_SELLA';
 				if (FlxG.save.data.blessLock != 'beaten') FPClientPrefs.blessLock = 'unlocked';
 		}
-		//Translating it later lol
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
@@ -1079,6 +1081,16 @@ class PlayState extends MusicBeatState
 				var whiteBGShit:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 8), Std.int(FlxG.height * 8), FlxColor.WHITE);
 				add(whiteBGShit);
 
+				aviMick = new FlxSprite(0, -150);
+				aviMick.frames = Paths.getSparrowAtlas('funkinAVI/Couch/AVIMouseCouchFNF');
+				aviMick.animation.addByPrefix('idle', 'FunkMouseIDLE', 24, true);
+				aviMick.animation.addByPrefix('AVILeft', 'FunkMouseLEFT', 24, true);
+				aviMick.animation.addByPrefix('AVIDown', 'FunkMouseDOWN', 24, true);
+				aviMick.animation.addByPrefix('AVIUp', 'FunkMouseUP', 24, true);
+				aviMick.animation.addByPrefix('AVIRight', 'FunkMouseRIGHT', 24, true);
+				aviMick.animation.play('idle');
+				aviMick.scrollFactor.set(0.9, 0.9);
+
 				cogMick = new FlxSprite(500, -150);
 				cogMick.frames = Paths.getSparrowAtlas('funkinAVI/Couch/CogMouseCouch');
 				cogMick.animation.addByPrefix('idle', 'CogMickIDLE', 24, true);
@@ -1124,10 +1136,12 @@ class PlayState extends MusicBeatState
 				WIMick.scale.set(1.3, 1.3);
 				randyMick.scale.set(1.3, 1.3);
 				rookieMick.scale.set(1.3, 1.3);	
+				aviMick.scale.set(1.3, 1.3);
 
 				//layering the fucking mouses
 				add(WIMick);
 				add(cogMick);
+				add(aviMick);
 				add(randyMick);
 				add(rookieMick);
 
@@ -1135,9 +1149,7 @@ class PlayState extends MusicBeatState
 				add(couch);
 
 				snsMickDed = new BGSprite('funkinAVI/Couch/SNSMickeyDieded', 1270, 680, 1.1, 1.1);
-
-
-
+				//for the love of god, why?
 				
 			case 'tank': //Week 7 - Ugh, Guns, Stress
 				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);
@@ -1207,6 +1219,13 @@ class PlayState extends MusicBeatState
 		if(isPixelStage) {
 			introSoundsSuffix = '-pixel';
 		}
+
+		whiteFlashBG = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 1), Std.int(FlxG.height * 1), FlxColor.WHITE);
+		whiteFlashBG.blend = ADD;
+		whiteFlashBG.alpha = 0;
+		whiteFlashBG.scale.set(5, 5);
+		add(whiteFlashBG);
+
 
 		add(gfGroup); //Needed for blammed lights
 
@@ -1484,10 +1503,10 @@ class PlayState extends MusicBeatState
 			{
 				timeBarBG.visible = false;
 			}else{
-				timeBarBG.alpha = 0;
+				timeBarBG.visible = showTime;
 			}
 		}else{
-			timeBarBG.alpha = 0;
+			timeBarBG.visible = showTime;
 		}
 		
 		
@@ -1508,10 +1527,10 @@ class PlayState extends MusicBeatState
 			{
 				timeBar.visible = false;
 			}else{
-				timeBar.alpha = 0;
+				timeBar.visible = showTime;
 			}	
 		}else{
-			timeBar.alpha = 0;
+			timeBar.visible = showTime;
 		}
 		add(timeBar);
 		add(timeTxt);
@@ -4185,8 +4204,6 @@ class PlayState extends MusicBeatState
 		}
 	        }
 
-			//Literally, Disorganized code
-
 					// Info Bar
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
 		var ratingNameTwo:String = ratingName;
@@ -4709,6 +4726,13 @@ class PlayState extends MusicBeatState
 		}
 		return false;
 	}
+		function fadeWhiteFlash() {
+			if(ClientPrefs.flashing)
+			{
+					whiteFlashBG.alpha = 0.6;
+					whiteFlashBGFade = FlxTween.tween(whiteFlashBG, {alpha: 0}, 0.3, {ease: FlxEase.linear});
+			}
+		}
 
 	public function checkEventNote() {
 		while(eventNotes.length > 0) {
@@ -5473,7 +5497,6 @@ class PlayState extends MusicBeatState
 				} else if(value1 == 'true') {
 					FlxTween.tween(camHUD, {alpha: 1}, 1);
 				}
-				//trying to know the timer thing because value 2 is 'String'
 
 				/*if(val2 <= 0)
 				{
@@ -5801,7 +5824,18 @@ class PlayState extends MusicBeatState
 		if(achievementObj != null) {
 			return;
 		} else {
-			var achieve:String = checkForAchievement(['episode1', 'episode2', 'episode1_nomiss', 'episode2_nomiss', 'malfunction_nomiss', 'relapse_nomiss', 'malfunction_tryhard', 'test', 'malfunction_dead']);
+			var achieve:String = checkForAchievement(
+				['episode1', 
+				'episode2', 
+				'episode1_nomiss', 
+				'episode2_nomiss', 
+				'malfunction_nomiss', 
+				'relapse_nomiss', 
+				'malfunction_tryhard', 
+				'episode1_SFC', 
+				'episode2_SFC', 
+				'episode1_suicide', 
+				'episode2_suicide']);
 
 			if(achieve != null) {
 				startAchievement(achieve);
@@ -6761,6 +6795,8 @@ Stay Safe";
 								{
 									switch(note.noteType)
 									{
+										case 'AVI Sing':
+											aviMick.animation.play('AVILeft');
 										case 'Rookie Sing':
 											rookieMick.animation.play('rookieLeft');
 										case 'WI Sing':
@@ -6822,6 +6858,8 @@ Stay Safe";
 								{
 									switch(note.noteType)
 									{
+										case 'AVI Sing':
+											aviMick.animation.play('AVIDown');
 										case 'Rookie Sing':
 											rookieMick.animation.play('rookieDown');
 										case 'WI Sing':
@@ -6883,6 +6921,8 @@ Stay Safe";
 								{
 									switch(note.noteType)
 									{
+										case 'AVI Sing':
+											aviMick.animation.play('AVIUp');
 										case 'Rookie Sing':
 											rookieMick.animation.play('rookieUp');
 										case 'WI Sing':
@@ -6944,6 +6984,8 @@ Stay Safe";
 								{
 									switch(note.noteType)
 									{
+										case 'AVI Sing':
+											aviMick.animation.play('AVIRight');
 										case 'Rookie Sing':
 											rookieMick.animation.play('rookieRight');
 										case 'WI Sing':
@@ -7024,6 +7066,11 @@ Stay Safe";
 		{
 			switch(note.noteType)
 			{
+				case 'AVI Sing':
+					new FlxTimer().start(1.5, function(tmr:FlxTimer)
+					{
+						aviMick.animation.play('idle');
+					});
 				case 'Rookie Sing':
 					new FlxTimer().start(1.5, function(tmr:FlxTimer)
 					{
@@ -7827,59 +7874,73 @@ Stay Safe";
 				if(curStep == 392)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 400)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 408)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 416)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 424)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 432)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 448)
 				{
 					triggerEventNote('Flash Screen', '3', 'False');
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 456)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 464)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 472)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 480)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 488)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 496)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 504)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 512)
 				{
@@ -7889,63 +7950,78 @@ Stay Safe";
 				if(curStep == 520)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 528)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 536)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 544)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 552)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 560)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 568)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 576)
 				{
 					triggerEventNote('Flash Screen', '3', 'False');
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 584)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 592)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 600)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 608)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 616)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 624)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
+					fadeWhiteFlash();
 				}
 				if(curStep == 632)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 				if(curStep == 640)
 				{
@@ -7970,6 +8046,16 @@ Stay Safe";
 				if(curStep == 832)
 				{
 					triggerEventNote('Flash Screen', '3', '');
+				}
+				if(curStep == 896)
+				{
+					triggerEventNote('Flash Screen', '0', '');
+					triggerEventNote('Add Camera Zoom', '0.04', '0.05');
+				}
+				if(curStep == 904)
+				{
+					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
+					fadeWhiteFlash();
 				}
 			case 'Lunacy':
 				//Insert Events here
@@ -8173,6 +8259,50 @@ Stay Safe";
 									GameJoltAPI.getTrophy(169789);		
 							}
 						}
+					case 'episode1_SFC' | 'episode2_SFC':
+						if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'SUICIDAL' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
+						{
+							var weekName:String = WeekData.getWeekFileName();
+							switch(weekName) //I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
+							{
+								case 'chapter1':
+									if(achievementName == 'episode1_SFC')
+									{
+										unlock = true;
+										if(!GameJoltAPI.checkTrophy(170051))
+											GameJoltAPI.getTrophy(170051);		
+									}
+								case 'chapter2':
+									if(achievementName == 'episode2_SFC')
+									{
+										unlock = true;
+										if(!GameJoltAPI.checkTrophy(170052))
+											GameJoltAPI.getTrophy(170052);
+									}
+							}
+						}
+					case 'episode1_suicide' | 'episode2_suicide':
+						if(isStoryMode && CoolUtil.difficultyString() == 'SUICIDAL' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
+						{
+							var weekName:String = WeekData.getWeekFileName();
+							switch(weekName) //I know this is a lot of duplicated code, but it's easier readable and you can add weeks with different names than the achievement tag
+							{
+								case 'chapter1':
+									if(achievementName == 'episode1_suicide')
+									{
+										unlock = true;
+										if(!GameJoltAPI.checkTrophy(170049))
+											GameJoltAPI.getTrophy(170049);		
+									}
+								case 'chapter2':
+									if(achievementName == 'episode2_suicide')
+									{
+										unlock = true;
+										if(!GameJoltAPI.checkTrophy(169967))
+											GameJoltAPI.getTrophy(169967);
+									}
+							}
+						}
 					case 'episode1_nomiss' | 'episode2_nomiss' | 'malfunction_nomiss' | 'relapse_nomiss':
 						if(isStoryMode && campaignMisses + songMisses < 1 && CoolUtil.difficultyString() == 'HARD' && storyPlaylist.length <= 1 && !changedDifficulty && !usedPractice)
 						{
@@ -8190,6 +8320,8 @@ Stay Safe";
 									if(achievementName == 'episode2_nomiss')
 									{
 										unlock = true;
+										if(!GameJoltAPI.checkTrophy(169866))
+											GameJoltAPI.getTrophy(169866);		
 									}
 							}
 						}

@@ -1642,12 +1642,15 @@ class PlayState extends MusicBeatState
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
 				}
 
-		if(ClientPrefs.longBar)
-		{
-			healthBarBG = new AttachedSprite('healthBar-Long');
-		}else{
-			healthBarBG = new AttachedSprite('healthBar');
-		}
+				switch (curStage)
+				{
+					case 'stage' | 'Office' | 'Forest' | 'Line':
+						healthBarBG = new AttachedSprite('healthBar');
+					case 'PixelWorld':
+						healthBarBG = new AttachedSprite('placeholder'); //Placeholder
+					default:
+						healthBarBG = new AttachedSprite('healthBar');
+				}
 		healthBarBG.y = FlxG.height * 0.89;
 		healthBarBG.screenCenter(X);
 		healthBarBG.scrollFactor.set();
@@ -8288,7 +8291,7 @@ Stay Safe";
 
 				if(curStep == 546) {triggerEventNote('Scroll Type', 'Left', 'Right');}
 
-                if(curStep == 560) {triggerEventNote('Flash Screen', '0', 'false');  triggerEventNote('Screen Fade', '0', '');  triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+                if(curStep == 560) {triggerEventNote('Flash Screen', '0', 'false');  triggerEventNote('Screen Fade', '0', '');  triggerEventNote('Add Camera Zoom', '0.13', '0.14');  triggerEventNote('Scroll Type', 'Left', 'Right');  health = 1; }
 
 				if(curStep == 564) {
 					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
@@ -8305,6 +8308,215 @@ Stay Safe";
 				if(curStep == 576) {
 					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
 				}
+
+				if(curStep == 580) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 584) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 588) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 592) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 596) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 600) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 604) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 608) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 612) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 616) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+				
+				if(curStep == 620) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 624) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 628) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 632) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 636) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 640) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 644) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 648) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 652) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 656) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if (curStep == 660) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 664) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 668) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 672) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+                if(curStep == 676) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 680) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 684) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 688) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+					triggerEventNote('Scroll Type', 'Up', 'Down');
+				}
+
+				if(curStep == 692) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 696) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+					triggerEventNote('Scroll Type', 'Down', 'Up');
+				}
+
+				if(curStep == 700) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 704) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+					triggerEventNote('Scroll Type', 'Up', 'Down');
+				}
+
+				if(curStep == 708) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 712) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+					triggerEventNote('Scroll Type', 'Down', 'Up');
+				}
+
+				if(curStep == 716) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 720) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+					triggerEventNote('Scroll Type', 'Up', 'Down');
+				}
+
+				if(curStep == 724) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 728) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+					triggerEventNote('Scroll Type', 'down', 'up');
+				}
+
+				if(curStep == 732) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+				}
+
+				if(curStep == 736) {
+					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+					triggerEventNote('Scroll Type', 'Up', 'Down');
+				}
+
+				if(curStep == 740) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 744) {triggerEventNote('Add Camera Zoom', '0.13', '0.14'); triggerEventNote('Scroll Type', 'down', 'up');}
+
+				if(curStep == 748) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 752) {triggerEventNote('Add Camera Zoom', '0.13', '0.14'); triggerEventNote('Scroll Type', 'up', 'down');}
+				
+				if(curStep == 756) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 760) {triggerEventNote('Add Camera Zoom', '0.13', '0.14'); triggerEventNote('Scroll Type', "down", 'up');}
+
+				if(curStep == 764) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 768) {triggerEventNote('Add Camera Zoom', '0.13', '0.14'); triggerEventNote('Scroll Type', "down", 'up');}
+
+				if(curStep == 772) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 776) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');  triggerEventNote('Scroll Type', 'up', 'down');}
+                
+				if(curStep == 780) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 784) {triggerEventNote('Add Camera Zoom', '0.13', '0.14'); triggerEventNote('Scroll Type', "down", 'up');}
+
+				if(curStep == 788) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 792) {triggerEventNote('Add Camera Zoom', '0.13', '0.14'); triggerEventNote('Scroll Type', 'up', 'down');}
+
+				if(curStep == 796) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 800) {triggerEventNote('Add Camera Zoom', '0.13', '0.14'); triggerEventNote('Scroll Type', "down", 'up');}
+
+				if(curStep == 808) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 812) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');}
+
+				if(curStep == 816) {triggerEventNote('Alter camera Zoom', '1.2', '0.5');}
+
+				if(curStep == 822) {triggerEventNote('Scroll Type', 'Undyne', 'Undyne');}
+
+				if(curStep == 824) {triggerEventNote('Add Camera Zoom', '0.13', '0.14');  triggerEventNote('Flash Screen', '1', 'false');  triggerEventNote('Alter Camera Zoom', '0.8', '0.7');}
 
 			case 'Hunted':
 				//Insert Events here

@@ -137,7 +137,7 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
         FlxG.save.flush();
         trace(FlxG.save.data.gjUser + FlxG.save.data.gjToken);
         trace("Logged out!");
-        System.exit(0);
+        TitleState.restartGame();
     }
 
     /**
@@ -416,7 +416,7 @@ class GameJoltLogin extends MusicBeatState
         });
         helpBox.color = FlxColor.fromRGB(84,155,149);
 
-        logOutBox = new FlxButton(0, 625, "Log Out & Close", function()
+        logOutBox = new FlxButton(0, 625, "Log Out And Restart", function()
         {
             GameJoltAPI.deAuthDaUser();
         });

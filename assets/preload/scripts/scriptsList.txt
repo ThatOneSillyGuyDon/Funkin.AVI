@@ -1,2 +1,0 @@
-scriptA|1
-scriptB|2

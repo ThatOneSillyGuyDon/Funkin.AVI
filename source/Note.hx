@@ -167,6 +167,7 @@ class Note extends FlxSprite
 					hitCausesMiss = true;
 					reloadNote('ERROR');
 					noteSplashTexture = 'HURTnoteSplashes';
+					updateHitbox();
 					if(PlayState.isPixelStage) {
 						noteSplashTexture = 'pixelUI/HURTnoteSplashes';
 					}

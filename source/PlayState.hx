@@ -9324,7 +9324,7 @@ Stay Safe";
 					triggerEventNote('Flash Screen', '0', 'false');
 					triggerEventNote('Alter Camera Zoom', '0.8', '0.9');
 					triggerEventNote('Fade Character', '0', '');
-					triggerEventNote('Hide Hud', 'false', '');
+					FlxTween.tween(camHUD, {alpha: 0}, 1);
 				}
 
 				if(curStep == 1592) {

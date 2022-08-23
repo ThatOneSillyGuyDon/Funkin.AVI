@@ -28,7 +28,7 @@ class DiscordClient
 		{
 			DiscordRpc.process();
 			sleep(2);
-			trace("Discord Client Update");
+			//trace("Discord Client Update");
 		}
 
 		while (false)
@@ -96,7 +96,7 @@ class DiscordClient
             endTimestamp : Std.int(endTimestamp / 1000)
 		});
 
-		trace('Discord RPC Updated. Arguments: $details, $state, $smallImageKey, $hasStartTimestamp, $endTimestamp'); //k
+		//trace('Discord RPC Updated. Arguments: $details, $state, $smallImageKey, $hasStartTimestamp, $endTimestamp'); //k
 	}
 
 	#if LUA_ALLOWED

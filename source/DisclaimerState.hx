@@ -99,7 +99,6 @@ class DisclaimerState extends MusicBeatState
 					});
 				} else {
 					ClientPrefs.flashing = false;
-					System.exit(0);
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 					FlxTween.tween(blackFade, {alpha: 1}, 1, {
 						onComplete: function (twn:FlxTween) {

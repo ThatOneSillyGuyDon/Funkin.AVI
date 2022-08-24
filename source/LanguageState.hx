@@ -15,7 +15,7 @@ import flixel.util.FlxTimer;
 
 class LanguageState extends MusicBeatState
 {
-	public static var leftState:Bool = false;
+	public static var languageSelected:Bool = false;
 
 	var warnText:FlxText;
     var otherText:FlxText;
@@ -78,7 +78,7 @@ class LanguageState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		if(!leftState) {
+		if(!languageSelected) {
 				if(FlxG.mouse.overlaps(spanish) && FlxG.mouse.justPressed) {
 					ClientPrefs.language = "Spanish";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
@@ -88,6 +88,7 @@ class LanguageState extends MusicBeatState
 							MusicBeatState.switchState(new TitleState());
 						}
 						});
+					languageSelected = true;
 				} else {
                     if(FlxG.mouse.overlaps(english) && FlxG.mouse.justPressed) {
 					ClientPrefs.language = "English";
@@ -98,6 +99,7 @@ class LanguageState extends MusicBeatState
 							MusicBeatState.switchState(new TitleState());
 						}
 					});
+			    		languageSelected = true;
 				}
 			}
 		super.update(elapsed);

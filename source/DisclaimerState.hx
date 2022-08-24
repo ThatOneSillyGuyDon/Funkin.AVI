@@ -94,7 +94,7 @@ class DisclaimerState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					FlxTween.tween(blackFade, {alpha: 1}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new TitleState());
+							MusicBeatState.switchState(new LanguageState());
 						}
 					});
 				} else {
@@ -103,7 +103,7 @@ class DisclaimerState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 					FlxTween.tween(blackFade, {alpha: 1}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new TitleState());
+							MusicBeatState.switchState(new LanguageState());
 						}
 					});
 				}

@@ -333,6 +333,8 @@ class PlayState extends MusicBeatState
 	var timeTxt:FlxText;
 	var scoreTxtTween:FlxTween;
 
+	var color:FlxColor;
+
 	public static var campaignScore:Int = 0;
 	public static var campaignMisses:Int = 0;
 	public static var seenCutscene:Bool = false;
@@ -6013,6 +6015,7 @@ Stay Safe";
 		achievementObj = new AchievementObject(achieve, camOther);
 		achievementObj.onFinish = achievementEnd;
 		add(achievementObj);
+		ClientPrefs.saveSettings(); //maybe fix or smth
 		trace('Giving achievement ' + achieve);
 	}
 	function achievementEnd():Void
@@ -9344,6 +9347,95 @@ Stay Safe";
 					triggerEventNote('Fade Character', '0', '');
 					triggerEventNote('Fade Character', '0', '');
 				}
+
+				if(curStep == 1597) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1598) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1599) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1600) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1601) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1602) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1603) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1604) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1605) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1606) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1607) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1608) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1609) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1610) {
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+					triggerEventNote('Fade Character', '0', '');
+				}
+
+				if(curStep == 1613) {
+					triggerEventNote('Instant Fade Camera', 'fade', '');
+				}
+
 			case 'Hunted':
 				//Insert Events here
 			case 'Facade':

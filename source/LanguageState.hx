@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
 import flixel.text.FlxText;
+import flixel.FlxSprite;
 import flixel.util.FlxColor;
 import flixel.effects.FlxFlicker;
 import lime.app.Application;
@@ -12,30 +13,49 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
 
-class FlashingState extends MusicBeatState
+class LanguageState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
 	var warnText:FlxText;
+    var otherText:FlxText;
+    var spanish:FlxSprite;
+    var english:FlxSprite;
 	override function create()
 	{
 		super.create();
+
+        FlxG.mouse.visible = true;
 
 	
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
 		warnText = new FlxText(0, 0, FlxG.width,
-			"WARNING:\n
-			This Mod contains some flashing lights,\n
-			disturbing imagery, and disturbing themes of suicide.\n
-			Press ENTER to continue to the game.\n
-			Press ESCAPE to exit now.\n
-			You've been warned!",
+		"What Language Do You Talk?/De Que Lenguage hablas?",
 			32);
 		warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
-		warnText.screenCenter(Y);
+		warnText.screenCenter(X);
 		add(warnText);
+
+        warnText = new FlxText(0, 40, FlxG.width,
+            "(Puede Ser Cambiado En Opciones/it Can be Changed In Options)",
+                32);
+            warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
+            warnText.screenCenter(X);
+            add(warnText);
+
+                spanish = new FlxSprite().loadGraphic(Paths.image('language/Spanish'));
+                spanish.screenCenter(Y);
+                spanish.antialiasing = ClientPrefs.globalAntialiasing;
+                spanish.x = 250;
+                add(spanish);
+
+                english = new FlxSprite().loadGraphic(Paths.image('language/English'));
+                english.screenCenter(Y);
+                spanish.antialiasing = ClientPrefs.globalAntialiasing;
+                english.x = 750;
+                add(english);
 
 		var scratchStuff:FlxSprite = new FlxSprite();
 		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
@@ -59,31 +79,28 @@ class FlashingState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		if(!leftState) {
-			var back:Bool = controls.BACK;
-			if (controls.ACCEPT || back) {
-				leftState = true;
-				FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
-				if(!back) {
-					ClientPrefs.flashing = true;
-					ClientPrefs.saveSettings();
+				if(FlxG.mouse.overlaps(spanish) && FlxG.mouse.justPressed) {
+					ClientPrefs.language = "Spanish";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
+                    ClientPrefs.saveSettings();
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new DisclaimerState());
+							MusicBeatState.switchState(new TitleState());
 						}
-					});
+						});
 				} else {
-					ClientPrefs.flashing = false;
+                    if(FlxG.mouse.overlaps(english) && FlxG.mouse.justPressed) {
+					ClientPrefs.language = "English";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
+                    ClientPrefs.saveSettings();
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new DisclaimerState());
+							MusicBeatState.switchState(new TitleState());
 						}
 					});
 				}
 			}
-		}
 		super.update(elapsed);
 	}
+}
 }

@@ -34,24 +34,43 @@ class DisclaimerState extends MusicBeatState
 
 		var redFormat = new FlxTextFormatMarkerPair(new FlxTextFormat(FlxColor.RED, true, true), '^');
 
+		if(ClientPrefs.language == "English") {
 		disclaimText = new FlxText(20, 40, FlxG.width,
 			"DISCLAIMER:",
 			64);
-		disclaimText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 64, FlxColor.WHITE, LEFT);
-		add(disclaimText);
-
+			
 		disclaimText2 = new FlxText(15, 150, FlxG.width,
 			"Mickey Mouse is a character owned by Disney!\n
 			Flashing Lights are in this mod so Be careful.\n
 			Press ENTER to continue further to the game.\n
 			Press ESCAPE to disable flashes now.",
 			20);
-		disclaimText2.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, LEFT);
-		add(disclaimText2);
-
+			
 		disclaimText3 = new FlxText(15, 480, FlxG.width,
 			"^LAST CHANCE...^",
 			74);
+		} else if(ClientPrefs.language == "Spanish") {
+		disclaimText = new FlxText(20, 40, FlxG.width,
+			"DESCARGO DE RESPONSABILIDAD:",
+			40);
+		
+		disclaimText2 = new FlxText(15, 150, FlxG.width,
+			"¡Mickey Mouse es un personaje propiedad de Disney!\n
+			Las luces intermitentes están en este mod, así que ten cuidado.\n
+			Presiona ENTER para continuar con el juego.\n
+			Presione ESCAPE para desactivar los flashes ahora.",
+			20);
+			
+		disclaimText3 = new FlxText(15, 480, FlxG.width,
+			"^ÚLTIMA OPORTUNIDAD...^",
+			74);
+		}	
+		disclaimText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 64, FlxColor.WHITE, LEFT);
+		add(disclaimText);
+		
+		disclaimText2.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, LEFT);
+		add(disclaimText2);
+
 		disclaimText3.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 74, FlxColor.WHITE, LEFT);
 		disclaimText3.applyMarkup(disclaimText3.text, [redFormat]);
 		add(disclaimText3);

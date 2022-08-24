@@ -28,6 +28,7 @@ class NoticeState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
+		if(ClientPrefs.language == "English") {
 		warnText = new FlxText(0, 0, FlxG.width,
 			"NOTICE:\n
 			This Mod contains some higher end graphics,\n
@@ -36,6 +37,17 @@ class NoticeState extends MusicBeatState
 			Press ESCAPE to Disable them.\n
 			Thank you for playing!",
 			32);
+		} else if(ClientPrefs.language == "Spanish") {
+		warnText = new FlxText(0, 0, FlxG.width,
+			"AVISO:\n
+			Este Mod contiene algunos gráficos de gama alta,\n
+			causando así retrasos o fallas en su PC.\n
+			Presiona ENTER para mantener Shaders activados.\n
+			Presiona ESCAPE para deshabilitarlos.\n
+			¡Gracias por jugar!",
+			32);
+		}
+			
 		warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);

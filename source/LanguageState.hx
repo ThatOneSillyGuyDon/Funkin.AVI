@@ -85,7 +85,7 @@ class LanguageState extends MusicBeatState
                     ClientPrefs.saveSettings();
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new TitleState());
+							MusicBeatState.switchState(new FlashingState());
 						}
 						});
 					languageSelected = true;
@@ -96,7 +96,7 @@ class LanguageState extends MusicBeatState
                     ClientPrefs.saveSettings();
 					FlxTween.tween(warnText, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new TitleState());
+							MusicBeatState.switchState(new FlashingState());
 						}
 					});
 			    		languageSelected = true;

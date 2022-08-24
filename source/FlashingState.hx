@@ -25,6 +25,7 @@ class FlashingState extends MusicBeatState
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
 
+		if(ClientPrefs.language == "English") {
 		warnText = new FlxText(0, 0, FlxG.width,
 			"WARNING:\n
 			This Mod contains some flashing lights,\n
@@ -33,6 +34,16 @@ class FlashingState extends MusicBeatState
 			Press ESCAPE to disable flashes now.\n
 			You've been warned!",
 			32);
+		} else if(ClientPrefs.language == "Spanish") {
+		warnText = new FlxText(0, 0, FlxG.width,
+			"ADVERTENCIA:\n
+			Este mod contiene algunas luces intermitentes,\n
+			imágenes perturbadoras y temas perturbadores de suicidio.\n
+			Presiona ENTER para continuar con el juego.\n
+			Presiona ESCAPE para deshabilitar los flashes ahora.\n
+			¡Has sido advertido!",
+			32);
+		}
 		warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);

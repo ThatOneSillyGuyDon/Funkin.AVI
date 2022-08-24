@@ -346,16 +346,13 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-
-		var achievementText:FlxText = new FlxText(937, FlxG.height - 34, 0, "Press 8 to go to the achievement menu", 25);
-		achievementText.scrollFactor.set();
-		achievementText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(achievementText);
-
-		var GameJoltText:FlxText = new FlxText(937, FlxG.height - 54, 0, "Press 6 to Login to GameJolt", 25);
+		
+		if(!GameJoltAPI.userLogin) {
+		var GameJoltText:FlxText = new FlxText(937, FlxG.height - 34, 0, "Press 6 to Login to GameJolt", 25);
 		GameJoltText.scrollFactor.set();
 		GameJoltText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(GameJoltText);
+		}
 
 		// NG.core.calls.event.logEvent('swag').send();
 

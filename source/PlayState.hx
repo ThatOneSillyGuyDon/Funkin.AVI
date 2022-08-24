@@ -8078,27 +8078,96 @@ Stay Safe";
 			case 'Twisted Grins':
 				//Insert Events here
 			case 'Bless':
-			timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
+				if(!ClientPrefs.lowQuality) {
+					timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
+				}
 			case 'War Dilemma':
 				//Insert Events here
 			case 'Isolated Old':
 				//Insert Events here
 			case "Don't Cross!":
-				timeBar.createFilledBar(0xFF000000, 0xFFE1E1E1);
+				if(!ClientPrefs.lowQuality) {
+					timeBar.createFilledBar(0xFF000000, 0xFFE1E1E1);
+			}
+
+				if(curStep == 4) {
+					triggerEventNote('Alter Camera Zoom', '3', '11'); //?
+					FlxTween.tween(healthBar, {alpha: 0}, 1);
+					FlxTween.tween(healthBarBG, {alpha: 0}, 1);
+					FlxTween.tween(scoreTxt, {alpha: 0}, 1);
+					FlxTween.tween(iconP1, {alpha: 0}, 1);
+					FlxTween.tween(iconP2, {alpha: 0}, 1);
+					FlxTween.tween(timeBar, {alpha: 0}, 1);
+					FlxTween.tween(timeBarBG, {alpha: 0}, 1);
+					FlxTween.tween(timeTxt, {alpha: 0}, 1);
+				}
+
+				if(curStep == 128) {
+					triggerEventNote('Alter Camera Zoom', '0.8', '1.2');
+					triggerEventNote('Flash Screen', '0', 'false'); 
+
+					FlxTween.tween(healthBar, {alpha: 1}, 1);
+					FlxTween.tween(healthBarBG, {alpha: 1}, 1);
+					FlxTween.tween(scoreTxt, {alpha: 1}, 1);
+					FlxTween.tween(iconP1, {alpha: 1}, 1);
+					FlxTween.tween(iconP2, {alpha: 1}, 1);
+					FlxTween.tween(timeBar, {alpha: 0}, 1);
+					FlxTween.tween(timeBarBG, {alpha: 0}, 1);
+					FlxTween.tween(timeTxt, {alpha: 1}, 1);
+				}
+
+				if(curStep == 192) {
+					triggerEventNote('Alter Camera Zoom', '1.7', '4.7'); //?
+				}
+
+				if(curStep == 256) {
+					triggerEventNote('Alter Camera Zoom', '0.8', '0.8');
+					triggerEventNote('Flash Screen', '0', 'false');
+				}
+				
+				if(curStep == 351) {
+					triggerEventNote('Alter Camera Zoom', '1', '0.5');  
+				}
+
+				if(curStep == 358) {
+					triggerEventNote('Alter Camera Zoom', '1.1', '0.5');
+				}
+
+				if(curStep == 364) {
+					triggerEventNote('Alter Camera Zoom', '1.3', '0.5');
+				}
+
+				if(curStep == 369) {
+					triggerEventNote('Alter Camera Zoom', '0.8', '0.8');
+				}
+
+				if(curStep == 384) {
+					triggerEventNote('Alter Camera Zoom', '0.8', '0.8');
+					triggerEventNote('Flash Screen', '0', 'false');
+					triggerEventNote('Scroll Type', 'flip', 'flip');
+
+					super.beatHit();
+
+					if(curBeat % 1 == 0) {
+						triggerEventNote('Add Camera Zoom', '0.13', '0.14');
+					}
+				}
 			case 'Cycled Sins':
 				if(curStep == 572)
 				{
 					if(curStage == 'RelapseStage')
 					{
-						timeBar.createFilledBar(0xFF222222, 0xFF9E2222);
+						if(!ClientPrefs.lowQuality) {
+							timeBar.createFilledBar(0xFF222222, 0xFF9E2222);
+						}
 						relapseCalm.alpha = 0;
 						relapseChaos.alpha = 1;
 					}
 				}
 			case 'Malfunction':
-				if(curStep == 1)
+				if(curStep == 4) //for get it work
 				{
-					triggerEventNote('Alter Camera Zoom', '2', '5');
+					triggerEventNote('Alter Camera Zoom', '2', '2.4');
 					trace('is working');
 				}
 

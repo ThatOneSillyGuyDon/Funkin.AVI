@@ -89,21 +89,21 @@ class DisclaimerState extends MusicBeatState
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
 				if(!back) {
-					ClientPrefs.flashing = false;
+					ClientPrefs.flashing = true;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					FlxTween.tween(blackFade, {alpha: 1}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new LanguageState());
+							MusicBeatState.switchState(new TitleState());
 						}
 					});
 				} else {
-					ClientPrefs.flashing = true;
+					ClientPrefs.flashing = false;
 					System.exit(0);
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 					FlxTween.tween(blackFade, {alpha: 1}, 1, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new LanguageState());
+							MusicBeatState.switchState(new TitleState());
 						}
 					});
 				}

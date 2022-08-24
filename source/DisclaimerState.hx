@@ -43,8 +43,8 @@ class DisclaimerState extends MusicBeatState
 		disclaimText2 = new FlxText(15, 150, FlxG.width,
 			"Mickey Mouse is a character owned by Disney!\n
 			Flashing Lights are in this mod so Be careful.\n
-			Press ENTER to continue further to the game and disable it.\n
-			Press ESCAPE to exit now.",
+			Press ENTER to continue further to the game.\n
+			Press ESCAPE to disable flashes now.",
 			20);
 		disclaimText2.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, LEFT);
 		add(disclaimText2);

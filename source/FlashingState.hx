@@ -30,7 +30,7 @@ class FlashingState extends MusicBeatState
 			This Mod contains some flashing lights,\n
 			disturbing imagery, and disturbing themes of suicide.\n
 			Press ENTER to continue to the game.\n
-			Press ESCAPE to exit now.\n
+			Press ESCAPE to disable flashes now.\n
 			You've been warned!",
 			32);
 		warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);

@@ -42,7 +42,7 @@ import GameJolt;
 import GameJolt.GameJoltAPI;
 
 using StringTools;
-typedef TitleData =
+typedef TitleDumbData =
 {
 	
 	titlex:Float,
@@ -54,7 +54,7 @@ typedef TitleData =
 	backgroundSprite:String,
 	bpm:Int
 }
-class TitleState extends MusicBeatState
+class SpanishTitleState extends MusicBeatState
 {
 	public static var muteKeys:Array<FlxKey> = [FlxKey.ZERO];
 	public static var volumeDownKeys:Array<FlxKey> = [FlxKey.NUMPADMINUS, FlxKey.MINUS];
@@ -81,7 +81,7 @@ class TitleState extends MusicBeatState
 
 	var mustUpdate:Bool = false;
 	
-	var titleJSON:TitleData;
+	var titleJSON:TitleDumbData;
 	
 	public static var updateVersion:String = '';
 
@@ -180,10 +180,6 @@ class TitleState extends MusicBeatState
 			}
 			#end
 
-		if(ClientPrefs.language == "Spanish") {
-			MusicBeatState.switchState(new SpanishTitleState());
-		}
-
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				startIntro();
@@ -192,7 +188,7 @@ class TitleState extends MusicBeatState
 		#end
 	}
 
-	var logoBl:FlxSprite;
+	var goofyLogoBl:FlxSprite;
 	var gfDance:FlxSprite;
 	var danceLeft:Bool = false;
 	var titleText:FlxText;
@@ -245,22 +241,22 @@ class TitleState extends MusicBeatState
 		// bg.updateHitbox();
 		add(bg);
 
-		logoBl = new FlxSprite(150, 0);
-		logoBl.frames = Paths.getSparrowAtlas('MickeyLogo');
+		goofyLogoBl = new FlxSprite(150, 0);
+		goofyLogoBl.frames = Paths.getSparrowAtlas('MickeyLogo');
 		
-		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
-		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
-		logoBl.animation.play('bump');
-		logoBl.updateHitbox();
-		logoBl.screenCenter();
-		// logoBl.color = FlxColor.BLACK;
+		goofyLogoBl.antialiasing = ClientPrefs.globalAntialiasing;
+		goofyLogoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
+		goofyLogoBl.animation.play('bump');
+		goofyLogoBl.updateHitbox();
+		goofyLogoBl.screenCenter();
+		// goofyLogoBl.color = FlxColor.BLACK;
 
 		swagShader = new ColorSwap();
 
-		add(logoBl);
-		logoBl.shader = swagShader.shader;
+		add(goofyLogoBl);
+		goofyLogoBl.shader = swagShader.shader;
 
-		titleText = new FlxText(24, 600, 1200, "Press Enter to Start", 96);
+		titleText = new FlxText(24, 600, 1200, "Presiona ENTER Para Iniciar", 96);
 		titleText.setFormat("assets/fonts/NewWaltDisneyFontRegular-BPen.ttf", 60, FlxColor.fromRGB(255, 255, 255), CENTER);
 		add(titleText);
 
@@ -269,8 +265,8 @@ class TitleState extends MusicBeatState
 		logo.antialiasing = ClientPrefs.globalAntialiasing;
 		// add(logo);
 
-		// FlxTween.tween(logoBl, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
-		// FlxTween.tween(logo, {y: logoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
+		// FlxTween.tween(goofyLogoBl, {y: goofyLogoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG});
+		// FlxTween.tween(logo, {y: goofyLogoBl.y + 50}, 0.6, {ease: FlxEase.quadInOut, type: PINGPONG, startDelay: 0.1});
 
 		credGroup = new FlxGroup();
 		add(credGroup);
@@ -346,7 +342,7 @@ class TitleState extends MusicBeatState
 
 	function getIntroTextShit():Array<Array<String>>
 	{
-		var fullText:String = Assets.getText(Paths.txt('introText'));
+		var fullText:String = Assets.getText(Paths.txt('spanishIntroText'));
 
 		var firstArray:Array<String> = fullText.split('\n');
 		var swagGoodArray:Array<Array<String>> = [];
@@ -388,7 +384,7 @@ class TitleState extends MusicBeatState
 				System.exit(1337);
 			}
 			else
-				throw "Failed to restart bich";
+				throw "Fallao En Reiniciar la Ptm";
 			#end
 		}
 
@@ -446,7 +442,7 @@ class TitleState extends MusicBeatState
 				new FlxTimer().start(1, function(tmr:FlxTimer)
 				{
 					if (mustUpdate && ClientPrefs.outdated) {
-						Application.current.window.title = "Funkin.avi - OUTDATED VERSION";
+						Application.current.window.title = "Funkin.avi - DESACTUALIZADO";
 						MusicBeatState.switchState(new OutdatedState());
 					} else {
 						Application.current.window.title = "Funkin.avi";
@@ -454,7 +450,7 @@ class TitleState extends MusicBeatState
 					}
 					closedState = true;
 				});
-				FlxTween.tween(logoBl, {y: 2000}, 3, {ease: FlxEase.quadIn});
+				FlxTween.tween(goofyLogoBl, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				FlxTween.tween(titleText, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gfDance, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gradientBar, {y: 2000}, 3, {ease: FlxEase.quadIn});
@@ -788,8 +784,8 @@ class TitleState extends MusicBeatState
 		}
 	}
 
-		if(logoBl != null) 
-			logoBl.animation.play('bump', true);
+		if(goofyLogoBl != null) 
+			goofyLogoBl.animation.play('bump', true);
 
 		/*if(gfDance != null) {
 			danceLeft = !danceLeft;
@@ -804,10 +800,10 @@ class TitleState extends MusicBeatState
 			switch (sickBeats)
 			{
 				case 1:
-					createCoolText(["Dunkin' Funkin' Team"], 15);
+					createCoolText(["El Equipo De Dunkin' Funkin'"], 15);
 				// credTextShit.visible = true;
 				case 3:
-					addMoreText('Presents', 15);
+					addMoreText('Presenta', 15);
 					//creditsGrid.visible = true;
 				// credTextShit.text += '\npresent...';
 				// credTextShit.addText();
@@ -818,9 +814,9 @@ class TitleState extends MusicBeatState
 				// credTextShit.text = 'In association \nwith';
 				// credTextShit.screenCenter();
 				case 5:
-					createCoolText(['Yet another mod...'], -40);
+					createCoolText(['Si, Otro Mod...'], -40);
 				case 7:
-					addMoreText('..About Suicide Mouse', -40);
+					addMoreText('..Del Raton Suicida', -40);
 					//ngSpr.visible = true;
 				// credTextShit.text += '\nNewgrounds';
 				case 8:
@@ -852,97 +848,97 @@ class TitleState extends MusicBeatState
 				case 16:
 					deleteCoolText();
 				case 17:
-					addMoreText('Enjoy');
+					addMoreText('Disfruta');
 				case 18:
-					addMoreText('Your Stay...');
+					addMoreText('Tu Estado...');
 				case 19:
 					skipIntro();
 				}
 			}
-	}
+		}
 
 	var skippedIntro:Bool = false;
 	var increaseVolume:Bool = false;
 	function skipIntro():Void
-	{
-		if (!skippedIntro)
 		{
-			if (playJingle) //Ignore deez
+			if (!skippedIntro)
 			{
-				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
-				if (easteregg == null) easteregg = '';
-				easteregg = easteregg.toUpperCase();
-
-				var sound:FlxSound = null;
-				switch(easteregg)
+				if (playJingle) //Ignore deez
 				{
-					case 'RIVER':
-						sound = FlxG.sound.play(Paths.sound('JingleRiver'));
-					case 'SHUBS':
-						sound = FlxG.sound.play(Paths.sound('JingleShubs'));
-					case 'SHADOW':
-						FlxG.sound.play(Paths.sound('JingleShadow'));
-					case 'BBPANZU':
-						sound = FlxG.sound.play(Paths.sound('JingleBB'));
-					
-					default: //Go back to normal ugly ass boring GF
-						remove(ngSpr);
-						remove(credGroup);
-						FlxG.camera.flash(FlxColor.WHITE, 2);
-						skippedIntro = true;
-						playJingle = false;
+					var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
+					if (easteregg == null) easteregg = '';
+					easteregg = easteregg.toUpperCase();
+	
+					var sound:FlxSound = null;
+					switch(easteregg)
+					{
+						case 'RIVER':
+							sound = FlxG.sound.play(Paths.sound('JingleRiver'));
+						case 'SHUBS':
+							sound = FlxG.sound.play(Paths.sound('JingleShubs'));
+						case 'SHADOW':
+							FlxG.sound.play(Paths.sound('JingleShadow'));
+						case 'BBPANZU':
+							sound = FlxG.sound.play(Paths.sound('JingleBB'));
 						
-						FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'), 0);
-						FlxG.sound.music.fadeIn(4, 0, 0.7);
-						return;
-				}
-
-				transitioning = true;
-				if(easteregg == 'SHADOW')
-				{
-					new FlxTimer().start(3.2, function(tmr:FlxTimer)
+						default: //Go back to normal ugly ass boring GF
+							remove(ngSpr);
+							remove(credGroup);
+							FlxG.camera.flash(FlxColor.WHITE, 2);
+							skippedIntro = true;
+							playJingle = false;
+							
+							FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'), 0);
+							FlxG.sound.music.fadeIn(4, 0, 0.7);
+							return;
+					}
+	
+					transitioning = true;
+					if(easteregg == 'SHADOW')
+					{
+						new FlxTimer().start(3.2, function(tmr:FlxTimer)
+						{
+							remove(ngSpr);
+							remove(credGroup);
+							FlxG.camera.flash(FlxColor.WHITE, 0.6);
+							transitioning = false;
+						});
+					}
+					else
 					{
 						remove(ngSpr);
 						remove(credGroup);
-						FlxG.camera.flash(FlxColor.WHITE, 0.6);
-						transitioning = false;
-					});
+						FlxG.camera.flash(FlxColor.WHITE, 3);
+						sound.onComplete = function() {
+							FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'), 0);
+							FlxG.sound.music.fadeIn(4, 0, 0.7);
+							transitioning = false;
+						};
+					}
+					playJingle = false;
 				}
-				else
+				else //Default! Edit this one!!
 				{
 					remove(ngSpr);
 					remove(credGroup);
-					FlxG.camera.flash(FlxColor.WHITE, 3);
-					sound.onComplete = function() {
-						FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'), 0);
-						FlxG.sound.music.fadeIn(4, 0, 0.7);
-						transitioning = false;
-					};
-				}
-				playJingle = false;
+					FlxG.camera.flash(FlxColor.WHITE, 4);
+	
+					var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
+					if (easteregg == null) easteregg = '';
+					easteregg = easteregg.toUpperCase();
+								}
+				goofyLogoBl.angle = -4;
+	
+				new FlxTimer().start(0.01, function(tmr:FlxTimer)
+				{
+				   if (goofyLogoBl.angle == -4)
+						FlxTween.angle(goofyLogoBl, goofyLogoBl.angle, 4, 4, {ease: FlxEase.quartInOut});
+				   if (goofyLogoBl.angle == 4)
+						FlxTween.angle(goofyLogoBl, goofyLogoBl.angle, -4, 4, {ease: FlxEase.quartInOut});
+	
+				}, 0);
+				
+				skippedIntro = true;
 			}
-			else //Default! Edit this one!!
-			{
-				remove(ngSpr);
-				remove(credGroup);
-				FlxG.camera.flash(FlxColor.WHITE, 4);
-
-				var easteregg:String = FlxG.save.data.psychDevsEasterEgg;
-				if (easteregg == null) easteregg = '';
-				easteregg = easteregg.toUpperCase();
-							}
-			logoBl.angle = -4;
-
-			new FlxTimer().start(0.01, function(tmr:FlxTimer)
-			{
-			   if (logoBl.angle == -4)
-					FlxTween.angle(logoBl, logoBl.angle, 4, 4, {ease: FlxEase.quartInOut});
-			   if (logoBl.angle == 4)
-					FlxTween.angle(logoBl, logoBl.angle, -4, 4, {ease: FlxEase.quartInOut});
-
-	        }, 0);
-			
-			skippedIntro = true;
 		}
 	}
-}

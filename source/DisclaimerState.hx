@@ -46,7 +46,7 @@ class DisclaimerState extends MusicBeatState
 			Press ESCAPE to disable flashes now.",
 			20);
 			
-		disclaimText3 = new FlxText(15, 480, FlxG.width,
+		disclaimText3 = new FlxText(15, 280, FlxG.width,
 			"^LAST CHANCE...^",
 			74);
 		} else if(ClientPrefs.language == "Spanish") {
@@ -57,12 +57,12 @@ class DisclaimerState extends MusicBeatState
 		disclaimText2 = new FlxText(15, 150, FlxG.width,
 			"¡Mickey Mouse es un personaje propiedad de Disney!\n
 			Las luces intermitentes están en este mod, así que ten cuidado.\n
-			Presiona ENTER para continuar con el juego.\n
+			Presione ENTER para continuar con el juego.\n
 			Presione ESCAPE para desactivar los flashes ahora.",
 			20);
 			
-		disclaimText3 = new FlxText(15, 480, FlxG.width,
-			"^ÚLTIMA OPORTUNIDAD...^",
+		disclaimText3 = new FlxText(15, 280, FlxG.width,
+			"ÚLTIMA OPORTUNIDAD...",
 			74);
 		}	
 		disclaimText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 64, FlxColor.WHITE, LEFT);
@@ -71,7 +71,7 @@ class DisclaimerState extends MusicBeatState
 		disclaimText2.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, LEFT);
 		add(disclaimText2);
 
-		disclaimText3.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 74, FlxColor.WHITE, LEFT);
+		disclaimText3.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 74, FlxColor.WHITE, LEFT); //Buggy Mixed text
 		disclaimText3.applyMarkup(disclaimText3.text, [redFormat]);
 		add(disclaimText3);
 
@@ -113,15 +113,23 @@ class DisclaimerState extends MusicBeatState
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					FlxTween.tween(blackFade, {alpha: 1}, 1, {
 						onComplete: function (twn:FlxTween) {
+							if(ClientPrefs.language == "Spanish") {
+							MusicBeatState.switchState(new SpanishTitleState());
+						} else {
 							MusicBeatState.switchState(new TitleState());
 						}
+					} 
 					});
 				} else {
 					ClientPrefs.flashing = false;
 					FlxG.sound.play(Paths.sound('cancelMenu'));
-					FlxTween.tween(blackFade, {alpha: 1}, 1, {
+					FlxTween.tween(blackFade, {alpha: 1}, 1, { 
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new TitleState());
+							if(ClientPrefs.language == "Spanish") {
+								MusicBeatState.switchState(new SpanishTitleState());  
+							} else {
+								MusicBeatState.switchState(new TitleState());
+							}
 						}
 					});
 				}

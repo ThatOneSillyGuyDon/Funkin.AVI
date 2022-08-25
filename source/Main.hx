@@ -89,7 +89,11 @@ class Main extends Sprite
 		}
 
 		#if !debug
+		if(ClientPrefs.language == "Spanish") {
+			initialState = SpanishTitleState;
+		} else {
 		initialState = TitleState;
+		}
 		#end
 	
 		ClientPrefs.loadDefaultKeys();

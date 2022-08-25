@@ -62,7 +62,7 @@
 		0,
 		200
 	],
-	"healthicon": "mickey",
+	"healthicon": "legacy",
 	"flip_x": false,
 	"healthbar_colors": [
 		216,

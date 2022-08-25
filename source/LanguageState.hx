@@ -79,6 +79,14 @@ class LanguageState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		if(!languageSelected) {
+			
+			var back:Bool = controls.BACK;
+			if (controls.ACCEPT || back) {
+				languageSelected = true;
+				FlxTransitionableState.skipNextTransIn = true;
+				FlxTransitionableState.skipNextTransOut = true;
+			//ik, copied from FlashingState, but it works either way, this is to prevent the transition state from triggering
+				
 				if(FlxG.mouse.overlaps(spanish) && FlxG.mouse.justPressed) {
 					ClientPrefs.language = "Spanish";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));

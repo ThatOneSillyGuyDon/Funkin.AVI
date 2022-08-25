@@ -877,9 +877,31 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
 				}
+
+
+				case 'LegacyLoop':
+
+					var street:BGSprite = new BGSprite('funkinAVI/episode1/street/Mickeybg', -382, -409);
+					add(street);
+	
+					isolatedIntro = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+					add(isolatedIntro);
+					isolatedIntro.scrollFactor.set();
+					isolatedIntro.cameras = [camCustom];
+					isolatedIntro.alpha = 0;
+
+					if(ClientPrefs.funiShaders)
+						{
+							//cool shaders, for real
+							addShaderToCamera('camGame', new VCRDistortionEffect(0.1, true, true, true));
+							addShaderToCamera('camHUD', new VCRDistortionEffect(0.1, true, true, true));
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+							addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+							addShaderToCamera('hud', new GreyscaleEffect());
+							addShaderToCamera('game', new GreyscaleEffect());
+						}
 				
-
-
 			case 'Studio':
 				/*if(SONG.song == 'Delusional')
 				{
@@ -1738,7 +1760,7 @@ class PlayState extends MusicBeatState
 	        if (!isPixelStage) {
 			switch(curStage)
 			{
-				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
 					peWatermark.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				case 'PixelWorld':
 					peWatermark.setFormat(Paths.font("Retro Gaming.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1782,7 +1804,7 @@ class PlayState extends MusicBeatState
 		if (!isPixelStage) {
 			switch(curStage)
 			{
-				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
 					botplayTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				case 'PixelWorld':
 					botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1805,7 +1827,7 @@ class PlayState extends MusicBeatState
 			if (!isPixelStage) {
 			switch(curStage)
 			{
-				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
 					judgementCounter.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				case 'PixelWorld':
 					judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1859,7 +1881,8 @@ class PlayState extends MusicBeatState
 					crashLives.borderQuality = 2;
 					crashLives.scrollFactor.set();
 					crashLives.cameras = [camHUD];
-					crashLives.text = 'Lives: ${crashLivesCounter}';
+					if(ClientPrefs.language == "Spanish") crashLives.text = 'Vidas: ${crashLivesCounter}';
+					else crashLives.text = 'Lives: ${crashLivesCounter}';
 					add(crashLives);
 
 					crashLivesIcon.frames = Paths.getSparrowAtlas('funkinAVI/uiAndEvents/lives-icon');
@@ -1877,7 +1900,7 @@ class PlayState extends MusicBeatState
 
 			if(curStage == 'WaltStage')
 			{
-				waltText = new FlxText(0, 0, 0, "", 30);
+				waltText = new FlxText(0, 100, 0, "", 30);
 				if (!isPixelStage) {
 					switch(curStage)
 					{
@@ -1893,8 +1916,9 @@ class PlayState extends MusicBeatState
 				waltText.borderQuality = 2;
 				waltText.scrollFactor.set();
 				waltText.cameras = [camHUD];
-				waltText.text = 'Spam SPACE to Regain Health';
-				waltText.screenCenter();
+				if(ClientPrefs.language == "Spanish") waltText.text = 'Spamea ESPACIO Para Ganar Vida';
+				else waltText.text = 'Spam SPACE to Regain Health';
+				waltText.screenCenter(X); //it's not visible by the song banner
 				add(waltText);
 				FlxTween.tween(waltText, {alpha: 0}, 1, {ease: FlxEase.quadInOut, startDelay: 7});
 			}
@@ -1922,7 +1946,7 @@ class PlayState extends MusicBeatState
 
 		switch(curStage)
 		{
-			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat' | 'Studio' | 'ForestNEW':
+			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat' | 'Studio' | 'ForestNEW' | 'LegacyLoop':
 				add(filmScratch);
 				add(filmScratchGame);
 			default:
@@ -4206,6 +4230,10 @@ class PlayState extends MusicBeatState
 			} else {
 				scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
 		}
+		}
+
+		if(SONG.song == "Isolated Old") {
+				scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' - Score: ' + songScore + ' - Misses: ' + songMisses + ' - Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 	        }
 
@@ -8081,10 +8109,177 @@ Stay Safe";
 				if(!ClientPrefs.lowQuality) {
 					timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
 				}
+
+				if(curStep == 2) {
+					triggerEventNote('Flash Screen', '3', 'false')
+				}
+
+				if(curStep == 192) {
+					triggerEventNote('Add Camera Zoom', '0.013', '0.014');
+					triggerEventNote('Alter Camera Zoom', '1.4', '3.9');
+				}
+
+				if(curStep == 223) {
+					triggerEventNote('Change Scroll Speed', '1.2', '1.6');
+				}
+
+				if(curStep == 255) {
+					triggerEventNote('Flash Screen', '0', 'false')
+					triggerEventNote('Alter Camera Zoom', '0.9', '0.7');
+				}
+
+				if(curStep == 376) {
+					triggerEventNote('Change Scroll Speed', '1.35', '1.35');
+				}
+
+				if(curStep == 624) {
+					triggerEventNote('Change Scroll Speed', '1.1', '0.9');
+				}
+
+				if(curStep == 640) {
+					triggerEventNote('Add Camera Zoom', '0.014', '0.015');
+				}
+
+				if(curStep == 736) {
+					triggerEventNote('Change Scroll Speed', '1.4', '0.9');
+					FlxTween.tween(camHUD, {alpha: 0}, 0):
+				}
+
+				if(curStep == 752) {
+					triggerEventNote('Add Camera Zoom', '', '');
+					FlxTween.tween(camHUD, {alpha: 0.2}, 0);
+				}
+
+				if(curStep == 756) {
+					triggerEventNote('Add Camera Zoom', '', '');
+					FlxTween.tween(camHUD, {alpha: 0.5}, 0):
+				}
+
+				if(curStep == 762) {
+					triggerEventNote('Add Camera Zoom', '', '');
+				    FlxTween.tween(camHUD, {alpha: 0.8}, 0):
+				}
+
+				if(curStep == 766) {
+					triggerEventNote('Add Camera Zoom', '', '');
+					FlxTween.tween(camHUD, {alpha: 1}, 0);
+				}
+
+				if(curStep == 768) {
+					triggerEventNote('Add Camera Zoom', '', '');
+				}
+
+				if(curStep == 880) {
+					triggerEventNote('Change Scroll Speed', '1.15', '0.5');
+				}
+
+				if(curStep == 1024) {
+					triggerEventNote('Add Camera Zoom', '', '');
+					triggerEventNote('Change Scroll Speed', '0.85', '0.8');
+				}
+
+
+				if(curStep == 1152) {
+					triggerEventNote('Add Camera Zoom', '', '');
+					triggerEventNote('Change Scroll Speed', '1.2', '0.3');
+				}
 			case 'War Dilemma':
 				//Insert Events here
 			case 'Isolated Old':
-				//Insert Events here
+				if(!ClientPrefs.lowQuality) {
+					timeBar.createFilledBar(0xFF000000, 0xFFFFFFFF); //Like V1, it have the default Psych Engine color
+			}
+
+			if(curStep == 3) {
+				triggerEventNote('Alter Camera Zoom', '0.7', '0.5');
+			}
+
+			if(curStep == 16) {
+				triggerEventNote('Alter Camera Zoom', '1.2', '9.5');
+			}
+
+			if(curStep == 96) {
+				triggerEventNote('Alter Camera Zoom', '0.8', '0.3');
+			}
+
+			if(curStep == 120) {
+				triggerEventNote('Alter Camera Zoom', '1.5', '0.5');
+			}
+
+			if(curStep == 128) {
+				triggerEventNote('Alter Camera Zoom', '0.8', '0.5');
+			}
+
+			if(curStep == 144) {
+				triggerEventNote('Alter Camera Zoom', '1.2', '5.6');
+			}
+
+			if(curStep == 192) {
+				triggerEventNote('Alter Camera Zoom', '0.85', '5');
+			}
+
+			if(curStep == 256) {
+				triggerEventNote('Alter Camera Zoom', '1.2', '5.8');
+			}
+
+			if(curStep == 304) {
+				triggerEventNote('Alter Camera Zoom', '0.8', '3.5');
+			}
+
+			if(curStep == 336) {
+				triggerEventNote('Alter Camera Zoom', '1.4', '5.8');
+			}
+
+			if(curStep == 384) {
+				triggerEventNote('Alter Camera Zoom', '0.8', '2');
+			}
+
+			if(curStep == 576) {
+				triggerEventNote('Alter Camera Zoom', '1.5', '7.7');
+			}
+
+			if(curStep == 640) {
+				triggerEventNote('Alter Camera Zoom', '0.85', '2');
+			}
+
+			if(curStep == 656) {
+				triggerEventNote('Alter Camera Zoom', '1.2', '5.8');
+			}
+
+			if(curStep == 702) {
+				triggerEventNote('Alter Camera Zoom', '0.8', '2');
+			}
+
+			if(curStep == 704) {
+				triggerEventNote('Alter Camera Zoom', '0.8', '2');
+			}
+
+			if(curStep == 768) {
+				triggerEventNote('Alter Camera Zoom', '1.5', '20');
+			}
+
+			if(curStep == 896) {
+				triggerEventNote('Alter Camera Zoom', '0.8', '5');
+			}
+
+			if(curStep == 1024) {
+				triggerEventNote('Alter Camera Zoom', '0.1'/*Get real moment*/, '1');
+			}
+
+			if(curStep == 1040) {
+				triggerEventNote('Alter Camera Zoom', '1.5', '30');
+			}
+
+			if(curStep == 1280) {
+				triggerEventNote('Alter Camera Zoom', '0.85', '1');
+			}
+
+			//It Didn't took me an hour
+			//L
+			//M
+			//A
+			//O
+
 			case "Don't Cross!":
 				if(!ClientPrefs.lowQuality) {
 					timeBar.createFilledBar(0xFF000000, 0xFFE1E1E1);
@@ -8114,6 +8309,7 @@ Stay Safe";
 					FlxTween.tween(timeBar, {alpha: 0}, 1);
 					FlxTween.tween(timeBarBG, {alpha: 0}, 1);
 					FlxTween.tween(timeTxt, {alpha: 1}, 1);
+					//Tween Shit
 				}
 
 				if(curStep == 192) {
@@ -9506,7 +9702,8 @@ Stay Safe";
 				}
 
 			case 'Hunted':
-				//Insert Events here
+				super.beatHit();
+				triggerEventNote('Add Camera Zoom', '0.004', '0.03');
 			case 'Facade':
 				//Insert Events here
 		}
@@ -9799,3 +9996,5 @@ Stay Safe";
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
 }
+
+//LINE 10.000 LETS FUCKING GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO

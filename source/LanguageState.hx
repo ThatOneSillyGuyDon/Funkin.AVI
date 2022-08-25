@@ -80,12 +80,7 @@ class LanguageState extends MusicBeatState
 	{
 		if(!languageSelected) {
 			
-			var back:Bool = controls.BACK;
-			if (controls.ACCEPT || back) {
-				languageSelected = true;
-				FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
-			//ik, copied from FlashingState, but it works either way, this is to prevent the transition state from triggering
+		//Deleted It, It Just Freezes The Game And Don't Do Anything (the gae not the thing)
 				
 				if(FlxG.mouse.overlaps(spanish) && FlxG.mouse.justPressed) {
 					ClientPrefs.language = "Spanish";
@@ -97,25 +92,26 @@ class LanguageState extends MusicBeatState
 					FlxTween.tween(spanish, {alpha: 0}, 2.5, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new FlashingState());
+							languageSelected = true;
 						}
 					});
 				} else {
 				if(FlxG.mouse.overlaps(english) && FlxG.mouse.justPressed) {
 					ClientPrefs.language = "English";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
-                   			ClientPrefs.saveSettings();
+                   	ClientPrefs.saveSettings();
 					FlxTween.tween(otherText, {alpha: 0}, 1);
 					FlxTween.tween(spanish, {alpha: 0}, 0.2);
 					FlxTween.tween(warnText, {alpha: 0}, 1);
 					FlxTween.tween(english, {alpha: 0}, 2.5, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new FlashingState());
+							languageSelected = true;
 						}
 					});
 				}
 			}
 		super.update(elapsed);
 	}
-}
 }
 }

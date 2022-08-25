@@ -8111,7 +8111,7 @@ Stay Safe";
 				}
 
 				if(curStep == 2) {
-					triggerEventNote('Flash Screen', '3', 'false')
+					triggerEventNote('Flash Screen', '3', 'false');
 				}
 
 				if(curStep == 192) {

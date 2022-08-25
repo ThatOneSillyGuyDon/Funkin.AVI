@@ -16,6 +16,7 @@ class FlashingState extends MusicBeatState
 {
 	public static var leftState:Bool = false;
 
+	var blackFade:FlxSprite; //copy from DisclaimerState, whatever, it works
 	var warnText:FlxText;
 	override function create()
 	{
@@ -47,6 +48,9 @@ class FlashingState extends MusicBeatState
 		warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
 		warnText.screenCenter(Y);
 		add(warnText);
+		
+		blackFade = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		add(blackFade);
 
 		var scratchStuff:FlxSprite = new FlxSprite();
 		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
@@ -65,6 +69,8 @@ class FlashingState extends MusicBeatState
 		grain.scale.x = 1.1;
 		grain.scale.y = 1.1;
 		add(grain);
+		
+		FlxTween.tween(blackFade, {alpha: 0}, 1); //duplicatin' code from Disclaimer since this is BEFORE picking your language now.
 	}
 
 	override function update(elapsed:Float)
@@ -79,7 +85,7 @@ class FlashingState extends MusicBeatState
 					ClientPrefs.flashing = true;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
-					FlxTween.tween(warnText, {alpha: 0}, 1, {
+					FlxTween.tween(blackFade, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new DisclaimerState());
 						}
@@ -87,7 +93,7 @@ class FlashingState extends MusicBeatState
 				} else {
 					ClientPrefs.flashing = false;
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
-					FlxTween.tween(warnText, {alpha: 0}, 1, {
+					FlxTween.tween(blackFade, {alpha: 0}, 1, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new DisclaimerState());
 						}

@@ -85,7 +85,6 @@ class LanguageState extends MusicBeatState
 				languageSelected = true;
 				FlxTransitionableState.skipNextTransIn = true;
 				FlxTransitionableState.skipNextTransOut = true;
-			}
 			//ik, copied from FlashingState, but it works either way, this is to prevent the transition state from triggering
 				
 				if(FlxG.mouse.overlaps(spanish) && FlxG.mouse.justPressed) {
@@ -115,6 +114,7 @@ class LanguageState extends MusicBeatState
 					});
 				}
 			}
+		}
 		super.update(elapsed);
 	}
 }

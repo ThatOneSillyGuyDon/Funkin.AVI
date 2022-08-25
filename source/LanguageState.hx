@@ -99,7 +99,6 @@ class LanguageState extends MusicBeatState
 							MusicBeatState.switchState(new FlashingState());
 						}
 					});
-					languageSelected = true;
 				} else {
 				if(FlxG.mouse.overlaps(english) && FlxG.mouse.justPressed) {
 					ClientPrefs.language = "English";
@@ -113,7 +112,6 @@ class LanguageState extends MusicBeatState
 							MusicBeatState.switchState(new FlashingState());
 						}
 					});
-			    		languageSelected = true;
 				}
 			}
 		super.update(elapsed);

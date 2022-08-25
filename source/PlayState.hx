@@ -278,7 +278,7 @@ class PlayState extends MusicBeatState
 
 	//Overlay Shit
 	var light:BGSprite;
-	var cutsceneTransitionHelper:FlxSprite
+	var cutsceneTransitionHelper:FlxSprite;
 	var treesFront:BGSprite;
 	var depression:BGSprite;
 	var vignetteCam:BGSprite;

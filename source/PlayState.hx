@@ -8124,9 +8124,9 @@ Stay Safe";
 				}
 
 				if(curStep == 255) {
-					triggerEventNote('Flash Screen', '0', 'false')
+					triggerEventNote('Flash Screen', '0', 'false');
 					triggerEventNote('Alter Camera Zoom', '0.9', '0.7');
-				}
+				} 
 
 				if(curStep == 376) {
 					triggerEventNote('Change Scroll Speed', '1.35', '1.35');
@@ -8142,7 +8142,7 @@ Stay Safe";
 
 				if(curStep == 736) {
 					triggerEventNote('Change Scroll Speed', '1.4', '0.9');
-					FlxTween.tween(camHUD, {alpha: 0}, 0):
+					FlxTween.tween(camHUD, {alpha: 0}, 0);
 				}
 
 				if(curStep == 752) {
@@ -8152,12 +8152,12 @@ Stay Safe";
 
 				if(curStep == 756) {
 					triggerEventNote('Add Camera Zoom', '', '');
-					FlxTween.tween(camHUD, {alpha: 0.5}, 0):
+					FlxTween.tween(camHUD, {alpha: 0.5}, 0);
 				}
 
 				if(curStep == 762) {
 					triggerEventNote('Add Camera Zoom', '', '');
-				    FlxTween.tween(camHUD, {alpha: 0.8}, 0):
+				    FlxTween.tween(camHUD, {alpha: 0.8}, 0);
 				}
 
 				if(curStep == 766) {
@@ -8182,7 +8182,7 @@ Stay Safe";
 				if(curStep == 1152) {
 					triggerEventNote('Add Camera Zoom', '', '');
 					triggerEventNote('Change Scroll Speed', '1.2', '0.3');
-				}
+				}  
 			case 'War Dilemma':
 				//Insert Events here
 			case 'Isolated Old':

@@ -60,7 +60,7 @@ class ExtrasState extends MusicBeatState{
         if(FPClientPrefs.episode1FPLock == 'unlocked')
         {
             addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), FlxG.save.data.huntedLock);
-            addSong('Isolated Old', 3, 'mickey', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.oldisolateLock);
+            addSong('Isolated Old', 3, 'legacy', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.oldisolateLock);
             addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), FlxG.save.data.malfunctionLock);
            // addSong('Revenge', 3, 'face', FlxColor.WHITE, FlxG.save.data.revengeLock);
         }

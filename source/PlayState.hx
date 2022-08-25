@@ -1482,7 +1482,7 @@ class PlayState extends MusicBeatState
 		 if (!isPixelStage) {
 			switch(curStage)
 			{
-				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
 					timeTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				case 'PixelWorld':
 					timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1730,7 +1730,7 @@ class PlayState extends MusicBeatState
 	        if (!isPixelStage) {
 			switch(curStage)
 			{
-				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW': 
+				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
 					scoreTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				case 'PixelWorld':
 					scoreTxt.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -1969,7 +1969,7 @@ class PlayState extends MusicBeatState
 		timeTxt.cameras = [camHUD];
 		switch(curStage)
 		{
-			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat' | 'Studio' | 'ForestNEW':
+			case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat' | 'Studio' | 'ForestNEW' | 'LegacyLoop':
 				filmScratch.cameras = [camHUD];
 				filmScratchGame.cameras = [camGame];
 			default:
@@ -2965,7 +2965,7 @@ class PlayState extends MusicBeatState
 
 				switch (curStage)
 				{
-					case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat' | 'ForestNEW' | 'Studio' | 'WaltStage':
+					case 'EndlessLoop' | 'Forest' | 'Office' | 'Steamboat' | 'ForestNEW' | 'Studio' | 'WaltStage' | 'LegacyLoop':
 						introAlts = introAssets.get('vintage');
 						antialias = ClientPrefs.globalAntialiasing;
 					default:
@@ -9706,6 +9706,10 @@ Stay Safe";
 				triggerEventNote('Add Camera Zoom', '0.004', '0.03');
 			case 'Facade':
 				//Insert Events here
+
+			case 'test': //We need a name lmao
+            STRUM_X_MIDDLESCROLL = 1100;
+			remove(laneunderlayOpponent);
 		}
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????

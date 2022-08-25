@@ -18,9 +18,9 @@ class LanguageState extends MusicBeatState
 	public static var languageSelected:Bool = false;
 
 	var warnText:FlxText;
-    var otherText:FlxText;
-    var spanish:FlxSprite;
-    var english:FlxSprite;
+	var otherText:FlxText;
+	var spanish:FlxSprite;
+	var english:FlxSprite;
 	override function create()
 	{
 		super.create();
@@ -38,12 +38,12 @@ class LanguageState extends MusicBeatState
 		warnText.screenCenter(X);
 		add(warnText);
 
-        warnText = new FlxText(0, 40, FlxG.width,
-            "(Puede Ser Cambiado En Opciones/it Can be Changed In Options)",
+        	otherText = new FlxText(0, 40, FlxG.width,
+            	"(Puede Ser Cambiado En Opciones/it Can be Changed In Options)",
                 32);
-            warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
-            warnText.screenCenter(X);
-            add(warnText);
+            	otherText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
+            	otherText.screenCenter(X);
+            	add(otherText);
 
                 spanish = new FlxSprite().loadGraphic(Paths.image('language/Spanish'));
                 spanish.screenCenter(Y);
@@ -82,19 +82,25 @@ class LanguageState extends MusicBeatState
 				if(FlxG.mouse.overlaps(spanish) && FlxG.mouse.justPressed) {
 					ClientPrefs.language = "Spanish";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
-                    ClientPrefs.saveSettings();
-					FlxTween.tween(warnText, {alpha: 0}, 1, {
+					ClientPrefs.saveSettings();
+					FlxTween.tween(otherText, {alpha: 0}, 1);
+					FlxTween.tween(english, {alpha: 0}, 0.2);
+					FlxTween.tween(warnText, {alpha: 0}, 1);
+					FlxTween.tween(spanish, {alpha: 0}, 2.5, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new FlashingState());
 						}
-						});
+					});
 					languageSelected = true;
 				} else {
-                    if(FlxG.mouse.overlaps(english) && FlxG.mouse.justPressed) {
+				if(FlxG.mouse.overlaps(english) && FlxG.mouse.justPressed) {
 					ClientPrefs.language = "English";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
-                    ClientPrefs.saveSettings();
-					FlxTween.tween(warnText, {alpha: 0}, 1, {
+                   			ClientPrefs.saveSettings();
+					FlxTween.tween(otherText, {alpha: 0}, 1);
+					FlxTween.tween(spanish, {alpha: 0}, 0.2);
+					FlxTween.tween(warnText, {alpha: 0}, 1);
+					FlxTween.tween(english, {alpha: 0}, 2.5, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new FlashingState());
 						}

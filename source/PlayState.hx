@@ -278,7 +278,7 @@ class PlayState extends MusicBeatState
 
 	//Overlay Shit
 	var light:BGSprite;
-	var isolatedIntro:FlxSprite;
+	var cutsceneTransitionHelper:FlxSprite
 	var treesFront:BGSprite;
 	var depression:BGSprite;
 	var vignetteCam:BGSprite;
@@ -859,12 +859,6 @@ class PlayState extends MusicBeatState
 				var street:BGSprite = new BGSprite('funkinAVI/episode1/street/Mickeybg', -382, -409);
 				add(street);
 
-				isolatedIntro = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
-				add(isolatedIntro);
-				isolatedIntro.scrollFactor.set();
-				isolatedIntro.cameras = [camCustom];
-				isolatedIntro.alpha = 0;
-
 				if(ClientPrefs.funiShaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
@@ -883,12 +877,6 @@ class PlayState extends MusicBeatState
 
 					var street:BGSprite = new BGSprite('funkinAVI/episode1/street/Mickeybg', -382, -409);
 					add(street);
-	
-					isolatedIntro = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
-					add(isolatedIntro);
-					isolatedIntro.scrollFactor.set();
-					isolatedIntro.cameras = [camCustom];
-					isolatedIntro.alpha = 0;
 
 					if(ClientPrefs.funiShaders)
 						{
@@ -930,12 +918,6 @@ class PlayState extends MusicBeatState
 				depression = new BGSprite('funkinAVI/episode1/streetNEW/rain', -400, -300, 1.2, 1.2, ['Symbol 8 instance 1'], true);
 				depression.scale.set(1.6, 1.6);
 				depression.alpha = 0;
-
-				isolatedIntro = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
-				add(isolatedIntro);
-				isolatedIntro.scrollFactor.set();
-				isolatedIntro.cameras = [camCustom];
-				isolatedIntro.alpha = 0;
 
 				if(ClientPrefs.funiShaders)
 				{
@@ -1850,10 +1832,6 @@ class PlayState extends MusicBeatState
 		}
 		add(scoreTxt);
 
-		var filmScratch:BGSprite = new BGSprite('funkinAVI-filters/scratchShit', 0, 0, 1, 1, ['scratch thing 1'], true);
-		var filmScratchGame:BGSprite = new BGSprite('funkinAVI-filters/scratchShit', 0, 0, 1, 1, ['scratch thing 1'], true);
-		filmScratchGame.alpha = 0.5;
-
 		if(ClientPrefs.mechanics)
 		{
 			if(curStage == 'PixelWorld')
@@ -1923,6 +1901,11 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(waltText, {alpha: 0}, 1, {ease: FlxEase.quadInOut, startDelay: 7});
 			}
 		}
+
+		cutsceneTransitionHelper = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+		add(cutsceneTransitionHelper);
+		cutsceneTransitionHelper.scrollFactor.set();
+		cutsceneTransitionHelper.alpha = 0;
 		
 		songBanner = new FlxSprite(0, 0).makeGraphic(999, 136, FlxColor.WHITE);
 		songBanner.scrollFactor.set();
@@ -1931,7 +1914,6 @@ class PlayState extends MusicBeatState
 		songBanner.alpha = 0;
 		songBanner.antialiasing = ClientPrefs.globalAntialiasing;
 		songBanner.screenCenter(XY);
-		songBanner.cameras = [camHUD];
 		add(songBanner);
 
 		songBannerText = new FlxText(0, 0, 600, PlayState.SONG.song + '\n' + songComposer);
@@ -1940,9 +1922,12 @@ class PlayState extends MusicBeatState
 		songBannerText.borderSize = 1.25;
 		songBannerText.alpha = 0;
 		songBannerText.screenCenter(XY);
-		songBannerText.cameras = [camHUD];
 		songBannerText.visible = !ClientPrefs.hideHud;
 		add(songBannerText);
+
+		var filmScratch:BGSprite = new BGSprite('funkinAVI-filters/scratchShit', 0, 0, 1, 1, ['scratch thing 1'], true);
+		var filmScratchGame:BGSprite = new BGSprite('funkinAVI-filters/scratchShit', 0, 0, 1, 1, ['scratch thing 1'], true);
+		filmScratchGame.alpha = 0.5;
 
 		switch(curStage)
 		{
@@ -1976,6 +1961,9 @@ class PlayState extends MusicBeatState
 				//nothing, that's it.
 		}
 		blackFadeThing.cameras = [camCustom];
+		cutsceneTransitionHelper.cameras = [camCustom];
+		songBanner.cameras = [camCustom];
+		songBannerText.cameras = [camCustom];
 		doof.cameras = [camHUD];
 		
 		// if (SONG.song == 'South')
@@ -2034,7 +2022,7 @@ class PlayState extends MusicBeatState
 			{
 				case "isolated":
 					startVideo('Episode1_Intro');
-					isolatedIntro.alpha = 1;
+					cutsceneTransitionHelper.alpha = 1;
 					inCutscene = true;
 				case "monster":
 					var whiteScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
@@ -3002,7 +2990,7 @@ class PlayState extends MusicBeatState
 							switch (swagCounter)
 							{
 								case 0:
-									FlxTween.tween(isolatedIntro, {alpha: 0}, 1, {ease: FlxEase.linear});
+									FlxTween.tween(cutsceneTransitionHelper, {alpha: 0}, 1, {ease: FlxEase.linear});
 								case 1:
 									
 								case 2:

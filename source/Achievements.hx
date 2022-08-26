@@ -11,7 +11,7 @@ using StringTools;
 
 class Achievements {
 	public static var achievementsStuff:Array<Dynamic> = [ //Name, Description, Achievement save tag, Hidden achievement
-	    ["We Be Gamin'",		            "Login To GameJolt!",				                'gamejolt',		    false],
+	    ["We Be Gamin'",		        "Log To GameJolt!",				                    'gamejolt',		    false],
 		["Nothing is Real...",		    "Complete Episode 1.",				                'episode1',		    false],
 		["'Smiling For The Show.'",		"Complete Episode 2.",				                'episode2',			false],
 		["True Satanist",				"FC Episode 1.",									'episode1_nomiss',	false],
@@ -25,7 +25,7 @@ class Achievements {
 		["Bullet Dodger!",				"FC Cycled Sins.",									'relapse_nomiss',	false],
 		["Glitch in the System!",			"FC & Have ALL 30 Lives in Malfunction!",			'malfunction_tryhard',	false],
 		//THEY WORK, LET'S GOOOOOO
-		["Freaky on a Friday Night",	"Play on a Friday... Night.",						'friday_night_play',	 true],
+		["Getting Freaky Before Friday", "Play The Mod On A Thursday Night",					'thursday_night_play',	 true],
 		["What a Funkin' Disaster!",	"Complete a Song with a rating lower than 20%.",	'ur_bad',				false],
 		["Perfectionist",				"Complete a Song with a rating of 100%.",			'ur_good',				false]
 	];

@@ -76,7 +76,6 @@ class NoticeState extends MusicBeatState
 			var back:Bool = controls.BACK;
 			if (controls.ACCEPT || back) {
 				FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
 				if(!back) {
 					ClientPrefs.funiShaders = true;
 					ClientPrefs.saveSettings();

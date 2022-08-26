@@ -46,7 +46,7 @@ class DisclaimerState extends MusicBeatState
 			Press ESCAPE to disable flashes now.",
 			20);
 			
-		disclaimText3 = new FlxText(15, 280, FlxG.width,
+		disclaimText3 = new FlxText(15, 440, FlxG.width,
 			"^LAST CHANCE...^",
 			74);
 		} else if(ClientPrefs.language == "Spanish") {
@@ -61,8 +61,8 @@ class DisclaimerState extends MusicBeatState
 			Presione ESCAPE para desactivar los flashes ahora.",
 			20);
 			
-		disclaimText3 = new FlxText(15, 280, FlxG.width,
-			"ÚLTIMA OPORTUNIDAD...",
+		disclaimText3 = new FlxText(15, 440, FlxG.width,
+			"^ÚLTIMA OPORTUNIDAD...^",
 			74);
 		}	
 		disclaimText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 64, FlxColor.WHITE, LEFT);

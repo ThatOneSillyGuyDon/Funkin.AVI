@@ -111,7 +111,10 @@ class LanguageState extends MusicBeatState
 					});
 				}
 			}
+		}
 		super.update(elapsed);
 	}
+}
+<<<<<<< HEAD
 }
 }

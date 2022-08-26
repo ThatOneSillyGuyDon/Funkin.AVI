@@ -82,6 +82,7 @@ class TitleState extends MusicBeatState
 	var mustUpdate:Bool = false;
 	
 	var titleJSON:TitleData;
+	var nonLoginText:FlxText; //Toast Don't Work, Lets Make One
 	
 	public static var updateVersion:String = '';
 
@@ -336,6 +337,14 @@ class TitleState extends MusicBeatState
 		grain.scale.y = 1.1;
 		add(grain);
 
+		if(!GameJoltAPI.userLogin) {
+		nonLoginText = new FlxText(0, -10, FlxG.width, 'Not signed in!\nSign in to save GameJolt\nTrophies and Leaderboard Scores!', 48);
+		nonLoginText.setFormat("assets/fonts/vcr.ttf", 38, FlxColor.WHITE, CENTER);
+		nonLoginText.screenCenter(X);
+		FlxTween.tween(nonLoginText, {y: 40}, 1);
+		add(nonLoginText);
+		}
+
 		if (initialized)
 			skipIntro();
 		else
@@ -456,6 +465,7 @@ class TitleState extends MusicBeatState
 				});
 				FlxTween.tween(logoBl, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				FlxTween.tween(titleText, {y: 2000}, 3, {ease: FlxEase.quadIn});
+				if(!GameJoltAPI.userLogin) FlxTween.tween(nonLoginText, {y: -1000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gfDance, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gradientBar, {y: 2000}, 3, {ease: FlxEase.quadIn});
 			}
@@ -856,6 +866,7 @@ class TitleState extends MusicBeatState
 				case 18:
 					addMoreText('Your Stay...');
 				case 19:
+					nonLoginText.visible = false; //no disturbing time yay
 					skipIntro();
 				}
 			}

@@ -328,11 +328,12 @@ class GameJoltLogin extends MusicBeatState
             GameJoltAPI.leaderboardToggle = FlxG.save.data.lbToggle;
         }
 
-        if(!login)
+        /*if(!login)
         {
             FlxG.sound.playMusic(Paths.music('freakyMenu'),0);
             FlxG.sound.music.fadeIn(2, 0, 0.85);
-        }
+        }*/
+        //we don't need this shit
 
         trace(GJApi.initialized);
         FlxG.mouse.visible = true;

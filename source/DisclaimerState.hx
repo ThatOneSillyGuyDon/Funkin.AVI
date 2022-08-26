@@ -46,11 +46,7 @@ class DisclaimerState extends MusicBeatState
 			Press ESCAPE to disable flashes now.",
 			20);
 			
-<<<<<<< HEAD
-		disclaimText3 = new FlxText(15, 630, FlxG.width,
-=======
 		disclaimText3 = new FlxText(15, 440, FlxG.width,
->>>>>>> 8f016acc561deab7b6fb33e230173496bf644564
 			"^LAST CHANCE...^",
 			74);
 		} else if(ClientPrefs.language == "Spanish") {
@@ -65,11 +61,7 @@ class DisclaimerState extends MusicBeatState
 			Presione ESCAPE para desactivar los flashes ahora.",
 			20);
 			
-<<<<<<< HEAD
-		disclaimText3 = new FlxText(15, 630, FlxG.width, //idk why it mixes the text
-=======
 		disclaimText3 = new FlxText(15, 440, FlxG.width,
->>>>>>> 8f016acc561deab7b6fb33e230173496bf644564
 			"^ÚLTIMA OPORTUNIDAD...^",
 			74);
 		}	

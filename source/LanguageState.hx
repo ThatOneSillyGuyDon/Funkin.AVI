@@ -79,13 +79,7 @@ class LanguageState extends MusicBeatState
 	override function update(elapsed:Float)
 	{
 		if(!languageSelected) {
-			
-			var back:Bool = controls.BACK;
-			if (controls.ACCEPT || back) {
-				languageSelected = true;
-				FlxTransitionableState.skipNextTransIn = true;
-				FlxTransitionableState.skipNextTransOut = true;
-			//ik, copied from FlashingState, but it works either way, this is to prevent the transition state from triggering
+		   //bro idfk it just freezes the game after pressing enter or back
 				
 				if(FlxG.mouse.overlaps(spanish) && FlxG.mouse.justPressed) {
 					ClientPrefs.language = "Spanish";
@@ -114,7 +108,6 @@ class LanguageState extends MusicBeatState
 					});
 				}
 			}
-		}
 		super.update(elapsed);
 	}
 }

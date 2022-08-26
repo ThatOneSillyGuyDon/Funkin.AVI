@@ -85,7 +85,7 @@ class FlashingState extends MusicBeatState
 					ClientPrefs.flashing = true;
 					ClientPrefs.saveSettings();
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
-					FlxTween.tween(blackFade, {alpha: 0}, 1, {
+					FlxTween.tween(blackFade, {alpha: 1}, 1, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new DisclaimerState());
 						}
@@ -93,7 +93,7 @@ class FlashingState extends MusicBeatState
 				} else {
 					ClientPrefs.flashing = false;
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
-					FlxTween.tween(blackFade, {alpha: 0}, 1, {
+					FlxTween.tween(blackFade, {alpha: 1}, 1, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new DisclaimerState());
 						}

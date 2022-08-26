@@ -17,6 +17,7 @@ class LanguageState extends MusicBeatState
 {
 	public static var languageSelected:Bool = false;
 
+	var blackFade:FlxSprite; //copy from DisclaimerState, whatever, it works
 	var warnText:FlxText;
 	var otherText:FlxText;
 	var spanish:FlxSprite;
@@ -57,6 +58,9 @@ class LanguageState extends MusicBeatState
                 english.x = 750;
                 add(english);
 
+		blackFade = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
+		add(blackFade);
+
 		var scratchStuff:FlxSprite = new FlxSprite();
 		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
 		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
@@ -74,22 +78,30 @@ class LanguageState extends MusicBeatState
 		grain.scale.x = 1.1;
 		grain.scale.y = 1.1;
 		add(grain);
+
+		FlxTween.tween(blackFade, {alpha: 0}, 1); //we be makin this shit fancy now
 	}
 
 	override function update(elapsed:Float)
 	{
 		if(!languageSelected) {
+<<<<<<< HEAD
 			
 		//Deleted It, It Just Freezes The Game And Don't Do Anything (the gae not the thing)
+=======
+>>>>>>> 8f016acc561deab7b6fb33e230173496bf644564
 				
 				if(FlxG.mouse.overlaps(spanish) && FlxG.mouse.justPressed) {
+					languageSelected = true;
+					FlxTransitionableState.skipNextTransIn = true;
+					FlxTransitionableState.skipNextTransOut = true;
 					ClientPrefs.language = "Spanish";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 					ClientPrefs.saveSettings();
 					FlxTween.tween(otherText, {alpha: 0}, 1);
 					FlxTween.tween(english, {alpha: 0}, 0.2);
 					FlxTween.tween(warnText, {alpha: 0}, 1);
-					FlxTween.tween(spanish, {alpha: 0}, 2.5, {
+					FlxTween.tween(spanish, {alpha: 0}, 1.7, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new FlashingState());
 							languageSelected = true;
@@ -97,13 +109,16 @@ class LanguageState extends MusicBeatState
 					});
 				} else {
 				if(FlxG.mouse.overlaps(english) && FlxG.mouse.justPressed) {
+					languageSelected = true;
+					FlxTransitionableState.skipNextTransIn = true;
+					FlxTransitionableState.skipNextTransOut = true;
 					ClientPrefs.language = "English";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
                    	ClientPrefs.saveSettings();
 					FlxTween.tween(otherText, {alpha: 0}, 1);
 					FlxTween.tween(spanish, {alpha: 0}, 0.2);
 					FlxTween.tween(warnText, {alpha: 0}, 1);
-					FlxTween.tween(english, {alpha: 0}, 2.5, {
+					FlxTween.tween(english, {alpha: 0}, 1.7, {
 						onComplete: function (twn:FlxTween) {
 							MusicBeatState.switchState(new FlashingState());
 							languageSelected = true;
@@ -111,7 +126,6 @@ class LanguageState extends MusicBeatState
 					});
 				}
 			}
-		}
 		super.update(elapsed);
 	}
 }

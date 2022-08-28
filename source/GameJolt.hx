@@ -41,7 +41,7 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
     /**
      * Inline variable to see if the user wants to submit scores.
      */
-    public static var leaderboardToggle:Bool;
+    public static var leaderboardToggle:Bool = true;
     /**
      * Grabs user data and returns as a string, true for Username, false for Token
      * @param username Bool value
@@ -183,27 +183,27 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
         return returnable;
     }
 
-    /**
+ /**
      * Add a score to a table!
      * @param score Score of the song. **Can only be an int value!**
      * @param tableID ID of the table you want to add the score to!
      * @param extraData (Optional) You could put accuracy or any other details here!
      */
-    public static function addScore(score:Int, tableID:Int, ?extraData:String)
-    {
-        if (GameJoltAPI.leaderboardToggle)
+     public static function addScore(score:Int, tableID:Int, ?extraData:String)
         {
-            trace("Trying to add a score");
-            var formData:String = extraData.split(" ").join("%20");
-            GJApi.addScore(score+"%20Points", score, tableID, false, null, formData, function(data:Map<String, String>){
-                trace("Score submitted with a result of: " + data.get("success"));
-                Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Score submitted!", "Score: " + score + "\nExtra Data: "+extraData, true);
-            });
-        }
-        else
-        {
-            Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Score not submitted!", "Score: " + score + "Extra Data: " +extraData+"\nScore was not submitted due to score submitting being disabled!", true);
-        }
+            if (GameJoltAPI.leaderboardToggle)
+            {
+                trace("Trying to add a score");
+                var formData:String = extraData.split(" ").join("%20");
+                GJApi.addScore(score+"%20Points", score, tableID, false, null, formData, function(data:Map<String, String>){
+                    trace("Score submitted with a result of: " + data.get("success"));
+                    Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Score submitted!", "Score: " + score + "\nExtra Data: "+extraData, true);
+                });
+            }
+            else
+            {
+                Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Score not submitted!", "Score: " + score + "Extra Data: " +extraData+"\nScore was not submitted due to score submitting being disabled!", true);
+            }
     }
 
     /**

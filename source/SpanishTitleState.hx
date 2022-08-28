@@ -339,7 +339,13 @@ class SpanishTitleState extends MusicBeatState
 			nonLogedText.screenCenter(X);
 			FlxTween.tween(nonLogedText, {y: 40}, 1);
 			add(nonLogedText);
-			}
+		} else {
+			nonLogedText = new FlxText(0, -10, FlxG.width, '', 48); //Literally Nothing (because the game crashed)
+			nonLogedText.setFormat("assets/fonts/vcr.ttf", 38, FlxColor.WHITE, CENTER);
+			nonLogedText.screenCenter(X);
+			FlxTween.tween(nonLogedText, {y: 40}, 1);
+			add(nonLogedText);
+		}
 
 		if (initialized)
 			skipIntro();

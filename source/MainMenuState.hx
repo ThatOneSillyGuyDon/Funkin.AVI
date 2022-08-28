@@ -539,7 +539,7 @@ class MainMenuState extends MusicBeatState
 			}
 			else if (FlxG.keys.justPressed.SIX || FlxG.keys.justPressed.NUMPADSIX)
 				{
-					FlxG.switchState(new GameJoltLogin());
+					MusicBeatState.switchState(new GameJoltLogin());
 				}
 			#end
 			else if (FlxG.keys.justPressed.EIGHT || FlxG.keys.justPressed.NUMPADEIGHT)

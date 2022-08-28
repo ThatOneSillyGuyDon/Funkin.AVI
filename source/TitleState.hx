@@ -338,11 +338,11 @@ class TitleState extends MusicBeatState
 		add(grain);
 
 		if(!GameJoltAPI.userLogin) {
-		nonLoginText = new FlxText(0, -10, FlxG.width, 'Not signed in!\nSign in to save GameJolt\nTrophies and Leaderboard Scores!', 48);
-		nonLoginText.setFormat("assets/fonts/vcr.ttf", 38, FlxColor.WHITE, CENTER);
-		nonLoginText.screenCenter(X);
-		FlxTween.tween(nonLoginText, {y: 40}, 1);
-		add(nonLoginText);
+			nonLoginText = new FlxText(0, -10, FlxG.width, 'Not signed in!\nSign in to save GameJolt\nTrophies and Leaderboard Scores!', 48);
+			nonLoginText.setFormat("assets/fonts/vcr.ttf", 38, FlxColor.WHITE, CENTER);
+			nonLoginText.screenCenter(X);
+			FlxTween.tween(nonLoginText, {y: 40}, 1);
+			add(nonLoginText);
 		}
 
 		if (initialized)
@@ -866,7 +866,6 @@ class TitleState extends MusicBeatState
 				case 18:
 					addMoreText('Your Stay...');
 				case 19:
-					nonLoginText.visible = false; //no disturbing time yay
 					skipIntro();
 				}
 			}

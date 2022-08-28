@@ -69,7 +69,6 @@ class EpisodesState extends MusicBeatState
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
-		WeekData.reloadWeekFiles(false);
 
 		#if desktop
 		// Updating Discord Rich Presence
@@ -117,8 +116,6 @@ class EpisodesState extends MusicBeatState
             addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
             addSong('Facade', 3, 'smile', FlxColor.fromRGB(105, 17, 10));
         }
-
-		WeekData.loadTheFirstEnabledMod();
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
 
@@ -171,7 +168,6 @@ class EpisodesState extends MusicBeatState
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			// songText.screenCenter(X);
 		}
-		WeekData.setDirectoryFromWeek();
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, RIGHT);
@@ -400,17 +396,6 @@ class EpisodesState extends MusicBeatState
 
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
 				instPlaying = curSelected;
-				switch(PlayState.SONG.song)
-				{
-					case 'Isolated':
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
-					case 'Lunacy':
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: obscurity.";
-					case 'Delusional':
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
-					default:
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song;
-				}
 				#end
 			}
 

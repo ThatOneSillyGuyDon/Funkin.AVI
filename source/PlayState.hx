@@ -7202,7 +7202,8 @@ Stay Safe";
 								{
 									endSong();
 									FlxG.sound.play(Paths.sound('wiiCrash'), 1);
-									Application.current.window.alert('Error On Funkin.avi.exe!:', "Line: 7178, Message: if(note.noteType = 'Error Note') {trace('closing game...')}");
+									Application.current.window.alert("Message: if(note.noteType = 'Error Note') {trace('0 lives left, closing game...')", 'Error On Funkin.avi.exe!:');
+									trace('closing game...');
 									System.exit(0);
 								}else{
 									healthDrain = 0.01;

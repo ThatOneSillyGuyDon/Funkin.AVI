@@ -70,6 +70,7 @@ class EpisodesState extends MusicBeatState
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
 
+
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In Freeplay", "Main Story Songs", null, 'icon');

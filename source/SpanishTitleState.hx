@@ -332,20 +332,6 @@ class SpanishTitleState extends MusicBeatState
 		grain.scale.x = 1.1;
 		grain.scale.y = 1.1;
 		add(grain);
-		
-		if(!GameJoltAPI.userLogin) {
-			nonLogedText = new FlxText(0, -10, FlxG.width, 'No Hay Sesion!\nInicia sesión para guardar los trofeos de GameJolt\n y las puntuaciones de la clasificación!', 48);
-			nonLogedText.setFormat("assets/fonts/vcr.ttf", 38, FlxColor.WHITE, CENTER);
-			nonLogedText.screenCenter(X);
-			FlxTween.tween(nonLogedText, {y: 40}, 1);
-			add(nonLogedText);
-		} else {
-			nonLogedText = new FlxText(0, -10, FlxG.width, '', 48); //Literally Nothing (because the game crashed)
-			nonLogedText.setFormat("assets/fonts/vcr.ttf", 38, FlxColor.WHITE, CENTER);
-			nonLogedText.screenCenter(X);
-			FlxTween.tween(nonLogedText, {y: 40}, 1);
-			add(nonLogedText);
-		}
 
 		if (initialized)
 			skipIntro();
@@ -467,7 +453,6 @@ class SpanishTitleState extends MusicBeatState
 				});
 				FlxTween.tween(goofyLogoBl, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				FlxTween.tween(titleText, {y: 2000}, 3, {ease: FlxEase.quadIn});
-				if(!GameJoltAPI.userLogin) FlxTween.tween(nonLogedText, {y: -1000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gfDance, {y: 2000}, 3, {ease: FlxEase.quadIn});
 				//FlxTween.tween(gradientBar, {y: 2000}, 3, {ease: FlxEase.quadIn});
 			}

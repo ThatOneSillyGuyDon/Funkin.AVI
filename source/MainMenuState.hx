@@ -347,7 +347,18 @@ class MainMenuState extends MusicBeatState
 		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		
-		if(!GameJoltAPI.userLogin) {
+		if(!GameJoltAPI.userLogin && ClientPrefs.language == "Spanish") {
+		var achievementText:FlxText = new FlxText(907, FlxG.height - 34, 0, "Presiona 8 para ir al menu de trofeos", 25);
+		achievementText.scrollFactor.set();
+		achievementText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(achievementText);
+
+		var GameJoltText:FlxText = new FlxText(907, FlxG.height - 54, 0, "Presiona 6 Para Iniciar Sesion en GameJolt", 25);
+		GameJoltText.scrollFactor.set();
+		GameJoltText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(GameJoltText);
+
+		} else if(!GameJoltAPI.userLogin && ClientPrefs.language == "English") {
 		var achievementText:FlxText = new FlxText(937, FlxG.height - 34, 0, "Press 8 to go to the achievement menu", 25);
 		achievementText.scrollFactor.set();
 		achievementText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -357,12 +368,19 @@ class MainMenuState extends MusicBeatState
 		GameJoltText.scrollFactor.set();
 		GameJoltText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(GameJoltText);
-		}else{
+		} else if(GameJoltAPI.userLogin && ClientPrefs.language == "English") {
 		var achievementText:FlxText = new FlxText(937, FlxG.height - 34, 0, "Press 8 to go to the achievement menu", 25);
 		achievementText.scrollFactor.set();
 		achievementText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(achievementText);
+		} else if(GameJoltAPI.userLogin && ClientPrefs.language == "Spanish") {
+			var achievementText:FlxText = new FlxText(907, FlxG.height - 34, 0, "Presiona 8 Para Ir Al menu De Trofeos", 25);
+		achievementText.scrollFactor.set();
+		achievementText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(achievementText);
 		}
+
+		//Took me like 3 attemps
 
 		// NG.core.calls.event.logEvent('swag').send();
 
@@ -518,7 +536,8 @@ class MainMenuState extends MusicBeatState
 									//case 'awards':
 										//MusicBeatState.switchState(new AchievementsMenuState());
 									case 'credits':
-										MusicBeatState.switchState(new CreditsState());
+										if(ClientPrefs.language == "Spanish") MusicBeatState.switchState(new CreditsSpanishState());
+										else MusicBeatState.switchState(new CreditsState());
 									case 'options':
 										if(ClientPrefs.language == "Spanish") {
 										LoadingState.loadAndSwitchState(new options.SpanishOption());

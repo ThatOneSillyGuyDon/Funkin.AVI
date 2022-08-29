@@ -7201,11 +7201,14 @@ Stay Safe";
 								if(crashLivesCounter == -1)
 								{
 									endSong();
-									trace('0 lives left, closing game...');
+									trace('closing game...');
 									FlxG.sound.play(Paths.sound('wiiCrash'), 1);
-									Application.current.window.alert("Message: if(note.noteType = 'Error Note') {trace('0 lives left, closing game...')", 'Error On Funkin.avi.exe!:');
+		                          
+								  if(FlxG.random.bool(10)) Application.current.window.alert("Fuck You, You Suck LMAO", 'Note About Your Skill:');
+								  //10% of probability
+									else Application.current.window.alert("Message: if(note.noteType = 'Error Note') {trace('0 lives left, closing game...')", 'Error On Funkin.avi.exe!:');
 									System.exit(0);
-								}else{
+								} else {
 									healthDrain = 0.01;
 									health -= 0;
 								}

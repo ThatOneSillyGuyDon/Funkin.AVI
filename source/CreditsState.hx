@@ -89,7 +89,7 @@ class CreditsState extends MusicBeatState
 			['Funkin.avi Twitter',	'missing-icon',	'Follow Us Here for \nMore Updates!',	'https://twitter.com/AviFunkin',	'FFFFFF'],
 			['Directors'],
 			['DEMOLITIONDON96',	'demolitiondon96',	'Director Of Funkin.avi', 'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
-			['Nutsack',	'nutsack',	'2nd Co-Director',	'https://twitter.com/Nutblocked',	'FFFFFF'],
+			['Nutsack',	'nutsack',	'2nd Director',	'https://twitter.com/Nutblocked',	'FFFFFF'],
 			['GavinTheCartoonist', 'missing-icon', 'Co-Director Of Funkin.avi', 'https://twitter.com/AnimationFelix', 'FFFFFF'],
             ['HazeyPurple', 'missing-icon', 'Second Co-director', 'https://twitter.com/HazeyPurple_x', 'FFFFFF'],
 			['Artists'],

@@ -7204,14 +7204,21 @@ Stay Safe";
 									trace('closing game...');
 									FlxG.sound.play(Paths.sound('wiiCrash'), 1);
 		                          
-								  if(FlxG.random.bool(10)) Application.current.window.alert("Fuck You, You Suck LMAO", 'Note About Your Skill:');
-								  //10% of probability
-									else Application.current.window.alert("Message: if(note.noteType = 'Error Note') {trace('0 lives left, closing game...')", 'Error On Funkin.avi.exe!:');
-									System.exit(0);
+							if(ClientPrefs.language == "Spanish") {
+								if(FlxG.random.bool(10)) Application.current.window.alert("Apestas, LMAO", 'Nota Sobre Tu Habilidad:');
+								//10% of probability
+								  else Application.current.window.alert("Mensaje: if(note.noteType = 'Nota De Errror') { trace('0 vidas restantes, cerrando el juego...'); }", 
+								  'Error en Funkin.avi.exe!:'
+								  );
+								  System.exit(0); 
 								} else {
-									healthDrain = 0.01;
-									health -= 0;
+									if(FlxG.random.bool(10)) Application.current.window.alert("Fuck You, You Suck LMAO", 'Note About Your Skill:');
+								  //10% of probability
+									else Application.current.window.alert("Message: if(note.noteType = 'Error Note') { trace('0 lives left, closing game...'); }", 
+									'Error On Funkin.avi.exe!:');
+									System.exit(0);
 								}
+							}
 								crashLives.text = 'Lives: ${crashLivesCounter}';
 								crashLivesIcon.animation.play('OMFG IT GLITCHES');
 								new FlxTimer().start(0.25, function(tmr:FlxTimer)

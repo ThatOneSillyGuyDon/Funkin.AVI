@@ -78,6 +78,8 @@ class EpisodesState extends MusicBeatState
 			
 		Application.current.window.title = "Funkin.avi - Freeplay: Main Story Songs";
 
+		WeekData.reloadWeekFiles(false);
+
 		/*for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
 
@@ -169,6 +171,8 @@ class EpisodesState extends MusicBeatState
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			// songText.screenCenter(X);
 		}
+
+		WeekData.setDirectoryFromWeek();
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);
 		scoreText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, RIGHT);

@@ -7201,7 +7201,7 @@ Stay Safe";
 								if(crashLivesCounter == -1)
 								{
 									endSong();
-									trace('closing game...');
+									trace('0 lives left, closing game...');
 									FlxG.sound.play(Paths.sound('wiiCrash'), 1);
 		                          
 							if(ClientPrefs.language == "Spanish") {

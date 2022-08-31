@@ -82,6 +82,7 @@ class SpanishTitleState extends MusicBeatState
 	var mustUpdate:Bool = false;
 	
 	var titleJSON:TitleDumbData;
+	var nonLogedText:FlxText;
 	
 	public static var updateVersion:String = '';
 

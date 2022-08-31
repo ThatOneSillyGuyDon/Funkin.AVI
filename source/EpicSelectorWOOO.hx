@@ -117,8 +117,8 @@ class EpicSelectorWOOO extends MusicBeatState{
 				}else{
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 				}
+			}
             }
-        }
         super.update(elapsed);
     }
 

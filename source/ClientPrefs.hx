@@ -8,6 +8,7 @@ import Controls;
 
 class ClientPrefs
     {
+	public static var screenShake:Bool = true;
     public static var language:String = "English";
 	public static var cutscenes:Bool = false;
 	public static var FPStext:Bool = false;
@@ -127,6 +128,7 @@ class ClientPrefs
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.screenShake = screenShake;
 		FlxG.save.data.language = language;
 		FlxG.save.data.cutscens = cutscenes;
 		FlxG.save.data.FPStext = FPStext;
@@ -199,6 +201,9 @@ class ClientPrefs
 	}
 
 	public static function loadPrefs() {
+		if(FlxG.save.data.screenShake != null) {
+			screenShake = FlxG.save.data.screenShake;
+		}
 	    if(FlxG.save.data.language != null) {
 			language = FlxG.save.data.language;
 		}

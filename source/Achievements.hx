@@ -21,7 +21,6 @@ class Achievements {
 		["Isolation, Madness, Voices, It Never Ends...",					"FC Episode 1 on Suicidal Difficulty.",				'episode1_SFC',		false],
 		["Get Out of my Office!",		"FC Episode 2 on Suicidal Difficulty.",				'episode2_SFC',		false],
 		["What Malfunction?",			"FC Malfunction.",									'malfunction_nomiss',	false],
-		["Un-Defeated Glitch",			"Die 10 Times In Malfunction.",						'malfunction_dead',	false],
 		["Bullet Dodger!",				"FC Cycled Sins.",									'relapse_nomiss',	false],
 		["Glitch in the System!",			"FC & Have ALL 30 Lives in Malfunction!",			'malfunction_tryhard',	false],
 		//THEY WORK, LET'S GOOOOOO

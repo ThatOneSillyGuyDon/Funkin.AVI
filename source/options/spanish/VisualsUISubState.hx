@@ -109,6 +109,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
+		var option:Option = new Option('Temblor De Camara',
+		"Desactivalo Si eres sensivo al temblor de camara!",
+		'screenShake',
+		'bool',
+		true);
+	addOption(option); //haha imagine dont doing this with the rest of options
+
 		var option:Option = new Option('Flashing Lights',
 			"Uncheck this if you're sensitive to flashing lights!",
 			'flashing',

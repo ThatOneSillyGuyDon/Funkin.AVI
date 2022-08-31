@@ -69,7 +69,7 @@ class EpisodesState extends MusicBeatState
 		
 		persistentUpdate = true;
 		PlayState.isStoryMode = false;
-		WeekData.reloadWeekFiles(false);
+
 
 		#if desktop
 		// Updating Discord Rich Presence
@@ -77,6 +77,8 @@ class EpisodesState extends MusicBeatState
 		#end
 			
 		Application.current.window.title = "Funkin.avi - Freeplay: Main Story Songs";
+
+		WeekData.reloadWeekFiles(false);
 
 		/*for (i in 0...WeekData.weeksList.length) {
 			if(weekIsLocked(WeekData.weeksList[i])) continue;
@@ -117,8 +119,6 @@ class EpisodesState extends MusicBeatState
             addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
             addSong('Facade', 3, 'smile', FlxColor.fromRGB(105, 17, 10));
         }
-
-		WeekData.loadTheFirstEnabledMod();
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
 
@@ -171,6 +171,7 @@ class EpisodesState extends MusicBeatState
 			// DONT PUT X IN THE FIRST PARAMETER OF new ALPHABET() !!
 			// songText.screenCenter(X);
 		}
+
 		WeekData.setDirectoryFromWeek();
 
 		scoreText = new FlxText(FlxG.width * 0.7, 5, 0, "", 32);

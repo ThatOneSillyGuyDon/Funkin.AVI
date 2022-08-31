@@ -331,6 +331,7 @@ class PauseSubState extends MusicBeatSubstate
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
 					//PlayState.startCountdown();
 					close();
+					PlayState.instance.startCountdown();
 				case 'Change Difficulty':
 					menuItems = difficultyChoices;
 					regenMenu();

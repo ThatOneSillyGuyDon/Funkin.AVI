@@ -4225,6 +4225,10 @@ class PlayState extends MusicBeatState
 		if(SONG.song == "Isolated Old") {
 				scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' - Score: ' + songScore + ' - Misses: ' + songMisses + ' - Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
+
+		if(SONG.song == "Fight or flight") { //we don't know the song name
+			scoreTxt.text = 'Sacrifices: ' + deathCounter + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
+		}
 	        }
 
 					// Info Bar
@@ -5033,6 +5037,7 @@ class PlayState extends MusicBeatState
 				}
 
 			case 'Screen Shake':
+				if(ClientPrefs.screenShake) {
 				var valuesArray:Array<String> = [value1, value2];
 				var targetsArray:Array<FlxCamera> = [camGame, camHUD];
 				for (i in 0...targetsArray.length) {
@@ -5048,6 +5053,7 @@ class PlayState extends MusicBeatState
 						targetsArray[i].shake(intensity, duration);
 					}
 				}
+			}
 
 
 			case 'Change Character':
@@ -5992,6 +5998,28 @@ Stay Safe";
 			else
 			{
 				trace('WENT BACK TO FREEPLAY??');
+
+				if(SONG.song == "Malfunction") {
+			    	GameJoltAPI.addScore(songScore, 719335, 'Score of ' + SONG.song);
+				} else if(SONG.song == "Bless") {
+					GameJoltAPI.addScore(songScore, 755493, 'Score of ' + SONG.song);
+				} else if(SONG.song == "Hunted") {
+					GameJoltAPI.addScore(songScore, 755496, 'Score of ' + SONG.song);
+				} else if(SONG.song == "Don't Cross!") {
+					GameJoltAPI.addScore(songScore, 755498, 'Score of ' + SONG.song);
+				} else if(SONG.song == "Mercy") {
+					GameJoltAPI.addScore(songScore, 755524, 'Score of ' + SONG.song);
+				} else if(SONG.song == "Isolated Old") {
+					GameJoltAPI.addScore(songScore, 755529, 'Score of ' + SONG.song);
+				} else if(SONG.song == "War Dilemma") {
+					GameJoltAPI.addScore(songScore, 755530, 'Score of ' + SONG.song);
+				} else if(SONG.song == "Cycled Sins") {
+					GameJoltAPI.addScore(songScore, 755531, 'Score of ' + SONG.song);
+				}
+
+				//Story Songs later Lol, Thanks Tenta
+				//note: don't put it yet because it will be public
+		
 				cancelMusicFadeTween();
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
@@ -7175,13 +7203,24 @@ Stay Safe";
 								if(crashLivesCounter == -1)
 								{
 									endSong();
+									trace('closing game...');
 									FlxG.sound.play(Paths.sound('wiiCrash'), 1);
-									Application.current.window.alert('lime.app.Application: function goodNoteHit: note.noteType = "Error Note": closing game...');
+		                          
+							if(ClientPrefs.language == "Spanish") {
+								if(FlxG.random.bool(10)) Application.current.window.alert("Apestas, LMAO", 'Nota Sobre Tu Habilidad:');
+								//10% of probability
+								  else Application.current.window.alert("Mensaje: if(note.noteType = 'Nota De Errror') { trace('0 vidas restantes, cerrando el juego...'); }", 
+								  'Error en Funkin.avi.exe!:'
+								  );
+								  System.exit(0); 
+								} else {
+									if(FlxG.random.bool(10)) Application.current.window.alert("Fuck You, You Suck LMAO", 'Note About Your Skill:');
+								  //10% of probability
+									else Application.current.window.alert("Message: if(note.noteType = 'Error Note') { trace('0 lives left, closing game...'); }", 
+									'Error On Funkin.avi.exe!:');
 									System.exit(0);
-								}else{
-									healthDrain = 0.01;
-									health -= 0;
 								}
+							}
 								crashLives.text = 'Lives: ${crashLivesCounter}';
 								crashLivesIcon.animation.play('OMFG IT GLITCHES');
 								new FlxTimer().start(0.25, function(tmr:FlxTimer)
@@ -9298,7 +9337,7 @@ Stay Safe";
 				if(curStep == 1328) {
 					triggerEventNote('Alter Camera Zoom', '0.8', '0.7');
 					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
-					triggerEventNote('Scroll Type', 'right', 'left');	
+					triggerEventNote('Scroll Type', 'right', 'left');
 				}
 				
 				if(curBeat == 333) {
@@ -9698,8 +9737,6 @@ Stay Safe";
 				//Insert Events here
 
 			case 'test': //We need a name lmao
-            STRUM_X_MIDDLESCROLL = 1100;
-			remove(laneunderlayOpponent);
 		}
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????
@@ -9959,11 +9996,6 @@ Stay Safe";
 									if(achievementName == 'episode2') unlock = true;
 									GameJolt.GameJoltAPI.getTrophy(169866);
 							}
-						}
-
-						case 'malfunction_dead':
-							if(Paths.formatToSongPath(SONG.song) == 'Malfunction' && !usedPractice && !cpuControlled && deathCounter == 10) {
-								unlock = true;
 						}
 					case 'ur_bad':
 						if(ratingPercent < 0.2 && !practiceMode) {

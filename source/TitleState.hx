@@ -82,6 +82,7 @@ class TitleState extends MusicBeatState
 	var mustUpdate:Bool = false;
 	
 	var titleJSON:TitleData;
+	var nonLoginText:FlxText; //Toast Don't Work, Lets Make One
 	
 	public static var updateVersion:String = '';
 

@@ -89,7 +89,7 @@ class PauseSubState extends MusicBeatSubstate
 		bg.scrollFactor.set();
 		add(bg);
 
-		switch(PlayState.SONG.song)
+		/*switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity. (PAUSED)";
@@ -105,7 +105,9 @@ class PauseSubState extends MusicBeatSubstate
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz (PAUSED)";
 					default:
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " (PAUSED)";
-				}
+				}*/
+
+		Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer + " (PAUSED)";
 
 		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
@@ -115,7 +117,7 @@ class PauseSubState extends MusicBeatSubstate
 		add(levelInfo);
 
 		var composerCredit:FlxText = new FlxText(20, 15 + 32, 0, "", 32);
-		switch(PlayState.SONG.song)
+		/*switch(PlayState.SONG.song)
 		{
 			case 'Isolated' | 'Laugh Track':
 			composer = 'By Yama haki & obscurity.';
@@ -129,15 +131,15 @@ class PauseSubState extends MusicBeatSubstate
 			composer = 'By Sama Yama';
 			case 'Hunted':
 			composer = 'By JBlitz';
-		}
-		composerCredit.text += composer;
+		}*/
+		composerCredit.text = 'By: ' + PlayState.SONG.composer;
 		composerCredit.scrollFactor.set();
 		composerCredit.setFormat(Paths.font('NewWaltDisneyFontRegular-BPen.ttf'), 32);
 		composerCredit.updateHitbox();
 		add(composerCredit);
 
 		var charterCredit:FlxText = new FlxText(20, 15 + 64, 0, "", 32);
-		switch(PlayState.SONG.song)
+		/*switch(PlayState.SONG.song)
 		{
 			case 'Isolated' | 'Laugh Track' | 'Isolated Old' | 'Twisted Grins' | 'Malfunction' | 'Mercy':
 			charter = 'Chart by DEMOLITIONDON96';
@@ -151,8 +153,8 @@ class PauseSubState extends MusicBeatSubstate
 			charter = 'Chart by PhantomNexus';
 			case "Don't Cross!":
 			charter = 'Chart by fakeburritos123 & DEMOLITIONDON96';
-		}
-		charterCredit.text += charter;
+		}*/
+		charterCredit.text = 'Chart by: ' + PlayState.SONG.charter;
 		charterCredit.scrollFactor.set();
 		charterCredit.setFormat(Paths.font('NewWaltDisneyFontRegular-BPen.ttf'), 32);
 		charterCredit.updateHitbox();
@@ -309,7 +311,7 @@ class PauseSubState extends MusicBeatSubstate
 			switch (daSelected)
 			{
 				case "Resume":
-					switch(PlayState.SONG.song)
+					/*switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
@@ -325,7 +327,9 @@ class PauseSubState extends MusicBeatSubstate
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz";
 					default:
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
-				}
+				}*/
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
+					//PlayState.startCountdown();
 					close();
 					PlayState.instance.startCountdown();
 				case 'Change Difficulty':

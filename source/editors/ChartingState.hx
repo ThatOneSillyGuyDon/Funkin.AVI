@@ -228,6 +228,8 @@ class ChartingState extends MusicBeatState
 			//this is when you go to the chart editor in the master editor menu
 			_song = {
 				song: 'Test',
+				charter: 'Unknown',
+				composer: 'Unknown',
 				notes: [],
 				events: [],
 				bpm: 150.0, //BPM
@@ -416,6 +418,8 @@ class ChartingState extends MusicBeatState
 	var playSoundBf:FlxUICheckBox = null;
 	var playSoundDad:FlxUICheckBox = null;
 	var UI_songTitle:FlxUIInputText;
+	var composerInputUI:FlxUIInputText;
+	var charterInputUI:FlxUIInputText;
 	var noteSkinInputText:FlxUIInputText;
 	var noteSplashesInputText:FlxUIInputText;
 	var stageDropDown:FlxUIDropDownMenuCustom;
@@ -606,6 +610,17 @@ class ChartingState extends MusicBeatState
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
 
+		composerInputUI = new FlxUIInputText(stageDropDown.x, stageDropDown.y + 42, 120, _song.composer, 8);
+		blockPressWhileTypingOn.push(composerInputUI);
+
+		charterInputUI = new FlxUIInputText(composerInputUI.x, composerInputUI.y + 40, 120, _song.charter, 8);
+		blockPressWhileTypingOn.push(charterInputUI);
+
+		var creditsUpdateButton:FlxButton = new FlxButton(charterInputUI.x + 170, charterInputUI.y - 2, 'Update Credits', function(){
+			_song.composer = composerInputUI.text;
+			_song.charter = charterInputUI.text;
+		});
+
 		var skin = PlayState.SONG.arrowSkin;
 		if(skin == null) skin = '';
 		noteSkinInputText = new FlxUIInputText(player2DropDown.x, player2DropDown.y + 50, 150, skin, 8);
@@ -635,6 +650,9 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(stepperBPM);
 		tab_group_song.add(stepperSpeed);
 		tab_group_song.add(reloadNotesButton);
+		tab_group_song.add(creditsUpdateButton);
+		tab_group_song.add(composerInputUI);
+		tab_group_song.add(charterInputUI);
 		tab_group_song.add(noteSkinInputText);
 		tab_group_song.add(noteSplashesInputText);
 		tab_group_song.add(new FlxText(stepperBPM.x, stepperBPM.y - 15, 0, 'Song BPM:'));
@@ -643,6 +661,8 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(new FlxText(player3DropDown.x, player3DropDown.y - 15, 0, 'Girlfriend:'));
 		tab_group_song.add(new FlxText(player1DropDown.x, player1DropDown.y - 15, 0, 'Boyfriend:'));
 		tab_group_song.add(new FlxText(stageDropDown.x, stageDropDown.y - 15, 0, 'Stage:'));
+		tab_group_song.add(new FlxText(composerInputUI.x, composerInputUI.y - 15, 0, 'Composer:'));
+		tab_group_song.add(new FlxText(charterInputUI.x, charterInputUI.y - 15, 0, 'Charter:'));
 		tab_group_song.add(new FlxText(noteSkinInputText.x, noteSkinInputText.y - 15, 0, 'Note Texture:'));
 		tab_group_song.add(new FlxText(noteSplashesInputText.x, noteSplashesInputText.y - 15, 0, 'Note Splashes Texture:'));
 		tab_group_song.add(player2DropDown);
@@ -2897,8 +2917,13 @@ class ChartingState extends MusicBeatState
 	private function saveLevel()
 	{
 		_song.events.sort(sortByTime);
+		/*var songShit:Dynamic = {
+			
+		}*/
 		var json = {
-			"song": _song
+			"song": _song,
+			/*"composer": composerInputUI.text,
+			"charter": charterInputUI.text*/
 		};
 
 		var data:String = Json.stringify(json, "\t");
@@ -2921,22 +2946,8 @@ class ChartingState extends MusicBeatState
 	private function saveEvents()
 	{
 		_song.events.sort(sortByTime);
-		var eventsSong:SwagSong = {
-			song: _song.song,
-			notes: [],
-			events: _song.events,
-			bpm: _song.bpm,
-			needsVoices: _song.needsVoices,
-			speed: _song.speed,
-			arrowSkin: _song.arrowSkin,
-			splashSkin: _song.splashSkin,
-
-			player1: _song.player1,
-			player2: _song.player2,
-			player3: null,
-			gfVersion: _song.gfVersion,
-			stage: _song.stage,
-			validScore: false
+		var eventsSong:Dynamic = {
+			events: _song.events
 		};
 		var json = {
 			"song": eventsSong

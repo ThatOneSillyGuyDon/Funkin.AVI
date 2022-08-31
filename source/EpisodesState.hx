@@ -401,6 +401,18 @@ class EpisodesState extends MusicBeatState
 
 				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
 				instPlaying = curSelected;
+				/*switch(PlayState.SONG.song)
+				{
+					case 'Isolated':
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
+					case 'Lunacy':
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: obscurity.";
+					case 'Delusional':
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
+					default:
+					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song;
+				}*/
+				Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
 				#end
 			}
 

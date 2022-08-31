@@ -11316,6 +11316,8 @@
 		"player3": null,
 		"splashSkin": null,
 		"song": "Bless",
+		"composer": "END_SELLA",
+		"charter": "DEMOLITIONDON96",
 		"needsVoices": true,
 		"arrowSkin": "",
 		"validScore": true,

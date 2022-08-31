@@ -322,7 +322,7 @@ class PlayState extends MusicBeatState
 	var zoomBounce:Float = 0;
 	var songBanner:FlxSprite;
 	var songBannerText:FlxText;
-	var songComposer:String;
+	var charterBanner:FlxSprite;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -389,7 +389,7 @@ class PlayState extends MusicBeatState
 		// for lua
 		instance = this;
 
-		switch(PlayState.SONG.song) {
+		/*switch(PlayState.SONG.song) {
 			case 'Isolated':
 				songComposer = 'Yama haki & obscurity.';
 			case 'Lunacy':
@@ -425,7 +425,7 @@ class PlayState extends MusicBeatState
 			case 'Bless':
 				songComposer = 'END_SELLA';
 				if (FlxG.save.data.blessLock != 'beaten') FPClientPrefs.blessLock = 'unlocked';
-		}
+		}*/
 
 		debugKeysChart = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_1'));
 		debugKeysCharacter = ClientPrefs.copyKey(ClientPrefs.keyBinds.get('debug_2'));
@@ -1630,7 +1630,7 @@ class PlayState extends MusicBeatState
 		FlxG.fixedTimestep = false;
 		moveCameraSection(0);
 
-		switch(PlayState.SONG.song)
+		/*switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
@@ -1646,7 +1646,9 @@ class PlayState extends MusicBeatState
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz";
 					default:
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
-				}
+				}*/
+
+			Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
 
 				switch (curStage)
 				{
@@ -1916,7 +1918,7 @@ class PlayState extends MusicBeatState
 		songBanner.screenCenter(XY);
 		add(songBanner);
 
-		songBannerText = new FlxText(0, 0, 600, PlayState.SONG.song + '\n' + songComposer);
+		songBannerText = new FlxText(0, 0, 600, PlayState.SONG.song + '\n' + "By: " + PlayState.SONG.composer);
 		songBannerText.setFormat(Paths.font("vcr.ttf"), 36, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songBannerText.scrollFactor.set();
 		songBannerText.borderSize = 1.25;

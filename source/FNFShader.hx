@@ -5,6 +5,7 @@ import flixel.system.FlxAssets.FlxShader;
 import openfl.display.BitmapData;
 import openfl.display.Shader;
 import openfl.display.ShaderInput;
+import openfl.filters.ShaderFilter;
 import openfl.utils.Assets;
 import flixel.FlxG;
 import openfl.Lib;
@@ -119,21 +120,6 @@ class CrtShader extends FlxShader {
     public function new() {
         super();
     }
-}
-
-class BrightEffect extends Effectt //ily indie cross
-{
-	public static var brightShader:ShaderFilter = new ShaderFilter(new Bright());
-
-	public static function setBrightness(brightness:Float):Void
-	{
-		brightShader.shader.data.brightness.value = [brightness];
-	}
-	
-	public static function setContrast(contrast:Float):Void
-	{
-		brightShader.shader.data.contrast.value = [contrast];
-	}
 }
 
 class BrightShader extends FlxShader

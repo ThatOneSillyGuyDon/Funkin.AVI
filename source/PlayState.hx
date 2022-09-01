@@ -931,7 +931,6 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
-					addShaderToCamera('game', new BrightEffect());
 				}
 
 				/*

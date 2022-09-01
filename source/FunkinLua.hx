@@ -1863,9 +1863,9 @@ class FunkinLua {
 			
 			PlayState.instance.addShaderToCamera(camera, new VhsEffect(noise, intensityVHS));
 		});
-		Lua_helper.add_callback(lua, "addEffect15", function(camera:String) {
+		Lua_helper.add_callback(lua, "addEffect15", function(camera:String, brightness:Float, contrast:Float) {
 			
-			PlayState.instance.addShaderToCamera(camera, new CrtEffect());
+			PlayState.instance.addShaderToCamera(camera, new BrightEffect(brightness, contrast));
 		});
 		Lua_helper.add_callback(lua, "die", function(camera:String) {
 			PlayState.instance.clearShaderFromCamera(camera);

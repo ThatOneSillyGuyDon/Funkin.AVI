@@ -121,6 +121,43 @@ class CrtShader extends FlxShader {
     }
 }
 
+class BrightEffect extends Effectt //ily indie cross
+{
+	public static var brightShader:ShaderFilter = new ShaderFilter(new Bright());
+
+	public static function setBrightness(brightness:Float):Void
+	{
+		brightShader.shader.data.brightness.value = [brightness];
+	}
+	
+	public static function setContrast(contrast:Float):Void
+	{
+		brightShader.shader.data.contrast.value = [contrast];
+	}
+}
+
+class BrightShader extends FlxShader
+{
+	@:glFragmentSource('
+		#pragma header
+
+		uniform float brightness;
+		uniform float contrast;
+
+		void main()
+		{
+			vec4 col = texture2D(bitmap, openfl_TextureCoordv);
+			col.rgb = col.rgb * contrast;
+			col.rgb = col.rgb + brightness;
+
+			gl_FragColor = col;
+		}')
+	public function new()
+	{
+		super();
+	}
+}
+
 class Effectt {
 	public function setValue(shader:FlxShader, variable:String, value:Float){
 		Reflect.setProperty(Reflect.getProperty(shader, 'variable'), 'value', [value]);

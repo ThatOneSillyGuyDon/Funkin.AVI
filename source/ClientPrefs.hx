@@ -12,6 +12,9 @@ class ClientPrefs
     public static var language:String = "English";
 	public static var cutscenes:Bool = false;
 	public static var FPStext:Bool = false;
+	public static var colorblind:String = "No color filter";
+	public static var gamma:Float = 1;
+	public static var brightness:Float = 0;
 	//public static var lives:String = 'normal';
 	public static var randomModchart:Bool = false;
 	public static var mechanics:Bool = true;
@@ -131,6 +134,9 @@ class ClientPrefs
 		FlxG.save.data.screenShake = screenShake;
 		FlxG.save.data.language = language;
 		FlxG.save.data.cutscens = cutscenes;
+		FlxG.save.data.brightness = brightness;
+		FlxG.save.data.colorblind = colorblind;
+		FlxG.save.data.gamma = gamma;
 		FlxG.save.data.FPStext = FPStext;
 		FlxG.save.data.randomModchart = randomModchart;
 		FlxG.save.data.events = events;
@@ -200,7 +206,16 @@ class ClientPrefs
 		FlxG.log.add("Settings saved!");
 	}
 
-	public static function loadPrefs() {
+	public static function loadPrefs() {	
+		if(FlxG.save.data.brightness != null) {
+			brightness = FlxG.save.data.brightness;
+		}
+		if(FlxG.save.data.colorblind != null) {
+			colorblind = FlxG.save.data.colorblind;
+		}
+		if(FlxG.save.data.gamma != null) {
+			gamma = FlxG.save.data.gamma;
+		}
 		if(FlxG.save.data.screenShake != null) {
 			screenShake = FlxG.save.data.screenShake;
 		}

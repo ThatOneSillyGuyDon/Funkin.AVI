@@ -2878,6 +2878,7 @@ class PlayState extends MusicBeatState
 		}
 
 		inCutscene = false;
+		camHUD.angle -= 180;
 		var ret:Dynamic = callOnLuas('onStartCountdown', []);
 		if(ret != FunkinLua.Function_Stop) {
 			if (skipCountdown || startOnTime > 0) skipArrowStartTween = true;
@@ -3476,20 +3477,6 @@ class PlayState extends MusicBeatState
 
 	function startSong():Void
 	{
-		switch(SONG.song)
-		{
-			case "Malfunction":
-				windowW = 1024;
-				windowH = 768;
-			
-			default:
-			//Window Code by lemz1
-			windowX = window.x;
-			windowY = window.y;
-	    		windowW = window.width;
-	    		windowH = window.height;
-		}
-
 		startingSong = false;
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
@@ -3512,6 +3499,7 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
+		FlxTween.tween(camHUD, {angle: 180}, 1, {ease: FlxEase.circOut});
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
@@ -3843,9 +3831,9 @@ class PlayState extends MusicBeatState
 			babyArrow.downScroll = ClientPrefs.downScroll;
 			if (!isStoryMode && !skipArrowStartTween)
 			{
-				//babyArrow.y -= 10;
+				babyArrow.y -= 100;
 				babyArrow.alpha = 0;
-				FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+				FlxTween.tween(babyArrow, {y: babyArrow.y + 100, alpha: targetAlpha}, 1, {ease: FlxEase.elasticOut, startDelay: 0.5 + (0.2 * i)});
 			}
 			else
 			{

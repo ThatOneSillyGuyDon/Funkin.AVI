@@ -71,6 +71,7 @@ import StageData;
 import FunkinLua;
 
 import Shaders;
+import FNFShader;
 import data.Etterna;
 import data.Ratings;
 #if sys
@@ -930,7 +931,14 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
+					addShaderToCamera('game', new BrightEffect());
 				}
+
+				/*
+				if(ClientPrefs.funiShaders){
+					addShaderToCamera('game', new BrightEffect());
+				}
+				*/
 
 			case 'Office':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-smile';
@@ -965,6 +973,9 @@ class PlayState extends MusicBeatState
 
 				var square:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/PixelMouse', -984, -975);
 				add(square);
+
+				var 43:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/this fucking 43 shit', 0, 0);
+				add(43);
 
 			case 'Forest':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-goof';
@@ -3453,13 +3464,21 @@ class PlayState extends MusicBeatState
 
 	function startSong():Void
 	{
-		//Window Code by lemz1
-		windowX = window.x;
- 		windowY = window.y;
-		windowW = window.width;
-		windowH = window.height;
-		startingSong = false;
+		switch(SONG.song)
+		{
+			case "Malfunction":
+				windowW = 1024;
+				windowH = 768;
+			
+			default:
+			//Window Code by lemz1
+			windowX = window.x;
+			windowY = window.y;
+	    		windowW = window.width;
+	    		windowH = window.height;
+		}
 
+		startingSong = false;
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
 
@@ -4226,7 +4245,7 @@ class PlayState extends MusicBeatState
 				scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' - Score: ' + songScore + ' - Misses: ' + songMisses + ' - Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
 		}
 
-		if(SONG.song == "Fight or flight") { //we don't know the song name
+		if(SONG.song == "Fight or Flight") { //we don't know the song name, starved
 			scoreTxt.text = 'Sacrifices: ' + deathCounter + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
 		}
 	        }

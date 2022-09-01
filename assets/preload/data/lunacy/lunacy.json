@@ -5164,6 +5164,8 @@
 		"player3": null,
 		"splashSkin": null,
 		"song": "Lunacy",
+		"composer": "obscurity",
+		"charter": "obscurity",
 		"stage": "EndlessLoop",
 		"validScore": true,
 		"arrowSkin": "",

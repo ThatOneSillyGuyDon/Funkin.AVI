@@ -37,6 +37,7 @@ import Type.ValueType;
 import Controls;
 import DialogueBoxPsych;
 import Shaders;
+import FNFShader;
 
 #if desktop
 import Discord;
@@ -1861,6 +1862,10 @@ class FunkinLua {
 		Lua_helper.add_callback(lua, "addEffect14", function(camera:String, noise:Float = 0.00, intensityVHS:Float=0.10) {
 			
 			PlayState.instance.addShaderToCamera(camera, new VhsEffect(noise, intensityVHS));
+		});
+		Lua_helper.add_callback(lua, "addEffect15", function(camera:String, brightness:Float, contrast:Float) {
+			
+			PlayState.instance.addShaderToCamera(camera, new BrightEffect(brightness, contrast));
 		});
 		Lua_helper.add_callback(lua, "die", function(camera:String) {
 			PlayState.instance.clearShaderFromCamera(camera);

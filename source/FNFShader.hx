@@ -8,6 +8,10 @@ import openfl.display.ShaderInput;
 import openfl.utils.Assets;
 import flixel.FlxG;
 import openfl.Lib;
+import openfl.filters.ColorMatrixFilter;
+import openfl.filters.BitmapFilter;
+import flixel.graphics.tile.FlxGraphicsShader;
+import openfl.filters.ShaderFilter;
 using StringTools;
 typedef ShaderEffectt = {
   var shader:Dynamic;
@@ -119,43 +123,6 @@ class CrtShader extends FlxShader {
     public function new() {
         super();
     }
-}
-
-class BrightEffect extends Effectt //ily indie cross
-{
-	public static var brightShader:ShaderFilter = new ShaderFilter(new Bright());
-
-	public static function setBrightness(brightness:Float):Void
-	{
-		brightShader.shader.data.brightness.value = [brightness];
-	}
-	
-	public static function setContrast(contrast:Float):Void
-	{
-		brightShader.shader.data.contrast.value = [contrast];
-	}
-}
-
-class BrightShader extends FlxShader
-{
-	@:glFragmentSource('
-		#pragma header
-
-		uniform float brightness;
-		uniform float contrast;
-
-		void main()
-		{
-			vec4 col = texture2D(bitmap, openfl_TextureCoordv);
-			col.rgb = col.rgb * contrast;
-			col.rgb = col.rgb + brightness;
-
-			gl_FragColor = col;
-		}')
-	public function new()
-	{
-		super();
-	}
 }
 
 class Effectt {

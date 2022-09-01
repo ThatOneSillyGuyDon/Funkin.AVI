@@ -79,6 +79,15 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'Bedrock',
 			['Bedrock', 'Psych', 'Forever', 'Andromeda', "Etterna", 'Mania', "None"]);
 		addOption(option);
+
+		//bedrock can kiss my ass XD
+		var option:Option = new Option('Colorblind Filther:',
+			"Select Colorblind Filther From Your Prefrence", 
+			'colorblind', 
+			'string', 
+			'No color filter',
+			['No color filter', 'Protanopia filter', 'Protanomaly filter', 'Deuteranopia filter', "Etterna", 'Mania', "None"]);
+		addOption(option);
 		/*
 		var option:Option = new Option('Live Difficulty:',
 			"What Is The Difficulty Lives Should There Be In Malfunction?", 

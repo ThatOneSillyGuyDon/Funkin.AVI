@@ -71,6 +71,7 @@ import StageData;
 import FunkinLua;
 
 import Shaders;
+import FNFShader;
 import data.Etterna;
 import data.Ratings;
 #if sys
@@ -931,6 +932,12 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
 				}
+
+				/*
+				if(ClientPrefs.funiShaders){
+					addShaderToCamera('game', new CrtEffect());
+				}
+				*/
 
 			case 'Office':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-smile';

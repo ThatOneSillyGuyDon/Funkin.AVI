@@ -948,7 +948,6 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
-					addShaderToCamera('game', new BrightHandler(5, -2));
 				}
 
 				/*
@@ -991,8 +990,8 @@ class PlayState extends MusicBeatState
 				var square:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/PixelMouse', -984, -975);
 				add(square);
 
-				var qw:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/this fucking 43 shit', 0, 0);
-				add(qw);
+				var size:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/this fucking 43 shit', 0, 0);
+				add(size);
 
 			case 'Forest':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-goof';
@@ -1440,10 +1439,6 @@ class PlayState extends MusicBeatState
 			dialogueJson = DialogueBoxPsych.parseDialogue(file);
 		}
 
-		var file:String = Paths.txt(songName + '/' + songName + 'Dialogue'); //Checks for vanilla/Senpai dialogue
-		if (OpenFlAssets.exists(file)) {
-			dialogue = CoolUtil.coolTextFile(file);
-		}
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;
@@ -5216,13 +5211,22 @@ class PlayState extends MusicBeatState
 					case 9:
 						FlxG.camera.flash(FlxColor.LIME, 3);
 				}
+			}
 
+			if(ClientPrefs.flashing) {
 				switch(value2) {
 					case 'false' | 'False':
 						camHUD.visible = true;
 					case 'true' | 'True':
 						camHUD.visible = false;
-				}
+					}
+				} else {
+					switch(value2) {
+						case 'false' | 'False':
+							FlxTween.tween(camHUD, {alpha: 1}, 1);
+						case 'true' | 'True':
+							FlxTween.tween(camHUD, {alpha: 0}, 1);
+					}
 			}
 			case 'Fade Character':
 				var charType:Int = Std.parseInt(value1);
@@ -8163,6 +8167,9 @@ Stay Safe";
 				{
 					if(curStage == 'Studio')
 					{
+						if(!ClientPrefs.flashing) {
+							FlxTween.tween(camHUD, {alpha: 1}, 1);
+						}
 						depression.alpha = 1;
 					}
 				}

@@ -32,6 +32,7 @@ import flixel.input.keyboard.FlxKey;
 import GameJolt;
 import GameJolt.GameJoltAPI;
 import tentools.api.FlxGameJolt as GJApi;
+import Main;
 
 using StringTools;
 
@@ -434,8 +435,17 @@ class MainMenuState extends MusicBeatState
 		scratchStuff.cameras = [camFilter];
 		grain.cameras = [camFilter];
 
+		if(GameJoltAPI.userLogin == true) {
+			var LOGTEXT:FlxText = new FlxText(908, FlxG.height - -20, 0, "Loged To GameJolt!", 35);
+			LOGTEXT.scrollFactor.set();
+			LOGTEXT.setFormat(Paths.font("vcr.ttf"), 35, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			FlxTween.tween(LOGTEXT, {y: 10}, 2);
+			LOGTEXT.borderSize = 0.6;
+			add(LOGTEXT);
+		}
+
 		super.create();
-	}
+}
 
 	#if ACHIEVEMENTS_ALLOWED
 	// Unlocks "Freaky on a Friday Night" achievement

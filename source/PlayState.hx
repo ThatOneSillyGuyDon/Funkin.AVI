@@ -974,8 +974,8 @@ class PlayState extends MusicBeatState
 				var square:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/PixelMouse', -984, -975);
 				add(square);
 
-				var 43:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/this fucking 43 shit', 0, 0);
-				add(43);
+				var size:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/this fucking 43 shit', 0, 0);
+				add(size);
 
 			case 'Forest':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-goof';
@@ -1423,10 +1423,6 @@ class PlayState extends MusicBeatState
 			dialogueJson = DialogueBoxPsych.parseDialogue(file);
 		}
 
-		var file:String = Paths.txt(songName + '/' + songName + 'Dialogue'); //Checks for vanilla/Senpai dialogue
-		if (OpenFlAssets.exists(file)) {
-			dialogue = CoolUtil.coolTextFile(file);
-		}
 		var doof:DialogueBox = new DialogueBox(false, dialogue);
 		// doof.x += 70;
 		// doof.y = FlxG.height * 0.5;

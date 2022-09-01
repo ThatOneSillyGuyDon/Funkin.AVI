@@ -5180,13 +5180,22 @@ class PlayState extends MusicBeatState
 					case 9:
 						FlxG.camera.flash(FlxColor.LIME, 3);
 				}
+			}
 
+			if(ClientPrefs.flashing) {
 				switch(value2) {
 					case 'false' | 'False':
 						camHUD.visible = true;
 					case 'true' | 'True':
 						camHUD.visible = false;
-				}
+					}
+				} else {
+					switch(value2) {
+						case 'false' | 'False':
+							FlxTween.tween(camHUD, {alpha: 1}, 1);
+						case 'true' | 'True':
+							FlxTween.tween(camHUD, {alpha: 0}, 1);
+					}
 			}
 			case 'Fade Character':
 				var charType:Int = Std.parseInt(value1);
@@ -8127,6 +8136,9 @@ Stay Safe";
 				{
 					if(curStage == 'Studio')
 					{
+						if(!ClientPrefs.flashing) {
+							FlxTween.tween(camHUD, {alpha: 1}, 1);
+						}
 						depression.alpha = 1;
 					}
 				}

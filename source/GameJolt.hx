@@ -134,7 +134,10 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
         FlxG.save.flush();
         trace(FlxG.save.data.gjUser + FlxG.save.data.gjToken);
         trace("Logged out!");
-        TitleState.restartGame();
+        if(ClientPrefs.restart)
+            TitleState.restartGame();
+            else 
+            System.exit(0); 
     }
 
     /**

@@ -7228,13 +7228,19 @@ Stay Safe";
 								  else Application.current.window.alert("Mensaje: if(note.noteType = 'Nota De Errror') { trace('0 vidas restantes, cerrando el juego...'); }", 
 								  'Error en Funkin.avi.exe!:'
 								  );
-								  System.exit(0); 
+								  if(ClientPrefs.restart)
+									TitleState.restartGame();
+									else 
+									System.exit(0); 
 								} else {
 									if(FlxG.random.bool(10)) Application.current.window.alert("Fuck You, You Suck LMAO", 'Note About Your Skill:');
 								  //10% of probability
 									else Application.current.window.alert("Message: if(note.noteType = 'Error Note') { trace('0 lives left, closing game...'); }", 
 									'Error On Funkin.avi.exe!:');
-									System.exit(0);
+									if(ClientPrefs.restart)
+										TitleState.restartGame();
+										else 
+										System.exit(0);
 								}
 							}
 								crashLives.text = 'Lives: ${crashLivesCounter}';
@@ -10028,7 +10034,7 @@ Stay Safe";
 						}
 				}
 
-				if(unlock != false) {
+				if(unlock) {
 					Achievements.unlockAchievement(achievementName);
 					return achievementName;
 				}

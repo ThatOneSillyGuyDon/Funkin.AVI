@@ -56,6 +56,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false); //Default value
 		addOption(option);
 
+		var option:Option = new Option('Auto-Restart', 
+		'if checked, the game restart automaticly Loggin out or Losing In Malfunction.',
+		'restart',
+		'bool',
+		false);
+		addOption(option);
+
 		var option:Option = new Option('Middlescroll',
 			'If checked, your notes get centered.',
 			'middleScroll',

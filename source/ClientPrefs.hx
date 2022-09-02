@@ -61,6 +61,7 @@ class ClientPrefs
 	public static var showWatermarks:Bool = true;
 	public static var winningIcon:Bool = true;
 	public static var hitsoundVolume:Float = 0;
+	public static var restart:Bool = false;
 	public static var pauseMusic:String = 'Tea Time';
 	public static var gameplaySettings:Map<String, Dynamic> = [
 		'scrollspeed' => 1.0,
@@ -131,6 +132,7 @@ class ClientPrefs
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.restart = restart;
 		FlxG.save.data.screenShake = screenShake;
 		FlxG.save.data.language = language;
 		FlxG.save.data.cutscens = cutscenes;
@@ -207,6 +209,9 @@ class ClientPrefs
 	}
 
 	public static function loadPrefs() {	
+		if(FlxG.save.data.restar != null) {
+			restart = FlxG.save.data.rstart;
+		}
 		if(FlxG.save.data.brightness != null) {
 			brightness = FlxG.save.data.brightness;
 		}

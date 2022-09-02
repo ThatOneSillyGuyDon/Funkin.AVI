@@ -9,6 +9,10 @@ import openfl.filters.ShaderFilter;
 import openfl.utils.Assets;
 import flixel.FlxG;
 import openfl.Lib;
+import openfl.filters.ColorMatrixFilter;
+import openfl.filters.BitmapFilter;
+import flixel.graphics.tile.FlxGraphicsShader;
+import openfl.filters.ShaderFilter;
 using StringTools;
 typedef ShaderEffectt = {
   var shader:Dynamic;

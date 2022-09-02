@@ -72,6 +72,7 @@ import FunkinLua;
 
 import Shaders;
 import FNFShader;
+import IndieCrossShaderShit.FXHandler;
 import data.Etterna;
 import data.Ratings;
 #if sys
@@ -109,6 +110,9 @@ class PlayState extends MusicBeatState
 	public var camGameShaders:Array<ShaderEffect> = [];
 	public var camHUDShaders:Array<ShaderEffect> = [];
 	public var camOtherShaders:Array<ShaderEffect> = [];
+
+	var canaddshaders:Bool = ClientPrefs.funiShaders;
+	var filters:Array<BitmapFilter> = [];
 	
 	//modchart
 	public var modchartTweens:Map<String, FlxTween> = new Map<String, FlxTween>();
@@ -389,6 +393,12 @@ class PlayState extends MusicBeatState
 
 		// for lua
 		instance = this;
+
+		FlxG.game.setFilters(filters);
+
+		FlxG.game.filtersEnabled = true;
+
+		FXHandler.UpdateColors(filters);
 
 		/*switch(PlayState.SONG.song) {
 			case 'Isolated':
@@ -860,7 +870,7 @@ class PlayState extends MusicBeatState
 				var street:BGSprite = new BGSprite('funkinAVI/episode1/street/Mickeybg', -382, -409);
 				add(street);
 
-				if(ClientPrefs.funiShaders)
+				if(canaddshaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
 					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
@@ -879,7 +889,7 @@ class PlayState extends MusicBeatState
 					var street:BGSprite = new BGSprite('funkinAVI/episode1/street/Mickeybg', -382, -409);
 					add(street);
 
-					if(ClientPrefs.funiShaders)
+					if(canaddshaders)
 						{
 							//cool shaders, for real
 							addShaderToCamera('camGame', new VCRDistortionEffect(0.1, true, true, true));
@@ -920,7 +930,7 @@ class PlayState extends MusicBeatState
 				depression.scale.set(1.6, 1.6);
 				depression.alpha = 0;
 
-				if(ClientPrefs.funiShaders)
+				if(canaddshaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
 					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
@@ -934,7 +944,7 @@ class PlayState extends MusicBeatState
 				}
 
 				/*
-				if(ClientPrefs.funiShaders){
+				if(canaddshaders){
 					addShaderToCamera('game', new BrightEffect());
 				}
 				*/
@@ -952,7 +962,7 @@ class PlayState extends MusicBeatState
 				light.blend = ADD;
 				light.alpha = 0.55;
 
-				if(ClientPrefs.funiShaders)
+				if(canaddshaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
 					addShaderToCamera('hud', new VCRDistortionEffect(0.05, true, true, true));
@@ -987,7 +997,7 @@ class PlayState extends MusicBeatState
 				var forest:BGSprite = new BGSprite('funkinAVI/goofy/forest', 0, 0);
 				add(forest);
 
-				if(ClientPrefs.funiShaders)
+				if(canaddshaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
 					addShaderToCamera('hud', new VCRDistortionEffect(0.05, true, true, true));
@@ -1020,7 +1030,7 @@ class PlayState extends MusicBeatState
 				treesFront = new BGSprite('funkinAVI/goofyNEW/treesFront', -550, -850, 1.2, 1.2);
 				treesFront.scale.set(1.5, 1.5);
 
-				if(ClientPrefs.funiShaders)
+				if(canaddshaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
 					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
@@ -1041,7 +1051,7 @@ class PlayState extends MusicBeatState
 				var waltStage:BGSprite = new BGSprite('funkinAVI/walt/walt-bg', -339, -106);
 				add(waltStage);
 
-				if(ClientPrefs.funiShaders)
+				if(canaddshaders)
 				{
 					addShaderToCamera('game', new VhsEffect(0.5, 0));
 					addShaderToCamera('game', new VCRDistortionEffect(0, true, true, true));
@@ -1078,7 +1088,7 @@ class PlayState extends MusicBeatState
 				relapseChaos.alpha = 0;
 				add(relapseChaos);
 
-				if(ClientPrefs.funiShaders)
+				if(canaddshaders)
 				{
 					addShaderToCamera('game', new VhsEffect(0.4, 0.3));
 					addShaderToCamera('game', new VCRDistortionEffect(0, true, true, true));
@@ -2262,7 +2272,7 @@ class PlayState extends MusicBeatState
 	}
 		public function addShaderToCamera(cam:String, effect:ShaderEffect)
 	{ // STOLE FROM ANDROMEDA
-		if(ClientPrefs.funiShaders) {
+		if(canaddshaders) {
 		switch (cam.toLowerCase())
 		{
 			case 'camhud' | 'hud':
@@ -2309,7 +2319,7 @@ class PlayState extends MusicBeatState
 	
 		public function removeShaderFromCamera(cam:String, effect:ShaderEffect)
 	{
-		if(ClientPrefs.funiShaders) {
+		if(canaddshaders) {
 		switch (cam.toLowerCase())
 		{
 			case 'camhud' | 'hud':
@@ -2342,7 +2352,7 @@ class PlayState extends MusicBeatState
 	
 		public function clearShaderFromCamera(cam:String)
 	{
-		if(ClientPrefs.funiShaders) {
+		if(canaddshaders) {
 		switch (cam.toLowerCase())
 		{
 			case 'camhud' | 'hud':
@@ -2863,6 +2873,7 @@ class PlayState extends MusicBeatState
 		}
 
 		inCutscene = false;
+		camHUD.angle -= 180;
 		var ret:Dynamic = callOnLuas('onStartCountdown', []);
 		if(ret != FunkinLua.Function_Stop) {
 			if (skipCountdown || startOnTime > 0) skipArrowStartTween = true;
@@ -3461,20 +3472,6 @@ class PlayState extends MusicBeatState
 
 	function startSong():Void
 	{
-		switch(SONG.song)
-		{
-			case "Malfunction":
-				windowW = 1024;
-				windowH = 768;
-			
-			default:
-			//Window Code by lemz1
-			windowX = window.x;
-			windowY = window.y;
-	    		windowW = window.width;
-	    		windowH = window.height;
-		}
-
 		startingSong = false;
 		previousFrameTime = FlxG.game.ticks;
 		lastReportedPlayheadPosition = 0;
@@ -3497,6 +3494,7 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
+		FlxTween.tween(camHUD, {angle: 180}, 1, {ease: FlxEase.circOut});
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
@@ -3828,9 +3826,9 @@ class PlayState extends MusicBeatState
 			babyArrow.downScroll = ClientPrefs.downScroll;
 			if (!isStoryMode && !skipArrowStartTween)
 			{
-				//babyArrow.y -= 10;
+				babyArrow.y -= 100;
 				babyArrow.alpha = 0;
-				FlxTween.tween(babyArrow, {/*y: babyArrow.y + 10,*/ alpha: targetAlpha}, 1, {ease: FlxEase.circOut, startDelay: 0.5 + (0.2 * i)});
+				FlxTween.tween(babyArrow, {y: babyArrow.y + 100, alpha: targetAlpha}, 1, {ease: FlxEase.elasticOut, startDelay: 0.5 + (0.2 * i)});
 			}
 			else
 			{
@@ -6910,7 +6908,7 @@ Stay Safe";
 									if(curStage == 'PixelWorld')
 									{
 										triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
-											if(ClientPrefs.funiShaders)
+											if(canaddshaders)
 											{
 												addShaderToCamera('hud', new TiltshiftEffect(2, 0));
 												addShaderToCamera('game', new TiltshiftEffect(5, 0));
@@ -6973,7 +6971,7 @@ Stay Safe";
 									if(curStage == 'PixelWorld')
 									{
 										triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
-											if(ClientPrefs.funiShaders)
+											if(canaddshaders)
 											{
 												addShaderToCamera('hud', new TiltshiftEffect(2, 0));
 												addShaderToCamera('game', new TiltshiftEffect(5, 0));
@@ -7036,7 +7034,7 @@ Stay Safe";
 									if(curStage == 'PixelWorld')
 									{
 										triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
-											if(ClientPrefs.funiShaders)
+											if(canaddshaders)
 											{
 												addShaderToCamera('hud', new TiltshiftEffect(2, 0));
 												addShaderToCamera('game', new TiltshiftEffect(5, 0));
@@ -7099,7 +7097,7 @@ Stay Safe";
 									if(curStage == 'PixelWorld')
 									{
 										triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
-											if(ClientPrefs.funiShaders)
+											if(canaddshaders)
 											{
 												addShaderToCamera('hud', new TiltshiftEffect(2, 0));
 												addShaderToCamera('game', new TiltshiftEffect(5, 0));

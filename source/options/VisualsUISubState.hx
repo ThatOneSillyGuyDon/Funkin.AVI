@@ -25,6 +25,7 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
+import IndieCrossShaderShit.FXHandler;
 
 using StringTools;
 
@@ -78,6 +79,39 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
+
+		var option:Option = new Option('Color Blind Filther:',
+			"What should the Color Blind Filther display?",
+			'colorblind',
+			'string',
+			'No color filter',
+			['No color filter', 'Protanopia filter', 'Protanomaly filter', 'Deuteranopia filter', 'Deuteranomaly filter', 'Tritanopia filter', 'Tritanomaly filter', 'Achromatopsia filter', 'Achromatomaly filter']);
+		addOption(option);
+		option.onChange = onChangeCBFilther;
+
+		/*var option:Option = new Option('Gamma',
+			'How much Gamma should the game be.',
+			'gamma',
+			'percent',
+			1);
+			option.scrollSpeed = 1.6;
+			option.minValue = 0.0;
+			option.maxValue = 5;
+			option.changeValue = 0.1;
+			option.decimals = 1;
+		addOption(option); kinda buggy :(
+
+		var option:Option = new Option('Brightness',
+			'How much Brightness should the game be.',
+			'brightness',
+			'percent',
+			0);
+			option.scrollSpeed = 1.6;
+			option.minValue = -200;
+			option.maxValue = 200;
+			option.changeValue = 10;
+			option.decimals = 1;
+		addOption(option);*/
 		
 		var option:Option = new Option('Icon Bounce:',
 			'How should your icons bounce?',
@@ -201,6 +235,17 @@ class VisualsUISubState extends BaseOptionsMenu
 			FlxG.sound.playMusic(Paths.music(Paths.formatToSongPath(ClientPrefs.pauseMusic)));
 
 		changedMusic = true;
+	}
+
+	var changedCB:Bool = false;
+	function onChangeCBFilther()
+	{
+		if(ClientPrefs.colorblind == 'No color filter')
+			FlxG.sound.music.volume = 0;
+		else
+			FXHandler.UpdateColors();
+	
+		changedCB = true;
 	}
 
 	override function destroy()

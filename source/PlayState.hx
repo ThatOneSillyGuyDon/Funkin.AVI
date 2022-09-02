@@ -973,8 +973,10 @@ class PlayState extends MusicBeatState
 				var square:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/PixelMouse', -984, -975);
 				add(square);
 
-				var size:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/this fucking 43 shit', 0, 0);
-				add(size);
+		var Text:FlxText = new FlxText(857, FlxG.height - 34, 0, "Presiona 8 Para Ir Al menu De Trofeos", 25);
+		Text.scrollFactor.set();
+		Text.setFormat(Paths.font("vcr.ttf"), 25, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(Text);
 
 			case 'Forest':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-goof';
@@ -8409,7 +8411,7 @@ Stay Safe";
 					if(curStage == 'RelapseStage')
 					{
 						if(!ClientPrefs.lowQuality) {
-							timeBar.createFilledBar(0xFF222222, 0xFF9E2222);
+							timeBar.createFilledBar(0xFF4D4D4D, 0xFF9E2222);
 						}
 						relapseCalm.alpha = 0;
 						relapseChaos.alpha = 1;

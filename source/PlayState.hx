@@ -111,7 +111,7 @@ class PlayState extends MusicBeatState
 	public var camHUDShaders:Array<ShaderEffect> = [];
 	public var camOtherShaders:Array<ShaderEffect> = [];
 
-	var canaddshaders:Bool = false;
+	var canaddshaders:Bool = ClientPrefs.funiShaders;
 	var filters:Array<BitmapFilter> = [];
 	
 	//modchart
@@ -393,13 +393,6 @@ class PlayState extends MusicBeatState
 
 		// for lua
 		instance = this;
-
-		//if (!FlxG.save.data.photosensitive && FlxG.save.data.highquality)
-		if (ClientPrefs.funiShaders)
-		{
-			canaddshaders = true;
-			trace('added the fucking shaders AAAAAAAAAAAAAAAA');
-		}
 
 		FlxG.game.setFilters(filters);
 

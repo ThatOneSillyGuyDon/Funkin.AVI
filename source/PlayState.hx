@@ -5905,24 +5905,6 @@ class PlayState extends MusicBeatState
 				#end
 			}
 
-			#if sys
-			if(SONG.song.toLowerCase()=='malfunction'){
-				var path = '${Paths.getPropertyFromDesktop}\\malfunctionThing.txt';
-				var content:String = "Congratulations, You Beated The Unknown Black Square.
-But We Don't Know If He Will Return...
-Stay Safe";
-				try{
-					File.saveContent(path, content);
-				}catch(e:Dynamic){
-					path = 'malfunctionThing.txt';
-					File.saveContent(path, content);
-					trace(e);
-				}
-				CoolUtil.openDumbFile(path);
-				FlxG.save.flush();
-			}
-			#end
-
 			if (chartingMode)
 			{
 				openChartEditor();
@@ -9889,10 +9871,18 @@ Stay Safe";
 		setOnLuas('ratingFC', ratingFC);
 		if (!ClientPrefs.hideJudgement) {
 			if (ClientPrefs.marvelouses)
-			judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
-		        else
+				if(ClientPrefs.language == "Spanish") {
+			judgementCounter.text = 'Marav: ${marvelouses}\nExelentes: ${sicks}\nBuenos: ${goods}\nMalos: ${bads}\nTerribles: ${shits}\n';
+			} else {
+				judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
+			}
+		    else
+			if(ClientPrefs.language == "Spanish") {
+			judgementCounter.text = 'Exelentes: ${sicks}\nBuenos: ${goods}\nMalos: ${bads}\nTerribles: ${shits}\n';
+	       } else {
 			judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
 		}
+	}
 	}
 
 	#if ACHIEVEMENTS_ALLOWED

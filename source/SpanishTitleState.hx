@@ -88,8 +88,6 @@ class SpanishTitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		GameJoltAPI.connect();
-        GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
 		
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();

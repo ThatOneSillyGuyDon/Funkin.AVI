@@ -2868,7 +2868,6 @@ class PlayState extends MusicBeatState
 		}
 
 		inCutscene = false;
-		camHUD.angle -= 180;
 		var ret:Dynamic = callOnLuas('onStartCountdown', []);
 		if(ret != FunkinLua.Function_Stop) {
 			if (skipCountdown || startOnTime > 0) skipArrowStartTween = true;
@@ -3489,7 +3488,6 @@ class PlayState extends MusicBeatState
 
 		// Song duration in a float, useful for the time left feature
 		songLength = FlxG.sound.music.length;
-		FlxTween.tween(camHUD, {angle: 180}, 1, {ease: FlxEase.circOut});
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
@@ -10030,7 +10028,7 @@ Stay Safe";
 						}
 				}
 
-				if(unlock) {
+				if(unlock != false) {
 					Achievements.unlockAchievement(achievementName);
 					return achievementName;
 				}
@@ -10044,4 +10042,4 @@ Stay Safe";
 	var curLightEvent:Int = -1;
 }
 
-//LINE 10.000 LETS FUCKING GOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO
+

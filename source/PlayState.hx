@@ -983,11 +983,6 @@ class PlayState extends MusicBeatState
 				var square:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/PixelMouse', -984, -975);
 				add(square);
 
-		var Text:FlxText = new FlxText(857, FlxG.height - 34, 0, "Presiona 8 Para Ir Al menu De Trofeos", 25);
-		Text.scrollFactor.set();
-		Text.setFormat(Paths.font("vcr.ttf"), 25, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(Text);
-
 			case 'Forest':
 				//GameOverSubstate.deathSoundName = 'fnf_loss_sfx-goof';
 				//GameOverSubstate.loopSoundName = 'gameOver-goof';

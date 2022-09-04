@@ -4277,6 +4277,8 @@ class PlayState extends MusicBeatState
 					#if desktop
 					attemptsTillJumpscare -= 1;
 					satanSpeaks = new FlxText(0, 0, 0);
+					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					satanSpeaks.cameras = [camHUD];
 					satanSpeaks.screenCenter();
 					add(satanSpeaks);
 	

@@ -138,7 +138,7 @@ class PlayState extends MusicBeatState
 	public var DAD_X:Float = 100;
 	public var DAD_Y:Float = 100;
 	public var GF_X:Float = 400;
-	public var GF_Y:Float = 130;
+	public var GF_Y:Float = 130; 
 
 	//public var hudTransitionTween:FlxTween;
 	//public var hudTransitionSpeed(default, set):Float = 1;
@@ -4211,8 +4211,9 @@ class PlayState extends MusicBeatState
 		if(ratingName == '?') {
 			scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses;
 		} else {
-                        scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses + ' (' + ratingFC + ')';
+			scoreTxt.text = 'Punt ' + songScore + ' ~ Misses: ' + songMisses + ' (' + ratingFC + ')';
 		}
+		
 	        } else {
 
 		if(ratingName == '?') {
@@ -4277,12 +4278,22 @@ class PlayState extends MusicBeatState
 					vocals.pause();
 				}
 
+				#if desktop
+				if(SONG.song == "Delusional") {
+					//founded on reddit
+					var theText:FlxText = new FlxText(0, 0, 0);
+					theText.text = "You’re really getting on my nerves, " + Sys.environment()["USERNAME"];
+					theText.screenCenter();
+					add(theText);
+				} else { //desktop cus HTML
+					//Also PlaceHolder
+				#end 
 				if(ClientPrefs.language == "Spanish") {
 				openSubState(new PauseSpanishState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				} else {
 				openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				}
-				//}
+			    }
 		
 				#if desktop
 				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), curPortrait);

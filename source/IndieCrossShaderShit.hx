@@ -258,13 +258,6 @@ class FXHandler
                 a3 = 0.163; b3 = 0.320; c3 = 0.516;
         }
 
-        matrix = [
-            a1 * ClientPrefs.gamma, b1 * ClientPrefs.gamma, c1 * ClientPrefs.gamma, 0, ClientPrefs.brightness,
-            a2 * ClientPrefs.gamma, b2 * ClientPrefs.gamma, c2 * ClientPrefs.gamma, 0, ClientPrefs.brightness,
-            a3 * ClientPrefs.gamma, b3 * ClientPrefs.gamma, c3 * ClientPrefs.gamma, 0, ClientPrefs.brightness,
-            0, 0, 0, 1, 0,
-        ];
-
         if (input != null)
         {
             input.push(new ColorMatrixFilter(matrix));

@@ -88,30 +88,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			['No color filter', 'Protanopia filter', 'Protanomaly filter', 'Deuteranopia filter', 'Deuteranomaly filter', 'Tritanopia filter', 'Tritanomaly filter', 'Achromatopsia filter', 'Achromatomaly filter']);
 		addOption(option);
 		option.onChange = onChangeCBFilther;
-
-		/*var option:Option = new Option('Gamma',
-			'How much Gamma should the game be.',
-			'gamma',
-			'percent',
-			1);
-			option.scrollSpeed = 1.6;
-			option.minValue = 0.0;
-			option.maxValue = 5;
-			option.changeValue = 0.1;
-			option.decimals = 1;
-		addOption(option); kinda buggy :(
-
-		var option:Option = new Option('Brightness',
-			'How much Brightness should the game be.',
-			'brightness',
-			'percent',
-			0);
-			option.scrollSpeed = 1.6;
-			option.minValue = -200;
-			option.maxValue = 200;
-			option.changeValue = 10;
-			option.decimals = 1;
-		addOption(option);*/
 		
 		var option:Option = new Option('Icon Bounce:',
 			'How should your icons bounce?',

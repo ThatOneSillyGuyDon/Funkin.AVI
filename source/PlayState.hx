@@ -4268,9 +4268,9 @@ class PlayState extends MusicBeatState
 				theText.cameras = [camHUD];
 				add(theText);
 
-				FlxTween.tween(theText, {alpha: 0}, 1);
-				#end
+				FlxTween.tween(theText, {alpha: 0}, 1);	
 			} else {
+			#end
 			var ret:Dynamic = callOnLuas('onPause', []);
 			if(ret != FunkinLua.Function_Stop) {
 				persistentUpdate = false;

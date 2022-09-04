@@ -4272,7 +4272,6 @@ class PlayState extends MusicBeatState
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
-			#if desktop
 			if(SONG.song == 'Delusional')
 			{
 				#if desktop
@@ -4417,7 +4416,6 @@ class PlayState extends MusicBeatState
 				}
 				#end 
 			}else{
-			#end
 			var ret:Dynamic = callOnLuas('onPause', []);
 			if(ret != FunkinLua.Function_Stop) {
 				persistentUpdate = false;

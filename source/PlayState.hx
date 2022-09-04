@@ -73,8 +73,6 @@ import FunkinLua;
 import Shaders;
 import FNFShader;
 import IndieCrossShaderShit.FXHandler;
-import data.Etterna;
-import data.Ratings;
 #if sys
 import sys.FileSystem;
 #end
@@ -4274,9 +4272,9 @@ class PlayState extends MusicBeatState
 					#if desktop
 					attemptsTillJumpscare -= 1;
 					satanSpeaks = new FlxText(0, 0, 0);
-					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 					satanSpeaks.cameras = [camHUD];
-					satanSpeaks.screenCenter();
+					satanSpeaks.screenCenter(X);
 					add(satanSpeaks);
 	
 					//satanPopup = new FlxSprite();
@@ -6557,6 +6555,7 @@ class PlayState extends MusicBeatState
 			},
 			startDelay: Conductor.crochet * 0.001
 		});
+	}
 	}
 
 	private function onKeyPress(event:KeyboardEvent):Void

@@ -4270,7 +4270,7 @@ class PlayState extends MusicBeatState
 
 				FlxTween.tween(theText, {alpha: 0}, 2);	
 			} else {
-			#end
+			#end 
 			var ret:Dynamic = callOnLuas('onPause', []);
 			if(ret != FunkinLua.Function_Stop) {
 				persistentUpdate = false;

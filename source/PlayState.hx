@@ -4285,7 +4285,9 @@ class PlayState extends MusicBeatState
 				{
 					#if desktop
 					satanSpeaks = new FlxText(0, 0, 0);
-					satanSpeaks.screenCenter();
+					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					satanSpeaks.cameras = [camHUD];
+					satanSpeaks.screenCenter(X);
 					add(satanSpeaks);
 	
 					//satanPopup = new FlxSprite();
@@ -6578,6 +6580,7 @@ class PlayState extends MusicBeatState
 			},
 			startDelay: Conductor.crochet * 0.001
 		});
+	}
 	}
 
 	private function onKeyPress(event:KeyboardEvent):Void

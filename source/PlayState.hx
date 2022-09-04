@@ -280,6 +280,19 @@ class PlayState extends MusicBeatState
 	var tankGround:BGSprite;
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
+	
+	//Cool Ass Delusional Shit
+	public var attemptsTillJumpscare:Int = 20; //Loser, you can't pause on Delusional
+	var lightRain:FlxSprite;
+	var heavyRain:FlxSprite;
+	var rainIsHeavy:Bool = false;
+	var toggleThunder:Bool = false;
+	var toggleDestroyedBuildings:Bool = false;
+	var transformationScreenEffect:FlxSprite;
+	var fireBG:BGSprite;
+	var satanSpeaks:FlxText;
+	var satanJumpscare:FlxSprite;
+	var satanPopup:FlxSprite; //haha, funi distorted BF face, spooky
 
 	//Overlay Shit
 	var light:BGSprite;
@@ -4259,18 +4272,150 @@ class PlayState extends MusicBeatState
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
-			#if desktop
-			if(SONG.song == "Delusional") {
-				//founded on reddit
-				var theText:FlxText = new FlxText(937, FlxG.height - 34, 0, "You’re really getting on my nerves, " + Paths.delusionalJumpscaretext, 35); 
-				theText.screenCenter();
-				theText.setFormat(Paths.font("vcr.ttf"), 35, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				theText.cameras = [camHUD];
-				add(theText);
-
-				FlxTween.tween(theText, {alpha: 0}, 2);	
-			} else {
-			#end 
+			if(SONG.song == 'Delusional')
+			{
+				#if desktop
+				satanSpeaks = new FlxText(0, 0, 0);
+				satanSpeaks.screenCenter();
+				add(satanSpeaks);
+				
+				//satanPopup = new FlxSprite();
+				//add(satanPopup);
+				
+				//satanJumpscare = new FlxSprite();
+				//add(satanJumpscare);
+				//DO NOT USE THIS YET UNTIL WE GET THE SPRITE.
+				
+				if(attemptsTillJumpscare = 20)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "What's the matter, don't you want to play?";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 19)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "It's pointless to go now...";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 18)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "We're only getting started, fellow player.";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 17)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "What's wrong? Don't like the hospitality?";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 16)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "We're only having a little bit of fun.";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 15)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "See? Mickey is very happy...";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 14)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "Don't be a party pooper, player.";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 13)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "Don't stop now...";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 12)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "Don't worry, it will all be over soon.";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 11)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "Quit resisting...";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 10)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = ".....";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 9)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "Stop it.";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 8)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "You're starting to get on my nerves, " + Paths.delusionalJumpscaretext + ".";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 7)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "Quit it, it gets you nowhere.";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 6)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "Why do you still try, " + Paths.delusionalJumpscaretext + "?";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 5)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "This is getting irritating now...";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 4)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "I'm warning you, " + Paths.delusionalJumpscaretext + ", stop what you're doing.";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 3)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "I know who you are, " + Paths.delusionalJumpscareText + "...";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 2)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "Last warning, " + Paths.delusionalJumpscareText + ".";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 1)
+				{
+					//satanPopUp.animation.play('boo');
+					satanSpeaks.text = "Go ahead, press it again, see what happens...";
+					attemptsTillJumpscare -= 1;
+				}
+				if(attemptsTillJumpscare = 0)
+				{
+					//satanJumpscare.animation.play('jumpscare');
+					new FlxTimer().start(1.3, function(tmr:FlxTimer)
+					{
+						System.exit(0);
+					}
+				}
+				#end 
+			}else{
 			var ret:Dynamic = callOnLuas('onPause', []);
 			if(ret != FunkinLua.Function_Stop) {
 				persistentUpdate = false;

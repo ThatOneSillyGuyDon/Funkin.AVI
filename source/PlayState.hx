@@ -4259,6 +4259,18 @@ class PlayState extends MusicBeatState
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
+			#if desktop
+			if(SONG.song == "Delusional") {
+				//founded on reddit
+				var theText:FlxText = new FlxText(937, FlxG.height - 34, 0, "You’re really getting on my nerves, " + Paths.delusionalJumpscaretext, 35); 
+				theText.screenCenter();
+				theText.setFormat(Paths.font("vcr.ttf"), 35, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				theText.cameras = [camHUD];
+				add(theText);
+
+				FlxTween.tween(theText, {alpha: 0}, 1);
+				#end
+			} else {
 			var ret:Dynamic = callOnLuas('onPause', []);
 			if(ret != FunkinLua.Function_Stop) {
 				persistentUpdate = false;
@@ -4278,16 +4290,6 @@ class PlayState extends MusicBeatState
 					vocals.pause();
 				}
 
-				#if desktop
-				if(SONG.song == "Delusional") {
-					//founded on reddit
-					var theText:FlxText = new FlxText(0, 0, 0);
-					theText.text = "You’re really getting on my nerves, " + Sys.environment()["USERNAME"];
-					theText.screenCenter();
-					add(theText);
-				} else { //desktop cus HTML
-					//Also PlaceHolder
-				#end 
 				if(ClientPrefs.language == "Spanish") {
 				openSubState(new PauseSpanishState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 				} else {

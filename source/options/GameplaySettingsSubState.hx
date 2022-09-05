@@ -78,37 +78,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		//bedrock can kiss my ass XD
-		var option:Option = new Option('Rating System:',
-		    "What should your Rating System be?", 
-			'ratingSystem', 
-			'string', 
-			'Bedrock',
-			['Bedrock', 'Psych', 'Forever', 'Andromeda', "Etterna", 'Mania', "None"]);
-		addOption(option);
 
-		//bedrock can kiss my ass XD
-		var option:Option = new Option('Colorblind Filther:',
-			"Select Colorblind Filther From Your Prefrence", 
-			'colorblind', 
-			'string', 
-			'No color filter',
-			['No color filter', 'Protanopia filter', 'Protanomaly filter', 'Deuteranopia filter', "Etterna", 'Mania', "None"]);
-		addOption(option);
-		/*
 		var option:Option = new Option('Live Difficulty:',
 			"What Is The Difficulty Lives Should There Be In Malfunction?", 
 			'lives', 
 			'string', 
 			'normal',
-			['easy', 'normal', 'hard']);
-		addOption(option);
-		*/
-			var option:Option = new Option('Kade Engine Input System',
-			'If checked, KE input system will be on, this will not effect the rating system',
-			'keAccuracy',
-			'bool',
-			false);
+			['easy', 'normal', 'hard', 'hell']);
 		addOption(option);
 		
 		var option:Option = new Option('Hide Judgement Counter',

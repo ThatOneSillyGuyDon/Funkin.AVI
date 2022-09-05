@@ -4254,10 +4254,13 @@ class PlayState extends MusicBeatState
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
 		var ratingNameTwo:String = ratingName;
 		var divider:String = ' ' + '-' + ' ';
-		if(ClientPrefs.language == "Spanish") { //sexy spanish :moan_face:
-		scoreTxt.text = 'Puntuacion: ${songScore}' + divider + 'Perdidas: ${totalMisses}';
-		} else {
-			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
+			
+		if (ClientPrefs.ratingSystem == "None") {
+			if(ClientPrefs.language == "Spanish") {
+			scoreTxt.text = 'Puntuacion: ${songScore}' + divider + 'Perdidas: ${totalMisses}';
+			} else {
+				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
+			}
 		}
 
 		if(botplayTxt.visible) {
@@ -6322,9 +6325,15 @@ class PlayState extends MusicBeatState
 
 		var rating:FlxSprite = new FlxSprite();
 		var score:Int = 350;
+		
+		if (ClientPrefs.keAccuracy)
+			totalNotesHit += Etterna.wife3(-noteDiff, Conductor.safeZoneOffset / 166);
 
 		// tryna do MS based judgment due to popular demand
 		var daRating:String = Conductor.judgeNote(note, noteDiff);
+
+			if (ClientPrefs.keAccuracy)
+		{
 			if(ClientPrefs.mechanics)
 			{
 				if(curStage == 'WaltStage')
@@ -6360,6 +6369,36 @@ class PlayState extends MusicBeatState
 								health += 0;
 						marvelouses++;
 					}
+				}else{
+					switch (daRating)
+					{
+					case 'shit':
+						score = -300;
+						combo = 0;
+						songMisses++;
+						totalMisses++;
+						health -= 0.1;
+						shits++;
+					case 'bad':
+						daRating = 'bad';
+						score = 0;
+						health -= 0.06;
+						bads++;
+					case 'good':
+						daRating = 'good';
+						score = 200;
+						goods++;
+					case 'sick':
+						if (health < 2)
+							health += 0.04;
+						sicks++;
+					case "marvelous": // marvelous
+						totalNotesHit += 1;
+							if (health < 2)
+								health += 0.08;
+						marvelouses++;
+					}		
+				}
 			}else{
 				switch (daRating)
 				{
@@ -6390,6 +6429,89 @@ class PlayState extends MusicBeatState
 					marvelouses++;
 				}		
 			}
+			
+		}
+		else
+		{
+			if(ClientPrefs.mechanics)
+			{
+				if(curStage == 'WaltStage')
+				{
+					switch(daRating)
+					{
+						case "shit": // shit
+						totalNotesHit += 0;
+						health -= 0.04;
+						shits++;
+						case "bad": // bad
+							totalNotesHit += 0.5;
+							health -= 0.01;
+							bads++;
+						case "good": // good
+							totalNotesHit += 0.75;
+							health += 0.005;
+							goods++;
+						case "sick": // sick
+							if (!ClientPrefs.marvelouses)
+								totalNotesHit += 1;
+							else
+								totalNotesHit += 0.95;
+							health += 0.02;
+							sicks++;
+						case "marvelous": // marvelous
+							totalNotesHit += 1;
+							health += 0.015;
+							marvelouses++;
+					}
+						
+				}else{
+					switch(daRating)
+					{
+						case "shit": // shit
+						totalNotesHit += 0;
+						shits++;
+						case "bad": // bad
+							totalNotesHit += 0.5;
+							bads++;
+						case "good": // good
+							totalNotesHit += 0.75;
+							goods++;
+						case "sick": // sick
+							if (!ClientPrefs.marvelouses)
+								totalNotesHit += 1;
+							else
+								totalNotesHit += 0.95;
+							sicks++;
+						case "marvelous": // marvelous
+							totalNotesHit += 1;
+							marvelouses++;
+					}
+				}
+			}else{
+				switch(daRating)
+				{
+					case "shit": // shit
+						totalNotesHit += 0;
+						shits++;
+					case "bad": // bad
+						totalNotesHit += 0.5;
+						bads++;
+					case "good": // good
+						totalNotesHit += 0.75;
+						goods++;
+					case "sick": // sick
+						if (!ClientPrefs.marvelouses)
+							totalNotesHit += 1;
+						else
+							totalNotesHit += 0.95;
+						sicks++;
+					case "marvelous": // marvelous
+						totalNotesHit += 1;
+						marvelouses++;
+					}
+			}
+			
+		}
 
 		if (ClientPrefs.marvelouses == true)
 		{
@@ -9868,6 +9990,45 @@ class PlayState extends MusicBeatState
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
 				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
+<<<<<<< HEAD
+=======
+
+				var ratings:Array<Dynamic> = [ClientPrefs.ratingSystem];
+				switch (ClientPrefs.ratingSystem)
+				{
+					case "Bedrock":
+						ratings = Ratings.bedrockRatings;
+					case "Psych":
+						ratings = Ratings.psychRatings;
+						// GO CHECK FOREVER ENGINE OUT!! https://github.com/Yoshubs/Forever-Engine-Legacy
+					case "Forever":
+						ratings = Ratings.foreverRatings;
+						// ALSO TRY ANDROMEDA!! https://github.com/nebulazorua/andromeda-engine
+					case "Andromeda":
+						ratings = Ratings.andromedaRatings;
+					case "Etterna":
+						ratings = Ratings.accurateRatings;
+					case 'Mania':
+						ratings = Ratings.maniaRatings;
+				}
+
+				// Rating Name
+				if(ratingPercent >= 1)
+				{
+					ratingName = ratings[ratings.length-1][0]; //Uses last string
+				}
+				else
+				{
+					for (i in 0...ratings.length-1)
+					{
+						if(ratingPercent < ratings[i][1])
+						{
+							ratingName = ratings[i][0];
+							break;
+						}
+					}
+				}
+>>>>>>> parent of 0c72144 (fix)
 			}
 
 			// Rating FC

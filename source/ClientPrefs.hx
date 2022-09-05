@@ -13,7 +13,13 @@ class ClientPrefs
 	public static var cutscenes:Bool = false;
 	public static var FPStext:Bool = false;
 	public static var colorblind:String = "No color filter";
+<<<<<<< HEAD
 	public static var lives:String = 'normal';
+=======
+	public static var gamma:Float = 1;
+	public static var brightness:Float = 0;
+	//public static var lives:String = 'normal';
+>>>>>>> parent of 0c72144 (fix)
 	public static var randomModchart:Bool = false;
 	public static var mechanics:Bool = true;
 	public static var events:Bool = false;
@@ -22,6 +28,8 @@ class ClientPrefs
 	public static var middleScroll:Bool = false;
 	public static var antiMash:Bool = true;
 	public static var center:Bool = true;
+	public static var keAccuracy:Bool = false;
+	public static var ratingSystem:String = "Bedrock";
 	public static var laneunderlay:Bool = false;
 	public static var laneTransparency:Float = 0.5;
 	public static var debugMode:Bool = false;
@@ -159,11 +167,13 @@ class ClientPrefs
 		FlxG.save.data.lives = lives;
 		//FlxG.save.data.cursing = cursing;
 		//FlxG.save.data.violence = violence;
+		FlxG.save.data.keAccuracy = keAccuracy;
 		FlxG.save.data.funiShaders = funiShaders;
 		FlxG.save.data.camZooms = camZooms;
 		FlxG.save.data.noteOffset = noteOffset;
 		FlxG.save.data.hideHud = hideHud;
 		FlxG.save.data.hideJudgement = hideJudgement;
+		FlxG.save.data.ratingSystem = ratingSystem;
 		FlxG.save.data.arrowHSV = arrowHSV;
 		FlxG.save.data.imagesPersist = imagesPersist;
 		FlxG.save.data.ghostTapping = ghostTapping;
@@ -268,6 +278,10 @@ class ClientPrefs
 		if(FlxG.save.data.laneunderlay != null) {
 			laneunderlay = FlxG.save.data.laneunderlay;
 		}
+		if (FlxG.save.data.keAccuracy != null)
+		{
+			keAccuracy = FlxG.save.data.keAccuracy;
+		}
 		if(FlxG.save.data.laneTransparency != null) {
 			laneTransparency = FlxG.save.data.laneTransparency;
 		}
@@ -294,6 +308,10 @@ class ClientPrefs
 		}
 		if(FlxG.save.data.hideJudgement != null) {
 			hideJudgement = FlxG.save.data.hideJudgement;
+		}
+		if (FlxG.save.data.ratingSystem != null)
+		{
+			ratingSystem = FlxG.save.data.ratingSystem;
 		}
 		if(FlxG.save.data.lowQuality != null) {
 			lowQuality = FlxG.save.data.lowQuality;

@@ -280,7 +280,7 @@ class PlayState extends MusicBeatState
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
 	
 	//Cool Ass Delusional Shit
-	public var attemptsTillJumpscare:Int = 20; //Loser, you can't pause on Delusional
+	public var attemptsTillJumpscare:Int = 21; //Loser, you can't pause on Delusional
 	var lightRain:FlxSprite;
 	var heavyRain:FlxSprite;
 	var rainIsHeavy:Bool = false;
@@ -410,20 +410,6 @@ class PlayState extends MusicBeatState
 		FlxG.game.filtersEnabled = true;
 
 		FXHandler.UpdateColors(filters);
-
-		switch(ClientPrefs.lives){
-			case 'easy':
-				crashLivesCounter = 60; //dam
-
-			case 'normal':
-				crashLivesCounter = 30; //ok
-
-			case 'hard':
-				crashLivesCounter = 10; //a
-
-			case 'hell':
-				crashLivesCounter = 1; //needs to be a achiev
-		}
 
 		/*switch(PlayState.SONG.song) {
 			case 'Isolated':
@@ -4268,11 +4254,11 @@ class PlayState extends MusicBeatState
 		var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
 		var ratingNameTwo:String = ratingName;
 		var divider:String = ' ' + '-' + ' ';
-		if(ClientPrefs.language == "Spanish") {
-			scoreTxt.text = 'Puntuacion: ${songScore}' + divider + 'Perdidas: ${totalMisses}';
+		if(ClientPrefs.language == "Spanish") { //sexy spanish :moan_face:
+		scoreTxt.text = 'Puntuacion: ${songScore}' + divider + 'Perdidas: ${totalMisses}';
 		} else {
-				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
-			}
+			scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
+		}
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -4284,7 +4270,15 @@ class PlayState extends MusicBeatState
 			if(SONG.song == 'Delusional')
 				{
 					#if desktop
+					attemptsTillJumpscare -= 1;
+					satanSpeaks = new FlxText(-50, 0, 0);
+					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 40, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					satanSpeaks.cameras = [camHUD];
+					satanSpeaks.screenCenter();
+					add(satanSpeaks);
+	
 					//satanPopup = new FlxSprite();
+					//add(satanPopup);
 	
 					//satanJumpscare = new FlxSprite();
 					//add(satanJumpscare);
@@ -4295,14 +4289,51 @@ class PlayState extends MusicBeatState
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "What's the matter, don't you want to play?";
-						attemptsTillJumpscare -= 1;
+						//attemptsTillJumpscare -= 1;
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 					}
 					if(attemptsTillJumpscare == 19)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "It's pointless to go now...";
-<<<<<<< HEAD
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
+						//attemptsTillJumpscare -= 1;
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
+					}
+					if(attemptsTillJumpscare == 18)
+					{
+						//satanPopUp.animation.play('boo');
+						satanSpeaks.text = "We're only getting started, fellow player.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
+						//attemptsTillJumpscare -= 1;
+					}
+					if(attemptsTillJumpscare == 17)
+					{
+						//satanPopUp.animation.play('boo');
+						satanSpeaks.text = "What's wrong? Don't like the hospitality?";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
+						//attemptsTillJumpscare -= 1;
+					}
+					if(attemptsTillJumpscare == 16)
+					{
+						//satanPopUp.animation.play('boo');
+						satanSpeaks.text = "We're only having a little bit of fun.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
+						//attemptsTillJumpscare -= 1;
+					}
+					if(attemptsTillJumpscare == 15)
+					{
+						//satanPopUp.animation.play('boo');
+						satanSpeaks.text = "See? Mickey is very happy...";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
+						//attemptsTillJumpscare -= 1;
+					}
+					if(attemptsTillJumpscare == 14)
+					{
+						//satanPopUp.animation.play('boo');
+						satanSpeaks.text = "Don't be a party pooper, player.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
+						//attemptsTillJumpscare -= 1;
+					}
 					if(attemptsTillJumpscare == 13)
 					{
 						//satanPopUp.animation.play('boo');
@@ -4314,129 +4345,85 @@ class PlayState extends MusicBeatState
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Don't worry, it will all be over soon.";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
+					if(attemptsTillJumpscare == 11)
+					{
+						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Quit resisting...";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 10)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = ".....";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 9)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Stop it.";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 8)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "You're starting to get on my nerves, " + Paths.delusionalJumpscaretext + ".";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 7)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Quit it, it gets you nowhere.";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 6)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Why do you still try, " + Paths.delusionalJumpscaretext + "?";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 5)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "This is getting irritating now...";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 4)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "I'm warning you, " + Paths.delusionalJumpscaretext + ", stop what you're doing.";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 3)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "I know who you are, " + Paths.delusionalJumpscaretext + "...";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 2)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Last warning, " + Paths.delusionalJumpscaretext + ".";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 1)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Go ahead, press it again, see what happens...";
-<<<<<<< HEAD
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
-=======
-						attemptsTillJumpscare -= 1;
->>>>>>> d194afeb48329de3a0d9d9c5d7c62b27d553544c
 					}
 					if(attemptsTillJumpscare == 0)
 					{
@@ -6342,78 +6329,66 @@ class PlayState extends MusicBeatState
 			{
 				if(curStage == 'WaltStage')
 				{
-					switch(daRating)
+					switch (daRating)
 					{
-						case "shit": // shit
-						totalNotesHit += 0;
-						health -= 0.04;
+				
+					case 'shit':
+						score = -300;
+						combo = 0;
+						songMisses++;
+						totalMisses++;
+						health -= 0;
 						shits++;
-						case "bad": // bad
-							totalNotesHit += 0.5;
-							health -= 0.01;
-							bads++;
-						case "good": // good
-							totalNotesHit += 0.75;
-							health += 0.005;
-							goods++;
-						case "sick": // sick
-							if (!ClientPrefs.marvelouses)
-								totalNotesHit += 1;
-							else
-								totalNotesHit += 0.95;
-							health += 0.02;
-							sicks++;
-						case "marvelous": // marvelous
-							totalNotesHit += 1;
-							health += 0.015;
-							marvelouses++;
-					}
-						
-				}else{
-					switch(daRating)
-					{
-						case "shit": // shit
-						totalNotesHit += 0;
-						shits++;
-						case "bad": // bad
-							totalNotesHit += 0.5;
-							bads++;
-						case "good": // good
-							totalNotesHit += 0.75;
-							goods++;
-						case "sick": // sick
-							if (!ClientPrefs.marvelouses)
-								totalNotesHit += 1;
-							else
-								totalNotesHit += 0.95;
-							sicks++;
-						case "marvelous": // marvelous
-							totalNotesHit += 1;
-							marvelouses++;
-					}
-				}
-			}else{
-				switch(daRating)
-				{
-					case "shit": // shit
-						totalNotesHit += 0;
-						shits++;
-					case "bad": // bad
-						totalNotesHit += 0.5;
+					case 'bad':
+						daRating = 'bad';
+						score = 0;
+						health -= 0;
 						bads++;
-					case "good": // good
-						totalNotesHit += 0.75;
+					case 'good':
+						daRating = 'good';
+						score = 200;
+						if (health < 2)
+							health += 0;
 						goods++;
-					case "sick": // sick
-						if (!ClientPrefs.marvelouses)
-							totalNotesHit += 1;
-						else
-							totalNotesHit += 0.95;
+					case 'sick':
+						if (health < 2)
+							health += 0;
 						sicks++;
 					case "marvelous": // marvelous
 						totalNotesHit += 1;
+							if (health < 2)
+								health += 0;
 						marvelouses++;
 					}
+			}else{
+				switch (daRating)
+				{
+				case 'shit':
+					score = -300;
+					combo = 0;
+					songMisses++;
+					totalMisses++;
+					health -= 0.1;
+					shits++;
+				case 'bad':
+					daRating = 'bad';
+					score = 0;
+					health -= 0.06;
+					bads++;
+				case 'good':
+					daRating = 'good';
+					score = 200;
+					goods++;
+				case 'sick':
+					if (health < 2)
+						health += 0.04;
+					sicks++;
+				case "marvelous": // marvelous
+					totalNotesHit += 1;
+						if (health < 2)
+							health += 0.08;
+					marvelouses++;
+				}		
 			}
 
 		if (ClientPrefs.marvelouses == true)
@@ -6600,6 +6575,7 @@ class PlayState extends MusicBeatState
 			},
 			startDelay: Conductor.crochet * 0.001
 		});
+	}
 	}
 
 	private function onKeyPress(event:KeyboardEvent):Void

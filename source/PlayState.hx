@@ -4271,10 +4271,10 @@ class PlayState extends MusicBeatState
 				{
 					#if desktop
 					attemptsTillJumpscare -= 1;
-					satanSpeaks = new FlxText(0, 0, 0);
-					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					satanSpeaks = new FlxText(-50, 0, 0);
+					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 40, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 					satanSpeaks.cameras = [camHUD];
-					satanSpeaks.screenCenter(X);
+					satanSpeaks.screenCenter();
 					add(satanSpeaks);
 	
 					//satanPopup = new FlxSprite();
@@ -4290,119 +4290,139 @@ class PlayState extends MusicBeatState
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "What's the matter, don't you want to play?";
 						//attemptsTillJumpscare -= 1;
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 					}
 					if(attemptsTillJumpscare == 19)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "It's pointless to go now...";
 						//attemptsTillJumpscare -= 1;
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 					}
 					if(attemptsTillJumpscare == 18)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "We're only getting started, fellow player.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 17)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "What's wrong? Don't like the hospitality?";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 16)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "We're only having a little bit of fun.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 15)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "See? Mickey is very happy...";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 14)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Don't be a party pooper, player.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 13)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Don't stop now...";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 12)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Don't worry, it will all be over soon.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 11)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Quit resisting...";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 10)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = ".....";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 9)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Stop it.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 8)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "You're starting to get on my nerves, " + Paths.delusionalJumpscaretext + ".";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 7)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Quit it, it gets you nowhere.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 6)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Why do you still try, " + Paths.delusionalJumpscaretext + "?";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 5)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "This is getting irritating now...";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 4)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "I'm warning you, " + Paths.delusionalJumpscaretext + ", stop what you're doing.";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 3)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "I know who you are, " + Paths.delusionalJumpscaretext + "...";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 2)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Last warning, " + Paths.delusionalJumpscaretext + ".";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 1)
 					{
 						//satanPopUp.animation.play('boo');
 						satanSpeaks.text = "Go ahead, press it again, see what happens...";
+						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
 					if(attemptsTillJumpscare == 0)
@@ -9848,23 +9868,6 @@ class PlayState extends MusicBeatState
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
 				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
-
-				// Rating Name
-				if(ratingPercent >= 1)
-				{
-					ratingName = ratings[ratings.length-1][0]; //Uses last string
-				}
-				else
-				{
-					for (i in 0...ratings.length-1)
-					{
-						if(ratingPercent < ratings[i][1])
-						{
-							ratingName = ratings[i][0];
-							break;
-						}
-					}
-				}
 			}
 
 			// Rating FC

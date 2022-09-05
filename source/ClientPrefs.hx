@@ -13,13 +13,9 @@ class ClientPrefs
 	public static var cutscenes:Bool = false;
 	public static var FPStext:Bool = false;
 	public static var colorblind:String = "No color filter";
-<<<<<<< HEAD
 	public static var lives:String = 'normal';
-=======
 	public static var gamma:Float = 1;
 	public static var brightness:Float = 0;
-	//public static var lives:String = 'normal';
->>>>>>> parent of 0c72144 (fix)
 	public static var randomModchart:Bool = false;
 	public static var mechanics:Bool = true;
 	public static var events:Bool = false;

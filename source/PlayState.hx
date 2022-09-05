@@ -410,6 +410,20 @@ class PlayState extends MusicBeatState
 		FlxG.game.filtersEnabled = true;
 
 		FXHandler.UpdateColors(filters);
+		
+		switch(ClientPrefs.lives){
+			case 'easy':
+				crashLivesCounter = 60; //dam
+
+			case 'normal':
+				crashLivesCounter = 30; //ok
+
+			case 'hard':
+				crashLivesCounter = 10; //a
+
+			case 'hell':
+				crashLivesCounter = 1; //needs to be a achiev
+		}
 
 		/*switch(PlayState.SONG.song) {
 			case 'Isolated':

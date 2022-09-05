@@ -10004,9 +10004,7 @@ class PlayState extends MusicBeatState
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
 				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
-<<<<<<< HEAD
-=======
-
+				
 				var ratings:Array<Dynamic> = [ClientPrefs.ratingSystem];
 				switch (ClientPrefs.ratingSystem)
 				{
@@ -10042,7 +10040,6 @@ class PlayState extends MusicBeatState
 						}
 					}
 				}
->>>>>>> parent of 0c72144 (fix)
 			}
 
 			// Rating FC

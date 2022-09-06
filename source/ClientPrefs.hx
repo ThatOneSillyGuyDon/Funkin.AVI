@@ -14,8 +14,6 @@ class ClientPrefs
 	public static var FPStext:Bool = false;
 	public static var colorblind:String = "No color filter";
 	public static var lives:String = 'normal';
-	//public static var lives:String = 'normal';
-	public static var randomModchart:Bool = false;
 	public static var mechanics:Bool = true;
 	public static var events:Bool = false;
 	public static var outdated:Bool = false;

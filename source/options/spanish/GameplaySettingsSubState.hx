@@ -236,7 +236,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			'outdated',
 			'bool',
 			false);
-		addOption(option);
 
 		super();
 	}

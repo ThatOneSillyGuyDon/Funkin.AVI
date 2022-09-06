@@ -4264,6 +4264,15 @@ class PlayState extends MusicBeatState
 		if(SONG.song == "Fight or Flight") { //we don't know the song name, starved
 			scoreTxt.text = 'Sacrifices: ' + deathCounter + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
 		}
+
+		if(SONG.song == "Cycled Sins") { //Think About it Demo, that would be cool
+			if (healthBar.percent > 80)
+				scoreTxt.text = 'Health: ' + Math.round(health * 50) + ' | Status: Happy';
+			else if (healthBar.percent > 20 && healthBar.percent < 80)	
+				scoreTxt.text = 'Health: ' + Math.round(health * 50) + ' | Status: Normal';
+			else 
+				scoreTxt.text = 'Health: ' + Math.round(health * 50) + ' | Status: Death';
+		}
 	        }
 
 					// Info Bar

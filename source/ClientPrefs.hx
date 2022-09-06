@@ -135,7 +135,6 @@ class ClientPrefs
 		FlxG.save.data.cutscens = cutscenes;
 		FlxG.save.data.colorblind = colorblind;
 		FlxG.save.data.FPStext = FPStext;
-		FlxG.save.data.randomModchart = randomModchart;
 		FlxG.save.data.events = events;
 		FlxG.save.data.outdated = outdated;
 		FlxG.save.data.downScroll = downScroll;
@@ -221,9 +220,6 @@ class ClientPrefs
 		}
 		if(FlxG.save.data.FPStext != null) {
 			FPStext = FlxG.save.data.FPStext;
-		}
-		if(FlxG.save.data.randomModchart != null) {
-			randomModchart = FlxG.save.data.randomModchart;
 		}
 		if(FlxG.save.data.mechanics != null) {
 			mechanics = FlxG.save.data.mechanics;

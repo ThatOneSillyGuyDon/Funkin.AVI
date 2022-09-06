@@ -69,6 +69,8 @@ import Achievements;
 import DialogueBoxPsych;
 import StageData;
 import FunkinLua;
+import data.Etterna;
+import data.Ratings;
 
 import Shaders;
 import FNFShader;
@@ -6525,8 +6527,6 @@ class PlayState extends MusicBeatState
 					}
 			}
 			
-		}
-
 		if (ClientPrefs.marvelouses == true)
 		{
 			if (daRating == 'marvelous' && !note.noteSplashDisabled)
@@ -10004,8 +10004,6 @@ class PlayState extends MusicBeatState
 				// Rating Percent
 				ratingPercent = Math.min(1, Math.max(0, totalNotesHit / totalPlayed));
 				//trace((totalNotesHit / totalPlayed) + ', Total: ' + totalPlayed + ', notes hit: ' + totalNotesHit);
-<<<<<<< HEAD
-=======
 
 				var ratings:Array<Dynamic> = [ClientPrefs.ratingSystem];
 				switch (ClientPrefs.ratingSystem)
@@ -10042,7 +10040,6 @@ class PlayState extends MusicBeatState
 						}
 					}
 				}
->>>>>>> parent of 0c72144 (fix)
 			}
 
 			// Rating FC

@@ -4267,11 +4267,11 @@ class PlayState extends MusicBeatState
 
 		if(SONG.song == "Cycled Sins") { //Think About it Demo, that would be cool
 			if (healthBar.percent > 80)
-				scoreTxt.text = 'Health: ' + Math.round(health * 50) + ' | Status: Happy';
+				scoreTxt.text = 'Sanity: High  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 			else if (healthBar.percent > 20 && healthBar.percent < 80)	
-				scoreTxt.text = 'Health: ' + Math.round(health * 50) + ' | Status: Normal';
+				scoreTxt.text = 'Sanity: Medium  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 			else 
-				scoreTxt.text = 'Health: ' + Math.round(health * 50) + ' | Status: Death';
+				scoreTxt.text = 'Sanity: Low  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		}
 	        }
 

@@ -216,11 +216,9 @@ class VisualsUISubState extends BaseOptionsMenu
 	var changedCB:Bool = false;
 	function onChangeCBFilther()
 	{
-		if(ClientPrefs.colorblind == 'No color filter')
-			FlxG.sound.music.volume = 0;
-		else
-			FXHandler.UpdateColors();
-	
+		FlxG.game.setFilters(filters); 
+		FlxG.game.filtersEnabled = true; 
+		FXHandler.UpdateColors(filters);
 		changedCB = true;
 	}
 

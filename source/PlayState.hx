@@ -1,5 +1,6 @@
 package; //Lord X Porn
 
+import WindowAPI.WINDOW as WINDOw;
 import GameJolt;
 import GameJolt.GameJoltAPI;
 import flixel.graphics.FlxGraphic;
@@ -8346,6 +8347,15 @@ class PlayState extends MusicBeatState
 			case 'Twisted Grins':
 				//Insert Events here
 			case 'Bless':
+                var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(1, 1, 1));
+                if (defaultCamZoom < 0.9)
+                   {
+                   bg.scale.scale(0.9 / defaultCamZoom);
+                   }
+                bg.scrollFactor.set();
+                add(bg);
+				WINDOw.getWindowsTransparent();
+
 				if(!ClientPrefs.lowQuality) {
 					timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
 				}

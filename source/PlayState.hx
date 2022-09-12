@@ -626,6 +626,19 @@ class PlayState extends MusicBeatState
 		switch (curStage)
 		{
 			case 'stage': //Week 1
+
+			if(!ClientPrefs.lowQuality && SONG.song == "Bless") {
+			var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(1, 1, 1));
+			if (defaultCamZoom < 0.6)
+			   {
+			   bg.scale.scale(0.6 / defaultCamZoom);
+			   }
+			bg.scrollFactor.set();
+			add(bg);
+			WINDOw.getWindowsTransparent();
+			}
+
+			if(SONG.song != "Bless") {
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
 
@@ -648,6 +661,7 @@ class PlayState extends MusicBeatState
 					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 					stageCurtains.updateHitbox();
 					add(stageCurtains);
+				}
 				}
 
 			case 'spooky': //Week 2
@@ -8347,15 +8361,6 @@ class PlayState extends MusicBeatState
 			case 'Twisted Grins':
 				//Insert Events here
 			case 'Bless':
-                var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(1, 1, 1));
-                if (defaultCamZoom < 0.9)
-                   {
-                   bg.scale.scale(0.9 / defaultCamZoom);
-                   }
-                bg.scrollFactor.set();
-                add(bg);
-				WINDOw.getWindowsTransparent();
-
 				if(!ClientPrefs.lowQuality) {
 					timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
 				}

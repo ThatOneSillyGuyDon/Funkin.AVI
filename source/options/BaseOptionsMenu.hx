@@ -24,7 +24,6 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
-import IndieCrossShaderShit.FXHandler;
 
 using StringTools;
 
@@ -48,10 +47,6 @@ class BaseOptionsMenu extends MusicBeatSubstate
 	public function new()
 	{
 		super();
-		
-		FlxG.game.setFilters(filters); 
-		FlxG.game.filtersEnabled = true; 
-		FXHandler.UpdateColors(filters);
 
 		if(title == null) title = 'Options';
 		if(rpcTitle == null) rpcTitle = 'Options Menu';

@@ -36,6 +36,9 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
+import Shaders;
 import openfl.Assets;
 import PlayState;
 import GameJolt;
@@ -62,6 +65,11 @@ class TitleState extends MusicBeatState
 
 	public static var initialized:Bool = false;
 	public var camZooming:Bool = false;
+	
+	var vhsThing:VhsEffect;
+	var chrom:ChromaticAberrationEffect;
+
+	var shaders:Array<ShaderEffect> = [];
 
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
@@ -355,6 +363,23 @@ class TitleState extends MusicBeatState
 		}
 
 		return swagGoodArray;
+	}
+	
+	function addShader(effect:ShaderEffect)
+	{
+		if (!ClientPrefs.funiShaders)
+			return;
+
+		shaders.push(effect);
+
+		var newCamEffects:Array<BitmapFilter> = [];
+
+		for (i in shaders)
+		{
+			newCamEffects.push(new ShaderFilter(i.shader));
+		}
+
+		FlxG.camera.setFilters(newCamEffects);
 	}
 
 	var transitioning:Bool = false;
@@ -655,7 +680,7 @@ class TitleState extends MusicBeatState
 		case 58:
 		Application.current.window.title = "Funkin.avi - A mod about a very unfortunate mouse.";
 		case 59:
-		Application.current.window.title = "Funkin.avi - ​Imagine Having More Than 50 Members?!?!?!";
+		Application.current.window.title = "Funkin.avi - Imagine Having More Than 50 Members?!?!?!";
 		case 60:
 		Application.current.window.title = "Funkin.avi - Delusional is in, now STOP ASKING FOR IT";
 		case 61:
@@ -701,13 +726,13 @@ class TitleState extends MusicBeatState
 		case 81:
 		Application.current.window.title = "Funkin.avi - Stop saying the square's name is Theodore!";
 		case 82:
-		Application.current.window.title = "Funkin.avi - ​Let’s be honest, Mods are carrying FNF";
+		Application.current.window.title = "Funkin.avi - Let’s be honest, Mods are carrying FNF";
 		case 83:
 		Application.current.window.title = "Funkin.avi - Now better than ever!";
 		case 84:
 		Application.current.window.title = "Funkin.avi - Over 100+ Messages!";
 		case 85:
-		Application.current.window.title = "Funkin.avi - ​Your childhood friend is back!";
+		Application.current.window.title = "Funkin.avi - Your childhood friend is back!";
 		case 86:
 		Application.current.window.title = "Funkin.avi - Youtube Kids is the best at having totally not bad videos!";
 		case 87:
@@ -798,6 +823,20 @@ class TitleState extends MusicBeatState
 		}*/
 
 		if(!closedState) {
+			if(ClientPrefs.funiShaders)
+		{
+			chrom = new ChromaticAberrationEffect();
+			
+			vhsThing = new VhsEffect(0.3, 0);
+			
+			addShader(chrom);
+			
+			addShader(vhsThing);
+
+			if (chrom != null)
+			doChrome(null, false);
+		}
+
 			sickBeats++;
 			switch (sickBeats)
 			{
@@ -942,5 +981,24 @@ class TitleState extends MusicBeatState
 			
 			skippedIntro = true;
 		}
+	}
+	function doChrome(T:FlxTimer, ?setChrom:Bool = true)
+	{
+		if (!ClientPrefs.funiShaders || skippedIntro)
+			return;
+
+		if (T != null)
+			T.cancel();
+
+		if (chrom != null && setChrom)
+			chrom.setChrome(FlxG.random.float(0.0, 0.002));
+
+		new FlxTimer().start(FlxG.random.float(0.08, 0.12), function(tmr:FlxTimer)
+		{
+			new FlxTimer().start(FlxG.random.float(0.7, 1.6), function(tmr:FlxTimer)
+			{
+				doChrome(tmr, true);
+			});
+		});
 	}
 }

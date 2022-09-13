@@ -97,7 +97,7 @@ class ChromaticAberrationEffect extends Effect
 
 class WIDistortionEffect extends Effect //I'm sorry Box Funkin :(
 {
-	public var shader:DistortionShader = new DistortionShader();
+	public var shader:WIDistortionShader = new WIDistortionShader();
 
 	public function new(glitchFactor:Float, otherglitch:Float, ?pushUpdate:Bool = true)
 	{
@@ -304,7 +304,7 @@ class WIDistortionShader extends FlxShader
 
 class WIBloomEffect extends Effect
 {
-	public var shader:BloomShader = new BloomShader();
+	public var shader:WIBloomShader = new WIBloomShader();
 
 	public function new(?size:Float = 18.0, ?qualitly:Float = 8.0, ?dim:Float = 1.8, ?directions:Float = 16.0)
 	{

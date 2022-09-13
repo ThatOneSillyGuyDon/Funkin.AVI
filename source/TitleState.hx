@@ -186,10 +186,6 @@ class TitleState extends MusicBeatState
 			}
 			#end
 
-		if(ClientPrefs.language == "Spanish") {
-			MusicBeatState.switchState(new SpanishTitleState());
-		}
-
 			new FlxTimer().start(1, function(tmr:FlxTimer)
 			{
 				startIntro();

@@ -1,6 +1,6 @@
 package; //Lord X Porn
 
-import WindowAPI.WINDOW as WINDOw;
+import WindowAPI.WindowThing as Windowthing;
 import GameJolt;
 import GameJolt.GameJoltAPI;
 import flixel.graphics.FlxGraphic;
@@ -72,6 +72,16 @@ import StageData;
 import FunkinLua;
 import data.Etterna;
 import data.Ratings;
+import lime.app.Application;
+import lime.graphics.RenderContext;
+import lime.ui.MouseButton;
+import lime.ui.KeyCode;
+import lime.ui.KeyModifier;
+import lime.ui.Window;
+import openfl.geom.Matrix;
+import openfl.geom.Rectangle;
+import openfl.display.Sprite;
+import openfl.utils.Assets;
 
 import Shaders;
 import FNFShader;
@@ -401,6 +411,10 @@ class PlayState extends MusicBeatState
 
 	var precacheList:Map<String, String> = new Map<String, String>();
 
+	var windowDad:Window;
+    var dadWin = new Sprite();
+    var dadScrollWin = new Sprite();
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -627,18 +641,6 @@ class PlayState extends MusicBeatState
 		{
 			case 'stage': //Week 1
 
-			if(!ClientPrefs.lowQuality && SONG.song == "Bless") {
-			var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.fromRGB(1, 1, 1));
-			if (defaultCamZoom < 0.6)
-			   {
-			   bg.scale.scale(0.6 / defaultCamZoom);
-			   }
-			bg.scrollFactor.set();
-			add(bg);
-			WINDOw.getWindowsTransparent();
-			}
-
-			if(SONG.song != "Bless") {
 				var bg:BGSprite = new BGSprite('stageback', -600, -200, 0.9, 0.9);
 				add(bg);
 
@@ -661,7 +663,6 @@ class PlayState extends MusicBeatState
 					stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 					stageCurtains.updateHitbox();
 					add(stageCurtains);
-				}
 				}
 
 			case 'spooky': //Week 2
@@ -4310,9 +4311,10 @@ class PlayState extends MusicBeatState
 
 		if (controls.PAUSE && startedCountdown && canPause)
 		{
+			
 			if(SONG.song == 'Delusional')
 				{
-					#if desktop
+					#if (desktop && !avi_debug)
 					attemptsTillJumpscare -= 1;
 					satanSpeaks = new FlxText(-50, 0, 0);
 					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 40, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -4476,7 +4478,7 @@ class PlayState extends MusicBeatState
 							System.exit(0);
 						});
 					}
-					#end 
+				#end 
 				}else{
 			var ret:Dynamic = callOnLuas('onPause', []);
 			if(ret != FunkinLua.Function_Stop) {
@@ -4917,7 +4919,79 @@ class PlayState extends MusicBeatState
 		{
 			i(elapsed);
 		}
+
+		//suicidal malfunction stuff
+		@:privateAccess
+        var dadFrame = dad._frame;
+        
+        if (dadFrame == null || dadFrame.frame == null) return; // prevents crashes (i think???)
+            
+        var rect = new Rectangle(dadFrame.frame.x, dadFrame.frame.y, dadFrame.frame.width, dadFrame.frame.height);
+        
+        dadScrollWin.scrollRect = rect;
+        dadScrollWin.x = (((dadFrame.offset.x) - (dad.offset.x / 2)) * dadScrollWin.scaleX);
+        dadScrollWin.y = (((dadFrame.offset.y) - (dad.offset.y / 2)) * dadScrollWin.scaleY);        
+
 	}
+
+	function popupWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customName:String) {
+        var display = Application.current.window.display.currentMode;
+        // PlayState.defaultCamZoom = 0.5;
+
+		if(customName == '' || customName == null){
+			customName = 'Opponent.json';
+		}
+
+        windowDad = Lib.application.createWindow({
+            title: customName,
+            width: customWidth,
+            height: customHeight,
+            borderless: true,
+            alwaysOnTop: true
+
+        });
+		if(customX == null){
+			customX = -10;
+		}
+        windowDad.x = customX;
+	   windowDad.y = Std.int(display.height / 2);
+        windowDad.stage.color = 0xFFCECECE;
+        @:privateAccess
+        windowDad.stage.addEventListener("keyDown", FlxG.keys.onKeyDown);
+        @:privateAccess
+        windowDad.stage.addEventListener("keyUp", FlxG.keys.onKeyUp);
+        // Application.current.window.x = Std.int(display.width / 2) - 640;
+        // Application.current.window.y = Std.int(display.height / 2);
+
+        var bg = Paths.image('funkinAVI/SQUAREBOILOL/PixelMouse').bitmap;
+        // var spr = new Sprite();
+
+        var m = new Matrix();
+
+        // spr.graphics.beginBitmapFill(bg, m);
+        // spr.graphics.drawRect(0, 0, bg.width, bg.height);
+        // spr.graphics.endFill();
+        FlxG.mouse.useSystemCursor = true;
+
+        //Application.current.window.resize(640, 480);
+
+
+
+        dadWin.graphics.beginBitmapFill(dad.pixels, m);
+        dadWin.graphics.drawRect(0, 0, dad.pixels.width, dad.pixels.height);
+        dadWin.graphics.endFill();
+        dadScrollWin.scrollRect = new Rectangle();
+	// windowDad.stage.addChild(spr);
+        windowDad.stage.addChild(dadScrollWin);
+        dadScrollWin.addChild(dadWin);
+        dadScrollWin.scaleX = 0.7;
+        dadScrollWin.scaleY = 0.7;
+        dadGroup.visible = false;
+        // uncomment the line above if you want it to hide the dad ingame and make it visible via the windoe
+        Application.current.window.focus();
+		Windowthing.getWindowsTransparent();
+		FlxG.autoPause = false;
+    }
 
 	function openChartEditor()
 	{
@@ -7417,6 +7491,7 @@ class PlayState extends MusicBeatState
 							case 'PixelWorld':
 								crashLivesCounter -= 1;
 
+								#if !avi_debug
 								if(crashLivesCounter == -1)
 								{
 									endSong();
@@ -7444,6 +7519,7 @@ class PlayState extends MusicBeatState
 										System.exit(0);
 								}
 							}
+							#end
 								crashLives.text = 'Lives: ${crashLivesCounter}';
 								crashLivesIcon.animation.play('OMFG IT GLITCHES');
 								new FlxTimer().start(0.25, function(tmr:FlxTimer)
@@ -9564,6 +9640,15 @@ class PlayState extends MusicBeatState
 					triggerEventNote('Alter Camera Zoom', '0.8', '0.7');
 					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
 					triggerEventNote('Scroll Type', 'right', 'left');
+
+					if(!ClientPrefs.lowQuality) {
+					popupWindow(700, 500, 100, '   ');
+					Application.current.window.borderless = true;
+					Application.current.window.resize(700, 570);
+					Application.current.window.x = 800;
+					trace("dont crash");
+					Windowthing.getWindowsTransparent();
+				}
 				}
 				
 				if(curBeat == 333) {

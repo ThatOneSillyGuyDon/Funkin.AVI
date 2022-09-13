@@ -1,29 +1,6 @@
 package;
 
 @:cppFileCode('#include <windows.h>\n#include <dwmapi.h>\n\n#pragma comment(lib, "Dwmapi")')
-class CppAPI
-{
-	public static function darkMode()
-	{
-		WindowsData.setWindowColorMode(DARK);
-	}
-
-	public static function lightMode()
-	{
-		WindowsData.setWindowColorMode(LIGHT);
-	}
-
-	public static function setWindowOppacity(a:Float)
-	{
-		WindowsData.setWindowAlpha(a);
-	}
-
-	public static function _setWindowLayered()
-	{
-		WindowsData._setWindowLayered();
-	}
-}
-
 class WINDOW
 {
 	@:functionCode('

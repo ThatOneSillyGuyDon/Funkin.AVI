@@ -66,8 +66,10 @@ class TitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 	public var camZooming:Bool = false;
 	
-	var vhsThing:VhsEffect;
+	var bloomShit:VhsEffect;
 	var chrom:ChromaticAberrationEffect;
+	var blurThisShit:TiltshiftEffect;
+	var greyscale:GreyscaleEffect;
 
 	var shaders:Array<ShaderEffect> = [];
 
@@ -826,15 +828,26 @@ class TitleState extends MusicBeatState
 			if(ClientPrefs.funiShaders)
 		{
 			chrom = new ChromaticAberrationEffect();
-			
-			vhsThing = new VhsEffect(0.3, 0);
+			blurThisShit = new TiltshiftEffect(0.9, 0);
+			bloomShit = new WIBloomEffect(0);
+			greyscale = new GreyscaleEffect();
 			
 			addShader(chrom);
+			addShader(blurThisShit);
+			addShader(bloomShit);
+			addShader(greyscale);
 			
-			addShader(vhsThing);
-
 			if (chrom != null)
-			doChrome(null, false);
+			chrom.setChrome(0.003);
+			
+			if (bloomShit != null)
+			bloomShit.setSize(18.0);
+			
+			if(blurThisShit != null)
+			blurThisShit.bluramount.value = [0.9];
+			//Shaders suck lmao
+
+			
 		}
 
 			sickBeats++;
@@ -982,7 +995,7 @@ class TitleState extends MusicBeatState
 			skippedIntro = true;
 		}
 	}
-	function doChrome(T:FlxTimer, ?setChrom:Bool = true)
+	/*function doChrome(T:FlxTimer, ?setChrom:Bool = true)
 	{
 		if (!ClientPrefs.funiShaders || skippedIntro)
 			return;
@@ -1000,5 +1013,5 @@ class TitleState extends MusicBeatState
 				doChrome(tmr, true);
 			});
 		});
-	}
+	}*/ //fuck this shit, ain't using it no more.
 }

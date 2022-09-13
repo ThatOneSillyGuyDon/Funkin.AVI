@@ -66,7 +66,7 @@ class TitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 	public var camZooming:Bool = false;
 	
-	var bloomShit:VhsEffect;
+	var bloomShit:WIBloomEffect;
 	var chrom:ChromaticAberrationEffect;
 	var blurThisShit:TiltshiftEffect;
 	var greyscale:GreyscaleEffect;

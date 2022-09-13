@@ -984,7 +984,7 @@ class TitleState extends MusicBeatState
 	}
 	function doChrome(T:FlxTimer, ?setChrom:Bool = true)
 	{
-		if (!ClientPrefs.shaders || skippedIntro)
+		if (!ClientPrefs.funiShaders || skippedIntro)
 			return;
 
 		if (T != null)

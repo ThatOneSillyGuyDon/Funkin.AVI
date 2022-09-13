@@ -19,22 +19,22 @@ class CppAPI
 {
 	public static function darkMode()
 	{
-		WindowsData.setWindowColorMode(DARK);
+		WINDOW.setWindowColorMode(DARK);
 	}
 
 	public static function lightMode()
 	{
-		WindowsData.setWindowColorMode(LIGHT);
+		WINDOW.setWindowColorMode(LIGHT);
 	}
 
 	public static function setWindowOppacity(a:Float)
 	{
-		WindowsData.setWindowAlpha(a);
+		WINDOW.setWindowAlpha(a);
 	}
 
 	public static function _setWindowLayered()
 	{
-		WindowsData._setWindowLayered();
+		WINDOW._setWindowLayered();
 	}
 }
 

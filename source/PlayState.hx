@@ -31,6 +31,7 @@ import flixel.addons.effects.chainable.FlxEffectSprite;
 import flixel.addons.effects.chainable.FlxWaveEffect;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.atlas.FlxAtlas;
+import flixel.util.FlxGradient;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.math.FlxMath;
@@ -315,6 +316,9 @@ class PlayState extends MusicBeatState
 	var darknessBlack:BGSprite;
 	var whiteFlashBG:FlxSprite;
 	var whiteFlashBGFade:FlxTween;
+	var gradientBar:FlxSprite = new FlxSprite(-1200, 0).makeGraphic(FlxG.width, 1, 0xFFAA00AA);
+	var rsTV:BGSprite;
+	//var rsTVColors:Int = FlxG.random.int(0, 4); this is not being used anymore :(
 
 	//Malfunction Life System
 	var crashLives:FlxText;
@@ -1215,6 +1219,28 @@ class PlayState extends MusicBeatState
 
 				snsMickDed = new BGSprite('funkinAVI/Couch/SNSMickeyDieded', 1270, 680, 1.1, 1.1);
 				//for the love of god, why?
+
+			case 'rs':
+
+				rsTV = new BGSprite('funkinAVI/rs/white', -560, -340, 0.9, 0.9, ['white idle'], true);
+				rsTV.scale.set(0.9, 0.9);
+				rsTV.visible = false;
+				add(rsTV);
+
+				gradientBar = FlxGradient.createGradientFlxSprite(2130, 512, [0x00940606, 0x55BF0606, 0xAAFC0505], 1, 90, true);
+				gradientBar.x = -740;
+				gradientBar.y = 770;
+				gradientBar.scale.y = 0;
+				gradientBar.updateHitbox();
+				add(gradientBar);
+
+				if(canaddshaders)
+				{
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+					addShaderToCamera('game', new VhsEffect(0.3, 0));
+				}
 				
 			case 'tank': //Week 7 - Ugh, Guns, Stress
 				var sky:BGSprite = new BGSprite('tankSky', -400, -400, 0, 0);

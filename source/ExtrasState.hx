@@ -61,6 +61,7 @@ class ExtrasState extends MusicBeatState{
         {
             addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), FlxG.save.data.huntedLock);
             addSong('Isolated Old', 3, 'legacy', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.oldisolateLock);
+			addSong('Isolated Beta', 3, 'legacy', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.betaisolateLock);
             addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), FlxG.save.data.malfunctionLock);
            // addSong('Revenge', 3, 'face', FlxColor.WHITE, FlxG.save.data.revengeLock);
         }
@@ -69,6 +70,7 @@ class ExtrasState extends MusicBeatState{
         {
             addSong('Cycled Sins', 3, 'relapse', FlxColor.fromRGB(115, 86, 86), FlxG.save.data.sinsLock);
             addSong('War Dilemma', 3, 'warmick', FlxColor.fromRGB(105, 17, 10), FlxG.save.data.warLock);
+			addSong('Scrapped', 3, 'rs', FlxColor.BLACK, FlxG.save.data.scrappedLock);
             addSong('Bless', 3, 'whitenew', FlxColor.WHITE, FlxG.save.data.blessLock);
             addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED, FlxG.save.data.crossinLock);
             addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock);
@@ -231,9 +233,9 @@ class ExtrasState extends MusicBeatState{
 		super.closeSubState();
 	}
 
-	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int, difficulties:Array<String>)
+	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int, saveShit:Array<String>)
 	{
-		songs.push(new SongMetadataCool(songName, weekNum, songCharacter, color, difficulties));
+		songs.push(new SongMetadataCool(songName, weekNum, songCharacter, color, saveShit));
 	}
 
 	

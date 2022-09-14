@@ -20,6 +20,7 @@ class ClientPrefs
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
 	public static var antiMash:Bool = true;
+	public static var hudSelection:String = "Psych";
 	public static var center:Bool = true;
 	public static var keAccuracy:Bool = false;
 	public static var ratingSystem:String = "Bedrock";
@@ -152,6 +153,7 @@ class ClientPrefs
 		FlxG.save.data.globalAntialiasing = globalAntialiasing;
 		FlxG.save.data.noteSplashes = noteSplashes;
 		FlxG.save.data.longBar = longBar;
+		FlxG.save.data.hudSelection = hudSelection;
 		FlxG.save.data.mechanics = mechanics;
 		FlxG.save.data.lowQuality = lowQuality;
 		FlxG.save.data.framerate = framerate;
@@ -211,6 +213,9 @@ class ClientPrefs
 		}
 		if(FlxG.save.data.screenShake != null) {
 			screenShake = FlxG.save.data.screenShake;
+		}
+		if(FlxG.save.data.hudSelection != null) {
+			hudSelection = FlxG.save.data.hudSelection;
 		}
 	    if(FlxG.save.data.language != null) {
 			language = FlxG.save.data.language;

@@ -84,6 +84,8 @@ class LanguageState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		Application.current.window.title = "Funkin.avi - Pick your Language";
+		
 		if(!languageSelected) {
 				
 				if(FlxG.mouse.overlaps(spanish) && FlxG.mouse.justPressed) {

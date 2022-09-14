@@ -1026,7 +1026,7 @@ class PlayState extends MusicBeatState
 				//GameOverSubstate.loopSoundName = 'gameOver-square';
 				//GameOverSubstate.endSoundName = 'gameOverEnd-square';
 				//GameOverSubstate.characterName = 'bf-square-dead';
-
+				
 				var square:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/PixelMouse', -984, -975);
 				add(square);
 
@@ -4982,38 +4982,46 @@ class PlayState extends MusicBeatState
         // Application.current.window.x = Std.int(display.width / 2) - 640;
         // Application.current.window.y = Std.int(display.height / 2);
 
-        var bg = Paths.image('funkinAVI/SQUAREBOILOL/PixelMouse').bitmap;
+		var bg = Paths.image('funkinAVI/SQUAREBOILOL/nothing', 'shared').bitmap;
         var spr = new Sprite();
 
         var m = new Matrix();
 
         spr.graphics.beginBitmapFill(bg, m);
-         spr.graphics.drawRect(0, 0, bg.width, bg.height);
+        spr.graphics.drawRect(0, 0, bg.width, bg.height);
         spr.graphics.endFill();
-        FlxG.mouse.useSystemCursor = true;
 		Windowthing.getWindowsTransparent();
+        FlxG.mouse.useSystemCursor = true;
 
-        Application.current.window.resize(640, 480);
+        //Application.current.window.resize(640, 480);
 
 
 
         boyfriendWin.graphics.beginBitmapFill(boyfriend.pixels, m);
         boyfriendWin.graphics.drawRect(0, 0, boyfriend.pixels.width, boyfriend.pixels.height);
         boyfriendWin.graphics.endFill();
+		Windowthing.getWindowsTransparent();
+		
         bfScrollWin.scrollRect = new Rectangle();
 	    windowBoyfriend.stage.addChild(spr);
+		Windowthing.getWindowsTransparent();
         windowBoyfriend.stage.addChild(bfScrollWin);
+		Windowthing.getWindowsTransparent();
         bfScrollWin.addChild(boyfriendWin);
+		Windowthing.getWindowsTransparent();
         bfScrollWin.scaleX = 5;
+		Windowthing.getWindowsTransparent();
         bfScrollWin.scaleY = 5;
+		Windowthing.getWindowsTransparent();
         boyfriendGroup.visible = false;
+		Windowthing.getWindowsTransparent();
         // uncomment the line above if you want it to hide the dad ingame and make it visible via the windoe
         Application.current.window.focus();
 		FlxG.autoPause = false;
 		Windowthing.getWindowsTransparent();
 	}
 
-	function popupWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customY:Int, ?customName:String) {
+	function popupWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customY:Int, ?customName:String, ?isTransparent:Bool = false) {
         var display = Application.current.window.display.currentMode;
         // PlayState.defaultCamZoom = 0.5;
 
@@ -5043,22 +5051,21 @@ class PlayState extends MusicBeatState
         windowDad.stage.addEventListener("keyDown", FlxG.keys.onKeyDown);
         @:privateAccess
         windowDad.stage.addEventListener("keyUp", FlxG.keys.onKeyUp);
-		Windowthing.getWindowsTransparent();
         // Application.current.window.x = Std.int(display.width / 2) - 640;
         // Application.current.window.y = Std.int(display.height / 2);
 
-        var bg = Paths.image('funkinAVI/SQUAREBOILOL/PixelMouse').bitmap;
+		var bg = Paths.image('funkinAVI/SQUAREBOILOL/nothing', 'shared').bitmap;
         var spr = new Sprite();
 
         var m = new Matrix();
 
         spr.graphics.beginBitmapFill(bg, m);
-         spr.graphics.drawRect(0, 0, bg.width, bg.height);
+        spr.graphics.drawRect(0, 0, bg.width, bg.height);
         spr.graphics.endFill();
-        FlxG.mouse.useSystemCursor = true;
 		Windowthing.getWindowsTransparent();
+        FlxG.mouse.useSystemCursor = true;
 
-        Application.current.window.resize(640, 480);
+      //  Application.current.window.resize(640, 480);
 
 
 
@@ -5067,13 +5074,20 @@ class PlayState extends MusicBeatState
         dadWin.graphics.endFill();
         dadScrollWin.scrollRect = new Rectangle();
 	    windowDad.stage.addChild(spr);
+		Windowthing.getWindowsTransparent();
         windowDad.stage.addChild(dadScrollWin);
+		Windowthing.getWindowsTransparent();
         dadScrollWin.addChild(dadWin);
+		Windowthing.getWindowsTransparent();
         dadScrollWin.scaleX = 0.7;
+		Windowthing.getWindowsTransparent();
         dadScrollWin.scaleY = 0.7;
+		Windowthing.getWindowsTransparent();
         dadGroup.visible = false;
+		Windowthing.getWindowsTransparent();
         // uncomment the line above if you want it to hide the dad ingame and make it visible via the windoe
         Application.current.window.focus();
+		Windowthing.getWindowsTransparent();
 		FlxG.autoPause = false;
 		Windowthing.getWindowsTransparent();
     }
@@ -8083,7 +8097,7 @@ class PlayState extends MusicBeatState
 		Application.current.window.x = 500;
 		Application.current.window.y = 180;
 		Application.current.window.x = 500;
-		Applcation.current.window.resize(1280, 720);
+		Application.current.window.resize(1280, 720);
 		if (windowDad != null)
         {
         windowDad.close();
@@ -9359,6 +9373,10 @@ class PlayState extends MusicBeatState
 					triggerEventNote('Flash Screen', '1', 'false'); 
 					 triggerEventNote('Alter Camera Zoom', '0.8', '0.7'); 
 					 triggerEventNote('Scroll Type', 'undyne', '');
+					
+					popupBfWindow(500, 400, 1050, 490, SONG.player1);
+					popupWindow(500, 400, 0, 490, SONG.player2);
+					trace("dont crash");
 					}
 
 				if(curStep == 828) {
@@ -10025,6 +10043,10 @@ class PlayState extends MusicBeatState
 				}
 
 				if(curStep == 1592) {
+					if (windowDad != null)
+						{
+						windowDad.close();
+						}
 					triggerEventNote('Fade Character', '0', '');
 					triggerEventNote('Fade Character', '0', '');
 					triggerEventNote('Fade Character', '0', '');

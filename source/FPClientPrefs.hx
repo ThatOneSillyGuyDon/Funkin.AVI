@@ -39,9 +39,11 @@ class FPClientPrefs
 
     public static var huntedLock:String = 'locked';
     public static var oldisolateLock:String = 'locked';
+    public static var betaisolateLock:String = 'locked';
     public static var malfunctionLock:String = 'locked';
     public static var revengeLock:String = 'locked';
     public static var blessLock:String = 'locked';
+    public static var scrappedLock:String = 'locked';
     public static var sinsLock:String = 'locked';
     public static var warLock:String = 'locked';
     public static var crossinLock:String = 'locked';
@@ -53,9 +55,11 @@ class FPClientPrefs
 
         if (FlxG.save.data.huntedLock == null) FlxG.save.data.huntedLock = 'locked';
         if (FlxG.save.data.oldisolateLock == null) FlxG.save.data.oldisolateLock = 'locked';
+        if (FlxG.save.data.betaisolateLock == null) FlxG.save.data.betaisolateLock = 'locked';
         if (FlxG.save.data.malfunctionLock == null) FlxG.save.data.malfunctionLock = 'locked';
         if (FlxG.save.data.revengeLock == null) FlxG.save.data.revengeLock = 'locked';
         if (FlxG.save.data.blessLock == null) FlxG.save.data.blessLock = 'locked';
+        if (FlxG.save.data.scrappedLock == null) FlxG.save.data.scrappedLock = 'locked';
         if (FlxG.save.data.sinsLock == null) FlxG.save.data.sinsLock = 'locked';
         if (FlxG.save.data.warLock == null) FlxG.save.data.warLock = 'locked';
         if (FlxG.save.data.crossinLock == null) FlxG.save.data.crossinLock = 'locked';
@@ -69,9 +73,11 @@ class FPClientPrefs
 
         FlxG.save.data.huntedLock = huntedLock;
         FlxG.save.data.oldisolateLock = oldisolateLock;
+        FlxG.save.data.betaisolateLock = betaisolateLock;
         FlxG.save.data.malfunctionLock = malfunctionLock;
         FlxG.save.data.revengeLock = revengeLock;
         FlxG.save.data.blessLock = blessLock;
+        FlxG.save.data.scrappedLock = scrappedLock;
         FlxG.save.data.sinsLock = sinsLock;
         FlxG.save.data.warLock = warLock;
         FlxG.save.data.crossinLock = crossinLock;
@@ -85,9 +91,11 @@ class FPClientPrefs
 
         huntedLock = FlxG.save.data.huntedLock;
         oldisolateLock = FlxG.save.data.oldisolateLock;
+        betaisolateLock = FlxG.save.data.betaisolateLock;
         malfunctionLock = FlxG.save.data.malfunctionLock;
         revengeLock = FlxG.save.data.revengeLock;
         blessLock = FlxG.save.data.blessLock;
+        scrappedLock = FlxG.save.data.scrappedLock;
         sinsLock = FlxG.save.data.sinsLock;
         warLock = FlxG.save.data.warLock;
         crossinLock = FlxG.save.data.crossinLock;

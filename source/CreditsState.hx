@@ -114,7 +114,7 @@ class CreditsState extends MusicBeatState
 			['END_SELLA',	'Sella',	'Composer',	'https://www.youtube.com/c/seibichu%E3%83%84/videos',	'FFFFFF'],
 			['AttackPan',	'missing-icon',	'Instrumentals for some Tracks',	'nolink',	'FFFFFF'],
 			['Charters'],
-			['DEMOLITIONDON96',	'demolitiondon96',	'Did some charts',	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'], //i'm fucking dying
+			['DEMOLITIONDON96',	'demolitiondon96',	'Did some charts',	'https://youtube.com/c/DEMOLITIONDON96',	'03C6FC'],
 			['Yama haki',	'yama',	'Charted old Isolated',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
 			['Dest',	'dest',	'Charter',	'https://gamebanana.com/members/2095443',	'FFFFFF'],
 			['Noppz',	'missing-icon',	'Charter for Suicidal Difficulty \n(Not Available in this Demo)',	'https://www.youtube.com/channel/UCuz26FymzG_4tluOooxT-xQ',	'FFFFFF'],

@@ -57,6 +57,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			'bool',
 			true);
 		addOption(option);
+
+		var option:Option = new Option('HUD Style:',
+			"What HUD would you like to play with?",
+			'hudSelection',
+			'string',
+			'Psych',
+			['Psych', 'Vanilla']); //HUDs to add: Demolition HUD, Funkin.avi HUD, Red-Bun's HUD.
+			addOption(option);
 		
 		var option:Option = new Option('Winning Icons',
 			'If checked, enables extra icon frames',

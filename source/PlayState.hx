@@ -415,6 +415,10 @@ class PlayState extends MusicBeatState
     var dadWin = new Sprite();
     var dadScrollWin = new Sprite();
 
+	var windowBoyfriend:Window;
+    var boyfriendWin = new Sprite();
+    var bfScrollWin = new Sprite();
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -4921,7 +4925,7 @@ class PlayState extends MusicBeatState
 		}
 
 		//suicidal malfunction stuff
-		@:privateAccess
+			@:privateAccess
         var dadFrame = dad._frame;
         
         if (dadFrame == null || dadFrame.frame == null) return; // prevents crashes (i think???)
@@ -4932,9 +4936,84 @@ class PlayState extends MusicBeatState
         dadScrollWin.x = (((dadFrame.offset.x) - (dad.offset.x / 2)) * dadScrollWin.scaleX);
         dadScrollWin.y = (((dadFrame.offset.y) - (dad.offset.y / 2)) * dadScrollWin.scaleY);        
 
+		@:privateAccess
+        var boyfriendFrame = boyfriend._frame;
+        
+        if (boyfriendFrame == null || boyfriendFrame.frame == null) return; // prevents crashes (i think???)
+            
+        var rect = new Rectangle(boyfriendFrame.frame.x, boyfriendFrame.frame.y, boyfriendFrame.frame.width, boyfriendFrame.frame.height);
+        
+        bfScrollWin.scrollRect = rect;
+        bfScrollWin.x = (((boyfriendFrame.offset.x) - (boyfriend.offset.x / 2)) * bfScrollWin.scaleX);
+        bfScrollWin.y = (((boyfriendFrame.offset.y) - (boyfriend.offset.y / 2)) * bfScrollWin.scaleY);
+  }      
+
+	function popupBfWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customY:Int, ?customName:String) {
+        var display = Application.current.window.display.currentMode;
+        // PlayState.defaultCamZoom = 0.5;
+
+		if(customName == '' || customName == null){
+			customName = 'Player.json';
+		}
+
+        windowBoyfriend = Lib.application.createWindow({
+            title: customName,
+            width: customWidth,
+            height: customHeight,
+            borderless: false,
+            alwaysOnTop: true
+
+        });
+		if(customX == null){
+			customX = -10;
+		}
+        FlxTween.tween(windowBoyfriend, {x: customX}, 0.4);
+		windowBoyfriend.y = customY;
+        if(customY == null) {
+        windowBoyfriend.y = Std.int(display.height / 2);
+        }
+     //   windowboyfriend.stage.color = 0xFF686464;
+		
+        @:privateAccess
+        windowBoyfriend.stage.addEventListener("keyDown", FlxG.keys.onKeyDown);
+        @:privateAccess
+        windowBoyfriend.stage.addEventListener("keyUp", FlxG.keys.onKeyUp);
+		Windowthing.getWindowsTransparent();
+        // Application.current.window.x = Std.int(display.width / 2) - 640;
+        // Application.current.window.y = Std.int(display.height / 2);
+
+        var bg = Paths.image('funkinAVI/SQUAREBOILOL/PixelMouse').bitmap;
+        var spr = new Sprite();
+
+        var m = new Matrix();
+
+        spr.graphics.beginBitmapFill(bg, m);
+         spr.graphics.drawRect(0, 0, bg.width, bg.height);
+        spr.graphics.endFill();
+        FlxG.mouse.useSystemCursor = true;
+		Windowthing.getWindowsTransparent();
+
+        Application.current.window.resize(640, 480);
+
+
+
+        boyfriendWin.graphics.beginBitmapFill(boyfriend.pixels, m);
+        boyfriendWin.graphics.drawRect(0, 0, boyfriend.pixels.width, boyfriend.pixels.height);
+        boyfriendWin.graphics.endFill();
+        bfScrollWin.scrollRect = new Rectangle();
+	    windowBoyfriend.stage.addChild(spr);
+        windowBoyfriend.stage.addChild(bfScrollWin);
+        bfScrollWin.addChild(boyfriendWin);
+        bfScrollWin.scaleX = 5;
+        bfScrollWin.scaleY = 5;
+        boyfriendGroup.visible = false;
+        // uncomment the line above if you want it to hide the dad ingame and make it visible via the windoe
+        Application.current.window.focus();
+		FlxG.autoPause = false;
+		Windowthing.getWindowsTransparent();
 	}
 
-	function popupWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customName:String) {
+	function popupWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customY:Int, ?customName:String) {
         var display = Application.current.window.display.currentMode;
         // PlayState.defaultCamZoom = 0.5;
 
@@ -4946,34 +5025,40 @@ class PlayState extends MusicBeatState
             title: customName,
             width: customWidth,
             height: customHeight,
-            borderless: true,
+            borderless: false,
             alwaysOnTop: true
 
         });
 		if(customX == null){
 			customX = -10;
 		}
-        windowDad.x = customX;
-	   windowDad.y = Std.int(display.height / 2);
-        windowDad.stage.color = 0xFFCECECE;
+        FlxTween.tween(windowDad, {x: customX}, 0.4);
+		windowDad.y = customY;
+        if(customY == null) {
+        windowDad.y = Std.int(display.height / 2);
+        }
+     //   windowDad.stage.color = 0xFF686464;
+		
         @:privateAccess
         windowDad.stage.addEventListener("keyDown", FlxG.keys.onKeyDown);
         @:privateAccess
         windowDad.stage.addEventListener("keyUp", FlxG.keys.onKeyUp);
+		Windowthing.getWindowsTransparent();
         // Application.current.window.x = Std.int(display.width / 2) - 640;
         // Application.current.window.y = Std.int(display.height / 2);
 
         var bg = Paths.image('funkinAVI/SQUAREBOILOL/PixelMouse').bitmap;
-        // var spr = new Sprite();
+        var spr = new Sprite();
 
         var m = new Matrix();
 
-        // spr.graphics.beginBitmapFill(bg, m);
-        // spr.graphics.drawRect(0, 0, bg.width, bg.height);
-        // spr.graphics.endFill();
+        spr.graphics.beginBitmapFill(bg, m);
+         spr.graphics.drawRect(0, 0, bg.width, bg.height);
+        spr.graphics.endFill();
         FlxG.mouse.useSystemCursor = true;
+		Windowthing.getWindowsTransparent();
 
-        //Application.current.window.resize(640, 480);
+        Application.current.window.resize(640, 480);
 
 
 
@@ -4981,7 +5066,7 @@ class PlayState extends MusicBeatState
         dadWin.graphics.drawRect(0, 0, dad.pixels.width, dad.pixels.height);
         dadWin.graphics.endFill();
         dadScrollWin.scrollRect = new Rectangle();
-	// windowDad.stage.addChild(spr);
+	    windowDad.stage.addChild(spr);
         windowDad.stage.addChild(dadScrollWin);
         dadScrollWin.addChild(dadWin);
         dadScrollWin.scaleX = 0.7;
@@ -4989,8 +5074,8 @@ class PlayState extends MusicBeatState
         dadGroup.visible = false;
         // uncomment the line above if you want it to hide the dad ingame and make it visible via the windoe
         Application.current.window.focus();
-		Windowthing.getWindowsTransparent();
 		FlxG.autoPause = false;
+		Windowthing.getWindowsTransparent();
     }
 
 	function openChartEditor()
@@ -7994,6 +8079,19 @@ class PlayState extends MusicBeatState
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
 		super.destroy();
+		Application.current.window.borderless = false;
+		Application.current.window.x = 500;
+		Application.current.window.y = 180;
+		Application.current.window.x = 500;
+		Applcation.current.window.resize(1280, 720);
+		if (windowDad != null)
+        {
+        windowDad.close();
+        }
+
+		if(windowBoyfriend != null) {
+			windowBoyfriend.close();
+		}
 	}
 
 	public static function cancelMusicFadeTween() {
@@ -9640,15 +9738,6 @@ class PlayState extends MusicBeatState
 					triggerEventNote('Alter Camera Zoom', '0.8', '0.7');
 					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
 					triggerEventNote('Scroll Type', 'right', 'left');
-
-					if(!ClientPrefs.lowQuality) {
-					popupWindow(700, 500, 100, '   ');
-					Application.current.window.borderless = true;
-					Application.current.window.resize(700, 570);
-					Application.current.window.x = 800;
-					trace("dont crash");
-					Windowthing.getWindowsTransparent();
-				}
 				}
 				
 				if(curBeat == 333) {

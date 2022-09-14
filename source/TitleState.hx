@@ -821,31 +821,6 @@ class TitleState extends MusicBeatState
 		}*/
 
 		if(!closedState) {
-			if(ClientPrefs.funiShaders)
-		{
-			chrom = new ChromaticAberrationEffect();
-			blurThisShit = new TiltshiftEffect(0.9, 0);
-			bloomShit = new WIBloomEffect(0);
-			greyscale = new GreyscaleEffect();
-			
-			addShader(chrom);
-			addShader(blurThisShit);
-			addShader(bloomShit);
-			addShader(greyscale);
-			
-			if (chrom != null)
-			chrom.setChrome(0.003);
-			
-			if (bloomShit != null)
-			bloomShit.setSize(18.0);
-			
-			if(blurThisShit != null)
-			blurThisShit.bluramount.value = [0.9];
-			//Shaders suck lmao
-
-			
-		}
-
 			sickBeats++;
 			switch (sickBeats)
 			{

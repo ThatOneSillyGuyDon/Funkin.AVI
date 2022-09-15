@@ -1138,7 +1138,7 @@ class PlayState extends MusicBeatState
 				{
 					addShaderToCamera('game', new VhsEffect(0.4, 0.3));
 					addShaderToCamera('game', new VCRDistortionEffect(0, true, true, true));
-					addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.002));
 					addShaderToCamera('hud', new VCRDistortionEffect(0, true, true, true));
 					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
@@ -8755,29 +8755,15 @@ class PlayState extends MusicBeatState
 			}
 
 				if(curStep == 4) {
-					triggerEventNote('Alter Camera Zoom', '3', '11'); //?
-					FlxTween.tween(healthBar, {alpha: 0}, 1);
-					FlxTween.tween(healthBarBG, {alpha: 0}, 1);
-					FlxTween.tween(scoreTxt, {alpha: 0}, 1);
-					FlxTween.tween(iconP1, {alpha: 0}, 1);
-					FlxTween.tween(iconP2, {alpha: 0}, 1);
-					FlxTween.tween(timeBar, {alpha: 0}, 1);
-					FlxTween.tween(timeBarBG, {alpha: 0}, 1);
-					FlxTween.tween(timeTxt, {alpha: 0}, 1);
+					triggerEventNote('Alter Camera Zoom', '2.2', '11'); //?
+					FlxTween.tween(camHUD, {alpha: 0}, 1);
 				}
 
 				if(curStep == 128) {
 					triggerEventNote('Alter Camera Zoom', '0.8', '1.2');
 					triggerEventNote('Flash Screen', '0', 'false'); 
 
-					FlxTween.tween(healthBar, {alpha: 1}, 1);
-					FlxTween.tween(healthBarBG, {alpha: 1}, 1);
-					FlxTween.tween(scoreTxt, {alpha: 1}, 1);
-					FlxTween.tween(iconP1, {alpha: 1}, 1);
-					FlxTween.tween(iconP2, {alpha: 1}, 1);
-					FlxTween.tween(timeBar, {alpha: 0}, 1);
-					FlxTween.tween(timeBarBG, {alpha: 0}, 1);
-					FlxTween.tween(timeTxt, {alpha: 1}, 1);
+					FlxTween.tween(camHUD, {alpha: 1}, 1);
 					//Tween Shit
 				}
 
@@ -10183,6 +10169,772 @@ class PlayState extends MusicBeatState
 				triggerEventNote('Add Camera Zoom', '0.004', '0.03');
 			case 'Facade':
 				//Insert Events here
+			case 'Scrapped':
+				if(curStep == 112)
+				{
+					FlxG.camera.flash(FlxColor.BLACK, 2);
+					dad.y = -100;
+				}
+				if(curStep == 416)
+				{
+					rsTV.visible = true;
+				}
+				if(curStep == 420)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 428)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 436)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 444)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 452)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 460)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 468)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 476)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 484)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 492)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 500)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 508)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 516)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 524)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 532)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 540)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 544)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 548)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 552)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 556)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 560)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 564)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 568)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 572)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 576)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 580)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 584)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 588)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 592)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 596)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 600)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 604)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 608)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 612)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 616)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 620)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 624)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 628)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 632)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 636)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 640)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 644)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 648)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 652)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 656)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 660)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 664)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 736)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 752)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 760)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 768)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 864)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 872)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 880)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 1.5}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 888)
+				{
+					FlxTween.tween(gradientBar, {'scale.y': 0}, 0.6, {ease: FlxEase.quadInOut});
+				}
+				if(curStep == 932)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
+				if(curStep == 940)
+				{
+					if(canaddshaders)
+					{
+						addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+						addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
+						addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+						new FlxTimer().start(0.09, function(tmr:FlxTimer)
+						{
+							clearShaderFromCamera('game');
+							clearShaderFromCamera('hud');
+							addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+							addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
+							addShaderToCamera('game', new VhsEffect(0.3, 0));
+						});
+						
+					}
+				}
 
 			case 'test': //We need a name lmao
 		}

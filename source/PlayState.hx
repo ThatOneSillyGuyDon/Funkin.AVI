@@ -8560,7 +8560,19 @@ class PlayState extends MusicBeatState
 			case 'Lunacy': 
 				//Insert Events here
 			case 'Delusional':
-				if(curStep == 456)
+				if(curStep == 0)
+				{
+					dad.preloadCharacter("dad", "Mickeyinsane")
+				}
+				if(curStep == 464)
+				{
+					switchCharacter("dad", "Mickeyinsane")
+				}
+     			if(curStep == 128)
+				{
+					triggerEventNote('Flash Screen', '3' '')
+				}
+			    if(curStep == 456)
 				{
 					if(curStage == 'Studio')
 					{

@@ -8609,7 +8609,7 @@ class PlayState extends MusicBeatState
 				}
      			if(curStep == 128)
 				{
-					triggerEventNote('Flash Screen', '3' '');
+					triggerEventNote('Flash Screen', '3', '');
 				}
 			    if(curStep == 456)
 				{

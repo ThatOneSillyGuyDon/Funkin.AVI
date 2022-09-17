@@ -158,6 +158,10 @@ class Main extends Sprite
 				FlxG.drawFramerate = 60;
 			}
 		}
+
+		public function onResize(width:Int, height:Int) { //bro too easy
+			FlxG.resizeWindow(width, height);
+		}
 	
 		function onWindowFocusIn()
 		{

@@ -8557,8 +8557,9 @@ class PlayState extends MusicBeatState
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
 					fadeWhiteFlash();
 				} //Man
+
 			case 'Lunacy': 
-				//Insert Events here
+              //Insert Events Here
 			case 'Delusional':
 				if(curStep == 456)
 				{
@@ -10170,6 +10171,7 @@ class PlayState extends MusicBeatState
 			case 'Facade':
 				//Insert Events here
 			case 'Scrapped':
+				if(!ClientPrefs)
 				if(curStep == 112)
 				{
 					FlxG.camera.flash(FlxColor.BLACK, 2);

@@ -8601,15 +8601,15 @@ class PlayState extends MusicBeatState
 			case 'Delusional':
 				if(curStep == 0)
 				{
-					dad.preloadCharacter("dad", "Mickeyinsane")
+					dad.preloadCharacter("dad", "Mickeyinsane");
 				}
 				if(curStep == 464)
 				{
-					switchCharacter("dad", "Mickeyinsane")
+					switchCharacter("dad", "Mickeyinsane");
 				}
      			if(curStep == 128)
 				{
-					triggerEventNote('Flash Screen', '3' '')
+					triggerEventNote('Flash Screen', '3' '');
 				}
 			    if(curStep == 456)
 				{

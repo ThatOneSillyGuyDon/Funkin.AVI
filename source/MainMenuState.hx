@@ -27,6 +27,9 @@ import lime.app.Application;
 import Achievements;
 import editors.MasterEditorMenu;
 import flixel.input.keyboard.FlxKey;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
+import Shaders;
 
 //GameJolt
 import GameJolt;
@@ -42,6 +45,13 @@ class MainMenuState extends MusicBeatState
 	public static var DemoEngineVersion:String = '0.2.3';
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
+
+	var bloomShit:WIBloomEffect;
+	var chrom:ChromaticAberrationEffect;
+	var blurThisShit:TiltshiftEffect;
+	var greyscale:GreyscaleEffect;
+
+	var shaders:Array<ShaderEffect> = [];
 
 	var menuItems:FlxTypedGroup<FlxSprite>;
 	private var camGame:FlxCamera;
@@ -114,6 +124,33 @@ class MainMenuState extends MusicBeatState
 		persistentUpdate = persistentDraw = true;
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
+
+		if(ClientPrefs.funiShaders)
+					{
+						chrom = new ChromaticAberrationEffect();
+						blurThisShit = new TiltshiftEffect(0.4, 0);
+						bloomShit = new WIBloomEffect(0);
+						greyscale = new GreyscaleEffect();
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+						addShader(chrom);
+						addShader(blurThisShit);
+						addShader(bloomShit);
+						addShader(greyscale);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+						if (chrom != null)
+						chrom.setChrome(0.003);
+
+						if (bloomShit != null)
+						bloomShit.setSize(18.0);
+
+						if(blurThisShit != null)
+						blurThisShit.setBlur(0.4);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+
+					} //the game fucking breaks now for some reason with this on :(
 
 		eyes = new FlxSprite().loadGraphic(Paths.image('NEWmenu/HahaSadBoi'));
 		eyes.scrollFactor.set(0, 0);
@@ -462,6 +499,23 @@ class MainMenuState extends MusicBeatState
 		trace('Thanks For Login ' + GJApi.username);
 	}
 	#end
+
+	function addShader(effect:ShaderEffect)
+	{
+		if (!ClientPrefs.funiShaders)
+			return;
+
+		shaders.push(effect);
+
+		var newCamEffects:Array<BitmapFilter> = [];
+
+		for (i in shaders)
+		{
+			newCamEffects.push(new ShaderFilter(i.shader));
+		}
+
+		FlxG.camera.setFilters(newCamEffects);
+	}
 
 	var selectedSomethin:Bool = false;
 

@@ -31,18 +31,58 @@ import openfl.filters.ShaderFilter;
 using StringTools;
 
 class EpicSelectorWOOO extends MusicBeatState{
-	public var camFilter:FlxCamera;
-    var freeplayCats:Array<String> = ['Episodes', 'Extras'];
+
+	var bloomShit:WIBloomEffect;
+	var chrom:ChromaticAberrationEffect;
+	var blurThisShit:TiltshiftEffect;
+	var greyscale:GreyscaleEffect;
+	var distort:WIDistortionEffect;
+
+	var shaders:Array<ShaderEffect> = [];
+
+	//Spooky ass Mystery Effects OooooOOOooo
+	//var 
+
+	//public var camFilter:FlxCamera;
+    var freeplayCats:Array<String>;
 	var fpCateBanners:FlxSprite;
 	var grpCats:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 	var BG:FlxSprite;
     override function create(){
 
-		camFilter = new FlxCamera();
-		camFilter.bgColor.alpha = 0;
+		if(ClientPrefs.funiShaders)
+					{
+						chrom = new ChromaticAberrationEffect();
+						blurThisShit = new TiltshiftEffect(0.4, 0);
+						bloomShit = new WIBloomEffect(0);
+						greyscale = new GreyscaleEffect();
+						//uncomment these fucking pieces of shit if you feel like testing it.
 
-		FlxG.cameras.add(camFilter);
+						addShader(chrom);
+						addShader(blurThisShit);
+						addShader(bloomShit);
+						addShader(greyscale);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+						if (chrom != null)
+						chrom.setChrome(0.003);
+
+						if (bloomShit != null)
+						bloomShit.setSize(18.0);
+
+						if(blurThisShit != null)
+						blurThisShit.setBlur(0.4);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+
+					}
+		if(FPClientPrefs.episode2FPLock == 'unlocked')
+		{
+			freeplayCats = ['Episodes', 'Extras', '???'];
+		} else {
+			freeplayCats = ['Episodes', 'Extras'];
+		}		
 
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		BG.updateHitbox();
@@ -84,12 +124,33 @@ class EpicSelectorWOOO extends MusicBeatState{
 		grain.scale.y = 1.1;
 		add(grain);
 
-		scratchStuff.cameras = [camFilter];
-		grain.cameras = [camFilter];
-
         changeSelection();
         super.create();
     }
+
+	function clearShader()
+	{
+		shaders = [];
+		var newCamEffects:Array<BitmapFilter> = [];
+		FlxG.camera.setFilters(newCamEffects);
+	}
+
+	function addShader(effect:ShaderEffect)
+	{
+		if (!ClientPrefs.funiShaders)
+			return;
+
+		shaders.push(effect);
+
+		var newCamEffects:Array<BitmapFilter> = [];
+
+		for (i in shaders)
+		{
+			newCamEffects.push(new ShaderFilter(i.shader));
+		}
+
+		FlxG.camera.setFilters(newCamEffects);
+	}
 
     override public function update(elapsed:Float){
         
@@ -117,6 +178,8 @@ class EpicSelectorWOOO extends MusicBeatState{
 				}else{
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 				}
+				case 2:
+					FlxG.sound.play(Paths.sound('cancelMenu'));
 			}
             }
         super.update(elapsed);
@@ -141,5 +204,62 @@ class EpicSelectorWOOO extends MusicBeatState{
 			}
 		}
 		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
+
+		if(curSelected == 2)
+						{
+							FlxG.camera.flash(FlxColor.BLACK, 0.6);
+							FlxG.camera.shake(0.004, 99999999);
+							if(ClientPrefs.funiShaders)
+							{
+							clearShader();
+							chrom = new ChromaticAberrationEffect();
+							blurThisShit = new TiltshiftEffect(0.6, 0);
+
+							distort = new WIDistortionEffect(0.75, 0.25, false);
+							distort.shader.working.value = [true];
+
+							addShader(distort);
+							addShader(chrom);
+							addShader(blurThisShit);
+
+								if (chrom != null)
+							chrom.setChrome(0.005);
+
+							if(blurThisShit != null)
+							blurThisShit.setBlur(0.6);
+
+							if (distort != null)
+							distort.shader.working.value = [true];
+							}
+
+						}else{
+							FlxG.camera.flash(FlxColor.BLACK, 0.2);
+							if(ClientPrefs.funiShaders)
+							{
+							clearShader();
+							chrom = new ChromaticAberrationEffect();
+							blurThisShit = new TiltshiftEffect(0.4, 0);
+							bloomShit = new WIBloomEffect(0);
+							greyscale = new GreyscaleEffect();
+							//uncomment these fucking pieces of shit if you feel like testing it.
+
+							addShader(chrom);
+							addShader(blurThisShit);
+							addShader(bloomShit);
+							addShader(greyscale);
+							//uncomment these fucking pieces of shit if you feel like testing it.
+
+							if (chrom != null)
+							chrom.setChrome(0.003);
+
+							if (bloomShit != null)
+							bloomShit.setSize(18.0);
+
+							if(blurThisShit != null)
+							blurThisShit.setBlur(0.4);
+							//uncomment these fucking pieces of shit if you feel like testing it.
+							}
+							FlxG.camera.shake(0.004, 0);
+						}
 	}
 }

@@ -237,6 +237,33 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(60);
 		persistentUpdate = true;
 
+		if(ClientPrefs.funiShaders)
+					{
+						chrom = new ChromaticAberrationEffect();
+						blurThisShit = new TiltshiftEffect(0.4, 0);
+						bloomShit = new WIBloomEffect(0);
+						greyscale = new GreyscaleEffect();
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+						addShader(chrom);
+						addShader(blurThisShit);
+						addShader(bloomShit);
+						addShader(greyscale);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+						if (chrom != null)
+						chrom.setChrome(0.003);
+
+						if (bloomShit != null)
+						bloomShit.setSize(18.0);
+
+						if(blurThisShit != null)
+						blurThisShit.setBlur(0.4);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+
+					}
+
 		var bg:FlxSprite = new FlxSprite();
 		bg.loadGraphic(Paths.image('Title_bg'), false);
 		bg.screenCenter();
@@ -471,7 +498,7 @@ class TitleState extends MusicBeatState
 						MusicBeatState.switchState(new OutdatedState());
 					} else {
 						Application.current.window.title = "Funkin.avi";
-						MusicBeatState.switchState(new NoticeState());
+						MusicBeatState.switchState(new MainMenuState());
 					}
 					closedState = true;
 				});
@@ -825,32 +852,6 @@ class TitleState extends MusicBeatState
 			switch (sickBeats)
 			{
 				case 1:
-					if(ClientPrefs.funiShaders)
-					{
-						chrom = new ChromaticAberrationEffect();
-						//blurThisShit = new TiltshiftEffect(0.9, 0);
-						//bloomShit = new WIBloomEffect(0);
-						//greyscale = new GreyscaleEffect();
-						//uncomment these fucking pieces of shit if you feel like testing it.
-
-						addShader(chrom);
-						//addShader(blurThisShit);
-						//addShader(bloomShit);
-						//addShader(greyscale);
-						//uncomment these fucking pieces of shit if you feel like testing it.
-
-						if (chrom != null)
-						chrom.setChrome(0.003);
-
-						//if (bloomShit != null)
-						//bloomShit.setSize(18.0);
-
-						//if(blurThisShit != null)
-						//blurThisShit.bluramount.value = [0.9];
-						//uncomment these fucking pieces of shit if you feel like testing it.
-
-
-					}
 					createCoolText(["Dunkin' Funkin' Team"], 15);
 				// credTextShit.visible = true;
 				case 3:

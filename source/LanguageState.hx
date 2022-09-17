@@ -12,10 +12,20 @@ import flash.system.System;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxTimer;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
+import Shaders;
 
 class LanguageState extends MusicBeatState
 {
 	public static var languageSelected:Bool = false;
+
+	var bloomShit:WIBloomEffect;
+	var chrom:ChromaticAberrationEffect;
+	var blurThisShit:TiltshiftEffect;
+	var greyscale:GreyscaleEffect;
+
+	var shaders:Array<ShaderEffect> = [];
 
 	var blackFade:FlxSprite; //copy from DisclaimerState, whatever, it works
 	var warnText:FlxText;
@@ -28,6 +38,32 @@ class LanguageState extends MusicBeatState
 
         FlxG.mouse.visible = true;
 
+		if(ClientPrefs.funiShaders)
+					{
+						chrom = new ChromaticAberrationEffect();
+						blurThisShit = new TiltshiftEffect(0.4, 0);
+						bloomShit = new WIBloomEffect(0);
+						greyscale = new GreyscaleEffect();
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+						addShader(chrom);
+						addShader(blurThisShit);
+						addShader(bloomShit);
+						addShader(greyscale);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+						if (chrom != null)
+						chrom.setChrome(0.003);
+
+						if (bloomShit != null)
+						bloomShit.setSize(18.0);
+
+						if(blurThisShit != null)
+						blurThisShit.setBlur(0.4);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+
+					}
 	
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
@@ -80,6 +116,23 @@ class LanguageState extends MusicBeatState
 		add(grain);
 
 		FlxTween.tween(blackFade, {alpha: 0}, 1); //we be makin this shit fancy now
+	}
+
+	function addShader(effect:ShaderEffect)
+	{
+		if (!ClientPrefs.funiShaders)
+			return;
+
+		shaders.push(effect);
+
+		var newCamEffects:Array<BitmapFilter> = [];
+
+		for (i in shaders)
+		{
+			newCamEffects.push(new ShaderFilter(i.shader));
+		}
+
+		FlxG.camera.setFilters(newCamEffects);
 	}
 
 	override function update(elapsed:Float)

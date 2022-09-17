@@ -22,6 +22,9 @@ import lime.app.Application;
 import flixel.system.FlxSound;
 import openfl.utils.Assets as OpenFlAssets;
 import WeekData;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
+import Shaders;
 #if MODS_ALLOWED
 import sys.FileSystem;
 #end
@@ -30,14 +33,22 @@ using StringTools;
 
 class EpisodesState extends MusicBeatState
 {
-	private var camFilter:FlxCamera;
-
 	private var songs:Array<SongMetadata> = [];
 
 	var selector:FlxText;
 	private static var curSelected:Int = 0;
 	var curDifficulty:Int = -1;
 	private static var lastDifficultyName:String = '';
+
+	var bloomShit:WIBloomEffect;
+	var chrom:ChromaticAberrationEffect;
+	var blurThisShit:TiltshiftEffect;
+	var greyscale:GreyscaleEffect;
+	var distort:WIDistortionEffect;
+	var vcrShit:VCRDistortionEffect;
+
+	var shaders:Array<ShaderEffect> = [];
+	var shaderUpdates:Array<Float->Void> = [];
 
 	var scoreBG:FlxSprite;
 	var scoreText:FlxText;
@@ -58,12 +69,7 @@ class EpisodesState extends MusicBeatState
 	public var camZooming:Bool = false;
 
 	override function create()
-	{
-		camFilter = new FlxCamera();
-		camFilter.bgColor.alpha = 0;
-
-		FlxG.cameras.add(camFilter);
-		
+	{		
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		
@@ -117,7 +123,8 @@ class EpisodesState extends MusicBeatState
         if(FPClientPrefs.episode2FPLock == 'unlocked')
         {
             addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
-            addSong('Facade', 3, 'smile', FlxColor.fromRGB(105, 17, 10));
+            addSong('Facade', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
+			addSong('Mortiferum Risus', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
         }
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
@@ -258,11 +265,32 @@ class EpisodesState extends MusicBeatState
 		grain.scale.y = 1.1;
 		add(grain);
 
-		scratchStuff.cameras = [camFilter];
-		grain.cameras = [camFilter];
-
 		super.create();
 	}
+
+	function clearShader()
+		{
+			shaders = [];
+			var newCamEffects:Array<BitmapFilter> = [];
+			FlxG.camera.setFilters(newCamEffects);
+		}
+	
+		function addShader(effect:ShaderEffect)
+		{
+			if (!ClientPrefs.funiShaders)
+				return;
+	
+			shaders.push(effect);
+	
+			var newCamEffects:Array<BitmapFilter> = [];
+	
+			for (i in shaders)
+			{
+				newCamEffects.push(new ShaderFilter(i.shader));
+			}
+	
+			FlxG.camera.setFilters(newCamEffects);
+		}
 
 	override function closeSubState() {
 		changeSelection(0, false);
@@ -460,6 +488,11 @@ class EpisodesState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 		}
 		super.update(elapsed);
+
+		for (i in shaderUpdates)
+			{
+				i(elapsed);
+			}
 	}
 	
 	override function beatHit()
@@ -595,6 +628,67 @@ class EpisodesState extends MusicBeatState
 		if(newPos > -1)
 		{
 			curDifficulty = newPos;
+		}
+
+		switch (curSelected)
+		{
+			case 0 | 1 | 2:
+				FlxG.camera.flash(FlxColor.BLACK, 0.2);
+				if(ClientPrefs.funiShaders)
+				{
+				clearShader();
+				chrom = new ChromaticAberrationEffect();
+				blurThisShit = new TiltshiftEffect(0.4, 0);
+				bloomShit = new WIBloomEffect(0);
+				greyscale = new GreyscaleEffect();
+				//uncomment these fucking pieces of shit if you feel like testing it.
+
+				addShader(chrom);
+				addShader(blurThisShit);
+				addShader(bloomShit);
+				addShader(greyscale);
+				//uncomment these fucking pieces of shit if you feel like testing it.
+
+				if (chrom != null)
+				chrom.setChrome(0.003);
+
+				if (bloomShit != null)
+				bloomShit.setSize(18.0);
+
+				if(blurThisShit != null)
+				blurThisShit.setBlur(0.4);
+				//uncomment these fucking pieces of shit if you feel like testing it.
+				}
+				FlxG.camera.shake(0.004, 0);
+			case 3 | 4 | 5:
+				FlxG.camera.flash(FlxColor.BLACK, 0.2);
+				if(ClientPrefs.funiShaders)
+				{
+				clearShader();
+				chrom = new ChromaticAberrationEffect();
+				blurThisShit = new TiltshiftEffect(0.4, 0);
+				bloomShit = new WIBloomEffect(0);
+				greyscale = new GreyscaleEffect();
+				//uncomment these fucking pieces of shit if you feel like testing it.
+
+				addShader(chrom);
+				addShader(blurThisShit);
+				addShader(bloomShit);
+				addShader(greyscale);
+				//uncomment these fucking pieces of shit if you feel like testing it.
+
+				if (chrom != null)
+				chrom.setChrome(0.006);
+
+				if (bloomShit != null)
+				bloomShit.setSize(19.0);
+
+				if(blurThisShit != null)
+				blurThisShit.setBlur(0.5);
+				
+				//uncomment these fucking pieces of shit if you feel like testing it.
+				}
+				FlxG.camera.shake(0.002, 999999999);
 		}
 	}
 

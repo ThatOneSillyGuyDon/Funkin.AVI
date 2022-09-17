@@ -10228,7 +10228,6 @@ class PlayState extends MusicBeatState
 			case 'Facade':
 				//Insert Events here
 			case 'Scrapped':
-				if(!ClientPrefs)
 				if(curStep == 112)
 				{
 					FlxG.camera.flash(FlxColor.BLACK, 2);

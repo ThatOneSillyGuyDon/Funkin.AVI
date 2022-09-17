@@ -18,11 +18,22 @@ import flixel.util.FlxColor;
 import flash.system.System;
 import lime.utils.Assets;
 import flixel.system.FlxSound;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
+import Shaders;
 
 using StringTools;
 
 class ExtrasState extends MusicBeatState{
-	private var camFilter:FlxCamera;
+
+	var bloomShit:WIBloomEffect;
+	var chrom:ChromaticAberrationEffect;
+	var blurThisShit:TiltshiftEffect;
+	var greyscale:GreyscaleEffect;
+	var distort:WIDistortionEffect;
+
+	var shaders:Array<ShaderEffect> = [];
+
 	var songs:Array<SongMetadataCool> = [];
 
 	var selector:FlxText;
@@ -50,11 +61,6 @@ class ExtrasState extends MusicBeatState{
 
 	override function create()
 	{
-		camFilter = new FlxCamera();
-		camFilter.bgColor.alpha = 0;
-
-		FlxG.cameras.add(camFilter);
-
 		FPClientPrefs.loadShit();
 
         if(FPClientPrefs.episode1FPLock == 'unlocked')
@@ -62,17 +68,17 @@ class ExtrasState extends MusicBeatState{
             addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), FlxG.save.data.huntedLock);
             addSong('Isolated Old', 3, 'legacy', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.oldisolateLock);
 			addSong('Isolated Beta', 3, 'legacy', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.betaisolateLock);
+			addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED, FlxG.save.data.crossinLock);
             addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), FlxG.save.data.malfunctionLock);
            // addSong('Revenge', 3, 'face', FlxColor.WHITE, FlxG.save.data.revengeLock);
         }
 
         if(FPClientPrefs.episode2FPLock == 'unlocked')
         {
-            addSong('Cycled Sins', 3, 'relapse', FlxColor.fromRGB(115, 86, 86), FlxG.save.data.sinsLock);
+            addSong('Cycled Sins', 3, 'relapse-pixel', FlxColor.fromRGB(115, 86, 86), FlxG.save.data.sinsLock);
             addSong('War Dilemma', 3, 'warmick', FlxColor.fromRGB(105, 17, 10), FlxG.save.data.warLock);
 			addSong('Scrapped', 3, 'rs', FlxColor.BLACK, FlxG.save.data.scrappedLock);
             addSong('Bless', 3, 'whitenew', FlxColor.WHITE, FlxG.save.data.blessLock);
-            addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED, FlxG.save.data.crossinLock);
             addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock);
         }
 
@@ -221,11 +227,32 @@ class ExtrasState extends MusicBeatState{
 		grain.scale.y = 1.1;
 		add(grain);
 
-		scratchStuff.cameras = [camFilter];
-		grain.cameras = [camFilter];
-
 		super.create();
 	}
+
+	function clearShader()
+		{
+			shaders = [];
+			var newCamEffects:Array<BitmapFilter> = [];
+			FlxG.camera.setFilters(newCamEffects);
+		}
+	
+		function addShader(effect:ShaderEffect)
+		{
+			if (!ClientPrefs.funiShaders)
+				return;
+	
+			shaders.push(effect);
+	
+			var newCamEffects:Array<BitmapFilter> = [];
+	
+			for (i in shaders)
+			{
+				newCamEffects.push(new ShaderFilter(i.shader));
+			}
+	
+			FlxG.camera.setFilters(newCamEffects);
+		}
 
 	override function closeSubState() {
 		changeSelection(0, false);
@@ -558,6 +585,82 @@ class ExtrasState extends MusicBeatState{
 		{
 			curDifficulty = newPos;
 		}
+
+		if (curSelected == 3)
+			{
+				FlxG.camera.flash(FlxColor.BLACK, 0.6);
+							FlxG.camera.shake(0.007, 99999999);
+							if(ClientPrefs.funiShaders)
+							{
+							clearShader();
+							chrom = new ChromaticAberrationEffect();
+							blurThisShit = new TiltshiftEffect(0.6, 0);
+
+							addShader(chrom);
+							addShader(blurThisShit);
+
+								if (chrom != null)
+							chrom.setChrome(0.01);
+
+							if(blurThisShit != null)
+							blurThisShit.setBlur(1.3);
+
+							}
+			}else if (curSelected == 4 || curSelected == 7)
+			{
+				FlxG.camera.flash(FlxColor.BLACK, 0.6);
+				FlxG.camera.shake(0.004, 99999999);
+				if(ClientPrefs.funiShaders)
+				{
+				clearShader();
+				chrom = new ChromaticAberrationEffect();
+				blurThisShit = new TiltshiftEffect(0.6, 0);
+
+				distort = new WIDistortionEffect(0.75, 0.25, false);
+				distort.shader.working.value = [true];
+
+				addShader(distort);
+				addShader(chrom);
+				addShader(blurThisShit);
+
+					if (chrom != null)
+				chrom.setChrome(0.005);
+
+				if(blurThisShit != null)
+				blurThisShit.setBlur(0.6);
+
+				if (distort != null)
+				distort.shader.working.value = [true];
+				}
+			}else{
+				FlxG.camera.flash(FlxColor.BLACK, 0.2);
+			if(ClientPrefs.funiShaders)
+			{
+			clearShader();
+			chrom = new ChromaticAberrationEffect();
+			blurThisShit = new TiltshiftEffect(0.4, 0);
+			bloomShit = new WIBloomEffect(0);
+			greyscale = new GreyscaleEffect();
+			//uncomment these fucking pieces of shit if you feel like testing it.
+
+			addShader(chrom);
+			addShader(blurThisShit);
+			addShader(bloomShit);
+			addShader(greyscale);
+			//uncomment these fucking pieces of shit if you feel like testing it.
+
+			if (chrom != null)
+			chrom.setChrome(0.003);
+
+			if (bloomShit != null)
+			bloomShit.setSize(18.0);
+
+			if(blurThisShit != null)
+			blurThisShit.setBlur(0.4);
+			//uncomment these fucking pieces of shit if you feel like testing it.
+			}
+			FlxG.camera.shake(0.004, 0);
+			}
 	}
 
 	private function positionHighscore() {

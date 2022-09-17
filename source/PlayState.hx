@@ -330,10 +330,11 @@ class PlayState extends MusicBeatState
 	var rsTV:BGSprite;
 	//var rsTVColors:Int = FlxG.random.int(0, 4); this is not being used anymore :(
 
-	//Malfunction Life System
+	//Malfunction Stuff
 	var crashLives:FlxText;
 	var crashLivesIcon:FlxSprite;
 	public var crashLivesCounter:Int = 30;
+	var threatTrail:FlxTrail;
 
 	//Walt Mechanics Stuff
 	var waltText:FlxText;
@@ -349,6 +350,8 @@ class PlayState extends MusicBeatState
 	var pressCounter = 0;
 	//var warningText:FlxSprite;
 	var detectAttack:Bool = false;
+	var holyShitMOVEBITCH:FlxSprite;
+	var PRESSSPACEDUMBASS:FlxText;
 
 	//stole this from Vs Ourple Guy mod lmfao
 	var zoomBeat:Float = 4;
@@ -992,6 +995,7 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
+					addShaderToCamera('game', new WIBloomEffect());
 				}
 
 				/*
@@ -1138,11 +1142,10 @@ class PlayState extends MusicBeatState
 				{
 					addShaderToCamera('game', new VhsEffect(0.4, 0.3));
 					addShaderToCamera('game', new VCRDistortionEffect(0, true, true, true));
-					addShaderToCamera('hud', new ChromaticAberrationEffect(0.002));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
 					addShaderToCamera('hud', new VCRDistortionEffect(0, true, true, true));
 					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
-					addShaderToCamera('hud', new GreyscaleEffect());
 				}
 
 			case 'Couch':
@@ -1987,6 +1990,23 @@ class PlayState extends MusicBeatState
 				waltText.screenCenter(X); //it's not visible by the song banner
 				add(waltText);
 				FlxTween.tween(waltText, {alpha: 0}, 1, {ease: FlxEase.quadInOut, startDelay: 7});
+			}
+
+			if(curStage == 'RelapseStage')
+			{
+				holyShitMOVEBITCH = new FlxSprite(0, -400).loadGraphic(Paths.image('funkinAVI/uiAndEvents/ohNoes'));
+				holyShitMOVEBITCH.cameras = [camHUD];
+				holyShitMOVEBITCH.screenCenter(X);
+				holyShitMOVEBITCH.scale.set(0.25, 0.25);
+				add(holyShitMOVEBITCH);
+				holyShitMOVEBITCH.alpha = 0;
+
+				PRESSSPACEDUMBASS = new FlxText(0, 490, FlxG.width, "Press SPACE to Dodge!", 74);
+				PRESSSPACEDUMBASS.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 50, FlxColor.WHITE, CENTER);
+				PRESSSPACEDUMBASS.cameras = [camHUD];
+				add(PRESSSPACEDUMBASS);
+
+				FlxTween.tween(PRESSSPACEDUMBASS, {alpha: 0}, 1, {ease: FlxEase.quadInOut, startDelay: 7});
 			}
 		}
 
@@ -3575,15 +3595,16 @@ class PlayState extends MusicBeatState
 			case "Isolated" | "Lunacy" | "Delusional": curPortrait = "placeholder";
 			case "Malfunction": curPortrait = "malfunction";
 			case "Don't Cross!": curPortrait = "placeholder";
-			case "Twisted Grins" | "Facade": curPortrait = "episode2";
+			case "Twisted Grins" | "Facade" | "Mortiferum Risus": curPortrait = "episode2";
 			case "Laugh Track": curPortrait = "placeholder";
 			case "Scrapped": curPortrait = "scrapped";
-			case "Mercy": curPortrait = "placeholder";
+			case "Mercy": curPortrait = "mercy";
 			case "Bless": curPortrait = "bless";
 			case "Isolated Old": curPortrait = "placeholder";
 			case "Cycled Sins": curPortrait = "cycledsins";
 			case "War Dilemma": curPortrait = "placeholder";
 			case "Hunted": curPortrait = "hunted";
+			case "Neglection": curPortrait = "neglection";
 		}
 		#end
 
@@ -7315,6 +7336,10 @@ class PlayState extends MusicBeatState
 													addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
 												});
 											}
+											if(curStep >= 544)
+											{
+												FlxTween.tween(threatTrail, {x: -10}, 0.4); //Glitch Mickey looks more threatening now
+											}
 									}
 									if(ClientPrefs.camMove)
 									{
@@ -7377,6 +7402,10 @@ class PlayState extends MusicBeatState
 													addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
 													addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
 												});
+											}
+											if(curStep >= 544)
+											{
+												FlxTween.tween(threatTrail, {y: 10}, 0.4); //Glitch Mickey looks more threatening now
 											}
 									}
 									if(ClientPrefs.camMove)
@@ -7441,6 +7470,10 @@ class PlayState extends MusicBeatState
 													addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
 												});
 											}
+											if(curStep >= 544)
+											{
+												FlxTween.tween(threatTrail, {y: -10}, 0.4); //Glitch Mickey looks more threatening now
+											}
 									}
 									if(ClientPrefs.camMove)
 									{
@@ -7503,6 +7536,10 @@ class PlayState extends MusicBeatState
 													addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
 													addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
 												});
+											}
+											if(curStep >= 544)
+											{
+												FlxTween.tween(threatTrail, {x: 10}, 0.4); //Glitch Mickey looks more threatening now
 											}
 									}
 									if(ClientPrefs.camMove)
@@ -7917,13 +7954,15 @@ class PlayState extends MusicBeatState
 	function ohShitHeGonnaShoot()
 	{
 		FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Reload'), 0.6);
-		//warningText.alpha = 1;
+		holyShitMOVEBITCH.alpha = 1;
+		holyShitMOVEBITCH.y = -420;
+		//holyShitMOVEBITCH.rotateX = 0;
 		dad.playAnim("reload", true);
 		dad.specialAnim = true;
-		/*new FlxTimer().start(0.4, function(tmr:FlxTimer)
+		new FlxTimer().start(0.1, function(tmr:FlxTimer)
 		{
-			warningText.alpha = 0;
-		});*/
+			FlxTween.tween(holyShitMOVEBITCH, {alpha: 0, y: -400}, 0.3, {ease: FlxEase.quadInOut});
+		});
 		pressCounter = 0;
 	}
 
@@ -8774,7 +8813,6 @@ class PlayState extends MusicBeatState
 				if(curStep == 128) {
 					triggerEventNote('Alter Camera Zoom', '0.8', '1.2');
 					triggerEventNote('Flash Screen', '0', 'false'); 
-
 					FlxTween.tween(camHUD, {alpha: 1}, 1);
 					//Tween Shit
 				}
@@ -9112,7 +9150,12 @@ class PlayState extends MusicBeatState
 
 				if(curStep == 544) {
 					triggerEventNote('Screen Fade', '3', '');
-				}
+
+					threatTrail = new FlxTrail(dad, null, 10, 1, 0.6, 0.089); //Glitch Mickey looks more threatening now
+					insert(members.indexOf(dadGroup) - 1, threatTrail);
+					threatTrail.xEnabled = true;
+					threatTrail.yEnabled = true;
+           		}
 
 				if(curStep == 546) {
 					triggerEventNote('Scroll Type', 'Left', 'Right');
@@ -9398,9 +9441,9 @@ class PlayState extends MusicBeatState
 					 triggerEventNote('Alter Camera Zoom', '0.8', '0.7'); 
 					 triggerEventNote('Scroll Type', 'undyne', '');
 					
-					popupBfWindow(500, 400, 1050, 490, SONG.player1);
-					popupWindow(500, 400, 0, 490, SONG.player2);
-					trace("dont crash");
+					//popupBfWindow(500, 400, 1050, 490, SONG.player1);
+					//popupWindow(500, 400, 0, 490, SONG.player2);
+					//trace("dont crash");
 					}
 
 				if(curStep == 828) {
@@ -10067,10 +10110,10 @@ class PlayState extends MusicBeatState
 				}
 
 				if(curStep == 1592) {
-					if (windowDad != null)
-						{
-						windowDad.close();
-						}
+					//if (windowDad != null)
+						//{
+						//windowDad.close();
+						//}
 					triggerEventNote('Fade Character', '0', '');
 					triggerEventNote('Fade Character', '0', '');
 					triggerEventNote('Fade Character', '0', '');
@@ -10208,7 +10251,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 428)
@@ -10228,7 +10271,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 436)
@@ -10248,7 +10291,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 444)
@@ -10268,7 +10311,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 452)
@@ -10288,7 +10331,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 460)
@@ -10308,7 +10351,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 468)
@@ -10328,7 +10371,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 476)
@@ -10348,7 +10391,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 484)
@@ -10368,7 +10411,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 492)
@@ -10388,7 +10431,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 500)
@@ -10408,7 +10451,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 508)
@@ -10428,7 +10471,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 516)
@@ -10448,7 +10491,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 524)
@@ -10468,7 +10511,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 532)
@@ -10488,7 +10531,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 540)
@@ -10508,7 +10551,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 544)
@@ -10532,7 +10575,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 552)
@@ -10556,7 +10599,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 560)
@@ -10580,7 +10623,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 568)
@@ -10604,7 +10647,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 576)
@@ -10628,7 +10671,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 584)
@@ -10652,7 +10695,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 592)
@@ -10676,7 +10719,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 600)
@@ -10700,7 +10743,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 608)
@@ -10724,7 +10767,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 616)
@@ -10748,7 +10791,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 624)
@@ -10772,7 +10815,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 632)
@@ -10796,7 +10839,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 640)
@@ -10820,7 +10863,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 648)
@@ -10844,7 +10887,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 656)
@@ -10868,7 +10911,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 664)
@@ -10924,7 +10967,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 				if(curStep == 940)
@@ -10944,7 +10987,7 @@ class PlayState extends MusicBeatState
 							addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 							addShaderToCamera('game', new VhsEffect(0.3, 0));
 						});
-						
+
 					}
 				}
 

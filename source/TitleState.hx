@@ -5,6 +5,7 @@ import Discord.DiscordClient;
 import sys.thread.Thread;
 #end
 import flixel.FlxG;
+import flixel.FlxCamera;
 import flixel.util.FlxGradient;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -67,6 +68,8 @@ class TitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 	public var camZooming:Bool = false;
 
+	public var camGame:FlxCamera;
+
 	var bloomShit:WIBloomEffect;
 	var chrom:ChromaticAberrationEffect;
 	var blurThisShit:TiltshiftEffect;
@@ -102,8 +105,9 @@ class TitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		FlxG.game.filtersEnabled = true;
-		FXHandler.UpdateColors(filters);
+		//FlxG.game.setFilters(filters);
+		//FlxG.game.filtersEnabled = true;
+	//	FXHandler.UpdateColors(filters);
 
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		WeekData.loadTheFirstEnabledMod();

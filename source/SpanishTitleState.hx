@@ -93,8 +93,8 @@ class SpanishTitleState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
-		FlxG.game.filtersEnabled = true;
-		FXHandler.UpdateColors(filters);
+		//FlxG.game.filtersEnabled = true;
+		//FXHandler.UpdateColors(filters);
 
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		WeekData.loadTheFirstEnabledMod();

@@ -101,8 +101,8 @@ class MainMenuState extends MusicBeatState
 
 		Application.current.window.title = "Funkin.avi";
 
-		FlxG.game.filtersEnabled = true;
-		FXHandler.UpdateColors(filters);
+		//FlxG.game.filtersEnabled = true;
+		//FXHandler.UpdateColors(filters);
 
 		#if desktop
 		// Updating Discord Rich Presence

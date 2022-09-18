@@ -14,6 +14,8 @@ class FXHandler
     {
         trace("VALUE: " + ClientPrefs.colorblind);
 
+        var filters:Array<BitmapFilter> = [];
+
         var a1:Float = 1;
         var a2:Float = 0;
         var a3:Float = 0;
@@ -81,7 +83,6 @@ class FXHandler
         }
         else
         {
-            var filters:Array<BitmapFilter> = [];
             filters.push(new ColorMatrixFilter(matrix));
             FlxG.game.filtersEnabled = true;
             FlxG.game.setFilters(filters);

@@ -22,9 +22,13 @@ import gameObjects.CheckboxThingie;
 import gameObjects.Option;
 import openfl.Lib;
 import util.CoolUtil;
+import IndieCrossShaderShit.FXHandler;
 
 class WarningState extends MusicBeatState
 {
+	FlxG.game.filtersEnabled = true;
+	FXHandler.UpdateColors(filters);
+
 	private var canMove:Bool = false;
 
 	private var canPressSpace:Bool = false;

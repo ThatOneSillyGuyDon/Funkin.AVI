@@ -30,6 +30,7 @@ import flixel.input.keyboard.FlxKey;
 import openfl.filters.BitmapFilter;
 import openfl.filters.ShaderFilter;
 import Shaders;
+import IndieCrossShaderShit.FXHandler;
 
 //GameJolt
 import GameJolt;
@@ -57,7 +58,7 @@ class MainMenuState extends MusicBeatState
 	private var camGame:FlxCamera;
 	private var camAchievement:FlxCamera;
 	public var camFilter:FlxCamera;
-	
+
 	var optionShit:Array<String> = [
 		'story_mode',
 		'freeplay',
@@ -69,10 +70,10 @@ class MainMenuState extends MusicBeatState
 	];
 
 	var theCode:Array<Dynamic> = [
-		[FlxKey.E, FlxKey.E], 
-		[FlxKey.R, FlxKey.R], 
-		[FlxKey.R, FlxKey.R], 
-		[FlxKey.O, FlxKey.O], 
+		[FlxKey.E, FlxKey.E],
+		[FlxKey.R, FlxKey.R],
+		[FlxKey.R, FlxKey.R],
+		[FlxKey.O, FlxKey.O],
 		[FlxKey.R, FlxKey.R],
 		[FlxKey.ONE, FlxKey.NUMPADONE],
 		[FlxKey.ONE, FlxKey.NUMPADONE],
@@ -99,7 +100,10 @@ class MainMenuState extends MusicBeatState
 		FPClientPrefs.loadShit();
 
 		Application.current.window.title = "Funkin.avi";
-		
+
+		FlxG.game.filtersEnabled = true;
+		FXHandler.UpdateColors(filters);
+
 		#if desktop
 		// Updating Discord Rich Presence
 		DiscordClient.changePresence("In the Menus", null, null, 'icon');
@@ -218,7 +222,7 @@ class MainMenuState extends MusicBeatState
 				});
 			else
 				menuItem.y = 108 + (0 * 90);
-		
+
 			// Freeplay
 			var menuItem:FlxSprite = new FlxSprite(700, 250);
 			menuItem.scale.x = scale;
@@ -305,7 +309,7 @@ class MainMenuState extends MusicBeatState
 				});
 			else
 				menuItem.y = 108 + (0 * 90);
-		
+
 			// Donate
 			/*var menuItem:FlxSprite = new FlxSprite(100, 700);
 			menuItem.scale.x = scale;
@@ -334,7 +338,7 @@ class MainMenuState extends MusicBeatState
 				});
 			else
 				menuItem.y = 108 + (0 * 90);
-		
+
 			// Options
 			var menuItem:FlxSprite = new FlxSprite(100, 850);
 			menuItem.scale.x = scale;
@@ -367,7 +371,7 @@ class MainMenuState extends MusicBeatState
 		firstStart = false;
 
 		FlxG.camera.follow(camFollowPos, null, 1);
-		
+
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 84, 0, "Funkin.avi v" + MouseVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -384,7 +388,7 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		
+
 		if(!GameJoltAPI.userLogin && ClientPrefs.language == "Spanish") {
 		var achievementText:FlxText = new FlxText(907, FlxG.height - 34, 0, "Presiona 8 para ir al menu de trofeos", 25);
 		achievementText.scrollFactor.set();
@@ -639,7 +643,7 @@ class MainMenuState extends MusicBeatState
 		});
 	}
 
-	
+
 	function changeItem(huh:Int = 0)
 	{
 		curSelected += huh;

@@ -43,11 +43,12 @@ import openfl.Assets;
 import PlayState;
 import GameJolt;
 import GameJolt.GameJoltAPI;
+import IndieCrossShaderShit.FXHandler;
 
 using StringTools;
 typedef TitleData =
 {
-	
+
 	titlex:Float,
 	titley:Float,
 	startx:Float,
@@ -65,7 +66,7 @@ class TitleState extends MusicBeatState
 
 	public static var initialized:Bool = false;
 	public var camZooming:Bool = false;
-	
+
 	var bloomShit:WIBloomEffect;
 	var chrom:ChromaticAberrationEffect;
 	var blurThisShit:TiltshiftEffect;
@@ -90,16 +91,19 @@ class TitleState extends MusicBeatState
 	var wackyImage:FlxSprite;
 
 	var mustUpdate:Bool = false;
-	
+
 	var titleJSON:TitleData;
 	var nonLoginText:FlxText; //Toast Don't Work, Lets Make One
-	
+
 	public static var updateVersion:String = '';
 
 	override public function create():Void
-	{	
+	{
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
+
+		FlxG.game.filtersEnabled = true;
+		FXHandler.UpdateColors(filters);
 
 		// Just to load a mod on start up if ya got one. For mods that change the menu music and bg
 		WeekData.loadTheFirstEnabledMod();
@@ -108,7 +112,7 @@ class TitleState extends MusicBeatState
 		if(!closedState) {
 			trace('checking for update');
 			var http = new haxe.Http("https://raw.githubusercontent.com/DEMOLITIONDON96/Demolition-Engine/main/gitVersion.txt");
-			
+
 			http.onData = function (data:String)
 			{
 				updateVersion = data.split('\n')[0].trim();
@@ -119,11 +123,11 @@ class TitleState extends MusicBeatState
 					mustUpdate = true;
 				}
 			}
-			
+
 			http.onError = function (error) {
 				trace('error: $error');
 			}
-			
+
 			http.request();
 		}
 		#end
@@ -144,9 +148,9 @@ class TitleState extends MusicBeatState
 		super.create();
 
 		FlxG.save.bind('funkin', 'ninjamuffin99');
-		
+
 		ClientPrefs.loadPrefs();
-		
+
 		Highscore.load();
 
 		// IGNORE THIS!!!
@@ -214,7 +218,7 @@ class TitleState extends MusicBeatState
 				new FlxRect(-300, -300, FlxG.width * 1.8, FlxG.height * 1.8));
 			FlxTransitionableState.defaultTransOut = new TransitionData(FADE, FlxColor.BLACK, 0.7, new FlxPoint(0, 1),
 				{asset: diamond, width: 32, height: 32}, new FlxRect(-300, -300, FlxG.width * 1.8, FlxG.height * 1.8));
-				
+
 			transIn = FlxTransitionableState.defaultTransIn;
 			transOut = FlxTransitionableState.defaultTransOut;*/
 
@@ -233,7 +237,7 @@ class TitleState extends MusicBeatState
 				FlxG.sound.music.fadeIn(4, 0, 0.7);
 			}
 		}
-			
+
 		Conductor.changeBPM(60);
 		persistentUpdate = true;
 
@@ -270,7 +274,7 @@ class TitleState extends MusicBeatState
 		bg.scale.x = 0.68;
 		bg.scale.y = 0.67;
 		add(bg);
-		
+
 		// bg.antialiasing = ClientPrefs.globalAntialiasing;
 		// bg.setGraphicSize(Std.int(bg.width * 0.6));
 		// bg.updateHitbox();
@@ -278,7 +282,7 @@ class TitleState extends MusicBeatState
 
 		logoBl = new FlxSprite(150, 0);
 		logoBl.frames = Paths.getSparrowAtlas('MickeyLogo');
-		
+
 		logoBl.antialiasing = ClientPrefs.globalAntialiasing;
 		logoBl.animation.addByPrefix('bump', 'logo bumpin', 24, false);
 		logoBl.animation.play('bump');
@@ -331,7 +335,7 @@ class TitleState extends MusicBeatState
 		ngSpr.updateHitbox();
 		ngSpr.screenCenter(X);
 		ngSpr.antialiasing = ClientPrefs.globalAntialiasing;
-		
+
 		/*psychEngine = new FlxSprite(0, FlxG.height * 0.52).loadGraphic(Paths.image('psychLogo'));
 		add(psychEngine);
 		psychEngine.visible = false;
@@ -346,7 +350,7 @@ class TitleState extends MusicBeatState
 		creditsGrid.screenCenter(X);
 		creditsGrid.antialiasing = ClientPrefs.globalAntialiasing;*/
 		//???
-		
+
 		FlxTween.tween(credTextShit, {y: credTextShit.y + 20}, 2.9, {ease: FlxEase.quadInOut, type: PINGPONG});
 
 		var scratchStuff:FlxSprite = new FlxSprite();
@@ -389,7 +393,7 @@ class TitleState extends MusicBeatState
 
 		return swagGoodArray;
 	}
-	
+
 	function addShader(effect:ShaderEffect)
 	{
 		if (!ClientPrefs.funiShaders)
@@ -417,11 +421,11 @@ class TitleState extends MusicBeatState
 			var args = "Test.hx";
 			var app = "";
 			var workingdir = Sys.getCwd();
-	
+
 			FlxG.log.add(app);
-	
+
 			app = Sys.programPath();
-	
+
 			// Launch application:
 			var result = systools.win.Tools.createProcess(app // app. path
 				, args // app. args
@@ -442,7 +446,7 @@ class TitleState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
-		
+
 		if (FlxG.sound.music != null)
 			Conductor.songPosition = FlxG.sound.music.time;
 		// FlxG.watch.addQuick('amp', FlxG.sound.music.amplitude);
@@ -620,7 +624,7 @@ class TitleState extends MusicBeatState
 																{
 																	Application.current.window.title = "Funkin.avi - OH THE MISERY EVERYBODY WANNA BE MY ENEMY MY ENEMY";
 																});
-															});		
+															});
 														});
 													});
 												});
@@ -828,7 +832,7 @@ class TitleState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
-		
+
 			if(ClientPrefs.camZooms) {
         FlxG.camera.zoom += 0.025;
 		if(!camZooming) { //Copied from PlayState.hx
@@ -836,7 +840,7 @@ class TitleState extends MusicBeatState
 		}
 	}
 
-		if(logoBl != null) 
+		if(logoBl != null)
 			logoBl.animation.play('bump', true);
 
 		/*if(gfDance != null) {
@@ -932,14 +936,14 @@ class TitleState extends MusicBeatState
 						FlxG.sound.play(Paths.sound('JingleShadow'));
 					case 'BBPANZU':
 						sound = FlxG.sound.play(Paths.sound('JingleBB'));
-					
+
 					default: //Go back to normal ugly ass boring GF
 						remove(ngSpr);
 						remove(credGroup);
 						FlxG.camera.flash(FlxColor.WHITE, 2);
 						skippedIntro = true;
 						playJingle = false;
-						
+
 						FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'), 0);
 						FlxG.sound.music.fadeIn(4, 0, 0.7);
 						return;
@@ -989,7 +993,7 @@ class TitleState extends MusicBeatState
 					FlxTween.angle(logoBl, logoBl.angle, -4, 4, {ease: FlxEase.quartInOut});
 
 	        }, 0);
-			
+
 			skippedIntro = true;
 		}
 	}

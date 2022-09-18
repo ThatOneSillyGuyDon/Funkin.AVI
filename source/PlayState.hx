@@ -443,6 +443,8 @@ class PlayState extends MusicBeatState
     var boyfriendWin = new Sprite();
     var bfScrollWin = new Sprite();
 
+	var hudStyle = ClientPrefs.hudSelection;
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -454,8 +456,6 @@ class PlayState extends MusicBeatState
 		modeRelative = new RelativeScaleMode(0.75, 0.75);
 		modeStage = new StageSizeScaleMode();
 		modePixel = new PixelPerfectScaleMode();
-
-		hudStyle = ClientPrefs.hudSelection;
 
 		// for lua
 		instance = this;

@@ -42,7 +42,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var MouseVersion:String = '2.0';
+	public static var MouseVersion:String = '1.5 (Demo)';
 	public static var DemoEngineVersion:String = '0.2.3';
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -560,7 +560,11 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if (optionShit[curSelected] == 'donate')
+				if(optionShit[curSelected] == 'story_mode')
+				{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+				}else if (optionShit[curSelected] == 'donate')
+				
 				{
 					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
 				}
@@ -597,8 +601,9 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'story_mode':
-										MusicBeatState.switchState(new StoryMenuState());
+									//case 'story_mode':
+										//FlxG.sound.play(Paths.sound('cancelMenu'));
+										//MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
 										MusicBeatState.switchState(new EpicSelectorWOOO());
 									//#if MODS_ALLOWED

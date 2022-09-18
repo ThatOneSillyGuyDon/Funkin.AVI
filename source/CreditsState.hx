@@ -99,7 +99,7 @@ class CreditsState extends MusicBeatState
 			['Mr. IDK',	'idk',	'Sprite & Icon Artist', 'https://twitter.com/Mr_IDKK?t=iYM1mlQcv4_UVmxtW2kvig&s=09',	'FFFFFF'],
 			['AustinTheRedDragon',	'austin',	'Creator of Mr. Smiles & Concept Artist',	'https://twitter.com/Austinthereddr3?t=ZQVsYKPA_aseqQ5EBImdWQ&s=09', 'FFFFFF'],
 			['GavinTheCartoonist',	'missing-icon',	'Artist',	'https://twitter.com/AnimationFelix',	'FFFFFF'],
-			['HazeyPurple', 'missing-icon', 'Artist', 'https://twitter.com/HazeyPurple_x', 'FFFFFF'],
+			['HazeyPurple', 'haze', 'Artist', 'https://twitter.com/HazeyPurple_x', 'FFFFFF'],
 			['DEMOLITIONDON96',	'demolitiondon96',	'Concept Artist',	'https://youtube.com/c/DEMOLITIONDON96',	'FFFFFF'],
 			['awe',	'missing-icon',	'Concept Artist',	'https://twitter.com/awesitoelpapu',	'FFFFFF'],
 			['JaoXD', 'jao', 'Icon Artist', 'https://twitter.com/JaoXDDD?t=M5UEMC9nLAVOyOejPfbDJw&s=09', 'FFFFFF'],

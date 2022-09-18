@@ -77,11 +77,11 @@ class EpicSelectorWOOO extends MusicBeatState{
 
 
 					}
-		if(FPClientPrefs.episode2FPLock == 'unlocked')
+		if(FPClientPrefs.isolatedSong == 'Completed' && FPClientPrefs.lunacySong == 'Completed' && FPClientPrefs.twistedSong == 'Completed' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten')
 		{
-			freeplayCats = ['Episodes', 'Extras', '???'];
+			freeplayCats = ['Play', 'A Letter for You', '???'];
 		} else {
-			freeplayCats = ['Episodes', 'Extras'];
+			freeplayCats = ['Play', '???', '???'];
 		}		
 
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -165,16 +165,17 @@ class EpicSelectorWOOO extends MusicBeatState{
         if (controls.ACCEPT){
             switch(curSelected){
                 case 0:
-				if(FPClientPrefs.episode1FPLock == 'unlocked')
-				{
+				//if(FPClientPrefs.episode1FPLock == 'unlocked')
+				//{
 					MusicBeatState.switchState(new EpisodesState());
-				}else{
-					FlxG.sound.play(Paths.sound('cancelMenu'));
-				}
+				//}else{
+				//	FlxG.sound.play(Paths.sound('cancelMenu'));
+				//}
                 case 1:
-				if(FPClientPrefs.episode1FPLock == 'unlocked')
+				if(FPClientPrefs.isolatedSong == 'Completed' && FPClientPrefs.lunacySong == 'Completed' && FPClientPrefs.twistedSong == 'Completed' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten')
 				{
-					MusicBeatState.switchState(new ExtrasState());
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+					//MusicBeatState.switchState(new FuckingVideo());
 				}else{
 					FlxG.sound.play(Paths.sound('cancelMenu'));
 				}
@@ -232,6 +233,31 @@ class EpicSelectorWOOO extends MusicBeatState{
 							distort.shader.working.value = [true];
 							}
 
+						}else if(curSelected == 1 && FPClientPrefs.isolatedSong != 'Completed' || FPClientPrefs.lunacySong != 'Completed' || FPClientPrefs.twistedSong != 'Completed' || FPClientPrefs.huntedLock != 'beaten' || FPClientPrefs.malfunctionLock != 'beaten' || FPClientPrefs.sinsLock != 'beaten' || FPClientPrefs.oldisolateLock != 'beaten'){
+							FlxG.camera.flash(FlxColor.BLACK, 0.6);
+							FlxG.camera.shake(0.004, 99999999);
+							if(ClientPrefs.funiShaders)
+							{
+							clearShader();
+							chrom = new ChromaticAberrationEffect();
+							blurThisShit = new TiltshiftEffect(0.6, 0);
+
+							distort = new WIDistortionEffect(0.75, 0.25, false);
+							distort.shader.working.value = [true];
+
+							addShader(distort);
+							addShader(chrom);
+							addShader(blurThisShit);
+
+								if (chrom != null)
+							chrom.setChrome(0.005);
+
+							if(blurThisShit != null)
+							blurThisShit.setBlur(0.6);
+
+							if (distort != null)
+							distort.shader.working.value = [true];
+							}
 						}else{
 							FlxG.camera.flash(FlxColor.BLACK, 0.2);
 							if(ClientPrefs.funiShaders)

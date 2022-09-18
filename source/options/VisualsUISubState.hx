@@ -63,7 +63,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'hudSelection',
 			'string',
 			'Psych',
-			['Psych', 'Vanilla', 'Demolition', 'Funkin.avi', 'Red-Bun']); //HUDs to add: Demolition HUD, Funkin.avi HUD, Red-Bun's HUD.
+			['Psych', 'Vanilla']); //HUDs to add: Demolition HUD, Funkin.avi HUD, Red-Bun's HUD.
 			addOption(option);
 		
 		var option:Option = new Option('Winning Icons',

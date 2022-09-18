@@ -34,6 +34,12 @@ using StringTools;
 
 class FPClientPrefs
 {
+    public static var beatenAllDemoSongs:String = 'Incomplete';
+
+    public static var isolatedSong:String = 'Incomplete';
+    public static var lunacySong:String = 'Incomplete';
+    public static var twistedSong:String = 'Incomplete';
+
     public static var episode1FPLock:String = 'locked';
     public static var episode2FPLock:String = 'locked';
 
@@ -50,6 +56,12 @@ class FPClientPrefs
     public static var mercyLock:String = 'locked';
 
     public static function lockinIt() {
+        if (FlxG.save.data.beatenAllDemoSongs == null) FlxG.save.data.beatenAllDemoSongs == 'Incomplete';
+
+        if (FlxG.save.data.isolatedSong == null) FlxG.save.data.isolatedSong == 'Incomplete';
+        if (FlxG.save.data.lunacySong == null) FlxG.save.data.lunacySong == 'Incomplete';
+        if (FlxG.save.data.twistedSong == null) FlxG.save.data.twistedSong == 'Incomplete';
+
         if (FlxG.save.data.episode1FPLock == null) FlxG.save.data.episode1FPLock = 'locked';
         if (FlxG.save.data.episode2FPLock == null) FlxG.save.data.episode2FPLock = 'locked';
 
@@ -68,6 +80,12 @@ class FPClientPrefs
     }
 
     public static function saveShit() {
+        FlxG.save.data.beatenAllDemoSongs = beatenAllDemoSongs;
+
+        FlxG.save.data.isolatedSong = isolatedSong;
+        FlxG.save.data.lunacySong = lunacySong;
+        FlxG.save.data.twistedSong = twistedSong;
+
         FlxG.save.data.episode1FPLock = episode1FPLock;
         FlxG.save.data.episode2FPLock = episode2FPLock;
 
@@ -86,6 +104,11 @@ class FPClientPrefs
     }
 
     public static function loadShit() {
+
+        isolatedSong = FlxG.save.data.isolatedSong;
+        lunacySong = FlxG.save.data.lunacySong;
+        twistedSong = FlxG.save.data.twistedSong;
+
         episode1FPLock = FlxG.save.data.episode1FPLock;
         episode2FPLock = FlxG.save.data.episode2FPLock;
 
@@ -100,6 +123,7 @@ class FPClientPrefs
         warLock = FlxG.save.data.warLock;
         crossinLock = FlxG.save.data.crossinLock;
         mercyLock = FlxG.save.data.mercyLock;
+        if(isolatedSong == 'Completed' && lunacySong == 'Completed' && twistedSong == 'Completed' && huntedLock == 'beaten' && oldisolateLock == 'beaten' && malfunctionLock == 'beaten' && sinsLock == 'beaten') FlxG.save.data.beatenAllDemoSongs = 'Complete';
         FlxG.save.flush();
     }
 }

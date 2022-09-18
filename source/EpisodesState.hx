@@ -79,10 +79,10 @@ class EpisodesState extends MusicBeatState
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In Freeplay", "Main Story Songs", null, 'icon');
+		DiscordClient.changePresence("In Freeplay", "Picking a Song", null, 'icon');
 		#end
 			
-		Application.current.window.title = "Funkin.avi - Freeplay: Main Story Songs";
+		Application.current.window.title = "Funkin.avi - Freeplay: Pick a Song";
 
 		WeekData.reloadWeekFiles(false);
 
@@ -113,7 +113,15 @@ class EpisodesState extends MusicBeatState
 
 		FPClientPrefs.loadShit();
 
-        if(FPClientPrefs.episode1FPLock == 'unlocked')
+		addSong('Isolated', 3, 'mickey', FlxColor.fromRGB(60, 60, 60));
+		addSong('Lunacy', 3, 'lunamick', FlxColor.fromRGB(60, 60, 60));
+		addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40));
+		addSong('Isolated Old', 3, 'legacy', FlxColor.fromRGB(60, 60, 60));
+		addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180));
+		addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
+		addSong('Cycled Sins', 3, 'relapse-pixel', FlxColor.fromRGB(115, 86, 86));
+
+        /*if(FPClientPrefs.episode1FPLock == 'unlocked')
         {
             addSong('Isolated', 3, 'mickey', FlxColor.fromRGB(60, 60, 60));
             addSong('Lunacy', 3, 'lunamick', FlxColor.fromRGB(60, 60, 60));
@@ -125,7 +133,7 @@ class EpisodesState extends MusicBeatState
             addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
             addSong('Facade', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
 			addSong('Mortiferum Risus', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
-        }
+        }*/
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
 
@@ -632,7 +640,7 @@ class EpisodesState extends MusicBeatState
 
 		switch (curSelected)
 		{
-			case 0 | 1 | 2:
+			case 0 | 1 | 2 | 3 | 6:
 				FlxG.camera.flash(FlxColor.BLACK, 0.2);
 				if(ClientPrefs.funiShaders)
 				{
@@ -660,7 +668,32 @@ class EpisodesState extends MusicBeatState
 				//uncomment these fucking pieces of shit if you feel like testing it.
 				}
 				FlxG.camera.shake(0.004, 0);
-			case 3 | 4 | 5:
+			case 4:
+				FlxG.camera.flash(FlxColor.BLACK, 0.6);
+				FlxG.camera.shake(0.004, 99999999);
+				if(ClientPrefs.funiShaders)
+				{
+				clearShader();
+				chrom = new ChromaticAberrationEffect();
+				blurThisShit = new TiltshiftEffect(0.6, 0);
+
+				distort = new WIDistortionEffect(0.75, 0.25, false);
+				distort.shader.working.value = [true];
+
+				addShader(distort);
+				addShader(chrom);
+				addShader(blurThisShit);
+
+					if (chrom != null)
+				chrom.setChrome(0.005);
+
+				if(blurThisShit != null)
+				blurThisShit.setBlur(0.6);
+
+				if (distort != null)
+				distort.shader.working.value = [true];
+				}
+			case 5:
 				FlxG.camera.flash(FlxColor.BLACK, 0.2);
 				if(ClientPrefs.funiShaders)
 				{

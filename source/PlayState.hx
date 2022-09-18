@@ -4688,7 +4688,11 @@ class PlayState extends MusicBeatState
 			}
 		}
 		}else{
+			if(ClientPrefs.language == "English") {
 			scoreTxt.text = 'Score:' + songScore;
+			} else {
+			scoreTxt.text = 'Puntuacion: ' +songScore;
+			}
 		}
 
 		if(botplayTxt.visible) {
@@ -6773,22 +6777,22 @@ class PlayState extends MusicBeatState
 			{
 				trace('WENT BACK TO FREEPLAY??');
 
-				if(SONG.song == "Malfunction") {
-			    	GameJoltAPI.addScore(songScore, 719335, 'Score of ' + SONG.song);
-				} else if(SONG.song == "Bless") {
-					GameJoltAPI.addScore(songScore, 755493, 'Score of ' + SONG.song);
+				if(SONG.song == "Isolated Old") {
+			    	GameJoltAPI.addScore(songScore, 760676);
+				} else if(SONG.song == "Isolated") {
+					GameJoltAPI.addScore(songScore, 760684);
 				} else if(SONG.song == "Hunted") {
-					GameJoltAPI.addScore(songScore, 755496, 'Score of ' + SONG.song);
-				} else if(SONG.song == "Don't Cross!") {
-					GameJoltAPI.addScore(songScore, 755498, 'Score of ' + SONG.song);
-				} else if(SONG.song == "Mercy") {
-					GameJoltAPI.addScore(songScore, 755524, 'Score of ' + SONG.song);
+					GameJoltAPI.addScore(songScore, 760677);
+				} else if(SONG.song == "Twisted Grins") {
+					GameJoltAPI.addScore(songScore, 755498);
+				} else if(SONG.song == "Lunacy") {
+					GameJoltAPI.addScore(songScore, 760686);
 				} else if(SONG.song == "Isolated Old") {
-					GameJoltAPI.addScore(songScore, 755529, 'Score of ' + SONG.song);
-				} else if(SONG.song == "War Dilemma") {
-					GameJoltAPI.addScore(songScore, 755530, 'Score of ' + SONG.song);
+					GameJoltAPI.addScore(songScore, 755529);
 				} else if(SONG.song == "Cycled Sins") {
-					GameJoltAPI.addScore(songScore, 755531, 'Score of ' + SONG.song);
+					GameJoltAPI.addScore(songScore, 755530);
+				} else if(SONG.song == "Malfunction") {
+					GameJoltAPI.addScore(songScore, 755531);
 				}
 
 				//Story Songs later Lol, Thanks Tenta

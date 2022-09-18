@@ -30,7 +30,9 @@ import openfl.filters.ShaderFilter;
 
 using StringTools;
 
-class EpicSelectorWOOO extends MusicBeatState{
+class EpicSelectorWOOO extends MusicBeatState {
+
+	var unfinishedText:FlxText;
 
 	var bloomShit:WIBloomEffect;
 	var chrom:ChromaticAberrationEffect;
@@ -50,6 +52,20 @@ class EpicSelectorWOOO extends MusicBeatState{
 	var curSelected:Int = 0;
 	var BG:FlxSprite;
     override function create(){
+
+		if(ClientPrefs.language == "Spanish") {
+		unfinishedText = new FlxText(907, FlxG.height - 54, 0, "Por Ahora, Esto Esta Sin Terminar, La Version Final Sera Diferente!", 25);
+		unfinishedText.scrollFactor.set();
+		unfinishedText.screenCenter(X);
+		unfinishedText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(unfinishedText);
+		} else {
+		unfinishedText = new FlxText(907, FlxG.height - 54, 0, "Currently, The category Menu is Unfinished, The Final Verion Will Be Different!", 25);
+		unfinishedText.scrollFactor.set();
+		unfinishedText.screenCenter(X);
+		unfinishedText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(unfinishedText);
+		}
 
 		if(ClientPrefs.funiShaders)
 					{
@@ -79,9 +95,11 @@ class EpicSelectorWOOO extends MusicBeatState{
 					}
 		if(FPClientPrefs.episode2FPLock == 'unlocked')
 		{
-			freeplayCats = ['Episodes', 'Extras', '???'];
+		if(ClientPrefs.language == "Spanish")	freeplayCats = ['Episodios', 'Extras', '???'];
+		else	freeplayCats = ['Episodes', 'Extras', '???'];
 		} else {
-			freeplayCats = ['Episodes', 'Extras'];
+		if(ClientPrefs.language == "Spanish")	freeplayCats = ['Episodes', 'Extras'];
+		else freeplayCats = ['Episodios', 'Extras'];
 		}		
 
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));

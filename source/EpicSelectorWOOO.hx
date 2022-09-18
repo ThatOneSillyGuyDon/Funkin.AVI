@@ -190,7 +190,7 @@ class EpicSelectorWOOO extends MusicBeatState {
                 case 1:
 				if(FPClientPrefs.isolatedSong == 'Completed' && FPClientPrefs.lunacySong == 'Completed' && FPClientPrefs.twistedSong == 'Completed' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten')
 				{
-					FlxG.sound.play(Paths.sound('cancelMenu'));
+					CoolUtil.browserLoad('https://twitter.com/i/status/1536165280510005250'); // Fuck you, you're going to Twitter
 					//MusicBeatState.switchState(new FuckingVideo());
 				}else{
 					FlxG.sound.play(Paths.sound('cancelMenu'));

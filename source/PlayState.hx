@@ -10994,7 +10994,9 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-			case 'test': //We need a name lmao
+			case 'Isolated Beta':
+			timeBar.createFilledBar(0xFFFFFF, 0x000000);
+			scoreTxt.text = "Score: " + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName + (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
 		}
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????

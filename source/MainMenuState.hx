@@ -151,6 +151,7 @@ class MainMenuState extends MusicBeatState
 
 
 					} //the game fucking breaks now for some reason with this on :(
+						//Facts
 
 		eyes = new FlxSprite().loadGraphic(Paths.image('NEWmenu/HahaSadBoi'));
 		eyes.scrollFactor.set(0, 0);

@@ -632,8 +632,8 @@ class ExtrasState extends MusicBeatState{
 				if (distort != null)
 				distort.shader.working.value = [true];
 				}
-			}else{
-				FlxG.camera.flash(FlxColor.BLACK, 0.2);
+			} else {
+			FlxG.camera.flash(FlxColor.BLACK, 0.2);
 			if(ClientPrefs.funiShaders)
 			{
 			clearShader();

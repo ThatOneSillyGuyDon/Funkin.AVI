@@ -7979,11 +7979,7 @@ class PlayState extends MusicBeatState
 						health -= 500;
 						
 					case 'Error Note':
-								endSong();
-								FlxG.sound.play(Paths.sound('wiiCrash'), 1);
-								Application.current.window.alert('lime.app.Application: function goodNoteHit: note.noteType = "Error Note": closing game...');
-								System.exit(0);
-						/*switch(curStage)
+						switch(curStage)
 						{
 							case 'PixelWorld':
 								crashLivesCounter -= 1;
@@ -8042,7 +8038,7 @@ class PlayState extends MusicBeatState
 								FlxG.sound.play(Paths.sound('wiiCrash'), 1);
 								Application.current.window.alert('lime.app.Application: function goodNoteHit: note.noteType = "Error Note": closing game...');
 								System.exit(0);
-						}*/
+						}
 						
 
 					case 'Flip Note':

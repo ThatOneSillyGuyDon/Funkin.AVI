@@ -370,10 +370,6 @@ class PauseSpanishState extends MusicBeatSubstate
 						Application.current.window.title = "Funkin.avi";
 						switch(PlayState.SONG.song)
 						{
-							case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins':
-								MusicBeatState.switchState(new EpisodesState());
-							case 'Hunted' | 'Malfunction' | 'Birthday' | "Don't Cross!" | 'Isolated Old' | 'Mercy' | 'Cycled Sins' | 'War Dilema':
-								MusicBeatState.switchState(new ExtrasState());
 							default:
 								MusicBeatState.switchState(new EpisodesState());
 						}

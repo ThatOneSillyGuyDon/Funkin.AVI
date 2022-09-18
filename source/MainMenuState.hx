@@ -373,6 +373,18 @@ class MainMenuState extends MusicBeatState
 
 		FlxG.camera.follow(camFollowPos, null, 1);
 
+
+		if(ClientPrefs.language == "English") {
+	   var GameJoltText:FlxText = new FlxText(80, FlxG.height - -20, 0, "Story Mode Is Currently Disambled Until 2.0!", 25);
+		GameJoltText.scrollFactor.set();
+		GameJoltText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(GameJoltText);
+		} else {
+			var GameJoltText:FlxText = new FlxText(80, FlxG.height - -20, 0, "Modo Historia Esta Desabilitado hasta La 2.0!", 25);
+			GameJoltText.scrollFactor.set();
+			GameJoltText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			add(GameJoltText);
+		}
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 84, 0, "Funkin.avi v" + MouseVersion, 12);
 		versionShit.scrollFactor.set();
 		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

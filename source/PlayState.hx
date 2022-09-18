@@ -84,6 +84,14 @@ import openfl.geom.Rectangle;
 import openfl.display.Sprite;
 import openfl.utils.Assets;
 
+import flixel.system.scaleModes.BaseScaleMode;
+import flixel.system.scaleModes.FillScaleMode;
+import flixel.system.scaleModes.FixedScaleMode;
+import flixel.system.scaleModes.RatioScaleMode;
+import flixel.system.scaleModes.RelativeScaleMode;
+import flixel.system.scaleModes.StageSizeScaleMode;
+import flixel.system.scaleModes.PixelPerfectScaleMode;
+
 import Shaders;
 import IndieCrossShaderShit.FXHandler;
 #if sys
@@ -117,6 +125,16 @@ class PlayState extends MusicBeatState
  	public var windowW:Int = 1280;
  	public var windowH:Int = 720;
 
+	public var SCALEdebugText:FlxText;
+
+	public var modeBase:BaseScaleMode;
+	public var modeFill:FillScaleMode;
+	public var modeFixed:FixedScaleMode;
+	public var modeRatio:RatioScaleMode;
+	public var modeRelative:RelativeScaleMode;
+	public var modeStage:StageSizeScaleMode;
+	public var modePixel:PixelPerfectScaleMode;
+	
 	//Shaders shit
 	public var camGameShaders:Array<ShaderEffect> = [];
 	public var camHUDShaders:Array<ShaderEffect> = [];
@@ -428,6 +446,16 @@ class PlayState extends MusicBeatState
 	override public function create()
 	{
 		Paths.clearStoredMemory();
+
+		modeBase = new BaseScaleMode();
+		modeFill = new FillScaleMode();
+		modeFixed = new FixedScaleMode();
+		modeRatio = new RatioScaleMode();
+		modeRelative = new RelativeScaleMode(0.75, 0.75);
+		modeStage = new StageSizeScaleMode();
+		modePixel = new PixelPerfectScaleMode();
+
+		hudStyle = ClientPrefs.hudSelection;
 
 		// for lua
 		instance = this;
@@ -1545,100 +1573,287 @@ class PlayState extends MusicBeatState
 			}
 		}
 
-
-
-		var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
-		timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
-		 if (!isPixelStage) {
-			switch(curStage)
-			{
-				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop':
-					timeTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				case 'PixelWorld':
-					timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				default:
-					timeTxt.setFormat(Paths.font("vcr.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			}
-		} else {
-                timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		}
-		timeTxt.scrollFactor.set();
-		timeTxt.alpha = 0;
-		timeTxt.borderSize = 2;
-
-		if(ClientPrefs.mechanics)
+		switch(hudStyle)
 		{
-			if(curStage == 'WaltStage')
-			{
-				timeTxt.visible = false;
-			}else{
-				timeTxt.visible = showTime;
-			}
-		}else{
-			timeTxt.visible = showTime;
-		}
+			case 'Psych':
+				var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
+				timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+				if (!isPixelStage) {
+					switch(curStage)
+					{
+						case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
+							timeTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						case 'PixelWorld':
+							timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						default:
+							timeTxt.setFormat(Paths.font("vcr.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+				} else {
+						timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				}
+				timeTxt.scrollFactor.set();
+				timeTxt.alpha = 0;
+				timeTxt.borderSize = 2;
 
-		if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						timeTxt.visible = false;
+					}else{
+						timeTxt.visible = showTime;
+					}	
+				}else{
+					timeTxt.visible = showTime;
+				}
+				
+				if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
 
-		if(ClientPrefs.timeBarType == 'Song Name')
-		{
-			timeTxt.text = SONG.song;
-		}
-		updateTime = showTime;
+				if(ClientPrefs.timeBarType == 'Song Name')
+				{
+					timeTxt.text = SONG.song;
+				}
+				updateTime = showTime;
 
-		timeBarBG = new AttachedSprite('timeBar');
-		timeBarBG.x = timeTxt.x;
-		timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
-		timeBarBG.scrollFactor.set();
-		timeBarBG.alpha = 0;
-		if(ClientPrefs.mechanics)
-		{
-			if(curStage == 'WaltStage')
-			{
-				timeBarBG.visible = false;
-			}else{
-				timeBarBG.visible = showTime;
-			}
-		}else{
-			timeBarBG.visible = showTime;
-		}
+				timeBarBG = new AttachedSprite('timeBar');
+				timeBarBG.x = timeTxt.x;
+				timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
+				timeBarBG.scrollFactor.set();
+				timeBarBG.alpha = 0;
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						timeBarBG.visible = false;
+					}else{
+						timeBarBG.visible = showTime;
+					}
+				}else{
+					timeBarBG.visible = showTime;
+				}
+				
+				
+				timeBarBG.color = FlxColor.BLACK;
+				timeBarBG.xAdd = -4;
+				timeBarBG.yAdd = -4;
+				add(timeBarBG);
 
+				timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
+					'songPercent', 0, 1);
+				timeBar.scrollFactor.set();
+				timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
+				timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
+				timeBar.alpha = 0;
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						timeBar.visible = false;
+					}else{
+						timeBar.visible = showTime;
+					}	
+				}else{
+					timeBar.visible = showTime;
+				}
+				add(timeBar);
+				add(timeTxt);
+				timeBarBG.sprTracker = timeBar;
 
-		timeBarBG.color = FlxColor.BLACK;
-		timeBarBG.xAdd = -4;
-		timeBarBG.yAdd = -4;
-		add(timeBarBG);
+				if(ClientPrefs.timeBarType == 'Song Name')
+				{
+					timeTxt.size = 24;
+					timeTxt.y += 3;
+				}
+				
+			case 'Vanilla':
+				var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
+				timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+				if (!isPixelStage) {
+					switch(curStage)
+					{
+						case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
+							timeTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						case 'PixelWorld':
+							timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						default:
+							timeTxt.setFormat(Paths.font("vcr.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+				} else {
+						timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				}
+				timeTxt.scrollFactor.set();
+				timeTxt.alpha = 0;
+				timeTxt.borderSize = 2;
 
-		timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
-			'songPercent', 0, 1);
-		timeBar.scrollFactor.set();
-		timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
-		timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
-		timeBar.alpha = 0;
-		if(ClientPrefs.mechanics)
-		{
-			if(curStage == 'WaltStage')
-			{
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						timeTxt.visible = false;
+					}else{
+						timeTxt.visible = showTime;
+					}	
+				}else{
+					timeTxt.visible = showTime;
+				}
+				
+				if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
+
+				if(ClientPrefs.timeBarType == 'Song Name')
+				{
+					timeTxt.text = SONG.song;
+				}
+				updateTime = showTime;
+
+				timeBarBG = new AttachedSprite('timeBar');
+				timeBarBG.x = timeTxt.x;
+				timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
+				timeBarBG.scrollFactor.set();
+				timeBarBG.alpha = 0;
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						timeBarBG.visible = false;
+					}else{
+						timeBarBG.visible = showTime;
+					}
+				}else{
+					timeBarBG.visible = showTime;
+				}
+				
+				
+				timeBarBG.color = FlxColor.BLACK;
+				timeBarBG.xAdd = -4;
+				timeBarBG.yAdd = -4;
+				add(timeBarBG);
+
+				timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
+					'songPercent', 0, 1);
+				timeBar.scrollFactor.set();
+				timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
+				timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
+				timeBar.alpha = 0;
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						timeBar.visible = false;
+					}else{
+						timeBar.visible = showTime;
+					}	
+				}else{
+					timeBar.visible = showTime;
+				}
+				add(timeBar);
+				add(timeTxt);
+				timeBarBG.sprTracker = timeBar;
+
+				if(ClientPrefs.timeBarType == 'Song Name')
+				{
+					timeTxt.size = 24;
+					timeTxt.y += 3;
+				}
+
 				timeBar.visible = false;
-			}else{
-				timeBar.visible = showTime;
-			}
-		}else{
-			timeBar.visible = showTime;
+				timeBarBG.visible = false;
+				timeTxt.visible = false;
+
+			case 'Demolition':
+				var showTime:Bool = (ClientPrefs.timeBarType != 'Disabled');
+				timeTxt = new FlxText(STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+				if (!isPixelStage) {
+					switch(curStage)
+					{
+						case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
+							timeTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						case 'PixelWorld':
+							timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						default:
+							timeTxt.setFormat(Paths.font("vcr.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+				} else {
+						timeTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				}
+				timeTxt.scrollFactor.set();
+				timeTxt.alpha = 0;
+				timeTxt.borderSize = 2;
+
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						timeTxt.visible = false;
+					}else{
+						timeTxt.visible = showTime;
+					}	
+				}else{
+					timeTxt.visible = showTime;
+				}
+				
+				if(ClientPrefs.downScroll) timeTxt.y = FlxG.height - 44;
+
+				if(ClientPrefs.timeBarType == 'Song Name')
+				{
+					timeTxt.text = SONG.song;
+				}
+				updateTime = showTime;
+
+				timeBarBG = new AttachedSprite('timeBar');
+				timeBarBG.x = timeTxt.x;
+				timeBarBG.y = timeTxt.y + (timeTxt.height / 4);
+				timeBarBG.scrollFactor.set();
+				timeBarBG.alpha = 0;
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						timeBarBG.visible = false;
+					}else{
+						timeBarBG.visible = showTime;
+					}
+				}else{
+					timeBarBG.visible = showTime;
+				}
+				
+				
+				timeBarBG.color = FlxColor.BLACK;
+				timeBarBG.xAdd = -4;
+				timeBarBG.yAdd = -4;
+				add(timeBarBG);
+
+				timeBar = new FlxBar(timeBarBG.x + 4, timeBarBG.y + 4, LEFT_TO_RIGHT, Std.int(timeBarBG.width - 8), Std.int(timeBarBG.height - 8), this,
+					'songPercent', 0, 1);
+				timeBar.scrollFactor.set();
+				timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
+				timeBar.numDivisions = 800; //How much lag this causes?? Should i tone it down to idk, 400 or 200?
+				timeBar.alpha = 0;
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						timeBar.visible = false;
+					}else{
+						timeBar.visible = showTime;
+					}	
+				}else{
+					timeBar.visible = showTime;
+				}
+				add(timeBar);
+				add(timeTxt);
+				timeBarBG.sprTracker = timeBar;
+
+				if(ClientPrefs.timeBarType == 'Song Name')
+				{
+					timeTxt.size = 24;
+					timeTxt.y += 3;
+				}
+
 		}
-		add(timeBar);
-		add(timeTxt);
-		timeBarBG.sprTracker = timeBar;
 
 		strumLineNotes = new FlxTypedGroup<StrumNote>();
 		add(strumLineNotes);
 		add(grpNoteSplashes);
-
-		if(ClientPrefs.timeBarType == 'Song Name')
-		{
-			timeTxt.size = 24;
-			timeTxt.y += 3;
-		}
 
 		var splash:NoteSplash = new NoteSplash(100, 100, 0);
 		grpNoteSplashes.add(splash);
@@ -1737,33 +1952,48 @@ class PlayState extends MusicBeatState
 				}*/
 
 			Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
+		switch(hudStyle)
+		{
+			case 'Vanilla' | 'Psych':
+				healthBarBG = new AttachedSprite('healthBar');
+				healthBarBG.y = FlxG.height * 0.89;
+				healthBarBG.screenCenter(X);
+				healthBarBG.scrollFactor.set();
+				healthBarBG.visible = !ClientPrefs.hideHud;
+				healthBarBG.xAdd = -4;
+				healthBarBG.yAdd = -4;
+				add(healthBarBG);
+				if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
 
-				switch (curStage)
-				{
-					case 'stage' | 'Office' | 'Forest' | 'Line':
-						healthBarBG = new AttachedSprite('healthBar');
-					case 'PixelWorld':
-						healthBarBG = new AttachedSprite('placeholder'); //Placeholder
-					default:
-						healthBarBG = new AttachedSprite('healthBar');
-				}
-		healthBarBG.y = FlxG.height * 0.89;
-		healthBarBG.screenCenter(X);
-		healthBarBG.scrollFactor.set();
-		healthBarBG.visible = !ClientPrefs.hideHud;
-		healthBarBG.xAdd = -4;
-		healthBarBG.yAdd = -4;
-		add(healthBarBG);
-		if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
+				healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+					'health', 0, 2);
+				healthBar.scrollFactor.set();
+				// healthBar
+				healthBar.visible = !ClientPrefs.hideHud;
+				healthBar.alpha = ClientPrefs.healthBarAlpha;
+				add(healthBar);
+				healthBarBG.sprTracker = healthBar;
 
-		healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
-			'health', 0, 2);
-		healthBar.scrollFactor.set();
-		// healthBar
-		healthBar.visible = !ClientPrefs.hideHud;
-		healthBar.alpha = ClientPrefs.healthBarAlpha;
-		add(healthBar);
-		healthBarBG.sprTracker = healthBar;
+			case 'Demolition' | 'Funkin.avi' | 'Red-Bun':
+				healthBarBG = new AttachedSprite('healthBar-Long');
+				healthBarBG.y = FlxG.height * 0.89;
+				healthBarBG.screenCenter(X);
+				healthBarBG.scrollFactor.set();
+				healthBarBG.visible = !ClientPrefs.hideHud;
+				healthBarBG.xAdd = -4;
+				healthBarBG.yAdd = -4;
+				add(healthBarBG);
+				if(ClientPrefs.downScroll) healthBarBG.y = 0.11 * FlxG.height;
+
+				healthBar = new FlxBar(healthBarBG.x + 4, healthBarBG.y + 4, RIGHT_TO_LEFT, Std.int(healthBarBG.width - 8), Std.int(healthBarBG.height - 8), this,
+					'health', 0, 2);
+				healthBar.scrollFactor.set();
+				// healthBar
+				healthBar.visible = !ClientPrefs.hideHud;
+				healthBar.alpha = ClientPrefs.healthBarAlpha;
+				add(healthBar);
+				healthBarBG.sprTracker = healthBar;
+		}
 
 		iconP1 = new HealthIcon(boyfriend.healthIcon, true);
 		iconP1.y = healthBar.y - 75;
@@ -1798,35 +2028,93 @@ class PlayState extends MusicBeatState
 		add(iconP2);
 		reloadHealthBarColors();
 
-		scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-	        if (!isPixelStage) {
-			switch(curStage)
-			{
-				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop':
-					scoreTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				case 'PixelWorld':
-					scoreTxt.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				default:
-					scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			}
-		} else {
-                scoreTxt.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		}
-		scoreTxt.scrollFactor.set();
-		scoreTxt.borderSize = 1.25;
-		if(ClientPrefs.mechanics)
+		switch(hudStyle)
 		{
-			if(curStage == 'WaltStage')
-			{
-				scoreTxt.visible = false;
-			}else{
-				scoreTxt.visible = !ClientPrefs.hideHud;
-			}
-		}else{
-			scoreTxt.visible = !ClientPrefs.hideHud;
-		}
+			case 'Psych':
+				scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
+					if (!isPixelStage) {
+					switch(curStage)
+					{
+						case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
+							scoreTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						case 'PixelWorld':
+							scoreTxt.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						default: 
+							scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+				} else {
+						scoreTxt.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				}
+				scoreTxt.scrollFactor.set();
+				scoreTxt.borderSize = 1.25;
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						scoreTxt.visible = false;
+					}else{
+						scoreTxt.visible = !ClientPrefs.hideHud;
+					}
+				}else{
+					scoreTxt.visible = !ClientPrefs.hideHud;
+				}
+				
+				add(scoreTxt);
 
-		add(scoreTxt);
+			case 'Vanilla':
+				scoreTxt = new FlxText(healthBarBG.x + healthBarBG.width - 190, healthBarBG.y + 30, 0, "", 20);
+				scoreTxt.setFormat(Paths.font("vcr.ttf"), 16, FlxColor.WHITE, RIGHT);
+				scoreTxt.scrollFactor.set();
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						scoreTxt.visible = false;
+					}else{
+						scoreTxt.visible = !ClientPrefs.hideHud;
+					}
+				}else{
+					scoreTxt.visible = !ClientPrefs.hideHud;
+				}
+				
+				add(scoreTxt);
+
+			case 'Demolition':
+				if(ClientPrefs.downScroll)
+				{
+					scoreTxt = new FlxText(0, healthBarBG.y + 50, FlxG.width, "", 20);
+				}else{
+					scoreTxt = new FlxText(0, healthBarBG.y - 50, FlxG.width, "", 20);
+				}
+					if (!isPixelStage) {
+					switch(curStage)
+					{
+						case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
+							scoreTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						case 'PixelWorld':
+							scoreTxt.setFormat(Paths.font("m40.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						default: 
+							scoreTxt.setFormat(Paths.font("VanillaExtractRegular.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+				} else {
+						scoreTxt.setFormat(Paths.font("m40.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				}
+				scoreTxt.scrollFactor.set();
+				scoreTxt.borderSize = 1.25;
+				if(ClientPrefs.mechanics)
+				{
+					if(curStage == 'WaltStage')
+					{
+						scoreTxt.visible = false;
+					}else{
+						scoreTxt.visible = !ClientPrefs.hideHud;
+					}
+				}else{
+					scoreTxt.visible = !ClientPrefs.hideHud;
+				}
+				
+				add(scoreTxt);
+		}
 
 		peWatermark = new FlxText(5, FlxG.height - 29, 0, "", 16);
 	        if (!isPixelStage) {
@@ -1849,6 +2137,11 @@ class PlayState extends MusicBeatState
 		peWatermark.cameras = [camCustom];
 		add(peWatermark);
 		#end
+
+		SCALEdebugText = new FlxText(10,10,200,"Default scale mode (ratio)");
+		SCALEdebugText.scrollFactor.set(0,0);
+		SCALEdebugText.cameras = [camCustom];
+		add(SCALEdebugText);
 
 		botplayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (ClientPrefs.downScroll ? 100 : -100), "", 32);
 
@@ -1895,30 +2188,61 @@ class PlayState extends MusicBeatState
 		}
 
 	        if(!ClientPrefs.hideJudgement) {
-			judgementCounter = new FlxText(20, 0, 0, "", 20);
-			if (!isPixelStage) {
-			switch(curStage)
+			switch(hudStyle)
 			{
-				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop':
-					judgementCounter.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				case 'PixelWorld':
+				case 'Psych':
+					judgementCounter = new FlxText(20, 0, 0, "", 20);
+					if (!isPixelStage) {
+					switch(curStage)
+					{
+						case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
+							judgementCounter.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						case 'PixelWorld':
+							judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						default: 
+							judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+					} else {
 					judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				default:
-					judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+					judgementCounter.borderSize = 2;
+					judgementCounter.borderQuality = 2;
+					judgementCounter.scrollFactor.set();
+					judgementCounter.cameras = [camHUD];
+					judgementCounter.screenCenter(Y);
+					if (ClientPrefs.marvelouses)
+						judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
+					else
+						judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
+					add(judgementCounter);
+
+				case 'Vanilla':
+					judgementCounter = new FlxText(20, 0, 0, "", 20);
+					if (!isPixelStage) {
+					switch(curStage)
+					{
+						case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
+							judgementCounter.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 28, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						case 'PixelWorld':
+							judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						default: 
+							judgementCounter.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+					} else {
+					judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+					judgementCounter.borderSize = 2;
+					judgementCounter.borderQuality = 2;
+					judgementCounter.scrollFactor.set();
+					judgementCounter.cameras = [camHUD];
+					judgementCounter.screenCenter(Y);
+					if (ClientPrefs.marvelouses)
+						judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
+					else
+						judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
+					add(judgementCounter);
+					judgementCounter.visible = false;
 			}
-			} else {
-			judgementCounter.setFormat(Paths.font("Retro Gaming.ttf"), 20, FlxColor.WHITE, FlxTextAlign.LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			}
-			judgementCounter.borderSize = 2;
-			judgementCounter.borderQuality = 2;
-			judgementCounter.scrollFactor.set();
-			judgementCounter.cameras = [camHUD];
-			judgementCounter.screenCenter(Y);
-			if (ClientPrefs.marvelouses)
-				judgementCounter.text = 'Marvs: ${marvelouses}\nSicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
-			else
-				judgementCounter.text = 'Sicks: ${sicks}\nGoods: ${goods}\nBads: ${bads}\nShits: ${shits}\n';
-			add(judgementCounter);
 		}
 		add(scoreTxt);
 
@@ -4106,6 +4430,14 @@ class PlayState extends MusicBeatState
 
 	override public function update(elapsed:Float)
 	{
+		if (FlxG.keys.justPressed.Z) SetScaleMode(1);
+		if (FlxG.keys.justPressed.X) SetScaleMode(2);
+		if (FlxG.keys.justPressed.C) SetScaleMode(3);
+		if (FlxG.keys.justPressed.B) SetScaleMode(4);
+		if (FlxG.keys.justPressed.N) SetScaleMode(5);
+		if (FlxG.keys.justPressed.M) SetScaleMode(6);
+		if (FlxG.keys.justPressed.COMMA) SetScaleMode(7);
+
 		if (FlxG.keys.justPressed.NINE)
 		{
 			iconP1.swapOldIcon();
@@ -4298,7 +4630,9 @@ class PlayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
-
+		
+		if(hudStyle != 'Vanilla')
+		{
 		if(ClientPrefs.simplifiedScore) {
 
 		if(ratingName == '?') {
@@ -4352,6 +4686,9 @@ class PlayState extends MusicBeatState
 			} else {
 				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
 			}
+		}
+		}else{
+			scoreTxt.text = 'Score:' + songScore;
 		}
 
 		if(botplayTxt.visible) {
@@ -7339,6 +7676,9 @@ class PlayState extends MusicBeatState
 											{
 												FlxTween.tween(threatTrail, {x: -10}, 0.4); //Glitch Mickey looks more threatening now
 											}
+											FlxTween.tween(Application, {'current.window.x': 100, 'current.window.y': 180}, 0.1, {ease: FlxEase.quadOut});
+											//Application.current.window.x = 500;
+											//Application.current.window.y = 180;
 									}
 									if(ClientPrefs.camMove)
 									{
@@ -7406,6 +7746,7 @@ class PlayState extends MusicBeatState
 											{
 												FlxTween.tween(threatTrail, {y: 10}, 0.4); //Glitch Mickey looks more threatening now
 											}
+											FlxTween.tween(Application, {'current.window.x': 280, 'current.window.y': 230}, 0.1, {ease: FlxEase.quadOut});
 									}
 									if(ClientPrefs.camMove)
 									{
@@ -7473,6 +7814,7 @@ class PlayState extends MusicBeatState
 											{
 												FlxTween.tween(threatTrail, {y: -10}, 0.4); //Glitch Mickey looks more threatening now
 											}
+											FlxTween.tween(Application, {'current.window.x': 280, 'current.window.y': 110}, 0.1, {ease: FlxEase.quadOut});
 									}
 									if(ClientPrefs.camMove)
 									{
@@ -7540,6 +7882,7 @@ class PlayState extends MusicBeatState
 											{
 												FlxTween.tween(threatTrail, {x: 10}, 0.4); //Glitch Mickey looks more threatening now
 											}
+											FlxTween.tween(Application, {'current.window.x': 460, 'current.window.y': 180}, 0.1, {ease: FlxEase.quadOut});
 									}
 									if(ClientPrefs.camMove)
 									{
@@ -7924,6 +8267,28 @@ class PlayState extends MusicBeatState
 		splash.setupNoteSplash(x, y, data, skin, hue, sat, brt);
 		grpNoteSplashes.add(splash);
 	}
+
+	function SetScaleMode (screenMode:Int = -1)
+		{
+			// Remember: Switch block do not fall through
+			// in haxe, so there's no need for "break;"
+			// for each case.
+			var modeText = "Unknown";
+			switch (screenMode)
+			{
+				case 1: FlxG.scaleMode = modeBase; modeText = "base";
+				case 2: FlxG.scaleMode = modeFill; modeText = "fill";
+				case 3: FlxG.scaleMode = modeFixed; modeText = "fixed";
+				case 4: FlxG.scaleMode = modeRatio; modeText = "ratio";
+				case 5: FlxG.scaleMode = modeRelative; modeText = "relative";
+				case 6: FlxG.scaleMode = modeStage; modeText = "stage size";
+				case 7: FlxG.scaleMode = modePixel; modeText = "pixel perfect";
+			}
+	 
+			// Update debug text
+			if (screenMode != -1)
+				SCALEdebugText.text = "screen mode : " + modeText;
+		}
 
 	function relapseShoot()
 	{

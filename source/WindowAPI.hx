@@ -29,4 +29,3 @@ class WindowThing
 		return res;
 	}
 }
-

@@ -63,7 +63,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'hudSelection',
 			'string',
 			'Psych',
-			['Psych', 'Vanilla']); //HUDs to add: Demolition HUD, Funkin.avi HUD, Red-Bun's HUD.
+			['Psych', 'Vanilla', 'Demolition', 'Funkin.avi', 'Red-Bun']); //HUDs to add: Demolition HUD, Funkin.avi HUD, Red-Bun's HUD.
 			addOption(option);
 		
 		var option:Option = new Option('Winning Icons',
@@ -169,12 +169,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 		
-		var option:Option = new Option('Long Health Bar',
+		/*var option:Option = new Option('Long Health Bar',
 			"If unchecked, the health bar will be short.",
 			'longBar',
 			'bool',
 			true);
-		addOption(option);
+		addOption(option);*/
+		//NO MORE LONG HEALTH BAR TOGGLE, THANK FUCKING GOD.
 
 		var option:Option = new Option('Health Bar Transparency',
 			'How much transparent should the health bar and icons be.',

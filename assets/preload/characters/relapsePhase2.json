@@ -84,12 +84,12 @@
 		-80,
 		180
 	],
-	"healthicon": "face",
+	"healthicon": "relapse-pixel",
 	"flip_x": false,
 	"healthbar_colors": [
-		161,
-		161,
-		161
+		0,
+		0,
+		0
 	],
 	"camera_position": [
 		320,

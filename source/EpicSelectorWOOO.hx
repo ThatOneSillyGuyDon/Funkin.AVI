@@ -191,7 +191,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 				}
                 case 1:
 				if(FPClientPrefs.episode1FPLock == 'unlocked')
-				{
+				{ 
 					MusicBeatState.switchState(new ExtrasState());
 				}else{
 					FlxG.sound.play(Paths.sound('cancelMenu'));

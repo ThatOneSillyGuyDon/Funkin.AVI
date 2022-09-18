@@ -290,25 +290,25 @@ class GameJoltInfo extends FlxSubState
     /**
     * GameJolt + FNF version.
     */
-    public static var version:String = "1.1";
+    public static var version:String = "1.2";
     /**
      * Random quotes I got from other people. Nothing more, nothing less. Just for funny.
      */
     public static var textArray:Array<String> = [
-        "I should probably push my commits...",
+        "Tenta If You See This I Accidentaly Removed The Random Text.",
         "Where is my apple cider?",
         "Mario be like wahoo!",
-        "[Funny IP address joke]",
-        "I love Camellia mod",
+        "I Have Your IP Adress",
+        "Help, How I Change The API Thing To '*'",
         "I forgot to remove the IP grabber...",
         "Play Post Mortem Mixup",
         "*Spontaniously combusts*",
-        "Holofunk is awesome",
+        "Holofunk is awesome and fr",
         "What you know about rollin down in the deep",
         "This isn't an NFT. Crazy right?",
-        "no not the null reference :(",
+        "Like If You Hate The Null Object Reference",
         "Thank you BrightFyre for your help :)",
-        "Thank you Firubii for the notification code :)"
+        "Notifications Dont Work And IDK why"
     ];
 }
 

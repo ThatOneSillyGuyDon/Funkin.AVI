@@ -6784,7 +6784,7 @@ class PlayState extends MusicBeatState
 				} else if(SONG.song == "Hunted") {
 					GameJoltAPI.addScore(songScore, 760677);
 				} else if(SONG.song == "Twisted Grins") {
-					GameJoltAPI.addScore(songScore, 755498);
+					GameJoltAPI.addScore(songScore, 760679);
 				} else if(SONG.song == "Lunacy") {
 					GameJoltAPI.addScore(songScore, 760686);
 				} else if(SONG.song == "Isolated Old") {

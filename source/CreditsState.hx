@@ -107,6 +107,7 @@ class CreditsState extends MusicBeatState
 			['HassenX', 'missing-icon', 'A Cool Animator', 'nolink', 'FFFFFF'],
 			['Tycho', 'tycho', 'Cycled Sins Artwork', 'https://twitter.com/TychoFNFastral?t=nNkNFz_kCO4qMRMElrhVfA&s=09', 'FFFFFF'],
 			['SirSpookySkeleton', 'spooky', 'spoopy.', 'https://twitter.com/SirSpookySkeltn?t=zdg7Urcfn5QhllZxADekpA&s=09', 'FFFFFF'],
+			['Jsa010',       	'jsa010',	        "Concept Art", 'https://twitter.com/_Jsa010_',   	'FFFFFF'],
 			['Z3r0', 'zero', 'Epic 3D Artist', 'nolink', 'FFFFFF'],
 			['MalyPlus', 'maly', 'Pixel Artist', 'https://gamebanana.com/members/2014862', 'FFFFFF'],
 			['Genorelm_lmao',	'genore',	'Artist',	'https://twitter.com/Genorelm_',	'FFFFFF'],

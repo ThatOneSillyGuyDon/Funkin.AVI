@@ -461,6 +461,8 @@ class PlayState extends MusicBeatState
     var boyfriendWin = new Sprite();
     var bfScrollWin = new Sprite();
 
+	var hudStyle = ClientPrefs.hudSelection;
+
 	override public function create()
 	{
 		Paths.clearStoredMemory();
@@ -472,8 +474,6 @@ class PlayState extends MusicBeatState
 		modeRelative = new RelativeScaleMode(0.75, 0.75);
 		modeStage = new StageSizeScaleMode();
 		modePixel = new PixelPerfectScaleMode();
-
-		hudStyle = ClientPrefs.hudSelection;
 
 		// for lua
 		instance = this;
@@ -4669,7 +4669,11 @@ class PlayState extends MusicBeatState
 			}
 		}
 		}else{
+			if(ClientPrefs.language == "English") {
 			scoreTxt.text = 'Score:' + songScore;
+			} else {
+			scoreTxt.text = 'Puntuacion: ' +songScore;
+			}
 		}
 
 		if(botplayTxt.visible) {
@@ -6754,22 +6758,22 @@ class PlayState extends MusicBeatState
 			{
 				trace('WENT BACK TO FREEPLAY??');
 
-				if(SONG.song == "Malfunction") {
-			    	GameJoltAPI.addScore(songScore, 719335, 'Score of ' + SONG.song);
-				} else if(SONG.song == "Bless") {
-					GameJoltAPI.addScore(songScore, 755493, 'Score of ' + SONG.song);
+				if(SONG.song == "Isolated Old") {
+			    	GameJoltAPI.addScore(songScore, 760676);
+				} else if(SONG.song == "Isolated") {
+					GameJoltAPI.addScore(songScore, 760684);
 				} else if(SONG.song == "Hunted") {
-					GameJoltAPI.addScore(songScore, 755496, 'Score of ' + SONG.song);
-				} else if(SONG.song == "Don't Cross!") {
-					GameJoltAPI.addScore(songScore, 755498, 'Score of ' + SONG.song);
-				} else if(SONG.song == "Mercy") {
-					GameJoltAPI.addScore(songScore, 755524, 'Score of ' + SONG.song);
+					GameJoltAPI.addScore(songScore, 760677);
+				} else if(SONG.song == "Twisted Grins") {
+					GameJoltAPI.addScore(songScore, 755498);
+				} else if(SONG.song == "Lunacy") {
+					GameJoltAPI.addScore(songScore, 760686);
 				} else if(SONG.song == "Isolated Old") {
-					GameJoltAPI.addScore(songScore, 755529, 'Score of ' + SONG.song);
-				} else if(SONG.song == "War Dilemma") {
-					GameJoltAPI.addScore(songScore, 755530, 'Score of ' + SONG.song);
+					GameJoltAPI.addScore(songScore, 755529);
 				} else if(SONG.song == "Cycled Sins") {
-					GameJoltAPI.addScore(songScore, 755531, 'Score of ' + SONG.song);
+					GameJoltAPI.addScore(songScore, 755530);
+				} else if(SONG.song == "Malfunction") {
+					GameJoltAPI.addScore(songScore, 755531);
 				}
 
 				//Story Songs later Lol, Thanks Tenta
@@ -11348,7 +11352,9 @@ class PlayState extends MusicBeatState
 					}
 				}
 
-			case 'test': //We need a name lmao
+			case 'Isolated Beta':
+			timeBar.createFilledBar(0xFFFFFF, 0x000000);
+			scoreTxt.text = "Score: " + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName + (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
 		}
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????

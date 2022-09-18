@@ -402,7 +402,7 @@ class PlayState extends MusicBeatState
 
 	var scoreGroup:FlxTypedSpriteGroup<FlxText>;
 
-	var hudStyle:String = "Default";
+	var hudStyle = ClientPrefs.hudSelection;
 
 	var color:FlxColor;
 
@@ -460,8 +460,6 @@ class PlayState extends MusicBeatState
 	var windowBoyfriend:Window;
     var boyfriendWin = new Sprite();
     var bfScrollWin = new Sprite();
-
-	var hudStyle = ClientPrefs.hudSelection;
 
 	override public function create()
 	{

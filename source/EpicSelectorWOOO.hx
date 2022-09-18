@@ -95,9 +95,11 @@ class EpicSelectorWOOO extends MusicBeatState {
 					}
 		if(FPClientPrefs.isolatedSong == 'Completed' && FPClientPrefs.lunacySong == 'Completed' && FPClientPrefs.twistedSong == 'Completed' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten')
 		{
-			freeplayCats = ['Play', 'A Letter for You', '???'];
+			if(ClientPrefs.language == "Spanish") freeplayCats = ['Jugar', 'Un Mensaje Para It', '???'];
+			else freeplayCats = ['Play', 'A Letter for You', '???'];
 		} else {
-			freeplayCats = ['Play', '???', '???'];
+			if(ClientPrefs.language == "Spanish") freeplayCats = ['Play', '???', '???'];
+			else freeplayCats = ['Jugar', '???', '???'];
 		}		
 
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));

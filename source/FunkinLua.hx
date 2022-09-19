@@ -1,4 +1,4 @@
-#if LUA_ALLOWED
+#if LUA_ALLOWED // We can just forget about this
 import llua.Lua;
 import llua.LuaL;
 import llua.State;

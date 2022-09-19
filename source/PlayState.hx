@@ -1931,7 +1931,8 @@ class PlayState extends MusicBeatState
 					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
 				}*/
 
-			Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
+			if(ClientPrefs.language == "English") Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
+			else Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Hecho Por " + PlayState.SONG.composer;
 		switch(hudStyle)
 		{
 			case 'Vanilla' | 'Psych':
@@ -2303,7 +2304,8 @@ class PlayState extends MusicBeatState
 				add(holyShitMOVEBITCH);
 				holyShitMOVEBITCH.alpha = 0;
 
-				PRESSSPACEDUMBASS = new FlxText(0, 490, FlxG.width, "Press SPACE to Dodge!", 74);
+				if(ClientPrefs.language == "English") PRESSSPACEDUMBASS = new FlxText(0, 490, FlxG.width, "Press SPACE to Dodge!", 74);
+				else PRESSSPACEDUMBASS = new FlxText(0, 490, FlxG.width, "Presiona ESPACIO para Esquivar!", 74);
 				PRESSSPACEDUMBASS.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 50, FlxColor.WHITE, CENTER);
 				PRESSSPACEDUMBASS.cameras = [camHUD];
 				add(PRESSSPACEDUMBASS);
@@ -2326,7 +2328,8 @@ class PlayState extends MusicBeatState
 		songBanner.screenCenter(XY);
 		add(songBanner);
 
-		songBannerText = new FlxText(0, 0, 600, PlayState.SONG.song + '\n' + "By: " + PlayState.SONG.composer);
+		if(ClientPrefs.language == "English") songBannerText = new FlxText(0, 0, 600, PlayState.SONG.song + '\n' + "By: " + PlayState.SONG.composer);
+		else songBannerText = new FlxText(0, 0, 600, PlayState.SONG.song + '\n' + "Por: " + PlayState.SONG.composer);
 		songBannerText.setFormat(Paths.font("vcr.ttf"), 36, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		songBannerText.scrollFactor.set();
 		songBannerText.borderSize = 1.25;
@@ -4645,12 +4648,20 @@ class PlayState extends MusicBeatState
 		}
 
 		if(SONG.song == "Cycled Sins") { //Think About it Demo, that would be cool
+			if(ClientPrefs.language == "English") {
 			if (healthBar.percent > 80)
-				scoreTxt.text = 'Sanity: High  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+				scoreTxt.text = 'Sanity: High | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 			else if (healthBar.percent > 20 && healthBar.percent < 80)	
-				scoreTxt.text = 'Sanity: Medium  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+				scoreTxt.text = 'Sanity: Medium | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 			else 
-				scoreTxt.text = 'Sanity: Low  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+				scoreTxt.text = 'Sanity: Low | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+			} else {
+				if (healthBar.percent > 80)
+					scoreTxt.text = 'Salud: Alta | Presicion: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+				else if (healthBar.percent > 20 && healthBar.percent < 80)	
+					scoreTxt.text = 'Salud: Media | Presicion: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
+				else 
+					scoreTxt.text = 'Salud: Baja | Presicion: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 		}
 	        }
 
@@ -4664,6 +4675,7 @@ class PlayState extends MusicBeatState
 			scoreTxt.text = 'Puntuacion: ${songScore}' + divider + 'Perdidas: ${totalMisses}';
 			} else {
 				scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
+			}
 			}
 		}
 		}else{
@@ -4884,7 +4896,7 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 		{
-			openChartEditor(); 
+			Application.current.window.alert('No Cheating', 'ERROR:');
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);

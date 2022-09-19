@@ -448,7 +448,8 @@ class EpisodesState extends MusicBeatState
 					default:
 					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song;
 				}*/
-				Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
+			    if(ClientPrefs.language == "English")	Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
+				else Application.current.window.title = "Funkin.avi - Escuchando: " + PlayState.SONG.song + " - Por: " + PlayState.SONG.composer;
 				#end
 			}
 

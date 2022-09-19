@@ -98,10 +98,6 @@ class GameOverSubstate extends MusicBeatSubstate
 			else
 				switch(PlayState.SONG.song)
 					{
-						case 'Isolated' | 'Lunacy':
-							MusicBeatState.switchState(new EpisodesState());
-						case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy' | 'Cycled Sins':
-							MusicBeatState.switchState(new ExtrasState());
 						default:
 							MusicBeatState.switchState(new EpisodesState());
 					}

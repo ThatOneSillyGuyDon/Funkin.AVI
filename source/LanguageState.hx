@@ -38,7 +38,34 @@ class LanguageState extends MusicBeatState
 
         FlxG.mouse.visible = true;
 
-        //removed cus value exeption thing, just in case
+		
+		if(ClientPrefs.funiShaders)
+					{
+						chrom = new ChromaticAberrationEffect();
+						blurThisShit = new TiltshiftEffect(0.4, 0);
+						bloomShit = new WIBloomEffect(0);
+						greyscale = new GreyscaleEffect();
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+						addShader(chrom);
+						addShader(blurThisShit);
+						addShader(bloomShit);
+						addShader(greyscale);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+						if (chrom != null)
+						chrom.setChrome(0.003);
+
+						if (bloomShit != null)
+						bloomShit.setSize(18.0);
+
+						if(blurThisShit != null)
+						blurThisShit.setBlur(0.4);
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+
+					}
+        //removed cus value exeption thing, just in case -jsa | I added it back, but it won't work anyways if people turn it off at the shaders warning menu -don
 	
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
@@ -127,7 +154,7 @@ class LanguageState extends MusicBeatState
 					FlxTween.tween(warnText, {alpha: 0}, 1);
 					FlxTween.tween(spanish, {alpha: 0}, 1.7, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new ShadersState());
+							MusicBeatState.switchState(new FlashingState());
 						}
 					});
 				} else {
@@ -143,7 +170,7 @@ class LanguageState extends MusicBeatState
 					FlxTween.tween(warnText, {alpha: 0}, 1);
 					FlxTween.tween(english, {alpha: 0}, 1.7, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new ShadersState());
+							MusicBeatState.switchState(new FlashingState());
 						}
 					});
 				}

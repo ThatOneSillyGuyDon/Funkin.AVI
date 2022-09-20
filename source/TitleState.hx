@@ -181,10 +181,10 @@ class TitleState extends MusicBeatState
 		#elseif STORY
         MusicBeatState.switchState(new StoryMenuState());
 		#else
-		if(FlxG.save.data.language == null && !LanguageState.languageSelected) {
+		if(FlxG.save.data.funiShaders == null && !ShadersState.leftState) {
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
-			MusicBeatState.switchState(new LanguageState());
+			MusicBeatState.switchState(new ShadersState());
 		} else {
 			#if desktop
 			if (!DiscordClient.isInitialized)

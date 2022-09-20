@@ -6,7 +6,6 @@ import Discord.DiscordClient;
 import sys.thread.Thread;
 #end
 import flixel.FlxG;
-import flixel.FlxCamera;
 import flixel.util.FlxGradient;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -38,9 +37,6 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
-import openfl.filters.BitmapFilter;
-import openfl.filters.ShaderFilter;
-import Shaders;
 import openfl.Assets;
 import PlayState;
 import GameJolt;
@@ -48,7 +44,7 @@ import GameJolt.GameJoltAPI;
 import IndieCrossShaderShit.FXHandler;
 
 using StringTools;
-typedef TitleData =
+typedef TitleDumbData =
 {
 
 	titlex:Float,
@@ -69,15 +65,6 @@ class SpanishTitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 	public var camZooming:Bool = false;
 
-	public var camGame:FlxCamera;
-
-	var bloomShit:WIBloomEffect;
-	var chrom:ChromaticAberrationEffect;
-	var blurThisShit:TiltshiftEffect;
-	var greyscale:GreyscaleEffect;
-
-	var shaders:Array<ShaderEffect> = [];
-
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
 	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFB003B0);
@@ -97,7 +84,7 @@ class SpanishTitleState extends MusicBeatState
 	var mustUpdate:Bool = false;
 
 	var titleJSON:TitleDumbData;
-	var nonLogedText:FlxText; //Toast Don't Work, Lets Make One
+	var nonLogedText:FlxText;
 
 	public static var updateVersion:String = '';
 
@@ -247,33 +234,6 @@ class SpanishTitleState extends MusicBeatState
 
 		Conductor.changeBPM(60);
 		persistentUpdate = true;
-
-		if(ClientPrefs.funiShaders)
-			{
-				chrom = new ChromaticAberrationEffect();
-				blurThisShit = new TiltshiftEffect(0.4, 0);
-				bloomShit = new WIBloomEffect(0);
-				greyscale = new GreyscaleEffect();
-				//uncomment these fucking pieces of shit if you feel like testing it.
-
-				addShader(chrom);
-				addShader(blurThisShit);
-				addShader(bloomShit);
-				addShader(greyscale);
-				//uncomment these fucking pieces of shit if you feel like testing it.
-
-				if (chrom != null)
-				chrom.setChrome(0.003);
-
-				if (bloomShit != null)
-				bloomShit.setSize(18.0);
-
-				if(blurThisShit != null)
-				blurThisShit.setBlur(0.4);
-				//uncomment these fucking pieces of shit if you feel like testing it.
-
-
-			}
 
 		var bg:FlxSprite = new FlxSprite();
 		bg.loadGraphic(Paths.image('Title_bg'), false);

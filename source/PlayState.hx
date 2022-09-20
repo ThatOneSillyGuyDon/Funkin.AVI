@@ -8964,6 +8964,7 @@ class PlayState extends MusicBeatState
 					addCharacterToList("mickeyinsane", 1);
 					addCharacterToList("mickeygiveup", 1);
 					addCharacterToList("mickey", 1);
+					addCharacterToList("mickeyNEW", 1);
 				}
 				if(curStep == 464)
 				{

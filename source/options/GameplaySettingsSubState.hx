@@ -70,13 +70,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option(
+		/*var option:Option = new Option(
 			'Toggle Mechanics',
 			'If unchecked, Mechanics will be removed\n(If selecting this mid-game, you may need to restart from the menu.)',
 			'mechanics',
 			'bool',
 			true);
-		addOption(option);
+		addOption(option);*/
 
 
 		var option:Option = new Option('Live Difficulty:',
@@ -217,11 +217,11 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
-		var option:Option = new Option('Super mega random modchart',
+		/*var option:Option = new Option('Super mega random modchart',
 			'If checked, there will be a full random wtf modchart',
 			'outdated',
 			'bool',
-			false);
+			false);*/
 
 		super();
 	}

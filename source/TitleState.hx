@@ -1,12 +1,12 @@
 package;
 
-import GameJolt;
+import GameJolt.GameJoltAPI;
 #if desktop
 import Discord.DiscordClient;
 import sys.thread.Thread;
 #end
-import flixel.FlxCamera;
 import flixel.FlxG;
+import flixel.FlxCamera;
 import flixel.util.FlxGradient;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -87,16 +87,17 @@ class TitleState extends MusicBeatState
 	var psychEngine:FlxSprite;
 	var creditsGrid:FlxSprite;
 	var randomWindowText:Int = FlxG.random.int(0, 99);
+
 	var curWacky:Array<String> = [];
+
 	var Timer:Float = 0;
+
 	var wackyImage:FlxSprite;
 
 	var mustUpdate:Bool = false;
 
 	var titleJSON:TitleData;
 	var nonLoginText:FlxText; //Toast Don't Work, Lets Make One
-	var titleJSON:TitleDumbData;
-	var nonLogedText:FlxText;
 
 	public static var updateVersion:String = '';
 

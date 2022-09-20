@@ -1,11 +1,12 @@
 package;
 
-import GameJolt;
+import GameJolt.GameJoltAPI;
 #if desktop
 import Discord.DiscordClient;
 import sys.thread.Thread;
 #end
 import flixel.FlxG;
+import flixel.FlxCamera;
 import flixel.util.FlxGradient;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -37,6 +38,9 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 import lime.app.Application;
+import openfl.filters.BitmapFilter;
+import openfl.filters.ShaderFilter;
+import Shaders;
 import openfl.Assets;
 import PlayState;
 import GameJolt;
@@ -44,7 +48,7 @@ import GameJolt.GameJoltAPI;
 import IndieCrossShaderShit.FXHandler;
 
 using StringTools;
-typedef TitleDumbData =
+typedef TitleData =
 {
 
 	titlex:Float,
@@ -65,6 +69,15 @@ class SpanishTitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 	public var camZooming:Bool = false;
 
+	public var camGame:FlxCamera;
+
+	var bloomShit:WIBloomEffect;
+	var chrom:ChromaticAberrationEffect;
+	var blurThisShit:TiltshiftEffect;
+	var greyscale:GreyscaleEffect;
+
+	var shaders:Array<ShaderEffect> = [];
+
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
 	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFB003B0);
@@ -84,13 +97,12 @@ class SpanishTitleState extends MusicBeatState
 	var mustUpdate:Bool = false;
 
 	var titleJSON:TitleDumbData;
-	var nonLogedText:FlxText;
+	var nonLogedText:FlxText; //Toast Don't Work, Lets Make One
 
 	public static var updateVersion:String = '';
 
 	override public function create():Void
 	{
-
 		GameJolt.GameJoltAPI.connect();
         GameJolt.GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
 

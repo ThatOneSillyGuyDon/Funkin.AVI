@@ -8523,11 +8523,6 @@ class PlayState extends MusicBeatState
 			FlxG.stage.removeEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
 		super.destroy();
-		Application.current.window.borderless = false;
-		Application.current.window.x = 500;
-		Application.current.window.y = 180;
-		Application.current.window.x = 500;
-		Application.current.window.resize(1280, 720);
 		if (windowDad != null)
         {
         windowDad.close();
@@ -8962,7 +8957,7 @@ class PlayState extends MusicBeatState
 					fadeWhiteFlash();
 				} //Man
 			case 'Lunacy': 
-				//Insert Events here
+				addCharacterToList('mickeysadistic', 1);
 			case 'Delusional':
 				if(curStep == 0)
 				{

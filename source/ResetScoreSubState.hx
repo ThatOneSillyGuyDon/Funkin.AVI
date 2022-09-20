@@ -60,7 +60,8 @@ class ResetScoreSubState extends MusicBeatSubstate
 			add(icon);
 		}
 
-		yesText = new Alphabet(0, text.y + 150, 'Si', true);
+		if(ClientPrefs.language == "Spanish") yesText = new Alphabet(0, text.y + 150, 'Si', true);
+		else yesText = new Alphabet(0, text.y + 150, 'Yes', true);
 		yesText.screenCenter(X);
 		yesText.x -= 200;
 		add(yesText);

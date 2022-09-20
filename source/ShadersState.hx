@@ -42,7 +42,8 @@
                 32);
             warnText = new FlxText(0, 0, FlxG.width,
             warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
-            warnText.screenCenter();
+            warnText.screenCenter(Y);
+            warnText.screenCenter(X);
             add(warnText);
             
             blackFade = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);

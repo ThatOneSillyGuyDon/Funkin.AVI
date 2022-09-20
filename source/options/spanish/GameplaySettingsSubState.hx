@@ -34,15 +34,8 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		title = 'Configuracion De GamePlay';
 		rpcTitle = 'Gameplay Settings Menu'; //for Discord Rich Presence
 
-		var option:Option = new Option('Show Outdated Version',
-			'If checked and outdated, game will notify you to update demolition engine',
-			'outdated',
-			'bool',
-			false);
-		addOption(option);
-
-		var option:Option = new Option('Controller Mode',
-			'Check this if you want to play with\na controller instead of using your Keyboard.',
+		var option:Option = new Option('Control De Consola',
+			'Activalo Is Quieres Jugar Con Control De XBox/PS4',
 			'controllerMode',
 			'bool',
 			false);
@@ -50,120 +43,62 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 
 		//I'd suggest using "Downscroll" as an example for making your own option since it is the simplest here
 		var option:Option = new Option('Downscroll', //Name
-			'If checked, notes go Down instead of Up, simple enough.', //Description
+			'El Scroll Ira De Arriba A Abajo', //Description
 			'downScroll', //Save data variable name
 			'bool', //Variable type
 			false); //Default value
 		addOption(option);
 
 		var option:Option = new Option('Middlescroll',
-			'If checked, your notes get centered.',
+			'El Scroll Ira Al Centro',
 			'middleScroll',
 			'bool',
 			false);
 		addOption(option);
 
 		var option:Option = new Option(
-			'Toggle Mechanics',
-			'If unchecked, Mechanics will be removed\n(If selecting this mid-game, you may need to restart from the menu.)',
+			'Mecanicas',
+			'Desactivalo Si No Tienes Habilidad Con Las Mecanicas!',
 			'mechanics',
 			'bool',
 			true);
 		addOption(option);
-
-		//bedrock can kiss my ass XD
-		var option:Option = new Option('Rating System:',
-		    "What should your Rating System be?", 
-			'ratingSystem', 
-			'string', 
-			'Bedrock',
-			['Bedrock', 'Psych', 'Forever', 'Andromeda', "Etterna", 'Mania', "None"]);
-		addOption(option);
-		/*
-		var option:Option = new Option('Live Difficulty:',
-			"What Is The Difficulty Lives Should There Be In Malfunction?", 
+		
+		var option:Option = new Option('Difficultad De Vida:',
+			"Cual Debe Ser la Dificultad De Vida De Malfunction", 
 			'lives', 
 			'string', 
 			'normal',
 			['easy', 'normal', 'hard']);
 		addOption(option);
-		*/
-			var option:Option = new Option('Kade Engine Input System',
-			'If checked, KE input system will be on, this will not effect the rating system',
-			'keAccuracy',
-			'bool',
-			false);
-		addOption(option);
 		
-		var option:Option = new Option('Hide Judgement Counter',
-			'If checked, hides Judgement Counter on the screen',
+		var option:Option = new Option('Ocultar contador de rating',
+			'Activalo Para Ocultar El texto a la derecha',
 			'hideJudgement',
 			'bool',
 			false);
 		addOption(option);
 
-		var option:Option = new Option('Ghost Tapping',
-			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
+		var option:Option = new Option('Anti-perdida',
+			"Activalo Para No Tener Perdidas Al Tocar Notas",
 			'ghostTapping',
 			'bool',
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Enable Anti Mash',
-		"If Checked, Anti Mash Is Enabled IDK WHAT THIS DOES\nITS BEEN 10 FUCKING YEARS PLZ\nDEMO LET ME OUT :(",
-		'antiMash',
-		'bool',
-		true);
-		addOption(option);
-
-		var option:Option = new Option('Disable Reset Button',
-			"If checked, pressing Reset won't do anything.",
+		var option:Option = new Option('Desactivar Boton De Reiniciar',
+			"Si Lo Activas, Presionar R No Afecta nada",
 			'noReset',
 			'bool',
 			false);
 		addOption(option);
 
-		var option:Option = new Option('Enable Lane Underlay', //Stolen from DAB
-		'Check for a underlay behind the notes',
-		'laneunderlay',
-		'bool',
-		true);
-		addOption(option);
-		
-		var option:Option = new Option('Lane Underlay',
-		'Set lane underlay (Lane underlay must be enabled)',
-		'laneTransparency',
-		'float',
-		0);
-		option.minValue = 0;
-		option.maxValue = 1;
-		option.changeValue = 0.1;
-		addOption(option);
-
-		var option:Option = new Option('Debug Mode',
-		'If checked, you can do cool stuff on a song',
-		'debugMode',
-		false);
-		addOption(option);
-
-		var option:Option = new Option('Marvelouses Rating',
-		'If checked, marvelouses rating will appear on the\nJudgment counter and will show\n when hit',
+		var option:Option = new Option('Marvelous',
+		'Solo Añade "Maravelous"',
 		'marvelouses',
 		'bool',
 		true); //Default value
 		addOption(option);
-
-		var option:Option = new Option('Hitsound Volume',
-			'Funny notes does \"Tick!\" when you hit them."',
-			'hitsoundVolume',
-			'percent',
-			0);
-		addOption(option);
-		option.scrollSpeed = 1.6;
-		option.minValue = 0.0;
-		option.maxValue = 1;
-		option.changeValue = 0.1;
-		option.decimals = 1;
 
 		var option:Option = new Option('Rating Offset',
 			'Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.',
@@ -220,7 +155,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 135;
 		addOption(option);
 
-		var option:Option = new Option('Safe Frames',
+		var option:Option = new Option('Salvar Frames',
 			'Changes how many frames you have for\nhitting a note earlier or late.',
 			'safeFrames',
 			'float',
@@ -230,12 +165,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 10;
 		option.changeValue = 0.1;
 		addOption(option);
-
-		var option:Option = new Option('Super mega random modchart',
-			'If checked, there will be a full random wtf modchart',
-			'outdated',
-			'bool',
-			false);
 
 		super();
 	}

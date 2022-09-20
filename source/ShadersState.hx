@@ -37,17 +37,12 @@
             var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
             add(bg);
     
-            if(ClientPrefs.language == "English") {
             warnText = new FlxText(0, 0, FlxG.width,
-                "Should The Game Run Shaders?\n\nPress ENTER To Accept\nOr Press ESC For Reject Shaders",
+                "Should The Game Run Shaders?/Debe el juego ejecutar shaders?\n\nPress ENTER To Accept\nOr Press ESC For Reject Shaders/O presiona ESC para rechazar los shaders",
                 32);
-            } else if(ClientPrefs.language == "Spanish") {
             warnText = new FlxText(0, 0, FlxG.width,
-                "Debe el juego ejecutar shaders?\n\nPresiona ENTER para aceptar\nO presiona ESC para rechazar los shaders",
-                32);
-            }
             warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
-            warnText.screenCenter(Y);
+            warnText.screenCenter();
             add(warnText);
             
             blackFade = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);

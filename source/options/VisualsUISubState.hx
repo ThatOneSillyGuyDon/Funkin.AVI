@@ -48,7 +48,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			"If checked, cutscenes will show (this will affect Freeplay too).",
 			'cutscenes',
 			'bool',
-			false);
+			true);
 		addOption(option);
 
 		var option:Option = new Option('Note Splashes',

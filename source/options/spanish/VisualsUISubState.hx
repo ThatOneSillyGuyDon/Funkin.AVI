@@ -35,7 +35,7 @@ class VisualsUISubState extends BaseOptionsMenu
 		title = 'Visuales E UI';
 		rpcTitle = 'Visuals & UI Settings Menu'; //for Discord Rich Presence
 
-		var option:Option = new Option('Lenguage',
+		var option:Option = new Option('Lenguage:',
 		"En Que lenguage El Juego Debe Correr?",
 		'language',
 		'string',
@@ -43,67 +43,60 @@ class VisualsUISubState extends BaseOptionsMenu
 		['English', 'Spanish']);
 		addOption(option);
 
-		var option:Option = new Option('Cutscenes',
-			"If checked, cutscenes will show (this will affect Freeplay too).",
+		var option:Option = new Option('Cinematicas',
+			"Activalo Para Ver Cinematicas (Afecta Freeplay).",
 			'cutscenes',
 			'bool',
-			false);
+			true);
 		addOption(option);
 
-		var option:Option = new Option('Note Splashes',
-			"If unchecked, hitting \"Sick!\" notes won't show particles.",
+		var option:Option = new Option('Splash De Notas',
+			"Si Se Desactivarla, No Se Mostrara Un Splash Al Hacer Un 'Sick'",
 			'noteSplashes',
 			'bool',
 			true);
 		addOption(option);
-		
-		var option:Option = new Option('Winning Icons',
-			'If checked, enables extra icon frames',
-			'winningIcon',
-			'bool',
-			true);
-		addOption(option);
 
-		var option:Option = new Option('Hide HUD',
-			'If checked, hides most HUD elements.',
+		var option:Option = new Option('Ocultar HUD',
+			'Se Ocultaran Elementos Del HUD.',
 			'hideHud',
 			'bool',
 			false);
 		addOption(option);
 		
-		var option:Option = new Option('Time Bar:',
-			"What should the Time Bar display?",
+		var option:Option = new Option('Barra De Tiempo',
+			"Como Debe Ser La barra de tiempo?",
 			'timeBarType',
 			'string',
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);
 		
-		var option:Option = new Option('Icon Bounce:',
-			'How should your icons bounce?',
+		var option:Option = new Option('Tipo De Icono',
+			'Como Debe Ser El Tipo De Icono',
 			'iconBounce',
 			'string',
 			'Default',
 			['Default', 'Golden Apple', 'None']);
 		addOption(option);
 
-		var option:Option = new Option('Judgement Skin:', 
-		"What should your judgements look like?", 
+		var option:Option = new Option('Skin Del Judgement:', 
+		"Como Debe Ser La TExtura Del Judgement", 
 		'uiSkin', 
 		'string', 
 		'Demolition',
-			['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock', 'Matt :)', 'Funkin.avi']);
+		['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock', 'Matt :)', 'Funkin.avi']);
 		addOption(option);
 		
-		var option:Option = new Option('Simplify Score Text',
-			"If checked, Score Text under the Health Bar \ndisplays less text",
+		var option:Option = new Option('barra De Puntuacion Simple',
+			"El Titulo Dice Todo",
 			'simplifiedScore',
 			'bool',
 		        false);
 		addOption(option);
 
-		var option:Option = new Option('Camera Movement',
-			"If checked, camera moves to the corresponding arrow!",
+		var option:Option = new Option('Movimiento De Camara',
+			"La camara Se Movera Dependiendo la Pocision De Nota",
 			'camMove',
 			'bool',
 			true);
@@ -116,22 +109,22 @@ class VisualsUISubState extends BaseOptionsMenu
 		true);
 	addOption(option); //haha imagine dont doing this with the rest of options
 
-		var option:Option = new Option('Flashing Lights',
-			"Uncheck this if you're sensitive to flashing lights!",
+		var option:Option = new Option('Flash',
+			"Desactivalo Si Eres Sensible Al Flash!",
 			'flashing',
 			'bool',
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Show Watermarks',
-			"If unchecked, hides engine watermarks from the bottom left corner.", 
+		var option:Option = new Option('Mostrar marca de agua',
+			"Habra Un Boton De marca de agua abajo.", 
 			'showWatermarks', 
 			'bool', 
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Camera Zooms',
-			"If unchecked, the camera won't zoom in on a beat hit.",
+		var option:Option = new Option('Zoom De camara',
+			"La camara hara un zoom cada beat.",
 			'camZooms',
 			'bool',
 			true);
@@ -144,35 +137,16 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);*/
 
-		var option:Option = new Option('Score Text Zoom on Hit',
-			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
+		var option:Option = new Option('Zoom Al texto de Puntuacion',
+			"Habra Zoom Con La barra de puntuacion Al Hacer Un Beat",
 			'scoreZoom',
 			'bool',
 			true);
 		addOption(option);
 		
-		var option:Option = new Option('Long Health Bar',
-			"If unchecked, the health bar will be short.",
-			'longBar',
-			'bool',
-			true);
-		addOption(option);
-
-		var option:Option = new Option('Health Bar Transparency',
-			'How much transparent should the health bar and icons be.',
-			'healthBarAlpha',
-			'percent',
-			1);
-		option.scrollSpeed = 1.6;
-		option.minValue = 0.0;
-		option.maxValue = 1;
-		option.changeValue = 0.1;
-		option.decimals = 1;
-		addOption(option);
-		
 		#if !mobile
-		var option:Option = new Option('FPS Counter',
-			'If unchecked, hides FPS Counter.',
+		var option:Option = new Option('Contador De FPS',
+			'Desactivalo Para Ocultar El Contador De FPS',
 			'showFPS',
 			'bool',
 			true);
@@ -180,8 +154,8 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.onChange = onChangeFPSCounter;
 		#end
 		
-		var option:Option = new Option('Pause Screen Song:',
-			"What song do you prefer for the Pause Screen?",
+		var option:Option = new Option('Cancion del menu de pausa:',
+			"Que cancion habra cuando estes en pausa?",
 			'pauseMusic',
 			'string',
 			'Tea Time',

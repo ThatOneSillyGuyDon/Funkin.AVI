@@ -8957,15 +8957,32 @@ class PlayState extends MusicBeatState
 					fadeWhiteFlash();
 				} //Man
 			case 'Lunacy': 
-				addCharacterToList('mickeysadistic', 1);
+				addCharacterToList('mickeysadistic', 1); //yay i fixed goofy ahh lag
+				addCharacterToList('mickey', 1);
+
+				//just at the end lol
+				if(curStep == 1279) {
+					triggerEventNote('Alter Camera Zoom', '1.8', '1.4');
+				}
+
+				if(curStep == 1312) {
+					triggerEventNote('Alter Camera Zoom', '1.4', '3.2');
+				}
+
+				if(curStep == 1344) {
+					triggerEventNote('Alter Camera Zoom', '0.9', '2');
+				}
+
+				if(curStep == 1472) {
+					triggerEventNote('Alter Camera Zoom', '2.1', '35');
+				}
 			case 'Delusional':
-				if(curStep == 0)
-				{
+				
 					addCharacterToList("mickeyinsane", 1);
 					addCharacterToList("mickeygiveup", 1);
 					addCharacterToList("mickey", 1);
 					addCharacterToList("mickeyNEW", 1);
-				}
+
 				if(curStep == 464)
 				{
 					triggerEventNote('Change Character', 'dad', 'mickeyinsane');

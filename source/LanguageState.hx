@@ -127,7 +127,7 @@ class LanguageState extends MusicBeatState
 					FlxTween.tween(warnText, {alpha: 0}, 1);
 					FlxTween.tween(spanish, {alpha: 0}, 1.7, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new ShadersState());
+							MusicBeatState.switchState(new FlashingState());
 						}
 					});
 				} else {
@@ -143,7 +143,7 @@ class LanguageState extends MusicBeatState
 					FlxTween.tween(warnText, {alpha: 0}, 1);
 					FlxTween.tween(english, {alpha: 0}, 1.7, {
 						onComplete: function (twn:FlxTween) {
-							MusicBeatState.switchState(new ShadersState());
+							MusicBeatState.switchState(new FlashingState());
 						}
 					});
 				}

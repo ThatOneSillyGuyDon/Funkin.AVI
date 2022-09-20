@@ -36,11 +36,10 @@
         
             var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
             add(bg);
-    
+
             warnText = new FlxText(0, 0, FlxG.width,
-                "Should The Game Run Shaders?/Debe el juego ejecutar shaders?\n\nPress ENTER To Accept\nOr Press ESC For Reject Shaders/O presiona ESC para rechazar los shaders",
-                32);
-            warnText = new FlxText(0, 0, FlxG.width,
+            "Should The Game Run Shaders?/Debe el juego ejecutar shaders?\n\nPress ENTER To Accept\nOr Press ESC For Reject Shaders/O presiona ESC para rechazar los shaders",
+            32);
             warnText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32, FlxColor.WHITE, CENTER);
             warnText.screenCenter(Y);
             warnText.screenCenter(X);

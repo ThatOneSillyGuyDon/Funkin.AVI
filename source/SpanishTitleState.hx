@@ -1,5 +1,6 @@
 package;
 
+import GameJolt;
 #if desktop
 import Discord.DiscordClient;
 import sys.thread.Thread;
@@ -89,6 +90,9 @@ class SpanishTitleState extends MusicBeatState
 
 	override public function create():Void
 	{
+
+		GameJolt.GameJoltAPI.connect();
+        GameJolt.GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
 
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
@@ -231,6 +235,33 @@ class SpanishTitleState extends MusicBeatState
 
 		Conductor.changeBPM(60);
 		persistentUpdate = true;
+
+		if(ClientPrefs.funiShaders)
+			{
+				chrom = new ChromaticAberrationEffect();
+				blurThisShit = new TiltshiftEffect(0.4, 0);
+				bloomShit = new WIBloomEffect(0);
+				greyscale = new GreyscaleEffect();
+				//uncomment these fucking pieces of shit if you feel like testing it.
+
+				addShader(chrom);
+				addShader(blurThisShit);
+				addShader(bloomShit);
+				addShader(greyscale);
+				//uncomment these fucking pieces of shit if you feel like testing it.
+
+				if (chrom != null)
+				chrom.setChrome(0.003);
+
+				if (bloomShit != null)
+				bloomShit.setSize(18.0);
+
+				if(blurThisShit != null)
+				blurThisShit.setBlur(0.4);
+				//uncomment these fucking pieces of shit if you feel like testing it.
+
+
+			}
 
 		var bg:FlxSprite = new FlxSprite();
 		bg.loadGraphic(Paths.image('Title_bg'), false);

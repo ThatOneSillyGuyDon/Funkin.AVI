@@ -1,11 +1,9 @@
-package;
-
+import GameJolt;
 #if desktop
 import Discord.DiscordClient;
 import sys.thread.Thread;
 #end
 import flixel.FlxG;
-import flixel.FlxCamera;
 import flixel.util.FlxGradient;
 import flixel.FlxSprite;
 import flixel.FlxState;
@@ -68,15 +66,6 @@ class TitleState extends MusicBeatState
 	public static var initialized:Bool = false;
 	public var camZooming:Bool = false;
 
-	public var camGame:FlxCamera;
-
-	var bloomShit:WIBloomEffect;
-	var chrom:ChromaticAberrationEffect;
-	var blurThisShit:TiltshiftEffect;
-	var greyscale:GreyscaleEffect;
-
-	var shaders:Array<ShaderEffect> = [];
-
 	var blackScreen:FlxSprite;
 	var credGroup:FlxGroup;
 	var gradientBar:FlxSprite = new FlxSprite(0, 0).makeGraphic(FlxG.width, 1, 0xFFB003B0);
@@ -95,13 +84,16 @@ class TitleState extends MusicBeatState
 
 	var mustUpdate:Bool = false;
 
-	var titleJSON:TitleData;
-	var nonLoginText:FlxText; //Toast Don't Work, Lets Make One
+	var titleJSON:TitleDumbData;
+	var nonLogedText:FlxText;
 
 	public static var updateVersion:String = '';
 
 	override public function create():Void
 	{
+		GameJolt.GameJoltAPI.connect();
+        GameJolt.GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
+
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 

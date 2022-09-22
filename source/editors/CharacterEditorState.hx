@@ -35,7 +35,7 @@ import flixel.system.debug.interaction.tools.Pointer.GraphicCursorCross;
 import lime.system.Clipboard;
 import flixel.animation.FlxAnimation;
 
-#if MODS_ALLOWED
+#if MODS_ALLOWED // Which they arent
 import sys.FileSystem;
 #end
 

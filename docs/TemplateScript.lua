@@ -1,4 +1,4 @@
--- Lua stuff
+-- Lua stuff that we wont use
 
 function onCreate()
 	-- triggered when the lua file is started, some variables weren't created yet

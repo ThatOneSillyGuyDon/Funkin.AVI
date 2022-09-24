@@ -16,7 +16,7 @@ Windows SDK (10.0.17763.0)
 ```
 6) Finally run Installation.bat for get the rest of the dependencies
 
-7) Run "lime test windows" in the source directory
+7) Run "lime test (windows/linux/mac)" in the source directory
 8) Go to export when its done
 
 9) Enjoy your compiled build!

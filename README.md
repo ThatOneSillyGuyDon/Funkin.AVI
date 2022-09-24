@@ -1,6 +1,6 @@
 # Funkin.avi Official Source Code
 
-This repo shall remain private until mod release
+This repo shall remain private until mod release.
 
 ## IMPORTANT!:
 

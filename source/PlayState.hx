@@ -9020,6 +9020,7 @@ class PlayState extends MusicBeatState
 			case 'Delusional':
 
 					addCharacterToList("mickeyinsane", 1);
+					addCharacterToList("mickeysadistic", 1);
 					addCharacterToList("mickeygiveup", 1);
 					addCharacterToList("mickey", 1);
 					addCharacterToList("mickeyNEW", 1);

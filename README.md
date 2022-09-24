@@ -14,7 +14,7 @@ If you want to need to compile the mod:
 MSVC v142 - VS 2019 C++ x64/x86 build tools
 Windows SDK (10.0.17763.0)
 ```
-6) Finally run Installation.bat for get he rest of the dependencies
+6) Finally run Installation.bat for get the rest of the dependencies
 
 7) Run "lime test windows" in the source directory
 8) Go to export when its done

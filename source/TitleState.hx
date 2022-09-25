@@ -802,6 +802,8 @@ class TitleState extends MusicBeatState
 		Application.current.window.title = "Funkin.avi - Imagine the credits for the messages";
 		case 99:
 		Application.current.window.title = "Funkin.avi - Mickey getting bitches, 100% real no fake";
+		case 100:
+		Application.current.window.title = "Funkin.avi - Lets Goku mcdonalds, Y'know what im saiyan?";
 
 	}
 		super.update(elapsed);

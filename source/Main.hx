@@ -162,6 +162,7 @@ class Main extends Sprite
 
 		public function onResize(width:Int, height:Int) { //bro too easy
 			FlxG.resizeWindow(width, height);
+			FlxG.resizeGame(width, height);
 		}
 	
 		function onWindowFocusIn()

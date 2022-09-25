@@ -1,13 +1,9 @@
 To do List for the next update:
 
-- Artwork for each song on the Discord RPC
+
 - Mickey's sprites for 2nd song
--  ̶D̶o̶n̶'̶t̶ ̶C̶r̶o̶s̶s̶ ̶a̶s̶s̶e̶t̶s̶ ̶(̶e̶v̶e̶n̶ ̶t̶h̶o̶u̶g̶h̶ ̶w̶e̶'̶r̶e̶ ̶p̶r̶o̶b̶a̶b̶l̶y̶ ̶n̶o̶t̶ ̶a̶d̶d̶i̶n̶g̶ ̶h̶i̶m̶ ̶t̶o̶ ̶t̶h̶e̶ ̶d̶e̶m̶o̶)̶
 - Icons for basically all the characters in the demo
 - Muckney.mp4 assets and song
 - New Cutscenes(?)
 - New Goofy Sprites
-- couch. (yes)
-- Piracy screen for html5 builds
-- remove the fucking lua scripts that aren't needed unless they're shaders
-- The REAL BF Sprite (and pixel version for Malfunction)
+- The Remade REAL BF Sprite (and pixel version for Malfunction)

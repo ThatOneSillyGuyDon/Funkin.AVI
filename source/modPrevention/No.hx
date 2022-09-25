@@ -12,7 +12,7 @@ class No extends FlxState
 	{
 		super.create();
         FlxG.sound.play(Paths.sound('wiiCrash'), 1.8);
-        Application.current.window.alert('Never, but never try, to do a mod on Funkin.avi Again...');
+        Application.current.window.alert('Never EVER, try to install a mod on Funkin.avi Again...');
         System.exit(0);
 	}
 
@@ -20,7 +20,7 @@ class No extends FlxState
 	{
 		super.update(elapsed);
         FlxG.sound.play(Paths.sound('wiiCrash'), 1.8);
-        Application.current.window.alert('Never, but never try, to do a mod on Funkin.avi Again...');
+        Application.current.window.alert('Never EVER, try to install a mod on Funkin.avi Again...');
         System.exit(0);
 	}
 }

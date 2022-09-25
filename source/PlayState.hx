@@ -4860,8 +4860,8 @@ class PlayState extends MusicBeatState
 							System.exit(0);
 						});
 					}
-				#end 
 				}else{
+				#end 
 			var ret:Dynamic = callOnLuas('onPause', []);
 			if(ret != FunkinLua.Function_Stop) {
 				persistentUpdate = false;
@@ -4896,7 +4896,7 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 		{
-			Application.current.window.alert('No Cheating', 'ERROR:');
+			openChartEditor();
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);

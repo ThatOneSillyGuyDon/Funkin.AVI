@@ -161,7 +161,12 @@ class PauseSubState extends MusicBeatSubstate
 		add(charterCredit);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 96, 0, "", 32);
-		levelDifficulty.text += CoolUtil.difficultyString();
+		switch(PlayState.SONG.song) {
+		case 'Twisted Grins' | 'Facade' | 'Mortiferum Risus':
+			levelDifficulty.text = "SMILE";
+		case "Don't Cross!":
+			levelDifficulty.text = "YOU'RE FUCKED"; 
+		}
 		levelDifficulty.scrollFactor.set();
 		levelDifficulty.setFormat(Paths.font('NewWaltDisneyFontRegular-BPen.ttf'), 32);
 		levelDifficulty.updateHitbox();

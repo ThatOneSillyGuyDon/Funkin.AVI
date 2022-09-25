@@ -452,7 +452,7 @@ class SpanishTitleState extends MusicBeatState
 						MusicBeatState.switchState(new OutdatedState());
 					} else {
 						Application.current.window.title = "Funkin.avi";
-						MusicBeatState.switchState(new NoticeState());
+						MusicBeatState.switchState(new MainMenuState());
 					}
 					closedState = true;
 				});

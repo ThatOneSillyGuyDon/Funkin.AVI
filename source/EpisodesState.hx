@@ -113,15 +113,7 @@ class EpisodesState extends MusicBeatState
 
 		FPClientPrefs.loadShit();
 
-		addSong('Isolated', 3, 'mickey', FlxColor.fromRGB(60, 60, 60));
-		addSong('Lunacy', 3, 'lunamick', FlxColor.fromRGB(60, 60, 60));
-		addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40));
-		addSong('Isolated Old', 3, 'legacy', FlxColor.fromRGB(60, 60, 60));
-		addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180));
-		addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
-		addSong('Cycled Sins', 3, 'relapse-pixel', FlxColor.fromRGB(115, 86, 86));
-
-        /*if(FPClientPrefs.episode1FPLock == 'unlocked')
+        if(FPClientPrefs.episode1FPLock == 'unlocked')
         {
             addSong('Isolated', 3, 'mickey', FlxColor.fromRGB(60, 60, 60));
             addSong('Lunacy', 3, 'lunamick', FlxColor.fromRGB(60, 60, 60));
@@ -133,7 +125,7 @@ class EpisodesState extends MusicBeatState
             addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
             addSong('Facade', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
 			addSong('Mortiferum Risus', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
-        }*/
+        }
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
 
@@ -537,7 +529,11 @@ class EpisodesState extends MusicBeatState
 		#end
 
 		PlayState.storyDifficulty = curDifficulty;
+		if(curSelected == 3 || curSelected == 4 || curSelected == 5) {
+		diffText.text = '< SMILE >'; //like in one of ur streams
+		} else {
 		diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
+		}
 		positionHighscore();
 	}
 

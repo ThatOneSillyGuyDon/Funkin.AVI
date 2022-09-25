@@ -56,7 +56,7 @@
 	<define name="WAV_ALLOWED"/>
 	<define name="Goofy_Ahh_Crash_Thing" if="desktop" /> <!--0.6 shit-->
 
-	<define name="avi_debug" if="debug" />
+	<define name="avi_debug" />
 
 	<assets path="assets/preload" rename="assets" exclude="*.ogg" if="web"/>
 	<assets path="assets/preload" rename="assets" exclude="*.mp3"  unless="web"/>

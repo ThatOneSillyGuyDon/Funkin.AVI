@@ -63,7 +63,7 @@ class VisualsUISubState extends BaseOptionsMenu
 			'hudSelection',
 			'string',
 			'Psych',
-			['Psych', 'Vanilla']); //HUDs to add: Demolition HUD, Funkin.avi HUD, Red-Bun's HUD.
+			['Psych', 'Vanilla', 'Demolition']); //HUDs to add: Demolition HUD, Funkin.avi HUD, Red-Bun's HUD.
 			addOption(option);
 		
 		var option:Option = new Option('Winning Icons',
@@ -71,7 +71,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			'winningIcon',
 			'bool',
 			true);
-		addOption(option);
 
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
@@ -80,13 +79,13 @@ class VisualsUISubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 		
-		var option:Option = new Option('Time Bar:',
+		/*var option:Option = new Option('Time Bar:',
 			"What should the Time Bar display?",
 			'timeBarType',
 			'string',
 			'Time Left',
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
-		addOption(option);
+		addOption(option);*/
 
 		var option:Option = new Option('Color Blind Filther:',
 			"What should the Color Blind Filther display?",

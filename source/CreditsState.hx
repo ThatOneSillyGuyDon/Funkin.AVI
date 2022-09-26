@@ -159,6 +159,7 @@ class CreditsState extends MusicBeatState
 			[''],
 			['Former Funkin avi members'],
 			['Yama haki',	'yama',	'Ex-director of funkin.avi',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
+			['oz',	'missing-icon',	'Ex-artist of funkin.avi',	'nolink',	'FFFFFF'],
 			['pig69',	'missing-icon',	'Ex-artist of funkin.avi',	'nolink',	'FFFFFF'], //He was in GB credits, nothing else to do
 			[''],
 			['Demolition Engine Team'],

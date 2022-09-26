@@ -65,21 +65,21 @@ class ExtrasState extends MusicBeatState{
 
         if(FPClientPrefs.episode1FPLock == 'unlocked')
         {
-            addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), FlxG.save.data.huntedLock);
-            addSong('Isolated Old', 3, 'legacy', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.oldisolateLock);
-			addSong('Isolated Beta', 3, 'legacy', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.betaisolateLock);
-			addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED, FlxG.save.data.crossinLock);
-            addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), FlxG.save.data.malfunctionLock);
+			if(FPClientPrefs.huntedLock != 'beaten' && FPClientPrefs.huntedLock != 'unlocked') addSong('Hunted', 3, 'mysterymouse', FlxColor.fromRGB(0, 60, 40), FlxG.save.data.huntedLock); else addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40), FlxG.save.data.huntedLock);
+            if(FPClientPrefs.oldisolateLock != 'beaten' && FPClientPrefs.oldisolateLock != 'unlocked') addSong('Isolated Old', 3, 'mysterymouse', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.oldisolateLock); else addSong('Isolated Old', 3, 'legacy', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.oldisolateLock);
+			if(FPClientPrefs.betaisolateLock != 'beaten' && FPClientPrefs.betaisolateLock != 'unlocked') addSong('Isolated Beta', 3, 'mysterymouse', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.betaisolateLock); else addSong('Isolated Beta', 3, 'legacy', FlxColor.fromRGB(60, 60, 60), FlxG.save.data.betaisolateLock);
+			if(FPClientPrefs.crossinLock != 'beaten' && FPClientPrefs.crossinLock != 'unlocked') addSong("Don't Cross!", 3, 'mysterymouse', FlxColor.RED, FlxG.save.data.crossinLock); else addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED, FlxG.save.data.crossinLock);
+            if(FPClientPrefs.malfunctionLock != 'beaten' && FPClientPrefs.malfunctionLock != 'unlocked') addSong('Malfunction', 3, 'mysterymouse', FlxColor.fromRGB(140, 120, 180), FlxG.save.data.malfunctionLock); else addSong('Malfunction', 3, 'square-pixel', FlxColor.fromRGB(140, 120, 180), FlxG.save.data.malfunctionLock);
            // addSong('Revenge', 3, 'face', FlxColor.WHITE, FlxG.save.data.revengeLock);
         }
 
         if(FPClientPrefs.episode2FPLock == 'unlocked')
         {
-            addSong('Cycled Sins', 3, 'relapse-pixel', FlxColor.fromRGB(115, 86, 86), FlxG.save.data.sinsLock);
-            addSong('War Dilemma', 3, 'warmick', FlxColor.fromRGB(105, 17, 10), FlxG.save.data.warLock);
-			addSong('Scrapped', 3, 'rs', FlxColor.BLACK, FlxG.save.data.scrappedLock);
-            addSong('Bless', 3, 'whitenew', FlxColor.WHITE, FlxG.save.data.blessLock);
-            addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock);
+            if(FPClientPrefs.sinsLock != 'beaten' && FPClientPrefs.sinsLock != 'unlocked') addSong('Cycled Sins', 3, 'mysterymouse', FlxColor.fromRGB(115, 86, 86), FlxG.save.data.sinsLock); else addSong('Cycled Sins', 3, 'relapse-pixel', FlxColor.fromRGB(115, 86, 86), FlxG.save.data.sinsLock);
+            if(FPClientPrefs.warLock != 'beaten' && FPClientPrefs.warLock != 'unlocked') addSong('War Dilemma', 3, 'mysterymouse', FlxColor.fromRGB(105, 17, 10), FlxG.save.data.warLock); else addSong('War Dilemma', 3, 'warmick', FlxColor.fromRGB(105, 17, 10), FlxG.save.data.warLock);
+			if(FPClientPrefs.scrappedLock != 'beaten' && FPClientPrefs.scrappedLock != 'unlocked') addSong('Scrapped', 3, 'mysterymouse', FlxColor.BLACK, FlxG.save.data.scrappedLock); else addSong('Scrapped', 3, 'rs', FlxColor.BLACK, FlxG.save.data.scrappedLock);
+            if(FPClientPrefs.blessLock != 'beaten' && FPClientPrefs.blessLock != 'unlocked') addSong('Bless', 3, 'mysterymouse', FlxColor.WHITE, FlxG.save.data.blessLock); else addSong('Bless', 3, 'whitenew', FlxColor.WHITE, FlxG.save.data.blessLock);
+            if(FPClientPrefs.mercyLock != 'beaten' && FPClientPrefs.mercyLock != 'unlocked') addSong('Mercy', 3, 'mysterymouse', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock); else addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock);
         }
 
 		Paths.clearStoredMemory();
@@ -484,7 +484,14 @@ class ExtrasState extends MusicBeatState{
 		#end
 
 		PlayState.storyDifficulty = curDifficulty;
-		diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
+		if(curSelected == 3)
+		{
+			diffText.text = "< YOU'RE FUCKED >";
+			diffText.color = FlxColor.RED;
+		}else{
+			diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
+			diffText.color = FlxColor.WHITE;
+		}
 		positionHighscore();
 	}
 

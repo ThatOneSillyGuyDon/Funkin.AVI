@@ -1,6 +1,5 @@
 package;
 
-import GameJolt.GameJoltAPI;
 #if desktop
 import Discord.DiscordClient;
 import sys.thread.Thread;
@@ -90,8 +89,6 @@ class SpanishTitleState extends MusicBeatState
 
 	override public function create():Void
 	{
-		GameJolt.GameJoltAPI.connect();
-        GameJolt.GameJoltAPI.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
 
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();

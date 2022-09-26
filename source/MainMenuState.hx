@@ -42,8 +42,8 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var MouseVersion:String = '1.5h (HotFix Demo)';
-	public static var DemoEngineVersion:String = '0.2.3';
+	public static var MouseVersion:String = '2.0';
+	public static var DemoEngineVersion:String = '0.3.0';
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
@@ -91,6 +91,7 @@ class MainMenuState extends MusicBeatState
 	var debugKeys:Array<FlxKey>;
 	public static var firstStart:Bool = true;
 	public static var finishedFunnyMove:Bool = false;
+	var noFreeplay:FlxText;
 	//public var camZooming:Bool = false;
 
 	override function create()
@@ -374,33 +375,40 @@ class MainMenuState extends MusicBeatState
 		FlxG.camera.follow(camFollowPos, null, 1);
 
 
-		if(ClientPrefs.language == "English") {
-	   var GameJoltText:FlxText = new FlxText(80, FlxG.height - -20, 0, "Story Mode Is Currently Disambled Until 2.0!", 25);
-		GameJoltText.scrollFactor.set();
-		GameJoltText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(GameJoltText);
+		/*if(ClientPrefs.language == "English") {
+	   var sorryText:FlxText = new FlxText(80, FlxG.height - 4, 0, "Story Mode Is Currently Disambled Until 2.0!", 25);
+		sorryText.scrollFactor.set();
+		sorryText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(sorryText);
 		} else {
-			var GameJoltText:FlxText = new FlxText(80, FlxG.height - -20, 0, "Modo Historia Esta Desabilitado hasta La 2.0!", 25);
-			GameJoltText.scrollFactor.set();
-			GameJoltText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			add(GameJoltText);
-		}
+			var sorryText:FlxText = new FlxText(80, FlxG.height - 4, 0, "Modo Historia Esta Desabilitado hasta La 2.0!", 25);
+			sorryText.scrollFactor.set();
+			sorryText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			add(sorryText);
+		}*/
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 84, 0, "Funkin.avi v" + MouseVersion, 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 22, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 64, 0, "Demolition Engine v" + DemoEngineVersion, 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 22, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 44, 0, "Psych Engine v" + psychEngineVersion, 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 22, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
 		var versionShit:FlxText = new FlxText(12, FlxG.height - 24, 0, "Friday Night Funkin' v" + Application.current.meta.get('version'), 12);
 		versionShit.scrollFactor.set();
-		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 22, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
+		noFreeplay = new FlxText(350, FlxG.height - 350, 0, "Beat Episode 1 First!", 30);
+		noFreeplay.scrollFactor.set();
+		noFreeplay.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 80, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		noFreeplay.alpha = 0;
+		noFreeplay.borderSize = 3.5;
+		noFreeplay.borderQuality = 3.5;
+		add(noFreeplay);
 
 		if(!GameJoltAPI.userLogin && ClientPrefs.language == "Spanish") {
 			/*
@@ -493,7 +501,7 @@ class MainMenuState extends MusicBeatState
 		grain.cameras = [camFilter];
 
 		if(GameJoltAPI.userLogin == true) {
-			var LOGTEXT:FlxText = new FlxText(908, FlxG.height - -20, 0, "Loged To GameJolt!", 35);
+			var LOGTEXT:FlxText = new FlxText(908, FlxG.height - -20, 0, "Logged Into GameJolt!", 35);
 			LOGTEXT.scrollFactor.set();
 			LOGTEXT.setFormat(Paths.font("vcr.ttf"), 35, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			FlxTween.tween(LOGTEXT, {y: 10}, 2);
@@ -572,7 +580,53 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-		        if (optionShit[curSelected] == 'donate')
+				if(optionShit[curSelected] == 'freeplay')
+				{
+					if(FPClientPrefs.episode1FPLock == 'unlocked')
+					{
+						selectedSomethin = true;
+						FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
+
+						menuItems.forEach(function(spr:FlxSprite)
+							{
+								if (curSelected != spr.ID)
+								{
+									// Main Menu Select Animations
+									FlxTween.tween(FlxG.camera, {zoom: 1.15}, 2, {ease: FlxEase.quartInOut});
+									FlxTween.tween(menuart, {x: -170}, 2.2, {ease: FlxEase.quartInOut});
+									FlxTween.tween(magenta, {x: -170}, 2.2, {ease: FlxEase.quartInOut});
+									FlxTween.tween(menuart, {y: 200}, 1.9, {ease: FlxEase.quartInOut});
+									FlxTween.tween(magenta, {y: -120}, 1.9, {ease: FlxEase.quartInOut});
+									// FlxTween.tween(bg, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
+									// FlxTween.tween(magenta, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
+									FlxTween.tween(spr, {x: -250, alpha: 0}, 0.4, {
+										ease: FlxEase.quadOut,
+										onComplete: function(twn:FlxTween)
+										{
+											spr.kill();
+										}
+									});
+								}
+								else
+								{
+									FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+									{
+										var daChoice:String = optionShit[curSelected];
+		
+										switch (daChoice)
+										{
+											case 'freeplay':
+												MusicBeatState.switchState(new EpicSelectorWOOO());
+										}
+									});
+								}
+							});
+					}else{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+					noFreeplay.alpha = 1;
+					FlxTween.tween(noFreeplay, {alpha: 0}, 1.5, {ease: FlxEase.quadIn, startDelay: 2});
+					}
+				}else if (optionShit[curSelected] == 'donate')
 				{
 					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
 				}
@@ -610,14 +664,19 @@ class MainMenuState extends MusicBeatState
 								switch (daChoice)
 								{
 									case 'story_mode':
-                                        MusicBeatState.switchState(new StoryMenuState());
-									case 'freeplay':
-										MusicBeatState.switchState(new StupidShittyNewFreeplayCategoryExample());
+										//FlxG.sound.play(Paths.sound('cancelMenu'));
+										MusicBeatState.switchState(new StoryMenuState());
+									//case 'freeplay':
+										//MusicBeatState.switchState(new EpicSelectorWOOO());
+									//#if MODS_ALLOWED
+									//case 'mods':
+										//MusicBeatState.switchState(new ModsMenuState());
+									//#end
+									//case 'awards':
+										//MusicBeatState.switchState(new AchievementsMenuState());
 									case 'credits':
-										if(ClientPrefs.language == "Spanish") 
-											MusicBeatState.switchState(new CreditsSpanishState());
-										else 
-											MusicBeatState.switchState(new CreditsState());
+										if(ClientPrefs.language == "Spanish") MusicBeatState.switchState(new CreditsSpanishState());
+										else MusicBeatState.switchState(new CreditsState());
 									case 'options':
 										if(ClientPrefs.language == "Spanish") {
 										LoadingState.loadAndSwitchState(new options.SpanishOption());
@@ -634,7 +693,7 @@ class MainMenuState extends MusicBeatState
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
 				selectedSomethin = true;
-				MusicBeatState.switchState(new modPrevention.No());
+				MusicBeatState.switchState(new MasterEditorMenu());
 			}
 			else if (FlxG.keys.justPressed.SIX || FlxG.keys.justPressed.NUMPADSIX)
 				{

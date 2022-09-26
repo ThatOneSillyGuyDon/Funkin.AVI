@@ -132,6 +132,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
+		var option:Option = new Option('Debug Mode',
+		'If checked, you can do cool stuff on a song',
+		'debugMode',
+		false);
+		addOption(option);
+
 		var option:Option = new Option('Marvelouses Rating',
 		'If checked, marvelouses rating will appear on the\nJudgment counter and will show\n when hit',
 		'marvelouses',
@@ -218,10 +224,10 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		/*var option:Option = new Option('Super mega random modchart',
+		var option:Option = new Option('Super mega random modchart',
 			'If checked, there will be a full random wtf modchart',
 			'outdated',
 			'bool',
-			false);*/
 
 		super();
 	}

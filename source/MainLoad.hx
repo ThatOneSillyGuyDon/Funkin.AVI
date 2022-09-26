@@ -41,6 +41,7 @@ class MainLoad extends MusicBeatState
 	var images = [];
 	var music = [];
 	var charts = [];
+	var xmls = [];
 
 	override function create()
 	{
@@ -75,6 +76,18 @@ class MainLoad extends MusicBeatState
 		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/songs")))
 		{
 			music.push(i);
+		}
+
+		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/data")))
+		{
+			charts.push(i);
+		}
+
+		for (i in FileSystem.readDirectory(FileSystem.absolutePath("assets/shared/images/characters")))
+		{
+			if (!i.endsWith(".xml"))
+				continue;
+			xmls.push(i);
 		}
 		#end
 

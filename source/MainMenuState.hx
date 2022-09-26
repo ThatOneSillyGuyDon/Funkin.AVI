@@ -572,11 +572,7 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if(optionShit[curSelected] == 'story_mode')
-				{
-					FlxG.sound.play(Paths.sound('cancelMenu'));
-				}else if (optionShit[curSelected] == 'donate')
-				
+		        if (optionShit[curSelected] == 'donate')
 				{
 					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
 				}
@@ -613,20 +609,15 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									//case 'story_mode':
-										//FlxG.sound.play(Paths.sound('cancelMenu'));
-										//MusicBeatState.switchState(new StoryMenuState());
+									case 'story_mode':
+                                        MusicBeatState.switchState(new StoryMenuState());
 									case 'freeplay':
-										MusicBeatState.switchState(new EpicSelectorWOOO());
-									//#if MODS_ALLOWED
-									//case 'mods':
-										//MusicBeatState.switchState(new ModsMenuState());
-									//#end
-									//case 'awards':
-										//MusicBeatState.switchState(new AchievementsMenuState());
+										MusicBeatState.switchState(new StupidShittyNewFreeplayCategoryExample());
 									case 'credits':
-										if(ClientPrefs.language == "Spanish") MusicBeatState.switchState(new CreditsSpanishState());
-										else MusicBeatState.switchState(new CreditsState());
+										if(ClientPrefs.language == "Spanish") 
+											MusicBeatState.switchState(new CreditsSpanishState());
+										else 
+											MusicBeatState.switchState(new CreditsState());
 									case 'options':
 										if(ClientPrefs.language == "Spanish") {
 										LoadingState.loadAndSwitchState(new options.SpanishOption());

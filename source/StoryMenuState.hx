@@ -65,8 +65,9 @@ class StoryMenuState extends MusicBeatState
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 
+
 		PlayState.isStoryMode = true;
-		WeekData.reloadWeekFiles(true);
+		WeekData.reloadWeekFiles(false);
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
@@ -85,7 +86,7 @@ class StoryMenuState extends MusicBeatState
 		rankText.screenCenter(X);
 
 		var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
-		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFFF9CF51);
+		var bgYellow:FlxSprite = new FlxSprite(0, 56).makeGraphic(FlxG.width, 386, 0xFF000000);
 		bgSprite = new FlxSprite(0, 56);
 		bgSprite.antialiasing = ClientPrefs.globalAntialiasing;
 
@@ -183,14 +184,15 @@ class StoryMenuState extends MusicBeatState
 		add(bgSprite);
 		add(grpWeekCharacters);
 
-		var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 425).loadGraphic(Paths.image('Menu_Tracks'));
-		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
-		add(tracksSprite);
+	var tracksSprite:FlxSprite = new FlxSprite(FlxG.width * 0.07, bgSprite.y + 425).loadGraphic(Paths.image(null));
+//		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
+//		add(tracksSprite);
 
-		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 60, 0, "", 32);
-		txtTracklist.alignment = CENTER;
-		txtTracklist.font = rankText.font;
-		txtTracklist.color = 0xFFe55777;
+		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 100, 0, "", 32);
+		txtTracklist.x = 1;
+		txtTracklist.alignment = LEFT;
+		txtTracklist.font = Paths.font('NewWaltDisneyFontRegular-BPen.ttf');
+		txtTracklist.color = 0xff8d8d8d;
 		add(txtTracklist);
 		// add(rankText);
 		add(scoreText);
@@ -250,32 +252,32 @@ class StoryMenuState extends MusicBeatState
 			var downP = controls.UI_DOWN_P;
 			if (upP)
 			{
-				changeWeek(-1);
+				changeDifficulty(1);
 				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 
 			if (downP)
 			{
-				changeWeek(1);
+				changeDifficulty(-1);
 				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 
-			if (controls.UI_RIGHT)
+			if (controls.UI_DOWN)
 				rightArrow.animation.play('press')
 			else
 				rightArrow.animation.play('idle');
 
-			if (controls.UI_LEFT)
+			if (controls.UI_UP)
 				leftArrow.animation.play('press');
 			else
 				leftArrow.animation.play('idle');
 
 			if (controls.UI_RIGHT_P)
-				changeDifficulty(1);
+				changeWeek(1);
 			else if (controls.UI_LEFT_P)
-				changeDifficulty(-1);
+				changeWeek(-1);
 			else if (upP || downP)
-				changeDifficulty();
+				changeWeek();
 
 			if(FlxG.keys.justPressed.CONTROL)
 			{
@@ -439,6 +441,7 @@ class StoryMenuState extends MusicBeatState
 		}
 
 		bgSprite.visible = true;
+		bgSprite.screenCenter();
 		var assetName:String = leWeek.weekBackground;
 		if(assetName == null || assetName.length < 1) {
 			bgSprite.visible = false;

@@ -1,4 +1,4 @@
-package; //Lord X Porn
+package;
 
 import WindowAPI.WindowThing as Windowthing;
 import GameJolt;
@@ -4860,10 +4860,6 @@ class PlayState extends MusicBeatState
 							System.exit(0);
 						});
 					}
-<<<<<<< HEAD
-=======
-				#end
->>>>>>> 5dcf8ab8ac81b44d9934bcaf23866ce29226fa42
 				}else{
 				#end 
 			var ret:Dynamic = callOnLuas('onPause', []);
@@ -9279,7 +9275,7 @@ class PlayState extends MusicBeatState
 						triggerEventNote('Add Camera Zoom', '0.13', '0.14');
 					}
 				}
-			case 'Cycled Sins':
+		       case 'Cycled Sins':
 				if(curStep == 572)
 				{
 					if(curStage == 'RelapseStage')
@@ -9292,6 +9288,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			case 'Malfunction':
+
 				if(curStep == 4) //for get it work
 				{
 					triggerEventNote('Alter Camera Zoom', '2', '2.4');

@@ -11819,12 +11819,4 @@ class PlayState extends MusicBeatState
 					timeTxt.cameras = [camHUD];
 			}
 		}
-<<<<<<< HEAD
-
-}
-=======
-	
-}
-
-
->>>>>>> parent of 3282275 (amazing new camera shit, offsets need to be fix tho)
+		}

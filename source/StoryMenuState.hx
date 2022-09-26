@@ -67,7 +67,7 @@ class StoryMenuState extends MusicBeatState
 
 
 		PlayState.isStoryMode = true;
-		WeekData.reloadWeekFiles(false);
+		WeekData.reloadWeekFiles(true);
 		if(curWeek >= WeekData.weeksList.length) curWeek = 0;
 		persistentUpdate = persistentDraw = true;
 
@@ -425,6 +425,7 @@ class StoryMenuState extends MusicBeatState
 		var leName:String = leWeek.storyName;
 		txtWeekTitle.text = leName.toUpperCase();
 		txtWeekTitle.x = FlxG.width - (txtWeekTitle.width + 14);
+		txtWeekTitle.font = Paths.font('NewWaltDisneyFontRegular-BPen.ttf');
 		txtWeekTitle.screenCenter(X);
 
 		var bullShit:Int = 0;

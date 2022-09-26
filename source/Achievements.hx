@@ -154,6 +154,6 @@ class AchievementObject extends FlxSpriteGroup {
 		if(alphaTween != null) {
 			alphaTween.cancel();
 		}
-		super.destroy(); // Oh noes destroy scary
+		super.destroy();
 	}
 }

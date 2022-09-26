@@ -53,20 +53,6 @@ class EpicSelectorWOOO extends MusicBeatState {
 	var BG:FlxSprite;
     override function create(){
 
-		if(ClientPrefs.language == "Spanish") {
-		unfinishedText = new FlxText(907, FlxG.height - 54, 0, "Por Ahora, Esto Esta Sin Terminar, La Version Final Sera Diferente!", 25);
-		unfinishedText.scrollFactor.set();
-		unfinishedText.screenCenter(X);
-		unfinishedText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(unfinishedText);
-		} else {
-		unfinishedText = new FlxText(907, FlxG.height - 54, 0, "Currently, The category Menu is Unfinished, The Final Verion Will Be Different!", 25);
-		unfinishedText.scrollFactor.set();
-		unfinishedText.screenCenter(X);
-		unfinishedText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		add(unfinishedText);
-		}
-
 		if(ClientPrefs.funiShaders)
 					{
 						chrom = new ChromaticAberrationEffect();
@@ -93,13 +79,13 @@ class EpicSelectorWOOO extends MusicBeatState {
 
 
 					}
-		if(FPClientPrefs.isolatedSong == 'Completed' && FPClientPrefs.lunacySong == 'Completed' && FPClientPrefs.twistedSong == 'Completed' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten')
+		if(FPClientPrefs.episode2FPLock == 'unlocked' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.crossinLock == 'beaten' && FPClientPrefs.warLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.blessLock == 'beaten' && FPClientPrefs.scrappedLock == 'beaten' && FPClientPrefs.mercyLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten' && FPClientPrefs.betaisolateLock == 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?
 		{
 			if(ClientPrefs.language == "Spanish") freeplayCats = ['Jugar', 'Un Mensaje Para It', '???'];
-			else freeplayCats = ['Play', 'A Letter for You', '???'];
+			else freeplayCats = ['Episodes', 'Extras', 'Covers'];
 		} else {
-			if(ClientPrefs.language == "Spanish") freeplayCats = ['Play', '???', '???'];
-			else freeplayCats = ['Jugar', '???', '???'];
+			if(ClientPrefs.language == "Spanish") freeplayCats = ['Jugar', '???', '???'];
+			else freeplayCats = ['Episodes', 'Extras', '???'];
 		}		
 
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
@@ -123,6 +109,20 @@ class EpicSelectorWOOO extends MusicBeatState {
             catsText.isMenuItemCenter = true;
 			grpCats.add(catsText);
 		}
+
+		if(ClientPrefs.language == "Spanish") {
+			unfinishedText = new FlxText(907, FlxG.height - 54, 0, "Por Ahora, Esto Esta Sin Terminar, La Version Final Sera Diferente!", 25);
+			unfinishedText.scrollFactor.set();
+			unfinishedText.screenCenter(X);
+			unfinishedText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			add(unfinishedText);
+			} else {
+			unfinishedText = new FlxText(907, FlxG.height - 54, 0, "Currently, The category Menu is Unfinished, The Final Verion Will Be Different!", 25);
+			unfinishedText.scrollFactor.set();
+			unfinishedText.screenCenter(X);
+			unfinishedText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			add(unfinishedText);
+			}
 
 		var scratchStuff:FlxSprite = new FlxSprite();
 		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
@@ -190,15 +190,14 @@ class EpicSelectorWOOO extends MusicBeatState {
 				//	FlxG.sound.play(Paths.sound('cancelMenu'));
 				//}
                 case 1:
-				if(FPClientPrefs.isolatedSong == 'Completed' && FPClientPrefs.lunacySong == 'Completed' && FPClientPrefs.twistedSong == 'Completed' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten')
-				{
-					CoolUtil.browserLoad('https://twitter.com/i/status/1536165280510005250'); // Fuck you, you're going to Twitter
-					//MusicBeatState.switchState(new FuckingVideo());
-				}else{
-					FlxG.sound.play(Paths.sound('cancelMenu'));
-				}
+					MusicBeatState.switchState(new ExtrasState());
 				case 2:
-					FlxG.sound.play(Paths.sound('cancelMenu'));
+					//if(FPClientPrefs.episode2FPLock == 'unlocked' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.crossinLock == 'beaten' && FPClientPrefs.warLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.blessLock == 'beaten' && FPClientPrefs.scrappedLock == 'beaten' && FPClientPrefs.mercyLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten' && FPClientPrefs.betaisolateLock == 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?
+					//{
+					//	MusicBeatState.switchState(new CoversState());
+					//}else{
+						FlxG.sound.play(Paths.sound('cancelMenu'));
+					//}
 			}
             }
         super.update(elapsed);
@@ -226,6 +225,8 @@ class EpicSelectorWOOO extends MusicBeatState {
 
 		if(curSelected == 2)
 						{
+							if(FPClientPrefs.malfunctionLock != 'beaten' || FPClientPrefs.crossinLock != 'beaten' || FPClientPrefs.warLock != 'beaten' || FPClientPrefs.sinsLock != 'beaten' || FPClientPrefs.huntedLock != 'beaten' || FPClientPrefs.blessLock != 'beaten' || FPClientPrefs.scrappedLock != 'beaten' || FPClientPrefs.mercyLock != 'beaten' || FPClientPrefs.oldisolateLock != 'beaten' || FPClientPrefs.betaisolateLock != 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?))
+							{	
 							FlxG.camera.flash(FlxColor.BLACK, 0.6);
 							FlxG.camera.shake(0.004, 99999999);
 							if(ClientPrefs.funiShaders)
@@ -250,31 +251,8 @@ class EpicSelectorWOOO extends MusicBeatState {
 							if (distort != null)
 							distort.shader.working.value = [true];
 							}
-
-						}else if(curSelected == 1 && FPClientPrefs.isolatedSong != 'Completed' || FPClientPrefs.lunacySong != 'Completed' || FPClientPrefs.twistedSong != 'Completed' || FPClientPrefs.huntedLock != 'beaten' || FPClientPrefs.malfunctionLock != 'beaten' || FPClientPrefs.sinsLock != 'beaten' || FPClientPrefs.oldisolateLock != 'beaten'){
-							FlxG.camera.flash(FlxColor.BLACK, 0.6);
-							FlxG.camera.shake(0.004, 99999999);
-							if(ClientPrefs.funiShaders)
-							{
-							clearShader();
-							chrom = new ChromaticAberrationEffect();
-							blurThisShit = new TiltshiftEffect(0.6, 0);
-
-							distort = new WIDistortionEffect(0.75, 0.25, false);
-							distort.shader.working.value = [true];
-
-							addShader(distort);
-							addShader(chrom);
-							addShader(blurThisShit);
-
-								if (chrom != null)
-							chrom.setChrome(0.005);
-
-							if(blurThisShit != null)
-							blurThisShit.setBlur(0.6);
-
-							if (distort != null)
-							distort.shader.working.value = [true];
+							}else{
+								//Fuck Shaders, they're so complicated lmao.
 							}
 						}else{
 							FlxG.camera.flash(FlxColor.BLACK, 0.2);

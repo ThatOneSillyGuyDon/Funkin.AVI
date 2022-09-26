@@ -4,8 +4,10 @@ import flixel.FlxG;
 import flixel.FlxObject;
 import flixel.FlxSubState;
 import flixel.math.FlxMath;
+import flixel.FlxSprite;
 import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
+import flixel.FlxCamera;
 import flixel.util.FlxTimer;
 import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
@@ -47,29 +49,81 @@ class GameOverSubstate extends MusicBeatSubstate
 	{
 		super();
 
-		PlayState.instance.setOnLuas('inGameOver', true);
+		switch(PlayState.SONG.song)
+		{
 
-		Conductor.songPosition = 0;
+			case 'Twisted Grins' | 'Facade' | 'Mortiferum Risus':
 
-		boyfriend = new Boyfriend(x, y, characterName);
-		boyfriend.x += boyfriend.positionArray[0];
-		boyfriend.y += boyfriend.positionArray[1];
-		add(boyfriend);
+					boyfriend = new Boyfriend(x, y, characterName);
+					boyfriend.x += boyfriend.positionArray[0];
+					boyfriend.y += boyfriend.positionArray[1];
+					boyfriend.alpha = 0.001;
+					add(boyfriend);
 
-		camFollow = new FlxPoint(boyfriend.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
+					var blackFadeThing:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
+					blackFadeThing.scale.set(10, 10);
+					blackFadeThing.screenCenter(X);
+					blackFadeThing.screenCenter(Y);
+					add(blackFadeThing);
 
-		FlxG.sound.play(Paths.sound(deathSoundName));
-		Conductor.changeBPM(100);
-		// FlxG.camera.followLerp = 1;
-		// FlxG.camera.focusOn(FlxPoint.get(FlxG.width / 2, FlxG.height / 2));
-		FlxG.camera.scroll.set();
-		FlxG.camera.target = null;
+					var goofyAhhSmiles:FlxSprite = new FlxSprite();
+					goofyAhhSmiles.frames = Paths.getSparrowAtlas('funkinAVI/uiAndEvents/fuckYouSmiles');
+					goofyAhhSmiles.animation.addByPrefix('idle', 'fuckYouSmiles jumpscare', 33, false);
+					goofyAhhSmiles.animation.play('idle');
+					goofyAhhSmiles.screenCenter();
+					goofyAhhSmiles.scrollFactor.set();
+					goofyAhhSmiles.scale.set(2.3, 2.3);
+					add(goofyAhhSmiles);
 
-		boyfriend.playAnim('firstDeath');
+					PlayState.instance.setOnLuas('inGameOver', true);
 
-		camFollowPos = new FlxObject(0, 0, 1, 1);
-		camFollowPos.setPosition(FlxG.camera.scroll.x + (FlxG.camera.width / 2), FlxG.camera.scroll.y + (FlxG.camera.height / 2));
-		add(camFollowPos);
+					FlxG.sound.play(Paths.sound('funkinAVI/gameOverSounds/smilesJumpscare'));
+					
+					FlxTween.tween(goofyAhhSmiles, {alpha: 0}, 0.001, {startDelay: 4});
+
+					FlxTween.tween(blackFadeThing, {alpha: 0}, 3, {startDelay: 4.3});
+
+					camFollow = new FlxPoint(boyfriend.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
+
+					//FlxG.sound.play(Paths.sound(deathSoundName));
+					Conductor.changeBPM(100);
+					// FlxG.camera.followLerp = 1;
+					// FlxG.camera.focusOn(FlxPoint.get(FlxG.width / 2, FlxG.height / 2));
+					FlxG.camera.scroll.set();
+					FlxG.camera.target = null;
+
+					boyfriend.playAnim('firstDeath');
+
+					camFollowPos = new FlxObject(0, 0, 1, 1);
+					camFollowPos.setPosition(FlxG.camera.scroll.x + (FlxG.camera.width / 2), FlxG.camera.scroll.y + (FlxG.camera.height / 2));
+					add(camFollowPos);
+
+			default:
+				PlayState.instance.setOnLuas('inGameOver', true);
+
+				Conductor.songPosition = 0;
+
+				boyfriend = new Boyfriend(x, y, characterName);
+				boyfriend.x += boyfriend.positionArray[0];
+				boyfriend.y += boyfriend.positionArray[1];
+				add(boyfriend);
+
+				camFollow = new FlxPoint(boyfriend.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
+
+				FlxG.sound.play(Paths.sound(deathSoundName));
+				Conductor.changeBPM(100);
+				// FlxG.camera.followLerp = 1;
+				// FlxG.camera.focusOn(FlxPoint.get(FlxG.width / 2, FlxG.height / 2));
+				FlxG.camera.scroll.set();
+				FlxG.camera.target = null;
+
+				boyfriend.playAnim('firstDeath');
+
+				camFollowPos = new FlxObject(0, 0, 1, 1);
+				camFollowPos.setPosition(FlxG.camera.scroll.x + (FlxG.camera.width / 2), FlxG.camera.scroll.y + (FlxG.camera.height / 2));
+				add(camFollowPos);
+
+		}
 	}
 
 	var isFollowingAlready:Bool = false;
@@ -99,6 +153,10 @@ class GameOverSubstate extends MusicBeatSubstate
 			else
 				switch(PlayState.SONG.song)
 					{
+						case 'Isolated' | 'Lunacy':
+							MusicBeatState.switchState(new EpisodesState());
+						case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy' | 'Cycled Sins':
+							MusicBeatState.switchState(new ExtrasState());
 						default:
 							MusicBeatState.switchState(new EpisodesState());
 					}

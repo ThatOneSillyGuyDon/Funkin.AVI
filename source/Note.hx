@@ -31,6 +31,7 @@ class Note extends FlxSprite
 	public var hitByOpponent:Bool = false;
 	public var noteWasHit:Bool = false;
 	public var prevNote:Note;
+	public var downscrollNote:Bool = ClientPrefs.downScroll;
 
 	public var sustainLength:Float = 0;
 	public var isSustainNote:Bool = false;
@@ -118,6 +119,21 @@ class Note extends FlxSprite
 		            		colorSwap.hue = 0;
 		            		colorSwap.saturation = 0;
 		            		colorSwap.brightness = 0;
+				case 'Move Window Note': 
+								ignoreNote = mustPress;
+								hitCausesMiss = true;
+								reloadNote('RS');
+								noteSplashTexture = 'DAMAGEnoteSplashes';
+						if(PlayState.isPixelStage) {
+							reloadNote('DAMAGE');
+							noteSplashTexture = 'pixelUI/DAMAGEnoteSplashes';
+						}
+								colorSwap.hue = 0;
+								colorSwap.saturation = 0;
+								colorSwap.brightness = 0;
+								colorSwap.hue = 0;
+								colorSwap.saturation = 0;
+								colorSwap.brightness = 0;
 				case 'Flip Note':
 					ignoreNote = mustPress;
 					hitCausesMiss = true;
@@ -129,7 +145,7 @@ class Note extends FlxSprite
 					colorSwap.hue = 0;
 					colorSwap.saturation = 0;
 					colorSwap.brightness = 0;
-				case 'Darkness Note':
+				case 'Darkness Note' | 'Fuck Strums Note':
 					ignoreNote = mustPress;
 					hitCausesMiss = true;
 					reloadNote('DARKNESS');

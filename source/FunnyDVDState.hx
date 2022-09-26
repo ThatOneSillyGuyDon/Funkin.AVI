@@ -1,4 +1,4 @@
-package; // no cap
+package;
 
 import flixel.FlxG;
 import flixel.FlxSprite;

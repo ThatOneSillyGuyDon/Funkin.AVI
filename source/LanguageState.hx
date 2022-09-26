@@ -38,7 +38,6 @@ class LanguageState extends MusicBeatState
 
         FlxG.mouse.visible = true;
 
-		
 		if(ClientPrefs.funiShaders)
 					{
 						chrom = new ChromaticAberrationEffect();
@@ -65,7 +64,6 @@ class LanguageState extends MusicBeatState
 
 
 					}
-        //removed cus value exeption thing, just in case -jsa | I added it back, but it won't work anyways if people turn it off at the shaders warning menu -don
 	
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);
@@ -139,6 +137,7 @@ class LanguageState extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		Application.current.window.title = "Funkin.avi - Pick your Language";
 		
 		if(!languageSelected) {
 				
@@ -164,7 +163,7 @@ class LanguageState extends MusicBeatState
 					FlxTransitionableState.skipNextTransOut = true;
 					ClientPrefs.language = "English";
 					FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
-                   	ClientPrefs.saveSettings();
+                   			ClientPrefs.saveSettings();
 					FlxTween.tween(otherText, {alpha: 0}, 1);
 					FlxTween.tween(spanish, {alpha: 0}, 0.2);
 					FlxTween.tween(warnText, {alpha: 0}, 1);

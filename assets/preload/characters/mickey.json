@@ -1,59 +1,59 @@
 {
 	"animations": [
 		{
-			"loop": false,
 			"offsets": [
 				610,
 				640
 			],
-			"anim": "idle",
+			"indices": [],
 			"fps": 24,
-			"name": "Mickey1 Idle",
-			"indices": []
+			"anim": "idle",
+			"loop": false,
+			"name": "Mickey1 Idle"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				610,
 				644
 			],
-			"anim": "singLEFT",
+			"indices": [],
 			"fps": 24,
-			"name": "Mickey1 Left",
-			"indices": []
+			"anim": "singLEFT",
+			"loop": false,
+			"name": "Mickey1 Left"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				610,
 				643
 			],
-			"anim": "singDOWN",
+			"indices": [],
 			"fps": 24,
-			"name": "Mickey1 Down",
-			"indices": []
+			"anim": "singDOWN",
+			"loop": false,
+			"name": "Mickey1 Down"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				610,
 				640
 			],
-			"anim": "singUP",
+			"indices": [],
 			"fps": 24,
-			"name": "Mickey1 Up",
-			"indices": []
+			"anim": "singUP",
+			"loop": false,
+			"name": "Mickey1 Up"
 		},
 		{
-			"loop": false,
 			"offsets": [
 				618,
 				641
 			],
-			"anim": "singRIGHT",
+			"indices": [],
 			"fps": 24,
-			"name": "Mickey1 Right",
-			"indices": []
+			"anim": "singRIGHT",
+			"loop": false,
+			"name": "Mickey1 Right"
 		}
 	],
 	"no_antialiasing": false,
@@ -62,12 +62,12 @@
 		0,
 		200
 	],
-	"healthicon": "mickey",
+	"healthicon": "legacy",
 	"flip_x": false,
 	"healthbar_colors": [
-		40,
-		40,
-		40
+		216,
+		216,
+		216
 	],
 	"camera_position": [
 		-290,

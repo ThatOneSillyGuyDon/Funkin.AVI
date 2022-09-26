@@ -161,11 +161,11 @@ class PauseSubState extends MusicBeatSubstate
 		add(charterCredit);
 
 		var levelDifficulty:FlxText = new FlxText(20, 15 + 96, 0, "", 32);
-		switch(PlayState.SONG.song) {
-		case 'Twisted Grins' | 'Facade' | 'Mortiferum Risus':
-			levelDifficulty.text = "SMILE";
-		case "Don't Cross!":
-			levelDifficulty.text = "YOU'RE FUCKED"; 
+		if(PlayState.SONG.song == "Don't Cross!")
+		{
+			levelDifficulty.text += "YOU'RE FUCKED";
+		}else{
+			levelDifficulty.text += CoolUtil.difficultyString();
 		}
 		levelDifficulty.scrollFactor.set();
 		levelDifficulty.setFormat(Paths.font('NewWaltDisneyFontRegular-BPen.ttf'), 32);
@@ -382,8 +382,12 @@ class PauseSubState extends MusicBeatSubstate
 						Application.current.window.title = "Funkin.avi";
 						switch(PlayState.SONG.song)
 						{
-							default:
+							case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Facade' | 'Mortiferum Risus':
 								MusicBeatState.switchState(new EpisodesState());
+							case 'Hunted' | 'Isolated Old' | 'Isolated Beta' | "Don't Cross!" | 'Malfunction' | 'Cycled Sins' | 'War Dilemma' | 'Scrapped' | 'Bless' | 'Mercy':
+								MusicBeatState.switchState(new ExtrasState());
+							default:
+								MusicBeatState.switchState(new EpicSelectorWOOO());
 						}
 					}
 					PlayState.cancelMusicFadeTween();

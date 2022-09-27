@@ -2735,7 +2735,7 @@ class PlayState extends MusicBeatState
 		#end
 		
 		var daSong:String = Paths.formatToSongPath(curSong);
-		if (isStoryMode && !seenCutscene)
+	    if (ClientPrefs.cutscenes && !seenCutscene) //CUTSCENES ON FREEPLAY
 		{
 			switch (daSong)
 			{
@@ -2743,17 +2743,7 @@ class PlayState extends MusicBeatState
 					startVideo('Episode1_Intro');
 					cutsceneTransitionHelper.alpha = 1;
 					inCutscene = true;
-					if(FlxG.keys.justPressed.SPACE)
-					{
-						inCutscene = false;
-						seenCutscene = true;
-						startCountdown();
-					}
-			}
-		} else if (ClientPrefs.cutscenes && !seenCutscene) //CUTSCENES ON FREEPLAY
-		{
-			switch (daSong)
-			{
+					
 				case "monster":
 					var whiteScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
 					add(whiteScreen);
@@ -12381,7 +12371,7 @@ class PlayState extends MusicBeatState
 					timeBarBG.cameras = [camHUD];
 					timeTxt.cameras = [camHUD];
 			}
-		}*/
+		}
 	
 }
 

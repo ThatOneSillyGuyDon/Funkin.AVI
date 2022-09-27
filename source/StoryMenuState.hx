@@ -117,9 +117,9 @@ class StoryMenuState extends MusicBeatState
 			{
 				loadedWeeks.push(weekFile);
 				WeekData.setDirectoryFromWeek(weekFile);
-				var weekThing:MenuItem = new MenuItem(0, bgSprite.y + 396, WeekData.weeksList[i]);
-				weekThing.y += ((weekThing.height + 20) * num);
-				weekThing.targetY = num;
+				var weekThing:MenuItem = new MenuItem(0, bgSprite.y + -150, WeekData.weeksList[i]);
+				weekThing.y += 300;
+				weekThing.targetY = 300;
 				grpWeekText.add(weekThing);
 
 				weekThing.screenCenter(X);
@@ -153,8 +153,9 @@ class StoryMenuState extends MusicBeatState
 		difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
 
-		leftArrow = new FlxSprite(grpWeekText.members[0].x + grpWeekText.members[0].width + 9, grpWeekText.members[0].y + 9);
+		leftArrow = new FlxSprite(60 + grpWeekText.members[0].width + 9, 540);
 		leftArrow.frames = ui_tex;
+		leftArrow.angle = 90;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
 		leftArrow.animation.play('idle');
@@ -168,11 +169,11 @@ class StoryMenuState extends MusicBeatState
 		}
 		curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(lastDifficultyName)));
 		
-		sprDifficulty = new FlxSprite(0, leftArrow.y);
+		sprDifficulty = new FlxSprite(0, 20);
 		sprDifficulty.antialiasing = ClientPrefs.globalAntialiasing;
 		difficultySelectors.add(sprDifficulty);
 
-		rightArrow = new FlxSprite(leftArrow.x + 376, grpWeekText.members[0].y + 9);
+		rightArrow = new FlxSprite(leftArrow.x + 376, 540);
 		rightArrow.frames = ui_tex;
 		rightArrow.animation.addByPrefix('idle', 'arrow right');
 		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
@@ -253,13 +254,11 @@ class StoryMenuState extends MusicBeatState
 			if (upP)
 			{
 				changeDifficulty(1);
-				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 
 			if (downP)
 			{
 				changeDifficulty(-1);
-				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 
 			if (controls.UI_DOWN)
@@ -272,12 +271,17 @@ class StoryMenuState extends MusicBeatState
 			else
 				leftArrow.animation.play('idle');
 
-			if (controls.UI_RIGHT_P)
+			if (controls.UI_RIGHT_P) {
 				changeWeek(1);
-			else if (controls.UI_LEFT_P)
+		    	FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
+			}
+			else if (controls.UI_LEFT_P) {
 				changeWeek(-1);
-			else if (upP || downP)
+			FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
+			}
+			else if (upP || downP) {
 				changeWeek();
+			}
 
 			if(FlxG.keys.justPressed.CONTROL)
 			{
@@ -389,10 +393,9 @@ class StoryMenuState extends MusicBeatState
 		if(sprDifficulty.graphic != newImage)
 		{
 			sprDifficulty.loadGraphic(newImage);
-			sprDifficulty.x = leftArrow.x + 60;
-			sprDifficulty.x += (308 - sprDifficulty.width) / 3;
+			sprDifficulty.screenCenter(X);
 			sprDifficulty.alpha = 0;
-			sprDifficulty.y = leftArrow.y - 15;
+			sprDifficulty.y = 100;
 
 			if(tweenDifficulty != null) tweenDifficulty.cancel();
 			tweenDifficulty = FlxTween.tween(sprDifficulty, {y: leftArrow.y + 15, alpha: 1}, 0.07, {onComplete: function(twn:FlxTween)

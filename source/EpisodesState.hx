@@ -113,12 +113,12 @@ class EpisodesState extends MusicBeatState
 
 		FPClientPrefs.loadShit();
 
-        if(FPClientPrefs.episode1FPLock == 'unlocked')
-        {
-            addSong('Isolated', 3, 'mickey', FlxColor.fromRGB(60, 60, 60));
-            addSong('Lunacy', 3, 'lunamick', FlxColor.fromRGB(60, 60, 60));
-            addSong('Delusional', 3, 'insanemick', FlxColor.fromRGB(60, 60, 60));
-        }
+		if(FPClientPrefs.episode1FPLock == 'unlocked')
+			{
+				addSong('Isolated', 3, 'mickey', FlxColor.fromRGB(60, 60, 60));
+				addSong('Lunacy', 3, 'lunamick', FlxColor.fromRGB(60, 60, 60));
+				addSong('Delusional', 3, 'insanemick', FlxColor.fromRGB(60, 60, 60));
+			}
 
         if(FPClientPrefs.episode2FPLock == 'unlocked')
         {
@@ -417,7 +417,7 @@ class EpisodesState extends MusicBeatState
 			persistentUpdate = false;
 			openSubState(new GameplayChangersSubstate());
 		}
-			if(instPlaying != curSelected)
+		    if(instPlaying != curSelected)
 			{
 				#if PRELOAD_ALL
 				destroyFreeplayVocals();
@@ -444,7 +444,7 @@ class EpisodesState extends MusicBeatState
 				else Application.current.window.title = "Funkin.avi - Escuchando: " + PlayState.SONG.song + " - Por: " + PlayState.SONG.composer;
 				#end
 			}
-
+			  
 		else if (accepted)
 		{
 			persistentUpdate = false;

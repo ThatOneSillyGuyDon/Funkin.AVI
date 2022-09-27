@@ -149,7 +149,7 @@ class CreditsState extends MusicBeatState
 			['DEMOLITIONDON96',	'demolitiondon96',	"Main Coder Of Funkin.avi",	'https://youtube.com/c/DEMOLITIONDON96',	'FFFFFF'],
 			['Jsa010',       	'jsa010',	        "Secondary Coder of Funkin.avi", 'https://twitter.com/_Jsa010_',   	'FFFFFF'],
 		    ['TonyTime!',	    'matt',	    'He left but he\'s back',                                                   'https://github.com/TonyTimee',	                                            'FFFFFF'],
-			['Goofgoof43', 'missing-icon', 'Pretty cool guy, I\'d say', 'nolink', 'FFFFFF'],
+			['Goofgoof43', 'Goofgoof', 'Pretty cool guy, I\'d say', 'nolink', 'FFFFFF'],
 			['MalyPlus', 'maly', 'Newest Coder on the Team', 'https://gamebanana.com/members/2014862', 'FFFFFF'],
 			['A3ro', 'missing-icon', 'Also a new Coder', 'nolink', 'FFFFFF'],
 			[''],

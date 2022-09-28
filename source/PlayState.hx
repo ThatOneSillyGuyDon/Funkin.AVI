@@ -2655,8 +2655,9 @@ class PlayState extends MusicBeatState
 		var filmScratchGame:BGSprite = new BGSprite('funkinAVI-filters/scratchShit', 0, 0, 1, 1, ['scratch thing 1'], true);
 		filmScratchGame.alpha = 0.5;
 
-		if(SONG.song == 'Isolated')
+		switch(SONG.song)
 		{
+			case 'Isolated' | 'Lunacy':
 			var isolateIntro:FlxSprite = new FlxSprite().makeGraphic(Std.int(FlxG.width * 1), Std.int(FlxG.height * 1), FlxColor.BLACK);
 			isolateIntro.scale.set(10, 10);
 			isolateIntro.cameras = [camCustom];
@@ -4224,13 +4225,33 @@ class PlayState extends MusicBeatState
 
 		if(hudStyle == 'Demolition')
 		{
-			FlxTween.tween(camHUD, {alpha: 1}, 1, {ease: FlxEase.circOut});
-			FlxTween.tween(healthBarBG, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-			FlxTween.tween(healthBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-			FlxTween.tween(healthIcon, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-			FlxTween.tween(healthTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-			FlxTween.tween(iconP1, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-			FlxTween.tween(iconP2, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+			switch(SONG.song)
+			{
+				case 'Isolated':
+					FlxTween.tween(camHUD, {alpha: 1}, 3, {ease: FlxEase.circInOut, startDelay: 10});
+					FlxTween.tween(healthBarBG, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(healthBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(healthIcon, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(healthTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(iconP1, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(iconP2, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+				case 'Lunacy':
+					FlxTween.tween(camHUD, {alpha: 1}, 3, {ease: FlxEase.circInOut, startDelay: 27});
+					FlxTween.tween(healthBarBG, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(healthBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(healthIcon, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(healthTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(iconP1, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(iconP2, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+				default:
+					FlxTween.tween(camHUD, {alpha: 1}, 1, {ease: FlxEase.circOut});
+					FlxTween.tween(healthBarBG, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(healthBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(healthIcon, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(healthTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(iconP1, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(iconP2, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+			}
 		}
 
 		FlxTween.tween(songBanner, {alpha: 0.5}, 1, {ease: FlxEase.circOut});
@@ -4238,6 +4259,16 @@ class PlayState extends MusicBeatState
 
 		FlxTween.tween(songBanner, {alpha: 0}, 1.5, {ease: FlxEase.circIn, startDelay: 4});
 		FlxTween.tween(songBannerText, {alpha: 0}, 1.5, {ease: FlxEase.circIn, startDelay: 4});
+
+		switch(SONG.song)
+		{
+			case 'Isolated':
+				camHUD.alpha = 0;
+				FlxTween.tween(camHUD, {alpha: 1}, 3, {ease: FlxEase.circInOut, startDelay: 10});
+			case 'Lunacy':
+				camHUD.alpha = 0;
+				FlxTween.tween(camHUD, {alpha: 1}, 3, {ease: FlxEase.circInOut, startDelay: 27});
+		}
 
 		#if desktop //for prevent curPortrait error
 		switch(curSong){

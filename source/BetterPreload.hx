@@ -78,6 +78,10 @@ class BetterPreload extends MusicBeatState {
         'funkinAVI/vault/holyshitdarkness' => PreloadType.image, 
         'funkinAVI/vault/holyshititstoobright' => PreloadType.image, 
         'funkinAVI/walt/walt-bg' => PreloadType.image, 
+        'stageback' => PreloadType.image,
+        'stage_light' => PreloadType.image,
+        'stagecurtains' => PreloadType.image,
+        'stagefront' => PreloadType.image,
 
         //Preload UI stuff
         'funkinAVI/uiAndEvents/fuckYouSmiles' => PreloadType.image,
@@ -99,6 +103,8 @@ class BetterPreload extends MusicBeatState {
 
         //Note Skins and Splashes
         'NOTE_assets' => PreloadType.image,
+        'pixelUI/NOTE_assets' => PreloadType.image,
+        'pixelUI/NOTE_assetsENDS' => PreloadType.image,
         'Skins/bloodyNOTE_assets' => PreloadType.image,
         'Skins/gfNOTE_assets' => PreloadType.image,
         'Skins/GreyNOTE_assets' => PreloadType.image,
@@ -216,7 +222,89 @@ class BetterPreload extends MusicBeatState {
         'funkinAVI/WARNING/Avi_Disclaimer' => PreloadType.image,
         'alphabet' => PreloadType.imagealt,
         'checkboxanim' => PreloadType.imagealt,
+        'language/English' => PreloadType.imagealt,
+        'language/Spanish' => PreloadType.imagealt,
+        'mainmenu/menu_credits' => PreloadType.imagealt,
+        'mainmenu/menu_freeplay' => PreloadType.imagealt,
+        'mainmenu/menu_options' => PreloadType.imagealt,
+        'mainmenu/menu_story_mode' => PreloadType.imagealt,
+        'menubackgrounds/menu_street' => PreloadType.imagealt,
+        'menubackgrounds/menu_smile' => PreloadType.imagealt,
+        'menubackgrounds/menu_soon' => PreloadType.imagealt,
+        'menubackgrounds/menu_stage' => PreloadType.imagealt,
+        'chart_quant' => PreloadType.imagealt,
+        'storymenu/chapter1' => PreloadType.imagealt,
+        'storymenu/chapter2' => PreloadType.imagealt,
+        'storymenu/chapter3' => PreloadType.imagealt,
+        'storymenu/chapter4' => PreloadType.imagealt,
+        'campaign_menu_UI_assets' => PreloadType.imagealt,
 
+        //Credits (i'm dying)
+        'credits/demolitiondon96' => PreloadType.imagealt,
+        'credits/austin' => PreloadType.imagealt,
+        'credits/azko' => PreloadType.imagealt,
+        'credits/bb' => PreloadType.imagealt,
+        'credits/bb-panzu' => PreloadType.imagealt,
+        'credits/blaik' => PreloadType.imagealt,
+        'credits/blitz' => PreloadType.imagealt,
+        'credits/bonoan' => PreloadType.imagealt,
+        'credits/burrito' => PreloadType.imagealt,
+        'credits/cheez' => PreloadType.imagealt,
+        'credits/cool' => PreloadType.imagealt,
+        'credits/dest' => PreloadType.imagealt,
+        'credits/dreupy' => PreloadType.imagealt,
+        'credits/drive' => PreloadType.imagealt,
+        'credits/evilsk8r' => PreloadType.imagealt,
+        'credits/flacon' => PreloadType.imagealt,
+        'credits/flicky' => PreloadType.imagealt,
+        'credits/fresh' => PreloadType.imagealt,
+        'credits/gedehari' => PreloadType.imagealt,
+        'credits/genore' => PreloadType.imagealt,
+        'credits/haze' => PreloadType.imagealt,
+        'credits/hiro' => PreloadType.imagealt,
+        'credits/icono perdido' => PreloadType.imagealt,
+        'credits/idk' => PreloadType.imagealt,
+        'credits/iflicky' => PreloadType.imagealt,
+        'credits/jao' => PreloadType.imagealt,
+        'credits/jsa010' => PreloadType.imagealt,
+        'credits/justin' => PreloadType.imagealt,
+        'credits/kade' => PreloadType.imagealt,
+        'credits/kawaisprite' => PreloadType.imagealt,
+        'credits/keoiki' => PreloadType.imagealt,
+        'credits/lemz1' => PreloadType.imagealt,
+        'credits/mag' => PreloadType.imagealt,
+        'credits/maly' => PreloadType.imagealt,
+        'credits/matt' => PreloadType.imagealt,
+        'credits/missing-icon' => PreloadType.imagealt,
+        'credits/nebula' => PreloadType.imagealt,
+        'credits/nexus' => PreloadType.imagealt,
+        'credits/ninjamuffin99' => PreloadType.imagealt,
+        'credits/noppz' => PreloadType.imagealt,
+        'credits/nutsack' => PreloadType.imagealt,
+        'credits/pan' => PreloadType.imagealt,
+        'credits/phantomarcade' => PreloadType.imagealt,
+        'credits/polybiusproxy' => PreloadType.imagealt,
+        'credits/prism' => PreloadType.imagealt,
+        'credits/proxy' => PreloadType.imagealt,
+        'credits/reality' => PreloadType.imagealt,
+        'credits/rezeo' => PreloadType.imagealt,
+        'credits/river' => PreloadType.imagealt,
+        'credits/riveroaken' => PreloadType.imagealt,
+        'credits/sama' => PreloadType.imagealt,
+        'credits/Sella' => PreloadType.imagealt,
+        'credits/shadowmario' => PreloadType.imagealt,
+        'credits/shubs' => PreloadType.imagealt,
+        'credits/smokey' => PreloadType.imagealt,
+        'credits/spooky' => PreloadType.imagealt,
+        'credits/sqirra' => PreloadType.imagealt,
+        'credits/theoyeah credit' => PreloadType.imagealt,
+        'credits/tycho' => PreloadType.imagealt,
+        'credits/wither362' => PreloadType.imagealt,
+        'credits/xarion' => PreloadType.imagealt,
+        'credits/yama' => PreloadType.imagealt,
+        'credits/zero' => PreloadType.imagealt,
+
+        //Charts & Song Files
         'isolated' => PreloadType.chart,
         'isolated-old' => PreloadType.chart,
         'isolated-beta' => PreloadType.chart,
@@ -351,11 +439,11 @@ class BetterPreload extends MusicBeatState {
                     trace('character loaded ${preloadedCharacter.frames}');
                 case PreloadType.chart:
                     var preloadedChart:String = Paths.json(i);
-                    trace(i + 'is loaded?');
+                    trace(i + ' is loaded?');
                         var preloadedSong:String = Paths.voices(i);
-                        trace(i + 'loaded vocals');
+                        trace(i + ' loaded vocals');
                         var preloadedSong2:String = Paths.inst(i);
-                        trace(i + 'loaded music');
+                        trace(i + ' loaded music');
                 /*case PreloadType.music:
                     var preloadedSong:Song = new Song();
                     add(preloadedSong);

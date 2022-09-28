@@ -283,7 +283,7 @@ class GameJoltInfo extends FlxSubState
     * 
     * Example: Paths.getLibraryPath("images/stepmania-icon.png")
     */
-    public static var imagePath:String = null; 
+    public static var imagePath:String = Paths.getLibraryPath("images/sign.png"); 
 
     /* Other things that shouldn't be messed with are below this line! */
 
@@ -292,23 +292,46 @@ class GameJoltInfo extends FlxSubState
     */
     public static var version:String = "1.2";
     /**
-     * Random quotes I got from other people. Nothing more, nothing less. Just for funny.
+     * Random quotes from myself, Nothing more, nothing less. Just for funny.
      */
     public static var textArray:Array<String> = [
         "Tenta If You See This I Accidentaly Removed The Random Text.",
-        "Where is my apple cider?",
-        "Mario be like wahoo!",
-        "I Have Your IP Adress",
-        "Help, How I Change The API Thing To '*'",
-        "I forgot to remove the IP grabber...",
-        "Play Post Mortem Mixup",
-        "*Spontaniously combusts*",
+        "W.I Is Fucking Cool",
+        "Too Many Classes In One Menu",
+        "1st Mod To Have Leaderboards!",
+        "Help, How I Change The API Thing To '*'?",
+        "If i could just ask for the Password...",
+        "Certificed Random Text Moment",
+        "Quandle Dingle Here And I Forgor",
         "Holofunk is awesome and fr",
         "What you know about rollin down in the deep",
-        "This isn't an NFT. Crazy right?",
+        "Getting out of ideas",
         "Like If You Hate The Null Object Reference",
         "Thank you BrightFyre for your help :)",
-        "Notifications Dont Work And IDK why"
+        "Notifications Dont Work And IDK why",
+        "We Got The Mario Mix Man On This",
+        " ", //The Text Ever 2 (Jason)
+        'Learn HaxeFlixel',
+        'Forever Engine For 3.0 btw',
+        "Thx Tenta For Helping On How To Add Score :D",
+        "Imagine Changing The PC Wallpaper In Malfunction?!!?!?!?!?",
+        "Scratchin' Melodii Is A Parrapa The Rapper Based Game",
+        "I Contributed On The Login",
+        "Fun Fact: Hardcoding Malfunction took 4 days",
+        "No Lua, Cry About It",
+        "Haxe In The Flixel",
+        "Ran Out Ideas :1",
+        "Your Mom",
+        "The Black Box Lives In Your Walls", //fr
+        "We Should Be In Events",
+        "We Should Be In The FNF Fansite",
+        "Facts",
+        "The PlayState Code Is More Than 10K lines",
+        "Sansess",
+        "Charters Are Useful",
+        "Don't Do Pull Request When The Source is out",
+        "Toogle On Leaderboards!",
+        "Last Message Fr Fr"
     ];
 }
 
@@ -369,14 +392,30 @@ class GameJoltLogin extends MusicBeatSubstate
 		bg.alpha = 0.25;
 		add(bg);
 
-        charBop = new FlxSprite(FlxG.width - 400, 250);
-		charBop.frames = Paths.getSparrowAtlas('characters/BOYFRIEND', 'shared');
-		charBop.animation.addByPrefix('idle', 'BF idle dance', 24, false);
-        charBop.animation.addByPrefix('loggedin', 'BF HEY', 24, false);
-        charBop.setGraphicSize(Std.int(charBop.width * 1.4));
-		charBop.antialiasing = true;
-        charBop.flipX = false;
-		add(charBop);
+        switch(FlxG.random.int(1, 4)) {
+        case 1:
+        charBop = new FlxSprite(800, 200).loadGraphic(Paths.image('Mickey_Mouse_South_Park'));
+        charBop.antialiasing = ClientPrefs.globalAntialiasing;
+        add(charBop);
+
+        case 2:
+            charBop = new FlxSprite(780, 100).loadGraphic(Paths.image('BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB'));
+            charBop.antialiasing = ClientPrefs.globalAntialiasing;
+            FlxTween.tween(charBop, {x: 700}, 1.3);
+            add(charBop);
+
+        case 3:
+            charBop = new FlxSprite(0, 100).loadGraphic(Paths.image('the thing ever'));
+            charBop.antialiasing = ClientPrefs.globalAntialiasing;
+            FlxTween.tween(charBop, {x: 700}, 1.3);
+            add(charBop);
+        
+            case 4:
+                charBop = new FlxSprite(0, 100).loadGraphic(Paths.image('unknown'));
+                charBop.antialiasing = ClientPrefs.globalAntialiasing;
+                FlxTween.tween(charBop, {x: 700}, 1.3);
+                add(charBop);
+		}
 
         gamejoltText1 = new FlxText(0, 25, 0, "GameJolt + FNF Integration", 16);
         gamejoltText1.screenCenter(X);
@@ -390,7 +429,7 @@ class GameJoltLogin extends MusicBeatSubstate
         gamejoltText2.color = FlxColor.fromRGB(84,155,149);
         add(gamejoltText2);
 
-        funnyText = new FlxText(5, FlxG.height - 40, 0, GameJoltInfo.textArray[FlxG.random.int(0, GameJoltInfo.textArray.length - 1)]+ " -Tenta", 12);
+        funnyText = new FlxText(5, FlxG.height - 40, 0, GameJoltInfo.textArray[FlxG.random.int(0, GameJoltInfo.textArray.length - 1)]+ " -Jason", 12);
         add(funnyText);
 
         versionText = new FlxText(5, FlxG.height - 22, 0, "Game ID: " + GJKeys.id + " API: " + GameJoltInfo.version, 12);

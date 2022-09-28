@@ -25,6 +25,7 @@ import haxe.Exception; //funi
 import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
+import tentools.api.FlxGameJolt as GJApi;
 #if cpp
 import sys.FileSystem;
 import sys.io.File;
@@ -305,7 +306,8 @@ class BetterPreload extends MusicBeatState {
         if(FlxG.save.data.episode1FPLock == null) FPClientPrefs.lockinIt();
 
         GameJolt.connect();
-        GameJolt.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken); //Loads GameJolt stuff
+        GameJolt.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
+        trace('Loading GameJolt Data...',  GJApi.username); //Loads GameJolt stuff
 
         loadText = new FlxText(-100, FlxG.height - (32 + 7), 0, 'Loading...', 32);
         loadText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

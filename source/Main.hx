@@ -98,7 +98,7 @@ class Main extends Sprite
 		#end
 	
 		ClientPrefs.loadDefaultKeys();
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
+		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
@@ -113,7 +113,6 @@ class Main extends Sprite
 		FlxG.autoPause = false;
 		FlxG.mouse.visible = false;
 
-		Application.current.window.fullscreen = false;
 		Application.current.window.onFocusOut.add(onWindowFocusOut);
 		Application.current.window.onFocusIn.add(onWindowFocusIn);
 	}
@@ -162,7 +161,6 @@ class Main extends Sprite
 
 		public function onResize(width:Int, height:Int) { //bro too easy
 			FlxG.resizeWindow(width, height);
-			FlxG.resizeGame(width, height);
 		}
 	
 		function onWindowFocusIn()
@@ -184,7 +182,7 @@ class Main extends Sprite
 				focusMusicTween = FlxTween.tween(FlxG.sound, {volume: oldVol}, 0.5);
 	
 				// Bring framerate back when focused
-				FlxG.drawFramerate = 120;
+				FlxG.drawFramerate = 60;
 			}
 		}
 

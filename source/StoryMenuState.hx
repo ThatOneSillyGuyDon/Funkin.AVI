@@ -153,12 +153,13 @@ class StoryMenuState extends MusicBeatState
 		difficultySelectors = new FlxGroup();
 		add(difficultySelectors);
 
-		leftArrow = new FlxSprite(60 + grpWeekText.members[0].width + 9, 540);
+		leftArrow = new FlxSprite(60 + grpWeekText.members[0].width + 9, -100);
 		leftArrow.frames = ui_tex;
 		leftArrow.angle = 90;
 		leftArrow.animation.addByPrefix('idle', "arrow left");
 		leftArrow.animation.addByPrefix('press', "arrow push left");
 		leftArrow.animation.play('idle');
+		leftArrow.screenCenter(X);
 		leftArrow.antialiasing = ClientPrefs.globalAntialiasing;
 		difficultySelectors.add(leftArrow);
 
@@ -169,12 +170,18 @@ class StoryMenuState extends MusicBeatState
 		}
 		curDifficulty = Math.round(Math.max(0, CoolUtil.defaultDifficulties.indexOf(lastDifficultyName)));
 		
-		sprDifficulty = new FlxSprite(0, 20);
+		sprDifficulty = new FlxSprite(0, 0);
+		sprDifficulty.y -= 990;
 		sprDifficulty.antialiasing = ClientPrefs.globalAntialiasing;
 		difficultySelectors.add(sprDifficulty);
 
-		rightArrow = new FlxSprite(leftArrow.x + 376, 540);
+		rightArrow = new FlxSprite(leftArrow.x + 376, 100);
 		rightArrow.frames = ui_tex;
+		//Im Fucking Lazy
+		rightArrow.flipX = true;
+		rightArrow.screenCenter(X);
+		rightArrow.flipY = true;
+		rightArrow.angle = 270;
 		rightArrow.animation.addByPrefix('idle', 'arrow right');
 		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
 		rightArrow.animation.play('idle');
@@ -189,8 +196,8 @@ class StoryMenuState extends MusicBeatState
 //		tracksSprite.antialiasing = ClientPrefs.globalAntialiasing;
 //		add(tracksSprite);
 
-		txtTracklist = new FlxText(FlxG.width * 0.05, tracksSprite.y + 100, 0, "", 32);
-		txtTracklist.x = 1;
+		txtTracklist = new FlxText(FlxG.width * 0.05, 0, 0, "", 32);
+		txtTracklist.x = 0;
 		txtTracklist.alignment = LEFT;
 		txtTracklist.font = Paths.font('NewWaltDisneyFontRegular-BPen.ttf');
 		txtTracklist.color = 0xff8d8d8d;
@@ -251,25 +258,6 @@ class StoryMenuState extends MusicBeatState
 		{
 			var upP = controls.UI_UP_P;
 			var downP = controls.UI_DOWN_P;
-			if (upP)
-			{
-				changeDifficulty(1);
-			}
-
-			if (downP)
-			{
-				changeDifficulty(-1);
-			}
-
-			if (controls.UI_DOWN)
-				rightArrow.animation.play('press')
-			else
-				rightArrow.animation.play('idle');
-
-			if (controls.UI_UP)
-				leftArrow.animation.play('press');
-			else
-				leftArrow.animation.play('idle');
 
 			if (controls.UI_RIGHT_P) {
 				changeWeek(1);
@@ -312,6 +300,7 @@ class StoryMenuState extends MusicBeatState
 		grpLocks.forEach(function(lock:FlxSprite)
 		{
 			lock.y = grpWeekText.members[lock.ID].y;
+			lock.screenCenter(X);
 			lock.visible = (lock.y > FlxG.height / 2);
 		});
 	}
@@ -395,10 +384,10 @@ class StoryMenuState extends MusicBeatState
 			sprDifficulty.loadGraphic(newImage);
 			sprDifficulty.screenCenter(X);
 			sprDifficulty.alpha = 0;
-			sprDifficulty.y = 100;
+			sprDifficulty.y = 180;
 
 			if(tweenDifficulty != null) tweenDifficulty.cancel();
-			tweenDifficulty = FlxTween.tween(sprDifficulty, {y: leftArrow.y + 15, alpha: 1}, 0.07, {onComplete: function(twn:FlxTween)
+			tweenDifficulty = FlxTween.tween(sprDifficulty, {y: leftArrow.y, alpha: 0}, 0.07,{onComplete: function(twn:FlxTween)
 			{
 				tweenDifficulty = null;
 			}});
@@ -524,7 +513,8 @@ class StoryMenuState extends MusicBeatState
 		txtTracklist.text = txtTracklist.text.toUpperCase();
 
 		txtTracklist.screenCenter(X);
-		txtTracklist.x -= FlxG.width * 0.35;
+		txtTracklist.x -= 520;
+		txtTracklist.y = 580;
 
 		#if !switch
 		intendedScore = Highscore.getWeekScore(loadedWeeks[curWeek].fileName, curDifficulty);

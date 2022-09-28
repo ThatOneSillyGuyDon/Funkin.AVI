@@ -511,6 +511,9 @@ class PlayState extends MusicBeatState
 			case 'mercy':
 				if (FlxG.save.data.mercyLock != 'beaten') FPClientPrefs.mercyLock = 'unlocked';
 				FPClientPrefs.saveShit();
+			case 'neglection':
+					if (FlxG.save.data.pnmLock != 'beaten') FPClientPrefs.pnmLock = 'unlocked';
+					FPClientPrefs.saveShit();
 		}
 
 		modeBase = new BaseScaleMode();
@@ -2735,7 +2738,7 @@ class PlayState extends MusicBeatState
 		#end
 		
 		var daSong:String = Paths.formatToSongPath(curSong);
-	    if (ClientPrefs.cutscenes && !seenCutscene) //CUTSCENES ON FREEPLAY
+		/*if (isStoryMode && !seenCutscene)
 		{
 			switch (daSong)
 			{
@@ -2743,7 +2746,17 @@ class PlayState extends MusicBeatState
 					startVideo('Episode1_Intro');
 					cutsceneTransitionHelper.alpha = 1;
 					inCutscene = true;
-					
+					if(FlxG.keys.justPressed.SPACE)
+					{
+						inCutscene = false;
+						seenCutscene = true;
+						startCountdown();
+					}
+			}
+		} else */if (ClientPrefs.cutscenes && !seenCutscene) //CUTSCENES ON FREEPLAY
+		{
+			switch (daSong)
+			{
 				case "monster":
 					var whiteScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.WHITE);
 					add(whiteScreen);
@@ -4240,7 +4253,7 @@ class PlayState extends MusicBeatState
 			case "Cycled Sins": curPortrait = "cycledsins";
 			case "War Dilemma": curPortrait = "placeholder";
 			case "Hunted": curPortrait = "hunted";
-			case "Neglection": curPortrait = "neglection";
+			case "Neglection": curPortrait = "placeholder";
 		}
 		#end
 
@@ -12222,7 +12235,7 @@ class PlayState extends MusicBeatState
 	var curLight:Int = -1;
 	var curLightEvent:Int = -1;
 
-	function createHUD(style:String)
+	/*function createHUD(style:String)
 		{
 			switch (style)
 			{
@@ -12316,7 +12329,7 @@ class PlayState extends MusicBeatState
 					scoreGroup.cameras = [camHUD];
 					timeBar.cameras = [camHUD];
 					timeBarBG.cameras = [camHUD];
-					timeTxt.cameras = [camHUD];*/
+					timeTxt.cameras = [camHUD];
 				default:
 					scoreGroup = new FlxTypedSpriteGroup<FlxText>();
 	
@@ -12371,7 +12384,7 @@ class PlayState extends MusicBeatState
 					timeBarBG.cameras = [camHUD];
 					timeTxt.cameras = [camHUD];
 			}
-		}
+		}*/
 	
 }
 

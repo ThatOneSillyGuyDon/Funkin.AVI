@@ -78,6 +78,7 @@ class ExtrasState extends MusicBeatState{
             if(FPClientPrefs.sinsLock != 'beaten' && FPClientPrefs.sinsLock != 'unlocked') addSong('Cycled Sins', 3, 'mysterymouse', FlxColor.fromRGB(115, 86, 86), FlxG.save.data.sinsLock); else addSong('Cycled Sins', 3, 'relapse-pixel', FlxColor.fromRGB(115, 86, 86), FlxG.save.data.sinsLock);
             if(FPClientPrefs.warLock != 'beaten' && FPClientPrefs.warLock != 'unlocked') addSong('War Dilemma', 3, 'mysterymouse', FlxColor.fromRGB(105, 17, 10), FlxG.save.data.warLock); else addSong('War Dilemma', 3, 'warmick', FlxColor.fromRGB(105, 17, 10), FlxG.save.data.warLock);
 			if(FPClientPrefs.scrappedLock != 'beaten' && FPClientPrefs.scrappedLock != 'unlocked') addSong('Scrapped', 3, 'mysterymouse', FlxColor.BLACK, FlxG.save.data.scrappedLock); else addSong('Scrapped', 3, 'rs', FlxColor.BLACK, FlxG.save.data.scrappedLock);
+			if(FPClientPrefs.pnmLock != 'beaten' && FPClientPrefs.pnmLock != 'unlocked') addSong('Neglection', 3, 'mysterymouse', FlxColor.CYAN, FlxG.save.data.pnmLock); else addSong('Neglection', 3, 'pnm', FlxColor.CYAN, FlxG.save.data.pnmLock);
             if(FPClientPrefs.blessLock != 'beaten' && FPClientPrefs.blessLock != 'unlocked') addSong('Bless', 3, 'mysterymouse', FlxColor.WHITE, FlxG.save.data.blessLock); else addSong('Bless', 3, 'whitenew', FlxColor.WHITE, FlxG.save.data.blessLock);
             if(FPClientPrefs.mercyLock != 'beaten' && FPClientPrefs.mercyLock != 'unlocked') addSong('Mercy', 3, 'mysterymouse', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock); else addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock);
         }
@@ -484,14 +485,8 @@ class ExtrasState extends MusicBeatState{
 		#end
 
 		PlayState.storyDifficulty = curDifficulty;
-		if(curSelected == 3)
-		{
-			diffText.text = "< YOU'RE FUCKED >";
-			diffText.color = FlxColor.RED;
-		}else{
 			diffText.text = '< ' + CoolUtil.difficultyString() + ' >';
 			diffText.color = FlxColor.WHITE;
-		}
 		positionHighscore();
 	}
 
@@ -639,7 +634,25 @@ class ExtrasState extends MusicBeatState{
 				if (distort != null)
 				distort.shader.working.value = [true];
 				}
-			} else {
+			} else if(curSelected == 8 || curSelected == 9){
+				FlxG.camera.flash(FlxColor.BLACK, 0.6);
+				FlxG.camera.shake(0.004, 0);
+				if(ClientPrefs.funiShaders)
+				{
+				clearShader();
+				chrom = new ChromaticAberrationEffect();
+				blurThisShit = new TiltshiftEffect(0.6, 0);
+				
+				addShader(chrom);
+				addShader(blurThisShit);
+
+					if (chrom != null)
+				chrom.setChrome(0.005);
+
+				if(blurThisShit != null)
+				blurThisShit.setBlur(0.6);
+				}
+			}else{
 			FlxG.camera.flash(FlxColor.BLACK, 0.2);
 			if(ClientPrefs.funiShaders)
 			{

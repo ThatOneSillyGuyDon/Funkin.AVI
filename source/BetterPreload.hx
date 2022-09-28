@@ -36,7 +36,7 @@ enum PreloadType {
     image;
     imagealt;
     chart; //wat?
-    sound;
+   // sound; useless lol (Jason)
    // music; <-This shit doesn't work
 }
 

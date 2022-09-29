@@ -58,13 +58,14 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 		}
 		optionsArray.push(option);
 
-		/*var option:GameplayOption = new GameplayOption('Playback Rate', 'songspeed', 'float', 1);
+		var option:GameplayOption = new GameplayOption('Playback Rate', 'songspeed', 'float', 1);
 		option.scrollSpeed = 1;
 		option.minValue = 0.5;
-		option.maxValue = 2.5;
-		option.changeValue = 0.1;
+		option.maxValue = 5.0;
+		option.changeValue = 0.05;
 		option.displayFormat = '%vX';
-		optionsArray.push(option);*/
+		option.decimals = 2;
+		optionsArray.push(option);
 
 		var option:GameplayOption = new GameplayOption('Health Gain Multiplier', 'healthgain', 'float', 1);
 		option.scrollSpeed = 2.5;
@@ -260,9 +261,7 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 							curOption.change();
 							FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 						} else if(curOption.type != 'string') {
-							holdValue += curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1);
-							if(holdValue < curOption.minValue) holdValue = curOption.minValue;
-							else if (holdValue > curOption.maxValue) holdValue = curOption.maxValue;
+							holdValue = Math.max(curOption.minValue, Math.min(curOption.maxValue, holdValue + curOption.scrollSpeed * elapsed * (controls.UI_LEFT ? -1 : 1)));
 
 							switch(curOption.type)
 							{
@@ -270,7 +269,8 @@ class GameplayChangersSubstate extends MusicBeatSubstate
 									curOption.setValue(Math.round(holdValue));
 								
 								case 'float' | 'percent':
-									curOption.setValue(FlxMath.roundDecimal(holdValue, curOption.decimals));
+									var blah:Float = Math.max(curOption.minValue, Math.min(curOption.maxValue, holdValue + curOption.changeValue - (holdValue % curOption.changeValue)));
+									curOption.setValue(FlxMath.roundDecimal(blah, curOption.decimals));
 							}
 							updateTextFrom(curOption);
 							curOption.change();

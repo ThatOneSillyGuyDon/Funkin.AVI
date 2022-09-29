@@ -260,7 +260,7 @@ class Character extends FlxSprite
 		{
 			if(heyTimer > 0)
 			{
-				heyTimer -= elapsed;
+				heyTimer -= elapsed * PlayState.instance.playbackRate;
 				if(heyTimer <= 0)
 				{
 					if(specialAnim && animation.curAnim.name == 'hey' || animation.curAnim.name == 'cheer')
@@ -283,14 +283,12 @@ class Character extends FlxSprite
 					{
 						var noteData:Int = 1;
 						if(animationNotes[0][1] > 2) noteData = 3;
-
 						noteData += FlxG.random.int(0, 1);
 						playAnim('shoot' + noteData, true);
 						animationNotes.shift();
 					}
 					if(animation.curAnim.finished) playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
 			}
-
 			if (!isPlayer)
 			{
 				if (animation.curAnim.name.startsWith('sing'))
@@ -298,7 +296,8 @@ class Character extends FlxSprite
 					holdTimer += elapsed;
 				}
 
-				if (holdTimer >= Conductor.stepCrochet * 0.0011 * singDuration)
+				if (holdTimer >= Conductor.stepCrochet * (0.0011 / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1)) * singDuration)
+				{
 				{
 					dance();
 					holdTimer = 0;
@@ -311,6 +310,7 @@ class Character extends FlxSprite
 			}
 		}
 		super.update(elapsed);
+	}
 	}
 
 	public var danced:Bool = false;

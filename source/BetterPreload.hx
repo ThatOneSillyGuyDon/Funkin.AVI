@@ -392,14 +392,38 @@ class BetterPreload extends MusicBeatState {
 
         preloadedAssets = new Map<String, FlxGraphic>();
 
-        bg = new FlxSprite().loadGraphic(Paths.image('funkay' + FlxG.random.int(0, 4))); //Placeholder
-		bg.screenCenter();
-        bg.alpha = 0;
-		add(bg);
+        var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('funkay')); //Placeholder
+		menuBG.screenCenter();
+		add(menuBG);
+        /*var unownBg:FlxSprite = new FlxSprite();
+		unownBg.loadGraphic(Paths.image('Loading Unown'));
+        unownBg.setGraphicSize(Std.int(unownBg.width * globalRescale));
+        unownBg.updateHitbox();
+		backgroundGroup.add(unownBg);
 
-        FlxTween.tween(bg, {alpha: 1}, 1);
-        refreshLoadScreen();
-    
+        bg = new FlxSprite();
+		bg.loadGraphic(Paths.image('Loading Hypno'));
+        bg.setGraphicSize(Std.int(bg.width * globalRescale));
+        bg.updateHitbox();
+		backgroundGroup.add(bg);
+
+        var gfBg:FlxSprite = new FlxSprite();
+		gfBg.loadGraphic(Paths.image('Loading GF'));
+        gfBg.setGraphicSize(Std.int(gfBg.width * globalRescale));
+        gfBg.updateHitbox();
+		backgroundGroup.add(gfBg);
+
+        var pendulum:FlxSprite = new FlxSprite();
+        pendulum.frames = Paths.getSparrowAtlas('Loading Screen Pendelum');
+        pendulum.animation.addByPrefix('load', 'Loading Pendelum Finished', 24, true);
+        pendulum.animation.play('load');
+        pendulum.setGraphicSize(Std.int(pendulum.width * globalRescale));
+        pendulum.updateHitbox();
+        backgroundGroup.add(pendulum);
+        pendulum.x = FlxG.width - (pendulum.width + 10);
+        pendulum.y = FlxG.height - (pendulum.height + 10);*/
+
+       // add(backgroundGroup);
         FlxTween.tween(FlxG.camera, {alpha: 1}, 0.5, {
             onComplete: function(tween:FlxTween){
                 Thread.create(function(){
@@ -435,17 +459,6 @@ class BetterPreload extends MusicBeatState {
         super.update(elapsed);
     }
 
-    function refreshLoadScreen() {
-            FlxTween.tween(bg, {alpha: 0}, 1.5, {startDelay: 6, onComplete: function(twn:FlxTween)
-            {
-            remove(bg);
-            add(bg);
-            FlxTween.tween(bg, {alpha: 1}, 1.5);
-            },
-            type: LOOPING});
-
-    }
-
     var storedPercentage:Float = 0;
 
     function assetGenerate() {
@@ -457,23 +470,19 @@ class BetterPreload extends MusicBeatState {
             FlxGraphic.defaultPersist = true;
             switch(assetStack[i]) {
                 case PreloadType.imagealt:
-                    loadText.text = 'Loading Menu... ${Math.floor(storedPercentage * 100)}%';
                     var menuShit:FlxGraphic = FlxG.bitmap.add(Paths.image(i));
                     preloadedAssets.set(i, menuShit);
                     trace('menu asset is loaded');
                 case PreloadType.image:
-                    loadText.text = 'Loading Assets... ${Math.floor(storedPercentage * 100)}%';
                     var savedGraphic:FlxGraphic = FlxG.bitmap.add(Paths.image(i, 'shared'));
                     preloadedAssets.set(i, savedGraphic);
                     trace(savedGraphic + ', yeah its working');
                 case PreloadType.atlas:
-                    loadText.text = 'Loading Characters... ${Math.floor(storedPercentage * 100)}%';
                     var preloadedCharacter:Character = new Character(FlxG.width / 2, FlxG.height / 2, i);
                     preloadedCharacter.visible = false;
                     add(preloadedCharacter);
                     trace('character loaded ${preloadedCharacter.frames}');
                 case PreloadType.chart:
-                    loadText.text = 'Loading Songs... ${Math.floor(storedPercentage * 100)}%';
                     var preloadedChart:String = Paths.json(i);
                     trace(i + ' is loaded?');
                         var preloadedSong:String = Paths.voices(i);
@@ -489,14 +498,11 @@ class BetterPreload extends MusicBeatState {
         
             countUp++;
             storedPercentage = countUp/maxCount;
-            if(countUp == maxCount)
-            {
-                loadText.text = 'Game Fully Loaded! Launching Title Sequence...';
-            }
+            loadText.text = 'Loading... Progress at ${Math.floor(storedPercentage * 100)}%';
         }
 
         ///*
-        FlxTween.tween(FlxG.camera, {alpha: 0}, 0.5, {startDelay: 1,
+        FlxTween.tween(FlxG.camera, {alpha: 0}, 0.5, {
             onComplete: function(tween:FlxTween){
                 if(FlxG.save.data.funiShaders == null && !ShadersState.leftState)
                     {

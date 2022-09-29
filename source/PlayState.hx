@@ -4120,7 +4120,10 @@ class PlayState extends MusicBeatState
 								note.alpha = 0;
 								note.visible = false;
 							}
-						}else{
+						} else if(SONG.song == "Neglection") {
+							note.alpha *= 0.5;
+						}
+						else{
 							note.copyAlpha = false;
 							note.alpha = 1;
 

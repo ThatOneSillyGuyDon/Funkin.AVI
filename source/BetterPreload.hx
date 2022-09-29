@@ -106,6 +106,10 @@ class BetterPreload extends MusicBeatState {
         'NOTE_assets' => PreloadType.image,
         'pixelUI/NOTE_assets' => PreloadType.image,
         'pixelUI/NOTE_assetsENDS' => PreloadType.image,
+        'pixelUI/relapsePhase1NOTES' => PreloadType.image,
+        'pixelUI/relapsePhase2NOTES' => PreloadType.image,
+        'pixelUI/GreyNOTE_assets' => PreloadType.image,
+        'pixelUI/GreyNOTE_assetsENDS' => PreloadType.image,
         'Skins/bloodyNOTE_assets' => PreloadType.image,
         'Skins/gfNOTE_assets' => PreloadType.image,
         'Skins/GreyNOTE_assets' => PreloadType.image,
@@ -305,6 +309,45 @@ class BetterPreload extends MusicBeatState {
         'credits/yama' => PreloadType.imagealt,
         'credits/zero' => PreloadType.imagealt,
 
+        //Note Mechanics Assets
+        'HURTNOTE_assets' => PreloadType.image,
+        'DAMAGENOTE_assets' => PreloadType.image,
+        'KILLNOTE_assets' => PreloadType.image,
+        'DARKNESSNOTE_assets' => PreloadType.image,
+        'POISONNOTE_assets' => PreloadType.image,
+        'ERRORNOTE_assets' => PreloadType.image,
+        'FLIPNOTE_assets' => PreloadType.image,
+        'RSNOTE_assets' => PreloadType.image,
+        'pixelUI/HURTNOTE_assets' => PreloadType.image,
+        'pixelUI/DAMAGENOTE_assets' => PreloadType.image,
+        'pixelUI/KILLNOTE_assets' => PreloadType.image,
+        'pixelUI/DARKNESSNOTE_assets' => PreloadType.image,
+        'pixelUI/POISONNOTE_assets' => PreloadType.image,
+        'pixelUI/ERRORNOTE_assets' => PreloadType.image,
+        'pixelUI/FLIPNOTE_assets' => PreloadType.image,
+        'pixelUI/RSNOTE_assets' => PreloadType.image,
+        'pixelUI/HURTNOTE_assetsENDS' => PreloadType.image,
+        'pixelUI/DAMAGENOTE_assetsENDS' => PreloadType.image,
+        'pixelUI/KILLNOTE_assetsENDS' => PreloadType.image,
+        'pixelUI/DARKNESSNOTE_assetsENDS' => PreloadType.image,
+        'pixelUI/POISONNOTE_assetsENDS' => PreloadType.image,
+        'pixelUI/ERRORNOTE_assetsENDS' => PreloadType.image,
+        'pixelUI/FLIPNOTE_assetsENDS' => PreloadType.image,
+        'pixelUI/RSNOTE_assetsENDS' => PreloadType.image,
+        'HURTnoteSplashes' => PreloadType.image,
+        'DAMAGEnoteSplashes' => PreloadType.image,
+        'KILLnoteSplashes' => PreloadType.image,
+        'DARKNESSnoteSplashes' => PreloadType.image,
+        'FLIPnoteSplashes' => PreloadType.image,
+        'POISONnoteSplashes' => PreloadType.image,
+        'pixelUI/HURTnoteSplashes' => PreloadType.image,
+        'pixelUI/DAMAGEnoteSplashes' => PreloadType.image,
+        'pixelUI/KILLnoteSplashes' => PreloadType.image,
+        'pixelUI/DARKNESSnoteSplashes' => PreloadType.image,
+        'pixelUI/FLIPnoteSplashes' => PreloadType.image,
+        'pixelUI/POISONnoteSplashes' => PreloadType.image,
+        'pixelUI/RSnoteSplashes' => PreloadType.image,
+
         //Charts & Song Files
         'isolated' => PreloadType.chart,
         'isolated-old' => PreloadType.chart,
@@ -349,38 +392,14 @@ class BetterPreload extends MusicBeatState {
 
         preloadedAssets = new Map<String, FlxGraphic>();
 
-        var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('funkay')); //Placeholder
-		menuBG.screenCenter();
-		add(menuBG);
-        /*var unownBg:FlxSprite = new FlxSprite();
-		unownBg.loadGraphic(Paths.image('Loading Unown'));
-        unownBg.setGraphicSize(Std.int(unownBg.width * globalRescale));
-        unownBg.updateHitbox();
-		backgroundGroup.add(unownBg);
+        bg = new FlxSprite().loadGraphic(Paths.image('funkay' + FlxG.random.int(0, 4))); //Placeholder
+		bg.screenCenter();
+        bg.alpha = 0;
+		add(bg);
 
-        bg = new FlxSprite();
-		bg.loadGraphic(Paths.image('Loading Hypno'));
-        bg.setGraphicSize(Std.int(bg.width * globalRescale));
-        bg.updateHitbox();
-		backgroundGroup.add(bg);
-
-        var gfBg:FlxSprite = new FlxSprite();
-		gfBg.loadGraphic(Paths.image('Loading GF'));
-        gfBg.setGraphicSize(Std.int(gfBg.width * globalRescale));
-        gfBg.updateHitbox();
-		backgroundGroup.add(gfBg);
-
-        var pendulum:FlxSprite = new FlxSprite();
-        pendulum.frames = Paths.getSparrowAtlas('Loading Screen Pendelum');
-        pendulum.animation.addByPrefix('load', 'Loading Pendelum Finished', 24, true);
-        pendulum.animation.play('load');
-        pendulum.setGraphicSize(Std.int(pendulum.width * globalRescale));
-        pendulum.updateHitbox();
-        backgroundGroup.add(pendulum);
-        pendulum.x = FlxG.width - (pendulum.width + 10);
-        pendulum.y = FlxG.height - (pendulum.height + 10);*/
-
-       // add(backgroundGroup);
+        FlxTween.tween(bg, {alpha: 1}, 1);
+        refreshLoadScreen();
+    
         FlxTween.tween(FlxG.camera, {alpha: 1}, 0.5, {
             onComplete: function(tween:FlxTween){
                 Thread.create(function(){
@@ -416,6 +435,17 @@ class BetterPreload extends MusicBeatState {
         super.update(elapsed);
     }
 
+    function refreshLoadScreen() {
+            FlxTween.tween(bg, {alpha: 0}, 1.5, {startDelay: 6, onComplete: function(twn:FlxTween)
+            {
+            remove(bg);
+            add(bg);
+            FlxTween.tween(bg, {alpha: 1}, 1.5);
+            },
+            type: LOOPING});
+
+    }
+
     var storedPercentage:Float = 0;
 
     function assetGenerate() {
@@ -427,19 +457,23 @@ class BetterPreload extends MusicBeatState {
             FlxGraphic.defaultPersist = true;
             switch(assetStack[i]) {
                 case PreloadType.imagealt:
+                    loadText.text = 'Loading Menu... ${Math.floor(storedPercentage * 100)}%';
                     var menuShit:FlxGraphic = FlxG.bitmap.add(Paths.image(i));
                     preloadedAssets.set(i, menuShit);
                     trace('menu asset is loaded');
                 case PreloadType.image:
+                    loadText.text = 'Loading Assets... ${Math.floor(storedPercentage * 100)}%';
                     var savedGraphic:FlxGraphic = FlxG.bitmap.add(Paths.image(i, 'shared'));
                     preloadedAssets.set(i, savedGraphic);
                     trace(savedGraphic + ', yeah its working');
                 case PreloadType.atlas:
+                    loadText.text = 'Loading Characters... ${Math.floor(storedPercentage * 100)}%';
                     var preloadedCharacter:Character = new Character(FlxG.width / 2, FlxG.height / 2, i);
                     preloadedCharacter.visible = false;
                     add(preloadedCharacter);
                     trace('character loaded ${preloadedCharacter.frames}');
                 case PreloadType.chart:
+                    loadText.text = 'Loading Songs... ${Math.floor(storedPercentage * 100)}%';
                     var preloadedChart:String = Paths.json(i);
                     trace(i + ' is loaded?');
                         var preloadedSong:String = Paths.voices(i);
@@ -455,11 +489,14 @@ class BetterPreload extends MusicBeatState {
         
             countUp++;
             storedPercentage = countUp/maxCount;
-            loadText.text = 'Loading... Progress at ${Math.floor(storedPercentage * 100)}%';
+            if(countUp == maxCount)
+            {
+                loadText.text = 'Game Fully Loaded! Launching Title Sequence...';
+            }
         }
 
         ///*
-        FlxTween.tween(FlxG.camera, {alpha: 0}, 0.5, {
+        FlxTween.tween(FlxG.camera, {alpha: 0}, 0.5, {startDelay: 1,
             onComplete: function(tween:FlxTween){
                 if(FlxG.save.data.funiShaders == null && !ShadersState.leftState)
                     {

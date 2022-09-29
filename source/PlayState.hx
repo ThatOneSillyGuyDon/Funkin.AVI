@@ -3605,6 +3605,20 @@ class PlayState extends MusicBeatState
 
 			generateStaticArrows(0);
 			generateStaticArrows(1);
+			if(SONG.song == "Neglection") {
+				if(ClientPrefs.mechanics) {
+				for (i in 0...playerStrums.length) {
+					playerStrums.members[0].x = 90;
+					playerStrums.members[1].x = 190;
+					playerStrums.members[2].x = 990;
+					playerStrums.members[3].x = 1090;
+					opponentStrums.members[0].x = 430;
+					opponentStrums.members[1].x = 530;
+					opponentStrums.members[2].x = 630;
+					opponentStrums.members[3].x = 730;
+				}
+			}
+			} else {
 			for (i in 0...playerStrums.length) {
 				setOnLuas('defaultPlayerStrumX' + i, playerStrums.members[i].x);
 				setOnLuas('defaultPlayerStrumY' + i, playerStrums.members[i].y);
@@ -3622,7 +3636,7 @@ class PlayState extends MusicBeatState
 					for (i in 0...opponentStrums.length) {
 						setOnLuas('defaultOpponentStrumX' + i, opponentStrums.members[i].x);
 						setOnLuas('defaultOpponentStrumY' + i, opponentStrums.members[i].y);
-						//if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
+						// if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
 					}
 				}
 			}else{
@@ -3632,7 +3646,7 @@ class PlayState extends MusicBeatState
 					//if(ClientPrefs.middleScroll) opponentStrums.members[i].visible = false;
 				}
 			}
-			
+			}
 			
 
 			startedCountdown = true;
@@ -11973,7 +11987,25 @@ class PlayState extends MusicBeatState
 			case 'Isolated Beta':
 			timeBar.createFilledBar(0xFFFFFF, 0x000000);
 			scoreTxt.text = "Score: " + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName + (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
-		}
+
+			case 'Neglection':
+				if(curStep == 10) {
+				FlxTween.tween(timeBar, {alpha: 0}, 1);
+				FlxTween.tween(timeBarBG, {alpha: 0}, 1);
+				FlxTween.tween(scoreTxt, {alpha: 0}, 1);
+				FlxTween.tween(healthBar, {alpha: 0}, 1);
+				FlxTween.tween(healthBarBG, {alpha: 0}, 1);
+				trace()
+				}
+			
+		iconP1.visible = false;
+		iconP2.x = 50;
+
+		var goofyAhhPercent:FlxText = new FlxText(0, FlxG.height - 84, healthBar.percent + '%');
+		goofyAhhPercent.screenCenter(X);
+		goofyAhhPercent.setFormat(Paths.font("vcr.ttf"), 22, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		add(goofyAhhPercent);
+			}
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????
 		callOnLuas('onBeatHit', []);

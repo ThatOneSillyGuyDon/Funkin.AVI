@@ -50,7 +50,7 @@ class CreditsState extends MusicBeatState
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 		bg.screenCenter();
-		
+
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
@@ -148,7 +148,7 @@ class CreditsState extends MusicBeatState
 			['Coders'],
 			['DEMOLITIONDON96',	'demolitiondon96',	"Main Coder Of Funkin.avi",	'https://youtube.com/c/DEMOLITIONDON96',	'FFFFFF'],
 			['Jsa010',       	'jsa010',	        "Secondary Coder of Funkin.avi", 'https://twitter.com/_Jsa010_',   	'FFFFFF'],
-		    ['TonyTime!',	    'matt',	    'He left but he\'s back',                                                   'https://github.com/TonyTimee',	                                            'FFFFFF'],
+		    ['Real Deal Jinx!',	    'rj', /*woah*/	    'He left but he\'s back',                                                   'https://github.com/DEMOLITIONDON96/Demolition-Engine/commits?author=RealDealJinx',	                                            '4D4DC32'],
 			['Goofgoof43', 'Goofgoof', 'Pretty cool guy, I\'d say', 'nolink', 'FFFFFF'],
 			['MalyPlus', 'maly', 'Newest Coder on the Team', 'https://gamebanana.com/members/2014862', 'FFFFFF'],
 			['A3ro', 'missing-icon', 'Also a new Coder', 'nolink', 'FFFFFF'],
@@ -207,16 +207,16 @@ class CreditsState extends MusicBeatState
 			['ninjamuffin99',		'ninjamuffin99',	"Programmer of Friday Night Funkin'",							'https://twitter.com/ninja_muffin99',	'CF2D2D'],
 			['PhantomArcade',		'phantomarcade',	"Animator of Friday Night Funkin'",								'https://twitter.com/PhantomArcade3K',	'FADC45'],
 			['evilsk8r',			'evilsk8r',			"Artist of Friday Night Funkin'",								'https://twitter.com/evilsk8r',			'5ABD4B'],
-			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								'https://twitter.com/kawaisprite',		'378FC7']		
+			['kawaisprite',			'kawaisprite',		"Composer of Friday Night Funkin'",								'https://twitter.com/kawaisprite',		'378FC7']
 			//[''],
 			//["Slutty Crew"],
 			//['Ben UWU',		'ben',	"Got Drip And Is So Slutty",						"https://www.youtube.com/watch?v=v5F5WyhzW9M",		'FFFFFF']
 		];
-		
+
 		for(i in pisspoop){
 			creditsStuff.push(i);
 		}
-	
+
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !unselectableCheck(i);
@@ -241,7 +241,7 @@ class CreditsState extends MusicBeatState
 				var icon:AttachedSprite = new AttachedSprite('credits/' + creditsStuff[i][1]);
 				icon.xAdd = optionText.width + 10;
 				icon.sprTracker = optionText;
-	
+
 				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
 				add(icon);
@@ -250,7 +250,7 @@ class CreditsState extends MusicBeatState
 				if(curSelected == -1) curSelected = i;
 			}
 		}
-		
+
 		descBox = new AttachedSprite();
 		descBox.makeGraphic(1, 1, FlxColor.BLACK);
 		descBox.xAdd = -10;
@@ -287,7 +287,7 @@ class CreditsState extends MusicBeatState
 		grain.scale.x = 1.1;
 		grain.scale.y = 1.1;
 		add(grain);
-		
+
 		super.create();
 	}
 
@@ -343,7 +343,7 @@ class CreditsState extends MusicBeatState
   				if(noLink) {
   				if(controls.ACCEPT) {
   					FlxG.sound.play(Paths.sound('cancelMenu'));
-  				} 
+  				}
   				}else {
   					if(controls.ACCEPT) {
   					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
@@ -361,7 +361,7 @@ class CreditsState extends MusicBeatState
 				quitting = true;
 			}
 			}
-		
+
 		for (item in grpOptions.members)
 		{
 			if(!item.isBold)
@@ -383,7 +383,7 @@ class CreditsState extends MusicBeatState
 		}
 		super.update(elapsed);
 	}
-	
+
 		override function beatHit()
 	{
 		super.beatHit();
@@ -394,7 +394,7 @@ class CreditsState extends MusicBeatState
 		}
 	}
 	}
-	
+
 	var moveTween:FlxTween = null;
 	function changeSelection(change:Int = 0)
 	{

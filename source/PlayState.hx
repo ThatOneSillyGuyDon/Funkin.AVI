@@ -11995,7 +11995,7 @@ class PlayState extends MusicBeatState
 				FlxTween.tween(scoreTxt, {alpha: 0}, 1);
 				FlxTween.tween(healthBar, {alpha: 0}, 1);
 				FlxTween.tween(healthBarBG, {alpha: 0}, 1);
-				trace()
+				trace('pls work');
 				}
 			
 		iconP1.visible = false;

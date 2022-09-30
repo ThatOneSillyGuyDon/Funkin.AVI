@@ -1833,6 +1833,45 @@ class PlayState extends MusicBeatState
 						timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
 					case 'Scrapped':
 						timeBar.createFilledBar(0xFF0008FF, 0xFF11C700);
+					case 'Sink':
+						timeBar.createFilledBar(0xFF630000, 0xFFD70000);
+					case 'Invincible':
+						timeBar.createFilledBar(0xFF000000, 0xFF52627D);
+					case 'Neglection':
+						timeBar.createFilledBar(0xFF0088FF, 0xFFFFFFFF);
+					case 'Infitrigger':
+						timeBar.createFilledBar(0xFFFFFFFF, 0xFFD400FF);
+					case 'Mercy':
+						timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
+					case 'Malfunction':
+						glitchTimeColors = FlxG.random.int(12, 19);
+
+						switch glitchTimeColors
+						{
+
+							case 11: timeBar.createFilledBar(0xFF11C700, 0xFFFFF200);
+
+							case 12: timeBar.createFilledBar(0xFF11C700, 0xFF0008FF);
+
+							case 13: timeBar.createFilledBar(0xFF0008FF, 0xFF11C700);
+
+							case 14: timeBar.createFilledBar(0xFFFFF200, 0xFFFF0000);
+
+							case 15: timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
+
+							case 16: timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
+
+							case 17: timeBar.createFilledBar(0xFFFFF4BA, 0xFFC78800);
+
+							case 18: timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
+
+							case 19: timeBar.createFilledBar(0xFFB7B7B7, 0xFF2E2E2E);
+						}
+
+						new FlxTimer().start(0.8, function(tmr:FlxTimer)
+						{
+							glitchTimeColors = FlxG.random.int(12, 19);
+						});
 					default:
 						timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
 				}
@@ -2017,6 +2056,14 @@ class PlayState extends MusicBeatState
 						timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
 					case 'Scrapped':
 						timeBar.createFilledBar(0xFF0008FF, 0xFF11C700);
+					case 'Sink':
+						timeBar.createFilledBar(0xFF630000, 0xFFD70000);
+					case 'Invincible':
+						timeBar.createFilledBar(0xFF000000, 0xFF52627D);
+					case 'Neglection':
+						timeBar.createFilledBar(0xFF0088FF, 0xFFE2E2E2);
+					case 'Infitrigger':
+						timeBar.createFilledBar(0xFFFFFFFF, 0xFFD400FF);
 					case 'Mercy':
 						timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
 					case 'Malfunction':
@@ -2024,27 +2071,6 @@ class PlayState extends MusicBeatState
 
 						switch glitchTimeColors
 						{
-							case 0: FlxColor.RED;
-
-							case 1: FlxColor.BLUE;
-
-							case 2: FlxColor.CYAN;
-
-							case 3: FlxColor.LIME;
-
-							case 4: FlxColor.GREEN;
-
-							case 5: FlxColor.BLACK;
-
-							case 6: FlxColor.WHITE;
-
-							case 7: FlxColor.YELLOW;
-
-							case 8: FlxColor.ORANGE;
-
-							case 9: FlxColor.GRAY;
-
-							case 10: FlxColor.MAGENTA;
 
 							case 11: timeBar.createFilledBar(0xFF11C700, 0xFFFFF200);
 
@@ -2063,29 +2089,6 @@ class PlayState extends MusicBeatState
 							case 18: timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
 
 							case 19: timeBar.createFilledBar(0xFFB7B7B7, 0xFF2E2E2E);
-
-							/*case 20:
-
-							case 21:
-
-							case 22:
-
-							case 23:
-
-							case 24:
-
-							case 25:
-
-							case 26:
-
-							case 27:
-
-							case 28:
-
-							case 29:
-
-							case 30:*/
-
 						}
 
 						new FlxTimer().start(0.8, function(tmr:FlxTimer)
@@ -2859,6 +2862,7 @@ class PlayState extends MusicBeatState
 			FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
 
+		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
 		
 		super.create();
@@ -8868,8 +8872,8 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null) {
-		var skin:String = 'noteSplashes';
+	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null, ?judge:Array<String> = null) {
+		var skin:String = 'NoteSplashSkin/noteSplashes-Better';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 		
 		var hue:Float = ClientPrefs.arrowHSV[data % 4][0] / 360;
@@ -8883,7 +8887,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
-		splash.setupNoteSplash(x, y, data, skin, hue, sat, brt);
+		splash.setupNoteSplash(x, y, data, judge, skin, hue, sat, brt);
 		grpNoteSplashes.add(splash);
 	}
 

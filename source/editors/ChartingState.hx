@@ -106,7 +106,7 @@ class ChartingState extends MusicBeatState
 		['Lyrics',"Value 1: Lyrics\nValue 2: Color (white is default)"],
 		['Hide HUD', "Value 1: 1 = Hide HUD, 2 = Show HUD\n Value 2: No Use"],
 		['Spotlights', "ONLY VALUE 1 WORKS!\nType 1 for ON/OFF switch\n2 for Dad\n3 for BF"],
-		['Relapse Shoot', "he go pew pew"],
+		['Relapse Shoot', "he go pew pew\nThis event has been recently revamped to have 4 functions now!\nType 'Normal', or leave blank, for normal shoot timer.\nType 'Fast' to make Relapse Mouse give less time to react.\nType 'Instakill' if you're feeling evil today.\nType 'Speedy' to have Relapse Mouse make life hell for ya."],
 		['Alter Camera Bouncing', "Alters the Intensity and Speed of the camera bounce.\nValue 1: Beats to hit (Default: 4)\nValue 2: Bounce Intensity (Default: 0)\nLeave the values blank if you want to use Default."],
 		['Alter Camera Zoom', "Sets the zoom value\nValue 1: Zoom Value \n(Default: 1)\nValue 2: put in a number to do an instant zoom, otherwise leave blank to do a smooth zoom  \n(Default: 0.5)"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],

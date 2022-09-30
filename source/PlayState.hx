@@ -6860,7 +6860,18 @@ class PlayState extends MusicBeatState
 				if(bgGirls != null) bgGirls.swapDanceType();
 
 			case 'Relapse Shoot':
-				relapseShoot();
+				switch(value1) {
+					case 'Normal' | 'normal' | 'NORMAL':
+						relapseShoot();
+					case 'Fast' | 'fast' | 'FAST':
+						relapseShootButFast();
+					case 'Instakill' | 'instakill' | 'INSTAKILL':
+						relapseShootButInstakill();
+					case 'Speedy' | 'speedy' | 'SPEEDY':
+						relapseShootButFuckingQuick();
+					default:
+						relapseShoot();
+				}
 
 			case 'Hide HUD':
 				if(value1 == 'false') {
@@ -8872,7 +8883,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null, ?judge:Array<String> = null) {
+	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null) {
 		var skin:String = 'NoteSplashSkin/noteSplashes-Better';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 		
@@ -8887,7 +8898,7 @@ class PlayState extends MusicBeatState
 		}
 
 		var splash:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
-		splash.setupNoteSplash(x, y, data, judge, skin, hue, sat, brt);
+		splash.setupNoteSplash(x, y, data, skin, hue, sat, brt);
 		grpNoteSplashes.add(splash);
 	}
 
@@ -8913,26 +8924,116 @@ class PlayState extends MusicBeatState
 				SCALEdebugText.text = "screen mode : " + modeText;
 		}
 
+		function relapseShootButFast()
+			{
+				dodged = false;
+				shootin = true;	
+				ohShitHeGonnaShootButFast();
+					new FlxTimer().start(0.75, function(tmr:FlxTimer){
+						FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Shoot'), 0.6);
+						dad.playAnim("attack", true);
+						dad.specialAnim = true;
+						new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+						if(!dodged) {
+							FlxG.camera.shake(0.05, 0.05);
+							health -= 0.3;
+							trace("lmfao you got shot");
+							dodged = false;
+						} else {
+							boyfriend.playAnim('dodge');
+							dodged = false;
+							shootin = false;
+							health += 0.05;
+						}
+						});
+					});
+			}
+		
+			function ohShitHeGonnaShootButFast()
+			{
+				FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Reload'), 0.6);
+				holyShitMOVEBITCH.alpha = 1;
+				holyShitMOVEBITCH.y = -420;
+				//holyShitMOVEBITCH.rotateX = 0;
+				dad.playAnim("reload", true);
+				dad.specialAnim = true;
+				new FlxTimer().start(0.1, function(tmr:FlxTimer)
+				{
+					FlxTween.tween(holyShitMOVEBITCH, {alpha: 0, y: -400}, 0.3, {ease: FlxEase.quadInOut});
+				});
+				pressCounter = 0;
+			}
+
+			function relapseShootButFuckingQuick()
+				{
+					dodged = false;
+					shootin = true;	
+					ohShitHeGonnaShootButFast();
+						new FlxTimer().start(0.35, function(tmr:FlxTimer){
+							FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Shoot'), 0.6);
+							dad.playAnim("attack", true);
+							dad.specialAnim = true;
+							new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+							if(!dodged) {
+								FlxG.camera.shake(0.05, 0.05);
+								health = 0;
+								trace("lmfao you fucking died to a mouse");
+								dodged = false;
+							} else {
+								boyfriend.playAnim('dodge');
+								dodged = false;
+								shootin = false;
+								health += 0.05;
+							}
+							});
+						});
+				}
+
+			function relapseShootButInstakill()
+				{
+					dodged = false;
+					shootin = true;	
+					ohShitHeGonnaShoot();
+						new FlxTimer().start(0.5, function(tmr:FlxTimer){
+							FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Shoot'), 0.6);
+							dad.playAnim("attack", true);
+							dad.specialAnim = true;
+							new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+							if(!dodged) {
+								FlxG.camera.shake(0.05, 0.05);
+								health = 0;
+								trace("lmfao you fucking died to a mouse");
+								dodged = false;
+							} else {
+								boyfriend.playAnim('dodge');
+								dodged = false;
+								shootin = false;
+								health += 0.05;
+							}
+							});
+						});
+				}
+
 	function relapseShoot()
 	{
 		dodged = false;
 		shootin = true;	
 		ohShitHeGonnaShoot();
-			new FlxTimer().start(0.75, function(tmr:FlxTimer){
+			new FlxTimer().start(1.1, function(tmr:FlxTimer){
 				FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Shoot'), 0.6);
 				dad.playAnim("attack", true);
 				dad.specialAnim = true;
 				new FlxTimer().start(0.1, function(tmr:FlxTimer) {
 				if(!dodged) {
 					FlxG.camera.shake(0.05, 0.05);
-					health = 0;
-					trace("lmfao you fucking died to a mouse");
+					health -= 0.3;
+					trace("lmfao you got shot depsite the fact this is nerfed");
 					dodged = false;
 				} else {
 					boyfriend.playAnim('dodge');
 					dodged = false;
 					shootin = false;
-					health += 0.2;
+					health += 0.05;
 				}
 				});
 			});
@@ -8946,7 +9047,7 @@ class PlayState extends MusicBeatState
 		//holyShitMOVEBITCH.rotateX = 0;
 		dad.playAnim("reload", true);
 		dad.specialAnim = true;
-		new FlxTimer().start(0.1, function(tmr:FlxTimer)
+		new FlxTimer().start(0.4, function(tmr:FlxTimer)
 		{
 			FlxTween.tween(holyShitMOVEBITCH, {alpha: 0, y: -400}, 0.3, {ease: FlxEase.quadInOut});
 		});

@@ -16,7 +16,6 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
 //crash handler stuff
-#if Goofy_Ahh_Crash_Thing
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
@@ -25,7 +24,6 @@ import Discord.DiscordClient;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
-#end
 
 using StringTools;
 
@@ -96,7 +94,7 @@ class Main extends Sprite
 		}
 
 		#if !debug
-		initialState = TitleState;
+		initialState = BetterPreload;
 		#end
 	
 		ClientPrefs.loadDefaultKeys();

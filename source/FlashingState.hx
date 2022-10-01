@@ -31,34 +31,6 @@ class FlashingState extends MusicBeatState
 	override function create()
 	{
 		super.create();
-
-		if(ClientPrefs.funiShaders)
-					{
-						chrom = new ChromaticAberrationEffect();
-						blurThisShit = new TiltshiftEffect(0.4, 0);
-						bloomShit = new WIBloomEffect(0);
-						greyscale = new GreyscaleEffect();
-						//uncomment these fucking pieces of shit if you feel like testing it.
-
-						addShader(chrom);
-						addShader(blurThisShit);
-						addShader(bloomShit);
-						addShader(greyscale);
-						//uncomment these fucking pieces of shit if you feel like testing it.
-
-						if (chrom != null)
-						chrom.setChrome(0.003);
-
-						if (bloomShit != null)
-						bloomShit.setSize(18.0);
-
-						if(blurThisShit != null)
-						blurThisShit.setBlur(0.4);
-						//uncomment these fucking pieces of shit if you feel like testing it.
-
-
-					}
-
 	
 		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height, FlxColor.BLACK);
 		add(bg);

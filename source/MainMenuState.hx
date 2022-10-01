@@ -42,8 +42,8 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var MouseVersion:String = '2.0';
-	public static var DemoEngineVersion:String = '0.3.0';
+	public static var MouseVersion:String = '1.6 (STREAMER BUILD DEMO)';
+	public static var DemoEngineVersion:String = '0.3.0pa';
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
@@ -582,8 +582,6 @@ class MainMenuState extends MusicBeatState
 			{
 				if(optionShit[curSelected] == 'freeplay')
 				{
-					if(FPClientPrefs.episode1FPLock == 'unlocked')
-					{
 						selectedSomethin = true;
 						FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 
@@ -621,15 +619,12 @@ class MainMenuState extends MusicBeatState
 									});
 								}
 							});
-					}else{
-					FlxG.sound.play(Paths.sound('cancelMenu'));
-					noFreeplay.alpha = 1;
-					FlxTween.tween(noFreeplay, {alpha: 0}, 1.5, {ease: FlxEase.quadIn, startDelay: 2});
-					}
 				}else if (optionShit[curSelected] == 'donate')
 				{
 					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
-				}
+				} else if(optionShit[curSelected] == "story_mode") {
+                   lime.app.Application.current.window.alert('This is not completed, also check freeplay :)', 'Error On Funkin.avi.exe:');
+				} 
 				else
 				{
 					selectedSomethin = true;
@@ -663,9 +658,6 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									case 'story_mode':
-										//FlxG.sound.play(Paths.sound('cancelMenu'));
-										MusicBeatState.switchState(new StoryMenuState());
 									//case 'freeplay':
 										//MusicBeatState.switchState(new EpicSelectorWOOO());
 									//#if MODS_ALLOWED
@@ -692,8 +684,7 @@ class MainMenuState extends MusicBeatState
 			#if desktop
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
-				selectedSomethin = true;
-				MusicBeatState.switchState(new MasterEditorMenu());
+				lime.app.Application.current.window.alert("don't make a mod there lol, use demolition engine bru", 'wow sticky i never think u gonna do that:');
 			}
 			else if (FlxG.keys.justPressed.SIX || FlxG.keys.justPressed.NUMPADSIX)
 				{

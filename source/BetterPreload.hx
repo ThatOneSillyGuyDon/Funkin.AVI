@@ -458,17 +458,14 @@ class BetterPreload extends MusicBeatState {
             FlxGraphic.defaultPersist = true;
             switch(assetStack[i]) {
                 case PreloadType.imagealt:
-                    loadText.text = 'Loading Menu... ${Math.floor(storedPercentage * 100)}%';
                     var menuShit:FlxGraphic = FlxG.bitmap.add(Paths.image(i));
                     preloadedAssets.set(i, menuShit);
                     trace('menu asset is loaded');
                 case PreloadType.image:
-                    loadText.text = 'Loading Assets... ${Math.floor(storedPercentage * 100)}%';
                     var savedGraphic:FlxGraphic = FlxG.bitmap.add(Paths.image(i, 'shared'));
                     preloadedAssets.set(i, savedGraphic);
                     trace(savedGraphic + ', yeah its working');
                 case PreloadType.atlas:
-                    loadText.text = 'Loading Characters... ${Math.floor(storedPercentage * 100)}%';
                     var preloadedCharacter:Character = new Character(FlxG.width / 2, FlxG.height / 2, i);
                     preloadedCharacter.visible = false;
                     add(preloadedCharacter);
@@ -499,19 +496,14 @@ class BetterPreload extends MusicBeatState {
         ///*
         FlxTween.tween(FlxG.camera, {alpha: 0}, 0.5, {startDelay: 1,
             onComplete: function(tween:FlxTween){
-                if(FlxG.save.data.funiShaders == null && !ShadersState.leftState)
-                    {
-                        MusicBeatState.switchState(new ShadersState());
-                    }else{
-                if(ClientPrefs.language == "Spanish") {
+                if(ClientPrefs.language == null) {
+                MusicBeatState.switchState(new LanguageState());
+                } else if(ClientPrefs.language == "Spanish") {
                     MusicBeatState.switchState(new SpanishTitleState());
-                } else {
-                MusicBeatState.switchState(new TitleState());
-            }
-        }
+                }else if(ClientPrefs.language == "English") {
+                    MusicBeatState.switchState(new TitleState());
+                }
             }
         });
-        //*/
-
-    }
-}
+            }
+        }

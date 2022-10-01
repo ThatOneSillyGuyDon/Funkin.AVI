@@ -66,7 +66,6 @@ class LegacyState extends MusicBeatState{
         addSong('Isolated Legacy', 3, 'legacy', FlxColor.fromRGB(60, 60, 60));
         addSong('Lunacy Legacy', 3, 'legacy', FlxColor.fromRGB(60, 60, 60));
         addSong('Malfunction Legacy', 3, 'square-legacy-pixel', FlxColor.fromRGB(60, 60, 60));
-       //addSong('Scrapped Legacy', 3, 'rs', FlxColor.BLACK);
         addSong('Mercy Legacy', 3, 'walt', FlxColor.fromRGB(153, 148, 112));
 
         /*if(FPClientPrefs.episode1FPLock == 'unlocked')

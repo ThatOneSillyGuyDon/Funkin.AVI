@@ -467,6 +467,9 @@ class PlayState extends MusicBeatState
 	
 	// Less laggy controls
 	private var keysArray:Array<Dynamic>;
+	
+	//Pause Shit ig
+	public static var current:PlayState;
 
 	var precacheList:Map<String, String> = new Map<String, String>();
 
@@ -480,6 +483,8 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
+	current = this;
+		
 		Paths.clearStoredMemory();
 
 		//I fucking hate saves aaaaaaaaa
@@ -2069,8 +2074,9 @@ class PlayState extends MusicBeatState
 						timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
 					case 'Malfunction':
 						glitchTimeColors = FlxG.random.int(12, 19);
-
-						switch glitchTimeColors
+						
+						if(curBeat % 2 == 0) {
+ 						switch glitchTimeColors
 						{
 
 							case 11: timeBar.createFilledBar(0xFF11C700, 0xFFFFF200);
@@ -2091,6 +2097,7 @@ class PlayState extends MusicBeatState
 
 							case 19: timeBar.createFilledBar(0xFFB7B7B7, 0xFF2E2E2E);
 						}
+					}
 
 						new FlxTimer().start(0.8, function(tmr:FlxTimer)
 						{
@@ -4284,13 +4291,13 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(iconP1, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 					FlxTween.tween(iconP2, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 				default:
-					FlxTween.tween(camHUD, {alpha: 1}, 1, {ease: FlxEase.circOut});
-					FlxTween.tween(healthBarBG, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-					FlxTween.tween(healthBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-					FlxTween.tween(healthIcon, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-					FlxTween.tween(healthTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-					FlxTween.tween(iconP1, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
-					FlxTween.tween(iconP2, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
+					FlxTween.tween(camHUD, {alpha: 1}, 1 * playbackRate, {ease: FlxEase.circOut});
+					FlxTween.tween(healthBarBG, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					FlxTween.tween(healthBar, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					FlxTween.tween(healthIcon, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					FlxTween.tween(healthTxt, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					FlxTween.tween(iconP1, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					FlxTween.tween(iconP2, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 			}
 		}
 

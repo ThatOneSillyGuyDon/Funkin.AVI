@@ -1051,15 +1051,15 @@ class PlayState extends MusicBeatState
 				if(canaddshaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
-					addShaderToCamera('hud', new ChromaticAberrationEffect(0.003));
-					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.0015));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.003));
 					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 					addShaderToCamera('game', new VhsEffect(0.3, 0));
-					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
-					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					addShaderToCamera('hud', new TiltshiftEffect(0.25, 0));
+					addShaderToCamera('game', new TiltshiftEffect(0.3, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
-					addShaderToCamera('game', new WIBloomEffect());
+					addShaderToCamera('game', new WIBloomEffect(14));
 				}
 
 				/*
@@ -8267,8 +8267,8 @@ class PlayState extends MusicBeatState
 										triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
 											if(canaddshaders)
 											{
-												addShaderToCamera('hud', new TiltshiftEffect(2, 0));
-												addShaderToCamera('game', new TiltshiftEffect(5, 0));
+												addShaderToCamera('hud', new TiltshiftEffect(1.5, 0));
+												addShaderToCamera('game', new TiltshiftEffect(3, 0));
 												addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new WIBloomEffect());
@@ -8339,8 +8339,8 @@ class PlayState extends MusicBeatState
 										triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
 											if(canaddshaders)
 											{
-												addShaderToCamera('hud', new TiltshiftEffect(2, 0));
-												addShaderToCamera('game', new TiltshiftEffect(5, 0));
+												addShaderToCamera('hud', new TiltshiftEffect(1.5, 0));
+												addShaderToCamera('game', new TiltshiftEffect(3, 0));
 												addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new WIBloomEffect());
@@ -8409,8 +8409,8 @@ class PlayState extends MusicBeatState
 										triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
 											if(canaddshaders)
 											{
-												addShaderToCamera('hud', new TiltshiftEffect(2, 0));
-												addShaderToCamera('game', new TiltshiftEffect(5, 0));
+												addShaderToCamera('hud', new TiltshiftEffect(1.5, 0));
+												addShaderToCamera('game', new TiltshiftEffect(3, 0));
 												addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new WIBloomEffect());
@@ -8479,8 +8479,8 @@ class PlayState extends MusicBeatState
 										triggerEventNote('Screen Shake', '0.1, 0.006', '0.1, 0.006');
 											if(canaddshaders)
 											{
-												addShaderToCamera('hud', new TiltshiftEffect(2, 0));
-												addShaderToCamera('game', new TiltshiftEffect(5, 0));
+												addShaderToCamera('hud', new TiltshiftEffect(1.5, 0));
+												addShaderToCamera('game', new TiltshiftEffect(3, 0));
 												addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new WIBloomEffect());

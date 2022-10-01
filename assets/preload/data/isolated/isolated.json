@@ -1235,11 +1235,6 @@
 						0
 					],
 					[
-						58818.1818181819,
-						0,
-						0
-					],
-					[
 						58909.0909090909,
 						2,
 						0
@@ -1261,6 +1256,11 @@
 					],
 					[
 						59545.4545454546,
+						0,
+						0
+					],
+					[
+						58727.2727272728,
 						0,
 						0
 					]
@@ -1409,11 +1409,6 @@
 						0
 					],
 					[
-						64636.3636363637,
-						0,
-						0
-					],
-					[
 						64727.2727272728,
 						2,
 						0
@@ -1435,6 +1430,11 @@
 					],
 					[
 						65363.6363636364,
+						0,
+						0
+					],
+					[
+						64545.4545454546,
 						0,
 						0
 					]
@@ -1967,11 +1967,6 @@
 					[
 						80000,
 						5,
-						636.363636363636
-					],
-					[
-						80727.2727272728,
-						7,
 						636.363636363636
 					]
 				],
@@ -3918,7 +3913,12 @@
 					[
 						132000,
 						1,
-						272.727272727273
+						0
+					],
+					[
+						132272.727272727,
+						1,
+						0
 					]
 				],
 				"altAnim": false,
@@ -4097,7 +4097,12 @@
 					[
 						137818.181818182,
 						1,
-						272.727272727273
+						0
+					],
+					[
+						138090.909090909,
+						1,
+						0
 					]
 				],
 				"altAnim": false,
@@ -5051,6 +5056,166 @@
 				"bpm": 165
 			},
 			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 165,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 165,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 165,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 165
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 165
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 165,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 165
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 165
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 165
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 165
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 165
+			},
+			{
+				"gfSection": false,
+				"lengthInSteps": 16,
+				"altAnim": false,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"bpm": 165,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"gfSection": false,
+				"lengthInSteps": 16,
+				"altAnim": false,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"bpm": 165,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"gfSection": false,
+				"lengthInSteps": 16,
+				"altAnim": false,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"bpm": 165,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"gfSection": false,
+				"lengthInSteps": 16,
+				"altAnim": false,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"bpm": 165,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"gfSection": false,
+				"lengthInSteps": 16,
+				"altAnim": false,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"bpm": 165,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
 				"gfSection": false,
 				"lengthInSteps": 16,
 				"altAnim": false,
@@ -5084,6 +5249,26 @@
 		"gfVersion": "nogf",
 		"events": [
 			[
+				10181.8181818182,
+				[
+					[
+						"Alter HUD Transparency",
+						"1",
+						"1.5"
+					]
+				]
+			],
+			[
+				11636.3636363636,
+				[
+					[
+						"Flash Screen",
+						"0",
+						""
+					]
+				]
+			],
+			[
 				12363.6363636364,
 				[
 					[
@@ -5114,6 +5299,16 @@
 				]
 			],
 			[
+				14545.4545454545,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.2",
+						"3"
+					]
+				]
+			],
+			[
 				14727.2727272727,
 				[
 					[
@@ -5140,6 +5335,71 @@
 						"Change Character",
 						"dad",
 						"mickeyNEW"
+					],
+					[
+						"Alter Camera Zoom",
+						"0.9",
+						"0.5"
+					]
+				]
+			],
+			[
+				19272.7272727273,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.1",
+						"0.2"
+					]
+				]
+			],
+			[
+				19636.3636363636,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.2",
+						"0.2"
+					]
+				]
+			],
+			[
+				20000,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.3",
+						"0.2"
+					]
+				]
+			],
+			[
+				20363.6363636364,
+				[
+					[
+						"Alter Camera Zoom",
+						"1",
+						"0.2"
+					]
+				]
+			],
+			[
+				22545.4545454545,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.3",
+						"0.1"
+					]
+				]
+			],
+			[
+				23272.7272727273,
+				[
+					[
+						"Alter Camera Zoom",
+						"0.9",
+						"0.6"
 					]
 				]
 			],
@@ -5170,6 +5430,66 @@
 						"Change Character",
 						"dad",
 						"mickDrop"
+					]
+				]
+			],
+			[
+				32000,
+				[
+					[
+						"Alter HUD Transparency",
+						"0.8",
+						"0.5"
+					]
+				]
+			],
+			[
+				32727.2727272727,
+				[
+					[
+						"Alter HUD Transparency",
+						"0.6",
+						"0.5"
+					]
+				]
+			],
+			[
+				33454.5454545455,
+				[
+					[
+						"Alter HUD Transparency",
+						"0.4",
+						"0.5"
+					]
+				]
+			],
+			[
+				34181.8181818182,
+				[
+					[
+						"Alter HUD Transparency",
+						"0.3",
+						"0.5"
+					]
+				]
+			],
+			[
+				34909.0909090909,
+				[
+					[
+						"Alter HUD Transparency",
+						"1",
+						"0.5"
+					]
+				]
+			],
+			[
+				40727.2727272727,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.2",
+						"0.6"
 					]
 				]
 			],
@@ -5224,6 +5544,56 @@
 				]
 			],
 			[
+				46545.4545454546,
+				[
+					[
+						"Alter Camera Zoom",
+						"0.9",
+						"0.6"
+					]
+				]
+			],
+			[
+				48727.2727272727,
+				[
+					[
+						"Alter HUD Transparency",
+						"0",
+						"0"
+					]
+				]
+			],
+			[
+				48909.0909090909,
+				[
+					[
+						"Alter HUD Transparency",
+						"1",
+						"0"
+					]
+				]
+			],
+			[
+				49090.9090909091,
+				[
+					[
+						"Alter HUD Transparency",
+						"0",
+						"0"
+					]
+				]
+			],
+			[
+				49272.7272727273,
+				[
+					[
+						"Alter HUD Transparency",
+						"1",
+						"0"
+					]
+				]
+			],
+			[
 				53454.5454545455,
 				[
 					[
@@ -5264,6 +5634,26 @@
 				]
 			],
 			[
+				59454.5454545455,
+				[
+					[
+						"Alter HUD Transparency",
+						"0",
+						"0"
+					]
+				]
+			],
+			[
+				59545.4545454546,
+				[
+					[
+						"Alter HUD Transparency",
+						"1",
+						"0"
+					]
+				]
+			],
+			[
 				66363.6363636364,
 				[
 					[
@@ -5300,6 +5690,16 @@
 						"Change Character",
 						"dad",
 						"mickeyNEW"
+					],
+					[
+						"Alter HUD Transparency",
+						"0.6",
+						"1"
+					],
+					[
+						"Alter Camera Zoom",
+						"1.2",
+						"6"
 					]
 				]
 			],
@@ -5344,12 +5744,92 @@
 				]
 			],
 			[
+				80000,
+				[
+					[
+						"Alter HUD Transparency",
+						"1",
+						"1"
+					]
+				]
+			],
+			[
 				81090.9090909091,
 				[
 					[
 						"Change Character",
 						"dad",
 						"mickDrop"
+					]
+				]
+			],
+			[
+				81454.5454545455,
+				[
+					[
+						"Alter Camera Zoom",
+						"0.8",
+						"0.5"
+					]
+				]
+			],
+			[
+				82909.090909091,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				83636.3636363637,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				84363.6363636364,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				85090.9090909091,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				85818.1818181819,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				86545.4545454546,
+				[
+					[
+						"Flash Background",
+						"",
+						""
 					]
 				]
 			],
@@ -5364,12 +5844,37 @@
 				]
 			],
 			[
+				87272.7272727273,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					],
+					[
+						"Flash Screen",
+						"3",
+						""
+					],
+					[
+						"Alter Camera Zoom",
+						"1.1",
+						"0.5"
+					]
+				]
+			],
+			[
 				88000,
 				[
 					[
 						"Change Character",
 						"dad",
 						"mickDrop"
+					],
+					[
+						"Flash Background",
+						"",
+						""
 					]
 				]
 			],
@@ -5380,6 +5885,11 @@
 						"Change Character",
 						"dad",
 						"mickeyNEW"
+					],
+					[
+						"Flash Background",
+						"",
+						""
 					]
 				]
 			],
@@ -5390,6 +5900,11 @@
 						"Change Character",
 						"dad",
 						"mickDrop"
+					],
+					[
+						"Flash Background",
+						"",
+						""
 					]
 				]
 			],
@@ -5400,6 +5915,36 @@
 						"Change Character",
 						"dad",
 						"mickeyNEW"
+					]
+				]
+			],
+			[
+				90181.8181818182,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				90909.090909091,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				91636.3636363637,
+				[
+					[
+						"Flash Background",
+						"",
+						""
 					]
 				]
 			],
@@ -5420,6 +5965,126 @@
 						"Change Character",
 						"dad",
 						"mickeyNEW"
+					],
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				93090.9090909091,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					],
+					[
+						"Flash Screen",
+						"0",
+						""
+					],
+					[
+						"Alter Camera Zoom",
+						"0.85",
+						"0.5"
+					]
+				]
+			],
+			[
+				93818.1818181819,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				94545.4545454546,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				95272.7272727273,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				96000.0000000001,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				96727.2727272728,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				97454.5454545455,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				98181.8181818182,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				98909.090909091,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					],
+					[
+						"Flash Screen",
+						"3",
+						""
+					]
+				]
+			],
+			[
+				99636.3636363637,
+				[
+					[
+						"Flash Background",
+						"",
+						""
 					]
 				]
 			],
@@ -5444,12 +6109,37 @@
 				]
 			],
 			[
+				100363.636363636,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
 				101090.909090909,
 				[
 					[
 						"Change Character",
 						"dad",
 						"mickDrop"
+					],
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				101818.181818182,
+				[
+					[
+						"Flash Background",
+						"",
+						""
 					]
 				]
 			],
@@ -5464,12 +6154,287 @@
 				]
 			],
 			[
+				102545.454545455,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				103272.727272727,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				104000,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
 				104727.272727273,
 				[
 					[
 						"Change Character",
 						"dad",
 						"mickDrop"
+					],
+					[
+						"Flash Background",
+						"",
+						""
+					],
+					[
+						"Alter Camera Zoom",
+						"1.3",
+						"15"
+					]
+				]
+			],
+			[
+				105454.545454546,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				106181.818181818,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				106909.090909091,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				107636.363636364,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				108363.636363636,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				109090.909090909,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				109818.181818182,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				110545.454545455,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				111272.727272727,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				112000,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				112727.272727273,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				113454.545454546,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				114181.818181818,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				114909.090909091,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				115636.363636364,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				116363.636363636,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					],
+					[
+						"Alter Camera Zoom",
+						"0.8",
+						""
+					]
+				]
+			],
+			[
+				117090.909090909,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				117818.181818182,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				118545.454545455,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				119272.727272727,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				120000,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				120727.272727273,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				121454.545454546,
+				[
+					[
+						"Flash Background",
+						"",
+						""
 					]
 				]
 			],
@@ -5484,12 +6449,52 @@
 				]
 			],
 			[
+				122181.818181818,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					],
+					[
+						"Alter Camera Zoom",
+						"1.2",
+						"6"
+					]
+				]
+			],
+			[
+				122909.090909091,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				123636.363636364,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
 				124363.636363636,
 				[
 					[
 						"Change Character",
 						"dad",
 						"mickDrop"
+					],
+					[
+						"Flash Background",
+						"",
+						""
 					]
 				]
 			],
@@ -5504,12 +6509,202 @@
 				]
 			],
 			[
+				125090.909090909,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				125818.181818182,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				126545.454545455,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
 				127181.818181818,
 				[
 					[
 						"Change Character",
 						"dad",
 						"mickDrop"
+					]
+				]
+			],
+			[
+				127272.727272727,
+				[
+					[
+						"Flash Background",
+						"",
+						""
+					]
+				]
+			],
+			[
+				128000,
+				[
+					[
+						"Alter Camera Zoom",
+						"0.9",
+						"0.5"
+					]
+				]
+			],
+			[
+				130909.090909091,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.1",
+						"0.2"
+					]
+				]
+			],
+			[
+				131272.727272727,
+				[
+					[
+						"Alter Camera Zoom",
+						"0.9",
+						"0.2"
+					]
+				]
+			],
+			[
+				131636.363636364,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.1",
+						"0.2"
+					]
+				]
+			],
+			[
+				132000,
+				[
+					[
+						"Alter Camera Zoom",
+						"0.9",
+						"0.2"
+					]
+				]
+			],
+			[
+				132363.636363636,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.1",
+						"0.2"
+					]
+				]
+			],
+			[
+				132727.272727273,
+				[
+					[
+						"Alter Camera Zoom",
+						"0.9",
+						"0.2"
+					]
+				]
+			],
+			[
+				133090.909090909,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.1",
+						"0.2"
+					]
+				]
+			],
+			[
+				133454.545454546,
+				[
+					[
+						"Alter Camera Zoom",
+						"0.9",
+						"0.2"
+					]
+				]
+			],
+			[
+				140727.272727273,
+				[
+					[
+						"Alter Camera Zoom",
+						"0.95",
+						"0.2"
+					]
+				]
+			],
+			[
+				140909.090909091,
+				[
+					[
+						"Alter Camera Zoom",
+						"1",
+						"0.2"
+					]
+				]
+			],
+			[
+				142181.818181818,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.05",
+						"0.2"
+					]
+				]
+			],
+			[
+				142363.636363636,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.1",
+						"0.2"
+					]
+				]
+			],
+			[
+				143636.363636364,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.15",
+						"0.2"
+					]
+				]
+			],
+			[
+				143818.181818182,
+				[
+					[
+						"Alter Camera Zoom",
+						"1.2",
+						"0.2"
 					]
 				]
 			],
@@ -5541,7 +6736,7 @@
 		"needsVoices": true,
 		"stage": "Studio",
 		"arrowSkin": "",
-		"speed": 2,
+		"speed": 2.3,
 		"bpm": 165
 	}
 }

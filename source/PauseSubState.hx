@@ -382,10 +382,12 @@ class PauseSubState extends MusicBeatSubstate
 						Application.current.window.title = "Funkin.avi";
 						switch(PlayState.SONG.song)
 						{
-							case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Facade' | 'Mortiferum Risus':
+							case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Facade' | 'Mortiferum Risus' | 'Malfunction' | "Don't Cross!" | 'Bless' | 'Cycled Sins' | 'Hunted':
 								MusicBeatState.switchState(new EpisodesState());
-							case 'Hunted' | 'Isolated Old' | 'Isolated Beta' | "Don't Cross!" | 'Malfunction' | 'Cycled Sins' | 'War Dilemma' | 'Scrapped' | 'Bless' | 'Mercy':
-								MusicBeatState.switchState(new ExtrasState());
+							case 'Isolated Legacy' | 'Lunacy Legacy' | 'Malfunction Legacy' | 'Mercy Legacy':
+								MusicBeatState.switchState(new LegacyState());
+							/*case 'Hunted' | 'Isolated Old' | 'Isolated Beta' | "Don't Cross!" | 'Malfunction' | 'Cycled Sins' | 'War Dilemma' | 'Scrapped' | 'Bless' | 'Mercy':
+								MusicBeatState.switchState(new ExtrasState());*/
 							default:
 								MusicBeatState.switchState(new EpicSelectorWOOO());
 						}

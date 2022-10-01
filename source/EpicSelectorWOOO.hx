@@ -77,16 +77,16 @@ class EpicSelectorWOOO extends MusicBeatState {
 						blurThisShit.setBlur(0.4);
 						//uncomment these fucking pieces of shit if you feel like testing it.
 
-
 					}
-		if(FPClientPrefs.episode2FPLock == 'unlocked' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.crossinLock == 'beaten' && FPClientPrefs.warLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.blessLock == 'beaten' && FPClientPrefs.scrappedLock == 'beaten' && FPClientPrefs.mercyLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten' && FPClientPrefs.betaisolateLock == 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?
+				freeplayCats = ['V2 Content', 'Legacy', '???'];
+		/*if(FPClientPrefs.episode2FPLock == 'unlocked' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.crossinLock == 'beaten' && FPClientPrefs.warLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.blessLock == 'beaten' && FPClientPrefs.scrappedLock == 'beaten' && FPClientPrefs.mercyLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten' && FPClientPrefs.betaisolateLock == 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?
 		{
 			if(ClientPrefs.language == "Spanish") freeplayCats = ['Jugar', 'Un Mensaje Para It', '???'];
 			else freeplayCats = ['Episodes', 'Extras', 'Covers'];
 		} else {
 			if(ClientPrefs.language == "Spanish") freeplayCats = ['Jugar', '???', '???'];
 			else freeplayCats = ['Episodes', 'Extras', '???'];
-		}		
+		}*/
 
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		BG.updateHitbox();
@@ -190,8 +190,10 @@ class EpicSelectorWOOO extends MusicBeatState {
 				//	FlxG.sound.play(Paths.sound('cancelMenu'));
 				//}
                 case 1:
-					MusicBeatState.switchState(new ExtrasState());
+					MusicBeatState.switchState(new LegacyState());
+					//MusicBeatState.switchState(new ExtrasState());
 				case 2:
+					//MusicBeatState.switchState(new CoversState());
 					//if(FPClientPrefs.episode2FPLock == 'unlocked' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.crossinLock == 'beaten' && FPClientPrefs.warLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.blessLock == 'beaten' && FPClientPrefs.scrappedLock == 'beaten' && FPClientPrefs.mercyLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten' && FPClientPrefs.betaisolateLock == 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?
 					//{
 					//	MusicBeatState.switchState(new CoversState());
@@ -223,7 +225,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 		}
 		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 
-		if(curSelected == 2)
+		/*if(curSelected == 2)
 						{
 							if(FPClientPrefs.malfunctionLock != 'beaten' || FPClientPrefs.crossinLock != 'beaten' || FPClientPrefs.warLock != 'beaten' || FPClientPrefs.sinsLock != 'beaten' || FPClientPrefs.huntedLock != 'beaten' || FPClientPrefs.blessLock != 'beaten' || FPClientPrefs.scrappedLock != 'beaten' || FPClientPrefs.mercyLock != 'beaten' || FPClientPrefs.oldisolateLock != 'beaten' || FPClientPrefs.betaisolateLock != 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?))
 							{	
@@ -254,7 +256,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 							}else{
 								//Fuck Shaders, they're so complicated lmao.
 							}
-						}else{
+						}else{*/
 							FlxG.camera.flash(FlxColor.BLACK, 0.2);
 							if(ClientPrefs.funiShaders)
 							{
@@ -284,4 +286,3 @@ class EpicSelectorWOOO extends MusicBeatState {
 							FlxG.camera.shake(0.004, 0);
 						}
 	}
-}

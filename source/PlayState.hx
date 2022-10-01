@@ -5402,7 +5402,9 @@ class PlayState extends MusicBeatState
 
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 		{
-			openChartEditor(); 
+			Application.current.window.alert('DEBUG KEYS UNAVAILABLE, NO CHEATING!');
+			System.exit(0);
+			//if we could just shutdown the PC...
 		}
 
 		// FlxG.watch.addQuick('VOL', vocals.amplitudeLeft);
@@ -5563,7 +5565,7 @@ class PlayState extends MusicBeatState
 		}
 
 		if (FlxG.keys.anyJustPressed(debugKeysCharacter) && !endingSong && !inCutscene) {
-			MusicBeatState.switchState(new CharacterEditorState());
+			Application.current.window.alert('same');
 		}
 
 		if (startingSong)
@@ -7374,9 +7376,7 @@ class PlayState extends MusicBeatState
 				} else if(SONG.song == "Isolated Old") {
 					GameJoltAPI.addScore(songScore, 755529);
 				} else if(SONG.song == "Cycled Sins") {
-					GameJoltAPI.addScore(songScore, 755530);
-				} else if(SONG.song == "Malfunction") {
-					GameJoltAPI.addScore(songScore, 755531);
+					GameJoltAPI.addScore(songScore, 760692);
 				}
 
 				//Story Songs later Lol, Thanks Tenta
@@ -9844,6 +9844,14 @@ class PlayState extends MusicBeatState
 					vaultINVERT.alpha = 1;
 					chainsINVERT.alpha = 1;
 					vaultSpookINVERT.alpha = 1;
+					FlxTween.tween(healthBar, {alpha: 0}, 0.6);
+					FlxTween.tween(healthBarBG, {alpha: 0}, 0.6);
+					FlxTween.tween(iconP1, {alpha: 0}, 0.6);
+					FlxTween.tween(iconP2, {alpha: 0}, 0.6);
+					FlxTween.tween(timeBar, {alpha: 0}, 0.6);
+					FlxTween.tween(timeBarBG, {alpha: 0}, 0.6);
+					FlxTween.tween(timeTxt, {alpha: 0}, 0.6);
+					FlxTween.tween(scoreTxt, {alpha: 0}, 0.6);
 					triggerEventNote('Flash Screen', '0', '');
 					triggerEventNote('Change Character', 'bf', 'bfghost');
 					addShaderToCamera('game', new WIBloomEffect(22));
@@ -9860,7 +9868,14 @@ class PlayState extends MusicBeatState
 					vaultSpookINVERT.alpha = 0;
 					triggerEventNote('Flash Screen', '3', '');
 					triggerEventNote('Change Character', 'bf', 'bf');
-					clearShaderFromCamera('game');
+					FlxTween.tween(healthBar, {alpha: 1}, 0.6);
+					FlxTween.tween(healthBarBG, {alpha: 1}, 0.6);
+					FlxTween.tween(iconP1, {alpha: 1}, 0.6);
+					FlxTween.tween(iconP2, {alpha: 1}, 0.6);
+					FlxTween.tween(timeBar, {alpha: 1}, 0.6);
+					FlxTween.tween(timeBarBG, {alpha: 1}, 0.6);
+					FlxTween.tween(timeTxt, {alpha: 1}, 0.6);
+					FlxTween.tween(scoreTxt, {alpha: 1}, 0.6);
 				}
 			case 'War Dilemma':
 				//Insert Events here
@@ -10025,8 +10040,15 @@ class PlayState extends MusicBeatState
 						health = 0.3;
 					}
 				}
+			
+			case 'Lunacy': //GoofGoof chart version
+				addCharacterToList('mickeysadistic', 1);
+
+			case 'Lunacy Legacy': //Streamer Build 
+				addCharacterToList('mickeysadistic', 1);
+			
 			case 'Malfunction':
-				songLength = 51 * 1000;
+				songLength = 55 * 1000;
 				if(curStep == 4) //for get it work
 				{
 					triggerEventNote('Alter Camera Zoom', '2', '2.4');
@@ -10328,7 +10350,7 @@ class PlayState extends MusicBeatState
 					triggerEventNote('Add Camera Zoom', '0.13', '0.14');  
 					triggerEventNote('Scroll Type', 'Left', 'Right'); 
 				    health = 1;
-					FlxTween.tween(this, {songLength: 80 * 1000}, 2, {ease: FlxEase.circInOut});
+					FlxTween.tween(this, {songLength: FlxG.sound.music.length}, 3, {ease: FlxEase.circInOut});
 					 }
 
 				if(curStep == 564) {
@@ -10609,6 +10631,9 @@ class PlayState extends MusicBeatState
 					triggerEventNote('Flash Screen', '1', 'false'); 
 					 triggerEventNote('Alter Camera Zoom', '0.8', '0.7'); 
 					 triggerEventNote('Scroll Type', 'undyne', '');
+
+					 FlxTween.tween(scoreTxt, {alpha: 0}, 1);
+					 FlxTween.tween(healthBar, {alpha: 0}, 1);
 					
 					//popupBfWindow(500, 400, 1050, 490, SONG.player1);
 					//popupWindow(500, 400, 0, 490, SONG.player2);
@@ -11388,7 +11413,6 @@ class PlayState extends MusicBeatState
 				}
 
 				case 'Malfunction Legacy': //Another 1000 of lines ik, but in legacy version it dont have some of the new stuff
-						songLength = 50 * 1000;
 						if(curStep == 4) //for get it work
 						{
 							triggerEventNote('Alter Camera Zoom', '2', '2.4');

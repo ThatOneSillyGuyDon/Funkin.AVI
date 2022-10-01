@@ -9979,13 +9979,8 @@ class PlayState extends MusicBeatState
 						health = 0.3;
 					}
 				}
-<<<<<<< HEAD
-			case 'Malfunction':
-				songLength = 50 * 1000; //WI moment
-=======
 			case 'Malfunction' | 'Malfunction Legacy':
 				songLength = 50 * 1000;
->>>>>>> c4dea22501c97bea8b2610b58e6364d2735aa1f1
 				if(curStep == 4) //for get it work
 				{
 					triggerEventNote('Alter Camera Zoom', '2', '2.4');

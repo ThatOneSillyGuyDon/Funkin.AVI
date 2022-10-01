@@ -1838,6 +1838,45 @@ class PlayState extends MusicBeatState
 						timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
 					case 'Scrapped':
 						timeBar.createFilledBar(0xFF0008FF, 0xFF11C700);
+					case 'Sink':
+						timeBar.createFilledBar(0xFF630000, 0xFFD70000);
+					case 'Invincible':
+						timeBar.createFilledBar(0xFF000000, 0xFF52627D);
+					case 'Neglection':
+						timeBar.createFilledBar(0xFF0088FF, 0xFFFFFFFF);
+					case 'Infitrigger':
+						timeBar.createFilledBar(0xFFFFFFFF, 0xFFD400FF);
+					case 'Mercy':
+						timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
+					case 'Malfunction':
+						glitchTimeColors = FlxG.random.int(12, 19);
+
+						switch glitchTimeColors
+						{
+
+							case 11: timeBar.createFilledBar(0xFF11C700, 0xFFFFF200);
+
+							case 12: timeBar.createFilledBar(0xFF11C700, 0xFF0008FF);
+
+							case 13: timeBar.createFilledBar(0xFF0008FF, 0xFF11C700);
+
+							case 14: timeBar.createFilledBar(0xFFFFF200, 0xFFFF0000);
+
+							case 15: timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
+
+							case 16: timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
+
+							case 17: timeBar.createFilledBar(0xFFFFF4BA, 0xFFC78800);
+
+							case 18: timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
+
+							case 19: timeBar.createFilledBar(0xFFB7B7B7, 0xFF2E2E2E);
+						}
+
+						new FlxTimer().start(0.8, function(tmr:FlxTimer)
+						{
+							glitchTimeColors = FlxG.random.int(12, 19);
+						});
 					default:
 						timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
 				}
@@ -2022,6 +2061,14 @@ class PlayState extends MusicBeatState
 						timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
 					case 'Scrapped':
 						timeBar.createFilledBar(0xFF0008FF, 0xFF11C700);
+					case 'Sink':
+						timeBar.createFilledBar(0xFF630000, 0xFFD70000);
+					case 'Invincible':
+						timeBar.createFilledBar(0xFF000000, 0xFF52627D);
+					case 'Neglection':
+						timeBar.createFilledBar(0xFF0088FF, 0xFFE2E2E2);
+					case 'Infitrigger':
+						timeBar.createFilledBar(0xFFFFFFFF, 0xFFD400FF);
 					case 'Mercy':
 						timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
 					case 'Malfunction':
@@ -2030,27 +2077,6 @@ class PlayState extends MusicBeatState
 					if(curBeat % 2 == 0) {
  						switch glitchTimeColors
 						{
-							case 0: FlxColor.RED;
-
-							case 1: FlxColor.BLUE;
-
-							case 2: FlxColor.CYAN;
-
-							case 3: FlxColor.LIME;
-
-							case 4: FlxColor.GREEN;
-
-							case 5: FlxColor.BLACK;
-
-							case 6: FlxColor.WHITE;
-
-							case 7: FlxColor.YELLOW;
-
-							case 8: FlxColor.ORANGE;
-
-							case 9: FlxColor.GRAY;
-
-							case 10: FlxColor.MAGENTA;
 
 							case 11: timeBar.createFilledBar(0xFF11C700, 0xFFFFF200);
 
@@ -2069,29 +2095,6 @@ class PlayState extends MusicBeatState
 							case 18: timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
 
 							case 19: timeBar.createFilledBar(0xFFB7B7B7, 0xFF2E2E2E);
-
-							/*case 20:
-
-							case 21:
-
-							case 22:
-
-							case 23:
-
-							case 24:
-
-							case 25:
-
-							case 26:
-
-							case 27:
-
-							case 28:
-
-							case 29:
-
-							case 30:*/
-
 						}
 }
 						new FlxTimer().start(0.8, function(tmr:FlxTimer)
@@ -2865,6 +2868,7 @@ class PlayState extends MusicBeatState
 			FlxG.stage.addEventListener(KeyboardEvent.KEY_UP, onKeyRelease);
 		}
 
+		Conductor.safeZoneOffset = (ClientPrefs.safeFrames / 60) * 1000;
 		callOnLuas('onCreatePost', []);
 		
 		super.create();
@@ -6862,7 +6866,18 @@ class PlayState extends MusicBeatState
 				if(bgGirls != null) bgGirls.swapDanceType();
 
 			case 'Relapse Shoot':
-				relapseShoot();
+				switch(value1) {
+					case 'Normal' | 'normal' | 'NORMAL':
+						relapseShoot();
+					case 'Fast' | 'fast' | 'FAST':
+						relapseShootButFast();
+					case 'Instakill' | 'instakill' | 'INSTAKILL':
+						relapseShootButInstakill();
+					case 'Speedy' | 'speedy' | 'SPEEDY':
+						relapseShootButFuckingQuick();
+					default:
+						relapseShoot();
+				}
 
 			case 'Hide HUD':
 				if(value1 == 'false') {
@@ -8876,7 +8891,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null) {
-		var skin:String = 'noteSplashes';
+		var skin:String = 'NoteSplashSkin/noteSplashes-Better';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 		
 		var hue:Float = ClientPrefs.arrowHSV[data % 4][0] / 360;
@@ -8916,26 +8931,116 @@ class PlayState extends MusicBeatState
 				SCALEdebugText.text = "screen mode : " + modeText;
 		}
 
+		function relapseShootButFast()
+			{
+				dodged = false;
+				shootin = true;	
+				ohShitHeGonnaShootButFast();
+					new FlxTimer().start(0.75, function(tmr:FlxTimer){
+						FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Shoot'), 0.6);
+						dad.playAnim("attack", true);
+						dad.specialAnim = true;
+						new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+						if(!dodged) {
+							FlxG.camera.shake(0.05, 0.05);
+							health -= 0.3;
+							trace("lmfao you got shot");
+							dodged = false;
+						} else {
+							boyfriend.playAnim('dodge');
+							dodged = false;
+							shootin = false;
+							health += 0.05;
+						}
+						});
+					});
+			}
+		
+			function ohShitHeGonnaShootButFast()
+			{
+				FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Reload'), 0.6);
+				holyShitMOVEBITCH.alpha = 1;
+				holyShitMOVEBITCH.y = -420;
+				//holyShitMOVEBITCH.rotateX = 0;
+				dad.playAnim("reload", true);
+				dad.specialAnim = true;
+				new FlxTimer().start(0.1, function(tmr:FlxTimer)
+				{
+					FlxTween.tween(holyShitMOVEBITCH, {alpha: 0, y: -400}, 0.3, {ease: FlxEase.quadInOut});
+				});
+				pressCounter = 0;
+			}
+
+			function relapseShootButFuckingQuick()
+				{
+					dodged = false;
+					shootin = true;	
+					ohShitHeGonnaShootButFast();
+						new FlxTimer().start(0.35, function(tmr:FlxTimer){
+							FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Shoot'), 0.6);
+							dad.playAnim("attack", true);
+							dad.specialAnim = true;
+							new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+							if(!dodged) {
+								FlxG.camera.shake(0.05, 0.05);
+								health = 0;
+								trace("lmfao you fucking died to a mouse");
+								dodged = false;
+							} else {
+								boyfriend.playAnim('dodge');
+								dodged = false;
+								shootin = false;
+								health += 0.05;
+							}
+							});
+						});
+				}
+
+			function relapseShootButInstakill()
+				{
+					dodged = false;
+					shootin = true;	
+					ohShitHeGonnaShoot();
+						new FlxTimer().start(0.5, function(tmr:FlxTimer){
+							FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Shoot'), 0.6);
+							dad.playAnim("attack", true);
+							dad.specialAnim = true;
+							new FlxTimer().start(0.1, function(tmr:FlxTimer) {
+							if(!dodged) {
+								FlxG.camera.shake(0.05, 0.05);
+								health = 0;
+								trace("lmfao you fucking died to a mouse");
+								dodged = false;
+							} else {
+								boyfriend.playAnim('dodge');
+								dodged = false;
+								shootin = false;
+								health += 0.05;
+							}
+							});
+						});
+				}
+
 	function relapseShoot()
 	{
 		dodged = false;
 		shootin = true;	
 		ohShitHeGonnaShoot();
-			new FlxTimer().start(0.75, function(tmr:FlxTimer){
+			new FlxTimer().start(1.1, function(tmr:FlxTimer){
 				FlxG.sound.play(Paths.sound('funkinAVI/relapseMechs/Shoot'), 0.6);
 				dad.playAnim("attack", true);
 				dad.specialAnim = true;
 				new FlxTimer().start(0.1, function(tmr:FlxTimer) {
 				if(!dodged) {
 					FlxG.camera.shake(0.05, 0.05);
-					health = 0;
-					trace("lmfao you fucking died to a mouse");
+					health -= 0.3;
+					trace("lmfao you got shot depsite the fact this is nerfed");
 					dodged = false;
 				} else {
 					boyfriend.playAnim('dodge');
 					dodged = false;
 					shootin = false;
-					health += 0.2;
+					health += 0.05;
 				}
 				});
 			});
@@ -8949,7 +9054,7 @@ class PlayState extends MusicBeatState
 		//holyShitMOVEBITCH.rotateX = 0;
 		dad.playAnim("reload", true);
 		dad.specialAnim = true;
-		new FlxTimer().start(0.1, function(tmr:FlxTimer)
+		new FlxTimer().start(0.4, function(tmr:FlxTimer)
 		{
 			FlxTween.tween(holyShitMOVEBITCH, {alpha: 0, y: -400}, 0.3, {ease: FlxEase.quadInOut});
 		});

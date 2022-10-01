@@ -505,7 +505,7 @@ class BetterPreload extends MusicBeatState {
         }
 
         ///*
-        FlxTween.tween(FlxG.camera, {alpha: 0}, 0.5, {
+        FlxTween.tween(FlxG.camera, {alpha: 0}, 0.5, {startDelay: 1,
             onComplete: function(tween:FlxTween){
                 if(FlxG.save.data.funiShaders == null && !ShadersState.leftState)
                     {

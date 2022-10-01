@@ -22,6 +22,8 @@ class Conductor
 	public static var songPosition:Float=0;
 	public static var lastSongPos:Float;
 	public static var offset:Float = 0;
+	public static var timingWindows:Array<Int>;
+	public static var windowNames:Array<String>;
 
 	//public static var safeFrames:Int = 10;
 	public static var safeZoneOffset:Float = (ClientPrefs.safeFrames / 60) * 1000; // is calculated in create(), is safeFrames in milliseconds
@@ -36,8 +38,8 @@ class Conductor
 	{
 		//tryna do MS based judgment due to popular demand
 		if (ClientPrefs.marvelouses){
-			var timingWindows:Array<Int> = [ClientPrefs.marvelousWindow, ClientPrefs.sickWindow, ClientPrefs.goodWindow, ClientPrefs.badWindow];
-			var windowNames:Array<String> = ['marvelous', 'sick', 'good', 'bad'];
+			timingWindows = [ClientPrefs.marvelousWindow, ClientPrefs.sickWindow, ClientPrefs.goodWindow, ClientPrefs.badWindow];
+			windowNames = ['marvelous', 'sick', 'good', 'bad'];
 
 			// var diff = Math.abs(note.strumTime - Conductor.songPosition) / (PlayState.songMultiplier >= 1 ? PlayState.songMultiplier : 1);
 		for(i in 0...timingWindows.length) // based on 4 timing windows, will break with anything else
@@ -49,8 +51,8 @@ class Conductor
 		}
 		return 'shit';
 		}else{
-			var timingWindows:Array<Int> = [ClientPrefs.sickWindow, ClientPrefs.goodWindow, ClientPrefs.badWindow];
-			var windowNames:Array<String> = ['sick', 'good', 'bad'];
+			timingWindows = [ClientPrefs.sickWindow, ClientPrefs.goodWindow, ClientPrefs.badWindow];
+			windowNames = ['sick', 'good', 'bad'];
 
 		// var diff = Math.abs(note.strumTime - Conductor.songPosition) / (PlayState.songMultiplier >= 1 ? PlayState.songMultiplier : 1);
 		for(i in 0...timingWindows.length) // based on 4 timing windows, will break with anything else

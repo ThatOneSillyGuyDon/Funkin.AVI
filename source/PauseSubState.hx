@@ -17,6 +17,7 @@ import flixel.FlxCamera;
 import flixel.util.FlxStringUtil;
 import flash.system.System;
 import openfl.filters.ShaderFilter as Filters;
+import flixel.ui.FlxBar;
 import PlayState;
 
 class PauseSubState extends MusicBeatSubstate
@@ -39,9 +40,17 @@ class PauseSubState extends MusicBeatSubstate
 	var pauseMusic:FlxSound;
 	var practiceText:FlxText;
 	var skipTimeText:FlxText;
+	var timeShit:FlxText;
 	var skipTimeTracker:Alphabet;
 	var curTime:Float = Math.max(0, Conductor.songPosition);
-	//var botplayText:FlxText;
+
+	//shitty sonic.exe stuff
+	private var timeBarBG:AttachedSprite;
+	public var iconP1:HealthIcon;
+	public var iconP2:HealthIcon;
+	public var timeBar:FlxBar;
+
+	var levelInfo:FlxText;
 
 	public static var songName:String = '';
 
@@ -109,7 +118,7 @@ class PauseSubState extends MusicBeatSubstate
 
 		Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer + " (PAUSED)";
 
-		var levelInfo:FlxText = new FlxText(20, 15, 0, "", 32);
+		levelInfo=  new FlxText(20, 15, 0, "", 32);
 		levelInfo.text += PlayState.SONG.song;
 		levelInfo.scrollFactor.set();
 		levelInfo.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 32);
@@ -178,6 +187,14 @@ class PauseSubState extends MusicBeatSubstate
 		blueballedTxt.setFormat(Paths.font('NewWaltDisneyFontRegular-BPen.ttf'), 32);
 		blueballedTxt.updateHitbox();
 		add(blueballedTxt);
+
+		var timeShit = new FlxText(PlayState.STRUM_X + (FlxG.width / 2) - 248, 19, 400, "", 32);
+		timeShit.x = 800;
+		timeShit.y = 700;
+		timeShit.scrollFactor.set();
+		timeShit.setFormat(Paths.font('NewWaltDisneyFontRegular-BPen.ttf'), 32);
+		timeShit.updateHitbox();
+		add(timeShit);
 
 		practiceText = new FlxText(20, 15 + 162, 0, "PRACTICE MODE", 32);
 		practiceText.scrollFactor.set();

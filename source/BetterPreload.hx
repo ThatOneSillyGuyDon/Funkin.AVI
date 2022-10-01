@@ -379,6 +379,9 @@ class BetterPreload extends MusicBeatState {
     override public function create() {
         super.create();
 
+        FlxG.drawFramerate = 60;
+        FlxG.updateFramerate = 60;
+
         FlxTransitionableState.skipNextTransIn = true;
         FlxTransitionableState.skipNextTransOut = true;
 

@@ -20,6 +20,7 @@ class Achievements {
 		["Sinister Smiles",				"Beat Episode 2 on Suicidal Difficulty.",			'episode2_suicide',	false],
 		["Isolation, Madness, Voices, It Never Ends...",					"FC Episode 1 on Suicidal Difficulty.",				'episode1_SFC',		false],
 		["Get Out of my Office!",		"FC Episode 2 on Suicidal Difficulty.",				'episode2_SFC',		false],
+		["At The Speed Of Light'",		        "Complete Episode 1 With The PlayBack Rate At The Max value!",  'funiPlayback',  false],
 		["What Malfunction?",			"FC Malfunction.",									'malfunction_nomiss',	false],
 		["Bullet Dodger!",				"FC Cycled Sins.",									'relapse_nomiss',	false],
 		["Glitch in the System!",			"FC & Have ALL 30 Lives in Malfunction!",			'malfunction_tryhard',	false],

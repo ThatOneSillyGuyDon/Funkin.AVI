@@ -27,13 +27,15 @@ import sys.io.File;
 import sys.io.Process;
 #end
 
+using StringTools;
+
 class Main extends Sprite
 {
 	var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var initialState:Class<FlxState> = BetterPreload; // The FlxState the game starts with.
 	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
-	var framerate:Int = 60; // Wowwowoowowowowowowowowowowowowowowowow wtf dude, start with at least 120 FPS
+	var framerate:Int = 60;
 	var skipSplash:Bool = true; // Hope we add this to the mod xd
 	var startFullscreen:Bool = false; // N o
 	public static var gjToastManager:GJToastManager; //Toast For Advice
@@ -94,7 +96,7 @@ class Main extends Sprite
 		}
 
 		#if !debug
-		initialState = BetterPreload;
+		initialState = TitleState;
 		#end
 	
 		ClientPrefs.loadDefaultKeys();
@@ -156,6 +158,7 @@ class Main extends Sprite
 	
 				// Conserve power by lowering draw framerate when unfocuced
 				FlxG.drawFramerate = 60;
+				FlxG.updateFramerate = 60;
 			}
 		}
 
@@ -183,10 +186,11 @@ class Main extends Sprite
 	
 				// Bring framerate back when focused
 				FlxG.drawFramerate = 60;
+				FlxG.updateFramerate = 60;
 			}
 		}
 
-		/*function onCrash(e:UncaughtErrorEvent):Void
+		function onCrash(e:UncaughtErrorEvent):Void
 			{
 				var errMsg:String = "";
 				var path:String;
@@ -243,6 +247,6 @@ class Main extends Sprite
 				}
 		
 				Sys.exit(1);
-			}*/
+			}
 }
 	

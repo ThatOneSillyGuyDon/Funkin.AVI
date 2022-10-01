@@ -9959,7 +9959,7 @@ class PlayState extends MusicBeatState
 					}
 				}
 			case 'Malfunction':
-				songLength = 50 * 1000;
+				songLength = 50 * 1000; //WI moment
 				if(curStep == 4) //for get it work
 				{
 					triggerEventNote('Alter Camera Zoom', '2', '2.4');

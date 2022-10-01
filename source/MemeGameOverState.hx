@@ -23,7 +23,7 @@ class MemeGameOverState extends MusicBeatState
   var randomGameOverText:Array<String> = ['DAMN BITCH', 'i wll shoot you', 'Funkin.AVI + W.I >>>', 'Skill Issue', 'Bro do you not know how to play FNF', 'Get the mechanics right', 'pussy']; //OMG LUA?!
   var frGameOverText:FlxText;
 
-  override function create()
+  override function create
   {
     Application.current.window.title = "omg you found the secret game over... Stupid FNF Kid - Da Furry That Works On This Stupid Shitty Game Over State";
     frGameOverText = new FlxText(0, 0, 0, randomGameOverText, 20); //NOT STOLEN TRUST ME!!!!!!!!!!!!!!!!!!!!

@@ -11,16 +11,18 @@ class No extends FlxState
 	override public function create()
 	{
 		super.create();
-        FlxG.sound.play(Paths.sound('wiiCrash'), 1.8);
-        Application.current.window.alert('Never EVER, try to modify the contents of Funkin.avi Again...');
-        System.exit(0);
+        var cryAboutIt = new FlxSprite().loadGraphic(Paths.image('Piracy/piracyscreen-2'));
+        cryAboutIt.screenCenter();
+        add(cryAboutIt);
 	}
 
 	override public function update(elapsed:Float)
 	{
 		super.update(elapsed);
+        if (FlxG.keys.justPressed.ESCAPE) {
         FlxG.sound.play(Paths.sound('wiiCrash'), 1.8);
-        Application.current.window.alert('Never EVER, try to modify the contents of Funkin.avi Again...');
+        Application.current.window.alert('Never, but never try, to do a mod on Funkin.avi Again...');
         System.exit(0);
+		}
 	}
 }

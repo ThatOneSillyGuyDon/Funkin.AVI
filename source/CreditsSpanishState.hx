@@ -52,7 +52,7 @@ class CreditsSpanishState extends MusicBeatState
 		bg = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		add(bg);
 		bg.screenCenter();
-
+		
 		grpOptions = new FlxTypedGroup<Alphabet>();
 		add(grpOptions);
 
@@ -151,7 +151,7 @@ class CreditsSpanishState extends MusicBeatState
 ['Codificadores'],
 ['DEMOLITIONDON96', 'demolitiondon96', "Codificador principal de Funkin.avi", 'https://youtube.com/c/DEMOLITIONDON96', 'FFFFFF'],
 ['Jsa010', 'jsa010', "Codificador secundario de Funkin.avi", 'https://twitter.com/_Jsa010_', 'FFFFFF'],
-['Real Deal Jinx!', 'rj', 'Se fue pero ha vuelto', 'https://github.com/DEMOLITIONDON96/Demolition-Engine/commits?author=RealDealJinx', '4D4DC32'],
+['TonyTime!', 'matt', 'Se fue pero ha vuelto', 'https://github.com/TonyTimee', 'FFFFFF'],
 ['Goofgoof43', 'icono perdido', 'Tipo bastante genial, diría', 'nolink', 'FFFFFF'],
 ['MalyPlus', 'maly', 'Programador más nuevo del equipo', 'https://gamebanana.com/members/2014862', 'FFFFFF'],
 ['A3ro', 'icono perdido', 'También un codificador nuevo', 'nolink', 'FFFFFF'],
@@ -171,7 +171,7 @@ class CreditsSpanishState extends MusicBeatState
             ['¡Tony Time!', 'matt', 'Codificador Epico \n(hizo muchas cosas geniales)', 'https://github.com/TonyTimee', '444444'],
             ['Cherif107', 'missing-icon', 'Programador genial\nBuen Tipo', 'https://github.com/Cherif107', 'FFFFFF'],
             ['PrismLight', 'prism', 'Código menor', 'https://github.com/PrismLight', '3B3B3B',],
-            ['Theoyeah', 'theoyeah credit', 'Ayuda con algo de código', 'https://github.com/Theoyeah', 'FFFFFF'],
+            ['Theoyeah', 'theoyeah credit', 'Ayuda con algo de código', 'https://github.com/Theoyeah', 'FFFFFF'],	
             [''],
 ['Código adicional'],
 ['mayo78', 'missing-icon', 'Código de máscara de CPU épica', 'https://github.com/mayo78', 'FFFFFF'],
@@ -216,11 +216,11 @@ class CreditsSpanishState extends MusicBeatState
 			//["Slutty Crew"],
 			//['Ben UWU',		'ben',	"Got Drip And Is So Slutty",						"https://www.youtube.com/watch?v=v5F5WyhzW9M",		'FFFFFF']
 		];
-
+		
 		for(i in pisspoop){
 			creditsStuff.push(i);
 		}
-
+	
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !unselectableCheck(i);
@@ -245,7 +245,7 @@ class CreditsSpanishState extends MusicBeatState
 				var icon:AttachedSprite = new AttachedSprite('credits/' + creditsStuff[i][1]);
 				icon.xAdd = optionText.width + 10;
 				icon.sprTracker = optionText;
-
+	
 				// using a FlxGroup is too much fuss!
 				iconArray.push(icon);
 				add(icon);
@@ -254,7 +254,7 @@ class CreditsSpanishState extends MusicBeatState
 				if(curSelected == -1) curSelected = i;
 			}
 		}
-
+		
 		descBox = new AttachedSprite();
 		descBox.makeGraphic(1, 1, FlxColor.BLACK);
 		descBox.xAdd = -10;
@@ -291,7 +291,7 @@ class CreditsSpanishState extends MusicBeatState
 		grain.scale.x = 1.1;
 		grain.scale.y = 1.1;
 		add(grain);
-
+		
 		super.create();
 	}
 
@@ -347,7 +347,7 @@ class CreditsSpanishState extends MusicBeatState
   				if(noLink) {
   				if(controls.ACCEPT) {
   					FlxG.sound.play(Paths.sound('cancelMenu'));
-  				}
+  				} 
   				}else {
   					if(controls.ACCEPT) {
   					CoolUtil.browserLoad(creditsStuff[curSelected][3]);
@@ -365,7 +365,7 @@ class CreditsSpanishState extends MusicBeatState
 				quitting = true;
 			}
 			}
-
+		
 		for (item in grpOptions.members)
 		{
 			if(!item.isBold)
@@ -387,7 +387,7 @@ class CreditsSpanishState extends MusicBeatState
 		}
 		super.update(elapsed);
 	}
-
+	
 		override function beatHit()
 	{
 		super.beatHit();
@@ -398,7 +398,7 @@ class CreditsSpanishState extends MusicBeatState
 		}
 	}
 	}
-
+	
 	var moveTween:FlxTween = null;
 	function changeSelection(change:Int = 0)
 	{

@@ -42,7 +42,6 @@ class GameOverSubstate extends MusicBeatSubstate
 		PlayState.instance.callOnLuas('onGameOverStart', []);
 
 		super.create();
-		lime.app.Application.current.window.focus();
 	}
 
 	public function new(x:Float, y:Float, camX:Float, camY:Float)
@@ -153,12 +152,14 @@ class GameOverSubstate extends MusicBeatSubstate
 			else
 				switch(PlayState.SONG.song)
 					{
-						case 'Isolated' | 'Lunacy':
+						case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Facade' | 'Mortiferum Risus' | 'Malfunction' | "Don't Cross!" | 'Bless' | 'Cycled Sins' | 'Hunted':
 							MusicBeatState.switchState(new EpisodesState());
-						case 'Hunted' | 'Malfunction' | 'Birthday' | 'Twisted Grins' | "Don't Cross!" | 'Isolated Old' | 'Mercy' | 'Cycled Sins':
-							MusicBeatState.switchState(new ExtrasState());
+						case 'Isolated Legacy' | 'Lunacy Legacy' | 'Malfunction Legacy' | 'Mercy Legacy':
+							MusicBeatState.switchState(new LegacyState());
+						/*case 'Hunted' | 'Isolated Old' | 'Isolated Beta' | "Don't Cross!" | 'Malfunction' | 'Cycled Sins' | 'War Dilemma' | 'Scrapped' | 'Bless' | 'Mercy':
+							MusicBeatState.switchState(new ExtrasState());*/
 						default:
-							MusicBeatState.switchState(new EpisodesState());
+							MusicBeatState.switchState(new EpicSelectorWOOO());
 					}
 
 			FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));

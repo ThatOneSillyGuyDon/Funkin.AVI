@@ -25,7 +25,6 @@ import haxe.Exception; //funi
 import flixel.tweens.FlxEase;
 import flixel.util.FlxColor;
 import flixel.tweens.FlxTween;
-import tentools.api.FlxGameJolt as GJApi;
 #if cpp
 import sys.FileSystem;
 import sys.io.File;
@@ -36,8 +35,8 @@ enum PreloadType {
     atlas;
     image;
     imagealt;
-    chart; //wat?
-   // sound; useless lol (Jason)
+   // chart; //wat?
+    //sound;
    // music; <-This shit doesn't work
 }
 
@@ -348,7 +347,7 @@ class BetterPreload extends MusicBeatState {
         'pixelUI/POISONnoteSplashes' => PreloadType.image,
         'pixelUI/RSnoteSplashes' => PreloadType.image,
 
-        //Charts & Song Files
+       /*//Charts & Song Files
         'isolated' => PreloadType.chart,
         'isolated-old' => PreloadType.chart,
         'isolated-beta' => PreloadType.chart,
@@ -365,7 +364,7 @@ class BetterPreload extends MusicBeatState {
         'mortiferum-risus' => PreloadType.chart,
         'cycled-sins' => PreloadType.chart,
         'scrapped' => PreloadType.chart,
-        'war-dilemma' => PreloadType.chart,
+        'war-dilemma' => PreloadType.chart,*/
 
 
 
@@ -395,38 +394,14 @@ class BetterPreload extends MusicBeatState {
 
         preloadedAssets = new Map<String, FlxGraphic>();
 
-        var menuBG:FlxSprite = new FlxSprite().loadGraphic(Paths.image('funkay')); //Placeholder
-		menuBG.screenCenter();
-		add(menuBG);
-        /*var unownBg:FlxSprite = new FlxSprite();
-		unownBg.loadGraphic(Paths.image('Loading Unown'));
-        unownBg.setGraphicSize(Std.int(unownBg.width * globalRescale));
-        unownBg.updateHitbox();
-		backgroundGroup.add(unownBg);
+        bg = new FlxSprite().loadGraphic(Paths.image('funkay' + FlxG.random.int(0, 4))); //Placeholder
+		bg.screenCenter();
+        bg.alpha = 0;
+		add(bg);
 
-        bg = new FlxSprite();
-		bg.loadGraphic(Paths.image('Loading Hypno'));
-        bg.setGraphicSize(Std.int(bg.width * globalRescale));
-        bg.updateHitbox();
-		backgroundGroup.add(bg);
-
-        var gfBg:FlxSprite = new FlxSprite();
-		gfBg.loadGraphic(Paths.image('Loading GF'));
-        gfBg.setGraphicSize(Std.int(gfBg.width * globalRescale));
-        gfBg.updateHitbox();
-		backgroundGroup.add(gfBg);
-
-        var pendulum:FlxSprite = new FlxSprite();
-        pendulum.frames = Paths.getSparrowAtlas('Loading Screen Pendelum');
-        pendulum.animation.addByPrefix('load', 'Loading Pendelum Finished', 24, true);
-        pendulum.animation.play('load');
-        pendulum.setGraphicSize(Std.int(pendulum.width * globalRescale));
-        pendulum.updateHitbox();
-        backgroundGroup.add(pendulum);
-        pendulum.x = FlxG.width - (pendulum.width + 10);
-        pendulum.y = FlxG.height - (pendulum.height + 10);*/
-
-       // add(backgroundGroup);
+        FlxTween.tween(bg, {alpha: 1}, 1);
+        refreshLoadScreen();
+    
         FlxTween.tween(FlxG.camera, {alpha: 1}, 0.5, {
             onComplete: function(tween:FlxTween){
                 Thread.create(function(){
@@ -440,8 +415,7 @@ class BetterPreload extends MusicBeatState {
         if(FlxG.save.data.episode1FPLock == null) FPClientPrefs.lockinIt();
 
         GameJolt.connect();
-        GameJolt.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken);
-        trace('Loading GameJolt Data...',  GJApi.username); //Loads GameJolt stuff
+        GameJolt.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken); //Loads GameJolt stuff
 
         loadText = new FlxText(-100, FlxG.height - (32 + 7), 0, 'Loading...', 32);
         loadText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -462,6 +436,17 @@ class BetterPreload extends MusicBeatState {
         super.update(elapsed);
     }
 
+    function refreshLoadScreen() {
+            FlxTween.tween(bg, {alpha: 0}, 1.5, {startDelay: 6, onComplete: function(twn:FlxTween)
+            {
+            remove(bg);
+            add(bg);
+            FlxTween.tween(bg, {alpha: 1}, 1.5);
+            },
+            type: LOOPING});
+
+    }
+
     var storedPercentage:Float = 0;
 
     function assetGenerate() {
@@ -473,19 +458,23 @@ class BetterPreload extends MusicBeatState {
             FlxGraphic.defaultPersist = true;
             switch(assetStack[i]) {
                 case PreloadType.imagealt:
+                    loadText.text = 'Loading Menu... ${Math.floor(storedPercentage * 100)}%';
                     var menuShit:FlxGraphic = FlxG.bitmap.add(Paths.image(i));
                     preloadedAssets.set(i, menuShit);
                     trace('menu asset is loaded');
                 case PreloadType.image:
+                    loadText.text = 'Loading Assets... ${Math.floor(storedPercentage * 100)}%';
                     var savedGraphic:FlxGraphic = FlxG.bitmap.add(Paths.image(i, 'shared'));
                     preloadedAssets.set(i, savedGraphic);
                     trace(savedGraphic + ', yeah its working');
                 case PreloadType.atlas:
+                    loadText.text = 'Loading Characters... ${Math.floor(storedPercentage * 100)}%';
                     var preloadedCharacter:Character = new Character(FlxG.width / 2, FlxG.height / 2, i);
                     preloadedCharacter.visible = false;
                     add(preloadedCharacter);
                     trace('character loaded ${preloadedCharacter.frames}');
-                case PreloadType.chart:
+              /*  case PreloadType.chart:
+                    loadText.text = 'Loading Songs... ${Math.floor(storedPercentage * 100)}%';
                     var preloadedChart:String = Paths.json(i);
                     trace(i + ' is loaded?');
                         var preloadedSong:String = Paths.voices(i);
@@ -501,7 +490,10 @@ class BetterPreload extends MusicBeatState {
         
             countUp++;
             storedPercentage = countUp/maxCount;
-            loadText.text = 'Loading... Progress at ${Math.floor(storedPercentage * 100)}%';
+            if(countUp == maxCount)
+            {
+                loadText.text = 'Game Fully Loaded! Launching Title Sequence...';
+            }
         }
 
         ///*

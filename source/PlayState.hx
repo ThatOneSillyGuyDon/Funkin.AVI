@@ -2140,6 +2140,7 @@ class PlayState extends MusicBeatState
 
 			if(ClientPrefs.language == "English") Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
 			else Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Hecho Por " + PlayState.SONG.composer;
+
 		switch(hudStyle)
 		{
 			case 'Vanilla' | 'Psych':
@@ -5403,7 +5404,9 @@ class PlayState extends MusicBeatState
 		if (FlxG.keys.anyJustPressed(debugKeysChart) && !endingSong && !inCutscene)
 		{
 			Application.current.window.alert('DEBUG KEYS UNAVAILABLE, NO CHEATING!');
-			System.exit(0);
+			openChartEditor();
+			//uncomment this when everything is ready
+		//	System.exit(0);
 			//if we could just shutdown the PC...
 		}
 

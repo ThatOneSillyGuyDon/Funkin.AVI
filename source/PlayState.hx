@@ -9892,9 +9892,11 @@ class PlayState extends MusicBeatState
 					Application.current.window.borderless = true; //ALT + F4 Supermarcy
 					triggerEventNote('Flash Screen', '0', '');
 					triggerEventNote('Change Character', 'bf', 'bfghost');
+					if(!ClientPrefs.optimization) {
 					addShaderToCamera('game', new WIBloomEffect(22));
 					addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					}
 				}
 				if(curStep == 2432)
 				{

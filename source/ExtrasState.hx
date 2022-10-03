@@ -80,6 +80,7 @@ class ExtrasState extends MusicBeatState{
 			if(FPClientPrefs.scrappedLock != 'beaten' && FPClientPrefs.scrappedLock != 'unlocked') addSong('Scrapped', 3, 'mysterymouse', FlxColor.BLACK, FlxG.save.data.scrappedLock); else addSong('Scrapped', 3, 'rs', FlxColor.BLACK, FlxG.save.data.scrappedLock);
 			if(FPClientPrefs.pnmLock != 'beaten' && FPClientPrefs.pnmLock != 'unlocked') addSong('Neglection', 3, 'mysterymouse', FlxColor.CYAN, FlxG.save.data.pnmLock); else addSong('Neglection', 3, 'pnm', FlxColor.CYAN, FlxG.save.data.pnmLock);
             if(FPClientPrefs.blessLock != 'beaten' && FPClientPrefs.blessLock != 'unlocked') addSong('Bless', 3, 'mysterymouse', FlxColor.WHITE, FlxG.save.data.blessLock); else addSong('Bless', 3, 'whitenew', FlxColor.WHITE, FlxG.save.data.blessLock);
+			if(FPClientPrefs.rbLock != 'beaten' && FPClientPrefs.rbLock != 'unlocked') addSong('BrainStorm', 3, 'mysterymouse', FlxColor.fromRGB(229, 85, 44), FlxG.save.data.rbLock); else addSong('BrainStorm', 3, 'face', FlxColor.fromRGB(229, 85, 84), FlxG.save.data.rbLock);
             if(FPClientPrefs.mercyLock != 'beaten' && FPClientPrefs.mercyLock != 'unlocked') addSong('Mercy', 3, 'mysterymouse', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock); else addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock);
         }
 

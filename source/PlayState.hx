@@ -1,6 +1,6 @@
 package;
 
-import WindowAPI.WindowThing as Windowthing;
+import window.windowMod.FlxWindowModifier; //rip bozo
 import GameJolt;
 import GameJolt.GameJoltAPI;
 import flixel.graphics.FlxGraphic;
@@ -995,8 +995,10 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
 					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 					//addShaderToCamera('game', new VhsEffect(0.3, 0));
+					if(!ClientPrefs.optimization) {
 					addShaderToCamera('hud', new TiltshiftEffect(0.5, 0));
 					addShaderToCamera('game', new TiltshiftEffect(0.6, 0));
+					}
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
 				}
@@ -1051,15 +1053,18 @@ class PlayState extends MusicBeatState
 				if(canaddshaders)
 				{
 					//Epic Shaders Let's GOOOOOOOOO
-					addShaderToCamera('hud', new ChromaticAberrationEffect(0.0015));
-					addShaderToCamera('game', new ChromaticAberrationEffect(0.003));
+					
 					addShaderToCamera('hud', new VCRDistortionEffect(0, true, false, true));
 					addShaderToCamera('game', new VhsEffect(0.3, 0));
 					addShaderToCamera('hud', new TiltshiftEffect(0.25, 0));
 					addShaderToCamera('game', new TiltshiftEffect(0.3, 0));
 					addShaderToCamera('hud', new GreyscaleEffect());
 					addShaderToCamera('game', new GreyscaleEffect());
+					if(!ClientPrefs.optimization) {
+					addShaderToCamera('hud', new ChromaticAberrationEffect(0.0015));
+					addShaderToCamera('game', new ChromaticAberrationEffect(0.003));
 					addShaderToCamera('game', new WIBloomEffect(14));
+				}
 				}
 
 				/*
@@ -5084,15 +5089,13 @@ class PlayState extends MusicBeatState
 					scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses;
 				} else {
 					scoreTxt.text = 'Punt ' + songScore + ' ~ Misses: ' + songMisses + ' (' + ratingFC + ')';
-				}
-				
+				} 
 					} else {
-
-				if(ratingName == '?') {
+				if(ratingPercent == 0) {
 					if(ClientPrefs.language == "Spanish") {
-					scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ' + ratingFC;
+					scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ?';
 				} else {
-					scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + ratingFC;
+					scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ?'; //no way i was a dumbass all the time
 				}
 				} else {
 					if(ClientPrefs.language == "Spanish") {
@@ -5865,7 +5868,7 @@ class PlayState extends MusicBeatState
 			i(elapsed);
 		}
 
-		//suicidal malfunction stuff
+		/*//suicidal malfunction stuff
 			@:privateAccess
         var dadFrame = dad._frame;
         
@@ -5887,9 +5890,9 @@ class PlayState extends MusicBeatState
         bfScrollWin.scrollRect = rect;
         bfScrollWin.x = (((boyfriendFrame.offset.x) - (boyfriend.offset.x / 2)) * bfScrollWin.scaleX);
         bfScrollWin.y = (((boyfriendFrame.offset.y) - (boyfriend.offset.y / 2)) * bfScrollWin.scaleY);
-  }      
+  }    */  
 
-	function popupBfWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customY:Int, ?customName:String) {
+	/*function popupBfWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customY:Int, ?customName:String) {
         var display = Application.current.window.display.currentMode;
         // PlayState.defaultCamZoom = 0.5;
 
@@ -5962,7 +5965,7 @@ class PlayState extends MusicBeatState
 		Windowthing.getWindowsTransparent();
 	}
 
-	function popupWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customY:Int, ?customName:String, ?isTransparent:Bool = false) {
+	/*function popupWindow(customWidth:Int, customHeight:Int, ?customX:Int, ?customY:Int, ?customName:String, ?isTransparent:Bool = false) {
         var display = Application.current.window.display.currentMode;
         // PlayState.defaultCamZoom = 0.5;
 
@@ -6031,7 +6034,8 @@ class PlayState extends MusicBeatState
 		Windowthing.getWindowsTransparent();
 		FlxG.autoPause = false;
 		Windowthing.getWindowsTransparent();
-    }
+    }*/ //rip code
+	}
 
 	function openChartEditor()
 	{
@@ -6983,6 +6987,28 @@ class PlayState extends MusicBeatState
 				}
 				defaultCamZoom = zoomValue;
 			}
+
+			//need to figure out how to make notes invisible
+			case 'Set Strum Visibility':
+				for (i in 0...playerStrums.length) {
+				switch(value1) {
+                 case 'false' | 'False':
+					playerStrums.members[i].visible = false;
+				
+				case 'true' | 'True':
+					playerStrums.members[i].visible = true;
+				}
+				}
+
+				for (i in 0...opponentStrums.length) {
+					switch(value2) {
+					 case 'false' | 'False':
+						opponentStrums.members[i].visible = false;
+					
+					case 'true' | 'True':
+						opponentStrums.members[i].visible = true;
+					}
+					}
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
@@ -8272,9 +8298,11 @@ class PlayState extends MusicBeatState
 											{
 												addShaderToCamera('hud', new TiltshiftEffect(1.5, 0));
 												addShaderToCamera('game', new TiltshiftEffect(3, 0));
+												if(!ClientPrefs.optimization) {
 												addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new WIBloomEffect());
+											}
 												new FlxTimer().start(0.04, function(tmr:FlxTimer)
 												{
 													clearShaderFromCamera('game');
@@ -8344,9 +8372,11 @@ class PlayState extends MusicBeatState
 											{
 												addShaderToCamera('hud', new TiltshiftEffect(1.5, 0));
 												addShaderToCamera('game', new TiltshiftEffect(3, 0));
+												if(!ClientPrefs.optimization) {
 												addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new WIBloomEffect());
+												}
 												new FlxTimer().start(0.04, function(tmr:FlxTimer)
 												{
 													clearShaderFromCamera('game');
@@ -8414,9 +8444,11 @@ class PlayState extends MusicBeatState
 											{
 												addShaderToCamera('hud', new TiltshiftEffect(1.5, 0));
 												addShaderToCamera('game', new TiltshiftEffect(3, 0));
+												if(!ClientPrefs.optimization) {
 												addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new WIBloomEffect());
+												}
 												new FlxTimer().start(0.04, function(tmr:FlxTimer)
 												{
 													clearShaderFromCamera('game');
@@ -8484,9 +8516,11 @@ class PlayState extends MusicBeatState
 											{
 												addShaderToCamera('hud', new TiltshiftEffect(1.5, 0));
 												addShaderToCamera('game', new TiltshiftEffect(3, 0));
+												if(!ClientPrefs.optimization) {
 												addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
 												addShaderToCamera('game', new WIBloomEffect());
+												}
 												new FlxTimer().start(0.04, function(tmr:FlxTimer)
 												{
 													clearShaderFromCamera('game');
@@ -9855,6 +9889,7 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(timeBarBG, {alpha: 0}, 0.6);
 					FlxTween.tween(timeTxt, {alpha: 0}, 0.6);
 					FlxTween.tween(scoreTxt, {alpha: 0}, 0.6);
+					Application.current.window.borderless = true; //ALT + F4 Supermarcy
 					triggerEventNote('Flash Screen', '0', '');
 					triggerEventNote('Change Character', 'bf', 'bfghost');
 					addShaderToCamera('game', new WIBloomEffect(22));
@@ -9870,7 +9905,8 @@ class PlayState extends MusicBeatState
 					chainsINVERT.alpha = 0;
 					vaultSpookINVERT.alpha = 0;
 					triggerEventNote('Flash Screen', '3', '');
-					triggerEventNote('Change Character', 'bf', 'bf');
+					triggerEventNote('Change Character', 'bf', 'GraveyandBf');
+					Application.current.window.borderless = false;
 					FlxTween.tween(healthBar, {alpha: 1}, 0.6);
 					FlxTween.tween(healthBarBG, {alpha: 1}, 0.6);
 					FlxTween.tween(iconP1, {alpha: 1}, 0.6);
@@ -10637,10 +10673,6 @@ class PlayState extends MusicBeatState
 
 					 FlxTween.tween(scoreTxt, {alpha: 0}, 1);
 					 FlxTween.tween(healthBar, {alpha: 0}, 1);
-					
-					//popupBfWindow(500, 400, 1050, 490, SONG.player1);
-					//popupWindow(500, 400, 0, 490, SONG.player2);
-					//trace("dont crash");
 					}
 
 				if(curStep == 828) {

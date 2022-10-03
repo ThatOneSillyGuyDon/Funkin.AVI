@@ -144,6 +144,7 @@ class MainMenuState extends MusicBeatState
 						addShader(greyscale);
 						//uncomment these fucking pieces of shit if you feel like testing it.
 
+						if(!ClientPrefs.optimization) {
 						if (chrom != null)
 						chrom.setChrome(0.003);
 
@@ -152,6 +153,7 @@ class MainMenuState extends MusicBeatState
 
 						if(blurThisShit != null)
 						blurThisShit.setBlur(0.4);
+						}
 						//uncomment these fucking pieces of shit if you feel like testing it.
 
 
@@ -167,7 +169,7 @@ class MainMenuState extends MusicBeatState
 
 		menuart = new FlxSprite().loadGraphic(Paths.image('NEWmenu/newspaper'));
 		menuart.scrollFactor.set(0, 0);
-		//menuart.setGraphicSize(Std.int(menuart.width * 1.175));
+		//menuart.setGraphicSize(StdDaInt(menuart.width * 1.175));
 		menuart.updateHitbox();
 		menuart.screenCenter();
 		menuart.antialiasing = ClientPrefs.globalAntialiasing;
@@ -694,6 +696,10 @@ class MainMenuState extends MusicBeatState
 			else if (FlxG.keys.justPressed.EIGHT || FlxG.keys.justPressed.NUMPADEIGHT)
 			{
 				MusicBeatState.switchState(new AchievementsMenuState());
+			}
+			else if(FlxG.keys.justPressed.ONE || FlxG.keys.justPressed.NUMPADONE) 
+			{
+				MusicBeatState.switchState(new ExtrasState());
 			}
 		}
 

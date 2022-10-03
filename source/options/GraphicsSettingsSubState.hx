@@ -75,6 +75,9 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		addOption(option);
         #end
 
+		var option:Option = new Option('Optimization Mode', 'If Checked, The Game Will Optimizate as max as it can', 'optimization', 'bool', false);
+		addOption(option);
+
 		#if desktop //no need for this at other platforms cuz only desktop has fullscreen as false by default (MAYBE I'LL TRY TO MAKE IT FOR FULLSCREEN MODE TOO)
 		var option:Option = new Option('Screen Resolution',
 			'Choose your preferred screen resolution.',

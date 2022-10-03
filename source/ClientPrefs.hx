@@ -8,9 +8,10 @@ import Controls;
 
 class ClientPrefs
     {
+	public static var optimization:Bool = false; //The shaders fucking suck
 	public static var screenShake:Bool = true;
     public static var language:String = "English";
-	public static var cutscenes:Bool = false;
+	public static var cutscenes:Bool = true;
 	public static var FPStext:Bool = false;
 	public static var colorblind:String = "No color filter";
 	public static var lives:String = 'normal';
@@ -130,6 +131,7 @@ class ClientPrefs
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.optimization = optimization;
 		FlxG.save.data.restart = restart;
 		FlxG.save.data.screenShake = screenShake;
 		FlxG.save.data.language = language;
@@ -205,8 +207,10 @@ class ClientPrefs
 	}
 
 	public static function loadPrefs() {	
-		if(FlxG.save.data.restar != null) {
-			restart = FlxG.save.data.rstart;
+		if(FlxG.save.data.optimization != null) 
+			optimization = FlxG.save.data.optimization;
+		if(FlxG.save.data.restart != null) {
+			restart = FlxG.save.data.restart;
 		}
 		if(FlxG.save.data.colorblind != null) {
 			colorblind = FlxG.save.data.colorblind;

@@ -55,6 +55,7 @@ class FPClientPrefs
     public static var crossinLock:String = 'locked';
     public static var mercyLock:String = 'locked';
     public static var pnmLock:String = 'locked';
+    public static var rbLock:String = 'locked';
 
     public static function lockinIt() {
         if (FlxG.save.data.beatenAllDemoSongs == null) FlxG.save.data.beatenAllDemoSongs == 'Incomplete';
@@ -78,6 +79,7 @@ class FPClientPrefs
         if (FlxG.save.data.crossinLock == null) FlxG.save.data.crossinLock = 'locked';
         if (FlxG.save.data.mercyLock == null) FlxG.save.data.mercyLock = 'locked';
         if (FlxG.save.data.pnmLock == null) FlxG.save.data.pnmLock = 'locked';
+        if (FlxG.save.data.rbLock == null) FlxG.save.data.rbLock = 'locked';
         FlxG.save.flush();
     }
 
@@ -103,6 +105,7 @@ class FPClientPrefs
         FlxG.save.data.crossinLock = crossinLock;
         FlxG.save.data.mercyLock = mercyLock;
         FlxG.save.data.pnmLock = pnmLock;
+        FlxG.save.data.rbLock = rbLock;
         FlxG.save.flush();
     }
 
@@ -127,6 +130,7 @@ class FPClientPrefs
         crossinLock = FlxG.save.data.crossinLock;
         mercyLock = FlxG.save.data.mercyLock;
         pnmLock = FlxG.save.data.pnmLock;
+        rbLock = FlxG.save.data.rbLock;
         if(isolatedSong == 'Completed' && lunacySong == 'Completed' && twistedSong == 'Completed' && huntedLock == 'beaten' && oldisolateLock == 'beaten' && malfunctionLock == 'beaten' && sinsLock == 'beaten') FlxG.save.data.beatenAllDemoSongs = 'Complete';
         FlxG.save.flush();
     }

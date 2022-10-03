@@ -643,30 +643,35 @@ class EpisodesState extends MusicBeatState
 			case 0 | 1 | 2:
 				FlxG.camera.flash(FlxColor.BLACK, 0.2);
 				if(ClientPrefs.funiShaders)
-				{
-				clearShader();
-				chrom = new ChromaticAberrationEffect();
-				blurThisShit = new TiltshiftEffect(0.4, 0);
-				bloomShit = new WIBloomEffect(0);
-				greyscale = new GreyscaleEffect();
-				//uncomment these fucking pieces of shit if you feel like testing it.
+					{
+						clearShader();
+						chrom = new ChromaticAberrationEffect();
+						blurThisShit = new TiltshiftEffect(0.4, 0);
+						bloomShit = new WIBloomEffect(0);
+						greyscale = new GreyscaleEffect();
+						//uncomment these fucking pieces of shit if you feel like testing it.
 
-				addShader(chrom);
-				addShader(blurThisShit);
-				addShader(bloomShit);
-				addShader(greyscale);
-				//uncomment these fucking pieces of shit if you feel like testing it.
+						addShader(chrom);
+						addShader(blurThisShit);
+						addShader(bloomShit);
+						addShader(greyscale);
+						//uncomment these fucking pieces of shit if you feel like testing it.
 
-				if (chrom != null)
-				chrom.setChrome(0.003);
+						if(!ClientPrefs.optimization) {
+						if (chrom != null)
+						chrom.setChrome(0.003);
 
-				if (bloomShit != null)
-				bloomShit.setSize(18.0);
+						if (bloomShit != null)
+						bloomShit.setSize(18.0);
 
-				if(blurThisShit != null)
-				blurThisShit.setBlur(0.4);
-				//uncomment these fucking pieces of shit if you feel like testing it.
-				}
+						if(blurThisShit != null)
+						blurThisShit.setBlur(0.4);
+						}
+						//uncomment these fucking pieces of shit if you feel like testing it.
+
+
+					} //the game fucking breaks now for some reason with this on :(
+						//Facts
 				FlxG.camera.shake(0.004, 0);
 			case 3 | 4 | 5:
 				FlxG.camera.flash(FlxColor.BLACK, 0.2);
@@ -685,6 +690,7 @@ class EpisodesState extends MusicBeatState
 				addShader(greyscale);
 				//uncomment these fucking pieces of shit if you feel like testing it.
 
+				if(!ClientPrefs.optimization) {
 				if (chrom != null)
 				chrom.setChrome(0.006);
 
@@ -693,6 +699,7 @@ class EpisodesState extends MusicBeatState
 
 				if(blurThisShit != null)
 				blurThisShit.setBlur(0.5);
+				}
 				
 				//uncomment these fucking pieces of shit if you feel like testing it.
 				}

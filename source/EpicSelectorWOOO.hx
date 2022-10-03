@@ -273,6 +273,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 							addShader(greyscale);
 							//uncomment these fucking pieces of shit if you feel like testing it.
 
+							if(!ClientPrefs.optimization) {
 							if (chrom != null)
 							chrom.setChrome(0.003);
 
@@ -281,6 +282,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 
 							if(blurThisShit != null)
 							blurThisShit.setBlur(0.4);
+							}
 							//uncomment these fucking pieces of shit if you feel like testing it.
 							}
 							FlxG.camera.shake(0.004, 0);

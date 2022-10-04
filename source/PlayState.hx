@@ -9907,7 +9907,7 @@ class PlayState extends MusicBeatState
 					chainsINVERT.alpha = 0;
 					vaultSpookINVERT.alpha = 0;
 					triggerEventNote('Flash Screen', '3', '');
-					triggerEventNote('Change Character', 'bf', 'GraveyandBf');
+					triggerEventNote('Change Character', 'bf', 'GraveyandBf'); //he forgors /J
 					Application.current.window.borderless = false;
 					FlxTween.tween(healthBar, {alpha: 1}, 0.6);
 					FlxTween.tween(healthBarBG, {alpha: 1}, 0.6);

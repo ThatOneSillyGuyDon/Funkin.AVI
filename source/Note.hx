@@ -264,7 +264,7 @@ class Note extends FlxSprite
 			case 'spooky':
 				skin = 'Skins/SpookyNOTE_assets';
 				antialias = true;
-			case 'bffakeNEW' | 'mickDrop' | 'mickey' | 'mickeysadistic' | 'mickeyinsane' | 'mickeylegacy' | 'mickeygiveup' | 'mickeynew' | 'bf-fake' | 'bffake' | 'bf-demon' | 'bfgrey' | 'bfsatan' | 'bfworried' | 'huntergoofy' | 'smiles':
+			case 'bffakenew' | 'mickdrop' | 'mickey' | 'mickeysadistic' | 'mickeyinsane' | 'mickeylegacy' | 'mickeygiveup' | 'mickeynew' | 'bf-fake' | 'bffake' | 'bf-demon' | 'bfgrey' | 'bfsatan' | 'bfworried' | 'huntergoofy' | 'smiles':
 				skin = 'Skins/GreyNOTE_assets';
 				antialias = true;
 			case 'walt' | 'bf-firstperson':

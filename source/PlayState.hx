@@ -6993,20 +6993,20 @@ class PlayState extends MusicBeatState
 				for (i in 0...playerStrums.length) {
 				switch(value1) {
                  case 'false' | 'False':
-					playerStrums.members[i].visible = false;
+					FlxTween.tween(playerStrums.members[i], {alpha: 0}, 1, {ease: FlxEase.sineInOut});
 				
 				case 'true' | 'True':
-					playerStrums.members[i].visible = true;
+					FlxTween.tween(playerStrums.members[i], {alpha: 1}, 1, {ease: FlxEase.sineInOut});
 				}
 				}
 
 				for (i in 0...opponentStrums.length) {
 					switch(value2) {
 					 case 'false' | 'False':
-						opponentStrums.members[i].visible = false;
+						FlxTween.tween(opponentStrums.members[i], {alpha: 0}, 1, {ease: FlxEase.sineInOut});
 					
 					case 'true' | 'True':
-						opponentStrums.members[i].visible = true;
+						FlxTween.tween(opponentStrums.members[i], {alpha: 1}, 1, {ease: FlxEase.sineInOut});
 					}
 					}
 		}
@@ -7747,16 +7747,21 @@ class PlayState extends MusicBeatState
 		{
 			if (daRating == 'marvelous' && !note.noteSplashDisabled)
 			{
-				spawnNoteSplashOnNote(note);
+				spawnNoteSplashOnNoteMarvelous(note);
 			}
 		}
-		else
-		{
 			if (daRating == 'sick' && !note.noteSplashDisabled)
+			{
+				spawnNoteSplashOnNoteSick(note);
+			}
+			if(daRating == 'good' && !note.noteSplashDisabled)
 			{
 				spawnNoteSplashOnNote(note);
 			}
-		}
+			if(daRating == 'bad' || daRating == 'shit' && !note.noteSplashDisabled)
+			{
+				spawnNoteSplashOnNoteShit(note);
+			}
 
 		if (!practiceMode && !cpuControlled)
 		{
@@ -8936,6 +8941,90 @@ class PlayState extends MusicBeatState
 		}
 	}
 
+	function spawnNoteSplashOnNoteShit(note:Note) {
+		if(ClientPrefs.noteSplashes && note != null) {
+			var strum:StrumNote = playerStrums.members[note.noteData];
+			if(strum != null) {
+				spawnNoteSplashShit(strum.x, strum.y, note.noteData, note);
+			}
+		}
+	}
+
+	public function spawnNoteSplashShit(x:Float, y:Float, data:Int, ?note:Note = null) {
+		var skin:String = 'NoteSplashSkin/NOTE_splashes-Better';
+		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
+		
+		var hue:Float = ClientPrefs.arrowHSV[data % 4][0] / 360;
+		var sat:Float = ClientPrefs.arrowHSV[data % 4][1] / 100;
+		var brt:Float = ClientPrefs.arrowHSV[data % 4][2] / 100;
+		if(note != null) {
+			skin = note.noteSplashTexture;
+			hue = note.noteSplashHue;
+			sat = note.noteSplashSat;
+			brt = note.noteSplashBrt;
+		}
+
+		var splashShit:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
+		splashShit.setupNoteSplashShit(x, y, data, skin, hue, sat, brt);
+		grpNoteSplashes.add(splashShit);
+	}
+
+	function spawnNoteSplashOnNoteMarvelous(note:Note) {
+		if(ClientPrefs.noteSplashes && note != null) {
+			var strum:StrumNote = playerStrums.members[note.noteData];
+			if(strum != null) {
+				spawnNoteSplashMarvelous(strum.x, strum.y, note.noteData, note);
+			}
+		}
+	}
+
+	public function spawnNoteSplashMarvelous(x:Float, y:Float, data:Int, ?note:Note = null) {
+		var skin:String = 'NoteSplashSkin/NOTE_splashes-Better';
+		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
+		
+		var hue:Float = ClientPrefs.arrowHSV[data % 4][0] / 360;
+		var sat:Float = ClientPrefs.arrowHSV[data % 4][1] / 100;
+		var brt:Float = ClientPrefs.arrowHSV[data % 4][2] / 100;
+		if(note != null) {
+			skin = note.noteSplashTexture;
+			hue = note.noteSplashHue;
+			sat = note.noteSplashSat;
+			brt = note.noteSplashBrt;
+		}
+
+		var splashMarv:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
+		splashMarv.setupNoteSplashMarvelous(x, y, data, skin, hue, sat, brt);
+		grpNoteSplashes.add(splashMarv);
+	}
+
+	function spawnNoteSplashOnNoteSick(note:Note) {
+		if(ClientPrefs.noteSplashes && note != null) {
+			var strum:StrumNote = playerStrums.members[note.noteData];
+			if(strum != null) {
+				spawnNoteSplashSick(strum.x, strum.y, note.noteData, note);
+			}
+		}
+	}
+
+	public function spawnNoteSplashSick(x:Float, y:Float, data:Int, ?note:Note = null) {
+		var skin:String = 'NoteSplashSkin/NOTE_splashes-Better';
+		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
+		
+		var hue:Float = ClientPrefs.arrowHSV[data % 4][0] / 360;
+		var sat:Float = ClientPrefs.arrowHSV[data % 4][1] / 100;
+		var brt:Float = ClientPrefs.arrowHSV[data % 4][2] / 100;
+		if(note != null) {
+			skin = note.noteSplashTexture;
+			hue = note.noteSplashHue;
+			sat = note.noteSplashSat;
+			brt = note.noteSplashBrt;
+		}
+
+		var splashSick:NoteSplash = grpNoteSplashes.recycle(NoteSplash);
+		splashSick.setupNoteSplashSick(x, y, data, skin, hue, sat, brt);
+		grpNoteSplashes.add(splashSick);
+	}
+
 	function spawnNoteSplashOnNote(note:Note) {
 		if(ClientPrefs.noteSplashes && note != null) {
 			var strum:StrumNote = playerStrums.members[note.noteData];
@@ -8946,7 +9035,7 @@ class PlayState extends MusicBeatState
 	}
 
 	public function spawnNoteSplash(x:Float, y:Float, data:Int, ?note:Note = null) {
-		var skin:String = 'NoteSplashSkin/noteSplashes-Better';
+		var skin:String = 'NoteSplashSkin/NOTE_splashes-Better';
 		if(PlayState.SONG.splashSkin != null && PlayState.SONG.splashSkin.length > 0) skin = PlayState.SONG.splashSkin;
 		
 		var hue:Float = ClientPrefs.arrowHSV[data % 4][0] / 360;
@@ -9777,8 +9866,6 @@ class PlayState extends MusicBeatState
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
 					fadeWhiteFlash();
 				} //Man
-			case 'Lunacy': 
-				//Insert Events here
 			case 'Delusional':
 				if(curStep == 0)
 				{
@@ -9907,7 +9994,7 @@ class PlayState extends MusicBeatState
 					chainsINVERT.alpha = 0;
 					vaultSpookINVERT.alpha = 0;
 					triggerEventNote('Flash Screen', '3', '');
-					triggerEventNote('Change Character', 'bf', 'GraveyandBf');
+					//triggerEventNote('Change Character', 'bf', 'GraveyandBf');
 					Application.current.window.borderless = false;
 					FlxTween.tween(healthBar, {alpha: 1}, 0.6);
 					FlxTween.tween(healthBarBG, {alpha: 1}, 0.6);
@@ -9917,6 +10004,7 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(timeBarBG, {alpha: 1}, 0.6);
 					FlxTween.tween(timeTxt, {alpha: 1}, 0.6);
 					FlxTween.tween(scoreTxt, {alpha: 1}, 0.6);
+					clearShaderFromCamera('game');
 				}
 			case 'War Dilemma':
 				//Insert Events here

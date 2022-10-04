@@ -394,7 +394,7 @@ class BetterPreload extends MusicBeatState {
 
         preloadedAssets = new Map<String, FlxGraphic>();
 
-        bg = new FlxSprite().loadGraphic(Paths.image('funkay' + FlxG.random.int(0, 4))); //Placeholder
+        bg = new FlxSprite().loadGraphic(Paths.image('mickPlaceholder')); //Placeholder
 		bg.screenCenter();
         bg.alpha = 0;
 		add(bg);

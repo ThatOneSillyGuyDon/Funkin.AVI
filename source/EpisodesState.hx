@@ -119,7 +119,7 @@ class EpisodesState extends MusicBeatState
 		addSong("Don't Cross!", 3, 'ohgod', FlxColor.RED);
 		//addSong('Twisted Grins', 3, 'smile', FlxColor.fromRGB(115, 86, 86));
 		addSong('Hunted', 3, 'goofy', FlxColor.fromRGB(0, 60, 40));
-		//addSong('Bless', 3, 'whitenew', FlxColor.WHITE);
+		addSong('Bless', 3, 'whitenew', FlxColor.WHITE);
 
         /*if(FPClientPrefs.episode1FPLock == 'unlocked')
         {

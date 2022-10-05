@@ -29,6 +29,7 @@ using StringTools;
 
 class Main extends Sprite
 {
+	public static var gjToastManager:GJToastManager; //Toast For Advice
 	var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var initialState:Class<FlxState> = BetterPreload; // The FlxState the game starts with.
@@ -36,7 +37,6 @@ class Main extends Sprite
 	var framerate:Int = 60;
 	var skipSplash:Bool = true; // Hope we add this to the mod xd
 	var startFullscreen:Bool = false; // N o
-	public static var gjToastManager:GJToastManager; //Toast For Advice
 	public static var fpsVar:FPS;
 
 	public static var focusMusicTween:FlxTween;
@@ -74,9 +74,7 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-		gjToastManager = new GJToastManager();
-		addChild(gjToastManager); //adding the toddler
-		
+	
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
@@ -115,6 +113,9 @@ class Main extends Sprite
 
 		Application.current.window.onFocusOut.add(onWindowFocusOut);
 		Application.current.window.onFocusIn.add(onWindowFocusIn);
+
+		gjToastManager = new GJToastManager();
+		addChild(gjToastManager); //adding the toddler
 	}
 
 	var game:FlxGame;

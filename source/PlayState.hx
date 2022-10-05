@@ -13670,7 +13670,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.visible = false;
 		timeBar.visible = false;
 		timeBarBG.visible = false;
-			}
+		}
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????
 		callOnLuas('onBeatHit', []);

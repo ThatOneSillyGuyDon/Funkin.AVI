@@ -15,6 +15,7 @@ import flixel.util.FlxColor;
 import lime.system.System;
 import flixel.FlxSprite;
 import flixel.ui.FlxBar;
+import Achievements;
 
 // Toast things
 import flixel.util.FlxTimer;
@@ -92,7 +93,7 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
                 trace("token:"+in2);
                 if(v)
                     {
-                        Main.gjToastManager.createToast(GameJoltInfo.imagePath, in1 + " signed in!", "Time: " + Date.now() + "\nGame ID: " + GJKeys.id + "\nScore Submitting: " + (GameJoltAPI.leaderboardToggle? "Enabled" : "Disabled"), false);
+                        Main.gjToastManager.createToast(GameJoltInfo.imagePath, in1 + " signed in, conntected to GameJolt!", "Score Submitting: " + (GameJoltAPI.leaderboardToggle? "Enabled" : "Disabled") , false);
                         trace("User authenticated!");
                         FlxG.save.data.gjUser = in1;
                         FlxG.save.data.gjToken = in2;
@@ -153,7 +154,7 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
                 var bool:Bool = false;
                 if (data.exists("message"))
                     bool = true;
-                Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Unlocked a new trophy"+(bool ? "... again?" : "!"), "Thank you for testing this out!\nCheck out Vs. King, it's cool", true);
+                Main.gjToastManager.createToast(GameJoltInfo.imagePath, "The trophy"+(bool ? "" : ""), "has been unlocked", true);
             });
         }
     }
@@ -202,10 +203,6 @@ class GameJoltAPI // Connects to tentools.api.FlxGameJolt
                     trace("Score submitted with a result of: " + data.get("success"));
                     Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Score submitted!", "Score: " + score + "\nExtra Data: "+extraData, true);
                 });
-            }
-            else
-            {
-                Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Score not submitted!", "Score: " + score + "Extra Data: " +extraData+"\nScore was not submitted due to score submitting being disabled!", true);
             }
     }
 
@@ -284,6 +281,11 @@ class GameJoltInfo extends FlxSubState
     * Example: Paths.getLibraryPath("images/stepmania-icon.png")
     */
     public static var imagePath:String = Paths.getLibraryPath("images/sign.png"); 
+
+    /**
+     * other type of path
+     */
+     public static var otherImagePath:String = Paths.getLibraryPath("images/achievements/test.png");
 
     /* Other things that shouldn't be messed with are below this line! */
 
@@ -488,7 +490,7 @@ class GameJoltLogin extends MusicBeatSubstate
                     GameJoltAPI.leaderboardToggle = !GameJoltAPI.leaderboardToggle;
                     trace(GameJoltAPI.leaderboardToggle);
                     FlxG.save.data.lbToggle = GameJoltAPI.leaderboardToggle;
-                    Main.gjToastManager.createToast(GameJoltInfo.imagePath, "Score Submitting", "Score submitting is now " + (GameJoltAPI.leaderboardToggle ? "Enabled":"Disabled"), false);
+                    Main.gjToastManager.createToast(GameJoltInfo.otherImagePath, "Score Submitting", "Score submitting is now " + (GameJoltAPI.leaderboardToggle ? "Enabled":"Disabled"), false);
                 }
         });
         helpBox.color = FlxColor.fromRGB(84,155,149);
@@ -619,9 +621,9 @@ class GameJoltLogin extends MusicBeatSubstate
 
 class GJToastManager extends Sprite
 {
-    public static var ENTER_TIME:Float = 0.5;
-    public static var DISPLAY_TIME:Float = 3.0;
-    public static var LEAVE_TIME:Float = 0.5;
+    public static var ENTER_TIME:Float = 0.7;
+    public static var DISPLAY_TIME:Float = 6.0;
+    public static var LEAVE_TIME:Float = 0.3;
     public static var TOTAL_TIME:Float = ENTER_TIME + DISPLAY_TIME + LEAVE_TIME;
 
     var playTime:FlxTimer = new FlxTimer();
@@ -784,7 +786,7 @@ class Toast extends Sprite
 
         title = new TextField();
         title.text = titleText;
-        title.setTextFormat(new TextFormat(openfl.utils.Assets.getFont(GameJoltInfo.fontPath).fontName, 24, 0xFFFF00, true));
+        title.setTextFormat(new TextFormat(openfl.utils.Assets.getFont(GameJoltInfo.fontPath).fontName, 24, 0xBFBFBF, true));
         title.wordWrap = true;
         title.width = 360;
         if(iconPath!=null){title.x = 120;}

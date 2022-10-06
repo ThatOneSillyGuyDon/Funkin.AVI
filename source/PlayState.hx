@@ -7390,22 +7390,22 @@ class PlayState extends MusicBeatState
 			}
 			else
 			{
-				trace('WENT BACK TO FREEPLAY??');
+		        trace('WENT BACK TO FREEPLAY??');
 
 				if(SONG.song == "Isolated Old") {
-			    	GameJoltAPI.addScore(songScore, 760676);
+			    	GameJoltAPI.addScore(songScore, 760676, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
 				} else if(SONG.song == "Isolated") {
-					GameJoltAPI.addScore(songScore, 760684);
+					GameJoltAPI.addScore(songScore, 760684, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
 				} else if(SONG.song == "Hunted") {
-					GameJoltAPI.addScore(songScore, 760677);
+					GameJoltAPI.addScore(songScore, 760677, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
 				} else if(SONG.song == "Twisted Grins") {
-					GameJoltAPI.addScore(songScore, 760679);
+					GameJoltAPI.addScore(songScore, 760679, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
 				} else if(SONG.song == "Lunacy") {
-					GameJoltAPI.addScore(songScore, 760686);
+					GameJoltAPI.addScore(songScore, 760686, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
 				} else if(SONG.song == "Isolated Old") {
-					GameJoltAPI.addScore(songScore, 755529);
+					GameJoltAPI.addScore(songScore, 755529, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
 				} else if(SONG.song == "Cycled Sins") {
-					GameJoltAPI.addScore(songScore, 760692);
+					GameJoltAPI.addScore(songScore, 760692, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
 				}
 
 				//Story Songs later Lol, Thanks Tenta

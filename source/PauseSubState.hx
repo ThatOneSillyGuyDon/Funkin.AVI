@@ -26,11 +26,11 @@ class PauseSubState extends MusicBeatSubstate
 
 	var menuItems:Array<String> = [];
 	var menuItemsOG:Array<String> = [
-		'Resume', 
-		'Restart Song', 
+		'Continue', 
+		'Restart', 
 		'Options', 
 		'Change Difficulty', 
-		'Exit to menu'
+		'Exit'
 	];
 	var difficultyChoices = [];
 	var curSelected:Int = 0;
@@ -332,7 +332,7 @@ class PauseSubState extends MusicBeatSubstate
 
 			switch (daSelected)
 			{
-				case "Resume":
+				case "Continue":
 					/*switch(PlayState.SONG.song)
 				{
 					case 'Isolated' | 'Laugh Track':
@@ -361,7 +361,7 @@ class PauseSubState extends MusicBeatSubstate
 					PlayState.instance.practiceMode = !PlayState.instance.practiceMode;
 					PlayState.changedDifficulty = true;
 					practiceText.visible = PlayState.instance.practiceMode;
-				case "Restart Song":
+				case "Restart":
 					restartSong();
 				case 'Restart Replay':
 					FlxG.resetState();
@@ -387,9 +387,8 @@ class PauseSubState extends MusicBeatSubstate
 					close();
 					PlayState.instance.finishSong(true);
 				case 'Toggle Botplay':
-						Application.current.window.alert('No, LOL');
-						System.exit(0);
-				case "Exit to menu":
+						throw "no, lol";
+				case "Exit":
 					PlayState.deathCounter = 0;
 					PlayState.seenCutscene = false;
 					if(PlayState.isStoryMode) {

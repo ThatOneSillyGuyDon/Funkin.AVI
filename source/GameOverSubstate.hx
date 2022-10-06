@@ -156,7 +156,7 @@ class GameOverSubstate extends MusicBeatSubstate
 							MusicBeatState.switchState(new EpisodesState());
 						case 'Isolated Legacy' | 'Lunacy Legacy' | 'Malfunction Legacy' | 'Mercy Legacy':
 							MusicBeatState.switchState(new LegacyState());
-						case 'Hunted' | 'Isolated Old' | 'Isolated Beta' | "Don't Cross!" | 'Malfunction' | 'Cycled Sins' | 'War Dilemma' | 'Scrapped' | 'Bless' | 'Mercy':
+						case 'Hunted' | 'Isolated Old' | 'Isolated Beta' | "Don't Cross!" | 'Malfunction' | 'Cycled Sins' | 'War Dilemma' | 'Scrapped'  | 'Neglection' | 'Bless' | 'Mercy':
 							MusicBeatState.switchState(new ExtrasState());
 						default:
 							MusicBeatState.switchState(new EpicSelectorWOOO());

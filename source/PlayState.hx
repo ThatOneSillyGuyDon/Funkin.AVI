@@ -1058,13 +1058,13 @@ class PlayState extends MusicBeatState
 					addShaderToCamera('game', new VhsEffect(0.3, 0));
 					addShaderToCamera('hud', new TiltshiftEffect(0.25, 0));
 					addShaderToCamera('game', new TiltshiftEffect(0.3, 0));
-					addShaderToCamera('hud', new GreyscaleEffect());
-					addShaderToCamera('game', new GreyscaleEffect());
 					if(!ClientPrefs.optimization) {
 					addShaderToCamera('hud', new ChromaticAberrationEffect(0.0015));
 					addShaderToCamera('game', new ChromaticAberrationEffect(0.003));
 					addShaderToCamera('game', new WIBloomEffect(14));
 				}
+				addShaderToCamera('hud', new GreyscaleEffect());
+				addShaderToCamera('game', new GreyscaleEffect());
 				}
 
 				/*
@@ -2005,7 +2005,7 @@ class PlayState extends MusicBeatState
 
 			case 'Demolition':
 				var showTime:Bool = !ClientPrefs.hideHud;
-				timeTxt = new FlxText(450, 70, 400, "", 32);
+				if(ClientPrefs.downScroll) timeTxt = new FlxText(450, 70, 400, "", 32); else timeTxt = new FlxText(450, 655, 400, "", 32);
 				if (!isPixelStage) {
 							timeTxt.setFormat(Paths.font("VanillaExtractRegular.ttf"), 13, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				} else {
@@ -2037,7 +2037,7 @@ class PlayState extends MusicBeatState
 
 				timeBarBG = new AttachedSprite('healthBar');
 				timeBarBG.x = 600;
-				timeBarBG.y = 0.063 * FlxG.height;
+				if(ClientPrefs.downScroll) timeBarBG.y = 0.063 * FlxG.height; else timeBarBG.y = 673;
 				timeBarBG.scrollFactor.set();
 				timeBarBG.alpha = 0;
 				if(ClientPrefs.mechanics)
@@ -2263,9 +2263,9 @@ class PlayState extends MusicBeatState
 				switch(curStage)
 				{
 					case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
-						healthIcon = new FlxSprite(1150, -40).loadGraphic(Paths.image('hudAssets/demolition/health-iconGREYSCALE')); //I had to, looked SOOO out of place when you turn off shaders
+						if(ClientPrefs.downScroll) healthIcon = new FlxSprite(1150, -39).loadGraphic(Paths.image('hudAssets/demolition/health-iconGREYSCALE')); else healthIcon = new FlxSprite(1150, 600).loadGraphic(Paths.image('hudAssets/demolition/health-iconGREYSCALE')); //I had to, looked SOOO out of place when you turn off shaders
 					default:
-						healthIcon = new FlxSprite(1150, -40).loadGraphic(Paths.image('hudAssets/demolition/health-icon'));
+						if(ClientPrefs.downScroll) healthIcon = new FlxSprite(1150, -39).loadGraphic(Paths.image('hudAssets/demolition/health-icon')); else healthIcon = new FlxSprite(1150, 600).loadGraphic(Paths.image('hudAssets/demolition/health-icon'));
 				}
 				healthIcon.scrollFactor.set();
 				healthIcon.scale.set(0.55, 0.55);
@@ -2274,7 +2274,7 @@ class PlayState extends MusicBeatState
 				healthIcon.visible = !ClientPrefs.hideHud;
 				add(healthIcon);
 
-				healthTxt = new FlxText(1036, 32, 400, "", 32);
+				if(ClientPrefs.downScroll) healthTxt = new FlxText(1036, 32, 400, "", 32); else healthTxt = new FlxText(1036, 670, 400, "", 32);
 				if (!isPixelStage) {
 							healthTxt.setFormat(Paths.font("VanillaExtractRegular.ttf"), 19, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				} else {
@@ -2289,9 +2289,9 @@ class PlayState extends MusicBeatState
 				switch(curStage)
 				{
 					case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
-						missIcon = new FlxSprite(1150, 40).loadGraphic(Paths.image('hudAssets/demolition/miss-iconGREYSCALE'));
+						if(ClientPrefs.downScroll) missIcon = new FlxSprite(1150, 40).loadGraphic(Paths.image('hudAssets/demolition/miss-iconGREYSCALE')); else missIcon = new FlxSprite(1150, 500).loadGraphic(Paths.image('hudAssets/demolition/miss-iconGREYSCALE'));
 					default:
-						missIcon = new FlxSprite(1150, 40).loadGraphic(Paths.image('hudAssets/demolition/miss-icon'));
+						if(ClientPrefs.downScroll) missIcon = new FlxSprite(1150, 40).loadGraphic(Paths.image('hudAssets/demolition/miss-icon')); else missIcon = new FlxSprite(1150, 500).loadGraphic(Paths.image('hudAssets/demolition/miss-icon'));
 				}
 				missIcon.scrollFactor.set();
 				missIcon.scale.set(0.25, 0.25);
@@ -2299,7 +2299,7 @@ class PlayState extends MusicBeatState
 				missIcon.visible = !ClientPrefs.hideHud;
 				add(missIcon);
 
-				missesTxt = new FlxText(800, 120, 400, "", 32);
+				if(ClientPrefs.downScroll) missesTxt = new FlxText(800, 120, 400, "", 32); else missesTxt = new FlxText(800, 580, 380, "", 32);
 				if (!isPixelStage) {
 					missesTxt.setFormat(Paths.font("VanillaExtractRegular.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				} else {
@@ -2419,48 +2419,128 @@ class PlayState extends MusicBeatState
 		SCALEdebugText.cameras = [camCustom];
 		//add(SCALEdebugText);
 
-		botplayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (ClientPrefs.downScroll ? 100 : -100), "", 32);
-
-		switch (FlxG.random.int(1, 7))
+		switch(hudStyle)
 		{
-			case 1:
-				botplayTxt.text = "CHEATER!";
-			case 2:
-				botplayTxt.text = "HE'S FUNKIN CHEATING";
-			case 3:
-				botplayTxt.text = "I CAN SEE YOU CHEATING";
-			case 4:
-				botplayTxt.text = "CHEATING...";
-			case 5:
-				botplayTxt.text = "Damm bro we should make this easier";
-			case 6:
-				botplayTxt.text = "Showcase";
-			case 7:
-				botplayTxt.text = "Go to hell";
-			case 8:
-				botplayTxt.text = " ";
-			case 9:
-				botplayTxt.text = " ";
-		}
-		if (!isPixelStage) {
-			switch(curStage)
-			{
-				case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
-					botplayTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				case 'PixelWorld':
+			case 'Psych':
+				botplayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (ClientPrefs.downScroll ? 100 : -100), "", 32);
+
+				switch (FlxG.random.int(1, 7))
+				{
+					case 1:
+						botplayTxt.text = "CHEATER!";
+					case 2:
+						botplayTxt.text = "HE'S FUNKIN CHEATING";
+					case 3:
+						botplayTxt.text = "I CAN SEE YOU CHEATING";
+					case 4:
+						botplayTxt.text = "CHEATING...";
+					case 5:
+						botplayTxt.text = "Damm bro we should make this easier";
+					case 6:
+						botplayTxt.text = "Showcase";
+					case 7:
+						botplayTxt.text = "Go to hell";
+					case 8:
+						botplayTxt.text = " ";
+					case 9:
+						botplayTxt.text = " ";
+				}
+				if (!isPixelStage) {
+					switch(curStage)
+					{
+						case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
+							botplayTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						case 'PixelWorld':
+							botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						default: 
+							botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					}
+				} else {
+				botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+				}
+				botplayTxt.scrollFactor.set();
+				botplayTxt.borderSize = 1.25;
+				botplayTxt.visible = cpuControlled;
+				add(botplayTxt);
+				if(ClientPrefs.downScroll) {
+					botplayTxt.y = timeBarBG.y - 78;
+				}
+				case 'Vanilla':
+					botplayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (ClientPrefs.downScroll ? 100 : -100), "", 32);
+
+					switch (FlxG.random.int(1, 7))
+					{
+						case 1:
+							botplayTxt.text = "CHEATER!";
+						case 2:
+							botplayTxt.text = "HE'S FUNKIN CHEATING";
+						case 3:
+							botplayTxt.text = "I CAN SEE YOU CHEATING";
+						case 4:
+							botplayTxt.text = "CHEATING...";
+						case 5:
+							botplayTxt.text = "Damm bro we should make this easier";
+						case 6:
+							botplayTxt.text = "Showcase";
+						case 7:
+							botplayTxt.text = "Go to hell";
+						case 8:
+							botplayTxt.text = " ";
+						case 9:
+							botplayTxt.text = " ";
+					}
+								botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					botplayTxt.scrollFactor.set();
+					botplayTxt.borderSize = 1.25;
+					botplayTxt.visible = cpuControlled;
+					add(botplayTxt);
+					if(ClientPrefs.downScroll) {
+						botplayTxt.y = timeBarBG.y - 78;
+					}
+				case 'Demolition':
+					botplayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (ClientPrefs.downScroll ? 100 : -100), "", 32);
+
+					switch (FlxG.random.int(1, 7))
+					{
+						case 1:
+							botplayTxt.text = "CHEATER!";
+						case 2:
+							botplayTxt.text = "HE'S FUNKIN CHEATING";
+						case 3:
+							botplayTxt.text = "I CAN SEE YOU CHEATING";
+						case 4:
+							botplayTxt.text = "CHEATING...";
+						case 5:
+							botplayTxt.text = "Damm bro we should make this easier";
+						case 6:
+							botplayTxt.text = "Showcase";
+						case 7:
+							botplayTxt.text = "Go to hell";
+						case 8:
+							botplayTxt.text = " ";
+						case 9:
+							botplayTxt.text = " ";
+					}
+					if (!isPixelStage) {
+						switch(curStage)
+						{
+							case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
+								botplayTxt.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 40, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+							case 'PixelWorld':
+								botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+							default: 
+								botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+						}
+					} else {
 					botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-				default: 
-					botplayTxt.setFormat(Paths.font("vcr.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-			}
-		} else {
-		botplayTxt.setFormat(Paths.font("Retro Gaming.ttf"), 32, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		}
-		botplayTxt.scrollFactor.set();
-		botplayTxt.borderSize = 1.25;
-		botplayTxt.visible = cpuControlled;
-		add(botplayTxt);
-		if(ClientPrefs.downScroll) {
-			botplayTxt.y = timeBarBG.y - 78;
+					}
+					botplayTxt.scrollFactor.set();
+					botplayTxt.borderSize = 1.25;
+					botplayTxt.visible = cpuControlled;
+					add(botplayTxt);
+					if(ClientPrefs.downScroll) {
+						botplayTxt.y = timeBarBG.y - 78;
+					}
 		}
 
 	        if(!ClientPrefs.hideJudgement) {
@@ -2523,7 +2603,7 @@ class PlayState extends MusicBeatState
 				case 'Demolition':
 					if(!isPixelStage)
 					{
-						judgementUnderlay = new FlxSprite(910, 0).loadGraphic(Paths.image('hudAssets/demolition/judge-underlay'));
+						if(ClientPrefs.downScroll) judgementUnderlay = new FlxSprite(910, 0).loadGraphic(Paths.image('hudAssets/demolition/judge-underlay')); else judgementUnderlay = new FlxSprite(890, 0).loadGraphic(Paths.image('hudAssets/demolition/judge-underlay'));
 						judgementUnderlay.scrollFactor.set();
 						judgementUnderlay.scale.set(0.35, 0.32);
 						judgementUnderlay.alpha = 0.45;
@@ -2531,7 +2611,7 @@ class PlayState extends MusicBeatState
 						judgementUnderlay.visible = !ClientPrefs.hideHud;
 						add(judgementUnderlay);
 					}else{
-						judgementUnderlay = new FlxSprite(890, 0).loadGraphic(Paths.image('hudAssets/demolition/judge-underlay'));
+						if(ClientPrefs.downScroll) judgementUnderlay = new FlxSprite(890, 0).loadGraphic(Paths.image('hudAssets/demolition/judge-underlay')); else judgementUnderlay = new FlxSprite(870, 0).loadGraphic(Paths.image('hudAssets/demolition/judge-underlay'));
 						judgementUnderlay.scrollFactor.set();
 						judgementUnderlay.scale.set(0.37, 0.32);
 						judgementUnderlay.alpha = 0.45;
@@ -7418,12 +7498,12 @@ class PlayState extends MusicBeatState
 				//MusicBeatState.switchState(new MainMenuState());
 				switch(PlayState.SONG.song)
 				{
-					case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Facade' | 'Mortiferum Risus' | 'Malfunction' | "Don't Cross!" | 'Bless' | 'Cycled Sins' | 'Hunted':
+					case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Facade' | 'Mortiferum Risus':
 						MusicBeatState.switchState(new EpisodesState());
 					case 'Isolated Legacy' | 'Lunacy Legacy' | 'Malfunction Legacy' | 'Mercy Legacy':
 						MusicBeatState.switchState(new LegacyState());
-					/*case 'Hunted' | 'Isolated Old' | 'Isolated Beta' | "Don't Cross!" | 'Malfunction' | 'Cycled Sins' | 'War Dilemma' | 'Scrapped' | 'Bless' | 'Mercy':
-						MusicBeatState.switchState(new ExtrasState());*/
+					case 'Hunted' | 'Isolated Old' | 'Isolated Beta' | "Don't Cross!" | 'Malfunction' | 'Cycled Sins' | 'War Dilemma' | 'Scrapped' | 'Neglection' | 'Bless' | 'Mercy':
+						MusicBeatState.switchState(new ExtrasState());
 					default:
 						MusicBeatState.switchState(new EpicSelectorWOOO());
 				}
@@ -9087,7 +9167,7 @@ class PlayState extends MusicBeatState
 						new FlxTimer().start(0.1, function(tmr:FlxTimer) {
 						if(!dodged) {
 							FlxG.camera.shake(0.05, 0.05);
-							health -= 0.3;
+							health -= 0.4;
 							trace("lmfao you got shot");
 							dodged = false;
 						} else {
@@ -9127,7 +9207,7 @@ class PlayState extends MusicBeatState
 							new FlxTimer().start(0.1, function(tmr:FlxTimer) {
 							if(!dodged) {
 								FlxG.camera.shake(0.05, 0.05);
-								health = 0;
+								health -= 0.4;
 								trace("lmfao you fucking died to a mouse");
 								dodged = false;
 							} else {
@@ -9177,7 +9257,7 @@ class PlayState extends MusicBeatState
 				new FlxTimer().start(0.1, function(tmr:FlxTimer) {
 				if(!dodged) {
 					FlxG.camera.shake(0.05, 0.05);
-					health -= 0.3;
+					health -= 0.4;
 					trace("lmfao you got shot depsite the fact this is nerfed");
 					dodged = false;
 				} else {
@@ -9994,6 +10074,7 @@ class PlayState extends MusicBeatState
 					chainsINVERT.alpha = 0;
 					vaultSpookINVERT.alpha = 0;
 					triggerEventNote('Flash Screen', '3', '');
+					//triggerEventNote('Change Character', 'bf', 'GraveyandBf');
 					Application.current.window.borderless = false;
 					FlxTween.tween(healthBar, {alpha: 1}, 0.6);
 					FlxTween.tween(healthBarBG, {alpha: 1}, 0.6);
@@ -13670,7 +13751,7 @@ class PlayState extends MusicBeatState
 		healthBarBG.visible = false;
 		timeBar.visible = false;
 		timeBarBG.visible = false;
-		}
+			}
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????
 		callOnLuas('onBeatHit', []);

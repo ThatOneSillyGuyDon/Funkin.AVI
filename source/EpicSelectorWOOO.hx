@@ -50,6 +50,8 @@ class EpicSelectorWOOO extends MusicBeatState {
 	var fpCateBanners:FlxSprite;
 	var grpCats:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
+	var noFreeplay:FlxText;
+	var noCovers:FlxText;
 	var BG:FlxSprite;
     override function create(){
 
@@ -78,15 +80,19 @@ class EpicSelectorWOOO extends MusicBeatState {
 						//uncomment these fucking pieces of shit if you feel like testing it.
 
 					}
-				freeplayCats = ['V2 Content', 'Legacy', '???'];
+				//freeplayCats = ['V2 Content', 'Legacy', '???'];
 		/*if(FPClientPrefs.episode2FPLock == 'unlocked' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.crossinLock == 'beaten' && FPClientPrefs.warLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.blessLock == 'beaten' && FPClientPrefs.scrappedLock == 'beaten' && FPClientPrefs.mercyLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten' && FPClientPrefs.betaisolateLock == 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?
 		{
-			if(ClientPrefs.language == "Spanish") freeplayCats = ['Jugar', 'Un Mensaje Para It', '???'];
-			else freeplayCats = ['Episodes', 'Extras', 'Covers'];
+			if(ClientPrefs.language == "Spanish") freeplayCats = ['Legado', 'Jugar', 'Un Mensaje Para It', 'Cubiertas'];
+			else freeplayCats = ['Legacy', 'Episodes', 'Extras', 'Covers'];
+		}else*/ if (FPClientPrefs.episode1FPLock == 'unlocked')
+		{
+			if(ClientPrefs.language == "Spanish") freeplayCats = ['Legado', 'Jugar', 'Un Mensaje Para It'];
+			else freeplayCats = ['Legacy', 'Episodes', 'Extras'];
 		} else {
-			if(ClientPrefs.language == "Spanish") freeplayCats = ['Jugar', '???', '???'];
-			else freeplayCats = ['Episodes', 'Extras', '???'];
-		}*/
+			if(ClientPrefs.language == "Spanish") freeplayCats = ['Legado', '???', '???'];
+			else freeplayCats = ['Legacy', '???', '???'];
+		}
 
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		BG.updateHitbox();
@@ -123,6 +129,22 @@ class EpicSelectorWOOO extends MusicBeatState {
 			unfinishedText.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 25, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 			add(unfinishedText);
 			}
+
+			noFreeplay = new FlxText(350, FlxG.height - 350, 0, "Beat Episode 1 First!", 30);
+			noFreeplay.scrollFactor.set();
+			noFreeplay.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 80, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			noFreeplay.alpha = 0;
+			noFreeplay.borderSize = 3.5;
+			noFreeplay.borderQuality = 3.5;
+			add(noFreeplay);
+
+			noCovers = new FlxText(350, FlxG.height - 350, 0, "Beat All Freeplay Songs!", 30);
+			noCovers.scrollFactor.set();
+			noCovers.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 80, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+			noCovers.alpha = 0;
+			noCovers.borderSize = 3.5;
+			noCovers.borderQuality = 3.5;
+			add(noCovers);
 
 		var scratchStuff:FlxSprite = new FlxSprite();
 		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
@@ -182,23 +204,36 @@ class EpicSelectorWOOO extends MusicBeatState {
 		}
         if (controls.ACCEPT){
             switch(curSelected){
-                case 0:
-				//if(FPClientPrefs.episode1FPLock == 'unlocked')
-				//{
-					MusicBeatState.switchState(new EpisodesState());
-				//}else{
-				//	FlxG.sound.play(Paths.sound('cancelMenu'));
-				//}
+				case 0:
+					MusicBeatState.switchState(new LegacyState());
                 case 1:
-					MusicBeatState.switchState(new ExtrasState());
-					//MusicBeatState.switchState(new ExtrasState());
-				case 2:
+				if(FPClientPrefs.episode1FPLock == 'unlocked')
+				{
+					MusicBeatState.switchState(new EpisodesState());
+				}else{
+					FlxG.sound.play(Paths.sound('cancelMenu'));
+					noFreeplay.alpha = 1;
+					FlxTween.tween(noFreeplay, {alpha: 0}, 1.5, {ease: FlxEase.quadIn, startDelay: 2});
+				}
+                case 2:
+					//MusicBeatState.switchState(new LegacyState());
+					if(FPClientPrefs.episode1FPLock == 'unlocked')
+						{
+							MusicBeatState.switchState(new ExtrasState());
+						}else{
+							FlxG.sound.play(Paths.sound('cancelMenu'));
+							noFreeplay.alpha = 1;
+							FlxTween.tween(noFreeplay, {alpha: 0}, 1.5, {ease: FlxEase.quadIn, startDelay: 2});
+						}
+				/*case 3:
 					//MusicBeatState.switchState(new CoversState());
-					//if(FPClientPrefs.episode2FPLock == 'unlocked' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.crossinLock == 'beaten' && FPClientPrefs.warLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.blessLock == 'beaten' && FPClientPrefs.scrappedLock == 'beaten' && FPClientPrefs.mercyLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten' && FPClientPrefs.betaisolateLock == 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?
-					//{
-					//	MusicBeatState.switchState(new CoversState());
-					//}else{
+					/*if(FPClientPrefs.episode2FPLock == 'unlocked' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.crossinLock == 'beaten' && FPClientPrefs.warLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.blessLock == 'beaten' && FPClientPrefs.scrappedLock == 'beaten' && FPClientPrefs.mercyLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten' && FPClientPrefs.betaisolateLock == 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?
+					{
+						MusicBeatState.switchState(new CoversState());
+					}else{
 						FlxG.sound.play(Paths.sound('cancelMenu'));
+						noCovers.alpha = 1;
+						FlxTween.tween(noCovers, {alpha: 0}, 1.5, {ease: FlxEase.quadIn, startDelay: 2});*/
 					//}
 			}
             }
@@ -225,7 +260,36 @@ class EpicSelectorWOOO extends MusicBeatState {
 		}
 		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 
-		/*if(curSelected == 2)
+		if(curSelected == 3)
+			{
+				if(FPClientPrefs.malfunctionLock != 'beaten' || FPClientPrefs.crossinLock != 'beaten' || FPClientPrefs.warLock != 'beaten' || FPClientPrefs.sinsLock != 'beaten' || FPClientPrefs.huntedLock != 'beaten' || FPClientPrefs.blessLock != 'beaten' || FPClientPrefs.scrappedLock != 'beaten' || FPClientPrefs.mercyLock != 'beaten' || FPClientPrefs.oldisolateLock != 'beaten' || FPClientPrefs.betaisolateLock != 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?))
+				{	
+				FlxG.camera.flash(FlxColor.BLACK, 0.6);
+				FlxG.camera.shake(0.004, 99999999);
+				if(ClientPrefs.funiShaders)
+				{
+				clearShader();
+				chrom = new ChromaticAberrationEffect();
+				blurThisShit = new TiltshiftEffect(0.6, 0);
+
+				distort = new WIDistortionEffect(0.75, 0.25, false);
+				distort.shader.working.value = [true];
+
+				addShader(distort);
+				addShader(chrom);
+				addShader(blurThisShit);
+
+					if (chrom != null)
+				chrom.setChrome(0.005);
+
+				if(blurThisShit != null)
+				blurThisShit.setBlur(0.6);
+
+				if (distort != null)
+				distort.shader.working.value = [true];
+				}
+			}
+		}else if(curSelected == 2 || curSelected == 1 && FPClientPrefs.episode1FPLock != 'unlocked')
 						{
 							if(FPClientPrefs.malfunctionLock != 'beaten' || FPClientPrefs.crossinLock != 'beaten' || FPClientPrefs.warLock != 'beaten' || FPClientPrefs.sinsLock != 'beaten' || FPClientPrefs.huntedLock != 'beaten' || FPClientPrefs.blessLock != 'beaten' || FPClientPrefs.scrappedLock != 'beaten' || FPClientPrefs.mercyLock != 'beaten' || FPClientPrefs.oldisolateLock != 'beaten' || FPClientPrefs.betaisolateLock != 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?))
 							{	
@@ -256,7 +320,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 							}else{
 								//Fuck Shaders, they're so complicated lmao.
 							}
-						}else{*/
+						}else{
 							FlxG.camera.flash(FlxColor.BLACK, 0.2);
 							if(ClientPrefs.funiShaders)
 							{
@@ -288,3 +352,4 @@ class EpicSelectorWOOO extends MusicBeatState {
 							FlxG.camera.shake(0.004, 0);
 						}
 	}
+}

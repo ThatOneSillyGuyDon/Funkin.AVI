@@ -21,7 +21,7 @@ class ClientPrefs
 	public static var downScroll:Bool = false;
 	public static var middleScroll:Bool = false;
 	public static var antiMash:Bool = true;
-	public static var hudSelection:String = "Psych";
+	public static var hudSelection:String = "Demolition";
 	public static var center:Bool = true;
 	public static var keAccuracy:Bool = false;
 	public static var ratingSystem:String = "Bedrock";
@@ -38,7 +38,7 @@ class ClientPrefs
 	public static var globalAntialiasing:Bool = true;
 	public static var noteSplashes:Bool = true;
 	public static var lowQuality:Bool = false;
-	public static var framerate:Int = 240;
+	public static var framerate:Int = 60;
 	public static var cursing:Bool = true;
 	public static var violence:Bool = true;
 	public static var camZooms:Bool = true;

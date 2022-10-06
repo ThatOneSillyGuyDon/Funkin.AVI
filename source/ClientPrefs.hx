@@ -8,6 +8,7 @@ import Controls;
 
 class ClientPrefs
     {
+	public static var cursor:String = 'Default';
 	public static var optimization:Bool = false; //The shaders fucking suck
 	public static var screenShake:Bool = true;
     public static var language:String = "English";
@@ -131,6 +132,7 @@ class ClientPrefs
 	}
 
 	public static function saveSettings() {
+		FlxG.save.data.cursor = cursor;
 		FlxG.save.data.optimization = optimization;
 		FlxG.save.data.restart = restart;
 		FlxG.save.data.screenShake = screenShake;
@@ -207,6 +209,8 @@ class ClientPrefs
 	}
 
 	public static function loadPrefs() {	
+		if(FlxG.save.data.cursor != null) 
+			cursor = FlxG.save.data.cursor;
 		if(FlxG.save.data.optimization != null) 
 			optimization = FlxG.save.data.optimization;
 		if(FlxG.save.data.restart != null) {

@@ -24,6 +24,7 @@ import Discord.DiscordClient;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
+import flixel.input.mouse.FlxMouse;
 
 using StringTools;
 
@@ -109,10 +110,12 @@ class Main extends Sprite
 		#end
 
 		FlxG.autoPause = false;
-		FlxG.mouse.visible = false;
+		FlxG.mouse.visible = true;
 
 		Application.current.window.onFocusOut.add(onWindowFocusOut);
 		Application.current.window.onFocusIn.add(onWindowFocusIn);
+
+		FlxG.mouse.load(Paths.image('mouse/' + ClientPrefs.cursor));
 
 		gjToastManager = new GJToastManager();
 		addChild(gjToastManager); //adding the toddler

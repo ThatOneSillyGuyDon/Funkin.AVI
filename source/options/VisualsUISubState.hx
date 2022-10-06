@@ -31,6 +31,8 @@ using StringTools;
 
 class VisualsUISubState extends BaseOptionsMenu
 {
+    var option:Option;
+
 	public function new()
 	{
 		title = 'Visuals and UI';
@@ -49,6 +51,9 @@ class VisualsUISubState extends BaseOptionsMenu
 			'cutscenes',
 			'bool',
 			true);
+		addOption(option);
+
+		option = new Option('Cursor Style:', 'What Texture Should The Cursor Be?', 'cursor', 'string', 'Default', ['Default', 'Funkin.avi']);
 		addOption(option);
 
 		var option:Option = new Option('Note Splashes',

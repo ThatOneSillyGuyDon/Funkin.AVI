@@ -911,7 +911,7 @@ class TitleState extends MusicBeatState
 					addMoreText('avi');
 				// credTextShit.text += '\nNight';
 				case 15:
-					addMoreText('Demo'); // credTextShit.text += '\nFunkin';
+					addMoreText('v2.0'); // credTextShit.text += '\nFunkin';
 				case 16:
 					deleteCoolText();
 				case 17:

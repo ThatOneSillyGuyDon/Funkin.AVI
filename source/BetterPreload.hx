@@ -35,7 +35,7 @@ enum PreloadType {
     atlas;
     image;
     imagealt;
-   // chart; //wat?
+    chart; //wat?
     //sound;
    // music; <-This shit doesn't work
 }
@@ -170,6 +170,8 @@ class BetterPreload extends MusicBeatState {
         'bfGrey' => PreloadType.atlas,
        'bfPixel' => PreloadType.atlas,
         'bfPixelsDEAD' => PreloadType.atlas,
+        'bfFear' => PreloadType.atlas,
+        'guitarBF' => PreloadType.atlas,
         'Bf-relapsed' => PreloadType.atlas,
         'blackness' => PreloadType.atlas,
         'blessBf' => PreloadType.atlas,
@@ -347,14 +349,17 @@ class BetterPreload extends MusicBeatState {
         'pixelUI/POISONnoteSplashes' => PreloadType.image,
         'pixelUI/RSnoteSplashes' => PreloadType.image,
 
-       /*//Charts & Song Files
+       //Charts & Song Files
         'isolated' => PreloadType.chart,
+        'isolated-legacy' => PreloadType.chart,
+        'lunacy-legacy' => PreloadType.chart,
         'isolated-old' => PreloadType.chart,
         'isolated-beta' => PreloadType.chart,
         'lunacy' => PreloadType.chart,
         'delusional' => PreloadType.chart,
         'bless' => PreloadType.chart,
-        'mercy' => PreloadType.chart,
+        'mercy-legacy' => PreloadType.chart,
+        'malfunction-legacy' => PreloadType.chart,
         'malfunction' => PreloadType.chart,
         'hunted' => PreloadType.chart,
         'neglection' => PreloadType.chart,
@@ -364,7 +369,7 @@ class BetterPreload extends MusicBeatState {
         'mortiferum-risus' => PreloadType.chart,
         'cycled-sins' => PreloadType.chart,
         'scrapped' => PreloadType.chart,
-        'war-dilemma' => PreloadType.chart,*/
+        'war-dilemma' => PreloadType.chart,
 
 
 
@@ -400,7 +405,7 @@ class BetterPreload extends MusicBeatState {
 		add(bg);
 
         FlxTween.tween(bg, {alpha: 1}, 1);
-        refreshLoadScreen();
+       // refreshLoadScreen();
     
         FlxTween.tween(FlxG.camera, {alpha: 1}, 0.5, {
             onComplete: function(tween:FlxTween){
@@ -436,7 +441,7 @@ class BetterPreload extends MusicBeatState {
         super.update(elapsed);
     }
 
-    function refreshLoadScreen() {
+   /* function refreshLoadScreen() {
             FlxTween.tween(bg, {alpha: 0}, 1.5, {startDelay: 6, onComplete: function(twn:FlxTween)
             {
             remove(bg);
@@ -445,7 +450,7 @@ class BetterPreload extends MusicBeatState {
             },
             type: LOOPING});
 
-    }
+    }*/
 
     var storedPercentage:Float = 0;
 
@@ -470,8 +475,7 @@ class BetterPreload extends MusicBeatState {
                     preloadedCharacter.visible = false;
                     add(preloadedCharacter);
                     trace('character loaded ${preloadedCharacter.frames}');
-              /*  case PreloadType.chart:
-                    loadText.text = 'Loading Songs... ${Math.floor(storedPercentage * 100)}%';
+              case PreloadType.chart:
                     var preloadedChart:String = Paths.json(i);
                     trace(i + ' is loaded?');
                         var preloadedSong:String = Paths.voices(i);

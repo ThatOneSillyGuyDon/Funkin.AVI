@@ -42,7 +42,7 @@ using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
-	public static var MouseVersion:String = '1.6 (STREAMER BUILD DEMO)';
+	public static var MouseVersion:String = '2.0';
 	public static var DemoEngineVersion:String = '0.3.0pa';
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
@@ -404,13 +404,6 @@ class MainMenuState extends MusicBeatState
 		versionShit.scrollFactor.set();
 		versionShit.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 22, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		add(versionShit);
-		noFreeplay = new FlxText(350, FlxG.height - 350, 0, "Beat Episode 1 First!", 30);
-		noFreeplay.scrollFactor.set();
-		noFreeplay.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 80, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
-		noFreeplay.alpha = 0;
-		noFreeplay.borderSize = 3.5;
-		noFreeplay.borderQuality = 3.5;
-		add(noFreeplay);
 
 		if(!GameJoltAPI.userLogin && ClientPrefs.language == "Spanish") {
 			/*
@@ -582,51 +575,56 @@ class MainMenuState extends MusicBeatState
 
 			if (controls.ACCEPT)
 			{
-				if(optionShit[curSelected] == 'freeplay')
-				{
-						selectedSomethin = true;
-						FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
-
-						menuItems.forEach(function(spr:FlxSprite)
-							{
-								if (curSelected != spr.ID)
+				/*if(optionShit[curSelected] == 'freeplay')
+					{
+						if(FPClientPrefs.episode1FPLock == 'unlocked')
+						{
+							selectedSomethin = true;
+							FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
+	
+							menuItems.forEach(function(spr:FlxSprite)
 								{
-									// Main Menu Select Animations
-									FlxTween.tween(FlxG.camera, {zoom: 1.15}, 2, {ease: FlxEase.quartInOut});
-									FlxTween.tween(menuart, {x: -170}, 2.2, {ease: FlxEase.quartInOut});
-									FlxTween.tween(magenta, {x: -170}, 2.2, {ease: FlxEase.quartInOut});
-									FlxTween.tween(menuart, {y: 200}, 1.9, {ease: FlxEase.quartInOut});
-									FlxTween.tween(magenta, {y: -120}, 1.9, {ease: FlxEase.quartInOut});
-									// FlxTween.tween(bg, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
-									// FlxTween.tween(magenta, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
-									FlxTween.tween(spr, {x: -250, alpha: 0}, 0.4, {
-										ease: FlxEase.quadOut,
-										onComplete: function(twn:FlxTween)
-										{
-											spr.kill();
-										}
-									});
-								}
-								else
-								{
-									FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
+									if (curSelected != spr.ID)
 									{
-										var daChoice:String = optionShit[curSelected];
-		
-										switch (daChoice)
+										// Main Menu Select Animations
+										FlxTween.tween(FlxG.camera, {zoom: 1.15}, 2, {ease: FlxEase.quartInOut});
+										FlxTween.tween(menuart, {x: -170}, 2.2, {ease: FlxEase.quartInOut});
+										FlxTween.tween(magenta, {x: -170}, 2.2, {ease: FlxEase.quartInOut});
+										FlxTween.tween(menuart, {y: 200}, 1.9, {ease: FlxEase.quartInOut});
+										FlxTween.tween(magenta, {y: -120}, 1.9, {ease: FlxEase.quartInOut});
+										// FlxTween.tween(bg, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
+										// FlxTween.tween(magenta, {alpha: 0}, 0.8, {ease: FlxEase.expoIn});
+										FlxTween.tween(spr, {x: -250, alpha: 0}, 0.4, {
+											ease: FlxEase.quadOut,
+											onComplete: function(twn:FlxTween)
+											{
+												spr.kill();
+											}
+										});
+									}
+									else
+									{
+										FlxFlicker.flicker(spr, 1, 0.06, false, false, function(flick:FlxFlicker)
 										{
-											case 'freeplay':
-												MusicBeatState.switchState(new EpicSelectorWOOO());
-										}
-									});
-								}
-							});
-				}else if (optionShit[curSelected] == 'donate')
+											var daChoice:String = optionShit[curSelected];
+			
+											switch (daChoice)
+											{
+												case 'freeplay':
+													MusicBeatState.switchState(new EpicSelectorWOOO());
+											}
+										});
+									}
+								});
+						}else{
+						FlxG.sound.play(Paths.sound('cancelMenu'));
+						noFreeplay.alpha = 1;
+						FlxTween.tween(noFreeplay, {alpha: 0}, 1.5, {ease: FlxEase.quadIn, startDelay: 2});
+						}
+				}else*/ if (optionShit[curSelected] == 'donate')
 				{
 					CoolUtil.browserLoad('https://ninja-muffin24.itch.io/funkin');
-				} else if(optionShit[curSelected] == "story_mode") {
-                   lime.app.Application.current.window.alert('This is not completed, also check freeplay :)', 'Error On Funkin.avi.exe:');
-				} 
+				}
 				else
 				{
 					selectedSomethin = true;
@@ -660,8 +658,11 @@ class MainMenuState extends MusicBeatState
 
 								switch (daChoice)
 								{
-									//case 'freeplay':
-										//MusicBeatState.switchState(new EpicSelectorWOOO());
+									case 'story_mode':
+										//FlxG.sound.play(Paths.sound('cancelMenu'));
+										MusicBeatState.switchState(new StoryMenuState());
+									case 'freeplay':
+										MusicBeatState.switchState(new EpicSelectorWOOO());
 									//#if MODS_ALLOWED
 									//case 'mods':
 										//MusicBeatState.switchState(new ModsMenuState());

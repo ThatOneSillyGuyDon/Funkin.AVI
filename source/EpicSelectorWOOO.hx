@@ -190,7 +190,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 				//	FlxG.sound.play(Paths.sound('cancelMenu'));
 				//}
                 case 1:
-					MusicBeatState.switchState(new LegacyState());
+					MusicBeatState.switchState(new ExtrasState());
 					//MusicBeatState.switchState(new ExtrasState());
 				case 2:
 					//MusicBeatState.switchState(new CoversState());

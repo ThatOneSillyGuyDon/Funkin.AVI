@@ -3820,6 +3820,7 @@ class PlayState extends MusicBeatState
 				introAssets.set('vintage', ['funkinAVI/intro/3', 'funkinAVI/intro/2', 'funkinAVI/intro/1', 'funkinAVI/intro/Go']);
 				introAssets.set('corrupted', ['funkinAVI/intro/3-PixelWorld-pixel', 'funkinAVI/intro/2-PixelWorld-pixel', 'funkinAVI/intro/1-PixelWorld-pixel', 'funkinAVI/intro/Go-PixelWorld-pixel']);
 				introAssets.set('vintage-corrupt', ['funkinAVI/intro/3-currupt', 'funkinAVI/intro/2-currupt', 'funkinAVI/intro/1-currupt', 'funkinAVI/intro/Go-currupt',]);
+				introAssets.set('relapse', ['funkinAVI/intro/RelapseIntro3-pixel', 'funkinAVI/intro/RelapseIntro2-pixel', 'funkinAVI/intro/RelapseIntro1-pixel', 'funkinAVI/intro/RelapseIntroGo-pixel']);
 				introAssets.set('default', ['ready', 'set', 'go']);
 				introAssets.set('pixel', ['pixelUI/ready-pixel', 'pixelUI/set-pixel', 'pixelUI/date-pixel']);
 
@@ -3838,6 +3839,9 @@ class PlayState extends MusicBeatState
 					{
 						case 'PixelWorld':
 						introAlts = introAssets.get('corrupted');
+						antialias = false;
+						case 'RelapseStage':
+						introAlts = introAssets.get('relapse');
 						antialias = false;
 						default:
 						introAlts = introAssets.get('pixel');
@@ -3960,6 +3964,106 @@ class PlayState extends MusicBeatState
 								case 4:
 							}
 						}
+						case 'Cycled Sins':
+							switch (swagCounter)
+							{
+								case 0:
+									countdownBeginning = new FlxSprite().loadGraphic(Paths.image(introAlts[0]));
+									countdownBeginning.scrollFactor.set();
+									countdownBeginning.updateHitbox();
+
+									if (PlayState.isPixelStage)
+										countdownBeginning.setGraphicSize(Std.int(countdownBeginning.width * daPixelZoom));
+	
+									countdownBeginning.screenCenter();
+									countdownBeginning.antialiasing = antialias;
+									add(countdownBeginning);
+									FlxTween.tween(countdownBeginning, {y: countdownBeginning.y + 100, alpha: 0}, Conductor.crochet / 1000, {
+										ease: FlxEase.cubeInOut,
+										onComplete: function(twn:FlxTween)
+										{
+											remove(countdownBeginning);
+											countdownBeginning.destroy();
+										}
+									});
+									FlxG.sound.play(Paths.sound('funkinAVI/intro/Relapse3' + introSoundsSuffix), 1);
+								case 1:
+									camGame.zoom = 0.85;
+									camHUD.zoom = 0.85;
+									FlxTween.tween(camGame, {zoom: 0.8}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+									FlxTween.tween(camHUD, {zoom: 1}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+									
+									countdownReady = new FlxSprite().loadGraphic(Paths.image(introAlts[1]));
+									countdownReady.scrollFactor.set();
+									countdownReady.updateHitbox();
+
+									if (PlayState.isPixelStage)
+										countdownReady.setGraphicSize(Std.int(countdownBeginning.width * daPixelZoom));
+	
+									countdownReady.screenCenter();
+									countdownReady.antialiasing = antialias;
+									add(countdownReady);
+									FlxTween.tween(countdownReady, {y: countdownReady.y + 100, alpha: 0}, Conductor.crochet / 1000, {
+										ease: FlxEase.cubeInOut,
+										onComplete: function(twn:FlxTween)
+										{
+											remove(countdownReady);
+											countdownReady.destroy();
+										}
+									});
+									FlxG.sound.play(Paths.sound('funkinAVI/intro/Relapse2' + introSoundsSuffix), 1);
+								case 2:
+									camGame.zoom = 0.9;
+									camHUD.zoom = 0.9;
+									FlxTween.tween(camGame, {zoom: 0.8}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+									FlxTween.tween(camHUD, {zoom: 1}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+	
+									countdownSet = new FlxSprite().loadGraphic(Paths.image(introAlts[2]));
+									countdownSet.scrollFactor.set();
+
+									if (PlayState.isPixelStage)
+										countdownSet.setGraphicSize(Std.int(countdownBeginning.width * daPixelZoom));
+	
+									countdownSet.screenCenter();
+									countdownSet.antialiasing = antialias;
+									add(countdownSet);
+									FlxTween.tween(countdownSet, {y: countdownSet.y + 100, alpha: 0}, Conductor.crochet / 1000, {
+										ease: FlxEase.cubeInOut,
+										onComplete: function(twn:FlxTween)
+										{
+											remove(countdownSet);
+											countdownSet.destroy();
+										}
+									});
+									FlxG.sound.play(Paths.sound('funkinAVI/intro/Relapse1' + introSoundsSuffix), 1);
+								case 3:
+									camGame.zoom = 1;
+									camHUD.zoom = 1;
+									FlxTween.tween(camGame, {zoom: 0.8}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+									FlxTween.tween(camHUD, {zoom: 1}, Conductor.crochet / 2000, {ease: FlxEase.cubeInOut});
+	
+									countdownGo = new FlxSprite().loadGraphic(Paths.image(introAlts[3]));
+									countdownGo.scrollFactor.set();
+	
+									countdownGo.updateHitbox();
+
+									if (PlayState.isPixelStage)
+										countdownGo.setGraphicSize(Std.int(countdownBeginning.width * daPixelZoom));
+	
+									countdownGo.screenCenter();
+									countdownGo.antialiasing = antialias;
+									add(countdownGo);
+									FlxTween.tween(countdownGo, {y: countdownGo.y + 100, alpha: 0}, Conductor.crochet / 1000, {
+										ease: FlxEase.cubeInOut,
+										onComplete: function(twn:FlxTween)
+										{
+											remove(countdownGo);
+											countdownGo.destroy();
+										}
+									});
+									FlxG.sound.play(Paths.sound('funkinAVI/intro/RelapseGo' + introSoundsSuffix), 1);
+								case 4:
+							}
 					case 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Hunted' | 'Facade' | 'Isolated Old' | 'Mercy' | 'Isolated Legacy' | 'Lunacy Legacy' | 'Mercy Legacy':
 						switch (swagCounter)
 						{

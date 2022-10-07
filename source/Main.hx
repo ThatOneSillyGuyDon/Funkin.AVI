@@ -116,7 +116,7 @@ class Main extends Sprite
 		Application.current.window.onFocusIn.add(onWindowFocusIn);
 
 		if(ClientPrefs.cursor == "Funkin.avi") {
-		FlxG.mouse.load(Paths.image('mouse/Funkin.av'));
+		FlxG.mouse.load(Paths.image('mouse/Funkin.avi'));
 		}
 
 		gjToastManager = new GJToastManager();

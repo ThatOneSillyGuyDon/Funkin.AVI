@@ -115,7 +115,9 @@ class Main extends Sprite
 		Application.current.window.onFocusOut.add(onWindowFocusOut);
 		Application.current.window.onFocusIn.add(onWindowFocusIn);
 
-		FlxG.mouse.load(Paths.image('mouse/' + ClientPrefs.cursor));
+		if(ClientPrefs.cursor == "Funkin.avi") {
+		FlxG.mouse.load(Paths.image('mouse/Funkin.av'));
+		}
 
 		gjToastManager = new GJToastManager();
 		addChild(gjToastManager); //adding the toddler
@@ -190,65 +192,45 @@ class Main extends Sprite
 				FlxG.drawFramerate = 60;
 				FlxG.updateFramerate = 60;
 			}
+			Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, crash);
 		}
-
-		function onCrash(e:UncaughtErrorEvent):Void
+	
+		function crash(e:UncaughtErrorEvent):Void
+		{
+			var errMsg:String = "";
+			var path:String;
+			var callStack:Array<StackItem> = CallStack.exceptionStack(true);
+			var dateNow:String = Date.now().toString();
+	
+			dateNow = dateNow.replace(" ", "_");
+			dateNow = dateNow.replace(":", "'");
+	
+			path = "./crash/" + ""+ Application.current.meta.get('title') + "_" + dateNow + ".txt";
+	
+			for (stackItem in callStack)
 			{
-				var errMsg:String = "";
-				var path:String;
-				var callStack:Array<StackItem> = CallStack.exceptionStack(true);
-				var dateNow:String = Date.now().toString();
-		
-				dateNow = StringTools.replace(dateNow, " ", "_");
-				dateNow = StringTools.replace(dateNow, ":", "'");
-		
-				path = "./crash/" + "FunkinAVI_" + dateNow + ".txt";
-		
-				errMsg = "Version: " + Lib.application.meta["version"] + "\n";
-		
-				for (stackItem in callStack)
+				switch (stackItem)
 				{
-					switch (stackItem)
-					{
-						case FilePos(s, file, line, column):
-							errMsg += file + " (line " + line + ")\n";
-						default:
-							Sys.println(stackItem);
-					}
+					case FilePos(s, file, line, column):
+						errMsg += file + " (" + line + ")\n";
+					default:
+						Sys.println(stackItem);
 				}
-		
-				errMsg += "\nUncaught Error: " + e.error + "\nReport the error here: https://discord.gg/cZydhxFYpp";
-		
-				if (!FileSystem.exists("./crash/"))
-					FileSystem.createDirectory("./crash/");
-		
-				File.saveContent(path, errMsg + "\n");
-		
-				Sys.println(errMsg);
-				Sys.println("Crash dump saved in " + Path.normalize(path));
-		
-				var crashDialoguePath:String = "FlixelCrashHandler";
-		
-				#if windows
-				crashDialoguePath += ".exe";
-				#end
-		
-				if (FileSystem.exists("./" + crashDialoguePath))
-				{
-					Sys.println("Found crash dialog: " + crashDialoguePath);
-		
-					#if linux
-					crashDialoguePath = "./" + crashDialoguePath;
-					#end
-					new Process(crashDialoguePath, [path]);
-				}
-				else
-				{
-					Sys.println("No crash dialog found! Making a simple alert instead...");
-					Application.current.window.alert(errMsg, "Error!");
-				}
-		
-				Sys.exit(1);
 			}
+	
+			errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the Demolition Engine GitHub page: https://github.com/DEMOLITIONDON96/Demolition-Engine/issues\n\n> Crash Handler written by: sqirra-rng for Psych Engine";
+	
+			if (!FileSystem.exists("./crash_messages/"))
+				FileSystem.createDirectory("./crash_messages/");
+	
+			File.saveContent(path, errMsg + "\n");
+	
+			Sys.println(errMsg);
+			Sys.println("The Crash Notes Have Been Saved In: " + Path.normalize(path));
+	
+			Application.current.window.alert(errMsg, "Error On Funkin.avi.exe!");
+			DiscordClient.shutdown();
+			Sys.exit(1);
+		}
 }
 	

@@ -4603,12 +4603,13 @@ class PlayState extends MusicBeatState
 			{
 				for (i in 0...event[1].length)
 				{
-					var newEventNote:Array<Dynamic> = [event[0], event[1][i][0], event[1][i][1], event[1][i][2]];
+					var newEventNote:Array<Dynamic> = [event[0], event[1][i][0], event[1][i][1], event[1][i][2], event[1][i][3]];
 					var subEvent:EventNote = {
 						strumTime: newEventNote[0] + ClientPrefs.noteOffset,
 						event: newEventNote[1],
 						value1: newEventNote[2],
-						value2: newEventNote[3]
+						value2: newEventNote[3],
+						value3: newEventNote[4]
 					};
 					subEvent.strumTime -= eventNoteEarlyTrigger(subEvent);
 					eventNotes.push(subEvent);
@@ -4714,12 +4715,13 @@ class PlayState extends MusicBeatState
 		{
 			for (i in 0...event[1].length)
 			{
-				var newEventNote:Array<Dynamic> = [event[0], event[1][i][0], event[1][i][1], event[1][i][2]];
+				var newEventNote:Array<Dynamic> = [event[0], event[1][i][0], event[1][i][1], event[1][i][2], event[1][i][3]];
 				var subEvent:EventNote = {
 					strumTime: newEventNote[0] + ClientPrefs.noteOffset,
 					event: newEventNote[1],
 					value1: newEventNote[2],
-					value2: newEventNote[3]
+					value2: newEventNote[3],
+					value3: newEventNote[4]
 				};
 				subEvent.strumTime -= eventNoteEarlyTrigger(subEvent);
 				eventNotes.push(subEvent);
@@ -6310,7 +6312,11 @@ class PlayState extends MusicBeatState
 			if(eventNotes[0].value2 != null)
 				value2 = eventNotes[0].value2;
 
-			triggerEventNote(eventNotes[0].event, value1, value2);
+			var value3:String = '';
+			if(eventNotes[0].value3 != null)
+				value3 = eventNotes[0].value3;
+
+			triggerEventNote(eventNotes[0].event, value1, value2, value3);
 			eventNotes.shift();
 		}
 	}
@@ -6323,7 +6329,10 @@ class PlayState extends MusicBeatState
 
 	var lyrics:FlxText;
 	
-	public function triggerEventNote(eventName:String, value1:String, value2:String) {
+	public function triggerEventNote(eventName:String, value1:String, value2:String, ?value3:String) {
+		var theValue1:String = value1.toLowerCase().trim();
+		var theValue2:String = value2.toLowerCase().trim();
+		var theValue3:String = value3.toLowerCase().trim();
 		switch(eventName) {
 
 			case 'Spotlights':
@@ -7174,23 +7183,25 @@ class PlayState extends MusicBeatState
 
 			//need to figure out how to make notes invisible
 			case 'Set Strum Visibility':
+                var timer = Std.parseFloat(value3);
+
 				for (i in 0...playerStrums.length) {
 				switch(value1) {
                  case 'false' | 'False':
-					FlxTween.tween(playerStrums.members[i], {alpha: 0}, 1, {ease: FlxEase.sineInOut});
+					FlxTween.tween(playerStrums.members[i], {alpha: 0}, timer, {ease: FlxEase.sineInOut});
 				
 				case 'true' | 'True':
-					FlxTween.tween(playerStrums.members[i], {alpha: 1}, 1, {ease: FlxEase.sineInOut});
+					FlxTween.tween(playerStrums.members[i], {alpha: 1}, timer, {ease: FlxEase.sineInOut});
 				}
 				}
 
 				for (i in 0...opponentStrums.length) {
 					switch(value2) {
 					 case 'false' | 'False':
-						FlxTween.tween(opponentStrums.members[i], {alpha: 0}, 1, {ease: FlxEase.sineInOut});
+						FlxTween.tween(opponentStrums.members[i], {alpha: 0}, timer, {ease: FlxEase.sineInOut});
 					
 					case 'true' | 'True':
-						FlxTween.tween(opponentStrums.members[i], {alpha: 1}, 1, {ease: FlxEase.sineInOut});
+						FlxTween.tween(opponentStrums.members[i], {alpha: 1}, timer, {ease: FlxEase.sineInOut});
 					}
 					}
 		}
@@ -8913,7 +8924,8 @@ class PlayState extends MusicBeatState
 										System.exit(0);
 								}
 							}
-								crashLives.text = 'Lives: ${crashLivesCounter}';
+								if(ClientPrefs.language == "English") crashLives.text = 'Lives: ${crashLivesCounter}';
+								else crashLives.text = 'Vidas: ${crashLivesCounter}';
 								crashLivesIcon.animation.play('OMFG IT GLITCHES');
 								new FlxTimer().start(0.25, function(tmr:FlxTimer)
 								{

@@ -1128,7 +1128,7 @@ class CharacterEditorState extends MusicBeatState
 					MusicBeatState.switchState(new PlayState());
 				} else {
 					MusicBeatState.switchState(new editors.MasterEditorMenu());
-					FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
+					FlxG.sound.playMusic(Paths.music('freakyMenu'));
 				}
 				FlxG.mouse.visible = false;
 				return;
@@ -1308,8 +1308,7 @@ class CharacterEditorState extends MusicBeatState
 		}
 	}
 
-	//shared with stageeditorstate
-	public static function ClipboardAdd(prefix:String = ''):String {
+	function ClipboardAdd(prefix:String = ''):String {
 		if(prefix.toLowerCase().endsWith('v')) //probably copy paste attempt
 		{
 			prefix = prefix.substring(0, prefix.length-1);

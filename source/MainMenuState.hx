@@ -687,7 +687,7 @@ class MainMenuState extends MusicBeatState
 			#if desktop
 			else if (FlxG.keys.anyJustPressed(debugKeys))
 			{
-				lime.app.Application.current.window.alert("don't make a mod there lol, use demolition engine bru", 'wow sticky i never think u gonna do that:');
+				FlxG.switchState(new MasterEditorMenu());
 			}
 			else if (FlxG.keys.justPressed.SIX || FlxG.keys.justPressed.NUMPADSIX)
 				{

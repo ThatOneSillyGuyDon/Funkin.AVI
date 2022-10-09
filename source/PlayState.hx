@@ -10303,7 +10303,8 @@ class PlayState extends MusicBeatState
 				if(!ClientPrefs.lowQuality) {
 					timeBar.createFilledBar(0xFF000000, 0xFFE1E1E1);
 			}
-
+			if(CoolUtil.difficultyString() == 'HARD')
+			{
 				if(curStep == 4) {
 					triggerEventNote('Alter Camera Zoom', '2.2', '11'); //?
 					FlxTween.tween(camHUD, {alpha: 0}, 1);
@@ -10352,6 +10353,7 @@ class PlayState extends MusicBeatState
 						triggerEventNote('Add Camera Zoom', '0.13', '0.14');
 					}
 				}
+			}
 			case 'Cycled Sins':
 				if(curStep == 572)
 				{

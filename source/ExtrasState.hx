@@ -363,6 +363,18 @@ class ExtrasState extends MusicBeatState{
 			}
 		}
 
+		if (FlxG.mouse.wheel != 0)
+			{
+				if (FlxG.mouse.wheel > 0)
+				{
+					changeSelection(-1);
+				}
+				else
+				{
+					changeSelection(1);
+				}
+			}
+
 		if (controls.UI_LEFT_P)
 			changeDiff(-1);
 		else if (controls.UI_RIGHT_P)
@@ -414,7 +426,7 @@ class ExtrasState extends MusicBeatState{
 				Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
 				#end
 			}
-		else if (accepted)
+		else if (accepted || FlxG.mouse.justPressed)
 		{
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);

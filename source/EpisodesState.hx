@@ -411,6 +411,18 @@ class EpisodesState extends MusicBeatState
 			changeDiff(1);
 		else if (upP || downP) changeDiff();
 
+		if (FlxG.mouse.wheel != 0)
+			{
+				if (FlxG.mouse.wheel > 0)
+				{
+					changeSelection(-1);
+				}
+				else
+				{
+					changeSelection(1);
+				}
+			}
+
 		if (controls.BACK)
 		{
 			persistentUpdate = false;
@@ -453,7 +465,7 @@ class EpisodesState extends MusicBeatState
 				#end
 			}
 
-		else if (accepted)
+		else if (accepted || FlxG.mouse.justPressed)
 		{
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);

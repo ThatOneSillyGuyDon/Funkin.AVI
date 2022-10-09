@@ -2350,6 +2350,21 @@
 				]
 			],
 			[
+				50106.3829787234,
+				[
+					[
+						"Change Character",
+						"BF",
+						"lunacyBF"
+					],
+					[
+						"Alter Camera Zoom",
+						"1.2",
+						"0.3"
+					]
+				]
+			],
+			[
 				51063.8297872341,
 				[
 					[
@@ -2361,6 +2376,11 @@
 						"Flash Screen",
 						"3",
 						""
+					],
+					[
+						"Alter Camera Zoom",
+						"0.9",
+						"0.5"
 					]
 				]
 			],
@@ -2481,6 +2501,21 @@
 						"Alter HUD Transparency",
 						"0",
 						"2"
+					],
+					[
+						"Play Animation",
+						"singUP-alt",
+						"bf"
+					]
+				]
+			],
+			[
+				172819.14893617,
+				[
+					[
+						"Alt Idle Animation",
+						"bf",
+						"-alt"
 					]
 				]
 			]
@@ -6619,7 +6654,7 @@
 				"sectionNotes": [
 					[
 						168510.638297872,
-						2,
+						0,
 						1196.8085106383
 					]
 				],
@@ -6645,8 +6680,9 @@
 				"sectionNotes": [
 					[
 						171063.829787234,
-						0,
-						1196.8085106383
+						2,
+						1196.8085106383,
+						"No Animation"
 					]
 				],
 				"altAnim": false,
@@ -6786,44 +6822,114 @@
 				"bpm": 188
 			},
 			{
-				"gfSection": false,
 				"lengthInSteps": 16,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
 				"bpm": 188,
 				"changeBPM": false,
 				"mustHitSection": true
 			},
 			{
-				"gfSection": false,
 				"lengthInSteps": 16,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
 				"bpm": 188,
 				"changeBPM": false,
 				"mustHitSection": true
 			},
 			{
-				"gfSection": false,
 				"lengthInSteps": 16,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
 				"bpm": 188,
 				"changeBPM": false,
 				"mustHitSection": true
 			},
 			{
-				"gfSection": false,
 				"lengthInSteps": 16,
-				"altAnim": false,
 				"typeOfSection": 0,
 				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
 				"bpm": 188,
 				"changeBPM": false,
 				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 188,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 188,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 188,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 188,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"lengthInSteps": 16,
+				"typeOfSection": 0,
+				"sectionNotes": [],
+				"altAnim": false,
+				"gfSection": false,
+				"bpm": 188,
+				"changeBPM": false,
+				"mustHitSection": true
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 188
+			},
+			{
+				"sectionNotes": [],
+				"typeOfSection": 0,
+				"lengthInSteps": 16,
+				"gfSection": false,
+				"altAnim": false,
+				"mustHitSection": true,
+				"changeBPM": false,
+				"bpm": 188
 			},
 			{
 				"gfSection": false,
@@ -6878,7 +6984,7 @@
 		],
 		"gfVersion": "gf",
 		"player3": null,
-		"charter": "obscurity",
+		"charter": "DEMOLITIONDON96",
 		"splashSkin": null,
 		"song": "Lunacy",
 		"stage": "Studio",

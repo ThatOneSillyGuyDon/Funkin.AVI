@@ -174,7 +174,8 @@ class TitleState extends MusicBeatState
 			StoryMenuState.weekCompleted = FlxG.save.data.weekCompleted;
 		}
 
-		FlxG.mouse.visible = false;
+		FlxG.mouse.visible = true;
+		FlxG.mouse.load("assets/images/mouse/" + ClientPrefs.cursor + ".png");
 		#if FREEPLAY
 		MusicBeatState.switchState(new EpisodesState());
 		#elseif FREEPLAYEXTRA
@@ -304,7 +305,7 @@ class TitleState extends MusicBeatState
 		add(logoBl);
 		logoBl.shader = swagShader.shader;
 
-		titleText = new FlxText(24, 600, 1200, "Press Enter to Start", 96);
+		titleText = new FlxText(24, 600, 1200, "Click Anywhere to Start", 96);
 		titleText.setFormat("assets/fonts/NewWaltDisneyFontRegular-BPen.ttf", 60, FlxColor.fromRGB(255, 255, 255), CENTER);
 		add(titleText);
 
@@ -465,7 +466,7 @@ class TitleState extends MusicBeatState
 		gradientBar.updateHitbox();
 		gradientBar.y = FlxG.height - gradientBar.height;*/
 
-		var pressedEnter:Bool = FlxG.keys.justPressed.ENTER || controls.ACCEPT;
+		var pressedEnter:Bool = FlxG.mouse.justPressed;
 
 		#if mobile
 		for (touch in FlxG.touches.list)

@@ -31,7 +31,6 @@ using StringTools;
 
 class VisualsUISubState extends BaseOptionsMenu
 {
-    var option:Option;
 
 	public function new()
 	{
@@ -53,8 +52,14 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		option = new Option('Cursor Style:', 'What Texture Should The Cursor Be?', 'cursor', 'string', 'Default', ['Default', 'Funkin.avi']);
+		var option:Option = new Option('Cursor Style:', 
+		'What Texture Should The Cursor Be?', 
+		'cursor', 
+		'string', 
+		'Default', 
+		['Default', 'Hand', 'Mickey', 'Silhouette', 'The Eye']);
 		addOption(option);
+		option.onChange = onChangeCursorSkin;
 
 		var option:Option = new Option('Note Splashes',
 			"If unchecked, hitting \"Sick!\" notes won't show particles.",
@@ -213,6 +218,14 @@ class VisualsUISubState extends BaseOptionsMenu
 		option.onChange = onChangePauseMusic;
 
 		super();
+	}
+
+	var changedCursor:Bool = false;
+	function onChangeCursorSkin()
+	{
+		FlxG.mouse.load("assets/images/mouse/" + ClientPrefs.cursor + ".png");
+
+		changedCursor = true;
 	}
 
 	var changedMusic:Bool = false;

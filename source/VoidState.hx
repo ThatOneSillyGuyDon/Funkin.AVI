@@ -24,7 +24,7 @@ import Shaders;
 
 using StringTools;
 
-class LegacyState extends MusicBeatState{
+class VoidState extends MusicBeatState{
 
 	var bloomShit:WIBloomEffect;
 	var chrom:ChromaticAberrationEffect;
@@ -34,7 +34,7 @@ class LegacyState extends MusicBeatState{
 
 	var shaders:Array<ShaderEffect> = [];
 
-	var songs:Array<SongMetadataLegacy> = [];
+	var songs:Array<SongMetadataVoid> = [];
 
 	var selector:FlxText;
 	private static var curSelected:Int = 0;
@@ -63,10 +63,7 @@ class LegacyState extends MusicBeatState{
 	{
 		FPClientPrefs.loadShit();
 
-        addSong('Isolated Legacy', 3, 'legacy', FlxColor.fromRGB(60, 60, 60));
-        addSong('Lunacy Legacy', 3, 'legacy', FlxColor.fromRGB(60, 60, 60));
-        addSong('Malfunction Legacy', 3, 'square-legacy-pixel', FlxColor.fromRGB(60, 60, 60));
-        addSong('Mercy Legacy', 3, 'walt', FlxColor.fromRGB(153, 148, 112));
+        addSong('Birthday', 3, 'muckny', FlxColor.BLACK);
 
         /*if(FPClientPrefs.episode1FPLock == 'unlocked')
         {
@@ -97,10 +94,10 @@ class LegacyState extends MusicBeatState{
 
 		#if desktop
 		// Updating Discord Rich Presence
-		DiscordClient.changePresence("In Freeplay", "Legacy Songs", null, 'icon');
+		DiscordClient.changePresence("In Freeplay", "The Void", null, 'icon');
 		#end
 
-		Application.current.window.title = "Funkin.avi - Freeplay: Legacy Songs";
+		Application.current.window.title = "Funkin.avi - Freeplay: The Void";
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
@@ -268,7 +265,7 @@ class LegacyState extends MusicBeatState{
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
 	{
-		songs.push(new SongMetadataLegacy(songName, weekNum, songCharacter, color));
+		songs.push(new SongMetadataVoid(songName, weekNum, songCharacter, color));
 	}
 
 	
@@ -467,6 +464,8 @@ class LegacyState extends MusicBeatState{
 					
 			destroyFreeplayVocals();
 			EpisodesState.destroyFreeplayVocals();
+			LegacyState.destroyFreeplayVocals();
+			ExtrasState.destroyFreeplayVocals();
 		}
 		else if(controls.RESET)
 		{
@@ -605,33 +604,24 @@ class LegacyState extends MusicBeatState{
 			curDifficulty = newPos;
 		}
 
-			FlxG.camera.flash(FlxColor.BLACK, 0.2);
-			if(ClientPrefs.funiShaders)
-			{
-			clearShader();
-			chrom = new ChromaticAberrationEffect();
-			blurThisShit = new TiltshiftEffect(0.4, 0);
-			bloomShit = new WIBloomEffect(0);
-			greyscale = new GreyscaleEffect();
-			//uncomment these fucking pieces of shit if you feel like testing it.
+		FlxG.camera.flash(FlxColor.BLACK, 0.6);
+		FlxG.camera.shake(0.007, 99999999);
+		if(ClientPrefs.funiShaders)
+		{
+		clearShader();
+		chrom = new ChromaticAberrationEffect();
+		blurThisShit = new TiltshiftEffect(0.6, 0);
 
-			addShader(chrom);
-			addShader(blurThisShit);
-			addShader(bloomShit);
-			addShader(greyscale);
-			//uncomment these fucking pieces of shit if you feel like testing it.
+		addShader(chrom);
+		addShader(blurThisShit);
 
 			if (chrom != null)
-			chrom.setChrome(0.003);
+		chrom.setChrome(0.01);
 
-			if (bloomShit != null)
-			bloomShit.setSize(18.0);
+		if(blurThisShit != null)
+		blurThisShit.setBlur(1.3);
 
-			if(blurThisShit != null)
-			blurThisShit.setBlur(0.4);
-			//uncomment these fucking pieces of shit if you feel like testing it.
-			}
-			FlxG.camera.shake(0.004, 0);
+		}
 			}
 
 	private function positionHighscore() {
@@ -644,7 +634,7 @@ class LegacyState extends MusicBeatState{
 	}
 }
 
-class SongMetadataLegacy
+class SongMetadataVoid
 {
 	public var songName:String = "";
 	public var week:Int = 0;

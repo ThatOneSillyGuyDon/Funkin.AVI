@@ -42,6 +42,9 @@ class EpicSelectorWOOO extends MusicBeatState {
 
 	var shaders:Array<ShaderEffect> = [];
 
+	public var timesToEnter:Int = 30;
+	var debugTxt:FlxText;
+
 	//Spooky ass Mystery Effects OooooOOOooo
 	//var 
 
@@ -51,9 +54,14 @@ class EpicSelectorWOOO extends MusicBeatState {
 	var grpCats:FlxTypedGroup<Alphabet>;
 	var curSelected:Int = 0;
 	var noFreeplay:FlxText;
+	var leftArrow:FlxSprite;
+	var rightArrow:FlxSprite;
+	var ui_tex = Paths.getSparrowAtlas('campaign_menu_UI_assets');
 	var noCovers:FlxText;
 	var BG:FlxSprite;
     override function create(){
+
+		timesToEnter = 30;
 
 		if(ClientPrefs.funiShaders)
 					{
@@ -110,11 +118,34 @@ class EpicSelectorWOOO extends MusicBeatState {
 		add(grpCats);
         for (i in 0...freeplayCats.length)
         {
-			var catsText:Alphabet = new Alphabet(0, (70 * i) + 30, freeplayCats[i], true, false);
+			var catsText:Alphabet = new Alphabet(0, (70 * i) + 250, freeplayCats[i], true, false);
             catsText.targetY = i;
-            catsText.isMenuItemCenter = true;
+			catsText.isMenuItem = true;
 			grpCats.add(catsText);
 		}
+
+		leftArrow = new FlxSprite(120, 0);
+		leftArrow.frames = ui_tex;
+		leftArrow.angle = 90;
+		leftArrow.animation.addByPrefix('idle', "arrow left");
+		leftArrow.animation.addByPrefix('press', "arrow push left");
+		leftArrow.animation.play('idle');
+		leftArrow.screenCenter(X);
+		leftArrow.antialiasing = ClientPrefs.globalAntialiasing;
+		add(leftArrow);
+
+		rightArrow = new FlxSprite(leftArrow.x, leftArrow.y + 80);
+		rightArrow.frames = ui_tex;
+		//Im Fucking Lazy
+		rightArrow.flipX = true;
+		rightArrow.screenCenter(X);
+		rightArrow.flipY = true;
+		rightArrow.angle = 270;
+		rightArrow.animation.addByPrefix('idle', 'arrow right');
+		rightArrow.animation.addByPrefix('press', "arrow push right", 24, false);
+		rightArrow.animation.play('idle');
+		rightArrow.antialiasing = ClientPrefs.globalAntialiasing;
+		add(rightArrow);
 
 		if(ClientPrefs.language == "Spanish") {
 			unfinishedText = new FlxText(907, FlxG.height - 54, 0, "Por Ahora, Esto Esta Sin Terminar, La Version Final Sera Diferente!", 25);
@@ -164,10 +195,18 @@ class EpicSelectorWOOO extends MusicBeatState {
 		grain.scale.y = 1.1;
 		add(grain);
 
+		debugTxt = new FlxText(0, 0, 0, 'Void Menu Attempts: ${timesToEnter}', 50);
+		//add(debugTxt);
+
         changeSelection();
         super.create();
     }
 
+	function updateCounter()
+	{
+		timesToEnter -= 1;
+		//debugTxt.text = 'Void Menu Attempts: ${timesToEnter}';
+	}
 	function clearShader()
 	{
 		shaders = [];
@@ -193,15 +232,53 @@ class EpicSelectorWOOO extends MusicBeatState {
 	}
 
     override public function update(elapsed:Float){
-        
-		if (controls.UI_UP_P) 
+
+		if (controls.UI_UP_P && curSelected != 0) 
 			changeSelection(-1);
-		if (controls.UI_DOWN_P) 
-			changeSelection(1);
-		if (controls.BACK) {
+		else if (controls.UI_UP_P && curSelected == 0) {
+			updateCounter();
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new MainMenuState());
 		}
+		if (controls.UI_DOWN_P && curSelected != 2) 
+			changeSelection(1);
+		else if (controls.UI_DOWN_P && curSelected == 2) {
+			updateCounter();
+			FlxG.sound.play(Paths.sound('cancelMenu'));
+		}
+		//Mouse supremacy
+		
+		if (controls.BACK) {
+			if (timesToEnter <= 0)
+			{
+				MusicBeatState.switchState(new VoidState());
+			}else{
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+				MusicBeatState.switchState(new MainMenuState());
+			}
+
+		}
+
+		if(FlxG.mouse.overlaps(rightArrow)) {
+			if(FlxG.mouse.justPressed && curSelected != 2)
+				changeSelection(1);
+			else if(FlxG.mouse.justPressed && curSelected == 2) {
+				updateCounter();
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+			}
+			/*else if(Flx.mouse.justPressed && curSelected == 2 && timesToEnter == -1)
+				MusicBeatState.switchState(new VoidState());*/
+			//SECRET SONG?!?!?!?!?!
+		}
+		if(FlxG.mouse.overlaps(leftArrow)) {
+			if(FlxG.mouse.justPressed && curSelected != 0)
+				changeSelection(-1);
+			else if(FlxG.mouse.justPressed && curSelected == 0) {
+				updateCounter();
+				FlxG.sound.play(Paths.sound('cancelMenu'));
+			}
+		}
+
+
         if (controls.ACCEPT){
             switch(curSelected){
 				case 0:
@@ -237,6 +314,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 					//}
 			}
             }
+
         super.update(elapsed);
     }
 
@@ -260,7 +338,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 		}
 		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 
-		if(curSelected == 3)
+		/*if(curSelected == 3)
 			{
 				if(FPClientPrefs.malfunctionLock != 'beaten' || FPClientPrefs.crossinLock != 'beaten' || FPClientPrefs.warLock != 'beaten' || FPClientPrefs.sinsLock != 'beaten' || FPClientPrefs.huntedLock != 'beaten' || FPClientPrefs.blessLock != 'beaten' || FPClientPrefs.scrappedLock != 'beaten' || FPClientPrefs.mercyLock != 'beaten' || FPClientPrefs.oldisolateLock != 'beaten' || FPClientPrefs.betaisolateLock != 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?))
 				{	
@@ -289,10 +367,8 @@ class EpicSelectorWOOO extends MusicBeatState {
 				distort.shader.working.value = [true];
 				}
 			}
-		}else if(curSelected == 2 || curSelected == 1 && FPClientPrefs.episode1FPLock != 'unlocked')
+		}else*/ if(curSelected == 2 && FPClientPrefs.episode1FPLock != 'unlocked' || curSelected == 1 && FPClientPrefs.episode1FPLock != 'unlocked')
 						{
-							if(FPClientPrefs.malfunctionLock != 'beaten' || FPClientPrefs.crossinLock != 'beaten' || FPClientPrefs.warLock != 'beaten' || FPClientPrefs.sinsLock != 'beaten' || FPClientPrefs.huntedLock != 'beaten' || FPClientPrefs.blessLock != 'beaten' || FPClientPrefs.scrappedLock != 'beaten' || FPClientPrefs.mercyLock != 'beaten' || FPClientPrefs.oldisolateLock != 'beaten' || FPClientPrefs.betaisolateLock != 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?))
-							{	
 							FlxG.camera.flash(FlxColor.BLACK, 0.6);
 							FlxG.camera.shake(0.004, 99999999);
 							if(ClientPrefs.funiShaders)
@@ -316,9 +392,6 @@ class EpicSelectorWOOO extends MusicBeatState {
 
 							if (distort != null)
 							distort.shader.working.value = [true];
-							}
-							}else{
-								//Fuck Shaders, they're so complicated lmao.
 							}
 						}else{
 							FlxG.camera.flash(FlxColor.BLACK, 0.2);

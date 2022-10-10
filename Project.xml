@@ -118,11 +118,6 @@
 	<haxelib name="linc_luajit" if="LUA_ALLOWED"/>
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="discord_rpc" if="desktop"/>
-	<!--Gamejolt stuff-->
-	<haxelib name="tentools" />
-    <haxelib name="systools" />
-    <ndll name="systools" haxelib="systools" />
-	<haxelib name="window_mod_flx"/> <!--https://github.com/DuskieWhy/window_mod_flx explains everything-->
 	<!-- <haxelib name="hxcpp-debug-server" if="desktop"/> -->
 
 	<!-- <haxelib name="markdown" /> -->

@@ -6329,6 +6329,13 @@ class PlayState extends MusicBeatState
 
 	var lyrics:FlxText;
 	
+	/**
+	 * Function Used For Hardcoded Events So No One Can Remove It!
+	 * @param eventName The Event Name
+	 * @param value1 First Value
+	 * @param value2 Second Value
+	 * @param value3 Third Value Used Just In Case!
+	 */
 	public function triggerEventNote(eventName:String, value1:String, value2:String, ?value3:String) {
 		var theValue1:String = value1.toLowerCase().trim();
 		var theValue2:String = value2.toLowerCase().trim();
@@ -7204,6 +7211,11 @@ class PlayState extends MusicBeatState
 						FlxTween.tween(opponentStrums.members[i], {alpha: 1}, timer, {ease: FlxEase.sineInOut});
 					}
 					}
+
+				case 'Do Health Tween':
+					var val1 = Std.parseFloat(value1);
+					var val2 = Std.parseFloat(value2);
+					FlxTween.tween(this, {health: val1}, val2, {ease: FlxEase.sineInOut});
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}

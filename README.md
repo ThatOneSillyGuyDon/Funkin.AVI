@@ -4,7 +4,7 @@ This repo shall remain private until mod release.
 
 ## IMPORTANT!:
 
-If you want to need to compile the mod:
+If you need to compile the mod:
 1) Download The Latest Version Of Haxe: https://haxe.org/download/
 2) Download Visual Studio 2019: https://docs.microsoft.com/en-us/visualstudio/releases/2019/release-notes
 3) Install Visual Studio 2019 with

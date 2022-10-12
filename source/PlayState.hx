@@ -1110,7 +1110,7 @@ class PlayState extends MusicBeatState
 				//var particles = new FlxTypedGroup<FlxEmitter>();
 
 				for (i in 1...4) {
-				mickParticles = new FlxEmitter(-2080.5, 650.4);
+				var mickParticles:FlxEmitter = new FlxEmitter(-2080.5, 650.4);
                     mickParticles.launchMode = FlxEmitterMode.SQUARE;
 					mickParticles.velocity.set(-50, -200, 50, -600, -90, 0, 90, -600);
                     mickParticles.scale.set(4, 4, 4, 4, 0, 0, 0, 0);
@@ -8568,7 +8568,7 @@ class PlayState extends MusicBeatState
 											{
 												FlxTween.tween(threatTrail, {x: -10}, 0.4); //Glitch Mickey looks more threatening now
 											}
-											FlxTween.tween(Application, {'current.window.x': 100, 'current.window.y': 180}, 0.1, {ease: FlxEase.quadOut});
+											//FlxTween.tween(Application, {'current.window.x': 100, 'current.window.y': 180}, 0.1, {ease: FlxEase.quadOut});
 											//Application.current.window.x = 500;
 											//Application.current.window.y = 180;
 									}

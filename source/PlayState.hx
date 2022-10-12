@@ -1107,6 +1107,24 @@ class PlayState extends MusicBeatState
 				var square:BGSprite = new BGSprite('funkinAVI/SQUAREBOILOL/PixelMouse', -984, -975);
 				add(square);
 
+				//var particles = new FlxTypedGroup<FlxEmitter>();
+
+				for (i in 1...4) {
+				mickParticles = new FlxEmitter(-2080.5, 650.4);
+                    mickParticles.launchMode = FlxEmitterMode.SQUARE;
+					mickParticles.velocity.set(-50, -200, 50, -600, -90, 0, 90, -600);
+                    mickParticles.scale.set(4, 4, 4, 4, 0, 0, 0, 0);
+                    mickParticles.drag.set(0, 0, 0, 0, 5, 5, 10, 10);
+                    mickParticles.width = 4787.45;
+                    mickParticles.alpha.set(1, 1);
+					mickParticles.lifespan.set(1.9, 4.9);
+                    mickParticles.loadParticles(Paths.image('funkinAVI/SQUAREBOILOL/mickParticle' + i), 500, 16, true);
+					mickParticles.start(false, FlxG.random.float(.0368, .0841), 1000000);
+					add(mickParticles);
+
+					mickParticles.cameras = [camHUD];
+				}
+
 					greyParticles = new FlxEmitter(-2080.5, 650.4);
                     greyParticles.launchMode = FlxEmitterMode.SQUARE;
                     greyParticles.velocity.set(-50, -200, 50, -600, -90, 0, 90, -600);

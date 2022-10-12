@@ -260,6 +260,7 @@ class PauseSubState extends MusicBeatSubstate
 		var upP = controls.UI_UP_P;
 		var downP = controls.UI_DOWN_P;
 		var accepted = controls.ACCEPT;
+		var doReturn = controls.BACK;
 
 		if (upP)
 		{
@@ -268,6 +269,20 @@ class PauseSubState extends MusicBeatSubstate
 		if (downP)
 		{
 			changeSelection(1);
+		}
+		if(doReturn) //certificed Geometry Dash moment
+		{
+			switch(PlayState.SONG.song.toLowerCase())
+			{
+				case 'isolated' | 'lunacy' | 'delusional' | 'twisted grins' | 'facade' | 'mortiferum risus':
+					MusicBeatState.switchState(new EpisodesState());
+				case 'hunted' | 'isolated old' | 'isolated beta' | 'malfunction' | "don't cross!" | 'neglection' | 'cycled sins' | 'bless' | 'mercy' | 'scrapped': //omg too many extras (jason)
+					MusicBeatState.switchState(new ExtrasState());
+			    case 'isolated legacy' | 'lunacy legacy' | 'malfunction legacy' | 'mercy legacy':
+					MusicBeatState.switchState(new LegacyState());
+				case 'birthday':
+					MusicBeatState.switchState(new EpicSelectorWOOO());
+			}
 		}
 
 		var daSelected:String = menuItems[curSelected];

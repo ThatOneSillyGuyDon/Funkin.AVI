@@ -698,10 +698,6 @@ class MainMenuState extends MusicBeatState
 			{
 				MusicBeatState.switchState(new AchievementsMenuState());
 			}
-			else if(FlxG.keys.justPressed.ONE || FlxG.keys.justPressed.NUMPADONE) 
-			{
-				MusicBeatState.switchState(new ExtrasState());
-			}
 		}
 
 		super.update(elapsed);

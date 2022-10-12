@@ -53,7 +53,7 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeAntiAliasing; //Changing onChange is only needed if you want to make a special interaction after it changes the value
 		addOption(option);
 
-		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
+		#if desktop //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
 			"Pretty self explanatory, isn't it?",
 			'framerate',
@@ -72,13 +72,19 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 			'funiShaders',
 			'bool',
 			true);
+		addOption(option);	
+		
+		var option:Option = new Option('Optimize Shaders', 'If Checked, The Game Will OptimizateThe Shaders as max as it can', 'optimization', 'bool', false);
 		addOption(option);
-        #end
 
-		var option:Option = new Option('Optimization Mode', 'If Checked, The Game Will Optimizate as max as it can', 'optimization', 'bool', false);
-		addOption(option);
+		var option:Option = new Option('Play Instrumental In Freeplay', //this one too btw
+			'If checked, the song instrumental will be playing when you are in Freeplay.',
+			'instPlaying',
+			'bool',
+			true);
+		addOption(option);	
 
-		#if desktop //no need for this at other platforms cuz only desktop has fullscreen as false by default (MAYBE I'LL TRY TO MAKE IT FOR FULLSCREEN MODE TOO)
+		//no need for this at other platforms cuz only desktop has fullscreen as false by default (MAYBE I'LL TRY TO MAKE IT FOR FULLSCREEN MODE TOO)
 		var option:Option = new Option('Screen Resolution',
 			'Choose your preferred screen resolution.',
 			'screenRes',

@@ -150,7 +150,8 @@ class CreditsState extends MusicBeatState
 			['Jsa010',       	'jsa010',	        "Secondary Coder of Funkin.avi", 'https://twitter.com/_Jsa010_',   	'FFFFFF'],
 		    ['Real Deal Jinx!',	    'rj', /*woah*/	    'He left but he\'s back',                                                   'https://github.com/DEMOLITIONDON96/Demolition-Engine/commits?author=RealDealJinx',	                                            '4D4DC32'],
 			['Goofgoof43', 'Goofgoof', 'Pretty cool guy, I\'d say', 'nolink', 'FFFFFF'],
-			['MalyPlus', 'maly', 'Newest Coder on the Team', 'https://gamebanana.com/members/2014862', 'FFFFFF'],
+			//['MalyPlus', 'maly', 'Newest Coder on the Team', 'https://gamebanana.com/members/2014862', 'FFFFFF'],
+			//fuck you maly, do something
 			['A3ro', 'missing-icon', 'Also a new Coder', 'nolink', 'FFFFFF'],
 			[''],
 			['Translators'],
@@ -158,8 +159,6 @@ class CreditsState extends MusicBeatState
 			['DEMOLITIONDON96',	'demolitiondon96',	"Translated All The Warnings",	'https://youtube.com/c/DEMOLITIONDON96',	'FFFFFF'],
 			[''],
 			['Former Funkin avi members'],
-			['Yama haki',	'yama',	'Ex-director of funkin.avi',	'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg',	'FFFFFF'],
-			['oz',	'missing-icon',	'Ex-artist of funkin.avi',	'nolink',	'FFFFFF'],
 			['pig69',	'missing-icon',	'Ex-artist of funkin.avi',	'nolink',	'FFFFFF'], //He was in GB credits, nothing else to do
 			[''],
 			['Demolition Engine Team'],

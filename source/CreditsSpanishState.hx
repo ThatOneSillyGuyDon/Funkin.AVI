@@ -153,7 +153,7 @@ class CreditsSpanishState extends MusicBeatState
 ['Jsa010', 'jsa010', "Codificador secundario de Funkin.avi", 'https://twitter.com/_Jsa010_', 'FFFFFF'],
 ['TonyTime!', 'matt', 'Se fue pero ha vuelto', 'https://github.com/TonyTimee', 'FFFFFF'],
 ['Goofgoof43', 'icono perdido', 'Tipo bastante genial, diría', 'nolink', 'FFFFFF'],
-['MalyPlus', 'maly', 'Programador más nuevo del equipo', 'https://gamebanana.com/members/2014862', 'FFFFFF'],
+//['MalyPlus', 'maly', 'Programador más nuevo del equipo', 'https://gamebanana.com/members/2014862', 'FFFFFF'],
 ['A3ro', 'icono perdido', 'También un codificador nuevo', 'nolink', 'FFFFFF'],
 [''],
 ['Traductores'],
@@ -161,8 +161,6 @@ class CreditsSpanishState extends MusicBeatState
 ['DEMOLITIONDON96', 'demolitiondon96', "Todas las advertencias traducidas", 'https://youtube.com/c/DEMOLITIONDON96', 'FFFFFF'],
 [''],
 ['Antiguos miembros de Funkin avi'],
-['Yama haki', 'yama', 'Exdirector de funkin.avi', 'https://www.youtube.com/channel/UCm2eFBC_lMxkRO8JF17ArFg', 'FFFFFF'],
-['oz', 'icono perdido', 'Ex-artista de funkin.avi', 'nolink', 'FFFFFF'],
 ['pig69', 'missing-icon', 'Ex-artista de funkin.avi', 'nolink', 'FFFFFF'], //Estaba en los créditos de GB, nada más que hacer
 [''],
             [''],

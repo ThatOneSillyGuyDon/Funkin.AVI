@@ -438,9 +438,9 @@ class EpisodesState extends MusicBeatState
 			persistentUpdate = false;
 			openSubState(new GameplayChangersSubstate());
 		}
-			if(instPlaying != curSelected)
+			if(instPlaying != curSelected && ClientPrefs.instPlaying)
 			{
-				#if PRELOAD_ALL
+				#if (PRELOAD_ALL && desktop)
 				destroyFreeplayVocals();
 				ExtrasState.destroyFreeplayVocals();
 				FlxG.sound.music.volume = 0;

@@ -2078,8 +2078,9 @@ class PlayState extends MusicBeatState
 					case 'Mercy':
 						timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
 					case 'Malfunction':
+					if(curBeat % 2 == 0)
 						glitchTimeColors = FlxG.random.int(12, 19);
-						
+
 						if(curBeat % 2 == 0) {
  						switch glitchTimeColors
 						{
@@ -2143,8 +2144,10 @@ class PlayState extends MusicBeatState
 
 		}
 
-			if(ClientPrefs.language == "English") Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
-			else Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Hecho Por " + PlayState.SONG.composer;
+				if(ClientPrefs.language == "English") 
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
+				else 
+					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Hecho Por " + PlayState.SONG.composer;
 
 		switch(hudStyle)
 		{
@@ -2263,9 +2266,15 @@ class PlayState extends MusicBeatState
 				switch(curStage)
 				{
 					case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
-						if(ClientPrefs.downScroll) healthIcon = new FlxSprite(1150, -39).loadGraphic(Paths.image('hudAssets/demolition/health-iconGREYSCALE')); else healthIcon = new FlxSprite(1150, 600).loadGraphic(Paths.image('hudAssets/demolition/health-iconGREYSCALE')); //I had to, looked SOOO out of place when you turn off shaders
+						if(ClientPrefs.downScroll) 
+							healthIcon = new FlxSprite(1150, -39).loadGraphic(Paths.image('hudAssets/demolition/health-iconGREYSCALE')); 
+						else 
+							healthIcon = new FlxSprite(1150, 600).loadGraphic(Paths.image('hudAssets/demolition/health-iconGREYSCALE')); //I had to, looked SOOO out of place when you turn off shaders
 					default:
-						if(ClientPrefs.downScroll) healthIcon = new FlxSprite(1150, -39).loadGraphic(Paths.image('hudAssets/demolition/health-icon')); else healthIcon = new FlxSprite(1150, 600).loadGraphic(Paths.image('hudAssets/demolition/health-icon'));
+						if(ClientPrefs.downScroll) 
+							healthIcon = new FlxSprite(1150, -39).loadGraphic(Paths.image('hudAssets/demolition/health-icon')); 
+						else 
+							healthIcon = new FlxSprite(1150, 600).loadGraphic(Paths.image('hudAssets/demolition/health-icon'));
 				}
 				healthIcon.scrollFactor.set();
 				healthIcon.scale.set(0.55, 0.55);
@@ -2289,9 +2298,15 @@ class PlayState extends MusicBeatState
 				switch(curStage)
 				{
 					case 'EndlessLoop' | 'Forest' | 'Office' | 'Studio' | 'ForestNEW' | 'LegacyLoop': 
-						if(ClientPrefs.downScroll) missIcon = new FlxSprite(1150, 40).loadGraphic(Paths.image('hudAssets/demolition/miss-iconGREYSCALE')); else missIcon = new FlxSprite(1150, 500).loadGraphic(Paths.image('hudAssets/demolition/miss-iconGREYSCALE'));
+						if(ClientPrefs.downScroll) 
+							missIcon = new FlxSprite(1150, 40).loadGraphic(Paths.image('hudAssets/demolition/miss-iconGREYSCALE')); 
+						else
+							 missIcon = new FlxSprite(1150, 500).loadGraphic(Paths.image('hudAssets/demolition/miss-iconGREYSCALE'));
 					default:
-						if(ClientPrefs.downScroll) missIcon = new FlxSprite(1150, 40).loadGraphic(Paths.image('hudAssets/demolition/miss-icon')); else missIcon = new FlxSprite(1150, 500).loadGraphic(Paths.image('hudAssets/demolition/miss-icon'));
+						if(ClientPrefs.downScroll)
+						missIcon = new FlxSprite(1150, 40).loadGraphic(Paths.image('hudAssets/demolition/miss-icon')); 
+						else 
+						missIcon = new FlxSprite(1150, 500).loadGraphic(Paths.image('hudAssets/demolition/miss-icon'));
 				}
 				missIcon.scrollFactor.set();
 				missIcon.scale.set(0.25, 0.25);
@@ -2299,7 +2314,10 @@ class PlayState extends MusicBeatState
 				missIcon.visible = !ClientPrefs.hideHud;
 				add(missIcon);
 
-				if(ClientPrefs.downScroll) missesTxt = new FlxText(800, 120, 400, "", 32); else missesTxt = new FlxText(800, 580, 380, "", 32);
+				if(ClientPrefs.downScroll) 
+				missesTxt = new FlxText(800, 120, 400, "", 32); 
+				else 
+				missesTxt = new FlxText(800, 580, 380, "", 32);
 				if (!isPixelStage) {
 					missesTxt.setFormat(Paths.font("VanillaExtractRegular.ttf"), 16, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 				} else {
@@ -2414,10 +2432,10 @@ class PlayState extends MusicBeatState
 		add(peWatermark);
 		#end
 
-		SCALEdebugText = new FlxText(10,10,200,"Default scale mode (ratio)");
+		/*SCALEdebugText = new FlxText(10,10,200,"Default scale mode (ratio)");
 		SCALEdebugText.scrollFactor.set(0,0);
 		SCALEdebugText.cameras = [camCustom];
-		//add(SCALEdebugText);
+		//add(SCALEdebugText);*/
 
 		switch(hudStyle)
 		{
@@ -3728,6 +3746,7 @@ class PlayState extends MusicBeatState
 					opponentStrums.members[1].x = 530;
 					opponentStrums.members[2].x = 630;
 					opponentStrums.members[3].x = 730;
+					opponentStrums.members[i].alpha = 0.5;
 				}
 			}
 			} else {
@@ -5300,7 +5319,7 @@ class PlayState extends MusicBeatState
 				}
 
 				if(SONG.song == "'Neglection") {
-					scoreTxt.text += healthBar.percent;
+					scoreTxt.text = ''+healthBar.percent+'%';
 				}
 
 				if(SONG.song == "Fight or Flight") { //we don't know the song name, starved
@@ -5336,7 +5355,10 @@ class PlayState extends MusicBeatState
 				scoreTxt.text = 'Puntuacion: ' + songScore;
 				}
 			case 'Demolition':
+				if(ClientPrefs.language == "English")
 				missesTxt.text = songMisses + ' Misses';
+				else
+				missesTxt.text = songMisses + ' Perdidas';
 				
 				healthTxt.text = Math.round(health * 50) + '%';
 				
@@ -5387,7 +5409,7 @@ class PlayState extends MusicBeatState
 			
 			if(SONG.song == 'Delusional')
 				{
-					#if (desktop && !avi_debug)
+					#if (desktop)
 					attemptsTillJumpscare -= 1;
 					satanSpeaks = new FlxText(-50, 0, 0);
 					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 40, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -5448,7 +5470,7 @@ class PlayState extends MusicBeatState
 					if(attemptsTillJumpscare == 14)
 					{
 						//satanPopUp.animation.play('boo');
-						satanSpeaks.text = "Don't be a party pooper, player.";
+						satanSpeaks.text = "Don't be a party pooper, "+Paths.delusionalJumpscaretext+".";
 						FlxTween.tween(satanSpeaks, {alpha: 0}, 0.5);
 						//attemptsTillJumpscare -= 1;
 					}
@@ -6336,7 +6358,7 @@ class PlayState extends MusicBeatState
 	 * @param value2 Second Value
 	 * @param value3 Third Value Used Just In Case!
 	 */
-	public function triggerEventNote(eventName:String, value1:String, value2:String, ?value3:String) {
+	public function triggerEventNote(eventName:String, value1:String, value2:String, ?value3:String = '') {
 		var theValue1:String = value1.toLowerCase().trim();
 		var theValue2:String = value2.toLowerCase().trim();
 		var theValue3:String = value3.toLowerCase().trim();
@@ -8528,7 +8550,7 @@ class PlayState extends MusicBeatState
 											{
 												FlxTween.tween(threatTrail, {x: -10}, 0.4); //Glitch Mickey looks more threatening now
 											}
-											//FlxTween.tween(Application, {'current.window.x': 100, 'current.window.y': 180}, 0.1, {ease: FlxEase.quadOut});
+											FlxTween.tween(Application, {'current.window.x': 100, 'current.window.y': 180}, 0.1, {ease: FlxEase.quadOut});
 											//Application.current.window.x = 500;
 											//Application.current.window.y = 180;
 									}
@@ -10367,6 +10389,10 @@ class PlayState extends MusicBeatState
 				}
 			}
 			case 'Cycled Sins':
+               if(curStep == 503) {
+				triggerEventNote('Do Health Tween', '0.3', '4');
+				}
+
 				if(curStep == 572)
 				{
 					if(curStage == 'RelapseStage')
@@ -10376,7 +10402,6 @@ class PlayState extends MusicBeatState
 						}
 						relapseCalm.alpha = 0;
 						relapseChaos.alpha = 1;
-						health = 0.3;
 					}
 				}
 			
@@ -13875,12 +13900,9 @@ class PlayState extends MusicBeatState
 			timeBar.createFilledBar(0xFFFFFF, 0x000000);
 
 			case 'Neglection':	
-		iconP1.visible = false;
-		iconP2.visible = false;
-		healthBar.visible = false;
-		healthBarBG.visible = false;
-		timeBar.visible = false;
-		timeBarBG.visible = false;
+				for (i in 0...opponentStrums.length) {
+                opponentStrums.members[i].alpha = 0.5;
+				}
 			}
 
 		setOnLuas('curBeat', curBeat); //DAWGG?????

@@ -351,6 +351,7 @@ class PlayState extends MusicBeatState
 	public var crashLivesCounter:Int = 60;
 	var threatTrail:FlxTrail;
 	var glitchTimeColors:Int = FlxG.random.int(11, 19); //timer colors go crazy
+	public var funnyTimebarThing:Int;
 	var blackParticles:FlxEmitter;
 	var greyParticles:FlxEmitter;
 
@@ -1872,35 +1873,6 @@ class PlayState extends MusicBeatState
 						timeBar.createFilledBar(0xFFFFFFFF, 0xFFD400FF);
 					case 'Mercy':
 						timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
-					case 'Malfunction':
-						glitchTimeColors = FlxG.random.int(12, 19);
-
-						switch glitchTimeColors
-						{
-
-							case 11: timeBar.createFilledBar(0xFF11C700, 0xFFFFF200);
-
-							case 12: timeBar.createFilledBar(0xFF11C700, 0xFF0008FF);
-
-							case 13: timeBar.createFilledBar(0xFF0008FF, 0xFF11C700);
-
-							case 14: timeBar.createFilledBar(0xFFFFF200, 0xFFFF0000);
-
-							case 15: timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
-
-							case 16: timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
-
-							case 17: timeBar.createFilledBar(0xFFFFF4BA, 0xFFC78800);
-
-							case 18: timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
-
-							case 19: timeBar.createFilledBar(0xFFB7B7B7, 0xFF2E2E2E);
-						}
-
-						new FlxTimer().start(0.8, function(tmr:FlxTimer)
-						{
-							glitchTimeColors = FlxG.random.int(12, 19);
-						});
 					default:
 						timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
 				}
@@ -9699,6 +9671,34 @@ class PlayState extends MusicBeatState
 	override function beatHit()
 	{
 		super.beatHit();
+		///getting working this, counting you only see it for a minute due to songLenght bugs
+		if (curBeat % 1 == 0 && SONG.song == "Malfunction" && curStage == "PixelWorld")
+			{
+							var prevInt:Int = funnyTimebarThing;
+						
+					    	funnyTimebarThing = FlxG.random.int(1, 9, [funnyTimebarThing]);
+						
+							switch(funnyTimebarThing)
+							{
+							case 1: timeBar.createFilledBar(0xFF11C700, 0xFFFFF200);
+
+							case 2: timeBar.createFilledBar(0xFF11C700, 0xFF0008FF);
+
+							case 3: timeBar.createFilledBar(0xFF0008FF, 0xFF11C700);
+
+							case 4: timeBar.createFilledBar(0xFFFFF200, 0xFFFF0000);
+
+							case 5: timeBar.createFilledBar(0xFFFF0000, 0xFFFFF200);
+
+							case 6: timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
+
+						case 7: timeBar.createFilledBar(0xFFFFF4BA, 0xFFC78800);
+
+							case 8: timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
+
+							case 9: timeBar.createFilledBar(0xFFB7B7B7, 0xFF2E2E2E);
+							}
+				}
 
 		if(lastBeatHit >= curBeat) {
 			//trace('BEAT HIT: ' + curBeat + ', LAST HIT: ' + lastBeatHit);
@@ -11014,6 +11014,7 @@ class PlayState extends MusicBeatState
 					 triggerEventNote('Alter Camera Zoom', '0.8', '0.7'); 
 					 triggerEventNote('Scroll Type', 'undyne', '');
 
+					 Lib.application.window.borderless = true; //ALT + F4 Supermarcy 2: Electric Bobaloo (Jason)
 					 FlxTween.tween(scoreTxt, {alpha: 0}, 1);
 					 FlxTween.tween(healthBar, {alpha: 0}, 1);
 					}
@@ -11784,6 +11785,7 @@ class PlayState extends MusicBeatState
 					triggerEventNote('Fade Character', '0', '');
 					triggerEventNote('Fade Character', '0', '');
 					triggerEventNote('Fade Character', '0', '');
+					Lib.application.window.borderless = false;
 				}
 
 				if(curStep == 1613) {

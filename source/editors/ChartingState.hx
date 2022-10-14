@@ -20,6 +20,7 @@ import flixel.addons.ui.FlxUI;
 import flixel.addons.ui.FlxUICheckBox;
 import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
+import flixel.addons.ui.FlxUISlider;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
 import flixel.addons.transition.FlxTransitionableState;
@@ -179,6 +180,9 @@ class ChartingState extends MusicBeatState
 	var value2InputText:FlxUIInputText;
 	var value3InputText:FlxUIInputText; //stolen from theoyeah engine lmao
 	var currentSongName:String;
+	var currentDifficultyName:String;
+
+	public var colorSwap:ColorSwap = null;
 	
 	var zoomTxt:FlxText;
 	var curZoom:Int = 1;
@@ -615,6 +619,29 @@ class ChartingState extends MusicBeatState
 		});
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
+		
+		tempMap.clear();
+		var difficulties:Array<String> = CoolUtil.difficulties;
+		for (i in 0...difficulties.length) {
+			tempMap.set(difficulties[i], true);
+		}
+		currentDifficultyName = CoolUtil.difficulties[PlayState.storyDifficulty];
+
+		var difficultyDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenuCustom.makeStrIdLabelArray(difficulties, true), function (difficulty:String)
+			{
+				var newDiff = difficulties[Std.parseInt(difficulty)];
+				if (newDiff != currentDifficultyName)
+				{
+					openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function(){
+					currentDifficultyName = newDiff;
+					PlayState.storyDifficulty = Std.parseInt(difficulty);
+					loadJson(_song.song.toLowerCase());
+					}, null,ignoreWarnings));
+				}
+
+			});
+		difficultyDropDown.selectedLabel = currentDifficultyName;
+		blockPressWhileScrolling.push(difficultyDropDown);
 
 		composerInputUI = new FlxUIInputText(stageDropDown.x, stageDropDown.y + 42, 120, _song.composer, 8);
 		blockPressWhileTypingOn.push(composerInputUI);
@@ -666,6 +693,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(new FlxText(player2DropDown.x, player2DropDown.y - 15, 0, 'Opponent:'));
 		tab_group_song.add(new FlxText(player3DropDown.x, player3DropDown.y - 15, 0, 'Girlfriend:'));
 		tab_group_song.add(new FlxText(player1DropDown.x, player1DropDown.y - 15, 0, 'Boyfriend:'));
+		tab_group_song.add(new FlxText(difficultyDropDown.x, difficultyDropDown.y - 15, 0, 'Difficulty:'));
 		tab_group_song.add(new FlxText(stageDropDown.x, stageDropDown.y - 15, 0, 'Stage:'));
 		tab_group_song.add(new FlxText(composerInputUI.x, composerInputUI.y - 15, 0, 'Composer:'));
 		tab_group_song.add(new FlxText(charterInputUI.x, charterInputUI.y - 15, 0, 'Charter:'));
@@ -674,6 +702,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(player2DropDown);
 		tab_group_song.add(player3DropDown);
 		tab_group_song.add(player1DropDown);
+		tab_group_song.add(difficultyDropDown);
 		tab_group_song.add(stageDropDown);
 
 		UI_box.addGroup(tab_group_song);
@@ -2667,7 +2696,25 @@ class ChartingState extends MusicBeatState
 		if(height < minHeight) height = minHeight;
 		if(height < 1) height = 1; //Prevents error of invalid height
 
-		var spr:FlxSprite = new FlxSprite(note.x + (GRID_SIZE * 0.5) - 4, note.y + GRID_SIZE / 2).makeGraphic(8, height);
+		var colorSwap = new ColorSwap();
+		var shader = colorSwap.shader;
+
+		var colorList:Array<String> = ['c24b99', '00ffff', '12fa05', 'f9393f'];
+		if (PlayState.isPixelStage) colorList = ['e276ff', '3dcaff', '71e300', 'ff884e'];
+		var susColor:Int = Std.parseInt('0xff' + colorList[note.noteData]);
+
+		var hueColor = ClientPrefs.arrowHSV[note.noteData][0] / 360;
+		var saturationColor = ClientPrefs.arrowHSV[note.noteData][1] / 100;
+		var brightnessColor = ClientPrefs.arrowHSV[note.noteData][2] / 100;
+		if (note.noteType != " " || note.noteType != "Double Damage") susColor = CoolUtil.dominantColor(note); //Make black if hurt note
+
+		var spr:FlxSprite = new FlxSprite(note.x + (GRID_SIZE * 0.5) - 4, note.y + GRID_SIZE / 2).makeGraphic(8, height, susColor);
+		if (note.noteType == " " || note.noteType == "Double Damage"){
+			spr.shader = colorSwap.shader;
+			colorSwap.hue = hueColor;
+			colorSwap.saturation = saturationColor;
+			colorSwap.brightness = brightnessColor;
+		}
 		return spr;
 	}
 
@@ -2948,11 +2995,16 @@ class ChartingState extends MusicBeatState
 
 		if ((data != null) && (data.length > 0))
 		{
+			var cock:String = '';
+			if (currentDifficultyName != CoolUtil.defaultDifficulty){
+				cock = "-" + currentDifficultyName.toLowerCase();
+			}
+			
 			_file = new FileReference();
 			_file.addEventListener(Event.COMPLETE, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
-			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + ".json");
+			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + cock + ".json");
 		}
 	}
 	

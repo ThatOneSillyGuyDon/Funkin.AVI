@@ -627,7 +627,7 @@ class ChartingState extends MusicBeatState
 		}
 		currentDifficultyName = CoolUtil.difficulties[PlayState.storyDifficulty];
 
-		var difficultyDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, gfVersionDropDown.y, FlxUIDropDownMenuCustom.makeStrIdLabelArray(difficulties, true), function (difficulty:String)
+		var difficultyDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, player3DropDown.y, FlxUIDropDownMenuCustom.makeStrIdLabelArray(difficulties, true), function (difficulty:String)
 			{
 				var newDiff = difficulties[Std.parseInt(difficulty)];
 				if (newDiff != currentDifficultyName)

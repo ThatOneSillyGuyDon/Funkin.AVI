@@ -6301,11 +6301,12 @@ class PlayState extends MusicBeatState
 		}
 		return false;
 	}
-		function fadeWhiteFlash() {
+		function fadeWhiteFlash(time:Float = 0.3, color:String = '#FFFFFF') {
 			if(ClientPrefs.flashing)
 			{
 					whiteFlashBG.alpha = 0.6;
-					whiteFlashBGFade = FlxTween.tween(whiteFlashBG, {alpha: 0}, 0.3, {ease: FlxEase.linear});
+					whiteFlashBG.color = FlxColor.fromString(color);
+					whiteFlashBGFade = FlxTween.tween(whiteFlashBG, {alpha: 0}, time, {ease: FlxEase.linear});
 			}
 		}
 
@@ -7102,8 +7103,15 @@ class PlayState extends MusicBeatState
 						relapseShoot();
 				}
 
-			case 'Flash Background':
-				fadeWhiteFlash();
+				case 'Flash Background':
+					var fadeTime:Float = Std.parseFloat(value1);
+					if(value2.trim()=='')value2='#FFFFFF';
+					if(fadeTime > 0)
+					{
+						fadeWhiteFlash(0.3, value2);
+					}else{	
+						fadeWhiteFlash(fadeTime, value2);
+					}
 
 			case 'Alter HUD Transparency':
 				var alphaValue:Float = Std.parseFloat(value1);

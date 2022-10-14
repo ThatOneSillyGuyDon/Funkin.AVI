@@ -9626,6 +9626,8 @@ class PlayState extends MusicBeatState
 		if(windowBoyfriend != null) {
 			windowBoyfriend.close();
 		}
+
+		Lib.application.window.borderless = false;
 	}
 
 	public static function cancelMusicFadeTween() {
@@ -11785,7 +11787,6 @@ class PlayState extends MusicBeatState
 					triggerEventNote('Fade Character', '0', '');
 					triggerEventNote('Fade Character', '0', '');
 					triggerEventNote('Fade Character', '0', '');
-					Lib.application.window.borderless = false;
 				}
 
 				if(curStep == 1613) {

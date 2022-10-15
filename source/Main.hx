@@ -53,6 +53,8 @@ class Main extends Sprite
 	{
 		super();
 
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+
 		if (stage != null)
 		{
 			init();
@@ -114,11 +116,7 @@ class Main extends Sprite
 
 		Application.current.window.onFocusOut.add(onWindowFocusOut);
 		Application.current.window.onFocusIn.add(onWindowFocusIn);
-
-		if(ClientPrefs.cursor == "Funkin.avi") {
-		FlxG.mouse.load(Paths.image('mouse/Funkin.avi'));
-		}
-
+		
 		gjToastManager = new GJToastManager();
 		addChild(gjToastManager); //adding the toddler
 	}
@@ -192,10 +190,9 @@ class Main extends Sprite
 				FlxG.drawFramerate = 60;
 				FlxG.updateFramerate = 60;
 			}
-			Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, crash);
 		}
 	
-		function crash(e:UncaughtErrorEvent):Void
+		function onCrash(e:UncaughtErrorEvent):Void
 		{
 			var errMsg:String = "";
 			var path:String;

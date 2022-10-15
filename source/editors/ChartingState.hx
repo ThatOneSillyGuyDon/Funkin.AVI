@@ -116,6 +116,7 @@ class ChartingState extends MusicBeatState
 		['Flash Screen', "Flashes da hud, yup, thats it\nValue 1 = Color you should Flash\nValue 2 = Option to Hide HUD\n \n Colors: 0 = White\n1 = Red\n2 = Blue\n3 = Black\n4 = Cyan\n5 = Magenta\n6 = Pink\n7 = Orange\n8 = Purple\n9 = Lime\n \nTrue: HUD is hidden\n False: HUD is visible"],
 		['Set Strum Visibility', "Value 1: Visible Or Not For The Player\nValue 2: Same But With The Opponent\nValue 3: How Time It Takes To Appear/Disappear"],
 		['Do Health Tween', 'Value 1: Set The Health\nValue 2: How Time It Takes'],
+		['Tween Song Lenght', "Value 1: New Lenght\nValue 2: how long it takes"],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"]
 	];
 

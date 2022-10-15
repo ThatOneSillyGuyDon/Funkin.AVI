@@ -7103,7 +7103,7 @@ class PlayState extends MusicBeatState
 						relapseShoot();
 				}
 
-				case 'Flash Background':
+			case 'Flash Background':
 					var fadeTime:Float = Std.parseFloat(value1);
 					if(value2.trim()=='')value2='#FFFFFF';
 					if(fadeTime > 0)
@@ -7236,6 +7236,15 @@ class PlayState extends MusicBeatState
 					var val1 = Std.parseFloat(value1);
 					var val2 = Std.parseFloat(value2);
 					FlxTween.tween(this, {health: val1}, val2, {ease: FlxEase.sineInOut});
+
+					//test purposes only
+				case 'Tween Song Lenght':
+					var val1 = Std.parseFloat(value1);
+					var val2 = Std.parseFloat(value2);
+					if(value1 == "default")
+					FlxTween.tween(this, {songLength: FlxG.sound.music.length * 1000}, 3, {ease: FlxEase.circInOut});
+					else
+					FlxTween.tween(this, {songLength: val1 * 1000}, val2, {ease: FlxEase.circInOut});
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
@@ -10433,9 +10442,41 @@ class PlayState extends MusicBeatState
 					}
 				}
 			
-			case 'Lunacy': //GoofGoof chart version
-				addCharacterToList('mickeysadistic', 1);
+			case 'Lunacy':
+			if(curStep == 20) {
+           timeBarBG.alpha = 0;
+		   timeBar.alpha = 0;
+		   timeTxt.alpha = 0;
+		   iconP1.alpha = 0;
+		   iconP2.alpha = 0;
+		   healthBar.alpha = 0;
+		   healthBarBG.alpha = 0;
+		   for(i in 0...3) {
+			playerStrums.members[i].alpha = 0;
+			opponentStrums.members[i].alpha = 0;
+		   }
+		   }
 
+			if(curStep == 128) {
+				triggerEventNote('Set Strum Visibility', 'false', 'true', '3');
+			}
+
+           if(curStep == 256) {
+			FlxTween.tween(timeBar, {alpha: 1}, 1);
+			FlxTween.tween(timeBarBG, {alpha: 1}, 1);
+			FlxTween.tween(timeTxt, {alpha: 1}, 1);
+		   }
+
+		   if(curStep == 384) {
+			FlxTween.tween(iconP2, {alpha: 1}, 1);
+		   }
+
+		   if(curStep == 480) {
+			triggerEventNote('Set Strum Visibility', 'true', 'true', '1');
+			FlxTween.tween(iconP1, {alpha: 1}, 1);
+			FlxTween.tween(healthBar, {alpha: 1}, 1);
+			FlxTween.tween(healthBarBG, {alpha: 1}, 1);
+		   }
 			case 'Lunacy Legacy': //Streamer Build 
 				addCharacterToList('mickeysadistic', 1);
 			

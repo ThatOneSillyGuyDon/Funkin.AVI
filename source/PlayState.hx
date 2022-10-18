@@ -7200,6 +7200,7 @@ class PlayState extends MusicBeatState
 
 				//omg, best rewrite ever, easier and smoother, no way!1!!!!11
 				FlxTween.tween(this, {defaultCamZoom: zoomValue}, timeTween, {ease: FlxEase.sineInOut});
+				}
 
 			//need to figure out how to make notes invisible
 			case 'Set Strum Visibility':

@@ -78,6 +78,7 @@ class ChartingState extends MusicBeatState
 		//'Randy Sing',
 		//'WI Sing',
 		//'Cog Sing',
+		//These were for the couch song, but it's now gonna be in Cognitive Crisis (another mod we're collaborating with)
 		'GF Sing',
 		'No Animation'
 	];

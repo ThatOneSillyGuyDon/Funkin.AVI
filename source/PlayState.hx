@@ -5038,16 +5038,45 @@ class PlayState extends MusicBeatState
 	override public function onFocusLost():Void
 	{
 		#if desktop
-		if (health > 0 && !paused)
+		if (health > 0 && paused)
 		{
-			if(SONG.song == "Don't Cross!")
+			if(SONG.song == "Don't Cross!" && ClientPrefs.mechanics)
 			{
 				DiscordClient.changePresence(detailsPausedText, SONG.song + " (You're Fucked)", iconP2.getCharacter(), curPortrait);
+			}else if (SONG.song == 'Malfunction' && ClientPrefs.mechanics)
+			{
+				DiscordClient.changePresence(detailsPausedText, SONG.song + " (ERR_501)", iconP2.getCharacter(), curPortrait);
 			}else{
 				DiscordClient.changePresence(detailsPausedText, SONG.song + " (" + storyDifficultyText + ")", iconP2.getCharacter(), curPortrait);
 			}
 		}
 		#end
+
+		var ret:Dynamic = callOnLuas('onPause', []);
+		if(ret != FunkinLua.Function_Stop) {
+			persistentUpdate = false;
+			persistentDraw = true;
+			paused = true;
+
+			// 1 / 1000 chance for Gitaroo Man easter egg
+			/*if (FlxG.random.bool(0.1))
+			{
+				// gitaroo man easter egg
+				cancelMusicFadeTween();
+				MusicBeatState.switchState(new GitarooPause());
+			}
+			else {*/
+			if(FlxG.sound.music != null) {
+				FlxG.sound.music.pause();
+				vocals.pause();
+			}
+
+			if(ClientPrefs.language == "Spanish") {
+			openSubState(new PauseSpanishState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+			} else {
+			openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
+			}
+			}
 
 		super.onFocusLost();
 	}
@@ -5098,6 +5127,10 @@ class PlayState extends MusicBeatState
 		}
 
 		callOnLuas('onUpdate', [elapsed]);
+
+		if (generatedMusic && PlayState.SONG.notes[Std.int(curStep / 16)] != null && !endingSong && !isCameraOnForcedPos){
+			moveCameraSection(Std.int(curStep / 16), true);
+		}
 
 		switch (curStage)
 		{
@@ -5403,7 +5436,7 @@ class PlayState extends MusicBeatState
 			
 			if(SONG.song == 'Delusional')
 				{
-					#if (desktop)
+					//#if (desktop && !avi_debug)
 					attemptsTillJumpscare -= 1;
 					satanSpeaks = new FlxText(-50, 0, 0);
 					satanSpeaks.setFormat(Paths.font("satanFont.ttf"), 40, FlxColor.WHITE, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
@@ -5567,7 +5600,7 @@ class PlayState extends MusicBeatState
 							System.exit(0);
 						});
 					}
-				#end 
+				//#end 
 				}else{
 			var ret:Dynamic = callOnLuas('onPause', []);
 			if(ret != FunkinLua.Function_Stop) {
@@ -7094,6 +7127,8 @@ class PlayState extends MusicBeatState
 				if(bgGirls != null) bgGirls.swapDanceType();
 
 			case 'Relapse Shoot':
+				if(ClientPrefs.mechanics)
+					{
 				switch(value1) {
 					case 'Normal' | 'normal' | 'NORMAL':
 						relapseShoot();
@@ -7106,11 +7141,13 @@ class PlayState extends MusicBeatState
 					default:
 						relapseShoot();
 				}
+			}
 
-			case 'Flash Background':
+				case 'Flash Background':
 					var fadeTime:Float = Std.parseFloat(value1);
 					if(value2.trim()=='')value2='#FFFFFF';
-					if(fadeTime > 0)
+					if(value1.trim()=='') fadeTime = 0;
+					if(fadeTime <= 0)
 					{
 						fadeWhiteFlash(0.3, value2);
 					}else{	
@@ -7191,16 +7228,26 @@ class PlayState extends MusicBeatState
 					zoomBounce = BNCEIntensity;
 				}
 			case 'Alter Camera Zoom':
-				var zoomValue:Float = Std.parseFloat(value2);
-				var timeTween:Float = Std.parseFloat(value3);
+				var zoomValue:Float = Std.parseFloat(value1);
+				var timeTween:Float = Std.parseFloat(value2);
 
 				if(ClientPrefs.camZooms) {
 				if(Math.isNaN(zoomValue)) zoomValue = 1;
 				if (Math.isNaN(timeTween)) timeTween = 0.5;
 
-				//omg, best rewrite ever, easier and smoother, no way!1!!!!11
-				FlxTween.tween(this, {defaultCamZoom: zoomValue}, timeTween, {ease: FlxEase.sineInOut});
+				if(timeTween <= 0)
+				{
+					camGame.zoom = zoomValue;
+				}else{
+					camZoomTween = FlxTween.tween(camGame, {zoom: zoomValue}, timeTween, {ease: FlxEase.sineInOut, onComplete: 
+						function (twn:FlxTween)
+							{
+								camZoomTween = null;
+							}
+						});
 				}
+				defaultCamZoom = zoomValue;
+			}
 
 			//need to figure out how to make notes invisible
 			case 'Set Strum Visibility':
@@ -7243,8 +7290,7 @@ class PlayState extends MusicBeatState
 		callOnLuas('onEvent', [eventName, value1, value2]);
 	}
 
-	/*function moveCameraSection(?id:Int = 0, isNote:Bool = false):Void {
-		if(SONG.notes[id] == null) return;
+	function moveCameraSection(?id:Int = 0, isNote:Bool = false):Void {
 
 		if (gf != null && SONG.notes[id].gfSection)
 		{
@@ -7252,20 +7298,20 @@ class PlayState extends MusicBeatState
 			var xOffsetB:Int = 0;
 			if (ClientPrefs.camMove){
 				if (gf.animation.curAnim.name.startsWith('singUP')){
-					yOffsetB = -25;
+					yOffsetB = -40;
 					xOffsetB = 0;
 				}
 				else if (gf.animation.curAnim.name.startsWith('singDOWN')){
-					yOffsetB = 25;
+					yOffsetB = 40;
 					xOffsetB = 0;
 				}
 				else if (gf.animation.curAnim.name.startsWith('singLEFT')){
 					yOffsetB = 0;
-					xOffsetB = -25;
+					xOffsetB = -40;
 				}
 				else if (gf.animation.curAnim.name.startsWith('singRIGHT')){
 					yOffsetB = 0;
-					xOffsetB = 25;
+					xOffsetB = 40;
 				}
 				else if (!gf.animation.curAnim.name.startsWith('sing')){
 					yOffsetB = 0;
@@ -7297,20 +7343,20 @@ class PlayState extends MusicBeatState
 	{
 		if (isNote && ClientPrefs.camMove){
 			if (boyfriend.animation.curAnim.name.startsWith('singUP')){
-				yOffsetB = -25;
+				yOffsetB = -40;
 				xOffsetB = 0;
 			}
 			else if (boyfriend.animation.curAnim.name.startsWith('singDOWN')){
-				yOffsetB = 25;
+				yOffsetB = 40;
 				xOffsetB = 0;
 			}
 			else if (boyfriend.animation.curAnim.name.startsWith('singLEFT')){
 				yOffsetB = 0;
-				xOffsetB = -25;
+				xOffsetB = -40;
 			}
 			else if (boyfriend.animation.curAnim.name.startsWith('singRIGHT')){
 				yOffsetB = 0;
-				xOffsetB = 25;
+				xOffsetB = 40;
 			}
 			else if (!boyfriend.animation.curAnim.name.startsWith('sing') || !PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection){
 				yOffsetB = 0;
@@ -7318,20 +7364,20 @@ class PlayState extends MusicBeatState
 			}
 
 			if (dad.animation.curAnim.name.startsWith('singUP')){
-				yOffsetD = -25;
+				yOffsetD = -40;
 				xOffsetD = 0;
 			}
 			else if (dad.animation.curAnim.name.startsWith('singDOWN')){
-				yOffsetD = 25;
+				yOffsetD = 40;
 				xOffsetD = 0;
 			}
 			else if (dad.animation.curAnim.name.startsWith('singLEFT')){
 				yOffsetD = 0;
-				xOffsetD = -25;
+				xOffsetD = -40;
 			}
 			else if (dad.animation.curAnim.name.startsWith('singRIGHT')){
 				yOffsetD = 0;
-				xOffsetD = 25;
+				xOffsetD = 40;
 			}
 			else if (!dad.animation.curAnim.name.startsWith('sing') || PlayState.SONG.notes[Std.int(curStep / 16)].mustHitSection){
 				yOffsetD = 0;
@@ -7362,59 +7408,6 @@ class PlayState extends MusicBeatState
 				});
 			}
 		}
-	}*/
-
-	function moveCameraSection(?id:Int = 0):Void {
-		if(SONG.notes[id] == null) return;
-
-		if (gf != null && SONG.notes[id].gfSection)
-		{
-			camFollow.set(gf.getMidpoint().x, gf.getMidpoint().y);
-			camFollow.x += gf.cameraPosition[0] + girlfriendCameraOffset[0];
-			camFollow.y += gf.cameraPosition[1] + girlfriendCameraOffset[1];
-			tweenCamIn();
-			callOnLuas('onMoveCamera', ['gf']);
-			return;
-		}
-
-		if (!SONG.notes[id].mustHitSection)
-		{
-			moveCamera(true);
-			callOnLuas('onMoveCamera', ['dad']);
-		}
-		else
-		{
-			moveCamera(false);
-			callOnLuas('onMoveCamera', ['boyfriend']);
-		}
-	}
-
-	var cameraTwn:FlxTween;
-	public function moveCamera(isDad:Bool)
-	{
-		if(isDad)
-		{
-			camFollow.set(dad.getMidpoint().x + 150, dad.getMidpoint().y - 100);
-			camFollow.x += dad.cameraPosition[0] + opponentCameraOffset[0];
-			camFollow.y += dad.cameraPosition[1] + opponentCameraOffset[1];
-			tweenCamIn();
-		}
-		else
-		{
-			camFollow.set(boyfriend.getMidpoint().x - 100, boyfriend.getMidpoint().y - 100);
-			camFollow.x -= boyfriend.cameraPosition[0] - boyfriendCameraOffset[0];
-			camFollow.y += boyfriend.cameraPosition[1] + boyfriendCameraOffset[1];
-
-			if (Paths.formatToSongPath(SONG.song) == 'tutorial' && cameraTwn == null && FlxG.camera.zoom != 1)
-			{
-				cameraTwn = FlxTween.tween(FlxG.camera, {zoom: 1}, (Conductor.stepCrochet * 4 / 1000), {ease: FlxEase.elasticInOut, onComplete:
-					function (twn:FlxTween)
-					{
-						cameraTwn = null;
-					}
-				});
-			}
-		}
 	}
 
 	function tweenCamIn() {
@@ -7427,7 +7420,7 @@ class PlayState extends MusicBeatState
 		}
 	}
 
-	function snapCamFollowToPos(x:Float, y:Float) {
+	public function snapCamFollowToPos(x:Float, y:Float) {
 		camFollow.set(x, y);
 		camFollowPos.setPosition(x, y);
 	}
@@ -8771,10 +8764,10 @@ class PlayState extends MusicBeatState
 											}
 											//FlxTween.tween(Application, {'current.window.x': 460, 'current.window.y': 180}, 0.1, {ease: FlxEase.quadOut});
 									}
-									if(ClientPrefs.camMove)
+									/*if(ClientPrefs.camMove)
 									{
 										camFollow.x += 15;
-									}	
+									}*/
 								}
 						}
 			if(note.gfNote) {
@@ -9066,10 +9059,10 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						/*if(ClientPrefs.camMove)
 						{
 							camFollow.x -= 15;
-						}	
+						}*/
 					case 1:
 						animToPlay = 'singDOWN';
 						if(curStage == 'Line')
@@ -9079,10 +9072,10 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						/*if(ClientPrefs.camMove)
 						{
 							camFollow.y += 15;
-						}
+						}*/
 					case 2:
 						animToPlay = 'singUP';
 						if(curStage == 'Line')
@@ -9092,10 +9085,10 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						/*if(ClientPrefs.camMove)
 						{
 							camFollow.y -= 15;
-						}
+						}*/
 					case 3:
 						animToPlay = 'singRIGHT';
 						if(curStage == 'Line')
@@ -9105,10 +9098,10 @@ class PlayState extends MusicBeatState
 							boyfriend.scale.x += 0.0012;
 							boyfriend.scale.y += 0.0012;
 						}
-						if(ClientPrefs.camMove)
+						/*if(ClientPrefs.camMove)
 						{
 							camFollow.x += 15;
-						}
+						}*/
 				}
 
 				if(note.gfNote) 
@@ -9945,73 +9938,73 @@ class PlayState extends MusicBeatState
 				if(curStep == 392)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 400)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 408)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 416)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 424)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 432)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 448)
 				{
 					triggerEventNote('Flash Screen', '3', 'False');
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 456)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 464)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 472)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 480)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 488)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 496)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 504)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 512)
 				{
@@ -10021,78 +10014,78 @@ class PlayState extends MusicBeatState
 				if(curStep == 520)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 528)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 536)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 544)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 552)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 560)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 568)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 576)
 				{
 					triggerEventNote('Flash Screen', '3', 'False');
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 584)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 592)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 600)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 608)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 616)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 624)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.09');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 632)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				}
 				if(curStep == 640)
 				{
@@ -10126,7 +10119,7 @@ class PlayState extends MusicBeatState
 				if(curStep == 904)
 				{
 					triggerEventNote('Add Camera Zoom', '0.04', '0.15');
-					fadeWhiteFlash();
+					triggerEventNote('Flash Background', '', '');
 				} //Man
 			case 'Delusional':
 				if(curStep == 0)
@@ -11047,11 +11040,14 @@ class PlayState extends MusicBeatState
 				}
 
 				if(curStep == 816) {
+					if(ClientPrefs.mechanics)
+					{
 					FlxTween.tween(crashLivesIcon, {y: 1000}, 6, {ease: FlxEase.sineIn});
 					FlxTween.tween(crashLivesIcon, {alpha: 0}, 2, {ease: FlxEase.sineIn});
 					FlxTween.tween(crashLives, {y: 1000}, 6, {ease: FlxEase.sineIn});
 					FlxTween.tween(crashLives, {alpha: 0}, 2, {ease: FlxEase.sineIn});
-					triggerEventNote('Alter camera Zoom', '1.2', '0.5');
+					}
+					triggerEventNote('Alter Camera Zoom', '1.2', '0.5');
 				}
 
 				if(curStep == 824) {

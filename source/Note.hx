@@ -232,6 +232,17 @@ class Note extends FlxSprite
 	{
 		super();
 
+		if (!ClientPrefs.mechanics)
+			{
+				switch (noteType)
+				{
+					case 'Error Note' | 'Hurt Note' | 'Poison Note' | 'Darkness Note' | 'Flip Note' | 'Instakill Note' | 'Move Window Note' | 'Fuck Strums Note':
+						this.kill();
+					case 'Double Damage':
+						this.noteType = '';
+				}
+			}
+
 		if (prevNote == null)
 			prevNote = this;
 

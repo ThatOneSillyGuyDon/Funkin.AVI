@@ -72,20 +72,20 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 
 		var option:Option = new Option(
 			'Toggle Mechanics',
-			'If unchecked, Mechanics will be removed\n(If selecting this mid-game, you may need to restart from the menu.)',
+			'If unchecked, Mechanics will be removed\n(ONLY WORKS IF NOT FROM PAUSE MENU)',
 			'mechanics',
 			'bool',
 			true);
 		addOption(option);
 
 
-		var option:Option = new Option('Live Difficulty:',
+		/*var option:Option = new Option('Live Difficulty:',
 			"What Is The Difficulty Lives Should There Be In Malfunction?", 
 			'lives', 
 			'string', 
 			'normal',
 			['easy', 'normal', 'hard', 'hell']);
-		addOption(option);
+		addOption(option);*/
 		
 		var option:Option = new Option('Hide Judgement Counter',
 			'If checked, hides Judgement Counter on the screen',

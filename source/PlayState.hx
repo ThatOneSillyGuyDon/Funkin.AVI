@@ -7198,18 +7198,8 @@ class PlayState extends MusicBeatState
 				if(Math.isNaN(zoomValue)) zoomValue = 1;
 				if (Math.isNaN(timeTween)) timeTween = 0.5;
 
-				if(timeTween <= 0)
-				{
-					camGame.zoom = zoomValue;
-				}else{
-					camZoomTween = FlxTween.tween(camGame, {zoom: zoomValue}, timeTween, {ease: FlxEase.sineInOut, onComplete: 
-						function (twn:FlxTween)
-							{
-								camZoomTween = null;
-							}
-						});
-				}
-				defaultCamZoom = zoomValue;
+				//omg, best rewrite ever, easier and smoother, no way!1!!!!111
+				FlxTween.tween(this, {defaultCamZoom: zoomValue}, timeTween, {ease: FlxEase.sineInOut});
 			}
 
 			//need to figure out how to make notes invisible

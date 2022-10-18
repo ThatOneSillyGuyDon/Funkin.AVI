@@ -97,7 +97,7 @@ class VoidState extends MusicBeatState{
 		DiscordClient.changePresence("In Freeplay", "The Void", null, 'icon');
 		#end
 
-		Application.current.window.title = "Funkin.avi - Freeplay: The Void";
+		Application.current.window.title = "The Void";
 
 		/*		//KIND OF BROKEN NOW AND ALSO PRETTY USELESS//
 		var initSonglist = CoolUtil.coolTextFile(Paths.txt('freeplaySonglist'));
@@ -195,22 +195,6 @@ class VoidState extends MusicBeatState{
 		var textBG:FlxSprite = new FlxSprite(0, FlxG.height - 26).makeGraphic(FlxG.width, 26, 0xFF000000);
 		textBG.alpha = 0.6;
 		add(textBG);
-
-		if(ClientPrefs.language == "Spanish") {
-			var leText:String = "Presiona CTRL Para Modifical El GamePlay / Presiona R Para Reiniciar El Progreso De La Cancion.";
-			var size:Int = 18;
-			var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-			text.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), size, FlxColor.WHITE, RIGHT);
-			text.scrollFactor.set();
-			add(text);
-			} else {
-			var leText:String = "Press CTRL to open the Gameplay Changers Menu / Press RESET to Reset your Score and Accuracy.";
-			var size:Int = 18;
-			var text:FlxText = new FlxText(textBG.x, textBG.y + 4, FlxG.width, leText, size);
-			text.setFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), size, FlxColor.WHITE, RIGHT);
-			text.scrollFactor.set();
-			add(text);
-			}
 
 		var scratchStuff:FlxSprite = new FlxSprite();
 		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
@@ -325,7 +309,7 @@ class VoidState extends MusicBeatState{
 			ratingSplit[1] += '0';
 		}
 
-		scoreText.text = 'PERSONAL BEST: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
+		scoreText.text = 'Best Score: ' + lerpScore + ' (' + ratingSplit.join('.') + '%)';
 		positionHighscore();
 
 		var upP = controls.UI_UP_P;
@@ -389,7 +373,6 @@ class VoidState extends MusicBeatState{
 				colorTween.cancel();
 			}
 			FlxG.sound.play(Paths.sound('cancelMenu'));
-			MusicBeatState.switchState(new EpicSelectorWOOO());
 		}
 
 		if(ctrl)
@@ -399,33 +382,7 @@ class VoidState extends MusicBeatState{
 		}
 			if(instPlaying != curSelected)
 			{
-				#if PRELOAD_ALL
-				destroyFreeplayVocals();
-				EpisodesState.destroyFreeplayVocals();
-				FlxG.sound.music.volume = 0;
-				Paths.currentModDirectory = songs[curSelected].folder;
-				var poop:String = Highscore.formatSong(songs[curSelected].songName.toLowerCase(), curDifficulty);
-				PlayState.SONG = Song.loadFromJson(poop, songs[curSelected].songName.toLowerCase());
-
-				FlxG.sound.playMusic(Paths.inst(PlayState.SONG.song), 0.7);
-				instPlaying = curSelected;
-				/*switch(PlayState.SONG.song)
-				{
-					case 'Laugh Track':
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
-					case 'Isolated Old' | "Don't Cross!":
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: Yama haki";
-					case 'Malfunction' | 'Mercy':
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: obscurity.";
-					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: Sayan Sama";
-					case 'Hunted':
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: JBlitz";
-					default:
-					Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song;
-				}*/
-				Application.current.window.title = "Funkin.avi - Listening to: " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
-				#end
+				//do nothing
 			}
 		else if (accepted || FlxG.mouse.justPressed)
 		{

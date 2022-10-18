@@ -7202,10 +7202,7 @@ class PlayState extends MusicBeatState
 				switch(value1)
 				{
                    case 'game' | 'Game': //tweens the default (game camera)
-				   FlxTween.tween(camGame, {zoom: zoomValue}, timeTween);
-
-					case 'hud' | 'Hud' | 'HUD':
-					FlxTween.tween(camHUD, {zoom: zoomValue}, timeTween);
+					FlxTween.tween(this, {defaultCamZoom: zoomValue}, timeTween, {ease: FlxEase.sineInOut});
 				}
 			}
 

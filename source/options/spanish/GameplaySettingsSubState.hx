@@ -56,13 +56,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		/*var option:Option = new Option(
+		var option:Option = new Option(
 			'Mecanicas',
 			'Desactivalo Si No Tienes Habilidad Con Las Mecanicas!',
 			'mechanics',
 			'bool',
 			true);
-		addOption(option);*/
+		addOption(option);
 		
 		var option:Option = new Option('Difficultad De Vida:',
 			"Cual Debe Ser la Dificultad De Vida De Malfunction", 

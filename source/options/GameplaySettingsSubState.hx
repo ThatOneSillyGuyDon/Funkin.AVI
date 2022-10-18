@@ -70,13 +70,13 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		/*var option:Option = new Option(
+		var option:Option = new Option(
 			'Toggle Mechanics',
 			'If unchecked, Mechanics will be removed\n(If selecting this mid-game, you may need to restart from the menu.)',
 			'mechanics',
 			'bool',
 			true);
-		addOption(option);*/
+		addOption(option);
 
 
 		var option:Option = new Option('Live Difficulty:',

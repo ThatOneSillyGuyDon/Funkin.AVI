@@ -328,6 +328,12 @@ class Paths
 		return false;
 	}
 
+	/**
+	 * Funny Class Test
+	 * @param key image
+	 * @param library perself explicatory
+	 * @return FlxAtlasFrames
+	 */
 	inline static public function getSparrowAtlas(key:String, ?library:String):FlxAtlasFrames
 	{
 		#if MODS_ALLOWED

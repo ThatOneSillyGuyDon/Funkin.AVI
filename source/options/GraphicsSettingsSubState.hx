@@ -67,12 +67,13 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeFramerate;
 		
 			
-		var option:Option = new Option('Toggle Shaders', //this one too btw
-			'If checked, you will see some cool visuals.\n(TURN THIS OFF IF YOUR DEVICE CRASHES WITH SHADERS ON)',
-			'funiShaders',
-			'bool',
-			true);
-		addOption(option);	
+		//ye rewrite, cus of 0.6.3
+		var option:Option = new Option('Shaders', //Name
+		'If unchecked, disables shaders.\nIt\'s used for some visual effects, and also CPU intensive for weaker PCs.', //Description
+		'funiShaders', //Save data variable name
+		'bool', //Variable type
+		true); //Default value
+	addOption(option);
 		
 		var option:Option = new Option('Optimize Shaders', 'If Checked, The Game Will OptimizateThe Shaders as max as it can', 'optimization', 'bool', false);
 		addOption(option);

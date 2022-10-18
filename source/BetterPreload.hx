@@ -1,5 +1,6 @@
 package;
 
+import PlatformUtil;
 import GameJolt.GameJoltAPI as GameJolt;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -496,6 +497,7 @@ class BetterPreload extends MusicBeatState {
             if(countUp == maxCount)
             {
                 loadText.text = 'Game Fully Loaded! Launching Title Sequence...';
+                PlatformUtil.sendNotification('Game Loaded Succesfully!', 'Enjoy Your Experience!', 0);
             }
         }
 

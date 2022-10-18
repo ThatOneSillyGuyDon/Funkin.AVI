@@ -7191,15 +7191,22 @@ class PlayState extends MusicBeatState
 					zoomBounce = BNCEIntensity;
 				}
 			case 'Alter Camera Zoom':
-				var zoomValue:Float = Std.parseFloat(value1);
-				var timeTween:Float = Std.parseFloat(value2);
+				var zoomValue:Float = Std.parseFloat(value2);
+				var timeTween:Float = Std.parseFloat(value3);
 
 				if(ClientPrefs.camZooms) {
 				if(Math.isNaN(zoomValue)) zoomValue = 1;
 				if (Math.isNaN(timeTween)) timeTween = 0.5;
 
 				//omg, best rewrite ever, easier and smoother, no way!1!!!!111
-				FlxTween.tween(this, {defaultCamZoom: zoomValue}, timeTween, {ease: FlxEase.sineInOut});
+				switch(value1)
+				{
+                   case 'game' | 'Game': //tweens the default (game camera)
+				   FlxTween.tween(camGame, {zoom: zoomValue}, timeTween);
+
+					case 'hud' | 'Hud' | 'HUD':
+					FlxTween.tween(camHUD, {zoom: zoomValue}, timeTween);
+				}
 			}
 
 			//need to figure out how to make notes invisible

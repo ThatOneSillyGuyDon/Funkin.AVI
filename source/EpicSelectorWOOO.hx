@@ -250,6 +250,9 @@ class EpicSelectorWOOO extends MusicBeatState {
 		if (controls.BACK) {
 			if (timesToEnter <= 0)
 			{
+				if(FPClientPrefs.muckneyLock == "completed") //everything is happy after besting the song
+				MusicBeatState.switchState(new HappyState());
+				else
 				MusicBeatState.switchState(new VoidState());
 			}else{
 				FlxG.sound.play(Paths.sound('cancelMenu'));

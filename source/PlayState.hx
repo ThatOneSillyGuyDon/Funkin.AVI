@@ -7610,6 +7610,9 @@ class PlayState extends MusicBeatState
 								FPClientPrefs.episode1FPLock = 'unlocked';
 							case 'Twisted Grins':
 								FPClientPrefs.episode2FPLock = 'unlocked';
+							case "Birthday":
+								if(FPClientPrefs.muckneyLock == "uncompleted")
+										FPClientPrefs.muckneyLock = "completed";
 						}	
 						FPClientPrefs.saveShit();
 						FlxG.save.flush();
@@ -7727,6 +7730,8 @@ class PlayState extends MusicBeatState
 						FPClientPrefs.mercyLock = 'beaten';
 					case 'Scrapped':
 						FPClientPrefs.scrappedLock = 'beaten';
+					case 'Birthday':
+						FPClientPrefs.muckneyLock = "completed";
 				}
 				FPClientPrefs.saveShit();
 				changedDifficulty = false;

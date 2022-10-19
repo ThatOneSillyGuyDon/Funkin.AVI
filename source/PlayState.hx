@@ -7269,7 +7269,7 @@ class PlayState extends MusicBeatState
 				switch(value3)
 				{
 					case 'add' | 'Add' | 'ADD':
-						addCinematicBars(barSpeed, ?barThickness);
+						addCinematicBars(barSpeed, barThickness); //bruh cant use ? because is only when creating a function (jason)
 					case 'remove' | 'Remove' | 'REMOVE':
 						removeCinematicBars(barSpeed);
 				}

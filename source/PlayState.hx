@@ -344,6 +344,8 @@ class PlayState extends MusicBeatState
 	var rsTV:BGSprite;
 	var vault:BGSprite;
 	var vaultINVERT:BGSprite;
+	var cinematicBars:Map<String, FlxSprite> = ["top" => null, "bottom" => null,];
+	var camBars:FlxCamera; // I got lazy, sorry.
 	//var rsTVColors:Int = FlxG.random.int(0, 4); this is not being used anymore :(
 
 	//Malfunction Stuff
@@ -588,14 +590,17 @@ class PlayState extends MusicBeatState
 
 		// var gameCam:FlxCamera = FlxG.camera;
 		camGame = new FlxCamera();
+		camBars = new FlxCamera();
 		camHUD = new FlxCamera();
 		camOther = new FlxCamera();
 		camCustom = new FlxCamera();
+		camBars.bgColor.alpha = 0;
 		camHUD.bgColor.alpha = 0;
 		camOther.bgColor.alpha = 0;
 		camCustom.bgColor.alpha = 0;
 
 		FlxG.cameras.reset(camGame);
+		FlxG.cameras.add(camBars);
 		FlxG.cameras.add(camHUD);
 		FlxG.cameras.add(camOther);
 		FlxG.cameras.add(camCustom);
@@ -7256,6 +7261,19 @@ class PlayState extends MusicBeatState
 					zoomBeat = BNCEBeats;
 					zoomBounce = BNCEIntensity;
 				}
+					
+			case 'Cinematic Bars':
+				var barSpeed:Float = Std.parseFloat(value1);
+				var barThickness:Float = Std.parseFloat(value2);
+
+				switch(value3)
+				{
+					case 'add' | 'Add' | 'ADD':
+						addCinematicBars(barSpeed, ?barThickness);
+					case 'remove' | 'Remove' | 'REMOVE':
+						removeCinematicBars(barSpeed);
+				}
+
 			case 'Alter Camera Zoom':
 				var zoomValue:Float = Std.parseFloat(value1);
 				var timeTween:Float = Std.parseFloat(value2);
@@ -9327,6 +9345,43 @@ class PlayState extends MusicBeatState
 			if (screenMode != -1)
 				SCALEdebugText.text = "screen mode : " + modeText;
 		}*/
+					
+			function addCinematicBars(speed:Float, ?thickness:Float = 7)
+			{
+				if (cinematicBars["top"] == null)
+				{
+					cinematicBars["top"] = new FlxSprite(0, 0).makeGraphic(FlxG.width, Std.int(FlxG.height / thickness), FlxColor.BLACK);
+					cinematicBars["top"].screenCenter(X);
+					cinematicBars["top"].cameras = [camBars];
+					cinematicBars["top"].y = 0 - cinematicBars["top"].height; // offscreen
+					add(cinematicBars["top"]);
+				}
+		
+				if (cinematicBars["bottom"] == null)
+				{
+					cinematicBars["bottom"] = new FlxSprite(0, 0).makeGraphic(FlxG.width, Std.int(FlxG.height / thickness), FlxColor.BLACK);
+					cinematicBars["bottom"].screenCenter(X);
+					cinematicBars["bottom"].cameras = [camBars];
+					cinematicBars["bottom"].y = FlxG.height; // offscreen
+					add(cinematicBars["bottom"]);
+				}
+		
+				FlxTween.tween(cinematicBars["top"], {y: 0}, speed, {ease: FlxEase.circInOut});
+				FlxTween.tween(cinematicBars["bottom"], {y: FlxG.height - cinematicBars["bottom"].height}, speed, {ease: FlxEase.circInOut});
+			}
+		
+			function removeCinematicBars(speed:Float)
+			{
+				if (cinematicBars["top"] != null)
+				{
+					FlxTween.tween(cinematicBars["top"], {y: 0 - cinematicBars["top"].height}, speed, {ease: FlxEase.circInOut});
+				}
+		
+				if (cinematicBars["bottom"] != null)
+				{
+					FlxTween.tween(cinematicBars["bottom"], {y: FlxG.height}, speed, {ease: FlxEase.circInOut});
+				}
+			}
 
 		function relapseShootButFast()
 			{

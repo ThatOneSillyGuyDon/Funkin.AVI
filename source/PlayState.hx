@@ -350,6 +350,7 @@ class PlayState extends MusicBeatState
 	var crashLives:FlxText;
 	var crashLivesIcon:FlxSprite;
 	public var crashLivesCounter:Int = 60;
+	var mickParticles:FlxEmitter;
 	var threatTrail:FlxTrail;
 	var glitchTimeColors:Int = FlxG.random.int(11, 19); //timer colors go crazy
 	public var funnyTimebarThing:Int;
@@ -1113,7 +1114,7 @@ class PlayState extends MusicBeatState
 				//var particles = new FlxTypedGroup<FlxEmitter>();
 
 				for (i in 1...4) {
-				var mickParticles:FlxEmitter = new FlxEmitter(-2080.5, 650.4);
+				    mickParticles = new FlxEmitter(-2080.5, 650.4);
                     mickParticles.launchMode = FlxEmitterMode.SQUARE;
 					mickParticles.velocity.set(-50, -200, 50, -600, -90, 0, 90, -600);
                     mickParticles.scale.set(4, 4, 4, 4, 0, 0, 0, 0);
@@ -2863,7 +2864,7 @@ class PlayState extends MusicBeatState
 						startCountdown();
 					}
 			}
-		} else */if (ClientPrefs.cutscenes && !seenCutscene) //CUTSCENES ON FREEPLAY
+		} else */if (!seenCutscene) //CUTSCENES ON FREEPLAY
 		{
 			switch (daSong)
 			{
@@ -2923,6 +2924,34 @@ class PlayState extends MusicBeatState
 				case 'senpai' | 'roses' | 'thorns':
 					if(daSong == 'roses') FlxG.sound.play(Paths.sound('ANGRY'));
 					schoolIntro(doof);
+
+					/*case "malfunction":
+						var blackScreen:FlxSprite = new FlxSprite(0, 0).makeGraphic(Std.int(FlxG.width * 2), Std.int(FlxG.height * 2), FlxColor.BLACK);
+					add(blackScreen);
+					blackScreen.scrollFactor.set();
+					camHUD.visible = false;
+
+					new FlxTimer().start(0.1, function(tmr:FlxTimer)
+					{
+						remove(blackScreen);
+						FlxG.sound.play(Paths.sound('Lights_Turn_On'));
+						camFollow.y = -2050;
+						camFollow.x += 200;
+						FlxG.camera.zoom = 1.5;
+
+						new FlxTimer().start(0.8, function(tmr:FlxTimer)
+						{
+							camHUD.visible = true;
+							remove(blackScreen);
+							FlxTween.tween(FlxG.camera, {zoom: defaultCamZoom}, 2.5, {
+								ease: FlxEase.quadInOut,
+								onComplete: function(twn:FlxTween)
+								{
+									startCountdown();
+								}
+							});
+						});
+					});*/
 
 				case 'ugh' | 'guns' | 'stress':
 					tankIntro();
@@ -10469,6 +10498,7 @@ class PlayState extends MusicBeatState
 				addCharacterToList('mickeysadistic', 1);
 			
 			case 'Malfunction':
+				startedCountdown = true;
 				songLength = 55 * 1000;
 				if(curStep == 4) //for get it work
 				{
@@ -11058,7 +11088,7 @@ class PlayState extends MusicBeatState
 
 					 Lib.application.window.borderless = true; //ALT + F4 Supermarcy 2: Electric Bobaloo (Jason)
 					 FlxTween.tween(scoreTxt, {alpha: 0}, 1);
-					 FlxTween.tween(healthBar, {alpha: 0}, 1);
+					 FlxTween.tween(healthBar, {alpha: 0}, 1);					
 					}
 
 				if(curStep == 828) {

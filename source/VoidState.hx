@@ -384,37 +384,19 @@ class VoidState extends MusicBeatState{
 			{
 				//do nothing
 			}
-		else if (accepted || FlxG.mouse.justPressed)
+		if (controls.ACCEPT || FlxG.mouse.justPressed)
 		{
 			persistentUpdate = false;
 			var songLowercase:String = Paths.formatToSongPath(songs[curSelected].songName);
 			var poop:String = Highscore.formatSong(songLowercase, curDifficulty);
-			/*#if MODS_ALLOWED
-			if(!sys.FileSystem.exists(Paths.modsJson(songLowercase + '/' + poop)) && !sys.FileSystem.exists(Paths.json(songLowercase + '/' + poop))) {
-			#else
-			if(!OpenFlAssets.exists(Paths.json(songLowercase + '/' + poop))) {
-			#end
-				poop = songLowercase;
-				curDifficulty = 1;
-				trace('Couldnt find file');
-			}*/
-			trace(poop);
 
-			PlayState.SONG = Song.loadFromJson(poop, songLowercase);
+			PlayState.SONG = Song.loadFromJson('birthday', 'birthday');
 			PlayState.isStoryMode = false;
-			PlayState.storyDifficulty = curDifficulty;
+            LoadingState.loadAndSwitchState(new PlayState());
 
 			trace('CURRENT WEEK: ' + WeekData.getWeekFileName());
 			if(colorTween != null) {
 				colorTween.cancel();
-			}
-			
-			if (FlxG.keys.pressed.SHIFT){
-				Application.current.window.alert('No Cheating ofc (this should be a cheating cover btw)');
-				System.exit(0);
-			}else{
-				LoadingState.loadAndSwitchState(new PlayState());
-				FlxG.mouse.visible = false;
 			}
 
 			FlxG.sound.music.volume = 0;

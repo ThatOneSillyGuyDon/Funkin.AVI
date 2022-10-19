@@ -7236,13 +7236,13 @@ class PlayState extends MusicBeatState
 			case 'Cinematic Bars':
 				var barSpeed:Float = Std.parseFloat(value1);
 				var barThickness:Float = Std.parseFloat(value2);
-				var barTriggerType = value3;
 
-				if(barTriggerType == 'add' || barTriggerType == 'Add' || barTriggerType == 'ADD')
+				switch(value3)
 				{
-					addCinematicBars(barSpeed, ?barThickness);
-				}else{
-					removeCinematicBars(barSpeed);
+					case 'add' | 'Add' | 'ADD':
+						addCinematicBars(barSpeed, ?barThickness);
+					case 'remove' | 'Remove' | 'REMOVE':
+						removeCinematicBars(barSpeed);
 				}
 
 			case 'Alter Camera Zoom':

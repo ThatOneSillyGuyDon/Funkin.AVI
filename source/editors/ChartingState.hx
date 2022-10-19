@@ -118,6 +118,7 @@ class ChartingState extends MusicBeatState
 		['Set Strum Visibility', "Value 1: Visible Or Not For The Player\nValue 2: Same But With The Opponent\nValue 3: How Time It Takes To Appear/Disappear"],
 		['Do Health Tween', 'Value 1: Set The Health\nValue 2: How Time It Takes'],
 		['Tween Song Lenght', "Value 1: New Lenght\nValue 2: how long it takes"],
+		['Cinematic Bars', 'Value 1: Bar Speed\nValue 2: Bar Thickness\nValue 3: add or remove'],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"]
 	];
 

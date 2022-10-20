@@ -20,6 +20,7 @@ import flixel.addons.ui.FlxUI;
 import flixel.addons.ui.FlxUICheckBox;
 import flixel.addons.ui.FlxUIInputText;
 import flixel.addons.ui.FlxUINumericStepper;
+import flixel.addons.ui.FlxUISlider;
 import flixel.addons.ui.FlxUITabMenu;
 import flixel.addons.ui.FlxUITooltip.FlxUITooltipStyle;
 import flixel.addons.transition.FlxTransitionableState;
@@ -70,6 +71,14 @@ class ChartingState extends MusicBeatState
 		'Hurt Note',
 		'Flip Note',
 		'Error Note',
+		'Move Window Note',
+		'Fuck Strums Note',
+		//'AVI Sing',
+		//'Rookie Sing',
+		//'Randy Sing',
+		//'WI Sing',
+		//'Cog Sing',
+		//These were for the couch song, but it's now gonna be in Cognitive Crisis (another mod we're collaborating with)
 		'GF Sing',
 		'No Animation'
 	];
@@ -97,14 +106,19 @@ class ChartingState extends MusicBeatState
 		['Fade Character', "0 = -0.05 Dad Alpha Value\n1 = -0.05 BF Alpha Value\n2 = +0.05 Dad Alpha Value\n3 = +0.05 BF Alpha Value\n(i'm so sorry for the spam shit)"],
 		['Screen Fade', "Funi Screen Fade\n0 = Invisible\n1 = add 0.05 to Visibility\n2 = remove 0.05 to Visibility\n3 = Visible\n(i'm sorry you have to spam 1 & 2)"],
 		['Lyrics',"Value 1: Lyrics\nValue 2: Color (white is default)"],
-		['Flash Background', "Flashes Between Stage and Characters\nValue 1: Time it takes to fade away\nValue 2: Insert a HEX Color ID\n \nIf left empty, Default is:\nFade Time: 0.3, HEX Color ID: #FFFFFF"],
+		['Flash Background', "Flashes Between Stage and Characters"],
 		['Alter HUD Transparency', "Value 1: Alpha value you want to tween the HUD at.\n Value 2: Time it takes to change."],
+		['Spotlights', "ONLY VALUE 1 WORKS!\nType 1 for ON/OFF switch\n2 for Dad\n3 for BF"],
+		['Relapse Shoot', "he go pew pew\nThis event has been recently revamped to have 4 functions now!\nType 'Normal', or leave blank, for normal shoot timer.\nType 'Fast' to make Relapse Mouse give less time to react.\nType 'Instakill' if you're feeling evil today.\nType 'Speedy' to have Relapse Mouse make life hell for ya."],
+		['Alter Camera Bouncing', "Alters the Intensity and Speed of the camera bounce.\nValue 1: Beats to hit (Default: 4)\nValue 2: Bounce Intensity (Default: 0)\nLeave the values blank if you want to use Default."],
 		['Alter Camera Zoom', "Sets the zoom value\nValue 1: Zoom Value \n(Default: 1)\nValue 2: put in a number to do an instant zoom, otherwise leave blank to do a smooth zoom  \n(Default: 0.5)"],
 		['Change Scroll Speed', "Value 1: Scroll Speed Multiplier (1 is default)\nValue 2: Time it takes to change fully in seconds."],
 		['Scroll Type', "Changes Scroll Type, Mid-Song\n \nValue 1 = BF Notes\nValue 2 = Dad Notes\n \nDefault = Normal Scroll Type\nFlip = Flips Current Scroll Type\nDown = Locks Downscroll\nUp = Locks Upscroll\nLeft = Sidescroll from Left\nRight = Sidescroll from Right\nUndyne = Centerscroll"],
 		['Flash Screen', "Flashes da hud, yup, thats it\nValue 1 = Color you should Flash\nValue 2 = Option to Hide HUD\n \n Colors: 0 = White\n1 = Red\n2 = Blue\n3 = Black\n4 = Cyan\n5 = Magenta\n6 = Pink\n7 = Orange\n8 = Purple\n9 = Lime\n \nTrue: HUD is hidden\n False: HUD is visible"],
 		['Set Strum Visibility', "Value 1: Visible Or Not For The Player\nValue 2: Same But With The Opponent\nValue 3: How Time It Takes To Appear/Disappear"],
 		['Do Health Tween', 'Value 1: Set The Health\nValue 2: How Time It Takes'],
+		['Tween Song Lenght', "Value 1: New Lenght\nValue 2: how long it takes"],
+		['Cinematic Bars', 'Value 1: Bar Speed\nValue 2: Bar Thickness\nValue 3: add or remove'],
 		['Set Property', "Value 1: Variable name\nValue 2: New value"]
 	];
 
@@ -169,6 +183,9 @@ class ChartingState extends MusicBeatState
 	var value2InputText:FlxUIInputText;
 	var value3InputText:FlxUIInputText; //stolen from theoyeah engine lmao
 	var currentSongName:String;
+	var currentDifficultyName:String;
+
+	public var colorSwap:ColorSwap = null;
 	
 	var zoomTxt:FlxText;
 	var curZoom:Int = 1;
@@ -251,7 +268,7 @@ class ChartingState extends MusicBeatState
 		DiscordClient.changePresence("Chart Editor", StringTools.replace(_song.song, '-', ' '));
 		#end
 			
-		Application.current.window.title = "Friday Night Funkin': Demolition Engine - Chart Editor - Editing: " + StringTools.replace(_song.song, '-', ' ');
+		Application.current.window.title = "Funkin.Avi Chart Editor - Editing: " + StringTools.replace(_song.song, '-', ' ');
 
 		vortex = FlxG.save.data.chart_vortex;
 		ignoreWarnings = FlxG.save.data.ignoreWarnings;
@@ -605,6 +622,29 @@ class ChartingState extends MusicBeatState
 		});
 		stageDropDown.selectedLabel = _song.stage;
 		blockPressWhileScrolling.push(stageDropDown);
+		
+		tempMap.clear();
+		var difficulties:Array<String> = CoolUtil.difficulties;
+		for (i in 0...difficulties.length) {
+			tempMap.set(difficulties[i], true);
+		}
+		currentDifficultyName = CoolUtil.difficulties[PlayState.storyDifficulty];
+
+		var difficultyDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, player3DropDown.y, FlxUIDropDownMenuCustom.makeStrIdLabelArray(difficulties, true), function (difficulty:String)
+			{
+				var newDiff = difficulties[Std.parseInt(difficulty)];
+				if (newDiff != currentDifficultyName)
+				{
+					openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function(){
+					currentDifficultyName = newDiff;
+					PlayState.storyDifficulty = Std.parseInt(difficulty);
+					loadJson(_song.song.toLowerCase());
+					}, null,ignoreWarnings));
+				}
+
+			});
+		difficultyDropDown.selectedLabel = currentDifficultyName;
+		blockPressWhileScrolling.push(difficultyDropDown);
 
 		composerInputUI = new FlxUIInputText(stageDropDown.x, stageDropDown.y + 42, 120, _song.composer, 8);
 		blockPressWhileTypingOn.push(composerInputUI);
@@ -656,6 +696,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(new FlxText(player2DropDown.x, player2DropDown.y - 15, 0, 'Opponent:'));
 		tab_group_song.add(new FlxText(player3DropDown.x, player3DropDown.y - 15, 0, 'Girlfriend:'));
 		tab_group_song.add(new FlxText(player1DropDown.x, player1DropDown.y - 15, 0, 'Boyfriend:'));
+		tab_group_song.add(new FlxText(difficultyDropDown.x, difficultyDropDown.y - 15, 0, 'Difficulty:'));
 		tab_group_song.add(new FlxText(stageDropDown.x, stageDropDown.y - 15, 0, 'Stage:'));
 		tab_group_song.add(new FlxText(composerInputUI.x, composerInputUI.y - 15, 0, 'Composer:'));
 		tab_group_song.add(new FlxText(charterInputUI.x, charterInputUI.y - 15, 0, 'Charter:'));
@@ -664,6 +705,7 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(player2DropDown);
 		tab_group_song.add(player3DropDown);
 		tab_group_song.add(player1DropDown);
+		tab_group_song.add(difficultyDropDown);
 		tab_group_song.add(stageDropDown);
 
 		UI_box.addGroup(tab_group_song);
@@ -1051,7 +1093,7 @@ class ChartingState extends MusicBeatState
 		tab_group_event.add(text);
 		value2InputText = new FlxUIInputText(20, 150, 100, "");
 		blockPressWhileTypingOn.push(value2InputText);
-		
+
 		var text:FlxText = new FlxText(20, 170, 0, "Value 3:");
 		tab_group_event.add(text);
 		value3InputText = new FlxUIInputText(20, 190, 100, "");
@@ -1458,6 +1500,10 @@ class ChartingState extends MusicBeatState
 					curSelectedNote[1][curEventSelected][2] = value2InputText.text;
 					updateGrid();
 				}
+				else if(sender == value3InputText) {
+					curSelectedNote[1][curEventSelected][3] = value3InputText.text;
+					updateGrid();
+				}
 				else if(sender == strumTimeInputText) {
 					var value:Float = Std.parseFloat(strumTimeInputText.text);
 					if(Math.isNaN(value)) value = 0;
@@ -1517,7 +1563,7 @@ class ChartingState extends MusicBeatState
 		_song.song = UI_songTitle.text;
 
 		strumLine.y = getYfromStrum((Conductor.songPosition - sectionStartTime()) / zoomList[curZoom] % (Conductor.stepCrochet * _song.notes[curSection].lengthInSteps));
-		for (i in 0...8) {
+		for (i in 0...8){
 			strumLineNotes.members[i].y = strumLine.y;
 		}
 
@@ -1543,7 +1589,7 @@ class ChartingState extends MusicBeatState
 		FlxG.watch.addQuick('daBeat', curBeat);
 		FlxG.watch.addQuick('daStep', curStep);
 
-
+		
 		if (FlxG.mouse.justPressed)
 		{
 			if (FlxG.mouse.overlaps(curRenderedNotes))
@@ -1793,7 +1839,8 @@ class ChartingState extends MusicBeatState
 						doANoteThing(conductorTime, i, style);
 				}
 			}
-
+			
+			
 				var datimess = [];
 				
 				var daTime:Float = (Conductor.stepCrochet*quants[curQuant]);//WHY DID I ROUND BEFORE THIS IS A FLOAT???
@@ -1832,7 +1879,7 @@ class ChartingState extends MusicBeatState
 					//var tosnapto = 0.00;
 					var foundaspot = false;
 					var i = datimess.length-1;//backwards for loop 
-					while (i > -1) {
+					while (i > -1){
 						if (Math.ceil(FlxG.sound.music.time) >= Math.ceil(datimess[i]) && !foundaspot){
 							foundaspot = true;
 							FlxG.sound.music.time = datimess[i];
@@ -1894,9 +1941,9 @@ class ChartingState extends MusicBeatState
 			if (FlxG.keys.pressed.SHIFT)
 				shiftThing = 4;
 
-			if (FlxG.keys.justPressed.RIGHT && !vortex || FlxG.keys.justPressed.D)
+			if (FlxG.keys.justPressed.RIGHT && !vortex|| FlxG.keys.justPressed.D)
 				changeSection(curSection + shiftThing);
-			if (FlxG.keys.justPressed.LEFT && !vortex || FlxG.keys.justPressed.A) {
+			if (FlxG.keys.justPressed.LEFT && !vortex|| FlxG.keys.justPressed.A) {
 				if(curSection <= 0) {
 					changeSection(_song.notes.length-1);
 				} else {
@@ -1958,18 +2005,17 @@ class ChartingState extends MusicBeatState
 				if(note.strumTime > lastConductorPos && FlxG.sound.music.playing && note.noteData > -1) {
 					var data:Int = note.noteData % 4;
 					var noteDataToCheck:Int = note.noteData;
-					if(noteDataToCheck > -1 && note.mustPress != _song.notes[curSection].mustHitSection)
-						noteDataToCheck += 4;
-					strumLineNotes.members[noteDataToCheck].playAnim('confirm', true);
-					strumLineNotes.members[noteDataToCheck].resetAnim = (note.sustainLength / 1000) + 0.15;
+					if(noteDataToCheck > -1 && note.mustPress != _song.notes[curSection].mustHitSection) noteDataToCheck += 4;
+						strumLineNotes.members[noteDataToCheck].playAnim('confirm', true);
+						strumLineNotes.members[noteDataToCheck].resetAnim = (note.sustainLength / 1000) + 0.15;
 					if(!playedSound[data]) {
-						if((playSoundBf.checked && note.mustPress) || (playSoundDad.checked && !note.mustPress)) {
+						if((playSoundBf.checked && note.mustPress) || (playSoundDad.checked && !note.mustPress)){
 							var soundToPlay = 'hitsound';
 							if(_song.player1 == 'gf') { //Easter egg
 								soundToPlay = 'GF_' + Std.string(data + 1);
 							}
 							
-							FlxG.sound.play(Paths.sound(soundToPlay)).pan = note.noteData < 4 ? -0.3 : 0.3; //would be coolio
+							FlxG.sound.play(Paths.sound(soundToPlay)).pan = note.noteData < 4? -0.3 : 0.3; //would be coolio
 							playedSound[data] = true;
 						}
 					
@@ -2006,60 +2052,176 @@ class ChartingState extends MusicBeatState
 			audioBuffers[0].dispose();
 		}
 		audioBuffers[0] = null;
-		#if MODS_ALLOWED
-		if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'))) {
-			audioBuffers[0] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'));
-			//trace('Custom vocals found');
+		switch (CoolUtil.difficulties[PlayState.storyDifficulty])
+		{
+			case "X2":
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Instx2.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Instx2.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Instx2.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Instx2.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Instx2.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Instx2.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Instx2.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
+
+			case "Suicidal":
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEInst.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/SUICIDEInst.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
+
+			default:
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Inst.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
 		}
-		#if MP3_ALLOWED
- 		else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'))) {
- 				audioBuffers[0] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.mp3'));
- 		}
- 		#end
-		#if WAV_ALLOWED
- 		else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'))) {
- 				audioBuffers[0] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Inst.wav'));
- 		}
- 		#end
-		else { #end
-			var leVocals:String = Paths.getPath(currentSongName + '/Inst.' + Paths.SOUND_EXT, SOUND, 'songs');
-			if (OpenFlAssets.exists(leVocals)) { //Vanilla inst
-				audioBuffers[0] = AudioBuffer.fromFile('./' + leVocals.substr(6));
-				//trace('Inst found');
-			}
-		#if MODS_ALLOWED
-		}
-		#end
 
 		if(audioBuffers[1] != null) {
 			audioBuffers[1].dispose();
 		}
 		audioBuffers[1] = null;
-		#if MODS_ALLOWED
-		if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'))) {
-			audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'));
-			//trace('Custom vocals found');
-		
-		} 
- 		#if MP3_ALLOWED // in the new Psych Engine update this is not longer necessary
- 		else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'))) {
- 			audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'));
- 		}
-		#end
- 		#if WAV_ALLOWED
- 		else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'))) {
- 			audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'));
- 		}
- 		#end
- 			else { #end
-			var leVocals:String = Paths.getPath(currentSongName + '/Voices.' + Paths.SOUND_EXT, SOUND, 'songs');
-			if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
-				audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
-				//trace('Voices found, LETS FUCKING GOOOO');
-			}
-		#if MODS_ALLOWED
+		switch (CoolUtil.difficulties[PlayState.storyDifficulty])
+		{
+			case "X2":
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voicesx2.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Voicesx2.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
+			case "Suicidal":
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/SUICIDEVoices.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/SUICIDEVoices.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
+				
+			default:
+				#if MODS_ALLOWED
+				if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.ogg'));
+					//trace('Custom vocals found');
+				
+				} 
+				#if MP3_ALLOWED 
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.mp3'));
+				}
+				#end
+				#if WAV_ALLOWED
+				else if(FileSystem.exists(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'))) {
+					audioBuffers[1] = AudioBuffer.fromFile(Paths.modFolders('songs/' + currentSongName + '/Voices.wav'));
+				}
+				#end
+					else { #end
+					var leVocals:String = Paths.getPath(currentSongName + '/Voices.' + Paths.SOUND_EXT, SOUND, 'songs');
+					if (OpenFlAssets.exists(leVocals)) { //Vanilla voices
+						audioBuffers[1] = AudioBuffer.fromFile('./' + leVocals.substr(6));
+						//trace('Voices found, LETS FUCKING GOOOO');
+					}
+				#if MODS_ALLOWED
+				}
+				#end
 		}
-		#end
 	}
 	function reloadGridLayer() {
 		gridLayer.clear();
@@ -2079,8 +2241,8 @@ class ChartingState extends MusicBeatState
 		var gridBlackLine:FlxSprite = new FlxSprite(gridBG.x + gridBG.width - (GRID_SIZE * 4)).makeGraphic(2, Std.int(gridBG.height), FlxColor.BLACK);
 		gridLayer.add(gridBlackLine);
 
-		for (i in 1...4) {
-		var beatsep1:FlxSprite = new FlxSprite(gridBG.x,(GRID_SIZE * (4 * curZoom)) * i).makeGraphic(Std.int(gridBG.width), 1, 0x44FF0000);
+		for (i in 1...4){
+		var beatsep1:FlxSprite = new FlxSprite(gridBG.x,(GRID_SIZE * (4*curZoom))*i).makeGraphic(Std.int(gridBG.width), 1, 0x44FF0000);
 		if(vortex)gridLayer.add(beatsep1);
 		}
 
@@ -2346,7 +2508,7 @@ class ChartingState extends MusicBeatState
 				}
 				value1InputText.text = curSelectedNote[1][curEventSelected][1];
 				value2InputText.text = curSelectedNote[1][curEventSelected][2];
-				//value3InputText.text = curSelectedNote[1][curEventSelected][3];
+				value3InputText.text = curSelectedNote[1][curEventSelected][3];
 			}
 			strumTimeInputText.text = '' + curSelectedNote[0];
 		}
@@ -2429,8 +2591,7 @@ class ChartingState extends MusicBeatState
 				curRenderedNotes.add(note);
 				
 				if(note.y < -150) note.y = -150;
-
-				var text:String = 'Event: ' + note.eventName + ' (' + Math.floor(note.strumTime) + ' ms)' + '\nValue 1: ' + note.eventVal1 + '\nValue 2: ' + note.eventVal2;
+				var text:String = 'Event: ' + note.eventName + ' (' + Math.floor(note.strumTime) + ' ms)\nValue 1: ' + note.eventVal1 + '\nValue 2: ' + note.eventVal2 + '\nValue 3: ' + note.eventVal3;
 				if(note.eventLength > 1) text = note.eventLength + ' Events:\n' + note.eventName;
 
 				var daText:AttachedFlxText = new AttachedFlxText(0, 0, 400, text, 12);
@@ -2498,6 +2659,7 @@ class ChartingState extends MusicBeatState
 			{
 				note.eventVal1 = i[1][0][1];
 				note.eventVal2 = i[1][0][2];
+				note.eventVal3 = i[1][0][3];
 			}
 			note.noteData = -1;
 			daNoteInfo = -1;
@@ -2537,7 +2699,25 @@ class ChartingState extends MusicBeatState
 		if(height < minHeight) height = minHeight;
 		if(height < 1) height = 1; //Prevents error of invalid height
 
-		var spr:FlxSprite = new FlxSprite(note.x + (GRID_SIZE * 0.5) - 4, note.y + GRID_SIZE / 2).makeGraphic(8, height);
+		var colorSwap = new ColorSwap();
+		var shader = colorSwap.shader;
+
+		var colorList:Array<String> = ['c24b99', '00ffff', '12fa05', 'f9393f'];
+		if (PlayState.isPixelStage) colorList = ['e276ff', '3dcaff', '71e300', 'ff884e'];
+		var susColor:Int = Std.parseInt('0xff' + colorList[note.noteData]);
+
+		var hueColor = ClientPrefs.arrowHSV[note.noteData][0] / 360;
+		var saturationColor = ClientPrefs.arrowHSV[note.noteData][1] / 100;
+		var brightnessColor = ClientPrefs.arrowHSV[note.noteData][2] / 100;
+		if (note.noteType != " " || note.noteType != "Double Damage") susColor = CoolUtil.dominantColor(note); //Make black if hurt note
+
+		var spr:FlxSprite = new FlxSprite(note.x + (GRID_SIZE * 0.5) - 4, note.y + GRID_SIZE / 2).makeGraphic(8, height, susColor);
+		if (note.noteType == " " || note.noteType == "Double Damage"){
+			spr.shader = colorSwap.shader;
+			colorSwap.hue = hueColor;
+			colorSwap.saturation = saturationColor;
+			colorSwap.brightness = brightnessColor;
+		}
 		return spr;
 	}
 
@@ -2646,7 +2826,7 @@ class ChartingState extends MusicBeatState
 			});
 		}
 		
-		if (!delnote) {
+		if (!delnote){
 			addNote(cs, d, style);
 		}
 	}
@@ -2684,6 +2864,7 @@ class ChartingState extends MusicBeatState
 			var event = eventStuff[Std.parseInt(eventDropDown.selectedId)][0];
 			var text1 = value1InputText.text;
 			var text2 = value2InputText.text;
+			var text3 = value3InputText.text;
 			_song.events.push([noteStrum, [[event, text1, text2]]]);
 			curSelectedNote = _song.events[_song.events.length - 1];
 			curEventSelected = 0;
@@ -2702,10 +2883,10 @@ class ChartingState extends MusicBeatState
 		updateNoteUI();
 	}
 	// will figure this out l8r
-	function redo() {
+	function redo(){
 		//_song = redos[curRedoIndex];
 	}
-	function undo() {
+	function undo(){
 		//redos.push(_song);
 		undos.pop();
 		//_song.notes = undos[undos.length - 1];
@@ -2772,12 +2953,15 @@ class ChartingState extends MusicBeatState
 	{
 		//make it look sexier if possible
 		//null fix shit, i hate it
-		if (CoolUtil.difficulties[PlayState.storyDifficulty] != CoolUtil.defaultDifficulty /* 'Normal' */
-			&& CoolUtil.difficulties[PlayState.storyDifficulty] != null)
-		{
-			PlayState.SONG = Song.loadFromJson(song.toLowerCase() + "-" + CoolUtil.difficulties[PlayState.storyDifficulty], song.toLowerCase());
-		} else {
-			PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+		if (CoolUtil.difficulties[PlayState.storyDifficulty] != "Normal"){
+			if(CoolUtil.difficulties[PlayState.storyDifficulty] == null){
+				PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
+			}else{
+				PlayState.SONG = Song.loadFromJson(song.toLowerCase()+"-"+CoolUtil.difficulties[PlayState.storyDifficulty], song.toLowerCase());
+			}
+			
+		}else{
+		PlayState.SONG = Song.loadFromJson(song.toLowerCase(), song.toLowerCase());
 		}
 		MusicBeatState.resetState();
 	}
@@ -2791,6 +2975,9 @@ class ChartingState extends MusicBeatState
 	}
 
 	function clearEvents() {
+		
+		
+		
 		_song.events = [];
 		updateGrid();
 	}
@@ -2809,13 +2996,18 @@ class ChartingState extends MusicBeatState
 
 		var data:String = Json.stringify(json, "\t");
 
-		if (data != null && data.length > 0)
+		if ((data != null) && (data.length > 0))
 		{
+			var cock:String = '';
+			if (currentDifficultyName != CoolUtil.defaultDifficulty){
+				cock = "-" + currentDifficultyName.toLowerCase();
+			}
+			
 			_file = new FileReference();
 			_file.addEventListener(Event.COMPLETE, onSaveComplete);
 			_file.addEventListener(Event.CANCEL, onSaveCancel);
 			_file.addEventListener(IOErrorEvent.IO_ERROR, onSaveError);
-			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + ".json");
+			_file.save(data.trim(), Paths.formatToSongPath(_song.song) + cock + ".json");
 		}
 	}
 	
@@ -2836,7 +3028,7 @@ class ChartingState extends MusicBeatState
 
 		var data:String = Json.stringify(json, "\t");
 
-		if (data != null && data.length > 0)
+		if ((data != null) && (data.length > 0))
 		{
 			_file = new FileReference();
 			_file.addEventListener(Event.COMPLETE, onSaveComplete);

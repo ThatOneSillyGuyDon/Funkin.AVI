@@ -43,8 +43,6 @@ import Shaders;
 import openfl.Assets;
 import FPClientPrefs;
 import PlayState;
-import GameJolt;
-import GameJolt.GameJoltAPI;
 import IndieCrossShaderShit.FXHandler;
 
 using StringTools;

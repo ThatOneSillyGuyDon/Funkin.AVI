@@ -84,6 +84,11 @@ class ExtrasState extends MusicBeatState{
             if(FPClientPrefs.mercyLock != 'beaten' && FPClientPrefs.mercyLock != 'unlocked') addSong('Mercy', 3, 'mysterymouse', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock); else addSong('Mercy', 3, 'walt', FlxColor.fromRGB(153, 148, 112), FlxG.save.data.mercyLock);
         }
 
+		if(FPClientPrefs.muckneyLock == "completed") 
+		{
+			addSong('Birthday', 3, 'muckny', FlxColor.fromRGB(255, 131, 122));
+		}
+
 		Paths.clearStoredMemory();
 		Paths.clearUnusedMemory();
 		

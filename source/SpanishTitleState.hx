@@ -38,8 +38,6 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
 import PlayState;
-import GameJolt;
-import GameJolt.GameJoltAPI;
 import IndieCrossShaderShit.FXHandler;
 
 using StringTools;

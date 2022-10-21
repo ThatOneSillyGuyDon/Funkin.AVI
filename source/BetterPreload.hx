@@ -1,7 +1,9 @@
 package;
 
 import PlatformUtil;
-import GameJolt.GameJoltAPI as GameJolt;
+#if desktop
+import gamejolt.GJClient;
+#end
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.addons.transition.FlxTransitionSprite.GraphicTransTileDiamond;
@@ -422,8 +424,11 @@ class BetterPreload extends MusicBeatState {
         FlxG.save.bind('funkin', 'ninjamuffin99');
         if(FlxG.save.data.episode1FPLock == null) FPClientPrefs.lockinIt();
 
-        GameJolt.connect();
-        GameJolt.authDaUser(FlxG.save.data.gjUser, FlxG.save.data.gjToken); //Loads GameJolt stuff
+        #if desktop
+        GJClient.initialize();
+        GJClient.login();
+        GJClient.authUser();
+        #end //Loads GameJolt stuff
 
         loadText = new FlxText(-100, FlxG.height - (32 + 7), 0, 'Loading...', 32);
         loadText.setFormat("VCR OSD Mono", 16, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);

@@ -95,12 +95,12 @@ class EpicSelectorWOOO extends MusicBeatState {
 			else freeplayCats = ['Legacy', 'Episodes', 'Extras', 'Covers'];
 		}else*/ if (FPClientPrefs.episode1FPLock == 'unlocked')
 		{
-			if(ClientPrefs.language == "Spanish") freeplayCats = ['Legado', 'Jugar', 'Un Mensaje Para It'];
+			if(ClientPrefs.language == "Spanish") freeplayCats = ['Legado', 'Jugar', 'Extras'];
 			else freeplayCats = ['Legacy', 'Episodes', 'Extras'];
 		} else {
 			if(ClientPrefs.language == "Spanish") freeplayCats = ['Legado', '???', '???'];
 			else freeplayCats = ['Legacy', '???', '???'];
-		}
+			}
 
         BG = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		BG.updateHitbox();
@@ -250,9 +250,6 @@ class EpicSelectorWOOO extends MusicBeatState {
 		if (controls.BACK) {
 			if (timesToEnter <= 0)
 			{
-				if(FPClientPrefs.muckneyLock == "completed") //everything is happy after besting the song
-				MusicBeatState.switchState(new HappyState());
-				else
 				MusicBeatState.switchState(new VoidState());
 			}else{
 				FlxG.sound.play(Paths.sound('cancelMenu'));

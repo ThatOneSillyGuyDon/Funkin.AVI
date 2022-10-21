@@ -1,7 +1,5 @@
 package;
 
-import GameJolt;
-import GameJolt.GameJoltAPI;
 import flixel.graphics.FlxGraphic;
 import flixel.FlxG;
 import flixel.FlxGame;
@@ -30,7 +28,6 @@ using StringTools;
 
 class Main extends Sprite
 {
-	public static var gjToastManager:GJToastManager; //Toast For Advice
 	var gameWidth:Int = 1280; // Width of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var initialState:Class<FlxState> = BetterPreload; // The FlxState the game starts with.
@@ -116,9 +113,6 @@ class Main extends Sprite
 
 		Application.current.window.onFocusOut.add(onWindowFocusOut);
 		Application.current.window.onFocusIn.add(onWindowFocusIn);
-		
-		gjToastManager = new GJToastManager();
-		addChild(gjToastManager); //adding the toddler
 	}
 
 	var game:FlxGame;

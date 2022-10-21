@@ -1,8 +1,10 @@
 package;
 
 import PlatformUtil;
-import GameJolt;
-import GameJolt.GameJoltAPI;
+#if desktop
+import gamejolt.GJClient;
+import gamejolt.formats.*;
+#end
 import flixel.graphics.FlxGraphic;
 #if desktop
 import Discord.DiscordClient;
@@ -6759,10 +6761,12 @@ class PlayState extends MusicBeatState
 				}
 				reloadHealthBarColors();
 			case 'Screen Fade':
-				var charType:Int = Std.parseInt(value1);
-				if(Math.isNaN(charType)) charType = 0;
+				var fadeAlpha = Std.parseFloat(value1);
+				var timer = Std.parseFloat(value2);
+
+				FlxTween.tween(blackFadeThing, {alpha: fadeAlpha}, timer, {ease: FlxEase.sineInOut}); //sine it out supermarcy
 	
-				switch(charType) {
+				/*switch(charType) {
 					case 0:
 						blackFadeThing.alpha = 0;
 					case 1:
@@ -6772,7 +6776,7 @@ class PlayState extends MusicBeatState
 					case 3:
 						blackFadeThing.alpha += 1;
 					//Sorry that you have to fucking spam these events to do the thing
-				}
+				}*/
 			case 'Lyrics':
 				if(lyrics!=null){
 					remove(lyrics);
@@ -7665,21 +7669,23 @@ class PlayState extends MusicBeatState
 			{
 		        trace('WENT BACK TO FREEPLAY??');
 
+				#if desktop
 				if(SONG.song == "Isolated Old") {
-			    	GameJoltAPI.addScore(songScore, 760676, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
+			    	GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760676);
 				} else if(SONG.song == "Isolated") {
-					GameJoltAPI.addScore(songScore, 760684, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
+		            GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760684);
 				} else if(SONG.song == "Hunted") {
-					GameJoltAPI.addScore(songScore, 760677, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760677);
 				} else if(SONG.song == "Twisted Grins") {
-					GameJoltAPI.addScore(songScore, 760679, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760679);
 				} else if(SONG.song == "Lunacy") {
-					GameJoltAPI.addScore(songScore, 760686, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760686);
 				} else if(SONG.song == "Isolated Old") {
-					GameJoltAPI.addScore(songScore, 755529, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 755529);
 				} else if(SONG.song == "Cycled Sins") {
-					GameJoltAPI.addScore(songScore, 760692, 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%');
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760692);
 				}
+				#end
 
 				//Story Songs later Lol, Thanks Tenta
 				//note: don't put it yet because it will be public
@@ -8910,7 +8916,7 @@ class PlayState extends MusicBeatState
 						shadow.cameras = [camHUD];
 						shadow.alpha = 1;
 						add(shadow);
-						FlxTween.tween(shadow, {alpha: 0}, 2, {ease: FlxEase.quadInOut, startDelay: 15});
+						FlxTween.tween(shadow, {alpha: 0}, 2, {ease: FlxEase.quadInOut, startDelay: 5});
 						healthDrain = 0.005;
 						noteMiss(note);
 
@@ -9061,7 +9067,7 @@ class PlayState extends MusicBeatState
 					notes.remove(note, true);
 					note.destroy();
 				}
-				return;
+				return; 
 			}
 
 			if (!note.isSustainNote)
@@ -14195,7 +14201,7 @@ class PlayState extends MusicBeatState
 	}
 	}
 
-	#if ACHIEVEMENTS_ALLOWED
+	#if (ACHIEVEMENTS_ALLOWED && desktop)
 	private function checkForAchievement(achievesToCheck:Array<String> = null):String
 	{
 		if(chartingMode) return null;
@@ -14213,8 +14219,7 @@ class PlayState extends MusicBeatState
 							if(SONG.song == 'Malfunction')
 							{
 								unlock = true;
-								if(!GameJoltAPI.checkTrophy(169789))
-									GameJoltAPI.getTrophy(169789);		
+									GJClient.trophieAdd(169789);		
 							}
 						}
 					case 'episode1_SFC' | 'episode2_SFC':
@@ -14227,15 +14232,13 @@ class PlayState extends MusicBeatState
 									if(achievementName == 'episode1_SFC')
 									{
 										unlock = true;
-										if(!GameJoltAPI.checkTrophy(170051))
-											GameJoltAPI.getTrophy(170051);		
+											GJClient.trophieAdd(170051);		
 									}
 								case 'chapter2':
 									if(achievementName == 'episode2_SFC')
 									{
 										unlock = true;
-										if(!GameJoltAPI.checkTrophy(170052))
-											GameJoltAPI.getTrophy(170052);
+											GJClient.trophieAdd(170052);
 									}
 							}
 						}
@@ -14249,15 +14252,14 @@ class PlayState extends MusicBeatState
 									if(achievementName == 'episode1_suicide')
 									{
 										unlock = true;
-										if(!GameJoltAPI.checkTrophy(170049))
-											GameJoltAPI.getTrophy(170049);		
+											GJClient.trophieAdd(170049);		
 									}
 								case 'chapter2':
 									if(achievementName == 'episode2_suicide')
 									{
 										unlock = true;
-										if(!GameJoltAPI.checkTrophy(169967))
-											GameJoltAPI.getTrophy(169967);
+									//	if(!GameJoltAPI.checkTrophy(169967))
+											GJClient.trophieAdd(169967);
 									}
 							}
 						}
@@ -14271,15 +14273,15 @@ class PlayState extends MusicBeatState
 									if(achievementName == 'episode1_nomiss')
 									{
 										unlock = true;
-										if(!GameJoltAPI.checkTrophy(169793))
-											GameJoltAPI.getTrophy(169793);		
+				//						if(!GameJoltAPI.checkTrophy(169793))
+											GJClient.trophieAdd(169793);		
 									}
 								case 'chapter2':
 									if(achievementName == 'episode2_nomiss')
 									{
 										unlock = true;
-										if(!GameJoltAPI.checkTrophy(169866))
-											GameJoltAPI.getTrophy(169866);		
+							//			if(!GameJoltAPI.checkTrophy(169866))
+											GJClient.trophieAdd(169866);		
 									}
 							}
 						}
@@ -14290,8 +14292,8 @@ class PlayState extends MusicBeatState
 								if(achievementName == 'malfunction_nomiss')
 								{
 									unlock = true;
-									if(!GameJoltAPI.checkTrophy(169791))
-										GameJoltAPI.getTrophy(169791);		
+			//						if(!GameJoltAPI.checkTrophy(169791))
+										GJClient.trophieAdd(169791);		
 								}
 							}
 							if(SONG.song == 'Cycled Sins')
@@ -14299,8 +14301,8 @@ class PlayState extends MusicBeatState
 								if(achievementName == 'relapse_nomiss')
 								{ 
 									unlock = true;
-									if(!GameJoltAPI.checkTrophy(169790))
-										GameJoltAPI.getTrophy(169790);
+					//				if(!GameJoltAPI.checkTrophy(169790))
+										GJClient.trophieAdd(169790);
 								}
 							}
 						}
@@ -14314,12 +14316,12 @@ class PlayState extends MusicBeatState
 									if(achievementName == 'episode1')
 									{
 										unlock = true;
-										if(!GameJoltAPI.checkTrophy(169792))
-											GameJoltAPI.getTrophy(169792);
+			//							if(!GameJoltAPI.checkTrophy(169792))
+											GJClient.trophieAdd(169792);
 									}
 								case 'chapter2':
 									if(achievementName == 'episode2') unlock = true;
-									GameJolt.GameJoltAPI.getTrophy(169866);
+								     GJClient.trophieAdd(169866);
 							}
 						}
 					case 'ur_bad':
@@ -14328,8 +14330,8 @@ class PlayState extends MusicBeatState
 						}
 					case 'ur_good':
 						if(ratingPercent >= 1 && !usedPractice) {
-							if(!GameJoltAPI.checkTrophy(169967))
-								GameJoltAPI.getTrophy(169967);
+		//					if(!GameJoltAPI.checkTrophy(169967))
+								GJClient.trophieAdd(169967);
 							unlock = true;
 						}
 				}

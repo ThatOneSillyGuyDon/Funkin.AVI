@@ -86,7 +86,7 @@ class ExtrasState extends MusicBeatState{
 
 		if(FPClientPrefs.muckneyLock == "completed") 
 		{
-			addSong('Birthday', 3, 'muckny', FlxColor.fromRGB(255, 131, 122));
+			addSong('Birthday', 3, 'muckny', FlxColor.fromRGB(255, 131, 122), FlxG.save.data.muckneyLock);
 		}
 
 		Paths.clearStoredMemory();

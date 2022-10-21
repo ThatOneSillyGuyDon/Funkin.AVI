@@ -454,6 +454,8 @@ class ChartingState extends MusicBeatState
 		{
 			saveLevel();
 		});
+		saveButton.color = FlxColor.LIME;
+		saveButton.label.color = FlxColor.WHITE;
 
 		var reloadSong:FlxButton = new FlxButton(saveButton.x + 90, saveButton.y, "Reload Audio", function()
 		{
@@ -497,14 +499,14 @@ class ChartingState extends MusicBeatState
 			saveEvents();
 		});
 
-		var clear_events:FlxButton = new FlxButton(320, 310, 'Clear events', function()
+		var clear_events:FlxButton = new FlxButton(320, 320, 'Clear events', function()
 			{
 				openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, clearEvents, null,ignoreWarnings));
 			});
 		clear_events.color = FlxColor.RED;
 		clear_events.label.color = FlxColor.WHITE;
 
-		var clear_notes:FlxButton = new FlxButton(320, clear_events.y + 30, 'Clear notes', function()
+		var clear_notes:FlxButton = new FlxButton(320, clear_events.y + 20, 'Clear notes', function()
 			{
 				openSubState(new Prompt('This action will clear current progress.\n\nProceed?', 0, function(){for (sec in 0..._song.notes.length) {
 					_song.notes[sec].sectionNotes = [];
@@ -556,7 +558,7 @@ class ChartingState extends MusicBeatState
 		}
 		#end
 
-		var player1DropDown = new FlxUIDropDownMenuCustom(10, stepperSpeed.y + 40, FlxUIDropDownMenuCustom.makeStrIdLabelArray(characters, true), function(character:String)
+		var player1DropDown = new FlxUIDropDownMenuCustom(10, stepperSpeed.y + 33, FlxUIDropDownMenuCustom.makeStrIdLabelArray(characters, true), function(character:String)
 		{
 			_song.player1 = characters[Std.parseInt(character)];
 			updateHeads();
@@ -564,7 +566,7 @@ class ChartingState extends MusicBeatState
 		player1DropDown.selectedLabel = _song.player1;
 		blockPressWhileScrolling.push(player1DropDown);
 
-		var player3DropDown = new FlxUIDropDownMenuCustom(player1DropDown.x, player1DropDown.y + 35, FlxUIDropDownMenuCustom.makeStrIdLabelArray(characters, true), function(character:String)
+		var player3DropDown = new FlxUIDropDownMenuCustom(player1DropDown.x, player1DropDown.y + 34, FlxUIDropDownMenuCustom.makeStrIdLabelArray(characters, true), function(character:String)
 		{
 			_song.gfVersion = characters[Std.parseInt(character)];
 			updateHeads();
@@ -572,7 +574,7 @@ class ChartingState extends MusicBeatState
 		player3DropDown.selectedLabel = _song.gfVersion;
 		blockPressWhileScrolling.push(player3DropDown);
 
-		var player2DropDown = new FlxUIDropDownMenuCustom(player1DropDown.x, player3DropDown.y + 35, FlxUIDropDownMenuCustom.makeStrIdLabelArray(characters, true), function(character:String)
+		var player2DropDown = new FlxUIDropDownMenuCustom(player1DropDown.x, player3DropDown.y + 34, FlxUIDropDownMenuCustom.makeStrIdLabelArray(characters, true), function(character:String)
 		{
 			_song.player2 = characters[Std.parseInt(character)];
 			updateHeads();
@@ -616,7 +618,7 @@ class ChartingState extends MusicBeatState
 
 		if(stages.length < 1) stages.push('stage');
 
-		stageDropDown = new FlxUIDropDownMenuCustom(player1DropDown.x + 140, player1DropDown.y, FlxUIDropDownMenuCustom.makeStrIdLabelArray(stages, true), function(character:String)
+		stageDropDown = new FlxUIDropDownMenuCustom(player2DropDown.x, player2DropDown.y + 34, FlxUIDropDownMenuCustom.makeStrIdLabelArray(stages, true), function(character:String)
 		{
 			_song.stage = stages[Std.parseInt(character)];
 		});
@@ -630,7 +632,7 @@ class ChartingState extends MusicBeatState
 		}
 		currentDifficultyName = CoolUtil.difficulties[PlayState.storyDifficulty];
 
-		var difficultyDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, player3DropDown.y, FlxUIDropDownMenuCustom.makeStrIdLabelArray(difficulties, true), function (difficulty:String)
+		var difficultyDropDown = new FlxUIDropDownMenuCustom(stageDropDown.x, stageDropDown.y + 34, FlxUIDropDownMenuCustom.makeStrIdLabelArray(difficulties, true), function (difficulty:String)
 			{
 				var newDiff = difficulties[Std.parseInt(difficulty)];
 				if (newDiff != currentDifficultyName)
@@ -646,10 +648,23 @@ class ChartingState extends MusicBeatState
 		difficultyDropDown.selectedLabel = currentDifficultyName;
 		blockPressWhileScrolling.push(difficultyDropDown);
 
-		composerInputUI = new FlxUIInputText(saveEvents.x - 10, saveEvents.y + 42, 120, _song.composer, 8);
+		var skin = PlayState.SONG.arrowSkin;
+		if(skin == null) skin = '';
+		noteSkinInputText = new FlxUIInputText(player1DropDown.x + 140, player1DropDown.y, 120, skin, 8);
+		blockPressWhileTypingOn.push(noteSkinInputText);
+	
+		noteSplashesInputText = new FlxUIInputText(noteSkinInputText.x, noteSkinInputText.y + 30, 120, _song.splashSkin, 8);
+		blockPressWhileTypingOn.push(noteSplashesInputText);
+
+		var reloadNotesButton:FlxButton = new FlxButton(noteSplashesInputText.x + 170, noteSplashesInputText.y, 'Change Notes', function() {
+			_song.arrowSkin = noteSkinInputText.text;
+			updateGrid();
+		});
+
+		composerInputUI = new FlxUIInputText(noteSplashesInputText.x, noteSplashesInputText.y + 30, 120, _song.composer, 8);
 		blockPressWhileTypingOn.push(composerInputUI);
 
-		charterInputUI = new FlxUIInputText(composerInputUI.x, composerInputUI.y + 40, 120, _song.charter, 8);
+		charterInputUI = new FlxUIInputText(composerInputUI.x, composerInputUI.y + 30, 120, _song.charter, 8);
 		blockPressWhileTypingOn.push(charterInputUI);
 
 		var creditsUpdateButton:FlxButton = new FlxButton(charterInputUI.x + 170, charterInputUI.y - 2, 'Update Credits', function(){
@@ -658,19 +673,6 @@ class ChartingState extends MusicBeatState
 		});
 		creditsUpdateButton.color = FlxColor.fromRGB(22, 133, 195);
 		creditsUpdateButton.label.color = FlxColor.WHITE;
-
-		var skin = PlayState.SONG.arrowSkin;
-		if(skin == null) skin = '';
-		noteSkinInputText = new FlxUIInputText(player2DropDown.x, player2DropDown.y + 40, 150, skin, 8);
-		blockPressWhileTypingOn.push(noteSkinInputText);
-	
-		noteSplashesInputText = new FlxUIInputText(noteSkinInputText.x, noteSkinInputText.y + 30, 150, _song.splashSkin, 8);
-		blockPressWhileTypingOn.push(noteSplashesInputText);
-
-		var reloadNotesButton:FlxButton = new FlxButton(noteSplashesInputText.x, noteSplashesInputText.y + 20, 'Change Notes', function() {
-			_song.arrowSkin = noteSkinInputText.text;
-			updateGrid();
-		});
 
 		var tab_group_song = new FlxUI(null, UI_box);
 		tab_group_song.name = "Song";
@@ -704,11 +706,11 @@ class ChartingState extends MusicBeatState
 		tab_group_song.add(new FlxText(charterInputUI.x, charterInputUI.y - 15, 0, 'Charter:'));
 		tab_group_song.add(new FlxText(noteSkinInputText.x, noteSkinInputText.y - 15, 0, 'Note Texture:'));
 		tab_group_song.add(new FlxText(noteSplashesInputText.x, noteSplashesInputText.y - 15, 0, 'Note Splashes Texture:'));
+		tab_group_song.add(difficultyDropDown);
+		tab_group_song.add(stageDropDown);
 		tab_group_song.add(player2DropDown);
 		tab_group_song.add(player3DropDown);
 		tab_group_song.add(player1DropDown);
-		tab_group_song.add(difficultyDropDown);
-		tab_group_song.add(stageDropDown);
 
 		UI_box.addGroup(tab_group_song);
 
@@ -744,7 +746,7 @@ class ChartingState extends MusicBeatState
 		check_gfSection.checked = _song.notes[curSection].gfSection;
 		// _song.needsVoices = check_mustHit.checked;
 
-		check_altAnim = new FlxUICheckBox(10, 60, null, null, "Alt Animation", 100);
+		check_altAnim = new FlxUICheckBox(10, 50, null, null, "Alt Animation", 100);
 		check_altAnim.checked = _song.notes[curSection].altAnim;
 		check_altAnim.name = 'check_altAnim';
 
@@ -1064,7 +1066,7 @@ class ChartingState extends MusicBeatState
 		eventPushedMap = null;
 		#end
 
-		descText = new FlxText(20, 200, 0, eventStuff[0][0]);
+		descText = new FlxText(20, 180, 0, eventStuff[0][0]);
 
 		var leEvents:Array<String> = [];
 		for (i in 0...eventStuff.length) {
@@ -1096,9 +1098,9 @@ class ChartingState extends MusicBeatState
 		value2InputText = new FlxUIInputText(20, 150, 100, "");
 		blockPressWhileTypingOn.push(value2InputText);
 
-		var text:FlxText = new FlxText(20, 170, 0, "Value 3:");
+		var text:FlxText = new FlxText(130, 90, 0, "Value 3:");
 		tab_group_event.add(text);
-		value3InputText = new FlxUIInputText(20, 190, 100, "");
+		value3InputText = new FlxUIInputText(130, 110, 100, "");
 		blockPressWhileTypingOn.push(value3InputText);
 
 		// New event buttons

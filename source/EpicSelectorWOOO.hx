@@ -97,7 +97,10 @@ class EpicSelectorWOOO extends MusicBeatState {
 		{
 			if(ClientPrefs.language == "Spanish") freeplayCats = ['Legado', 'Jugar', 'Extras'];
 			else freeplayCats = ['Legacy', 'Episodes', 'Extras'];
-		} else {
+		} else if(FPClientPrefs.muckneyLock == "completed") {
+			if(ClientPrefs.language == "Spanish") freeplayCats = ['Legado', '???', 'Extras'];
+			else freeplayCats = ['Legacy', '???', 'Extras'];
+			} else {
 			if(ClientPrefs.language == "Spanish") freeplayCats = ['Legado', '???', '???'];
 			else freeplayCats = ['Legacy', '???', '???'];
 			}

@@ -4582,6 +4582,10 @@ class PlayState extends MusicBeatState
 				{
 					spr.dance();
 				});
+
+				case 'PixelWorld':
+					songLength = 55 * 1000; //ye fix the shit so the timebar still visible
+					//also we are not copy WI, is just for fun (jason)
 		}
 		
 		#if desktop
@@ -6423,9 +6427,6 @@ class PlayState extends MusicBeatState
 	 * @param value3 Third Value Used Just In Case!
 	 */
 	public function triggerEventNote(eventName:String, value1:String, value2:String, ?value3:String = '') {
-		var theValue1:String = value1.toLowerCase().trim();
-		var theValue2:String = value2.toLowerCase().trim();
-		var theValue3:String = value3.toLowerCase().trim();
 		switch(eventName) {
 
 			case 'Spotlights':
@@ -6761,12 +6762,14 @@ class PlayState extends MusicBeatState
 				}
 				reloadHealthBarColors();
 			case 'Screen Fade':
-				var fadeAlpha = Std.parseFloat(value1);
+				/*var fadeAlpha = Std.parseFloat(value1);
 				var timer = Std.parseFloat(value2);
 
-				FlxTween.tween(blackFadeThing, {alpha: fadeAlpha}, timer, {ease: FlxEase.sineInOut}); //sine it out supermarcy
+			//	FlxTween.tween(blackFadeThing, {alpha: fadeAlpha}, timer, {ease: FlxEase.sineInOut}); //sine it out supermarcy*/
+			var charType:Int = Std.parseInt(value1);
+			if(Math.isNaN(charType)) charType = 0;
 	
-				/*switch(charType) {
+				switch(charType) {
 					case 0:
 						blackFadeThing.alpha = 0;
 					case 1:
@@ -6776,7 +6779,8 @@ class PlayState extends MusicBeatState
 					case 3:
 						blackFadeThing.alpha += 1;
 					//Sorry that you have to fucking spam these events to do the thing
-				}*/
+				}
+
 			case 'Lyrics':
 				if(lyrics!=null){
 					remove(lyrics);
@@ -7196,17 +7200,7 @@ class PlayState extends MusicBeatState
 				var alphaValue:Float = Std.parseFloat(value1);
 				var timer:Float = Std.parseFloat(value2);
 
-				if(timer <= 0)
-				{
-					camHUD.alpha = alphaValue;
-				}else{
-				hudTransparentTween = FlxTween.tween(camHUD, {alpha: alphaValue}, timer, {ease: FlxEase.sineInOut, onComplete:
-					function (twn:FlxTween)
-					{
-						hudTransparentTween = null;
-					}
-				});
-			}
+				FlxTween.tween(camHUD, {alpha: alphaValue}, timer, {ease: FlxEase.sineInOut});
 
 				/*if(val2 <= 0)
 				{
@@ -7339,6 +7333,10 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(this, {songLength: val1 * 1000}, val2, {ease: FlxEase.circInOut});
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
+
+		if(value3 == null || value3 == 'null') {
+			value3 = '0';
+		}
 	}
 
 	function moveCameraSection(?id:Int = 0, isNote:Bool = false):Void {
@@ -10564,8 +10562,6 @@ class PlayState extends MusicBeatState
 				addCharacterToList('mickeysadistic', 1);
 			
 			case 'Malfunction':
-				startedCountdown = true;
-				songLength = 55 * 1000;
 				if(curStep == 4) //for get it work
 				{
 					triggerEventNote('Alter Camera Zoom', '2', '2.4');
@@ -10884,9 +10880,6 @@ class PlayState extends MusicBeatState
 
 				if(curStep == 576) {
 					triggerEventNote('Add Camera Zoom', '0.13', '0.14');
-					FlxTween.tween(timeBarBG, {alpha: 0}, 1);
-					FlxTween.tween(timeBar, {alpha: 0}, 1);
-					FlxTween.tween(timeTxt, {alpha: 0}, 1);
 				}
 
 				if(curStep == 580) {

@@ -181,7 +181,7 @@ class ChartingState extends MusicBeatState
 
 	var value1InputText:FlxUIInputText;
 	var value2InputText:FlxUIInputText;
-	var value3InputText:FlxUIInputText; //stolen from theoyeah engine lmao
+	var value3InputText:FlxUIInputText;
 	var currentSongName:String;
 	var currentDifficultyName:String;
 
@@ -2869,7 +2869,7 @@ class ChartingState extends MusicBeatState
 			var text1 = value1InputText.text;
 			var text2 = value2InputText.text;
 			var text3 = value3InputText.text;
-			_song.events.push([noteStrum, [[event, text1, text2]]]);
+			_song.events.push([noteStrum, [[event, text1, text2, text3]]]);
 			curSelectedNote = _song.events[_song.events.length - 1];
 			curEventSelected = 0;
 			changeEventSelected();

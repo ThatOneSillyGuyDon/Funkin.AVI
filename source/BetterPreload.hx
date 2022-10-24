@@ -386,6 +386,12 @@ class BetterPreload extends MusicBeatState {
     override public function create() {
         super.create();
 
+        #if desktop
+        GJClient.initialize();
+        GJClient.authUser();
+        GJClient.toggleAutoLogin(true);
+        #end
+
         FlxG.mouse.load("assets/images/mouse/" + ClientPrefs.cursor + ".png");
 
         FlxG.drawFramerate = 60;

@@ -655,7 +655,7 @@ class MainMenuState extends MusicBeatState
 										//MusicBeatState.switchState(new AchievementsMenuState());
 									case 'credits':
 										if(ClientPrefs.language == "Spanish") MusicBeatState.switchState(new CreditsSpanishState());
-										else MusicBeatState.switchState(new CreditsState());
+										else MusicBeatState.switchState(new TestCredits());
 									case 'options':
 										if(ClientPrefs.language == "Spanish") {
 										LoadingState.loadAndSwitchState(new options.SpanishOption());

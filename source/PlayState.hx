@@ -358,6 +358,7 @@ class PlayState extends MusicBeatState
 	var threatTrail:FlxTrail;
 	var glitchTimeColors:Int = FlxG.random.int(11, 19); //timer colors go crazy
 	public var funnyTimebarThing:Int;
+	public var healthBarCrazy:Dynamic; //lazy to know
 	var blackParticles:FlxEmitter;
 	var greyParticles:FlxEmitter;
 
@@ -384,6 +385,8 @@ class PlayState extends MusicBeatState
 	var songBanner:FlxSprite;
 	var songBannerText:FlxText;
 	var charterBanner:FlxSprite;
+
+	public var mechanics:Bool = true;
 
 	public var songScore:Int = 0;
 	public var songHits:Int = 0;
@@ -2144,10 +2147,18 @@ class PlayState extends MusicBeatState
 
 		}
 
+		//no more "Custom Week" on freeplay yay
+		if(isStoryMode) {
+				if(ClientPrefs.language == "English") 
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
+				else 
+					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + "- Hecho Por " + PlayState.SONG.composer;
+			} else {
 				if(ClientPrefs.language == "English") 
 					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Composed by: " + PlayState.SONG.composer;
 				else 
 					Application.current.window.title = "Funkin.avi - " + PlayState.SONG.song + " - Hecho Por " + PlayState.SONG.composer;
+			}
 
 		switch(hudStyle)
 		{
@@ -5348,6 +5359,14 @@ class PlayState extends MusicBeatState
 					}
 				});
 			}
+		if(FlxG.keys.justPressed.THREE && mechanics)
+		{
+             mechanics = false;
+		} 
+		else if(FlxG.keys.justPressed.THREE && !mechanics)
+		{
+			mechanics = true;
+		}
 		}
 
 		super.update(elapsed);
@@ -6876,7 +6895,7 @@ class PlayState extends MusicBeatState
 				}
 				//thx KutikiPlayz for letting me use this
 				case 'Scroll Type':
-				if(ClientPrefs.mechanics)
+				if(ClientPrefs.mechanics || mechanics)
 				{
 					var playerLeft:Bool = false;
 					var playerDown:Bool = false;
@@ -7169,7 +7188,7 @@ class PlayState extends MusicBeatState
 				if(bgGirls != null) bgGirls.swapDanceType();
 
 			case 'Relapse Shoot':
-				if(ClientPrefs.mechanics)
+				if(ClientPrefs.mechanics || mechanics)
 					{
 				switch(value1) {
 					case 'Normal' | 'normal' | 'NORMAL':
@@ -7319,9 +7338,11 @@ class PlayState extends MusicBeatState
 					}
 
 				case 'Do Health Tween':
+					if(ClientPrefs.mechanics || mechanics) {
 					var val1 = Std.parseFloat(value1);
 					var val2 = Std.parseFloat(value2);
 					FlxTween.tween(this, {health: val1}, val2, {ease: FlxEase.sineInOut});
+					}
 
 					//test purposes only
 				case 'Tween Song Lenght':
@@ -8906,6 +8927,8 @@ class PlayState extends MusicBeatState
 					spawnNoteSplashOnNote(note);
 				}
 
+				//yeah
+				if(mechanics) {
 				switch(note.noteType) {
 
 					case 'Darkness Note':
@@ -9056,6 +9079,7 @@ class PlayState extends MusicBeatState
 							boyfriend.specialAnim = true;
 						}
 						noteMiss(note);
+				}
 				}
 				
 				note.wasGoodHit = true;
@@ -9750,6 +9774,103 @@ class PlayState extends MusicBeatState
 		{
 			resyncVocals();
 		}
+
+		//health bar going crazy
+		if(curStep % 2 == 0 && SONG.song == "Birthday") 
+			{
+				var noInt:Int = healthBarCrazy;
+
+				healthBarCrazy = FlxG.random.int(1, 20, [healthBarCrazy]);
+
+				if(SONG.player2 != "weclome old") {
+				switch(healthBarCrazy)
+				{
+					case 1:
+						healthBar.createFilledBar(FlxColor.RED, FlxColor.LIME);
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 2:
+						healthBar.createFilledBar(FlxColor.BLUE, FlxColor.GRAY);
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 3:
+						healthBar.createFilledBar(FlxColor.fromRGB(1, 255, 100), FlxColor.BLACK);
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 4:
+						healthBar.createFilledBar(FlxColor.WHITE, FlxColor.RED);
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 5:
+						healthBar.createFilledBar(FlxColor.BLACK, FlxColor.WHITE);
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 6:
+						healthBar.createFilledBar(FlxColor.fromRGB(156, 165, 181), FlxColor.fromRGB(120, 48, 117));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 7:
+						healthBar.createFilledBar(FlxColor.fromRGB(226, 227, 175), FlxColor.fromRGB(74, 186, 104));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+					
+					case 8:
+						healthBar.createFilledBar(FlxColor.fromRGB(255, 221, 0), FlxColor.fromRGB(179, 169, 111));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 9:
+						healthBar.createFilledBar(FlxColor.fromRGB(102, 99, 186), FlxColor.fromRGB(173, 151, 169));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 10:
+						healthBar.createFilledBar(FlxColor.fromRGB(111, 222, 0), FlxColor.fromRGB(255, 155, 55));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 11:
+						healthBar.createFilledBar(FlxColor.fromRGB(152, 237, 236), FlxColor.fromRGB(0, 110, 108));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 12:
+						healthBar.createFilledBar(FlxColor.fromRGB(47, 138, 67), FlxColor.fromRGB(131, 255, 97));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 13:
+						healthBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+                    case 14:
+						healthBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 15:
+						healthBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+					case 16:
+						healthBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+						timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+						case 17:
+							healthBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+							timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+							case 18:
+								healthBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+								timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+								case 19:
+									healthBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+									timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+									case 20:
+										healthBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+										timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+
+				}
+				} else {
+					reloadHealthBarColors();
+					timeBar.createFilledBar(0x000000, 0xFFFFFF);
+				}
+			}
 
 		if(curStep == lastStepHit) {
 			return;
@@ -12208,10 +12329,10 @@ class PlayState extends MusicBeatState
 						if(curStep == 544) {
 							triggerEventNote('Screen Fade', '3', '');
 		
-							threatTrail = new FlxTrail(dad, null, 10, 1, 0.6, 0.089); //Glitch Mickey looks more threatening now
+							/*threatTrail = new FlxTrail(dad, null, 10, 1, 0.6, 0.089); //Glitch Mickey looks more threatening now
 							insert(members.indexOf(dadGroup) - 1, threatTrail);
 							threatTrail.xEnabled = true;
-							threatTrail.yEnabled = true;
+							threatTrail.yEnabled = true;*/
 						   }
 		
 						if(curStep == 546) {
@@ -12219,10 +12340,10 @@ class PlayState extends MusicBeatState
 						}
 		
 						if(curStep == 560) {
-							triggerEventNote('Flash Screen', '0', 'false');  
+							/*triggerEventNote('Flash Screen', '0', 'false');  
 							triggerEventNote('Screen Fade', '0', '');  
 							triggerEventNote('Add Camera Zoom', '0.13', '0.14');  
-							triggerEventNote('Scroll Type', 'Left', 'Right'); 
+							triggerEventNote('Scroll Type', 'Left', 'Right'); */
 							health = 1;
 							 }
 		
@@ -12497,6 +12618,7 @@ class PlayState extends MusicBeatState
 							triggerEventNote('Flash Screen', '1', 'false'); 
 							 triggerEventNote('Alter Camera Zoom', '0.8', '0.7'); 
 							 triggerEventNote('Scroll Type', 'undyne', '');
+							 //its crazy time
 							//popupBfWindow(500, 400, 1050, 490, SONG.player1);
 							//popupWindow(500, 400, 0, 490, SONG.player2);
 							//trace("dont crash");
@@ -14479,7 +14601,7 @@ class PlayState extends MusicBeatState
 					timeBarBG.sprTracker = timeBar;
 	
 					scoreTxt = new FlxText(0, healthBarBG.y + 36, FlxG.width, "", 20);
-					scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+					scoreTxt.setFormat(Paths.font("vcr.ttf"), 20, FlxColor.WHITE, CENTER, FlxTextBorderhStyle.OUTLINE, FlxColor.BLACK);
 					scoreTxt.scrollFactor.set();
 					scoreTxt.borderSize = 1.25;
 					scoreGroup.add(scoreTxt);

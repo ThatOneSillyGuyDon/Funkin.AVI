@@ -205,4 +205,17 @@ class CoolUtil
 			FlxG.openURL(site);
 			#end
 		}
+
+		public static var lerpSnap:Bool = false;
+		public static function fakeLerp(val1:Float, val2:Float, ratio:Float) {
+			if (lerpSnap)
+				return flixel.math.FlxMath.lerp(val1, val2, 1);
+			return flixel.math.FlxMath.lerp(val1, val2, ratio);
+		}
+
+		
+	inline public static function clamp(value:Float, min:Float, max:Float):Float
+		{
+			return Math.max(min, Math.min(max, value));
+		}
 	}

@@ -251,7 +251,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 		//Mouse supremacy
 		
 		if (controls.BACK) {
-			if (timesToEnter <= 0)
+			if (timesToEnter <= 0 && FPClientPrefs.muckneyLock != "completed")
 			{
 				MusicBeatState.switchState(new VoidState());
 			}else{
@@ -261,6 +261,8 @@ class EpicSelectorWOOO extends MusicBeatState {
 
 		}
 
+		//yay
+		if(FPClientPrefs.muckneyLock != "completed") {
 		if(FlxG.mouse.overlaps(rightArrow)) {
 			if(FlxG.mouse.justPressed && curSelected != 2)
 				changeSelection(1);
@@ -268,10 +270,10 @@ class EpicSelectorWOOO extends MusicBeatState {
 				updateCounter();
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 			}
+			}
 			/*else if(Flx.mouse.justPressed && curSelected == 2 && timesToEnter == -1)
 				MusicBeatState.switchState(new VoidState());*/
 			//SECRET SONG?!?!?!?!?!
-		}
 		if(FlxG.mouse.overlaps(leftArrow)) {
 			if(FlxG.mouse.justPressed && curSelected != 0)
 				changeSelection(-1);
@@ -279,6 +281,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 				updateCounter();
 				FlxG.sound.play(Paths.sound('cancelMenu'));
 			}
+		}
 		}
 
 

@@ -1,5 +1,7 @@
 # Funkin.avi Official Source Code
 
+![Repo size](https://img.shields.io/github/repo-size/DEMOLITIONDON96/Funkin.AVI)
+
 This repo shall remain private until mod release.
 
 ## IMPORTANT!:

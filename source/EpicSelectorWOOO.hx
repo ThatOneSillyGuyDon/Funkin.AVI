@@ -251,7 +251,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 		//Mouse supremacy
 		
 		if (controls.BACK) {
-			if (timesToEnter <= 0 && FPClientPrefs.muckneyLock != "completed")
+			if (timesToEnter <= 0 && FPClientPrefs.muckneyLock == "uncompleted")
 			{
 				MusicBeatState.switchState(new VoidState());
 			}else{
@@ -300,7 +300,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 				}
                 case 2:
 					//MusicBeatState.switchState(new LegacyState());
-					if(FPClientPrefs.episode1FPLock == 'unlocked')
+					if(FPClientPrefs.episode1FPLock == 'unlocked' || FPClientPrefs.muckneyLock == "completed")
 						{
 							MusicBeatState.switchState(new ExtrasState());
 						}else{

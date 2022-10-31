@@ -8927,8 +8927,6 @@ class PlayState extends MusicBeatState
 					spawnNoteSplashOnNote(note);
 				}
 
-				//yeah
-				if(mechanics) {
 				switch(note.noteType) {
 
 					case 'Darkness Note':
@@ -9079,7 +9077,6 @@ class PlayState extends MusicBeatState
 							boyfriend.specialAnim = true;
 						}
 						noteMiss(note);
-				}
 				}
 				
 				note.wasGoodHit = true;

@@ -143,7 +143,7 @@ class PlayState extends MusicBeatState
 	public var camGameShaders:Array<ShaderEffect> = [];
 	public var camHUDShaders:Array<ShaderEffect> = [];
 	public var camOtherShaders:Array<ShaderEffect> = [];
-
+	
 	var canaddshaders:Bool = ClientPrefs.funiShaders;
 	var filters:Array<BitmapFilter> = [];
 	
@@ -6895,7 +6895,7 @@ class PlayState extends MusicBeatState
 				}
 				//thx KutikiPlayz for letting me use this
 				case 'Scroll Type':
-				if(ClientPrefs.mechanics || mechanics)
+				if(ClientPrefs.mechanics)
 				{
 					var playerLeft:Bool = false;
 					var playerDown:Bool = false;
@@ -7188,7 +7188,7 @@ class PlayState extends MusicBeatState
 				if(bgGirls != null) bgGirls.swapDanceType();
 
 			case 'Relapse Shoot':
-				if(ClientPrefs.mechanics || mechanics)
+				if(ClientPrefs.mechanics)
 					{
 				switch(value1) {
 					case 'Normal' | 'normal' | 'NORMAL':
@@ -7338,7 +7338,7 @@ class PlayState extends MusicBeatState
 					}
 
 				case 'Do Health Tween':
-					if(ClientPrefs.mechanics || mechanics) {
+					if(ClientPrefs.mechanics) {
 					var val1 = Std.parseFloat(value1);
 					var val2 = Std.parseFloat(value2);
 					FlxTween.tween(this, {health: val1}, val2, {ease: FlxEase.sineInOut});
@@ -7354,10 +7354,6 @@ class PlayState extends MusicBeatState
 					FlxTween.tween(this, {songLength: val1 * 1000}, val2, {ease: FlxEase.sineInOut});
 		}
 		callOnLuas('onEvent', [eventName, value1, value2]);
-
-		if(value3 == null || value3 == 'null') {
-			value3 = '0';
-		}
 	}
 
 	function moveCameraSection(?id:Int = 0, isNote:Bool = false):Void {
@@ -10607,6 +10603,52 @@ class PlayState extends MusicBeatState
 			FlxTween.tween(missesTxt, {alpha: 1}, 1, {ease: FlxEase.sineInOut});
 		   }
 		}
+
+		if(curStep == 896)
+		{
+			triggerEventNote('Set Strum Visibility', 'false', 'false', '0.4');
+			FlxTween.tween(scoreTxt, {alpha: 0}, 1);
+			if(!ClientPrefs.hideJudgement) FlxTween.tween(judgementCounter, {alpha: 0}, 1, {ease: FlxEase.sineInOut});
+			FlxTween.tween(timeBar, {alpha: 0}, 1, {ease: FlxEase.sineInOut});
+			FlxTween.tween(timeBarBG, {alpha: 0}, 1, {ease: FlxEase.sineInOut});
+			FlxTween.tween(timeTxt, {alpha: 0}, 1, {ease: FlxEase.sineInOut});
+			if(hudStyle.toLowerCase() == 'demolition')
+		   {
+			FlxTween.tween(missIcon, {alpha: 0}, 1, {ease: FlxEase.sineInOut});
+			FlxTween.tween(missesTxt, {alpha: 0}, 1, {ease: FlxEase.sineInOut});
+		   }
+		}
+
+		if(curStep == 912)
+			{
+				FlxTween.tween(this, {health: 1}, 1, {ease: FlxEase.bounceInOut});
+			}
+
+		if(curStep == 952)
+			{
+					FlxTween.tween(this, {health: 0.5}, 1, {ease: FlxEase.bounceInOut});
+			}
+
+		if(curStep == 975)
+			{
+					FlxTween.tween(this, {health: 0.2}, 1, {ease: FlxEase.bounceInOut});
+			}
+
+			if(curStep == 1008)
+				{
+					triggerEventNote('Set Strum Visibility', 'true', 'true', '0.3');
+					FlxTween.tween(scoreTxt, {alpha: 0}, 1);
+					if(!ClientPrefs.hideJudgement) FlxTween.tween(judgementCounter, {alpha: 1}, 0.4, {ease: FlxEase.sineInOut});
+					FlxTween.tween(timeBar, {alpha: 1}, 0.4, {ease: FlxEase.sineInOut});
+					FlxTween.tween(timeBarBG, {alpha: 1}, 0.4, {ease: FlxEase.sineInOut});
+					FlxTween.tween(timeTxt, {alpha: 1}, 0.4, {ease: FlxEase.sineInOut});
+					FlxTween.tween(scoreTxt, {alpha: 1}, 0.6);
+					if(hudStyle.toLowerCase() == 'demolition')
+				   {
+					FlxTween.tween(missIcon, {alpha: 1}, 0.4, {ease: FlxEase.sineInOut});
+					FlxTween.tween(missesTxt, {alpha: 1}, 0.4, {ease: FlxEase.sineInOut});
+				   }
+				}
 
 		if(curStep == 1151) {
 			FlxTween.tween(scoreTxt, {alpha: 0}, 1);

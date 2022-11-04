@@ -392,6 +392,8 @@ class BetterPreload extends MusicBeatState {
         GJClient.initialize();
         GJClient.authUser();
         GJClient.toggleAutoLogin(FlxG.save.data.autoLogin);
+
+        CppAPI.darkMode();
         #end
 
         FlxG.mouse.load("assets/images/mouse/" + ClientPrefs.cursor + ".png");

@@ -37,7 +37,7 @@ using StringTools;
 class MainMenuState extends MusicBeatState
 {
 	public static var MouseVersion:String = '2.0.0';
-	public static var DemoEngineVersion:String = '0.3.0 pre-release';
+	public static var DemoEngineVersion:String = '0.3.0 PRE-RELEASE';
 	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 

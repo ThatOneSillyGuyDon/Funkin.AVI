@@ -476,6 +476,18 @@ class TitleState extends MusicBeatState
 		}
 		#end
 
+		/**
+		 * closing in a cool way
+		 */
+		if (FlxG.keys.justPressed.ESCAPE && !pressedEnter)
+			{
+				FlxG.sound.music.fadeOut(0.3);
+				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+				{
+					Sys.exit(0);
+				}, false);
+			}
+
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 
 		if (gamepad != null)

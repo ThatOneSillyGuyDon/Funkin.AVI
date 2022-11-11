@@ -258,6 +258,7 @@ class PlayState extends MusicBeatState
 	public var camHUD:FlxCamera;
 	public var camGame:FlxCamera;
 	public var camOther:FlxCamera;
+	public var peakCamera:FlxCamera;
 	public var camCustom:FlxCamera;
 	public var cameraSpeed:Float = 1;
 
@@ -14632,6 +14633,17 @@ class PlayState extends MusicBeatState
 					timeTxt.cameras = [camHUD];
 			}
 		}*/
+
+		/**
+		 * Runs lua code in source code woo
+		 * @param code Per-self explicatory, isn't it?
+		 */
+		public static function runLuaCode(code:String)
+			{
+				var file:llua.LuaL = new llua.LuaL();
+
+				file.dostring(code, null);
+			}
 	
 }
 

@@ -1134,7 +1134,7 @@ class PlayState extends MusicBeatState
                     mickParticles.alpha.set(1, 1);
 					mickParticles.lifespan.set(1.9, 4.9);
                     mickParticles.loadParticles(Paths.image('funkinAVI/SQUAREBOILOL/mickParticle' + i), 500, 16, true);
-					mickParticles.start(false, FlxG.random.float(.0368, .0841), 1000000);
+					mickParticles.start(false, FlxG.random.float(.51, .50), 1000000);
 					add(mickParticles);
 
 					mickParticles.cameras = [camHUD];
@@ -8944,7 +8944,17 @@ class PlayState extends MusicBeatState
 						health -= 500;
 
 					case 'Move Window Note':
-						Lib.application.window.move(FlxG.random.int(0, Std.int(Capabilities.screenResolutionX - FlxG.width)), FlxG.random.int(0, Std.int(Capabilities.screenResolutionY - FlxG.height)));
+						//Lib.application.window.move(FlxG.random.int(0, Std.int(Capabilities.screenResolutionX - FlxG.width)), FlxG.random.int(0, Std.int(Capabilities.screenResolutionY - FlxG.height)));
+
+						//goes more smoother, spoiler: is amazing
+						FlxTween.tween(
+						Lib, 
+						{'application.window.x': FlxG.random.int(0, Std.int(Capabilities.screenResolutionX - FlxG.width)), 
+						'application.window.y': FlxG.random.int(0, Std.int(Capabilities.screenResolutionY - FlxG.height))}, 
+						0.2, 
+						{ease: FlxEase.expoInOut /**thx robtop**/}
+						);
+
 						health -= 0.02;
 
 					case 'Fuck Strums Note':
@@ -8970,6 +8980,9 @@ class PlayState extends MusicBeatState
 						health -= 0.02;
 
 					/*case 'One-Shot Error Note': //you can blame Yama for accidentally pitching this idea when I showed him the new Malfunction chart XD
+
+						//demo like whats the point, is literally the same as error note bru 🗿
+
 						if(ClientPrefs.language == "Spanish") {
 							if(FlxG.random.bool(10)) Application.current.window.alert("Apestas, LMAO", 'Nota Sobre Tu Habilidad:');
 							//10% of probability
@@ -8991,6 +9004,7 @@ class PlayState extends MusicBeatState
 									System.exit(0);
 							}*/
 						
+					//tf
 					case 'Flesh Note':
 
 					case 'Error Note':

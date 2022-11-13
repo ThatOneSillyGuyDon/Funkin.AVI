@@ -19,6 +19,7 @@ class GameOverSubstate extends MusicBeatSubstate
 	var camFollowPos:FlxObject;
 	var updateCamera:Bool = false;
 	var playingDeathSound:Bool = false;
+	var coolcamera:FlxCamera;
 
 	var stageSuffix:String = "";
 
@@ -42,6 +43,9 @@ class GameOverSubstate extends MusicBeatSubstate
 		PlayState.instance.callOnLuas('onGameOverStart', []);
 
 		super.create();
+		coolcamera = new FlxCamera();
+		coolcamera.bgColor.alpha = 0;
+		FlxG.cameras.add(coolcamera);
 	}
 
 	public function new(x:Float, y:Float, camX:Float, camY:Float)

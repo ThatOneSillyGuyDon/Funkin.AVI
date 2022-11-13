@@ -494,8 +494,6 @@ class PlayState extends MusicBeatState
 
 	override public function create()
 	{
-	current = this;
-		
 		Paths.clearStoredMemory();
 
 		//I fucking hate saves aaaaaaaaa
@@ -1515,39 +1513,6 @@ class PlayState extends MusicBeatState
 			case 'Couch':
 				add(snsMickDed);
 		}
-
-		#if LUA_ALLOWED
-		luaDebugGroup = new FlxTypedGroup<DebugLuaText>();
-		luaDebugGroup.cameras = [camOther];
-		add(luaDebugGroup);
-		#end
-
-		// "GLOBAL" SCRIPTS
-		#if LUA_ALLOWED
-		var filesPushed:Array<String> = [];
-		var foldersToCheck:Array<String> = [Paths.getPreloadPath('scripts/')];
-
-		#if MODS_ALLOWED
-		foldersToCheck.insert(0, Paths.mods('scripts/'));
-		if(Paths.currentModDirectory != null && Paths.currentModDirectory.length > 0)
-			foldersToCheck.insert(0, Paths.mods(Paths.currentModDirectory + '/scripts/'));
-		#end
-
-		for (folder in foldersToCheck)
-		{
-			if(FileSystem.exists(folder))
-			{
-				for (file in FileSystem.readDirectory(folder))
-				{
-					if(file.endsWith('.lua') && !filesPushed.contains(file))
-					{
-						luaArray.push(new FunkinLua(folder + file));
-						filesPushed.push(file);
-					}
-				}
-			}
-		}
-		#end
 		
 
 		// STAGE SCRIPTS
@@ -1784,24 +1749,6 @@ class PlayState extends MusicBeatState
 
 		FlxG.fixedTimestep = false;
 		moveCameraSection(0);
-
-		/*switch(PlayState.SONG.song)
-				{
-					case 'Isolated' | 'Laugh Track':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki & obscurity.";
-					case 'Lunacy' | 'Malfunction' | 'Mercy':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: obscurity.";
-					case 'Delusional':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: FR3SHMoure";
-					case 'Isolated Old' | "Don't Cross!":
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Yama haki";
-					case 'Twisted Grins':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: Sayan Sama";
-					case 'Hunted':
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song + " - Composed by: JBlitz";
-					default:
-					Application.current.window.title = "Funkin.avi - " + WeekData.getCurrentWeek().weekName + ": " + PlayState.SONG.song;
-				}*/
 
 		switch(hudStyle)
 		{
@@ -14647,6 +14594,7 @@ class PlayState extends MusicBeatState
 					timeTxt.cameras = [camHUD];
 			}
 		}*/
+		
 }
 
 

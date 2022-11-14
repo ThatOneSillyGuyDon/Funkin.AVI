@@ -63,7 +63,7 @@ class WarningState extends MusicBeatState
 			return;
 		}
 
-		Lib.application.window.title = "Wednesday's Infidelity - WARNING";
+		Lib.application.window.title = "Funkin.avi - WARNING";
 
 		camGame = new FlxCamera();
 

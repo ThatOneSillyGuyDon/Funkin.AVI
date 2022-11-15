@@ -1,6 +1,5 @@
 package flixel.system.ui;
 
-#if FLX_SOUND_SYSTEM
 import flash.Lib;
 import flash.display.Bitmap;
 import flash.display.BitmapData;
@@ -54,7 +53,7 @@ class FlxSoundTray extends Sprite
 		visible = false;
 		scaleX = _defaultScale;
 		scaleY = _defaultScale;
-		var tmp:Bitmap = new Bitmap(new BitmapData(_width, 30, true, 0x7F000000));
+		var tmp:Bitmap = new Bitmap(new BitmapData(_width, 30, true, 0xDA686868));
 		screenCenter();
 		addChild(tmp);
 
@@ -71,11 +70,11 @@ class FlxSoundTray extends Sprite
 		text.gridFitType = GridFitType.PIXEL;
 		#else
 		#end
-		var dtf:TextFormat = new TextFormat(Paths.font("NewWaltDisneyFontRegular-BPen.ttf"), 10, 0xffffff); //idk if this will work, but let's find out
+		var dtf:TextFormat = new TextFormat(Paths.font('NewWaltDisneyFontRegular-BPen.ttf'), 11, 0xdfdfdf); //idk if this will work, but let's find out
 		dtf.align = TextFormatAlign.CENTER;
 		text.defaultTextFormat = dtf;
 		addChild(text);
-		text.text = "VOLUME";
+		text.text = "Volumen";
 		text.y = 16;
 
 		var bx:Int = 10;
@@ -170,4 +169,3 @@ class FlxSoundTray extends Sprite
 		x = (0.5 * (Lib.current.stage.stageWidth - _width * _defaultScale) - FlxG.game.x);
 	}
 }
-#end

@@ -14335,7 +14335,7 @@ class PlayState extends MusicBeatState
 		setOnLuas('rating', ratingPercent);
 		setOnLuas('ratingName', ratingName);
 		setOnLuas('ratingFC', ratingFC);
-		if (!ClientPrefs.hideJudgement || hudStyle != "Psych") {
+		if (!ClientPrefs.hideJudgement) {
 			if (ClientPrefs.marvelouses)
 				if(ClientPrefs.language == "Spanish") {
 			judgementCounter.text = 'Marav: ${marvelouses}\nExelentes: ${sicks}\nBuenos: ${goods}\nMalos: ${bads}\nTerribles: ${shits}\n';

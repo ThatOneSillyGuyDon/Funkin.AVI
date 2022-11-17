@@ -305,6 +305,9 @@ class PlayState extends MusicBeatState
 	var tankGround:BGSprite;
 	var tankmanRun:FlxTypedGroup<TankmenBG>;
 	var foregroundSprites:FlxTypedGroup<BGSprite>;
+
+	//Here comes the peak part of the songs going brrrrrrrrrrrrrr (jason)
+	public static var hereComesThePeak:Bool = false;
 	
 	//Cool Ass Delusional Shit
 	public var attemptsTillJumpscare:Int = 21; //Loser, you can't pause on Delusional
@@ -5070,11 +5073,20 @@ class PlayState extends MusicBeatState
 				vocals.pause();
 			}
 
-			if(ClientPrefs.language == "Spanish") {
+			/**
+			 * ok demo im gonna say bye bye to this because:
+			 * 
+			 * 1.is buggy
+			 * 2.you can no-clip
+			 * 3.pause in delusional
+			 * 4.i forgor
+			 */
+
+			/**if(ClientPrefs.language == "Spanish") {
 			openSubState(new PauseSpanishState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
 			} else {
 			openSubState(new PauseSubState(boyfriend.getScreenPosition().x, boyfriend.getScreenPosition().y));
-			}
+			}*/
 			}
 
 		super.onFocusLost();
@@ -5334,13 +5346,14 @@ class PlayState extends MusicBeatState
 					if(ClientPrefs.language == "Spanish") {
 					scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ?';
 				} else {
-					scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ?'; //no way i was a dumbass all the time
+					//im sorry but combo breaks is peak
+					scoreTxt.text = 'Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ?'; //no way i was a dumbass all the time
 				}
 				} else {
 					if(ClientPrefs.language == "Spanish") {
 						scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';
 					} else {
-						scoreTxt.text = 'Score: ' + songScore + ' | Misses: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
+						scoreTxt.text = 'Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
 				}
 				}
 
@@ -5379,7 +5392,7 @@ class PlayState extends MusicBeatState
 					if(ClientPrefs.language == "Spanish") {
 					scoreTxt.text = 'Puntuacion: ${songScore}' + divider + 'Perdidas: ${totalMisses}';
 					} else {
-						scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
+						scoreTxt.text = 'Score: ${songScore}' + divider + 'Combo Breaks: ${totalMisses}';
 					}
 				}
 			case 'Vanilla':
@@ -8385,6 +8398,7 @@ class PlayState extends MusicBeatState
 			}
 	
 		combo = 0;
+		
 
 		if(ClientPrefs.mechanics)
 		{
@@ -8393,6 +8407,26 @@ class PlayState extends MusicBeatState
 				health -= 0.20;
 			}else{
 				health -= daNote.missHealth * healthLoss;
+			}
+
+			if(SONG.song == "Malfunction" && hereComesThePeak)
+				{
+					for(i in 0...9) {
+					/**
+					 * i think i have to explain this,
+					 * yes, FlxTween have other type of functions like color, number, etc
+					 * a reminder that "color" only works with FlxSprite objects.
+					 * so ye, more tweens exist in FlxTween
+					 * btw can't set strum line colors cus is array and other things 💥
+					 * -Jason
+					 */
+					FlxTween.color(
+						playerStrums.members[i], 
+						0.8, 
+						FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)),  
+						FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)),
+						{ease: FlxEase.expoOut});
+				}
 			}
 		}else{
 			health -= daNote.missHealth * healthLoss;
@@ -9735,6 +9769,26 @@ class PlayState extends MusicBeatState
 			{
 				timeBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
 				healthBar.createFilledBar(FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)), FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)));
+				
+				for(i in 0...9) {
+				//Player strums one
+				FlxTween.color(
+					playerStrums.members[i], 
+					0.8, 
+					FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)),  
+					FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)),
+					{ease: FlxEase.expoOut}
+				);
+
+				//opponent ones
+				FlxTween.color(
+					opponentStrums.members[i], 
+					0.8, 
+					FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)),  
+					FlxColor.fromRGB(FlxG.random.int(1, 255), FlxG.random.int(1, 255), FlxG.random.int(1, 255)),
+					{ease: FlxEase.expoOut}
+				);
+				}
 			}
 
 		if(curStep == lastStepHit) {
@@ -9778,12 +9832,12 @@ class PlayState extends MusicBeatState
 
 							case 6: timeBar.createFilledBar(0xFFC78800, 0xFFFFF4BA);
 
-						case 7: timeBar.createFilledBar(0xFFFFF4BA, 0xFFC78800);
+							case 7: timeBar.createFilledBar(0xFFFFF4BA, 0xFFC78800);
 
 							case 8: timeBar.createFilledBar(0xFF2E2E2E, 0xFFB7B7B7);
 
 							case 9: timeBar.createFilledBar(0xFFB7B7B7, 0xFF2E2E2E);
-							}
+						}
 				}
 
 		if(lastBeatHit >= curBeat) {
@@ -10583,17 +10637,17 @@ class PlayState extends MusicBeatState
 
 		if(curStep == 912)
 			{
-				FlxTween.tween(this, {health: 1}, 1, {ease: FlxEase.bounceInOut});
+				FlxTween.tween(this, {health: 1}, 1, {ease: FlxEase.expoOut});
 			}
 
 		if(curStep == 952)
 			{
-					FlxTween.tween(this, {health: 0.5}, 1, {ease: FlxEase.bounceInOut});
+					FlxTween.tween(this, {health: 0.5}, 1, {ease: FlxEase.expoOut});
 			}
 
 		if(curStep == 975)
 			{
-					FlxTween.tween(this, {health: 0.2}, 1, {ease: FlxEase.bounceInOut});
+					FlxTween.tween(this, {health: 0.2}, 1, {ease: FlxEase.expoOut});
 			}
 
 			if(curStep == 1008)
@@ -11243,12 +11297,13 @@ class PlayState extends MusicBeatState
 				if(curStep == 824) {
 					triggerEventNote('Add Camera Zoom', '0.13', '0.14');  
 					triggerEventNote('Flash Screen', '1', 'false'); 
-					 triggerEventNote('Alter Camera Zoom', '0.8', '0.7'); 
-					 triggerEventNote('Scroll Type', 'undyne', '');
+					triggerEventNote('Alter Camera Zoom', '0.8', '0.7'); 
+					triggerEventNote('Scroll Type', 'undyne', '');
+					hereComesThePeak = true;
 
-					 Lib.application.window.borderless = true; //ALT + F4 Supermarcy 2: Electric Bobaloo (Jason)
-					 FlxTween.tween(scoreTxt, {alpha: 0}, 1);
-					 FlxTween.tween(healthBar, {alpha: 0}, 1);					
+					Lib.application.window.borderless = true; //ALT + F4 Supermarcy 2: Electric Bobaloo (Jason)
+					FlxTween.tween(scoreTxt, {alpha: 0}, 1);
+					FlxTween.tween(healthBar, {alpha: 0}, 1);					
 					}
 
 				if(curStep == 828) {

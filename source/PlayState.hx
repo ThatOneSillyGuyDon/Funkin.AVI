@@ -9367,7 +9367,13 @@ class PlayState extends MusicBeatState
 			if (screenMode != -1)
 				SCALEdebugText.text = "screen mode : " + modeText;
 		}*/
-					
+
+		
+			/**
+			 * peak
+			 * @param speed 
+			 * @param thickness 
+			 */
 			function addCinematicBars(speed:Float, ?thickness:Float = 7)
 			{
 				if (cinematicBars["top"] == null)

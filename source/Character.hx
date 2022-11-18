@@ -1,5 +1,6 @@
 package;
 
+import flixel.addons.util.FlxSimplex;
 import animateatlas.AtlasFrameMaker;
 import flixel.FlxG;
 import flixel.FlxSprite;
@@ -95,6 +96,37 @@ class Character extends FlxSprite
 		switch (curCharacter)
 		{
 			//case 'your character name in case you want to hardcode them instead':
+			/*case 'bffakeNEW':
+				var asset:FlxAtlasFrames = Paths.getSparrowAtlas("characters/FaviBf");
+				frames = asset;
+				animation.addByPrefix('singLEFT', 'FaviBf Left0', 17, false);
+				animation.addByPrefix('singDOWN', 'FaviBf Down0', 20, false);
+				animation.addByPrefix('singUP', 'FaviBf Up0', 18, false);
+				animation.addByPrefix('singRIGHT', 'FaviBf Right0', 19, false);
+				animation.addByPrefix('singLEFTmiss', 'FaviBf LeftMiss', 80, false);
+				animation.addByPrefix('singDOWNmiss', 'FaviBf DownMiss', 80, false);
+				animation.addByPrefix('singUPmiss', 'FaviBf UpMiss', 70, false);
+				animation.addByPrefix('singRIGHTmiss', 'FaviBf RightMiss', 90, false);
+				animation.addByPrefix('singLEFTmiss-loop', 'FaviBf LeftMiss', 80, true);
+				animation.addByPrefix('singDOWNmiss-loop', 'FaviBf DownMiss', 80, true);
+				animation.addByPrefix('singUPmiss-loop', 'FaviBf UpMiss', 70, true);
+				animation.addByPrefix('singRIGHTmiss-loop', 'FaviBf RightMiss', 90, true);
+				animation.addByPrefix('idle', 'FaviBf Idle', 17, false);
+				
+				addOffset('singDOWN', -2, 2);
+				addOffset('singUP', 20, -4);
+				addOffset('singRIGHT', 6, -2);
+				
+				cameraPosition = [-120, 230];
+				healthColorArray = [217, 217, 217];
+				positionArray = [-240, -80];
+				singDuration = 6.1;
+				healthIcon = 'fakenew';
+				isPlayer = true;
+				flipX = true;
+				
+				setGraphicSize(Std.int(width * 0.6));
+				updateHitbox();*/
 
 			default:
 				var characterPath:String = 'characters/' + curCharacter + '.json';

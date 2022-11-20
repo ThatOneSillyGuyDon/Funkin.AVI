@@ -65,13 +65,15 @@
             grain.scale.x = 1.1;
             grain.scale.y = 1.1;
             add(grain);
+
+            Application.current.window.title = "Funkin.avi - Would you like to have shaders?";
             
             FlxTween.tween(blackFade, {alpha: 0}, 1); //duplicatin' code from Disclaimer since this is BEFORE picking your language now.
         }
     
         function addShader(effect:ShaderEffect)
         {
-            if (!ClientPrefs.funiShaders)
+            if (!ClientPrefs.shaders)
                 return;
     
             shaders.push(effect);
@@ -95,7 +97,7 @@
                     FlxTransitionableState.skipNextTransIn = true;
                     FlxTransitionableState.skipNextTransOut = true;
                     if(!back) {
-                        ClientPrefs.funiShaders = true;
+                        ClientPrefs.shaders = true;
                         ClientPrefs.saveSettings();
                         FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
                         FlxTween.tween(blackFade, {alpha: 1}, 1, {
@@ -104,7 +106,7 @@
                             }
                         });
                     } else {
-                        ClientPrefs.funiShaders = false;
+                        ClientPrefs.shaders = false;
                         FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
                         FlxTween.tween(blackFade, {alpha: 1}, 1, {
                             onComplete: function (twn:FlxTween) {

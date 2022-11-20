@@ -19,7 +19,6 @@ class GameOverSubstate extends MusicBeatSubstate
 	var camFollowPos:FlxObject;
 	var updateCamera:Bool = false;
 	var playingDeathSound:Bool = false;
-	var coolcamera:FlxCamera;
 
 	var stageSuffix:String = "";
 
@@ -43,9 +42,6 @@ class GameOverSubstate extends MusicBeatSubstate
 		PlayState.instance.callOnLuas('onGameOverStart', []);
 
 		super.create();
-		coolcamera = new FlxCamera();
-		coolcamera.bgColor.alpha = 0;
-		FlxG.cameras.add(coolcamera);
 	}
 
 	public function new(x:Float, y:Float, camX:Float, camY:Float)
@@ -62,6 +58,17 @@ class GameOverSubstate extends MusicBeatSubstate
 					boyfriend.y += boyfriend.positionArray[1];
 					boyfriend.alpha = 0.001;
 					add(boyfriend);
+
+					var bfFuckingDied:FlxSprite = new FlxSprite().loadGraphic(Paths.image('funkinAVI/uiAndEvents/episode2-GM'));
+					bfFuckingDied.screenCenter();
+					bfFuckingDied.scrollFactor.set();
+					add(bfFuckingDied);
+
+					var retryText:FlxSprite = new FlxSprite().loadGraphic(Paths.image('funkinAVI/uiAndEvents/retry'));
+					retryText.screenCenter();
+					retryText.scrollFactor.set();
+					retryText.alpha = 0;
+					add(retryText);
 
 					var blackFadeThing:FlxSprite = new FlxSprite().makeGraphic(FlxG.width * 3, FlxG.height * 3, FlxColor.BLACK);
 					blackFadeThing.scale.set(10, 10);
@@ -80,11 +87,13 @@ class GameOverSubstate extends MusicBeatSubstate
 
 					PlayState.instance.setOnLuas('inGameOver', true);
 
+					Conductor.songPosition = 0;
+
 					FlxG.sound.play(Paths.sound('funkinAVI/gameOverSounds/smilesJumpscare'));
 					
 					FlxTween.tween(goofyAhhSmiles, {alpha: 0}, 0.001, {startDelay: 4});
-
 					FlxTween.tween(blackFadeThing, {alpha: 0}, 3, {startDelay: 4.3});
+					FlxTween.tween(retryText, {alpha: 1}, 1.5, {startDelay: 6});
 
 					camFollow = new FlxPoint(boyfriend.getGraphicMidpoint().x, boyfriend.getGraphicMidpoint().y);
 
@@ -125,7 +134,6 @@ class GameOverSubstate extends MusicBeatSubstate
 				camFollowPos = new FlxObject(0, 0, 1, 1);
 				camFollowPos.setPosition(FlxG.camera.scroll.x + (FlxG.camera.width / 2), FlxG.camera.scroll.y + (FlxG.camera.height / 2));
 				add(camFollowPos);
-
 		}
 	}
 
@@ -150,7 +158,9 @@ class GameOverSubstate extends MusicBeatSubstate
 			FlxG.sound.music.stop();
 			PlayState.deathCounter = 0;
 			PlayState.seenCutscene = false;
+			PlayState.chartingMode = false;
 
+			WeekData.loadTheFirstEnabledMod();
 			if (PlayState.isStoryMode)
 				MusicBeatState.switchState(new StoryMenuState());
 			else
@@ -170,7 +180,7 @@ class GameOverSubstate extends MusicBeatSubstate
 			PlayState.instance.callOnLuas('onGameOverConfirm', [false]);
 		}
 
-		if (boyfriend.animation.curAnim.name == 'firstDeath')
+		if (boyfriend.animation.curAnim != null && boyfriend.animation.curAnim.name == 'firstDeath')
 		{
 			if(boyfriend.animation.curAnim.curFrame >= 12 && !isFollowingAlready)
 			{

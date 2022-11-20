@@ -35,7 +35,7 @@ class DisclaimerState extends MusicBeatState
 	{
 		super.create();
 
-		if(ClientPrefs.funiShaders)
+		if(ClientPrefs.shaders)
 					{
 						chrom = new ChromaticAberrationEffect();
 						blurThisShit = new TiltshiftEffect(0.4, 0);
@@ -138,7 +138,7 @@ class DisclaimerState extends MusicBeatState
 
 	function addShader(effect:ShaderEffect)
 	{
-		if (!ClientPrefs.funiShaders)
+		if (!ClientPrefs.shaders)
 			return;
 
 		shaders.push(effect);

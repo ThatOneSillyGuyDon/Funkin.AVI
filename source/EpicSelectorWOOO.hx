@@ -63,7 +63,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 
 		timesToEnter = 30;
 
-		if(ClientPrefs.funiShaders)
+		if(ClientPrefs.shaders)
 					{
 						chrom = new ChromaticAberrationEffect();
 						blurThisShit = new TiltshiftEffect(0.4, 0);
@@ -121,8 +121,8 @@ class EpicSelectorWOOO extends MusicBeatState {
 		add(grpCats);
         for (i in 0...freeplayCats.length)
         {
-			var catsText:Alphabet = new Alphabet(0, (70 * i) + 250, freeplayCats[i], true, false);
-            catsText.targetY = i;
+			var catsText:Alphabet = new Alphabet(0, (70 * i) + 250, freeplayCats[i], true);
+            catsText.targetY = curSelected;
 			catsText.isMenuItem = true;
 			grpCats.add(catsText);
 		}
@@ -219,7 +219,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 
 	function addShader(effect:ShaderEffect)
 	{
-		if (!ClientPrefs.funiShaders)
+		if (!ClientPrefs.shaders)
 			return;
 
 		shaders.push(effect);
@@ -377,7 +377,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 						{
 							FlxG.camera.flash(FlxColor.BLACK, 0.6);
 							FlxG.camera.shake(0.004, 99999999);
-							if(ClientPrefs.funiShaders)
+							if(ClientPrefs.shaders)
 							{
 							clearShader();
 							chrom = new ChromaticAberrationEffect();
@@ -401,7 +401,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 							}
 						}else{
 							FlxG.camera.flash(FlxColor.BLACK, 0.2);
-							if(ClientPrefs.funiShaders)
+							if(ClientPrefs.shaders)
 							{
 							clearShader();
 							chrom = new ChromaticAberrationEffect();

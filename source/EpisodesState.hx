@@ -33,7 +33,7 @@ using StringTools;
 
 class EpisodesState extends MusicBeatState
 {
-	private var songs:Array<SongMetadata> = [];
+	private var songs:Array<SongMetadataE> = [];
 
 	var selector:FlxText;
 	private static var curSelected:Int = 0;
@@ -157,23 +157,17 @@ class EpisodesState extends MusicBeatState
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
+			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
 			songText.isMenuItemCenter = true;
-			songText.targetY = i;
+			songText.targetY = i - curSelected;
 			grpSongs.add(songText);
 
-			if (songText.width > 980)
+			var maxWidth = 980;
+			if (songText.width > maxWidth)
 			{
-				var textScale:Float = 980 / songText.width;
-				songText.scale.x = textScale;
-				for (letter in songText.lettersArray)
-				{
-					letter.x *= textScale;
-					letter.offset.x *= textScale;
-				}
-				//songText.updateHitbox();
-				//trace(songs[i].songName + ' new scale: ' + textScale);
+				songText.scaleX = maxWidth / songText.width;
 			}
+			songText.snapToPosition();
 
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
@@ -286,7 +280,7 @@ class EpisodesState extends MusicBeatState
 	
 		function addShader(effect:ShaderEffect)
 		{
-			if (!ClientPrefs.funiShaders)
+			if (!ClientPrefs.shaders)
 				return;
 	
 			shaders.push(effect);
@@ -309,7 +303,7 @@ class EpisodesState extends MusicBeatState
 
 	public function addSong(songName:String, weekNum:Int, songCharacter:String, color:Int)
 	{
-		songs.push(new SongMetadata(songName, weekNum, songCharacter, color));
+		songs.push(new SongMetadataE(songName, weekNum, songCharacter, color));
 	}
 
 	function weekIsLocked(name:String):Bool {
@@ -655,7 +649,7 @@ class EpisodesState extends MusicBeatState
 		{
 			case 0 | 1 | 2:
 				FlxG.camera.flash(FlxColor.BLACK, 0.2);
-				if(ClientPrefs.funiShaders)
+				if(ClientPrefs.shaders)
 					{
 						clearShader();
 						chrom = new ChromaticAberrationEffect();
@@ -688,7 +682,7 @@ class EpisodesState extends MusicBeatState
 				FlxG.camera.shake(0.004, 0);
 			case 3 | 4 | 5:
 				FlxG.camera.flash(FlxColor.BLACK, 0.2);
-				if(ClientPrefs.funiShaders)
+				if(ClientPrefs.shaders)
 				{
 				clearShader();
 				chrom = new ChromaticAberrationEffect();
@@ -730,7 +724,7 @@ class EpisodesState extends MusicBeatState
 	}
 }
 
-class SongMetadata
+class SongMetadataE
 {
 	public var songName:String = "";
 	public var week:Int = 0;

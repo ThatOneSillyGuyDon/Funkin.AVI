@@ -15,7 +15,6 @@ import lime.utils.Assets;
 import flixel.FlxSubState;
 import flash.text.TextField;
 import flixel.FlxG;
-import lime.app.Application;
 import flixel.FlxSprite;
 import flixel.util.FlxSave;
 import haxe.Json;
@@ -30,8 +29,7 @@ using StringTools;
 
 class OptionsState extends MusicBeatState
 {
-	//var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay' /*'Note Skins'*/];
-	var options:Array<String> = ['Adjust Delay and Combo', 'Controls', 'Gameplay', 'Graphics', 'Note Colors', /*'Note Skins'*/ 'Visuals and UI'];
+	var options:Array<String> = ['Note Colors', 'Controls', 'Adjust Delay and Combo', 'Graphics', 'Visuals and UI', 'Gameplay'];
 	private var grpOptions:FlxTypedGroup<Alphabet>;
 	private static var curSelected:Int = 0;
 	public static var menuBG:FlxSprite;
@@ -50,8 +48,6 @@ class OptionsState extends MusicBeatState
 				openSubState(new options.GameplaySettingsSubState());
 			case 'Adjust Delay and Combo':
 				LoadingState.loadAndSwitchState(new options.NoteOffsetState());
-			/*case 'Note Skins':
-				LoadingState.loadAndSwitchState(new options.NoteSkinState());*/
 		}
 	}
 
@@ -60,10 +56,8 @@ class OptionsState extends MusicBeatState
 
 	override function create() {
 		#if desktop
-		DiscordClient.changePresence("Options Menu", null, null, 'icon');
+		DiscordClient.changePresence("Options Menu", null);
 		#end
-			
-		Application.current.window.title = "Funkin.avi - Settings";
 
 		var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('menuDesat'));
 		bg.color = 0xFFea71fd;
@@ -78,38 +72,20 @@ class OptionsState extends MusicBeatState
 
 		for (i in 0...options.length)
 		{
-			var optionText:Alphabet = new Alphabet(0, 0, options[i], true, false);
+			var optionText:Alphabet = new Alphabet(0, 0, options[i], true);
 			optionText.screenCenter();
 			optionText.y += (100 * (i - (options.length / 2))) + 50;
 			grpOptions.add(optionText);
 		}
 
-		selectorLeft = new Alphabet(0, 0, '>', true, false);
+		selectorLeft = new Alphabet(0, 0, '>', true);
 		add(selectorLeft);
-		selectorRight = new Alphabet(0, 0, '<', true, false);
+		selectorRight = new Alphabet(0, 0, '<', true);
 		add(selectorRight);
 
 		changeSelection();
 		ClientPrefs.saveSettings();
 
-		var scratchStuff:FlxSprite = new FlxSprite();
-		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
-		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
-		scratchStuff.animation.play('idle');
-		scratchStuff.screenCenter();
-		scratchStuff.scale.x = 1.1;
-		scratchStuff.scale.y = 1.1;
-		add(scratchStuff);
-
-		var grain:FlxSprite = new FlxSprite();
-		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
-		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
-		grain.animation.play('idle');
-		grain.screenCenter();
-		grain.scale.x = 1.1;
-		grain.scale.y = 1.1;
-		add(grain);
-		
 		super.create();
 	}
 
@@ -131,7 +107,7 @@ class OptionsState extends MusicBeatState
 		if (controls.BACK) {
 			FlxG.sound.play(Paths.sound('cancelMenu'));
 			MusicBeatState.switchState(new MainMenuState());
-		    }
+		}
 
 		if (controls.ACCEPT) {
 			openSelectedSubstate(options[curSelected]);
@@ -160,6 +136,6 @@ class OptionsState extends MusicBeatState
 				selectorRight.y = item.y;
 			}
 		}
-		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
+		FlxG.sound.play(Paths.sound('scrollMenu'));
 	}
 }

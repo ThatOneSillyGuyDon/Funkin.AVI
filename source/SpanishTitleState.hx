@@ -38,7 +38,7 @@ import flixel.util.FlxTimer;
 import lime.app.Application;
 import openfl.Assets;
 import PlayState;
-import IndieCrossShaderShit.FXHandler;
+//import IndieCrossShaderShit.FXHandler;
 
 using StringTools;
 typedef TitleDumbData =

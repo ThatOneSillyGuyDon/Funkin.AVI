@@ -315,12 +315,14 @@ class Character extends FlxSprite
 					{
 						var noteData:Int = 1;
 						if(animationNotes[0][1] > 2) noteData = 3;
+
 						noteData += FlxG.random.int(0, 1);
 						playAnim('shoot' + noteData, true);
 						animationNotes.shift();
 					}
 					if(animation.curAnim.finished) playAnim(animation.curAnim.name, false, false, animation.curAnim.frames.length - 3);
 			}
+
 			if (!isPlayer)
 			{
 				if (animation.curAnim.name.startsWith('sing'))
@@ -329,7 +331,6 @@ class Character extends FlxSprite
 				}
 
 				if (holdTimer >= Conductor.stepCrochet * (0.0011 / (FlxG.sound.music != null ? FlxG.sound.music.pitch : 1)) * singDuration)
-				{
 				{
 					dance();
 					holdTimer = 0;
@@ -342,7 +343,6 @@ class Character extends FlxSprite
 			}
 		}
 		super.update(elapsed);
-	}
 	}
 
 	public var danced:Bool = false;

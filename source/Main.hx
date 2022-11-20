@@ -13,7 +13,9 @@ import openfl.display.StageScaleMode;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxTimer;
+
 //crash handler stuff
+#if CRASH_HANDLER
 import lime.app.Application;
 import openfl.events.UncaughtErrorEvent;
 import haxe.CallStack;
@@ -22,7 +24,7 @@ import Discord.DiscordClient;
 import sys.FileSystem;
 import sys.io.File;
 import sys.io.Process;
-import flixel.input.mouse.FlxMouse;
+#end
 
 using StringTools;
 
@@ -32,11 +34,10 @@ class Main extends Sprite
 	var gameHeight:Int = 720; // Height of the game in pixels (might be less / more in actual pixels depending on your zoom).
 	var initialState:Class<FlxState> = BetterPreload; // The FlxState the game starts with.
 	var zoom:Float = -1; // If -1, zoom is automatically calculated to fit the window dimensions.
-	var framerate:Int = 60;
-	var skipSplash:Bool = true; // Hope we add this to the mod xd
-	var startFullscreen:Bool = false; // N o
+	var framerate:Int = 60; // How many frames per second the game should run at.
+	var skipSplash:Bool = true; // Whether to skip the flixel splash screen that appears in release mode.
+	var startFullscreen:Bool = false; // Whether to start the game in fullscreen on desktop targets
 	public static var fpsVar:FPS;
-
 	public static var focusMusicTween:FlxTween;
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
@@ -49,8 +50,6 @@ class Main extends Sprite
 	public function new()
 	{
 		super();
-
-		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
 
 		if (stage != null)
 		{
@@ -74,13 +73,8 @@ class Main extends Sprite
 
 	private function setupGame():Void
 	{
-	
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
-
-		var res = ClientPrefs.screenRes.split('x');
-		gameWidth = Std.parseInt(res[0]);
-		gameHeight = Std.parseInt(res[1]);
 
 		if (zoom == -1)
 		{
@@ -90,13 +84,9 @@ class Main extends Sprite
 			gameWidth = Math.ceil(stageWidth / zoom);
 			gameHeight = Math.ceil(stageHeight / zoom);
 		}
-
-		#if !debug
-		initialState = BetterPreload;
-		#end
 	
 		ClientPrefs.loadDefaultKeys();
-		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, skipSplash, startFullscreen));
+		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
 		#if !mobile
 		fpsVar = new FPS(10, 3, 0xFFFFFF);
@@ -109,10 +99,14 @@ class Main extends Sprite
 		#end
 
 		FlxG.autoPause = false;
-		FlxG.mouse.visible = true;
+		FlxG.mouse.visible = false;
 
 		Application.current.window.onFocusOut.add(onWindowFocusOut);
 		Application.current.window.onFocusIn.add(onWindowFocusIn);
+		
+		#if CRASH_HANDLER
+		Lib.current.loaderInfo.uncaughtErrorEvents.addEventListener(UncaughtErrorEvent.UNCAUGHT_ERROR, onCrash);
+		#end
 	}
 
 	var game:FlxGame;
@@ -185,43 +179,46 @@ class Main extends Sprite
 				FlxG.updateFramerate = 60;
 			}
 		}
-	
-		function onCrash(e:UncaughtErrorEvent):Void
+
+	// Code was entirely made by sqirra-rng for their fnf engine named "Izzy Engine", big props to them!!!
+	// very cool person for real they don't get enough credit for their work
+	#if CRASH_HANDLER
+	function onCrash(e:UncaughtErrorEvent):Void
+	{
+		var errMsg:String = "";
+		var path:String;
+		var callStack:Array<StackItem> = CallStack.exceptionStack(true);
+		var dateNow:String = Date.now().toString();
+
+		dateNow = dateNow.replace(" ", "_");
+		dateNow = dateNow.replace(":", "'");
+
+		path = "./crash/" + "PsychEngine_" + dateNow + ".txt";
+
+		for (stackItem in callStack)
 		{
-			var errMsg:String = "";
-			var path:String;
-			var callStack:Array<StackItem> = CallStack.exceptionStack(true);
-			var dateNow:String = Date.now().toString();
-	
-			dateNow = dateNow.replace(" ", "_");
-			dateNow = dateNow.replace(":", "'");
-	
-			path = "./crash/" + ""+ Application.current.meta.get('title') + "_" + dateNow + ".txt";
-	
-			for (stackItem in callStack)
+			switch (stackItem)
 			{
-				switch (stackItem)
-				{
-					case FilePos(s, file, line, column):
-						errMsg += file + " (" + line + ")\n";
-					default:
-						Sys.println(stackItem);
-				}
+				case FilePos(s, file, line, column):
+					errMsg += file + " (line " + line + ")\n";
+				default:
+					Sys.println(stackItem);
 			}
-	
-			errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the Demolition Engine GitHub page: https://github.com/DEMOLITIONDON96/Demolition-Engine/issues\n\n> Crash Handler written by: sqirra-rng for Psych Engine";
-	
-			if (!FileSystem.exists("./crash_messages/"))
-				FileSystem.createDirectory("./crash_messages/");
-	
-			File.saveContent(path, errMsg + "\n");
-	
-			Sys.println(errMsg);
-			Sys.println("The Crash Notes Have Been Saved In: " + Path.normalize(path));
-	
-			Application.current.window.alert(errMsg, "Error On Funkin.avi.exe!");
-			DiscordClient.shutdown();
-			Sys.exit(1);
 		}
+
+		errMsg += "\nUncaught Error: " + e.error + "\nPlease report this error to the GitHub page: https://github.com/ShadowMario/FNF-PsychEngine\n\n> Crash Handler written by: sqirra-rng";
+
+		if (!FileSystem.exists("./crash/"))
+			FileSystem.createDirectory("./crash/");
+
+		File.saveContent(path, errMsg + "\n");
+
+		Sys.println(errMsg);
+		Sys.println("Crash dump saved in " + Path.normalize(path));
+
+		Application.current.window.alert(errMsg, "Error!");
+		DiscordClient.shutdown();
+		Sys.exit(1);
+	}
+	#end
 }
-	

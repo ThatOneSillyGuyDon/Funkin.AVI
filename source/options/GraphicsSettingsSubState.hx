@@ -53,7 +53,21 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeAntiAliasing; //Changing onChange is only needed if you want to make a special interaction after it changes the value
 		addOption(option);
 
-		#if desktop //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
+		var option:Option = new Option('Shaders', //Name
+			'If unchecked, disables shaders.\nIt\'s used for some visual effects, and also CPU intensive for weaker PCs.', //Description
+			'shaders', //Save data variable name
+			'bool', //Variable type
+			true); //Default value
+		addOption(option);
+
+		var option:Option = new Option('Play Instrumental In Freeplay', //this one too btw
+			'If checked, the song instrumental will be playing when you are in Freeplay.',
+			'instPlaying',
+			'bool',
+			true);
+		addOption(option);	
+
+		#if !html5 //Apparently other framerates isn't correctly supported on Browser? Probably it has some V-Sync shit enabled by default, idk
 		var option:Option = new Option('Framerate',
 			"Pretty self explanatory, isn't it?",
 			'framerate',
@@ -65,25 +79,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.maxValue = 240;
 		option.displayFormat = '%v FPS';
 		option.onChange = onChangeFramerate;
-		
-			
-		//ye rewrite, cus of 0.6.3
-		var option:Option = new Option('Shaders', //Name
-		'If unchecked, disables shaders.\nIt\'s used for some visual effects, and also CPU intensive for weaker PCs.', //Description
-		'funiShaders', //Save data variable name
-		'bool', //Variable type
-		true); //Default value
-	addOption(option);
-		
-		var option:Option = new Option('Optimize Shaders', 'If Checked, The Game Will OptimizateThe Shaders as max as it can', 'optimization', 'bool', false);
-		addOption(option);
-
-		var option:Option = new Option('Play Instrumental In Freeplay', //this one too btw
-			'If checked, the song instrumental will be playing when you are in Freeplay.',
-			'instPlaying',
-			'bool',
-			true);
-		addOption(option);	
 
 		//no need for this at other platforms cuz only desktop has fullscreen as false by default (MAYBE I'LL TRY TO MAKE IT FOR FULLSCREEN MODE TOO)
 		var option:Option = new Option('Screen Resolution',
@@ -104,16 +99,6 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 		option.onChange = onChangeFullscreen;
 		#end
 
-		/*
-		var option:Option = new Option('Persistent Cached Data',
-			'If checked, images loaded will stay in memory\nuntil the game is closed, this increases memory usage,\nbut basically makes reloading times instant.',
-			'imagesPersist',
-			'bool',
-			false);
-		option.onChange = onChangePersistentData; //Persistent Cached Data changes FlxGraphic.defaultPersist
-		addOption(option);
-		*/
-
 		super();
 	}
 
@@ -130,20 +115,21 @@ class GraphicsSettingsSubState extends BaseOptionsMenu
 	}
 
 	function onChangeScreenRes()
-	{
-		var res = ClientPrefs.screenRes.split('x');
-		FlxG.resizeWindow(Std.parseInt(res[0]), Std.parseInt(res[1]));
-
-		FlxG.fullscreen = false;
-
-		if(!FlxG.fullscreen)
-			onChangeFullscreen();
-	}
-
-	function onChangeFullscreen()
-	{
-		FlxG.fullscreen = ClientPrefs.fullscreen;
-	}
+		{
+			var res = ClientPrefs.screenRes.split('x');
+			FlxG.resizeWindow(Std.parseInt(res[0]), Std.parseInt(res[1]));
+	
+			FlxG.fullscreen = false;
+	
+			if(!FlxG.fullscreen)
+				onChangeFullscreen();
+		}
+	
+		function onChangeFullscreen()
+		{
+			FlxG.fullscreen = ClientPrefs.fullscreen;
+		}
+	
 
 	function onChangeFramerate()
 	{

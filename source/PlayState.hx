@@ -174,7 +174,6 @@ class PlayState extends MusicBeatState
 	var filters:Array<BitmapFilter> = [];
 
 	public var spawnTime:Float = 2000;
-
 	public var vocals:FlxSound;
 
 	public var dad:Character = null;
@@ -5311,14 +5310,6 @@ class PlayState extends MusicBeatState
 		switch(hudStyle)
 		{
 			default:
-				if(ClientPrefs.simplifiedScore) {
-				
-				if(ratingName == '?') {
-					scoreTxt.text = 'Score: ' + songScore + ' ~ Misses: ' + songMisses;
-				} else {
-					scoreTxt.text = 'Punt ' + songScore + ' ~ Misses: ' + songMisses + ' (' + ratingFC + ')';
-				} 
-				} else {
 				if(ratingPercent == 0) {
 					if(ClientPrefs.language == "Spanish") {
 					scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ?';
@@ -5358,8 +5349,6 @@ class PlayState extends MusicBeatState
 					else 
 						scoreTxt.text = 'Sanity: Low  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 				}
-			}
-
 							// Info Bar
 				var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
 				var ratingNameTwo:String = ratingName;
@@ -8082,8 +8071,8 @@ class PlayState extends MusicBeatState
 						//goes more smoother, spoiler: is amazing
 						FlxTween.tween(
 						Lib, 
-						{'application.window.x': FlxG.random.int(0, Std.int(Capabilities.screenResolutionX - FlxG.width)), 
-						'application.window.y': FlxG.random.int(0, Std.int(Capabilities.screenResolutionY - FlxG.height))}, 
+						{'application.window.x': FlxG.random.int(0, 900), 
+						'application.window.y': FlxG.random.int(0, 900)}, 
 						0.2, 
 						{ease: FlxEase.expoInOut /**thx robtop**/}
 						);

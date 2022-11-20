@@ -5341,7 +5341,7 @@ class PlayState extends MusicBeatState
 				} else {
 					scoreTxt.text = 'Punt ' + songScore + ' ~ Misses: ' + songMisses + ' (' + ratingFC + ')';
 				} 
-					} else {
+				} else {
 				if(ratingPercent == 0) {
 					if(ClientPrefs.language == "Spanish") {
 					scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ?';
@@ -5381,7 +5381,7 @@ class PlayState extends MusicBeatState
 					else 
 						scoreTxt.text = 'Sanity: Low  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
 				}
-					}
+			}
 
 							// Info Bar
 				var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);

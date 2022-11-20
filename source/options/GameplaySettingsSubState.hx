@@ -87,6 +87,16 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
+		var option:Option = new Option('Note Size',
+			'Set Note Size (May break IDFK)',
+			'men',
+			'float',
+			0.7);
+			option.minValue = 0.4;
+			option.maxValue = 2;
+			option.changeValue = 0.1;
+		addOption(option);
+
 		var option:Option = new Option('Ghost Tapping',
 			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
 			'ghostTapping',

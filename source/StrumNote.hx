@@ -112,7 +112,7 @@ class StrumNote extends FlxSprite
 				loadGraphic(Paths.image('pixelUI/' + texture), true, Math.floor(width), Math.floor(height));
 
 				antialiasing = false;
-				setGraphicSize(Std.int(width * PlayState.daPixelZoom));
+				setGraphicSize(Std.int(width * ClientPrefs.men * PlayState.daPixelZoom));
 
 				animation.add('green', [6]);
 				animation.add('red', [7]);
@@ -144,7 +144,7 @@ class StrumNote extends FlxSprite
 						loadGraphic(Paths.image('pixelUI/relapsePhase1NOTES'), true, Math.floor(width), Math.floor(height));
 
 						antialiasing = false;
-						setGraphicSize(Std.int(width * PlayState.daPixelZoom));
+						setGraphicSize(Std.int(width * ClientPrefs.men * PlayState.daPixelZoom));
 
 						animation.add('green', [6]);
 						animation.add('red', [7]);
@@ -179,7 +179,7 @@ class StrumNote extends FlxSprite
 			animation.addByPrefix('red', 'arrowRIGHT');
 
 			antialiasing = ClientPrefs.globalAntialiasing;
-			setGraphicSize(Std.int(width * 0.7));
+			setGraphicSize(Std.int(width * ClientPrefs.men));
 
 			switch (Math.abs(noteData))
 			{

@@ -29,6 +29,7 @@ class ClientPrefs {
 	public static var ratingSystem:String = "Bedrock";
 	public static var laneunderlay:Bool = false;
 	public static var laneTransparency:Float = 0.5;
+	public static var men:Float = 0.7;
 	public static var debugMode:Bool = false;
 	public static var iconBounce:String = 'Default';
 	public static var camMove:Bool = true;
@@ -136,6 +137,7 @@ class ClientPrefs {
 		FlxG.save.data.cutscens = cutscenes;
 		FlxG.save.data.colorblind = colorblind;
 		FlxG.save.data.FPStext = FPStext;
+		FlxG.save.data.men = men;
 		FlxG.save.data.events = events;
 		FlxG.save.data.outdated = outdated;
 		FlxG.save.data.downScroll = downScroll;
@@ -213,8 +215,11 @@ class ClientPrefs {
 			 optimization = FlxG.save.data.optimization;
  
 		 if(FlxG.save.data.restart != null) {
-			 restart = FlxG.save.data.restart;
-		 }
+			restart = FlxG.save.data.restart;
+		}
+		if(FlxG.save.data.men != null) {
+			men = FlxG.save.data.men;
+		}
 		 if(FlxG.save.data.colorblind != null) {
 			 colorblind = FlxG.save.data.colorblind;
 		 }

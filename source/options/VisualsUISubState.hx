@@ -1,6 +1,5 @@
 package options;
 
-import GameplayChangersSubstate.GameplayOption;
 #if desktop
 import Discord.DiscordClient;
 #end
@@ -25,13 +24,11 @@ import flixel.util.FlxTimer;
 import flixel.input.keyboard.FlxKey;
 import flixel.graphics.FlxGraphic;
 import Controls;
-import IndieCrossShaderShit.FXHandler;
 
 using StringTools;
 
 class VisualsUISubState extends BaseOptionsMenu
 {
-
 	public function new()
 	{
 		title = 'Visuals and UI';
@@ -75,12 +72,6 @@ class VisualsUISubState extends BaseOptionsMenu
 			'Psych',
 			['Psych', 'Vanilla', 'Demolition']); //HUDs to add: Demolition HUD, Funkin.avi HUD, Red-Bun's HUD.
 			addOption(option);
-		
-		var option:Option = new Option('Winning Icons',
-			'If checked, enables extra icon frames',
-			'winningIcon',
-			'bool',
-			true);
 
 		var option:Option = new Option('Hide HUD',
 			'If checked, hides most HUD elements.',
@@ -97,55 +88,23 @@ class VisualsUISubState extends BaseOptionsMenu
 			['Time Left', 'Time Elapsed', 'Song Name', 'Disabled']);
 		addOption(option);*/
 
-		var option:Option = new Option('Color Blind Filther:',
-			"What should the Color Blind Filther display?",
-			'colorblind',
-			'string',
-			'No color filter',
-			['No color filter', 'Protanopia filter', 'Protanomaly filter', 'Deuteranopia filter', 'Deuteranomaly filter', 'Tritanopia filter', 'Tritanomaly filter', 'Achromatopsia filter', 'Achromatomaly filter']);
-		addOption(option);
-		option.onChange = onChangeCBFilther;
-		
-		var option:Option = new Option('Icon Bounce:',
-			'How should your icons bounce?',
-			'iconBounce',
-			'string',
-			'Default',
-			['Default', 'Golden Apple', 'None']);
+		var option:Option = new Option('Flashing Lights',
+			"Uncheck this if you're sensitive to flashing lights!",
+			'flashing',
+			'bool',
+			true);
 		addOption(option);
 
-		var option:Option = new Option('Judgement Skin:', 
-		"What should your judgements look like?", 
-		'uiSkin', 
-		'string', 
-		'Demolition',
-			['Demolition', 'Classic', 'BEAT!', 'BEAT! Gradient', 'Bedrock', 'Matt :)', 'Funkin.avi']);
-		addOption(option);
-		
-		var option:Option = new Option('Simplify Score Text',
-			"If checked, Score Text under the Health Bar \ndisplays less text",
-			'simplifiedScore',
+		var option:Option = new Option('Camera Zooms',
+			"If unchecked, the camera won't zoom in on a beat hit.",
+			'camZooms',
 			'bool',
-		        false);
+			true);
 		addOption(option);
 
 		var option:Option = new Option('Camera Movement',
 			"If checked, camera moves to the corresponding arrow!",
 			'camMove',
-			'bool',
-			true);
-		addOption(option);
-
-		var option:Option = new Option('Screen Shake',
-			"Uncheck this if you're sensitive to screen shake!",
-			'screenShake',
-			'bool',
-			true);
-		addOption(option);
-
-		var option:Option = new Option('Flashing Lights',
-			"Uncheck this if you're sensitive to flashing lights!",
-			'flashing',
 			'bool',
 			true);
 		addOption(option);
@@ -157,34 +116,12 @@ class VisualsUISubState extends BaseOptionsMenu
 			true);
 		addOption(option);
 
-		var option:Option = new Option('Camera Zooms',
-			"If unchecked, the camera won't zoom in on a beat hit.",
-			'camZooms',
-			'bool',
-			true);
-		addOption(option);
-		
-		/*var option:Option = new Option('Center Menu',
-			"If unchecked, the Menu will be on the left, idk.",
-			'center',
-			'bool',
-			true);
-		addOption(option);*/
-
 		var option:Option = new Option('Score Text Zoom on Hit',
 			"If unchecked, disables the Score text zooming\neverytime you hit a note.",
 			'scoreZoom',
 			'bool',
 			true);
 		addOption(option);
-		
-		/*var option:Option = new Option('Long Health Bar',
-			"If unchecked, the health bar will be short.",
-			'longBar',
-			'bool',
-			true);
-		addOption(option);*/
-		//NO MORE LONG HEALTH BAR TOGGLE, THANK FUCKING GOD.
 
 		var option:Option = new Option('Health Bar Transparency',
 			'How much transparent should the health bar and icons be.',
@@ -216,6 +153,22 @@ class VisualsUISubState extends BaseOptionsMenu
 			['None', 'Breakfast', 'Tea Time']);
 		addOption(option);
 		option.onChange = onChangePauseMusic;
+		
+		#if CHECK_FOR_UPDATES
+		var option:Option = new Option('Check for Updates',
+			'On Release builds, turn this on to check for updates when you start the game.',
+			'checkForUpdates',
+			'bool',
+			true);
+		addOption(option);
+		#end
+
+		var option:Option = new Option('Combo Stacking',
+			"If unchecked, Ratings and Combo won't stack, saving on System Memory and making them easier to read",
+			'comboStacking',
+			'bool',
+			true);
+		addOption(option);
 
 		super();
 	}
@@ -239,20 +192,9 @@ class VisualsUISubState extends BaseOptionsMenu
 		changedMusic = true;
 	}
 
-	var changedCB:Bool = false;
-	function onChangeCBFilther()
-	{
-		if(ClientPrefs.colorblind == 'No color filter')
-			FlxG.sound.music.volume = 0;
-		else
-			FXHandler.UpdateColors();
-	
-		changedCB = true;
-	}
-
 	override function destroy()
 	{
-		if(changedMusic) FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
+		if(changedMusic) FlxG.sound.playMusic(Paths.music('freakyMenu'));
 		super.destroy();
 	}
 

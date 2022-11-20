@@ -30,15 +30,15 @@ import flixel.input.keyboard.FlxKey;
 import openfl.filters.BitmapFilter;
 import openfl.filters.ShaderFilter;
 import Shaders;
-import IndieCrossShaderShit.FXHandler;
+//import IndieCrossShaderShit.FXHandler;
 
 using StringTools;
 
 class MainMenuState extends MusicBeatState
 {
 	public static var MouseVersion:String = '2.0.0';
-	public static var DemoEngineVersion:String = '0.3.0 PRE-RELEASE';
-	public static var psychEngineVersion:String = '0.5.2h'; //This is also used for Discord RPC
+	public static var DemoEngineVersion:String = '0.3.0 pre-release';
+	public static var psychEngineVersion:String = '0.6.3'; //This is also used for Discord RPC
 	public static var curSelected:Int = 0;
 
 	var bloomShit:WIBloomEffect;
@@ -124,7 +124,7 @@ class MainMenuState extends MusicBeatState
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 
-		if(ClientPrefs.funiShaders)
+		if(ClientPrefs.shaders)
 					{
 						chrom = new ChromaticAberrationEffect();
 						blurThisShit = new TiltshiftEffect(0.4, 0);
@@ -439,7 +439,7 @@ class MainMenuState extends MusicBeatState
 
 		#if desktop
 		Achievements.loadAchievements();
-		if(gamejolt.GJClient.logged) {
+		/*if(gamejolt.GJClient.logged) {
 			var achieveID:Int = Achievements.getAchievementIndex('gamejolt');
 			if(!Achievements.isAchievementUnlocked(Achievements.achievementsStuff[achieveID][2])) { //It's GameJolt time!
 			//i loved when he said "It's GameJolt time!" and started to GameJolting all around
@@ -448,7 +448,7 @@ class MainMenuState extends MusicBeatState
 				gamejolt.GJClient.trophieAdd(169870);
 				ClientPrefs.saveSettings();
 			}
-		}
+		}*/
 		#end
 		#end
 
@@ -495,7 +495,7 @@ class MainMenuState extends MusicBeatState
 
 	function addShader(effect:ShaderEffect)
 	{
-		if (!ClientPrefs.funiShaders)
+		if (!ClientPrefs.shaders)
 			return;
 
 		shaders.push(effect);
@@ -641,7 +641,7 @@ class MainMenuState extends MusicBeatState
 										//MusicBeatState.switchState(new AchievementsMenuState());
 									case 'credits':
 										if(ClientPrefs.language == "Spanish") MusicBeatState.switchState(new CreditsSpanishState());
-										else MusicBeatState.switchState(new TestCredits());
+										else MusicBeatState.switchState(new CreditsState());
 									case 'options':
 										if(ClientPrefs.language == "Spanish") {
 										LoadingState.loadAndSwitchState(new options.SpanishOption());

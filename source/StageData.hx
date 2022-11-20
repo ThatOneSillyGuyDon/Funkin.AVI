@@ -53,14 +53,26 @@ class StageData {
 					stage = 'schoolEvil';
 				case 'ugh' | 'guns' | 'stress':
 					stage = 'tank';
-				case 'isolated' | 'isolated-old' | 'lunacy' | 'delusional':
-					stage = 'EndlessLoop';
-				case 'twisted-grins':
+					case 'isolated' | 'lunacy' | 'delusional':
+					stage = 'Studio';
+				case 'twisted-grins' | 'facade' | 'mortiferum-risus':
 					stage = 'Office';
-				case 'hunted':
-					stage = 'Forest';
-				case 'malfunction':
+				case 'isolated-legacy' | 'lunacy-legacy':
+					stage = 'EndlessLoop';
+				case 'isolated-old' | 'isolated-beta':
+					stage = 'LegacyLoop';
+				case 'malfunction' | 'malfunction-legacy':
 					stage = 'PixelWorld';
+				case 'hunted':
+					stage = 'ForestNEW';
+				case 'cycled-sins':
+					stage = 'RelapseStage';
+				case "don't-cross!":
+					stage = 'Line';
+				case 'mercy' | 'mercy-legacy':
+					stage = 'WaltStage';
+				case 'scrapped':
+					stage = 'rs';
 				default:
 					stage = 'stage';
 			}

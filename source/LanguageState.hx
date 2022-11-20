@@ -88,12 +88,14 @@ class LanguageState extends MusicBeatState
 		grain.scale.y = 1.1;
 		add(grain);
 
+		Application.current.window.title = "Funkin.avi - Choose your preferred language...";
+
 		FlxTween.tween(blackFade, {alpha: 0}, 1); //we be makin this shit fancy now
 	}
 
 	function addShader(effect:ShaderEffect)
 	{
-		if (!ClientPrefs.funiShaders)
+		if (!ClientPrefs.shaders)
 			return;
 
 		shaders.push(effect);

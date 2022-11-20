@@ -136,7 +136,6 @@ class GameJoltLoginState extends MusicBeatState
         {
             trace(usernameBox.text);
             trace(tokenBox.text);
-            if(usernameBox.text != null || usernameBox.text != '' || tokenBox.text != null || tokenBox.text != "") //Prevent Crashes
             GJClient.setUserInfo(usernameBox.text,tokenBox.text);
         });
 

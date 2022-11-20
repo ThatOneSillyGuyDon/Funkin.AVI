@@ -34,13 +34,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		title = 'Gameplay Settings';
 		rpcTitle = 'Gameplay Settings Menu'; //for Discord Rich Presence
 
-		var option:Option = new Option('Show Outdated Version',
-			'If checked and outdated, game will notify you to update demolition engine',
-			'outdated',
-			'bool',
-			false);
-		addOption(option);
-
 		var option:Option = new Option('Controller Mode',
 			'Check this if you want to play with\na controller instead of using your Keyboard.',
 			'controllerMode',
@@ -56,13 +49,6 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false); //Default value
 		addOption(option);
 
-		var option:Option = new Option('Auto-Restart', 
-		'if checked, the game restart automaticly Loggin out or Losing In Malfunction.',
-		'restart',
-		'bool',
-		false);
-		addOption(option);
-
 		var option:Option = new Option('Middlescroll',
 			'If checked, your notes get centered.',
 			'middleScroll',
@@ -70,47 +56,16 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 			false);
 		addOption(option);
 
-		var option:Option = new Option(
-			'Toggle Mechanics',
-			'If unchecked, Mechanics will be removed\n(ONLY WORKS IF NOT FROM PAUSE MENU)',
-			'mechanics',
+		var option:Option = new Option('Opponent Notes',
+			'If unchecked, opponent notes get hidden.',
+			'opponentStrums',
 			'bool',
 			true);
 		addOption(option);
 
-
-		/*var option:Option = new Option('Live Difficulty:',
-			"What Is The Difficulty Lives Should There Be In Malfunction?", 
-			'lives', 
-			'string', 
-			'normal',
-			['easy', 'normal', 'hard', 'hell']);
-		addOption(option);*/
-		
 		var option:Option = new Option('Hide Judgement Counter',
 			'If checked, hides Judgement Counter on the screen',
 			'hideJudgement',
-			'bool',
-			false);
-		addOption(option);
-
-		var option:Option = new Option('Ghost Tapping',
-			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
-			'ghostTapping',
-			'bool',
-			true);
-		addOption(option);
-
-		var option:Option = new Option('Enable Anti Mash',
-		"If Checked, Anti Mash Is Enabled IDK WHAT THIS DOES\nITS BEEN 10 FUCKING YEARS PLZ\nDEMO LET ME OUT :(",
-		'antiMash',
-		'bool',
-		true);
-		addOption(option);
-
-		var option:Option = new Option('Disable Reset Button',
-			"If checked, pressing Reset won't do anything.",
-			'noReset',
 			'bool',
 			false);
 		addOption(option);
@@ -132,17 +87,28 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.changeValue = 0.1;
 		addOption(option);
 
-		var option:Option = new Option('Debug Mode',
-		'If checked, you can do cool stuff on a song',
-		'debugMode',
-		false);
+		var option:Option = new Option('Note Size',
+			'Set Note Size (May break IDFK)',
+			'men',
+			'float',
+			0.7);
+			option.minValue = 0.4;
+			option.maxValue = 2;
+			option.changeValue = 0.1;
 		addOption(option);
 
-		var option:Option = new Option('Marvelouses Rating',
-		'If checked, marvelouses rating will appear on the\nJudgment counter and will show\n when hit',
-		'marvelouses',
-		'bool',
-		true); //Default value
+		var option:Option = new Option('Ghost Tapping',
+			"If checked, you won't get misses from pressing keys\nwhile there are no notes able to be hit.",
+			'ghostTapping',
+			'bool',
+			true);
+		addOption(option);
+
+		var option:Option = new Option('Disable Reset Button',
+			"If checked, pressing Reset won't do anything.",
+			'noReset',
+			'bool',
+			false);
 		addOption(option);
 
 		var option:Option = new Option('Hitsound Volume',
@@ -156,6 +122,7 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 1;
 		option.changeValue = 0.1;
 		option.decimals = 1;
+		option.onChange = onChangeHitsoundVolume;
 
 		var option:Option = new Option('Rating Offset',
 			'Changes how late/early you have to hit for a "Sick!"\nHigher values mean you have to hit later.',
@@ -169,14 +136,14 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		addOption(option);
 
 		var option:Option = new Option('Marvelous Hit Window',
-			'Changes the amount of time you have\nfor hitting a "Marvelous" in milliseconds.\n(Must have "Marvelouses Rating" on for this to work)',
+			'Changes the amount of time you have\nfor hitting a "Marvelous" in milliseconds.',
 			'marvelousWindow',
 			'int',
-			25);
+			30);
 		option.displayFormat = '%vms';
 		option.scrollSpeed = 15;
 		option.minValue = 15;
-		option.maxValue = 25;
+		option.maxValue = 30;
 		addOption(option);
 
 		var option:Option = new Option('Sick! Hit Window',
@@ -222,6 +189,12 @@ class GameplaySettingsSubState extends BaseOptionsMenu
 		option.maxValue = 10;
 		option.changeValue = 0.1;
 		addOption(option);
+
 		super();
+	}
+
+	function onChangeHitsoundVolume()
+	{
+		FlxG.sound.play(Paths.sound('hitsound'), ClientPrefs.hitsoundVolume);
 	}
 }

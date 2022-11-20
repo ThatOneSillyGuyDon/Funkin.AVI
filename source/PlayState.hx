@@ -7968,13 +7968,13 @@ class PlayState extends MusicBeatState
 						//Lib.application.window.move(FlxG.random.int(0, Std.int(Capabilities.screenResolutionX - FlxG.width)), FlxG.random.int(0, Std.int(Capabilities.screenResolutionY - FlxG.height)));
 
 						//goes more smoother, spoiler: is amazing
-						// FlxTween.tween(
-						// Lib, 
-						// {'application.window.x': FlxG.random.int(0, Std.int(Capabilities.screenResolutionX - FlxG.width)), 
-						// 'application.window.y': FlxG.random.int(0, Std.int(Capabilities.screenResolutionY - FlxG.height))}, 
-						// 0.2, 
-						// {ease: FlxEase.expoInOut /**thx robtop**/}
-						// );
+						FlxTween.tween(
+						Lib, 
+						{'application.window.x': FlxG.random.int(0, Std.int(Capabilities.screenResolutionX - FlxG.width)), 
+						'application.window.y': FlxG.random.int(0, Std.int(Capabilities.screenResolutionY - FlxG.height))}, 
+						0.2, 
+						{ease: FlxEase.expoInOut /**thx robtop**/}
+						);
 
 						health -= 0.02;
 

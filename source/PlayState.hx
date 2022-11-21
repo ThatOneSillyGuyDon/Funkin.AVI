@@ -6119,6 +6119,7 @@ class PlayState extends MusicBeatState
 			}
 		}
 	}
+	#end
 
 		setOnLuas('cameraX', camFollowPos.x);
 		setOnLuas('cameraY', camFollowPos.y);
@@ -8495,7 +8496,6 @@ class PlayState extends MusicBeatState
 			note.destroy();
 		}
 	}
-}
 
 	function goodNoteHit(note:Note):Void
 	{
@@ -8815,10 +8815,11 @@ class PlayState extends MusicBeatState
 				playerStrums.forEach(function(spr:StrumNote)
 				{
 					spr.playAnim('confirm', true);
-				}
-			}
+				});
 			note.wasGoodHit = true;
 			vocals.volume = 1;
+			}
+		}
 
 			var isSus:Bool = note.isSustainNote; //GET OUT OF MY HEAD, GET OUT OF MY HEAD, GET OUT OF MY HEAD
 			var leData:Int = Math.round(Math.abs(note.noteData));
@@ -8832,6 +8833,7 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		}
+	}
 
 	function spawnNoteSplashOnNoteShit(note:Note) {
 		if(ClientPrefs.noteSplashes && note != null) {

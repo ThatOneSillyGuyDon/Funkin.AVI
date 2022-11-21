@@ -599,7 +599,7 @@ class LegacyState extends MusicBeatState{
 			curDifficulty = newPos;
 		}
 
-			FlxG.camera.flash(FlxColor.BLACK, 0.2);
+			/*FlxG.camera.flash(FlxColor.BLACK, 0.2);
 			if(ClientPrefs.shaders)
 			{
 			clearShader();
@@ -625,7 +625,7 @@ class LegacyState extends MusicBeatState{
 			blurThisShit.setBlur(0.4);
 			//uncomment these fucking pieces of shit if you feel like testing it.
 			}
-			FlxG.camera.shake(0.004, 0);
+			FlxG.camera.shake(0.004, 0);*/
 			}
 
 	private function positionHighscore() {

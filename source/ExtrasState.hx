@@ -600,7 +600,7 @@ class ExtrasState extends MusicBeatState{
 			curDifficulty = newPos;
 		}
 
-		if (curSelected == 3)
+		/*if (curSelected == 3)
 			{
 				FlxG.camera.flash(FlxColor.BLACK, 0.6);
 							FlxG.camera.shake(0.007, 99999999);
@@ -692,7 +692,7 @@ class ExtrasState extends MusicBeatState{
 			//uncomment these fucking pieces of shit if you feel like testing it.
 			}
 			FlxG.camera.shake(0.004, 0);
-			}
+			}*/
 	}
 
 	private function positionHighscore() {

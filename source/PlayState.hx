@@ -30,6 +30,11 @@ import flixel.addons.effects.chainable.FlxWaveEffect;
 import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.atlas.FlxAtlas;
 import flixel.graphics.frames.FlxAtlasFrames;
+import lime.ui.MouseButton;
+import lime.ui.KeyCode;
+import lime.ui.KeyModifier;
+import lime.ui.Window;
+import flash.system.Capabilities;
 import flixel.group.FlxGroup.FlxTypedGroup;
 import flixel.util.FlxGradient;
 import flixel.math.FlxMath;
@@ -68,6 +73,7 @@ import StageData;
 import FunkinLua;
 import DialogueBoxPsych;
 import Conductor.Rating;
+
 #if !flash 
 import flixel.addons.display.FlxRuntimeShader;
 import openfl.filters.ShaderFilter;
@@ -174,6 +180,7 @@ class PlayState extends MusicBeatState
 	var filters:Array<BitmapFilter> = [];
 
 	public var spawnTime:Float = 2000;
+
 	public var vocals:FlxSound;
 
 	public var dad:Character = null;
@@ -4535,7 +4542,7 @@ class PlayState extends MusicBeatState
 		if(hudStyle == 'Demolition')
 		{
 			switch(SONG.song)
-			{ 
+			{
 				case 'Isolated':
 					//FlxTween.tween(camHUD, {alpha: 1}, 3, {ease: FlxEase.circInOut, startDelay: 10});
 					FlxTween.tween(healthBarBG, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
@@ -5306,111 +5313,9 @@ class PlayState extends MusicBeatState
 		}
 
 		super.update(elapsed);
-		
-		switch(hudStyle)
-		{
-			default:
-				if(ratingPercent == 0) {
-					if(ClientPrefs.language == "Spanish") {
-					scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ?';
-				} else {
-					//im sorry but combo breaks is peak
-					scoreTxt.text = 'Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ?'; //no way i was a dumbass all the time
-				}
-				} else {
-					if(ClientPrefs.language == "Spanish") {
-						scoreTxt.text = 'Puntuacion: ' + songScore + ' | Perdidas: ' + songMisses + ' | Presicion: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';
-					} else {
-						scoreTxt.text = 'Score: ' + songScore + ' | Combo Breaks: ' + songMisses + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
-				}
-				}
 
-				if(SONG.song == "Isolated Old") {
-						scoreTxt.text = 'Health:' + Math.round(health * 50) + "%" + ' - Score: ' + songScore + ' - Misses: ' + songMisses + ' - Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
-				}
-
-				if(SONG.song == "Isolated Beta") {
-					scoreTxt.text = "Score: " + songScore + ' | Misses: ' + songMisses + ' | Rating: ' + ratingName + (ratingName != '?' ? ' (${Highscore.floorDecimal(ratingPercent * 100, 2)}%) - $ratingFC' : '');
-				}
-
-				if(SONG.song == "'Neglection") {
-					scoreTxt.text = ''+healthBar.percent+'%';
-				}
-
-				if(SONG.song == "Fight or Flight") { //we don't know the song name, starved
-					scoreTxt.text = 'Sacrifices: ' + deathCounter + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
-				}
-
-				if(SONG.song == "Cycled Sins") { //Think About it Demo, that would be cool
-					if (healthBar.percent > 80)
-						scoreTxt.text = 'Sanity: High  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-					else if (healthBar.percent > 20 && healthBar.percent < 80)	
-						scoreTxt.text = 'Sanity: Medium  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-					else 
-						scoreTxt.text = 'Sanity: Low  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-				}
-							// Info Bar
-				var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
-				var ratingNameTwo:String = ratingName;
-				var divider:String = ' ' + '-' + ' ';
-					
-				if (ClientPrefs.ratingSystem == "None") {
-					if(ClientPrefs.language == "Spanish") {
-					scoreTxt.text = 'Puntuacion: ${songScore}' + divider + 'Perdidas: ${totalMisses}';
-					} else {
-						scoreTxt.text = 'Score: ${songScore}' + divider + 'Combo Breaks: ${totalMisses}';
-					}
-				}
-			case 'Vanilla':
-				if(ClientPrefs.language == "English") {
-				scoreTxt.text = 'Score:' + songScore;
-				} else {
-				scoreTxt.text = 'Puntuacion: ' + songScore;
-				}
-			case 'Demolition':
-				if(ClientPrefs.language == "English")
-				missesTxt.text = songMisses + ' Misses';
-				else
-				missesTxt.text = songMisses + ' Perdidas';
-				
-				healthTxt.text = Math.round(health * 50) + '%';
-				
-				if(ratingName == '?') {
-					scoreTxt.text = 'Score: ' + songScore;
-				}else{	
-				scoreTxt.text = 'Score: ' + songScore + ' / ' + 'Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% / Rating: '+ ratingFC;
-				}
-
-				if(SONG.song == "Isolated Old") {
-					scoreTxt.text = 'Score: ' + songScore + ' - Rating: ' + ratingName + ' (' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%)' + ' - ' + ratingFC;//peeps wanted no integer rating
-			}
-
-			if(SONG.song == "Fight or Flight") { //we don't know the song name, starved
-				scoreTxt.text = 'Sacrifices: ' + deathCounter + ' | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '% ' + ' [' + ratingFC + ']';//peeps wanted no integer rating
-			}
-
-			if(SONG.song == "Cycled Sins") { //Think About it Demo, that would be cool
-				if (healthBar.percent > 80)
-					scoreTxt.text = 'Sanity: High  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-				else if (healthBar.percent > 20 && healthBar.percent < 80)	
-					scoreTxt.text = 'Sanity: Medium  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-				else 
-					scoreTxt.text = 'Sanity: Low  | Accuracy: ' + Highscore.floorDecimal(ratingPercent * 100, 2) + '%';
-			}
-
-						// Info Bar
-						var accuracy:Float = Highscore.floorDecimal(ratingPercent * 100, 2);
-						var ratingNameTwo:String = ratingName;
-						var divider:String = ' ' + '-' + ' ';
-							
-						if (ClientPrefs.ratingSystem == "None") {
-							if(ClientPrefs.language == "Spanish") {
-							scoreTxt.text = 'Puntuacion: ${songScore}' + divider + 'Perdidas: ${totalMisses}';
-							} else {
-								scoreTxt.text = 'Score: ${songScore}' + divider + 'Misses: ${totalMisses}';
-							}
-						}
-		}
+		setOnLuas('curDecStep', curDecStep);
+		setOnLuas('curDecBeat', curDecBeat);
 
 		if(botplayTxt.visible) {
 			botplaySine += 180 * elapsed;
@@ -6503,24 +6408,50 @@ class PlayState extends MusicBeatState
 				reloadHealthBarColors();
 
 				case 'Screen Fade':
-					var fadeAlpha = value1;
-					var timer = Std.parseFloat(value2);
-	
-					FlxTween.tween(blackFadeThing, {alpha: fadeAlpha}, timer, {ease: FlxEase.sineInOut}); //sine it out supermarcy*/
-				/*var charType:Int = Std.parseInt(value1);
-				if(Math.isNaN(charType)) charType = 0;
 		
-					switch(charType) {
-						case 0:
-							blackFadeThing.alpha = 0;
-						case 1:
-							blackFadeThing.alpha += 0.05;
-						case 2:
-							blackFadeThing.alpha -= 0.05;
-						case 3:
-							blackFadeThing.alpha += 1;
-						//Sorry that you have to fucking spam these events to do the thing
-					}*/
+					switch(value3.toLowerCase().trim()) {
+
+						case 'old' | 'classic' | 'v1':
+							var charType:Int = Std.parseInt(value1);
+							if(Math.isNaN(charType)) charType = 0;
+					
+								switch(charType) {
+									case 0:
+										blackFadeThing.alpha = 0;
+									case 1:
+										blackFadeThing.alpha += 0.05;
+									case 2:
+										blackFadeThing.alpha -= 0.05;
+									case 3:
+										blackFadeThing.alpha += 1;
+									//Sorry that you have to fucking spam these events to do the thing
+								}
+						
+						case 'new' | 'v2' | 'tween':
+							var fadeAlpha:Float = Std.parseFloat(value1);
+							var timer:Float = Std.parseFloat(value2);
+
+							if (fadeAlpha > 1) fadeAlpha = 0.3; //The old version of this event still exists in the charts and I had to fucking put this in in hopes of fixing it until I actually update them
+							if (value2.trim()=='') timer = 1; //Fix for old version of this event aaaaaaa
+			
+							FlxTween.tween(blackFadeThing, {alpha: fadeAlpha}, timer, {ease: FlxEase.sineInOut}); //sine it out supermarcy*/
+							
+						default:
+							var charType:Int = Std.parseInt(value1);
+							if(Math.isNaN(charType)) charType = 0;
+					
+								switch(charType) {
+									case 0:
+										blackFadeThing.alpha = 0;
+									case 1:
+										blackFadeThing.alpha += 0.05;
+									case 2:
+										blackFadeThing.alpha -= 0.05;
+									case 3:
+										blackFadeThing.alpha += 1;
+									//Sorry that you have to fucking spam these events to do the thing
+								}
+					}//I had to fucking do this just so it fixes my fucking problem I'm having with this single event crashing the game cause of it using the old version
 	
 				case 'Lyrics':
 					if(lyrics!=null){
@@ -6539,6 +6470,7 @@ class PlayState extends MusicBeatState
 				case 'Flash Screen':
 					if(ClientPrefs.flashing) { //This Demolition, is how to make flashing lights disabled
 					var colorFlash:Int = Std.parseInt(value1);
+					var CustomColor:String = value3; //RGB moment
 					if(Math.isNaN(colorFlash)) colorFlash = 0;
 			
 					switch(colorFlash) {
@@ -6562,6 +6494,8 @@ class PlayState extends MusicBeatState
 							FlxG.camera.flash(FlxColor.PURPLE, 3);
 						case 9:
 							FlxG.camera.flash(FlxColor.LIME, 3);
+						case 10:
+							FlxG.camera.flash(FlxColor.fromString(CustomColor));
 					}
 				}
 	
@@ -7337,6 +7271,14 @@ class PlayState extends MusicBeatState
 						}
 
 						FlxG.save.data.weekCompleted = StoryMenuState.weekCompleted;
+						switch(SONG.song)
+						{
+							case 'Delusional':
+								FPClientPrefs.episode1FPLock = 'unlocked';
+							case 'Twisted Grins':
+								FPClientPrefs.episode2FPLock = 'unlocked';
+						}	
+						FPClientPrefs.saveShit();
 						FlxG.save.flush();
 					}
 					changedDifficulty = false;
@@ -7383,13 +7325,75 @@ class PlayState extends MusicBeatState
 			else
 			{
 				trace('WENT BACK TO FREEPLAY??');
+
+				#if desktop
+				if(SONG.song == "Isolated Old") {
+			    	GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760676);
+				} else if(SONG.song == "Isolated") {
+		            GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760684);
+				} else if(SONG.song == "Hunted") {
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760677);
+				} else if(SONG.song == "Twisted Grins") {
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760679);
+				} else if(SONG.song == "Lunacy") {
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760686);
+				} else if(SONG.song == "Isolated Old") {
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 755529);
+				} else if(SONG.song == "Cycled Sins") {
+					GJClient.submitNewScore('$songScore', songScore, 'Accuracy: ${Highscore.floorDecimal(ratingPercent * 100, 2)}%', 760692);
+				}
+				#end
+
 				WeekData.loadTheFirstEnabledMod();
 				cancelMusicFadeTween();
 				if(FlxTransitionableState.skipNextTransIn) {
 					CustomFadeTransition.nextCamera = null;
 				}
-				MusicBeatState.switchState(new FreeplayState());
-				FlxG.sound.playMusic(Paths.music('freakyMenu'));
+				switch(PlayState.SONG.song)
+				{
+					case 'Isolated' | 'Lunacy' | 'Delusional' | 'Twisted Grins' | 'Facade' | 'Mortiferum Risus':
+						MusicBeatState.switchState(new EpisodesState());
+					case 'Isolated Legacy' | 'Lunacy Legacy' | 'Malfunction Legacy' | 'Mercy Legacy':
+						MusicBeatState.switchState(new LegacyState());
+					case 'Hunted' | 'Isolated Old' | 'Isolated Beta' | "Don't Cross!" | 'Malfunction' | 'Cycled Sins' | 'War Dilemma' | 'Scrapped' | 'Neglection' | 'Bless' | 'Mercy':
+						MusicBeatState.switchState(new ExtrasState());
+					default:
+						MusicBeatState.switchState(new EpicSelectorWOOO());
+				}
+				FlxG.mouse.visible = true;
+				FlxG.sound.playMusic(Paths.music('funkinAVI/menu/MenuMusic'));
+				switch(SONG.song) {
+					/*case 'Isolated':
+						FPClientPrefs.isolatedSong = 'Completed';
+					case 'Lunacy':
+						FPClientPrefs.lunacySong = 'Completed';
+					case 'Twisted Grins':
+						FPClientPrefs.twistedSong = 'Completed';*/
+						//This isn't the demo lmao
+					case 'Hunted':
+						FPClientPrefs.huntedLock = 'beaten';
+					case 'Isolated Old':
+						FPClientPrefs.oldisolateLock = 'beaten';
+					case 'Malfunction':
+						FPClientPrefs.malfunctionLock = 'beaten';
+					case 'Isolated Beta':
+						FPClientPrefs.betaisolateLock = 'beaten';
+					case 'Bless':
+						FPClientPrefs.blessLock = 'beaten';
+					case 'Cycled Sins':
+						FPClientPrefs.sinsLock = 'beaten';
+					case 'War Dilemma':
+						FPClientPrefs.warLock = 'beaten';
+					case "Don't Cross!":
+						FPClientPrefs.crossinLock = 'beaten';
+					case 'Mercy':
+						FPClientPrefs.mercyLock = 'beaten';
+					case 'Scrapped':
+						FPClientPrefs.scrappedLock = 'beaten';
+					case 'Birthday':
+						FPClientPrefs.muckneyLock = "completed";
+				}
+				FPClientPrefs.saveShit();
 				changedDifficulty = false;
 			}
 			transitioning = true;
@@ -7901,8 +7905,25 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		});
+
+		if(daNote.noteType == 'Double Damage')
+			{
+				health -= daNote.missHealth * healthLoss * 2;
+			}
+	
 		combo = 0;
-		health -= daNote.missHealth * healthLoss;
+
+		if(ClientPrefs.mechanics)
+		{
+			if(curStage == 'WaltStage')
+			{
+				health -= 0.20;
+			}else{
+				health -= daNote.missHealth * healthLoss;
+			}
+		}else{
+			health -= daNote.missHealth * healthLoss;
+		}
 		
 		if(instakillOnMiss)
 		{
@@ -8000,6 +8021,50 @@ class PlayState extends MusicBeatState
 
 			var char:Character = dad;
 			var animToPlay:String = singAnimations[Std.int(Math.abs(note.noteData))] + altAnim;
+
+			if(curStage == 'Line')
+				{
+					boyfriend.x += 1;
+					boyfriend.y -= 1;
+					boyfriend.scale.x -= 0.001;
+					boyfriend.scale.y -= 0.001;
+				}
+				if(ClientPrefs.mechanics)
+				{
+					switch(curStage)
+					{
+						case 'WaltStage':
+							note.alpha = 0;
+							note.visible = false;
+						case 'PixelWorld' | 'Line':
+							if (health < 0.1)
+							{
+								health = 0.1;
+							}
+							health -= 0.01;
+					}
+					if(curStage == 'PixelWorld')
+					{
+						triggerEventNote('Screen Shake', '0.1, 0.009', '0.1, 0.009');
+							/*if(canaddshaders)
+							{
+								addShaderToCamera('hud', new TiltshiftEffect(1.5, 0));
+								addShaderToCamera('game', new TiltshiftEffect(3, 0));
+								if(!ClientPrefs.optimization) {
+								addShaderToCamera('hud', new ChromaticAberrationEffect(0.01));
+								addShaderToCamera('game', new ChromaticAberrationEffect(0.01));
+								addShaderToCamera('game', new WIBloomEffect());
+							}
+								new FlxTimer().start(0.04, function(tmr:FlxTimer)
+								{
+									clearShaderFromCamera('game');
+									clearShaderFromCamera('hud');
+									addShaderToCamera('hud', new ChromaticAberrationEffect(0.004));
+									addShaderToCamera('game', new ChromaticAberrationEffect(0.005));
+									addShaderToCamera('game', new WIBloomEffect());
+								});
+							}*/
+
 			if(note.gfNote) {
 				char = gf;
 			}
@@ -8030,6 +8095,8 @@ class PlayState extends MusicBeatState
 			note.destroy();
 		}
 	}
+}
+	}
 
 	function goodNoteHit(note:Note):Void
 	{
@@ -8043,174 +8110,166 @@ class PlayState extends MusicBeatState
 			}
 
 			if(note.hitCausesMiss) {
+				//noteMiss(note);
 				if(!note.noteSplashDisabled && !note.isSustainNote) {
 					spawnNoteSplashOnNote(note);
 				}
 
-				switch(note.noteType) {
+				
+				if(!note.noMissAnimation)
+				{
+					switch(note.noteType) {
 
-					case 'Darkness Note':
-						var shadow:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('lurkingShadow'));
-						//shadow.screenCenter();
-						shadow.cameras = [camHUD];
-						shadow.alpha = 1;
-						add(shadow);
-						FlxTween.tween(shadow, {alpha: 0}, 2, {ease: FlxEase.quadInOut, startDelay: 5});
-						healthDrain = 0.005;
-						noteMiss(note);
-
-					case 'Instakill Note':
-						if(boyfriend.animation.getByName('hurt') != null) {
-							boyfriend.playAnim('hurt', true);
-							boyfriend.specialAnim = true;
-						}
-						health -= 500;
-
-					case 'Move Window Note':
-						//Lib.application.window.move(FlxG.random.int(0, Std.int(Capabilities.screenResolutionX - FlxG.width)), FlxG.random.int(0, Std.int(Capabilities.screenResolutionY - FlxG.height)));
-
-						//goes more smoother, spoiler: is amazing
-						FlxTween.tween(
-						Lib, 
-						{'application.window.x': FlxG.random.int(0, 900), 
-						'application.window.y': FlxG.random.int(0, 900)}, 
-						0.2, 
-						{ease: FlxEase.expoInOut /**thx robtop**/}
-						);
-
-						health -= 0.02;
-
-					case 'Fuck Strums Note':
-						isDownscroll = FlxG.random.bool(50);
-						notes.forEach(function(note:Note){note.downscrollNote = isDownscroll;});
-						for (i in 0...playerStrums.length) {
-							if (i == 0) {
-								playerStrums.members[i].x = FlxG.random.int(100, Std.int(FlxG.width / 3));
-								if (isDownscroll)
-									playerStrums.members[i].y = FlxG.random.int(Std.int(FlxG.height / 2), FlxG.height - 100);
-								else
-									playerStrums.members[i].y = FlxG.random.int(0, 300);
-									
-							} else {
-								var futurex = FlxG.random.int(Std.int(playerStrums.members[i - 1].x) + 80, Std.int(playerStrums.members[i - 1].x) + 400);
-								if (futurex > FlxG.width - 100)
-									futurex = FlxG.width - 100;
-								playerStrums.members[i].x = futurex;
-			
-								playerStrums.members[i].y = FlxG.random.int(Std.int(playerStrums.members[0].y - 50), Std.int(playerStrums.members[0].y + 50));
-							}
-						}
-						health -= 0.02;
-
-					/*case 'One-Shot Error Note': //you can blame Yama for accidentally pitching this idea when I showed him the new Malfunction chart XD
-
-						//demo like whats the point, is literally the same as error note bru 🗿
-
-						if(ClientPrefs.language == "Spanish") {
-							if(FlxG.random.bool(10)) Application.current.window.alert("Apestas, LMAO", 'Nota Sobre Tu Habilidad:');
-							//10% of probability
-							  else Application.current.window.alert("Mensaje: if(note.noteType = 'Nota De Errror') { trace('0 vidas restantes, cerrando el juego...'); }", 
-							  'Error en Funkin.avi.exe!:'
-							  );
-							  if(ClientPrefs.restart)
-								TitleState.restartGame();
-								else 
-								System.exit(0); 
-							} else {
-								if(FlxG.random.bool(10)) Application.current.window.alert("Fuck You, You Suck LMAO", 'Note About Your Skill:');
-							  //10% of probability
-								else Application.current.window.alert("Message: if(note.noteType = 'Error Note') { trace('0 lives left, closing game...'); }", 
-								'Error On Funkin.avi.exe!:');
-								if(ClientPrefs.restart)
-									TitleState.restartGame();
-									else 
-									System.exit(0);
-							}*/
-						
-					//tf
-					case 'Flesh Note':
-
-					case 'Error Note':
-						switch(curStage)
-						{
-							case 'PixelWorld':
-								crashLivesCounter -= 1;
-
-								if(crashLivesCounter == -1)
-								{
-									endSong();
-									trace('0 lives left, closing game...');
-									FlxG.sound.play(Paths.sound('wiiCrash'), 1);
-		                          
-							if(ClientPrefs.language == "Spanish") {
-								if(FlxG.random.bool(10)) Application.current.window.alert("Apestas, LMAO", 'Nota Sobre Tu Habilidad:');
-								//10% of probability
-								  else Application.current.window.alert("Mensaje: if(note.noteType = 'Nota De Errror') { trace('0 vidas restantes, cerrando el juego...'); }", 
-								  'Error en Funkin.avi.exe!:'
-								  );
-								  if(ClientPrefs.restart)
-									TitleState.restartGame();
-									else 
-									System.exit(0); 
-								} else {
-									if(FlxG.random.bool(10)) Application.current.window.alert("Fuck You, You Suck LMAO", 'Note About Your Skill:');
-								  //10% of probability
-									else Application.current.window.alert("Message: if(note.noteType = 'Error Note') { trace('0 lives left, closing game...'); }", 
-									'Error On Funkin.avi.exe!:');
-									if(ClientPrefs.restart)
+							case 'Darkness Note':
+								var shadow:FlxSprite = new FlxSprite(0).loadGraphic(Paths.image('lurkingShadow'));
+								//shadow.screenCenter();
+								shadow.cameras = [camHUD];
+								shadow.alpha = 1;
+								add(shadow);
+								FlxTween.tween(shadow, {alpha: 0}, 2, {ease: FlxEase.quadInOut, startDelay: 5});
+								healthDrain = 0.005;
+								noteMiss(note);
+		
+							case 'Instakill Note':
+								if(boyfriend.animation.getByName('hurt') != null) {
+									boyfriend.playAnim('hurt', true);
+									boyfriend.specialAnim = true;
+								}
+								health -= 500;
+		
+							case 'Move Window Note':
+								Lib.application.window.move(FlxG.random.int(0, Std.int(Capabilities.screenResolutionX - FlxG.width)), FlxG.random.int(0, Std.int(Capabilities.screenResolutionY - FlxG.height)));
+								health -= 0.02;
+		
+							case 'Fuck Strums Note':
+								isDownscroll = FlxG.random.bool(50);
+								notes.forEach(function(note:Note){note.downscrollNote = isDownscroll;});
+								for (i in 0...playerStrums.length) {
+									if (i == 0) {
+										playerStrums.members[i].x = FlxG.random.int(100, Std.int(FlxG.width / 3));
+										if (isDownscroll)
+											playerStrums.members[i].y = FlxG.random.int(Std.int(FlxG.height / 2), FlxG.height - 100);
+										else
+											playerStrums.members[i].y = FlxG.random.int(0, 300);
+											
+									} else {
+										var futurex = FlxG.random.int(Std.int(playerStrums.members[i - 1].x) + 80, Std.int(playerStrums.members[i - 1].x) + 400);
+										if (futurex > FlxG.width - 100)
+											futurex = FlxG.width - 100;
+										playerStrums.members[i].x = futurex;
+					
+										playerStrums.members[i].y = FlxG.random.int(Std.int(playerStrums.members[0].y - 50), Std.int(playerStrums.members[0].y + 50));
+									}
+								}
+								health -= 0.02;
+		
+							/*case 'One-Shot Error Note': //you can blame Yama for accidentally pitching this idea when I showed him the new Malfunction chart XD
+								if(ClientPrefs.language == "Spanish") {
+									if(FlxG.random.bool(10)) Application.current.window.alert("Apestas, LMAO", 'Nota Sobre Tu Habilidad:');
+									//10% of probability
+									  else Application.current.window.alert("Mensaje: if(note.noteType = 'Nota De Errror') { trace('0 vidas restantes, cerrando el juego...'); }", 
+									  'Error en Funkin.avi.exe!:'
+									  );
+									  if(ClientPrefs.restart)
 										TitleState.restartGame();
 										else 
+										System.exit(0); 
+									} else {
+										if(FlxG.random.bool(10)) Application.current.window.alert("Fuck You, You Suck LMAO", 'Note About Your Skill:');
+									  //10% of probability
+										else Application.current.window.alert("Message: if(note.noteType = 'Error Note') { trace('0 lives left, closing game...'); }", 
+										'Error On Funkin.avi.exe!:');
+										if(ClientPrefs.restart)
+											TitleState.restartGame();
+											else 
+											System.exit(0);
+									}*/
+								
+							case 'Flesh Note':
+		
+							case 'Error Note':
+								switch(curStage)
+								{
+									case 'PixelWorld':
+										crashLivesCounter -= 1;
+		
+										if(crashLivesCounter == -1)
+										{
+											endSong();
+											trace('0 lives left, closing game...');
+											FlxG.sound.play(Paths.sound('wiiCrash'), 1);
+										  
+									if(ClientPrefs.language == "Spanish") {
+										if(FlxG.random.bool(10)) Application.current.window.alert("Apestas, LMAO", 'Nota Sobre Tu Habilidad:');
+										//10% of probability
+										  else Application.current.window.alert("Mensaje: if(note.noteType = 'Nota De Errror') { trace('0 vidas restantes, cerrando el juego...'); }", 
+										  'Error en Funkin.avi.exe!:'
+										  );
+										  if(ClientPrefs.restart)
+											TitleState.restartGame();
+											else 
+											System.exit(0); 
+										} else {
+											if(FlxG.random.bool(10)) Application.current.window.alert("Fuck You, You Suck LMAO", 'Note About Your Skill:');
+										  //10% of probability
+											else Application.current.window.alert("Message: if(note.noteType = 'Error Note') { trace('0 lives left, closing game...'); }", 
+											'Error On Funkin.avi.exe!:');
+											if(ClientPrefs.restart)
+												TitleState.restartGame();
+												else 
+												System.exit(0);
+										}
+									}
+										if(ClientPrefs.language == "English") crashLives.text = 'Lives: ${crashLivesCounter}';
+										else crashLives.text = 'Vidas: ${crashLivesCounter}';
+										crashLivesIcon.animation.play('OMFG IT GLITCHES');
+										new FlxTimer().start(0.25, function(tmr:FlxTimer)
+										{
+											crashLivesIcon.animation.play('idle');
+										});
+										FlxTween.tween(crashLives, {x: 620}, 0.01);
+										FlxTween.tween(crashLivesIcon, {x: 570}, 0.01);
+										FlxTween.tween(crashLives, {x: 585}, 0.01, {startDelay: 0.1});
+										FlxTween.tween(crashLivesIcon, {x: 535}, 0.01, {startDelay: 0.1});
+										FlxTween.tween(crashLives, {x: 610}, 0.01, {startDelay: 0.2});
+										FlxTween.tween(crashLivesIcon, {x: 560}, 0.01, {startDelay: 0.2});
+										FlxTween.tween(crashLives, {x: 595}, 0.01, {startDelay: 0.3});
+										FlxTween.tween(crashLivesIcon, {x: 545}, 0.01, {startDelay: 0.3});
+										FlxTween.tween(crashLives, {x: 600}, 0.01, {startDelay: 0.4});
+										FlxTween.tween(crashLivesIcon, {x: 550}, 0.01, {startDelay: 0.4});
+									default:
+										endSong();
+										FlxG.sound.play(Paths.sound('wiiCrash'), 1);
+										Application.current.window.alert('lime.app.Application: function goodNoteHit: note.noteType = "Error Note": closing game...');
 										System.exit(0);
 								}
-							}
-								if(ClientPrefs.language == "English") crashLives.text = 'Lives: ${crashLivesCounter}';
-								else crashLives.text = 'Vidas: ${crashLivesCounter}';
-								crashLivesIcon.animation.play('OMFG IT GLITCHES');
-								new FlxTimer().start(0.25, function(tmr:FlxTimer)
+								
+		
+							case 'Flip Note':
+								new FlxTimer().start(0.01, function(tmr:FlxTimer)
 								{
-									crashLivesIcon.animation.play('idle');
+										FlxTween.tween(camHUD, {angle: 180}, 1, {ease: FlxEase.circInOut, type: PERSIST});
 								});
-								FlxTween.tween(crashLives, {x: 620}, 0.01);
-								FlxTween.tween(crashLivesIcon, {x: 570}, 0.01);
-								FlxTween.tween(crashLives, {x: 585}, 0.01, {startDelay: 0.1});
-								FlxTween.tween(crashLivesIcon, {x: 535}, 0.01, {startDelay: 0.1});
-								FlxTween.tween(crashLives, {x: 610}, 0.01, {startDelay: 0.2});
-								FlxTween.tween(crashLivesIcon, {x: 560}, 0.01, {startDelay: 0.2});
-								FlxTween.tween(crashLives, {x: 595}, 0.01, {startDelay: 0.3});
-								FlxTween.tween(crashLivesIcon, {x: 545}, 0.01, {startDelay: 0.3});
-								FlxTween.tween(crashLives, {x: 600}, 0.01, {startDelay: 0.4});
-								FlxTween.tween(crashLivesIcon, {x: 550}, 0.01, {startDelay: 0.4});
-							default:
-								endSong();
-								FlxG.sound.play(Paths.sound('wiiCrash'), 1);
-								Application.current.window.alert('lime.app.Application: function goodNoteHit: note.noteType = "Error Note": closing game...');
-								System.exit(0);
+		
+								new FlxTimer().start(10, function(tmr:FlxTimer)
+									{
+											FlxTween.tween(camHUD, {angle: 0}, 1, {ease: FlxEase.circInOut, type: PERSIST});
+									});
+								health -= 0;
+		
+							case 'Poison Note':
+								noteMiss(note);
+								healthDrain = 0.20;
+								health -= 0;
+		
+							case 'Hurt Note': //Hurt note
+								if(boyfriend.animation.getByName('hurt') != null) {
+									boyfriend.playAnim('hurt', true);
+									boyfriend.specialAnim = true;
+								}
+								noteMiss(note);
 						}
-						
-
-					case 'Flip Note':
-						new FlxTimer().start(0.01, function(tmr:FlxTimer)
-						{
-								FlxTween.tween(camHUD, {angle: camHUD.angle = 180}, 1, {ease: FlxEase.circInOut, type: PERSIST});
-						});
-
-						new FlxTimer().start(10, function(tmr:FlxTimer)
-							{
-									FlxTween.tween(camHUD, {angle: camHUD.angle = 0}, 1, {ease: FlxEase.circInOut, type: PERSIST});
-							});
-						health -= 0;
-
-					case 'Poison Note':
-						noteMiss(note);
-						healthDrain = 0.20;
-						health -= 0;
-
-					case 'Hurt Note': //Hurt note
-						if(boyfriend.animation.getByName('hurt') != null) {
-							boyfriend.playAnim('hurt', true);
-							boyfriend.specialAnim = true;
-						}
-						noteMiss(note);
+					}
 				}
 
 				note.wasGoodHit = true;
@@ -8229,30 +8288,6 @@ class PlayState extends MusicBeatState
 				if(combo > 9999) combo = 9999;
 				popUpScore(note);
 			}
-			if(ClientPrefs.mechanics)
-			{
-				if(curStage == 'WaltStage')
-				{
-					health += 0.0;
-				}else{
-					health += note.hitHealth * healthGain;
-				}
-			}else{
-				health += note.hitHealth * healthGain;
-			}
-
-			function detectSpace()
-			{
-				if (FlxG.keys.justPressed.SPACE)
-				{
-					pressCounter += 1;
-					trace('tap');
-					pressedSpace = true;
-					detectAttack = false;
-				}
-			}
-			
-			
 			health += note.hitHealth * healthGain;
 
 			if(!note.noAnimation) {
@@ -8315,7 +8350,6 @@ class PlayState extends MusicBeatState
 				note.destroy();
 			}
 		}
-	}
 
 	function spawnNoteSplashOnNoteShit(note:Note) {
 		if(ClientPrefs.noteSplashes && note != null) {
@@ -9882,23 +9916,23 @@ function ohShitHeGonnaShoot()
 				}
 
 				if(curStep == 544) {
-					//triggerEventNote('Screen Fade', '3', '');
+					triggerEventNote('Screen Fade', '3', '');
 
 					threatTrail = new FlxTrail(dad, null, 10, 1, 0.6, 0.089); //Glitch Mickey looks more threatening now
-					insert(members.indexOf(dadGroup) - 1, threatTrail);
+					addBehindDad(threatTrail);
 					threatTrail.xEnabled = true;
 					threatTrail.yEnabled = true;
            		}
 
 				if(curStep == 546) {
-					triggerEventNote('Scroll Type', 'Left', 'Right');
+					//triggerEventNote('Scroll Type', 'Left', 'Right');
 				}
 
                 if(curStep == 560) {
 					triggerEventNote('Flash Screen', '0', 'false');  
-					//triggerEventNote('Screen Fade', '0', '');  
+					triggerEventNote('Screen Fade', '0', '');  
 					triggerEventNote('Add Camera Zoom', '0.13', '0.14');  
-					triggerEventNote('Scroll Type', 'Left', 'Right'); 
+					//triggerEventNote('Scroll Type', 'Left', 'Right'); 
 				    health = 1;
 					FlxTween.tween(this, {songLength: FlxG.sound.music.length}, 3, {ease: FlxEase.circInOut});
 					 }
@@ -10846,6 +10880,7 @@ function ohShitHeGonnaShoot()
 					triggerEventNote('Flash Screen', '0', 'false');
 					triggerEventNote('Alter Camera Zoom', '0.8', '0.9');
 					triggerEventNote('Fade Character', '0', '');
+					Lib.application.window.borderless = false;
 					FlxTween.tween(camHUD, {alpha: 0}, 1);
 				}
 

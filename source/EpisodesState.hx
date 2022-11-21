@@ -645,7 +645,7 @@ class EpisodesState extends MusicBeatState
 			curDifficulty = newPos;
 		}
 
-		switch (curSelected)
+		/*switch (curSelected)
 		{
 			case 0 | 1 | 2:
 				FlxG.camera.flash(FlxColor.BLACK, 0.2);
@@ -711,7 +711,7 @@ class EpisodesState extends MusicBeatState
 				//uncomment these fucking pieces of shit if you feel like testing it.
 				}
 				FlxG.camera.shake(0.002, 999999999);
-		}
+		}*/
 	}
 
 	private function positionHighscore() {

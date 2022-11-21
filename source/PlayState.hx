@@ -8065,6 +8065,7 @@ class PlayState extends MusicBeatState
 									addShaderToCamera('game', new WIBloomEffect());
 								});
 							}*/
+					}
 
 			if(note.gfNote) {
 				char = gf;

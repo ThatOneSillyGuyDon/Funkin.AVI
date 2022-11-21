@@ -2885,8 +2885,8 @@ class PlayState extends MusicBeatState
 					blackFadeThing.alpha = 1;
 				case "lunacy":
 					startVideo('episode1Cutscene2');
-					cutsceneTransitionHelper.alpha = 1;
-					blackFadeThing.alpha = 1;
+				//	cutsceneTransitionHelper.alpha = 1;
+				//	blackFadeThing.alpha = 1;
 				/*case "delusional":
 						startVideo('episode1Cutscene3');*/
 				case "monster":
@@ -3908,7 +3908,7 @@ class PlayState extends MusicBeatState
 								switch (swagCounter)
 								{
 									case 0:
-										FlxTween.tween(cutsceneTransitionHelper, {alpha: 0}, 1, {ease: FlxEase.linear});
+									//	FlxTween.tween(cutsceneTransitionHelper, {alpha: 0}, 1, {ease: FlxEase.linear});
 									case 1:
 										
 									case 2:
@@ -4532,32 +4532,43 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
-		if(hudStyle == 'Demolition')
-		{
+		if(isStoryMode) {
 			switch(SONG.song)
 			{
 				case 'Isolated':
-					//FlxTween.tween(camHUD, {alpha: 1}, 3, {ease: FlxEase.circInOut, startDelay: 10});
+					FlxTween.tween(camHUD, {alpha: 1}, 3, {ease: FlxEase.circInOut, startDelay: 3});
 					FlxTween.tween(healthBarBG, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					FlxTween.tween(blackFadeThing, {alpha: 0}, 3, {ease: FlxEase.circInOut, startDelay: 4});
 					FlxTween.tween(healthBar, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					if(hudStyle == "Demolition")
+					{
 					FlxTween.tween(healthIcon, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 					FlxTween.tween(healthTxt, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					}
 					FlxTween.tween(iconP1, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 					FlxTween.tween(iconP2, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 				case 'Lunacy':
-					//FlxTween.tween(camHUD, {alpha: 1}, 3, {ease: FlxEase.circInOut, startDelay: 27});
+				//	FlxTween.tween(camHUD, {alpha: 1}, 3, {ease: FlxEase.circInOut, startDelay: 27});
+					FlxTween.tween(blackFadeThing, {alpha: 0}, 7, {ease: FlxEase.circInOut});
 					FlxTween.tween(healthBarBG, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 					FlxTween.tween(healthBar, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
-					FlxTween.tween(healthIcon, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
-					FlxTween.tween(healthTxt, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					if(hudStyle == "Demolition")
+						{
+						FlxTween.tween(healthIcon, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+						FlxTween.tween(healthTxt, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+						}
 					FlxTween.tween(iconP1, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 					FlxTween.tween(iconP2, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 				default:
+					FlxTween.tween(blackFadeThing, {alpha: 0}, 0.5, {ease: FlxEase.circInOut});
 					FlxTween.tween(camHUD, {alpha: 1}, 1 * playbackRate, {ease: FlxEase.circOut});
 					FlxTween.tween(healthBarBG, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 					FlxTween.tween(healthBar, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
-					FlxTween.tween(healthIcon, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
-					FlxTween.tween(healthTxt, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+					if(hudStyle == "Demolition")
+						{
+						FlxTween.tween(healthIcon, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+						FlxTween.tween(healthTxt, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
+						}
 					FlxTween.tween(iconP1, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 					FlxTween.tween(iconP2, {alpha: 1}, 0.5 * playbackRate, {ease: FlxEase.circOut});
 			}
@@ -6021,7 +6032,8 @@ class PlayState extends MusicBeatState
 		}
 		checkEventNote();
 
-		#if debug
+	if(ClientPrefs.debugMode) 
+	{
 		if(!endingSong && !startingSong) {
 			if (FlxG.keys.justPressed.ONE) {
 				KillNotes();
@@ -6032,7 +6044,7 @@ class PlayState extends MusicBeatState
 				clearNotesBefore(Conductor.songPosition);
 			}
 		}
-		#end
+	}
 
 		setOnLuas('cameraX', camFollowPos.x);
 		setOnLuas('cameraY', camFollowPos.y);
@@ -9551,7 +9563,7 @@ function ohShitHeGonnaShoot()
 				}
 			
 		case 'Lunacy':
-		/*if(curStep == 20) {
+		if(curStep == 20) {
            timeBarBG.alpha = 0;
 		   timeBar.alpha = 0;
 		   timeTxt.alpha = 0;
@@ -9573,7 +9585,7 @@ function ohShitHeGonnaShoot()
 			opponentStrums.members[i].alpha = 0;
 			opponentStrums.members[3].alpha = 0;
 		   }
-		 }*/
+		 }
 
 			if(curStep == 128) {
 				triggerEventNote('Set Strum Visibility', 'false', 'true', '3');
@@ -9587,7 +9599,7 @@ function ohShitHeGonnaShoot()
 			{
 		   triggerEventNote("Set Strum Visibility", 'false', 'true', '1');
 			}
-
+			
 			if(curStep == 2032)
 				triggerEventNote("Set Strum Visibility", 'true', 'false', '1');
 

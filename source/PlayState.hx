@@ -8336,7 +8336,7 @@ class PlayState extends MusicBeatState
 				{
 					spr.playAnim('confirm', true);
 				}
-			}
+			} 
 			note.wasGoodHit = true;
 			vocals.volume = 1;
 

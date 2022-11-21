@@ -4539,7 +4539,7 @@ class PlayState extends MusicBeatState
 		FlxTween.tween(timeBar, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 		FlxTween.tween(timeTxt, {alpha: 1}, 0.5, {ease: FlxEase.circOut});
 
-		
+		//
 		if(hudStyle == 'Demolition')
 		{
 			switch(SONG.song)
@@ -8098,7 +8098,6 @@ class PlayState extends MusicBeatState
 		}
 	}
 }
-	}
 
 	function goodNoteHit(note:Note):Void
 	{

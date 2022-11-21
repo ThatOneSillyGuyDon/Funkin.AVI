@@ -133,5 +133,5 @@ class PlatformUtil
    /* static public function updateWallpaper() {  // Only works on windows, otherwise returns 0!
         return null;
     }*/
-    //fuck gamebanana rules, i wanted to make malfunction better *cries (jason) L + ratio + cry about it + git gud + stay mad + obey the rules + i don't want scareware anyways + malfunction is already fine the way it is + lmao (don)
+    //fuck gamebanana rules, i wanted to make malfunction better *cries (jason)
 }

@@ -123,17 +123,23 @@ class ExtrasState extends MusicBeatState{
 
 		for (i in 0...songs.length)
 		{
-			var songText:Alphabet = new Alphabet(90, 320, songs[i].songName, true);
+			var songText:Alphabet = new Alphabet(0, (70 * i) + 30, songs[i].songName, true, false);
 			songText.isMenuItemCenter = true;
-			songText.targetY = i - curSelected;
+			songText.targetY = i;
 			grpSongs.add(songText);
 
-			var maxWidth = 980;
-			if (songText.width > maxWidth)
+			if (songText.width > 980)
 			{
-				songText.scaleX = maxWidth / songText.width;
+				var textScale:Float = 980 / songText.width;
+				songText.scale.x = textScale;
+				for (letter in songText.lettersArray)
+				{
+					letter.x *= textScale;
+					letter.offset.x *= textScale;
+				}
+				//songText.updateHitbox();
+				//trace(songs[i].songName + ' new scale: ' + textScale);
 			}
-			songText.snapToPosition();
 
 			Paths.currentModDirectory = songs[i].folder;
 			var icon:HealthIcon = new HealthIcon(songs[i].songCharacter);
@@ -240,7 +246,7 @@ class ExtrasState extends MusicBeatState{
 	
 		function addShader(effect:ShaderEffect)
 		{
-			if (!ClientPrefs.shaders)
+			if (!ClientPrefs.funiShaders)
 				return;
 	
 			shaders.push(effect);
@@ -604,7 +610,7 @@ class ExtrasState extends MusicBeatState{
 			{
 				FlxG.camera.flash(FlxColor.BLACK, 0.6);
 							FlxG.camera.shake(0.007, 99999999);
-							if(ClientPrefs.shaders)
+							if(ClientPrefs.funiShaders)
 							{
 							clearShader();
 							chrom = new ChromaticAberrationEffect();
@@ -624,7 +630,7 @@ class ExtrasState extends MusicBeatState{
 			{
 				FlxG.camera.flash(FlxColor.BLACK, 0.6);
 				FlxG.camera.shake(0.004, 99999999);
-				if(ClientPrefs.shaders)
+				if(ClientPrefs.funiShaders)
 				{
 				clearShader();
 				chrom = new ChromaticAberrationEffect();
@@ -649,7 +655,7 @@ class ExtrasState extends MusicBeatState{
 			} else if(curSelected == 8 || curSelected == 9){
 				FlxG.camera.flash(FlxColor.BLACK, 0.6);
 				FlxG.camera.shake(0.004, 0);
-				if(ClientPrefs.shaders)
+				if(ClientPrefs.funiShaders)
 				{
 				clearShader();
 				chrom = new ChromaticAberrationEffect();
@@ -666,7 +672,7 @@ class ExtrasState extends MusicBeatState{
 				}
 			}else{
 			FlxG.camera.flash(FlxColor.BLACK, 0.2);
-			if(ClientPrefs.shaders)
+			if(ClientPrefs.funiShaders)
 			{
 			clearShader();
 			chrom = new ChromaticAberrationEffect();

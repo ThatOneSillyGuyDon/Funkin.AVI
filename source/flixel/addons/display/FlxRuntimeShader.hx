@@ -15,10 +15,10 @@ import openfl.display.ShaderParameterType;
  * HOW TO USE:
  * 1. Create an instance of this class, passing the text of the `.frag` and `.vert` files.
  *    Note that you can set either of these to null (making them both null would make the shader do nothing???).
- * 2. Use `flxSprite.shader = runtimeShader` to apply the shader to the sprite.
+ * 2. Use `FlxSprite.shader = runtimeShader` to apply the shader to the sprite.
  * 3. Use `runtimeShader.setFloat()`, `setBool()`, etc. to modify any uniforms.
  * 
- * @author MasterEric
+ * made by MasterEric
  * @see https://github.com/openfl/openfl/blob/develop/src/openfl/utils/_internal/ShaderMacro.hx
  * @see https://dixonary.co.uk/blog/shadertoy
  */
@@ -34,9 +34,7 @@ class FlxRuntimeShader extends FlxShader
 	// and probably won't change ever.
 	static final BASE_VERTEX_HEADER:String = "
 		#pragma version
-
 		#pragma precision
-
 		attribute float openfl_Alpha;
 		attribute vec4 openfl_ColorMultiplier;
 		attribute vec4 openfl_ColorOffset;
@@ -62,9 +60,7 @@ class FlxRuntimeShader extends FlxShader
 
 	static final BASE_FRAGMENT_HEADER:String = "
 		#pragma version
-
 		#pragma precision
-
 		varying float openfl_Alphav;
 		varying vec4 openfl_ColorMultiplierv;
 		varying vec4 openfl_ColorOffsetv;
@@ -231,7 +227,7 @@ class FlxRuntimeShader extends FlxShader
 
 		super();
 	}
-	
+
 	/**
 	 * Replace the `#pragma header` and `#pragma body` with the fragment shader header and body.
 	 */
@@ -297,7 +293,7 @@ class FlxRuntimeShader extends FlxShader
 			vertex = StringTools.replace(vertex, PRAGMA_VERSION, versionHeader);
 			var fragment = StringTools.replace(glFragmentSource, PRAGMA_PRECISION, precisionHeaders);
 			fragment = StringTools.replace(fragment, PRAGMA_VERSION, versionHeader);
-			
+
 			var id = vertex + fragment;
 
 			if (__context.__programs.exists(id)) {
@@ -613,22 +609,6 @@ class FlxRuntimeShader extends FlxShader
 			return;
 		}
 		prop.value = value;
-	}
-
-	/**
-	 * Set or modify a sampler2D input of the shader.
-	 * @param name The name of the shader input to modify.
-	 * @param value The texture to use as the sampler2D input.
-	 */
-	public function setSampler2D(name:String, value:BitmapData)
-	{
-		var prop:ShaderInput<BitmapData> = Reflect.field(this.data, name);
-		if(prop == null)
-		{
-			trace('[WARNING] Shader sampler2D property ${name} not found.');
-			return;
-		}
-		prop.input = value;
 	}
 
 	/**

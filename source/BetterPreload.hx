@@ -512,7 +512,7 @@ class BetterPreload extends MusicBeatState {
             if(countUp == maxCount)
             {
                 loadText.text = 'Game Fully Loaded! Launching Title Sequence...';
-                PlatformUtil.sendNotification('Game Loaded Succesfully!', 'Enjoy Your Experience!', 1);
+                PlatformUtil.sendNotification('Game Loaded Succesfully!', 'Enjoy Your Experience!', 0);
             }
         }
 

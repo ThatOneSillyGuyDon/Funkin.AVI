@@ -79,14 +79,12 @@ class FlashingState extends MusicBeatState
 		grain.scale.y = 1.1;
 		add(grain);
 		
-		Application.current.window.title = "Funkin.avi - WARNING";
-
 		FlxTween.tween(blackFade, {alpha: 0}, 1); //duplicatin' code from Disclaimer since this is BEFORE picking your language now.
 	}
 
 	function addShader(effect:ShaderEffect)
 	{
-		if (!ClientPrefs.shaders)
+		if (!ClientPrefs.funiShaders)
 			return;
 
 		shaders.push(effect);

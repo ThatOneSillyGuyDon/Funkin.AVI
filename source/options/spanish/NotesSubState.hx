@@ -84,9 +84,8 @@ class NotesSubState extends MusicBeatSubstate
 			shaderArray.push(newShader);
 		}
 
-		hsbText = new Alphabet(posX + 560, 0, "Tono    Saturación  Brillo", false);
-		hsbText.scaleX = 0.6;
-		hsbText.scaleY = 0.6;
+		hsbText = new Alphabet(0, 0, "Tono    Saturación  Brillo", false, false, 0, 0.65);
+		hsbText.x = posX + 240;
 		add(hsbText);
 
 		changeSelection();
@@ -267,13 +266,8 @@ class NotesSubState extends MusicBeatSubstate
 		}
 
 		var item = grpNumbers.members[(selected * 3) + type];
-		item.text = '0';
-
-		var add = (40 * (item.letters.length - 1)) / 2;
-		for (letter in item.letters)
-		{
-			letter.offset.x += add;
-		}
+		item.changeText('0');
+		item.offset.x = (40 * (item.lettersArray.length - 1)) / 2;
 	}
 	function updateValue(change:Float = 0) {
 		curValue += change;
@@ -298,13 +292,8 @@ class NotesSubState extends MusicBeatSubstate
 		}
 
 		var item = grpNumbers.members[(curSelected * 3) + typeSelected];
-		item.text = Std.string(roundedValue);
-
-		var add = (40 * (item.letters.length - 1)) / 2;
-		for (letter in item.letters)
-		{
-			letter.offset.x += add;
-			if(roundedValue < 0) letter.offset.x += 10;
-		}
+		item.changeText(Std.string(roundedValue));
+		item.offset.x = (40 * (item.lettersArray.length - 1)) / 2;
+		if(roundedValue < 0) item.offset.x += 10;
 	}
 }

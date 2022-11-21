@@ -43,7 +43,7 @@ import Shaders;
 import openfl.Assets;
 import FPClientPrefs;
 import PlayState;
-//import IndieCrossShaderShit.FXHandler;
+import IndieCrossShaderShit.FXHandler;
 
 using StringTools;
 typedef TitleData =
@@ -183,7 +183,7 @@ class TitleState extends MusicBeatState
 		#elseif STORY
         MusicBeatState.switchState(new StoryMenuState());
 		#else
-		if(FlxG.save.data.shaders == null && !ShadersState.leftState) {
+		if(FlxG.save.data.funiShaders == null && !ShadersState.leftState) {
 			FlxTransitionableState.skipNextTransIn = true;
 			FlxTransitionableState.skipNextTransOut = true;
 			MusicBeatState.switchState(new ShadersState());
@@ -404,7 +404,7 @@ class TitleState extends MusicBeatState
 
 	function addShader(effect:ShaderEffect)
 	{
-		if (!ClientPrefs.shaders)
+		if (!ClientPrefs.funiShaders)
 			return;
 
 		shaders.push(effect);
@@ -475,6 +475,18 @@ class TitleState extends MusicBeatState
 			}
 		}
 		#end
+
+		/**
+		 * closing in a cool way
+		 */
+		if (FlxG.keys.justPressed.ESCAPE && !pressedEnter)
+			{
+				FlxG.sound.music.fadeOut(0.3);
+				FlxG.camera.fade(FlxColor.BLACK, 0.5, false, function()
+				{
+					Sys.exit(0);
+				}, false);
+			}
 
 		var gamepad:FlxGamepad = FlxG.gamepads.lastActive;
 

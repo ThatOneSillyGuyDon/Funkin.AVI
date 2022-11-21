@@ -222,7 +222,7 @@ class CreditsSpanishState extends MusicBeatState
 		for (i in 0...creditsStuff.length)
 		{
 			var isSelectable:Bool = !unselectableCheck(i);
-			var optionText:Alphabet = new Alphabet(0, 70 * i, creditsStuff[i][0], !isSelectable);
+			var optionText:Alphabet = new Alphabet(0, 70 * i, creditsStuff[i][0], !isSelectable, false);
 			optionText.isMenuItem = true;
 			optionText.screenCenter(X);
 			optionText.yAdd -= 70;
@@ -231,7 +231,7 @@ class CreditsSpanishState extends MusicBeatState
 			}
 			optionText.forceX = optionText.x;
 			//optionText.yMult = 90;
-			optionText.targetY = i - curSelected;
+			optionText.targetY = i;
 			grpOptions.add(optionText);
 
 			if(isSelectable) {
@@ -364,24 +364,26 @@ class CreditsSpanishState extends MusicBeatState
 			}
 			}
 		
-			for (item in grpOptions.members)
+		for (item in grpOptions.members)
+		{
+			if(!item.isBold)
+			{
+				var lerpVal:Float = CoolUtil.boundTo(elapsed * 12, 0, 1);
+				if(item.targetY == 0)
 				{
-					if(!item.bold)
-					{
-						var lerpVal:Float = CoolUtil.boundTo(elapsed * 12, 0, 1);
-						if(item.targetY == 0)
-						{
-							var lastX:Float = item.x;
-							item.screenCenter(X);
-							item.x = FlxMath.lerp(lastX, item.x - 70, lerpVal);
-						}
-						else
-						{
-							item.x = FlxMath.lerp(item.x, 200 + -40 * Math.abs(item.targetY), lerpVal);
-						}
-					}
+					var lastX:Float = item.x;
+					item.screenCenter(X);
+					item.x = FlxMath.lerp(lastX, item.x - 70, lerpVal);
+					item.forceX = item.x;
 				}
-				super.update(elapsed);
+				else
+				{
+					item.x = FlxMath.lerp(item.x, 200 + -40 * Math.abs(item.targetY), lerpVal);
+					item.forceX = item.x;
+				}
+			}
+		}
+		super.update(elapsed);
 	}
 	
 		override function beatHit()

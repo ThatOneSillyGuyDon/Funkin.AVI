@@ -63,7 +63,8 @@ class NotesSubState extends MusicBeatSubstate
 		for (i in 0...ClientPrefs.arrowHSV.length) {
 			var yPos:Float = (165 * i) + 35;
 			for (j in 0...3) {
-				var optionText:Alphabet = new Alphabet(posX + (225 * j) + 250, yPos + 60, Std.string(ClientPrefs.arrowHSV[i][j]), true);
+				var optionText:Alphabet = new Alphabet(0, yPos + 60, Std.string(ClientPrefs.arrowHSV[i][j]), true);
+				optionText.x = posX + (225 * j) + 250;
 				grpNumbers.add(optionText);
 			}
 
@@ -83,12 +84,30 @@ class NotesSubState extends MusicBeatSubstate
 			shaderArray.push(newShader);
 		}
 
-		hsbText = new Alphabet(posX + 560, 0, "Hue    Saturation  Brightness", false);
-		hsbText.scaleX = 0.6;
-		hsbText.scaleY = 0.6;
+		hsbText = new Alphabet(0, 0, "Hue    Saturation  Brightness", false, false, 0, 0.65);
+		hsbText.x = posX + 240;
 		add(hsbText);
 
 		changeSelection();
+
+		var scratchStuff:FlxSprite = new FlxSprite();
+		scratchStuff.frames = Paths.getSparrowAtlas('funkinAVI-filters/scratchShit');
+		scratchStuff.animation.addByPrefix('idle', 'scratch thing 1', 24, true);
+		scratchStuff.animation.play('idle');
+		scratchStuff.screenCenter();
+		scratchStuff.scale.x = 1.1;
+		scratchStuff.scale.y = 1.1;
+		add(scratchStuff);
+
+		var grain:FlxSprite = new FlxSprite();
+		grain.frames = Paths.getSparrowAtlas('funkinAVI-filters/Grainshit');
+		grain.animation.addByPrefix('idle', 'grains 1', 24, true);
+		grain.animation.play('idle');
+		grain.screenCenter();
+		grain.scale.x = 1.1;
+		grain.scale.y = 1.1;
+		add(grain);
+		
 	}
 
 	var changingNote:Bool = false;
@@ -97,13 +116,13 @@ class NotesSubState extends MusicBeatSubstate
 			if(holdTime < 0.5) {
 				if(controls.UI_LEFT_P) {
 					updateValue(-1);
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 				} else if(controls.UI_RIGHT_P) {
 					updateValue(1);
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 				} else if(controls.RESET) {
 					resetValue(curSelected, typeSelected);
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 				}
 				if(controls.UI_LEFT_R || controls.UI_RIGHT_R) {
 					holdTime = 0;
@@ -121,35 +140,35 @@ class NotesSubState extends MusicBeatSubstate
 					updateValue(elapsed * add);
 				}
 				if(controls.UI_LEFT_R || controls.UI_RIGHT_R) {
-					FlxG.sound.play(Paths.sound('scrollMenu'));
+					FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 					holdTime = 0;
 				}
 			}
 		} else {
 			if (controls.UI_UP_P) {
 				changeSelection(-1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 			if (controls.UI_DOWN_P) {
 				changeSelection(1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 			if (controls.UI_LEFT_P) {
 				changeType(-1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 			if (controls.UI_RIGHT_P) {
 				changeType(1);
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 			}
 			if(controls.RESET) {
 				for (i in 0...3) {
 					resetValue(curSelected, i);
 				}
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 			}
 			if (controls.ACCEPT && nextAccept <= 0) {
-				FlxG.sound.play(Paths.sound('scrollMenu'));
+				FlxG.sound.play(Paths.sound('funkinAVI/menu/select_sfx'));
 				changingNote = true;
 				holdTime = 0;
 				for (i in 0...grpNumbers.length) {
@@ -215,7 +234,7 @@ class NotesSubState extends MusicBeatSubstate
 				blackBG.y = item.y - 20;
 			}
 		}
-		FlxG.sound.play(Paths.sound('scrollMenu'));
+		FlxG.sound.play(Paths.sound('funkinAVI/menu/scroll_sfx'));
 	}
 
 	function changeType(change:Int = 0) {
@@ -247,13 +266,8 @@ class NotesSubState extends MusicBeatSubstate
 		}
 
 		var item = grpNumbers.members[(selected * 3) + type];
-		item.text = '0';
-
-		var add = (40 * (item.letters.length - 1)) / 2;
-		for (letter in item.letters)
-		{
-			letter.offset.x += add;
-		}
+		item.changeText('0');
+		item.offset.x = (40 * (item.lettersArray.length - 1)) / 2;
 	}
 	function updateValue(change:Float = 0) {
 		curValue += change;
@@ -278,13 +292,8 @@ class NotesSubState extends MusicBeatSubstate
 		}
 
 		var item = grpNumbers.members[(curSelected * 3) + typeSelected];
-		item.text = Std.string(roundedValue);
-
-		var add = (40 * (item.letters.length - 1)) / 2;
-		for (letter in item.letters)
-		{
-			letter.offset.x += add;
-			if(roundedValue < 0) letter.offset.x += 10;
-		}
+		item.changeText(Std.string(roundedValue));
+		item.offset.x = (40 * (item.lettersArray.length - 1)) / 2;
+		if(roundedValue < 0) item.offset.x += 10;
 	}
 }

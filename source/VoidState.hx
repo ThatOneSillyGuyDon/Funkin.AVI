@@ -539,7 +539,7 @@ class VoidState extends MusicBeatState{
 
 		FlxG.camera.flash(FlxColor.BLACK, 0.6);
 		FlxG.camera.shake(0.007, 99999999);
-		if(ClientPrefs.shaders)
+		/*if(ClientPrefs.shaders)
 		{
 		clearShader();
 		chrom = new ChromaticAberrationEffect();
@@ -554,7 +554,7 @@ class VoidState extends MusicBeatState{
 		if(blurThisShit != null)
 		blurThisShit.setBlur(1.3);
 
-		}
+		}*/
 			}
 
 	private function positionHighscore() {

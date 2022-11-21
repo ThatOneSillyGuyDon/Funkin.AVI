@@ -63,7 +63,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 
 		timesToEnter = 30;
 
-		if(ClientPrefs.shaders)
+		/*if(ClientPrefs.shaders)
 					{
 						chrom = new ChromaticAberrationEffect();
 						blurThisShit = new TiltshiftEffect(0.4, 0);
@@ -87,7 +87,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 						blurThisShit.setBlur(0.4);
 						//uncomment these fucking pieces of shit if you feel like testing it.
 
-					}
+					}*/
 				//freeplayCats = ['V2 Content', 'Legacy', '???'];
 		/*if(FPClientPrefs.episode2FPLock == 'unlocked' && FPClientPrefs.malfunctionLock == 'beaten' && FPClientPrefs.crossinLock == 'beaten' && FPClientPrefs.warLock == 'beaten' && FPClientPrefs.sinsLock == 'beaten' && FPClientPrefs.huntedLock == 'beaten' && FPClientPrefs.blessLock == 'beaten' && FPClientPrefs.scrappedLock == 'beaten' && FPClientPrefs.mercyLock == 'beaten' && FPClientPrefs.oldisolateLock == 'beaten' && FPClientPrefs.betaisolateLock == 'beaten') //omfg, I hate this, why can't it just work some other, much more SIMPLER way?
 		{
@@ -373,7 +373,7 @@ class EpicSelectorWOOO extends MusicBeatState {
 				distort.shader.working.value = [true];
 				}
 			}
-		}else*/ if(curSelected == 2 && FPClientPrefs.episode1FPLock != 'unlocked' || curSelected == 1 && FPClientPrefs.episode1FPLock != 'unlocked')
+		}else if(curSelected == 2 && FPClientPrefs.episode1FPLock != 'unlocked' || curSelected == 1 && FPClientPrefs.episode1FPLock != 'unlocked')
 						{
 							FlxG.camera.flash(FlxColor.BLACK, 0.6);
 							FlxG.camera.shake(0.004, 99999999);
@@ -429,6 +429,6 @@ class EpicSelectorWOOO extends MusicBeatState {
 							//uncomment these fucking pieces of shit if you feel like testing it.
 							}
 							FlxG.camera.shake(0.004, 0);
-						}
+						}*/
 	}
 }

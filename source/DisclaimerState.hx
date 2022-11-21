@@ -35,7 +35,7 @@ class DisclaimerState extends MusicBeatState
 	{
 		super.create();
 
-		if(ClientPrefs.shaders)
+		/*if(ClientPrefs.shaders)
 					{
 						chrom = new ChromaticAberrationEffect();
 						blurThisShit = new TiltshiftEffect(0.4, 0);
@@ -60,7 +60,7 @@ class DisclaimerState extends MusicBeatState
 						//uncomment these fucking pieces of shit if you feel like testing it.
 
 
-					}
+					}*/
 
 		dumbBG = new FlxSprite();
 		dumbBG.loadGraphic(Paths.image('WARNING/Avi_Disclaimer'), false);

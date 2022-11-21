@@ -247,7 +247,7 @@ class TitleState extends MusicBeatState
 		Conductor.changeBPM(60);
 		persistentUpdate = true;
 
-		if(ClientPrefs.shaders)
+		/*if(ClientPrefs.shaders)
 					{
 						chrom = new ChromaticAberrationEffect();
 						blurThisShit = new TiltshiftEffect(0.4, 0);
@@ -274,7 +274,7 @@ class TitleState extends MusicBeatState
 						}
 
 
-					}
+					}*/
 
 		var bg:FlxSprite = new FlxSprite();
 		bg.loadGraphic(Paths.image('Title_bg'), false);

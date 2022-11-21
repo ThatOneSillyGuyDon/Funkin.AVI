@@ -124,7 +124,7 @@ class MainMenuState extends MusicBeatState
 
 		var yScroll:Float = Math.max(0.25 - (0.05 * (optionShit.length - 4)), 0.1);
 
-		if(ClientPrefs.shaders)
+		/*if(ClientPrefs.shaders)
 					{
 						chrom = new ChromaticAberrationEffect();
 						blurThisShit = new TiltshiftEffect(0.4, 0);
@@ -153,6 +153,7 @@ class MainMenuState extends MusicBeatState
 
 					} //the game fucking breaks now for some reason with this on :(
 						//Facts
+						*/
 
 		eyes = new FlxSprite().loadGraphic(Paths.image('NEWmenu/HahaSadBoi'));
 		eyes.scrollFactor.set(0, 0);

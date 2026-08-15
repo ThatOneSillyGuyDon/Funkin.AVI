@@ -1,5 +1,3 @@
-# IMPORTANT: THIS SOURCE CODE IS 100% SCRAPPED, WERE USING FOREVER, SO ASK JASON TO BE ON THE CURRENT REPOSITORY
-
 # Funkin.avi Official Source Code
 ![Repo size](https://img.shields.io/github/repo-size/DEMOLITIONDON96/Funkin.AVI)
 This repo shall remain private until mod release.
